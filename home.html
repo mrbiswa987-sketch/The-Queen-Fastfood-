@@ -1,602 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>The Queen Fast Food</title>
 
 <style>
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html {
-  scroll-behavior: smooth;
+body{
+  font-family:Arial, sans-serif;
+  background:#080808;
+  color:#fff;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #050505;
-  color: #ffffff;
+header{
+  background:#0d0d0d;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  border-bottom:1px solid #292929;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-header {
-  background: #000;
-  border-bottom: 1px solid #d4af37;
-  padding: 18px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.logo{
+  color:#d4af37;
+  font-size:24px;
+  font-weight:bold;
 }
 
-.logo {
-  color: #d4af37;
-  font-size: 24px;
-  font-weight: 900;
-  letter-spacing: 1px;
+.logo span{
+  display:block;
+  color:#fff;
+  font-size:12px;
+  letter-spacing:2px;
 }
 
-.logo span {
-  display: block;
-  color: white;
-  font-size: 12px;
-  letter-spacing: 4px;
-  margin-top: 3px;
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 25px;
-  font-weight: 600;
+nav a:hover{
+  color:#d4af37;
 }
 
-nav a:hover {
-  color: #d4af37;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-  min-height: 470px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 50px 20px;
-
+.hero{
+  min-height:430px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:50px 20px;
   background:
-    linear-gradient(
-      rgba(0,0,0,.75),
-      rgba(0,0,0,.92)
-    ),
-    url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1600&q=80")
-    center/cover;
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.8)),
+    radial-gradient(circle at center,#332b12,#080808 65%);
 }
 
-.hero h1 {
-  font-size: 52px;
-  color: #d4af37;
-  margin-bottom: 15px;
+.hero h1{
+  font-size:48px;
+  color:#d4af37;
+  margin-bottom:15px;
 }
 
-.hero p {
-  max-width: 650px;
-  margin: auto;
-  color: #ddd;
-  font-size: 18px;
-  line-height: 1.6;
+.hero p{
+  max-width:650px;
+  margin:auto;
+  color:#ddd;
+  font-size:17px;
+  line-height:1.7;
 }
 
-.hero .tagline {
-  color: white;
-  font-size: 20px;
-  margin-bottom: 10px;
-  font-weight: 600;
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:50px 20px;
 }
 
-/* =========================
-   SECTION
-========================= */
-
-section {
-  padding: 60px 7%;
+.section-title{
+  text-align:center;
+  margin-bottom:30px;
 }
 
-.section-title {
-  text-align: center;
-  color: #d4af37;
-  font-size: 34px;
-  margin-bottom: 40px;
+.section-title h2{
+  color:#d4af37;
+  font-size:32px;
 }
 
-/* =========================
-   MENU
-========================= */
-
-.menu-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(auto-fit, minmax(230px, 1fr));
-  gap: 25px;
+.section-title p{
+  color:#aaa;
+  margin-top:8px;
 }
 
-.food-card {
-  background: #101010;
-  border: 1px solid #222;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: .3s;
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
 }
 
-.food-card:hover {
-  transform: translateY(-5px);
-  border-color: #d4af37;
-  box-shadow:
-    0 8px 30px rgba(212,175,55,.12);
+.product{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:15px;
+  overflow:hidden;
+  transition:.2s;
 }
 
-.food-card img {
-  width: 100%;
-  height: 190px;
-  object-fit: cover;
+.product:hover{
+  transform:translateY(-3px);
+  border-color:#d4af37;
 }
 
-.food-info {
-  padding: 18px;
+.product img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
 }
 
-.food-info h3 {
-  margin-bottom: 10px;
-  font-size: 19px;
+.product-body{
+  padding:18px;
 }
 
-.price {
-  color: #d4af37;
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 15px;
+.product h3{
+  margin-bottom:8px;
 }
 
-.add-btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #d4af37;
-  color: #000;
-  font-weight: 800;
-  cursor: pointer;
-  transition: .3s;
+.price{
+  color:#d4af37;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:14px;
 }
 
-.add-btn:hover {
-  background: #fff;
+.add-btn{
+  width:100%;
+  border:0;
+  background:#d4af37;
+  color:#000;
+  padding:12px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-/* =========================
-   CART
-========================= */
-
-.cart-section {
-  background: #0b0b0b;
+.add-btn:hover{
+  background:#fff;
 }
 
-.cart-box {
-  max-width: 900px;
-  margin: auto;
-  background: #111;
-  border: 1px solid #333;
-  border-radius: 15px;
-  padding: 25px;
+.qty-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:10px;
+  background:#222;
+  border-radius:8px;
+  padding:5px;
 }
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  padding: 16px 0;
-  border-bottom: 1px solid #292929;
+.qty-box button{
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:6px;
+  background:#d4af37;
+  font-size:20px;
+  cursor:pointer;
 }
 
-.cart-item-name {
-  flex: 1;
-  font-weight: 700;
+.qty-number{
+  font-weight:bold;
 }
 
-.qty-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.cart-box,
+.checkout-box,
+.track-box{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:15px;
+  padding:25px;
+  margin-top:30px;
 }
 
-.qty-btn {
-  width: 32px;
-  height: 32px;
-  border: 1px solid #d4af37;
-  background: #000;
-  color: #d4af37;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 18px;
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #292929;
 }
 
-.qty-number {
-  min-width: 25px;
-  text-align: center;
+.cart-item:last-child{
+  border-bottom:0;
 }
 
-.item-total {
-  min-width: 70px;
-  text-align: right;
-  color: #d4af37;
-  font-weight: 700;
+.cart-total{
+  margin-top:20px;
+  font-size:22px;
+  color:#d4af37;
+  font-weight:bold;
 }
 
-.cart-summary {
-  margin-top: 25px;
+input,
+textarea,
+select{
+  width:100%;
+  padding:14px;
+  margin:8px 0 14px;
+  background:#202020;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:8px;
+  outline:none;
 }
 
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
+textarea{
+  min-height:100px;
+  resize:vertical;
 }
 
-.summary-row.total {
-  border-top: 1px solid #444;
-  margin-top: 10px;
-  padding-top: 15px;
-  color: #d4af37;
-  font-size: 22px;
-  font-weight: 900;
+.location-btn,
+.order-btn,
+.track-btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-top:8px;
 }
 
-.empty-cart {
-  text-align: center;
-  color: #888;
-  padding: 30px;
+.location-btn{
+  background:#333;
+  color:#fff;
 }
 
-/* =========================
-   CHECKOUT
-========================= */
-
-.checkout-section {
-  background: #050505;
+.order-btn,
+.track-btn{
+  background:#d4af37;
+  color:#000;
 }
 
-.checkout-box {
-  max-width: 750px;
-  margin: auto;
-  background: #101010;
-  border: 1px solid #333;
-  border-radius: 15px;
-  padding: 30px;
+.distance{
+  color:#d4af37;
+  margin:8px 0;
 }
 
-.checkout-box label {
-  display: block;
-  margin: 18px 0 8px;
-  font-weight: 700;
-  color: #ddd;
+.success{
+  background:#102615;
+  border:1px solid #2d6a35;
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+  display:none;
 }
 
-.checkout-box input,
-.checkout-box textarea,
-.checkout-box select {
-  width: 100%;
-  padding: 14px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #050505;
-  color: white;
-  outline: none;
+.order-id{
+  color:#d4af37;
+  font-size:22px;
+  font-weight:bold;
+  margin:10px 0;
 }
 
-.checkout-box input:focus,
-.checkout-box textarea:focus,
-.checkout-box select:focus {
-  border-color: #d4af37;
+.status-list{
+  margin-top:20px;
 }
 
-.checkout-box textarea {
-  min-height: 110px;
-  resize: vertical;
+.status-step{
+  padding:14px;
+  margin:7px 0;
+  background:#191919;
+  border-radius:8px;
+  color:#777;
 }
 
-/* =========================
-   LOCATION
-========================= */
-
-.location-btn {
-  width: 100%;
-  padding: 15px;
-  margin-top: 12px;
-  border: 1px solid #d4af37;
-  border-radius: 10px;
-  background: #111;
-  color: #d4af37;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: .3s;
+.status-step.active{
+  background:#26351f;
+  color:#fff;
+  border-left:4px solid #d4af37;
 }
 
-.location-btn:hover {
-  background: #d4af37;
-  color: #000;
+.status-step.done{
+  color:#d4af37;
 }
 
-.location-btn:disabled {
-  opacity: .7;
-  cursor: not-allowed;
+footer{
+  text-align:center;
+  padding:35px 20px;
+  background:#0d0d0d;
+  color:#888;
+  margin-top:50px;
 }
 
-.location-status {
-  margin-top: 12px;
-  padding: 13px;
-  border-radius: 8px;
-  background: #181818;
-  border: 1px solid #292929;
-  color: #ccc;
-  text-align: center;
-  font-size: 14px;
-}
-
-.delivery-preview {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.delivery-preview div {
-  background: #080808;
-  border: 1px solid #292929;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-}
-
-.delivery-preview span {
-  display: block;
-  color: #999;
-  font-size: 13px;
-  margin-bottom: 7px;
-}
-
-.delivery-preview strong {
-  color: #d4af37;
-  font-size: 18px;
-}
-
-/* =========================
-   PLACE ORDER
-========================= */
-
-.place-order {
-  width: 100%;
-  padding: 16px;
-  margin-top: 25px;
-  border: none;
-  border-radius: 10px;
-  background: #25d366;
-  color: white;
-  font-size: 17px;
-  font-weight: 900;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.place-order:hover {
-  background: #1ebe5d;
-}
-
-/* =========================
-   ORDER SUCCESS
-========================= */
-
-.thank-you {
-  display: none;
-  text-align: center;
-  background: #101010;
-  border: 1px solid #d4af37;
-  border-radius: 15px;
-  padding: 40px 20px;
-  max-width: 700px;
-  margin: auto;
-}
-
-.thank-you h2 {
-  color: #d4af37;
-  margin-bottom: 12px;
-}
-
-.order-id {
-  color: #d4af37;
-  font-size: 22px;
-  font-weight: 900;
-  margin: 15px 0;
-}
-
-/* =========================
-   TRACK ORDER
-========================= */
-
-.track-section {
-  background: #080808;
-}
-
-.track-box {
-  max-width: 700px;
-  margin: auto;
-  background: #111;
-  border: 1px solid #333;
-  border-radius: 15px;
-  padding: 30px;
-}
-
-.track-box input {
-  width: 100%;
-  padding: 14px;
-  background: #050505;
-  color: white;
-  border: 1px solid #444;
-  border-radius: 8px;
-  outline: none;
-}
-
-.track-box input:focus {
-  border-color: #d4af37;
-}
-
-.track-btn {
-  width: 100%;
-  padding: 14px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 8px;
-  background: #d4af37;
-  color: #000;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.track-result {
-  margin-top: 25px;
-  display: none;
-  background: #080808;
-  border: 1px solid #292929;
-  border-radius: 12px;
-  padding: 25px;
-  text-align: center;
-}
-
-.track-result h3 {
-  color: #d4af37;
-  margin-bottom: 15px;
-}
-
-.status-badge {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 20px;
-  border-radius: 25px;
-  background: #d4af37;
-  color: #000;
-  font-weight: 900;
-}
-
-.status-flow {
-  margin-top: 25px;
-  display: grid;
-  gap: 10px;
-}
-
-.status-step {
-  padding: 12px;
-  border: 1px solid #292929;
-  border-radius: 8px;
-  color: #777;
-}
-
-.status-step.active {
-  border-color: #d4af37;
-  color: #d4af37;
-  font-weight: 800;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-  background: #000;
-  border-top: 1px solid #222;
-  padding: 35px 20px;
-  text-align: center;
-  color: #999;
-}
-
-footer p {
-  margin: 7px 0;
-}
-
-footer strong {
-  color: #d4af37;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px) {
-
-  header {
-    padding: 15px 5%;
+@media(max-width:600px){
+  header{
+    padding:15px;
   }
 
-  nav a {
-    margin-left: 10px;
-    font-size: 14px;
+  nav a{
+    margin-left:8px;
+    font-size:12px;
   }
 
-  .hero h1 {
-    font-size: 38px;
+  .hero h1{
+    font-size:34px;
   }
 
-  .hero p {
-    font-size: 15px;
+  .cart-item{
+    flex-direction:column;
   }
-
-  section {
-    padding: 45px 5%;
-  }
-
-  .delivery-preview {
-    grid-template-columns: 1fr;
-  }
-
-  .cart-item {
-    flex-wrap: wrap;
-  }
-
-  .item-total {
-    margin-left: auto;
-  }
-
-  .track-box {
-    padding: 20px;
-  }
-
 }
-
 </style>
-
 </head>
 
 <body>
-
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header>
 
@@ -606,47 +334,25 @@ footer strong {
   </div>
 
   <nav>
-
-    <a href="#home">
-      Home
-    </a>
-
-    <a href="#menu">
-      Menu
-    </a>
-
-    <a href="#cart">
-      Cart 🛒
-    </a>
-
-    <a href="#track">
-      Track 🔎
-    </a>
-
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#cart">Cart</a>
+    <a href="#track">Track</a>
   </nav>
 
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero" id="home">
 
   <div>
 
-    <div class="tagline">
-      Your Cravings. Our Kitchen.
-    </div>
-
-    <h1>
-      Fresh Food. Bold Flavours.
-    </h1>
+    <h1>Fresh Food. Bold Flavours.</h1>
 
     <p>
       Made fresh, served hot, and prepared just for you.
-      Welcome to The Queen Fast Food.
     </p>
 
   </div>
@@ -654,583 +360,71 @@ footer strong {
 </section>
 
 
-<!-- =========================
-     MENU
-========================= -->
+<!-- MENU -->
 
-<section id="menu">
+<section class="section" id="menu">
 
-  <h2 class="section-title">
-    Choose. Add. Enjoy.
-  </h2>
+  <div class="section-title">
 
-  <div class="menu-grid">
+    <h2>Choose. Add. Enjoy.</h2>
 
-
-    <!-- VEG CHOWMIN -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80"
-        alt="Veg Chowmin"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Veg Chowmin
-        </h3>
-
-        <div class="price">
-          ₹50
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Veg Chowmin',50)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- VEG ROLL -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
-        alt="Veg Roll"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Veg Roll
-        </h3>
-
-        <div class="price">
-          ₹50
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Veg Roll',50)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- MANCHURIAN -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1623689046286-01d3e6f0c9a5?auto=format&fit=crop&w=800&q=80"
-        alt="Manchurian"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Manchurian
-        </h3>
-
-        <div class="price">
-          ₹50
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Manchurian',50)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- PANEER TIKKA -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80"
-        alt="Paneer Tikka"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Paneer Tikka
-        </h3>
-
-        <div class="price">
-          ₹60
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Paneer Tikka',60)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- PANEER BUTTER MASALA -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80"
-        alt="Paneer Butter Masala"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Paneer Butter Masala
-        </h3>
-
-        <div class="price">
-          ₹130
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Paneer Butter Masala',130)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- EGG CHICKEN CHOWMIN -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80"
-        alt="Egg Chicken Chowmin"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Egg Chicken Chowmin
-        </h3>
-
-        <div class="price">
-          ₹65
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Egg Chicken Chowmin',65)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- EGG CHICKEN ROLL -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
-        alt="Egg Chicken Roll"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Egg Chicken Roll
-        </h3>
-
-        <div class="price">
-          ₹60
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Egg Chicken Roll',60)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- PAKODA -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80"
-        alt="Pakoda"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Pakoda
-        </h3>
-
-        <div class="price">
-          ₹60
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Pakoda',60)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- CHILLI CHICKEN -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
-        alt="Chilli Chicken"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Chilli Chicken
-        </h3>
-
-        <div class="price">
-          ₹120
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Chilli Chicken',120)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- CHICKEN GARLIC -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80"
-        alt="Chicken Garlic"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Chicken Garlic
-        </h3>
-
-        <div class="price">
-          ₹80
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Chicken Garlic',80)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- CHICKEN BIRIYANI -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=800&q=80"
-        alt="Chicken Biriyani"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Chicken Biriyani
-        </h3>
-
-        <div class="price">
-          ₹120
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Chicken Biriyani',120)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- VEG BIRIYANI -->
-
-    <div class="food-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1596560548464-f010549b84d7?auto=format&fit=crop&w=800&q=80"
-        alt="Veg Biriyani"
-      >
-
-      <div class="food-info">
-
-        <h3>
-          Veg Biriyani
-        </h3>
-
-        <div class="price">
-          ₹100
-        </div>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Veg Biriyani',100)"
-        >
-          ADD TO CART
-        </button>
-
-      </div>
-
-    </div>
+    <p>Freshly prepared favourites from The Queen Fast Food.</p>
 
   </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
 
 </section>
 
 
-<!-- =========================
-     CART
-========================= -->
+<!-- CART -->
 
-<section
-  class="cart-section"
-  id="cart"
->
-
-  <h2 class="section-title">
-    Your Cart 🛒
-  </h2>
+<section class="section" id="cart">
 
   <div class="cart-box">
 
-    <div id="cartItems">
-
-      <div class="empty-cart">
-        Your cart is empty.
-      </div>
-
+    <div class="section-title">
+      <h2>🛒 Your Cart</h2>
     </div>
 
+    <div id="cartItems">
+      <p style="color:#888;text-align:center;">
+        Your cart is empty.
+      </p>
+    </div>
 
-    <div class="cart-summary">
-
-      <div class="summary-row">
-
-        <span>
-          Subtotal
-        </span>
-
-        <strong id="subtotalDisplay">
-          ₹0
-        </strong>
-
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>
-          Delivery
-        </span>
-
-        <strong id="cartDeliveryDisplay">
-          ₹0
-        </strong>
-
-      </div>
-
-
-      <div class="summary-row total">
-
-        <span>
-          Grand Total
-        </span>
-
-        <strong id="cartTotalDisplay">
-          ₹0
-        </strong>
-
-      </div>
-
+    <div class="cart-total" id="cartTotal">
+      Total: ₹0
     </div>
 
   </div>
 
-</section>
 
-
-<!-- =========================
-     CHECKOUT
-========================= -->
-
-<section
-  class="checkout-section"
-  id="checkout"
->
-
-  <h2 class="section-title">
-    Checkout
-  </h2>
+  <!-- CHECKOUT -->
 
   <div class="checkout-box">
 
-
-    <label for="customerName">
-      Customer Name
-    </label>
+    <div class="section-title">
+      <h2>📦 Checkout</h2>
+    </div>
 
     <input
-      type="text"
       id="customerName"
-      placeholder="Enter your name"
+      type="text"
+      placeholder="Your Name"
     >
-
-
-    <label for="customerPhone">
-      Mobile Number
-    </label>
 
     <input
-      type="tel"
       id="customerPhone"
-      placeholder="Enter your mobile number"
+      type="tel"
+      placeholder="Mobile Number"
+      maxlength="10"
     >
-
-
-    <label for="customerAddress">
-      Delivery Address
-    </label>
 
     <textarea
       id="customerAddress"
-      placeholder="House / Shop / Area / Landmark / PIN"
+      placeholder="Delivery Address"
     ></textarea>
-
-
-    <!-- LOCATION -->
-
-    <button
-      type="button"
-      class="location-btn"
-      onclick="getCustomerLocation()"
-    >
-      📍 USE MY CURRENT LOCATION
-    </button>
-
-
-    <div
-      id="locationStatus"
-      class="location-status"
-    >
-      📍 Location not detected yet
-    </div>
-
-
-    <!-- DELIVERY -->
-
-    <div class="delivery-preview">
-
-      <div>
-
-        <span>
-          Distance
-        </span>
-
-        <strong id="distanceDisplay">
-          -- km
-        </strong>
-
-      </div>
-
-
-      <div>
-
-        <span>
-          Delivery Charge
-        </span>
-
-        <strong id="deliveryChargeDisplay">
-          ₹0
-        </strong>
-
-      </div>
-
-
-      <div>
-
-        <span>
-          Grand Total
-        </span>
-
-        <strong id="checkoutTotalDisplay">
-          ₹0
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <!-- PAYMENT -->
-
-    <label for="paymentMethod">
-      Payment Method
-    </label>
 
     <select id="paymentMethod">
 
@@ -1245,202 +439,184 @@ footer strong {
     </select>
 
 
-    <!-- PLACE ORDER -->
-
     <button
-      type="button"
-      class="place-order"
-      onclick="placeOrder()"
-    >
-      📲 PLACE ORDER ON WHATSAPP
+      class="location-btn"
+      onclick="getLocation()">
+      📍 USE MY CURRENT LOCATION
     </button>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     ORDER SUCCESS
-========================= -->
-
-<section>
-
-  <div
-    class="thank-you"
-    id="thankYou"
-  >
-
-    <div style="font-size:50px;">
-      🎉
-    </div>
-
-    <h2>
-      ORDER PLACED SUCCESSFULLY!
-    </h2>
-
-    <p>
-      Your order has been received.
-    </p>
 
     <div
-      class="order-id"
-      id="successOrderId"
-    >
-      🆔 Order ID
+      id="locationMessage"
+      style="color:#aaa;margin-top:10px;">
     </div>
 
-    <p style="color:#aaa;">
-      👨‍🍳 Your order is being processed.
-    </p>
-
-    <br>
+    <div
+      id="distanceInfo"
+      class="distance">
+    </div>
 
     <button
-      class="track-btn"
-      onclick="goToTracking()"
-      style="max-width:300px;"
-    >
-      🔎 TRACK MY ORDER
+      class="order-btn"
+      onclick="placeOrder()">
+      👑 PLACE ORDER
     </button>
+
+
+    <div id="successBox" class="success">
+
+      <h3>🎉 Order Placed Successfully!</h3>
+
+      <p style="margin-top:10px;">
+        Your order has been received.
+      </p>
+
+      <div id="successOrderId" class="order-id"></div>
+
+      <button
+        class="track-btn"
+        onclick="scrollToTracking()">
+        📦 TRACK YOUR ORDER
+      </button>
+
+    </div>
 
   </div>
 
 </section>
 
 
-<!-- =========================
-     TRACK ORDER
-========================= -->
+<!-- TRACKING -->
 
-<section
-  class="track-section"
-  id="track"
->
-
-  <h2 class="section-title">
-    Track Your Order 🔎
-  </h2>
-
+<section class="section" id="track">
 
   <div class="track-box">
 
-    <input
-      type="text"
-      id="trackOrderId"
-      placeholder="Enter your Order ID e.g. TQF-240926-123"
-    >
+    <div class="section-title">
+      <h2>📦 Track Your Order</h2>
+      <p>Enter your Order ID to see live status.</p>
+    </div>
 
+    <input
+      id="trackOrderId"
+      type="text"
+      placeholder="Example: TQF-260924-001"
+    >
 
     <button
       class="track-btn"
-      onclick="trackOrder()"
-    >
-      🔎 TRACK ORDER
+      onclick="trackOrder()">
+      🔍 TRACK ORDER
     </button>
 
-
-    <div
-      class="track-result"
-      id="trackResult"
-    >
-
-      <h3>
-        👑 THE QUEEN FAST FOOD
-      </h3>
-
-      <p>
-        🆔 <strong id="trackingOrderId"></strong>
-      </p>
-
-      <div
-        class="status-badge"
-        id="trackingStatus"
-      >
-        🟢 ORDER RECEIVED
-      </div>
-
-
-      <div class="status-flow">
-
-        <div
-          class="status-step"
-          id="stepReceived"
-        >
-          🟢 Order Received
-        </div>
-
-        <div
-          class="status-step"
-          id="stepConfirmed"
-        >
-          🟡 Order Confirmed
-        </div>
-
-        <div
-          class="status-step"
-          id="stepMaking"
-        >
-          👨‍🍳 Your Order Is Making
-        </div>
-
-        <div
-          class="status-step"
-          id="stepDelivery"
-        >
-          🛵 Out for Delivery
-        </div>
-
-        <div
-          class="status-step"
-          id="stepDelivered"
-        >
-          ✅ Delivered
-        </div>
-
-      </div>
-
-    </div>
+    <div id="trackingResult"></div>
 
   </div>
 
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
-  <p>
-    <strong>
-      THE QUEEN FAST FOOD
-    </strong>
-  </p>
+  👑 THE QUEEN FAST FOOD
 
-  <p>
-    Ibrisingh Bazar, Odisha
-  </p>
+  <br><br>
 
-  <p>
-    Your Cravings. Our Kitchen.
-  </p>
+  Ibrisingh Bazar, Odisha
 
-  <p>
-    👑 Fresh Food • Bold Flavours
-  </p>
+  <br>
+
+  Your Cravings. Our Kitchen.
 
 </footer>
 
 
-<script>
+<script type="module">
 
 /* =========================================
-   CART
+   FIREBASE
 ========================================= */
 
-let cart = [];
+import {
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  signInAnonymously,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  set,
+  onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+  "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+  "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+  "the-queen-fast-food",
+
+  storageBucket:
+  "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+  "435721389652",
+
+  appId:
+  "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+  "G-Q1YCK636KJ"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getDatabase(app);
+
+let currentUser = null;
+
+
+/* =========================================
+   CUSTOMER AUTH
+========================================= */
+
+onAuthStateChanged(auth, user => {
+
+  currentUser = user;
+
+});
+
+signInAnonymously(auth)
+  .catch(error => {
+
+    console.error(
+      "Anonymous login error:",
+      error
+    );
+
+  });
 
 
 /* =========================================
@@ -1453,525 +629,415 @@ const restaurantLat =
 const restaurantLng =
   86.36464363454978;
 
-
-/* =========================================
-   DELIVERY RATE
-========================================= */
-
-const deliveryRate = 6;
-
-
-/* =========================================
-   CUSTOMER LOCATION
-========================================= */
+const deliveryRate =
+  6;
 
 let customerLat = null;
-
 let customerLng = null;
+let distanceKm = 0;
+let deliveryCharge = 0;
 
 
 /* =========================================
-   DELIVERY
+   MENU
 ========================================= */
 
-let calculatedDistance = null;
+const menu = [
 
-let calculatedDeliveryCharge = null;
+  {
+    id:"veg-chowmin",
+    name:"Veg Chowmin",
+    price:50,
+    image:"https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80"
+  },
 
+  {
+    id:"veg-roll",
+    name:"Veg Roll",
+    price:50,
+    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
+  },
 
-/* =========================================
-   LAST ORDER
-========================================= */
+  {
+    id:"manchurian",
+    name:"Manchurian",
+    price:50,
+    image:"https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=80"
+  },
 
-let lastOrderId = null;
+  {
+    id:"paneer-tikka",
+    name:"Paneer Tikka",
+    price:60,
+    image:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=80"
+  },
 
+  {
+    id:"paneer-butter-masala",
+    name:"Paneer Butter Masala",
+    price:130,
+    image:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80"
+  },
 
-/* =========================================
-   ADD TO CART
-========================================= */
+  {
+    id:"egg-chicken-chowmin",
+    name:"Egg Chicken Chowmin",
+    price:65,
+    image:"https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80"
+  },
 
-function addToCart(name, price) {
+  {
+    id:"egg-chicken-roll",
+    name:"Egg Chicken Roll",
+    price:60,
+    image:"https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80"
+  },
 
-  const existingItem =
-    cart.find(
-      item => item.name === name
-    );
+  {
+    id:"pakoda",
+    name:"Pakoda",
+    price:60,
+    image:"https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80"
+  },
 
+  {
+    id:"chilli-chicken",
+    name:"Chilli Chicken",
+    price:120,
+    image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
+  },
 
-  if (existingItem) {
+  {
+    id:"chicken-garlic",
+    name:"Chicken Garlic",
+    price:80,
+    image:"https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=80"
+  },
 
-    existingItem.quantity++;
+  {
+    id:"chicken-biriyani",
+    name:"Chicken Biriyani",
+    price:120,
+    image:"https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=800&q=80"
+  },
 
+  {
+    id:"veg-biriyani",
+    name:"Veg Biriyani",
+    price:100,
+    image:"https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?auto=format&fit=crop&w=800&q=80"
   }
 
-  else {
-
-    cart.push({
-
-      name: name,
-
-      price: price,
-
-      quantity: 1
-
-    });
-
-  }
+];
 
 
-  updateCart();
-
-
-  document
-    .getElementById("cart")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
-}
+let cart = {};
 
 
 /* =========================================
-   CHANGE QUANTITY
+   SHOW MENU
 ========================================= */
 
-function changeQuantity(index, change) {
+function renderMenu(){
 
-  cart[index].quantity += change;
+  const grid =
+    document.getElementById("menuGrid");
 
+  grid.innerHTML = "";
 
-  if (cart[index].quantity <= 0) {
+  menu.forEach(item => {
 
-    cart.splice(index, 1);
+    const quantity =
+      cart[item.id] || 0;
 
-  }
+    grid.innerHTML += `
 
+      <div class="product">
 
-  updateCart();
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+        >
 
-}
+        <div class="product-body">
 
+          <h3>
+            ${item.name}
+          </h3>
 
-/* =========================================
-   UPDATE CART
-========================================= */
+          <div class="price">
+            ₹${item.price}
+          </div>
 
-function updateCart() {
+          ${
+            quantity === 0
 
-  const cartItems =
-    document.getElementById("cartItems");
+            ?
 
+            `
+            <button
+              class="add-btn"
+              onclick="addToCart('${item.id}')">
+              🛒 ADD TO CART
+            </button>
+            `
 
-  if (cart.length === 0) {
+            :
 
-    cartItems.innerHTML = `
+            `
+            <div class="qty-box">
 
-      <div class="empty-cart">
+              <button
+                onclick="changeQty('${item.id}',-1)">
+                −
+              </button>
 
-        🛒 Your cart is empty.
+              <span class="qty-number">
+                ${quantity}
+              </span>
+
+              <button
+                onclick="changeQty('${item.id}',1)">
+                +
+              </button>
+
+            </div>
+            `
+
+          }
+
+        </div>
 
       </div>
 
     `;
 
-    updateCheckoutTotal();
+  });
+
+}
+
+
+/* =========================================
+   CART
+========================================= */
+
+window.addToCart = function(id){
+
+  cart[id] = 1;
+
+  renderMenu();
+
+  renderCart();
+
+};
+
+
+window.changeQty = function(id, amount){
+
+  cart[id] =
+    (cart[id] || 0) + amount;
+
+  if(cart[id] <= 0){
+
+    delete cart[id];
+
+  }
+
+  renderMenu();
+
+  renderCart();
+
+};
+
+
+function renderCart(){
+
+  const box =
+    document.getElementById("cartItems");
+
+  let subtotal = 0;
+
+  box.innerHTML = "";
+
+  const ids =
+    Object.keys(cart);
+
+  if(ids.length === 0){
+
+    box.innerHTML =
+      `<p style="color:#888;text-align:center;">
+        Your cart is empty.
+      </p>`;
+
+    document.getElementById("cartTotal")
+      .textContent =
+      "Total: ₹0";
+
+    updateDistanceDisplay();
 
     return;
 
   }
 
 
-  let html = "";
+  ids.forEach(id => {
 
+    const item =
+      menu.find(x => x.id === id);
 
-  cart.forEach(
-    (item, index) => {
+    const qty =
+      cart[id];
 
-      const itemTotal =
-        item.price *
-        item.quantity;
+    const amount =
+      item.price * qty;
 
+    subtotal += amount;
 
-      html += `
+    box.innerHTML += `
 
-        <div class="cart-item">
+      <div class="cart-item">
 
-          <div class="cart-item-name">
-
-            ${item.name}
-
-          </div>
-
-
-          <div class="qty-controls">
-
-            <button
-              class="qty-btn"
-              onclick="changeQuantity(${index}, -1)"
-            >
-              −
-            </button>
-
-
-            <span class="qty-number">
-
-              ${item.quantity}
-
-            </span>
-
-
-            <button
-              class="qty-btn"
-              onclick="changeQuantity(${index}, 1)"
-            >
-              +
-            </button>
-
-          </div>
-
-
-          <div class="item-total">
-
-            ₹${itemTotal}
-
-          </div>
-
+        <div>
+          <b>${item.name}</b>
+          <br>
+          <span style="color:#aaa;">
+            ₹${item.price} × ${qty}
+          </span>
         </div>
 
-      `;
+        <div style="color:#d4af37;font-weight:bold;">
+          ₹${amount}
+        </div>
 
-    }
-  );
+      </div>
 
+    `;
 
-  cartItems.innerHTML =
-    html;
-
-
-  updateCheckoutTotal();
-
-}
+  });
 
 
-/* =========================================
-   SUBTOTAL
-========================================= */
+  document.getElementById("cartTotal")
+    .textContent =
+    "Subtotal: ₹" + subtotal;
 
-function getSubtotal() {
-
-  return cart.reduce(
-    (total, item) =>
-      total +
-      (
-        item.price *
-        item.quantity
-      ),
-    0
-  );
+  updateDistanceDisplay();
 
 }
 
 
 /* =========================================
-   UPDATE TOTALS
+   CURRENT LOCATION
 ========================================= */
 
-function updateCheckoutTotal() {
+window.getLocation = function(){
 
-  const subtotal =
-    getSubtotal();
+  const msg =
+    document.getElementById("locationMessage");
 
+  if(!navigator.geolocation){
 
-  const delivery =
-    calculatedDeliveryCharge || 0;
-
-
-  const grandTotal =
-    subtotal + delivery;
-
-
-  document.getElementById(
-    "subtotalDisplay"
-  ).textContent =
-    "₹" + subtotal;
-
-
-  document.getElementById(
-    "cartDeliveryDisplay"
-  ).textContent =
-    "₹" + delivery;
-
-
-  document.getElementById(
-    "cartTotalDisplay"
-  ).textContent =
-    "₹" + grandTotal;
-
-
-  document.getElementById(
-    "checkoutTotalDisplay"
-  ).textContent =
-    "₹" + grandTotal;
-
-}
-
-
-/* =========================================
-   GET CUSTOMER LOCATION
-========================================= */
-
-function getCustomerLocation() {
-
-  const status =
-    document.getElementById(
-      "locationStatus"
-    );
-
-
-  const button =
-    document.querySelector(
-      ".location-btn"
-    );
-
-
-  if (!navigator.geolocation) {
-
-    status.textContent =
-      "❌ Your browser does not support GPS location.";
+    msg.textContent =
+      "Location is not supported by your browser.";
 
     return;
 
   }
 
 
-  button.disabled =
-    true;
-
-
-  button.textContent =
-    "⏳ GETTING LOCATION...";
-
-
-  status.textContent =
-    "📍 Please allow location access...";
+  msg.textContent =
+    "📍 Getting your location...";
 
 
   navigator.geolocation.getCurrentPosition(
 
-    async function(position) {
+    async position => {
 
       customerLat =
         position.coords.latitude;
-
 
       customerLng =
         position.coords.longitude;
 
 
-      status.textContent =
-        "✅ Current location detected";
+      msg.textContent =
+        "✅ Location captured successfully.";
 
-
-      button.textContent =
-        "✅ LOCATION DETECTED";
-
-
-      await calculateRoadDistance(
-        customerLat,
-        customerLng
-      );
+      await calculateDistance();
 
     },
 
+    error => {
 
-    function(error) {
+      console.error(error);
 
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "📍 USE MY CURRENT LOCATION";
-
-
-      if (error.code === 1) {
-
-        status.textContent =
-          "❌ Location permission denied. Please click Allow.";
-
-      }
-
-      else if (error.code === 2) {
-
-        status.textContent =
-          "❌ Location unavailable. Please try again.";
-
-      }
-
-      else if (error.code === 3) {
-
-        status.textContent =
-          "❌ Location request timed out. Please try again.";
-
-      }
-
-      else {
-
-        status.textContent =
-          "❌ Unable to get your location.";
-
-      }
+      msg.textContent =
+        "❌ Location permission denied. Please allow location.";
 
     },
-
 
     {
-
-      enableHighAccuracy: true,
-
-      timeout: 20000,
-
-      maximumAge: 0
-
+      enableHighAccuracy:true,
+      timeout:10000,
+      maximumAge:0
     }
 
   );
 
-}
+};
 
 
 /* =========================================
-   ROAD DISTANCE
+   DISTANCE
 ========================================= */
 
-async function calculateRoadDistance(
-  lat,
-  lng
-) {
+async function calculateDistance(){
 
-  const status =
-    document.getElementById(
-      "locationStatus"
-    );
+  try{
 
-
-  status.textContent =
-    "🚗 Calculating road distance...";
-
-
-  try {
-
-    const routeUrl =
+    const url =
       `https://router.project-osrm.org/route/v1/driving/` +
-      `${restaurantLng},${restaurantLat};${lng},${lat}` +
+      `${restaurantLng},${restaurantLat};` +
+      `${customerLng},${customerLat}` +
       `?overview=false`;
 
-
     const response =
-      await fetch(routeUrl);
+      await fetch(url);
 
-
-    if (!response.ok) {
-
-      throw new Error(
-        "Route service unavailable"
-      );
-
-    }
-
-
-    const routeData =
+    const data =
       await response.json();
 
+    if(
+      !data.routes ||
+      !data.routes.length
+    ){
 
-    if (
-      routeData.code !== "Ok" ||
-      !routeData.routes ||
-      routeData.routes.length === 0
-    ) {
-
-      throw new Error(
-        "Route not found"
-      );
+      throw new Error("Distance unavailable");
 
     }
 
 
-    const distanceKm =
-      routeData.routes[0].distance /
-      1000;
+    const meters =
+      data.routes[0].distance;
 
+    distanceKm =
+      meters / 1000;
 
-    const chargeableKm =
+    const billableKm =
       Math.ceil(distanceKm);
 
-
-    const deliveryCharge =
-      chargeableKm *
-      deliveryRate;
+    deliveryCharge =
+      billableKm * deliveryRate;
 
 
-    calculatedDistance =
-      distanceKm;
+    updateDistanceDisplay();
 
-
-    calculatedDeliveryCharge =
-      deliveryCharge;
-
-
-    document.getElementById(
-      "distanceDisplay"
-    ).textContent =
-      distanceKm.toFixed(1) +
-      " km";
-
-
-    document.getElementById(
-      "deliveryChargeDisplay"
-    ).textContent =
-      "₹" +
-      deliveryCharge;
-
-
-    status.textContent =
-      "✅ Location confirmed • Delivery distance calculated";
-
-
-    updateCheckoutTotal();
-
-  }
-
-
-  catch(error) {
+  }catch(error){
 
     console.error(error);
 
-
-    status.textContent =
-      "❌ Could not calculate road distance. Please try again.";
-
-
-    calculatedDistance =
-      null;
-
-
-    calculatedDeliveryCharge =
-      null;
-
-
-    document.getElementById(
-      "distanceDisplay"
-    ).textContent =
-      "-- km";
-
-
-    document.getElementById(
-      "deliveryChargeDisplay"
-    ).textContent =
-      "₹0";
-
-
-    updateCheckoutTotal();
+    document.getElementById("distanceInfo")
+      .textContent =
+      "Unable to calculate delivery distance.";
 
   }
 
@@ -1979,107 +1045,95 @@ async function calculateRoadDistance(
 
 
 /* =========================================
-   CREATE ORDER ID
+   TOTAL
 ========================================= */
 
-function generateOrderId() {
+function getSubtotal(){
 
-  const now =
+  let subtotal = 0;
+
+  Object.keys(cart).forEach(id => {
+
+    const item =
+      menu.find(x => x.id === id);
+
+    subtotal +=
+      item.price * cart[id];
+
+  });
+
+  return subtotal;
+
+}
+
+
+function updateDistanceDisplay(){
+
+  const info =
+    document.getElementById("distanceInfo");
+
+  const subtotal =
+    getSubtotal();
+
+
+  if(customerLat === null){
+
+    info.innerHTML =
+      `📍 Delivery charge: Please use your current location.`;
+
+    return;
+
+  }
+
+
+  const grandTotal =
+    subtotal + deliveryCharge;
+
+
+  info.innerHTML = `
+
+    📍 Delivery Distance:
+    <b>${distanceKm.toFixed(1)} KM</b>
+
+    <br>
+
+    🛵 Delivery Charge:
+    <b>₹${deliveryCharge}</b>
+
+    <br>
+
+    💰 Grand Total:
+    <b>₹${grandTotal}</b>
+
+  `;
+
+}
+
+
+/* =========================================
+   ORDER ID
+========================================= */
+
+function generateOrderId(){
+
+  const date =
     new Date();
 
+  const yy =
+    String(date.getFullYear()).slice(-2);
 
-  const day =
-    String(
-      now.getDate()
-    ).padStart(2, "0");
+  const mm =
+    String(date.getMonth()+1).padStart(2,"0");
 
-
-  const month =
-    String(
-      now.getMonth() + 1
-    ).padStart(2, "0");
-
-
-  const year =
-    String(
-      now.getFullYear()
-    ).slice(-2);
-
+  const dd =
+    String(date.getDate()).padStart(2,"0");
 
   const random =
     Math.floor(
-      100 +
-      Math.random() * 900
+      100 + Math.random()*900
     );
 
-
-  return `TQF-${day}${month}${year}-${random}`;
-
-}
-
-
-/* =========================================
-   ITEM EMOJI
-========================================= */
-
-function getItemEmoji(name) {
-
-  const item =
-    name.toLowerCase();
-
-
-  if (
-    item.includes("chowmin") ||
-    item.includes("chowmein")
-  ) {
-    return "🍜";
-  }
-
-
-  if (
-    item.includes("biriyani") ||
-    item.includes("biryani")
-  ) {
-    return "🍚";
-  }
-
-
-  if (
-    item.includes("chicken")
-  ) {
-    return "🍗";
-  }
-
-
-  if (
-    item.includes("roll")
-  ) {
-    return "🌯";
-  }
-
-
-  if (
-    item.includes("paneer")
-  ) {
-    return "🧀";
-  }
-
-
-  if (
-    item.includes("manchurian")
-  ) {
-    return "🥢";
-  }
-
-
-  if (
-    item.includes("pakoda")
-  ) {
-    return "🥘";
-  }
-
-
-  return "🍽️";
+  return `TQF-${yy}${mm}${dd}-${random}`;
 
 }
 
@@ -2088,15 +1142,12 @@ function getItemEmoji(name) {
    PLACE ORDER
 ========================================= */
 
-function placeOrder() {
+window.placeOrder = async function(){
 
-
-  /* CART */
-
-  if (cart.length === 0) {
+  if(!currentUser){
 
     alert(
-      "🛒 Please add at least one item to your cart."
+      "Connecting to order system. Please try again."
     );
 
     return;
@@ -2104,241 +1155,151 @@ function placeOrder() {
   }
 
 
-  /* NAME */
+  if(
+    Object.keys(cart).length === 0
+  ){
+
+    alert(
+      "Please add items to your cart."
+    );
+
+    return;
+
+  }
+
 
   const name =
-    document
-      .getElementById(
-        "customerName"
-      )
-      .value
-      .trim();
-
-
-  if (!name) {
-
-    alert(
-      "👤 Please enter your name."
-    );
-
-    return;
-
-  }
-
-
-  /* PHONE */
+    document.getElementById("customerName")
+      .value.trim();
 
   const phone =
-    document
-      .getElementById(
-        "customerPhone"
-      )
-      .value
-      .trim();
-
-
-  if (!phone) {
-
-    alert(
-      "📱 Please enter your mobile number."
-    );
-
-    return;
-
-  }
-
-
-  /* ADDRESS */
+    document.getElementById("customerPhone")
+      .value.trim();
 
   const address =
-    document
-      .getElementById(
-        "customerAddress"
-      )
-      .value
-      .trim();
-
-
-  if (!address) {
-
-    alert(
-      "🏠 Please enter your delivery address."
-    );
-
-    return;
-
-  }
-
-
-  /* LOCATION */
-
-  if (
-    customerLat === null ||
-    customerLng === null
-  ) {
-
-    alert(
-      "📍 Please allow your current location before placing the order."
-    );
-
-    return;
-
-  }
-
-
-  /* DELIVERY */
-
-  if (
-    calculatedDeliveryCharge === null
-  ) {
-
-    alert(
-      "🚗 Please wait until the delivery distance is calculated."
-    );
-
-    return;
-
-  }
-
-
-  /* PAYMENT */
+    document.getElementById("customerAddress")
+      .value.trim();
 
   const payment =
-    document
-      .getElementById(
-        "paymentMethod"
-      )
+    document.getElementById("paymentMethod")
       .value;
 
 
-  /* TOTAL */
+  if(!name){
+
+    alert("Please enter your name.");
+
+    return;
+
+  }
+
+
+  if(!/^[0-9]{10}$/.test(phone)){
+
+    alert(
+      "Please enter a valid 10-digit mobile number."
+    );
+
+    return;
+
+  }
+
+
+  if(!address){
+
+    alert(
+      "Please enter your delivery address."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    customerLat === null ||
+    customerLng === null
+  ){
+
+    alert(
+      "Please use your current location before placing the order."
+    );
+
+    return;
+
+  }
+
+
+  if(distanceKm <= 0){
+
+    await calculateDistance();
+
+  }
+
 
   const subtotal =
     getSubtotal();
 
-
-  const deliveryCharge =
-    calculatedDeliveryCharge;
-
-
   const grandTotal =
-    subtotal +
-    deliveryCharge;
-
-
-  /* ORDER ID */
+    subtotal + deliveryCharge;
 
   const orderId =
     generateOrderId();
 
 
-  lastOrderId =
-    orderId;
+  const items = [];
 
 
-  localStorage.setItem(
-    "TQF_LAST_ORDER_ID",
-    orderId
-  );
+  Object.keys(cart).forEach(id => {
+
+    const item =
+      menu.find(x => x.id === id);
+
+    items.push({
+
+      name:item.name,
+
+      price:item.price,
+
+      quantity:cart[id]
+
+    });
+
+  });
 
 
-  /* =========================
-     ORDER ITEMS
-  ========================= */
+  const order = {
 
-  let orderItemsText =
-    "";
+    orderId:orderId,
 
+    status:"received",
 
-  cart.forEach(
-    item => {
+    ownerUid:currentUser.uid,
 
-      const emoji =
-        getItemEmoji(
-          item.name
-        );
+    createdAt:Date.now(),
 
+    updatedAt:Date.now(),
 
-      const itemTotal =
-        item.price *
-        item.quantity;
+    customer:{
 
+      name:name,
 
-      orderItemsText +=
-        `${emoji} ${item.name} × ${item.quantity} = ₹${itemTotal}\n`;
+      phone:phone,
 
-    }
-  );
+      address:address,
 
+      lat:customerLat,
 
-  /* =========================
-     WHATSAPP MESSAGE
-  ========================= */
-
-  const message = `👑 *THE QUEEN FAST FOOD*
-
-🆔 *ORDER ID: ${orderId}*
-
-🛒 *ORDER DETAILS*
-━━━━━━━━━━━━━━━━━━
-${orderItemsText}━━━━━━━━━━━━━━━━━━
-
-💰 *Subtotal:* ₹${subtotal}
-📍 *Delivery Distance:* ${calculatedDistance.toFixed(1)} KM
-🛵 *Delivery Charge:* ₹${deliveryCharge}
-💵 *Grand Total:* ₹${grandTotal}
-
-👤 *CUSTOMER DETAILS*
-━━━━━━━━━━━━━━━━━━
-👤 *Name:* ${name}
-📱 *Mobile:* ${phone}
-🏠 *Address:* ${address}
-💳 *Payment:* ${payment}
-
-📍 *DELIVERY LOCATION*
-━━━━━━━━━━━━━━━━━━
-📌 *The Queen Fast Food*
-🏪 *Ibrisingh Bazar, Odisha*
-
-🗺️ *Customer Location:*
-https://www.google.com/maps?q=${customerLat},${customerLng}
-
-━━━━━━━━━━━━━━━━━━
-🙏 *THANKS FOR CHOOSING THE QUEEN FAST FOOD! 👑*
-
-❤️ *We appreciate your order.*
-🍴 *Have a delicious day!*`;
-
-
-  /* =========================
-     SAVE ORDER
-  ========================= */
-
-  const orderData = {
-
-    orderId: orderId,
-
-    status: "received",
-
-    customer: {
-
-      name: name,
-
-      phone: phone,
-
-      address: address,
-
-      lat: customerLat,
-
-      lng: customerLng
+      lng:customerLng
 
     },
 
-    items: cart,
+    items:items,
 
-    subtotal: subtotal,
+    subtotal:subtotal,
 
-    distanceKm: calculatedDistance,
+    distanceKm:
+      Number(distanceKm.toFixed(2)),
 
     deliveryCharge:
       deliveryCharge,
@@ -2347,124 +1308,121 @@ https://www.google.com/maps?q=${customerLat},${customerLng}
       grandTotal,
 
     payment:
-      payment,
-
-    createdAt:
-      new Date().toISOString()
+      payment
 
   };
 
 
-  localStorage.setItem(
-    "TQF_LAST_ORDER",
-    JSON.stringify(
-      orderData
-    )
-  );
+  try{
 
-
-  /* =========================
-     SHOW SUCCESS
-  ========================= */
-
-  document.getElementById(
-    "successOrderId"
-  ).textContent =
-    "🆔 " + orderId;
-
-
-  document.getElementById(
-    "thankYou"
-  ).style.display =
-    "block";
-
-
-  document.getElementById(
-    "thankYou"
-  ).scrollIntoView({
-    behavior: "smooth"
-  });
-
-
-  /* =========================
-     WHATSAPP
-  ========================= */
-
-  const restaurantPhone =
-    "919090220791";
-
-
-  const whatsappURL =
-    "https://wa.me/" +
-    restaurantPhone +
-    "?text=" +
-    encodeURIComponent(
-      message
+    await set(
+      ref(db,"orders/"+orderId),
+      order
     );
 
 
-  /*
-     Open WhatsApp.
-     Same tab so mobile browsers
-     handle it properly.
-  */
-
-  setTimeout(
-    function() {
-
-      window.location.href =
-        whatsappURL;
-
-    },
-    700
-  );
-
-}
+    document.getElementById("successBox")
+      .style.display = "block";
 
 
-/* =========================================
-   GO TO TRACKING
-========================================= */
+    document.getElementById("successOrderId")
+      .textContent =
+      "🆔 " + orderId;
 
-function goToTracking() {
 
-  const orderId =
-    localStorage.getItem(
-      "TQF_LAST_ORDER_ID"
+    localStorage.setItem(
+      "lastOrderId",
+      orderId
     );
 
 
-  if (!orderId) {
+    sendWhatsAppOrder(order);
+
+
+    cart = {};
+
+    renderMenu();
+
+    renderCart();
+
+  }catch(error){
+
+    console.error(error);
 
     alert(
-      "❌ No recent order found."
+      "Order could not be placed. Please try again."
     );
-
-    return;
 
   }
 
-
-  document.getElementById(
-    "trackOrderId"
-  ).value =
-    orderId;
+};
 
 
-  document
-    .getElementById("track")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
+/* =========================================
+   WHATSAPP
+========================================= */
+
+function sendWhatsAppOrder(order){
+
+  let itemText = "";
+
+  order.items.forEach(item => {
+
+    itemText +=
+      `🍴 ${item.name} × ${item.quantity} = ₹${item.price * item.quantity}\n`;
+
+  });
 
 
-  setTimeout(
-    function() {
+  const message =
 
-      trackOrder();
+`👑 *THE QUEEN FAST FOOD*
 
-    },
-    500
+🆔 *ORDER ID: ${order.orderId}*
+
+🛒 *ORDER DETAILS*
+━━━━━━━━━━━━━━━━━━
+${itemText}━━━━━━━━━━━━━━━━━━
+
+💰 *Subtotal:* ₹${order.subtotal}
+📍 *Delivery Distance:* ${order.distanceKm} KM
+🛵 *Delivery Charge:* ₹${order.deliveryCharge}
+💵 *Grand Total:* ₹${order.grandTotal}
+
+👤 *CUSTOMER DETAILS*
+━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${order.customer.name}
+📱 *Mobile:* ${order.customer.phone}
+🏠 *Address:* ${order.customer.address}
+💳 *Payment:* ${order.payment}
+
+📍 *DELIVERY LOCATION*
+━━━━━━━━━━━━━━━━━━
+📌 *The Queen Fast Food*
+🏪 *Ibrisingh Bazar, Odisha*
+
+🗺️ *Customer Location:*
+https://www.google.com/maps?q=${order.customer.lat},${order.customer.lng}
+
+━━━━━━━━━━━━━━━━━━
+🙏 *THANKS FOR CHOOSING THE QUEEN FAST FOOD! 👑*
+
+❤️ *We appreciate your order.*
+🍴 *Have a delicious day!*`;
+
+
+  const whatsappNumber =
+    "919090220791";
+
+
+  const url =
+    `https://wa.me/${whatsappNumber}?text=` +
+    encodeURIComponent(message);
+
+
+  window.open(
+    url,
+    "_blank"
   );
 
 }
@@ -2474,202 +1432,222 @@ function goToTracking() {
    TRACK ORDER
 ========================================= */
 
-function trackOrder() {
-
-  const input =
-    document.getElementById(
-      "trackOrderId"
-    );
-
+window.trackOrder = function(){
 
   const orderId =
-    input.value
-      .trim()
+    document.getElementById("trackOrderId")
+      .value.trim()
       .toUpperCase();
 
 
-  if (!orderId) {
-
-    alert(
-      "🆔 Please enter your Order ID."
-    );
-
-    return;
-
-  }
+  const result =
+    document.getElementById("trackingResult");
 
 
-  const savedOrder =
-    JSON.parse(
-      localStorage.getItem(
-        "TQF_LAST_ORDER"
-      )
-    );
+  if(!orderId){
 
-
-  if (
-    !savedOrder ||
-    savedOrder.orderId !== orderId
-  ) {
-
-    alert(
-      "❌ Order not found on this device."
-    );
+    result.innerHTML =
+      `<p style="color:#ff5555;margin-top:15px;">
+        Please enter your Order ID.
+      </p>`;
 
     return;
 
   }
 
 
-  const status =
-    savedOrder.status ||
-    "received";
+  const orderRef =
+    ref(db,"orders/"+orderId);
 
 
-  document.getElementById(
-    "trackingOrderId"
-  ).textContent =
-    orderId;
+  onValue(
+    orderRef,
+    snapshot => {
+
+      if(!snapshot.exists()){
+
+        result.innerHTML =
+          `<p style="color:#ff5555;margin-top:15px;">
+            ❌ Order not found.
+          </p>`;
+
+        return;
+
+      }
 
 
-  updateTrackingUI(
-    status
+      const order =
+        snapshot.val();
+
+
+      renderTracking(
+        orderId,
+        order
+      );
+
+    },
+    {
+      onlyOnce:false
+    }
   );
 
-
-  document.getElementById(
-    "trackResult"
-  ).style.display =
-    "block";
-
-}
+};
 
 
 /* =========================================
-   UPDATE TRACKING UI
+   TRACKING UI
 ========================================= */
 
-function updateTrackingUI(
-  status
-) {
+function renderTracking(
+  orderId,
+  order
+){
 
-  const statusBadge =
-    document.getElementById(
-      "trackingStatus"
-    );
+  const result =
+    document.getElementById("trackingResult");
 
 
-  const steps = [
+  const current =
+    order.status || "received";
 
-    document.getElementById(
-      "stepReceived"
-    ),
 
-    document.getElementById(
-      "stepConfirmed"
-    ),
+  const statuses = [
 
-    document.getElementById(
-      "stepMaking"
-    ),
+    {
+      id:"received",
+      text:"🟢 Order Received"
+    },
 
-    document.getElementById(
-      "stepDelivery"
-    ),
+    {
+      id:"confirmed",
+      text:"🟡 Order Confirmed"
+    },
 
-    document.getElementById(
-      "stepDelivered"
-    )
+    {
+      id:"making",
+      text:"👨‍🍳 Your Order Is Making"
+    },
+
+    {
+      id:"out_for_delivery",
+      text:"🛵 Out for Delivery"
+    },
+
+    {
+      id:"delivered",
+      text:"✅ Delivered"
+    }
 
   ];
 
 
-  steps.forEach(
-    step => {
+  const currentIndex =
+    statuses.findIndex(
+      x => x.id === current
+    );
 
-      step.classList.remove(
-        "active"
-      );
+
+  let html = `
+
+    <div style="margin-top:25px;">
+
+      <div class="order-id">
+        🆔 ${orderId}
+      </div>
+
+      <p style="color:#aaa;">
+        Live Order Status
+      </p>
+
+  `;
+
+
+  statuses.forEach(
+    (status,index) => {
+
+      let className = "status-step";
+
+
+      if(index < currentIndex){
+
+        className += " done";
+
+      }
+
+
+      if(index === currentIndex){
+
+        className += " active";
+
+      }
+
+
+      html += `
+
+        <div class="${className}">
+          ${status.text}
+        </div>
+
+      `;
 
     }
   );
 
 
-  let activeIndex = 0;
+  html += `
 
-  let statusText =
-    "🟢 ORDER RECEIVED";
+    </div>
 
-
-  if (
-    status === "confirmed"
-  ) {
-
-    activeIndex = 1;
-
-    statusText =
-      "🟡 ORDER CONFIRMED";
-
-  }
-
-  else if (
-    status === "making"
-  ) {
-
-    activeIndex = 2;
-
-    statusText =
-      "👨‍🍳 YOUR ORDER IS MAKING";
-
-  }
-
-  else if (
-    status === "out_for_delivery"
-  ) {
-
-    activeIndex = 3;
-
-    statusText =
-      "🛵 OUT FOR DELIVERY";
-
-  }
-
-  else if (
-    status === "delivered"
-  ) {
-
-    activeIndex = 4;
-
-    statusText =
-      "✅ DELIVERED";
-
-  }
+  `;
 
 
-  for (
-    let i = 0;
-    i <= activeIndex;
-    i++
-  ) {
-
-    steps[i].classList.add(
-      "active"
-    );
-
-  }
-
-
-  statusBadge.textContent =
-    statusText;
+  result.innerHTML =
+    html;
 
 }
 
 
 /* =========================================
-   INITIAL CART
+   SCROLL TO TRACKING
 ========================================= */
 
-updateCart();
+window.scrollToTracking =
+function(){
+
+  document
+    .getElementById("track")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+
+  const lastOrder =
+    localStorage.getItem(
+      "lastOrderId"
+    );
+
+
+  if(lastOrder){
+
+    document.getElementById(
+      "trackOrderId"
+    ).value =
+      lastOrder;
+
+    trackOrder();
+
+  }
+
+};
+
+
+/* =========================================
+   INITIAL
+========================================= */
+
+renderMenu();
+
+renderCart();
 
 
 </script>
