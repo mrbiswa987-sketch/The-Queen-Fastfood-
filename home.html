@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,11 +15,19 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: #050505;
   color: #ffffff;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header {
   background: #000;
@@ -58,7 +67,9 @@ nav a:hover {
   color: #d4af37;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero {
   min-height: 470px;
@@ -67,8 +78,12 @@ nav a:hover {
   align-items: center;
   text-align: center;
   padding: 50px 20px;
+
   background:
-    linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.9)),
+    linear-gradient(
+      rgba(0,0,0,.75),
+      rgba(0,0,0,.92)
+    ),
     url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1600&q=80")
     center/cover;
 }
@@ -94,7 +109,9 @@ nav a:hover {
   font-weight: 600;
 }
 
-/* SECTION */
+/* =========================
+   SECTION
+========================= */
 
 section {
   padding: 60px 7%;
@@ -107,11 +124,14 @@ section {
   margin-bottom: 40px;
 }
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns:
+    repeat(auto-fit, minmax(230px, 1fr));
   gap: 25px;
 }
 
@@ -126,7 +146,8 @@ section {
 .food-card:hover {
   transform: translateY(-5px);
   border-color: #d4af37;
-  box-shadow: 0 8px 30px rgba(212,175,55,.12);
+  box-shadow:
+    0 8px 30px rgba(212,175,55,.12);
 }
 
 .food-card img {
@@ -160,13 +181,16 @@ section {
   color: #000;
   font-weight: 800;
   cursor: pointer;
+  transition: .3s;
 }
 
 .add-btn:hover {
   background: #fff;
 }
 
-/* CART */
+/* =========================
+   CART
+========================= */
 
 .cart-section {
   background: #0b0b0b;
@@ -249,7 +273,9 @@ section {
   padding: 30px;
 }
 
-/* CHECKOUT */
+/* =========================
+   CHECKOUT
+========================= */
 
 .checkout-section {
   background: #050505;
@@ -294,7 +320,9 @@ section {
   resize: vertical;
 }
 
-/* LOCATION */
+/* =========================
+   LOCATION
+========================= */
 
 .location-btn {
   width: 100%;
@@ -358,7 +386,9 @@ section {
   font-size: 18px;
 }
 
-/* BUTTON */
+/* =========================
+   PLACE ORDER
+========================= */
 
 .place-order {
   width: 100%;
@@ -371,13 +401,16 @@ section {
   font-size: 17px;
   font-weight: 900;
   cursor: pointer;
+  transition: .3s;
 }
 
 .place-order:hover {
   background: #1ebe5d;
 }
 
-/* THANK YOU */
+/* =========================
+   ORDER SUCCESS
+========================= */
 
 .thank-you {
   display: none;
@@ -395,7 +428,103 @@ section {
   margin-bottom: 12px;
 }
 
-/* FOOTER */
+.order-id {
+  color: #d4af37;
+  font-size: 22px;
+  font-weight: 900;
+  margin: 15px 0;
+}
+
+/* =========================
+   TRACK ORDER
+========================= */
+
+.track-section {
+  background: #080808;
+}
+
+.track-box {
+  max-width: 700px;
+  margin: auto;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.track-box input {
+  width: 100%;
+  padding: 14px;
+  background: #050505;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 8px;
+  outline: none;
+}
+
+.track-box input:focus {
+  border-color: #d4af37;
+}
+
+.track-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #d4af37;
+  color: #000;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.track-result {
+  margin-top: 25px;
+  display: none;
+  background: #080808;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+}
+
+.track-result h3 {
+  color: #d4af37;
+  margin-bottom: 15px;
+}
+
+.status-badge {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  background: #d4af37;
+  color: #000;
+  font-weight: 900;
+}
+
+.status-flow {
+  margin-top: 25px;
+  display: grid;
+  gap: 10px;
+}
+
+.status-step {
+  padding: 12px;
+  border: 1px solid #292929;
+  border-radius: 8px;
+  color: #777;
+}
+
+.status-step.active {
+  border-color: #d4af37;
+  color: #d4af37;
+  font-weight: 800;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
   background: #000;
@@ -405,9 +534,17 @@ footer {
   color: #999;
 }
 
+footer p {
+  margin: 7px 0;
+}
+
 footer strong {
   color: #d4af37;
 }
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px) {
 
@@ -443,14 +580,23 @@ footer strong {
   .item-total {
     margin-left: auto;
   }
+
+  .track-box {
+    padding: 20px;
+  }
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- HEADER -->
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -460,15 +606,31 @@ footer strong {
   </div>
 
   <nav>
-    <a href="#home">Home</a>
-    <a href="#menu">Menu</a>
-    <a href="#cart">Cart 🛒</a>
+
+    <a href="#home">
+      Home
+    </a>
+
+    <a href="#menu">
+      Menu
+    </a>
+
+    <a href="#cart">
+      Cart 🛒
+    </a>
+
+    <a href="#track">
+      Track 🔎
+    </a>
+
   </nav>
 
 </header>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero" id="home">
 
@@ -478,7 +640,9 @@ footer strong {
       Your Cravings. Our Kitchen.
     </div>
 
-    <h1>Fresh Food. Bold Flavours.</h1>
+    <h1>
+      Fresh Food. Bold Flavours.
+    </h1>
 
     <p>
       Made fresh, served hot, and prepared just for you.
@@ -490,7 +654,9 @@ footer strong {
 </section>
 
 
-<!-- MENU -->
+<!-- =========================
+     MENU
+========================= -->
 
 <section id="menu">
 
@@ -501,7 +667,7 @@ footer strong {
   <div class="menu-grid">
 
 
-    <!-- 1 -->
+    <!-- VEG CHOWMIN -->
 
     <div class="food-card">
 
@@ -512,7 +678,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Veg Chowmin</h3>
+        <h3>
+          Veg Chowmin
+        </h3>
 
         <div class="price">
           ₹50
@@ -530,7 +698,7 @@ footer strong {
     </div>
 
 
-    <!-- 2 -->
+    <!-- VEG ROLL -->
 
     <div class="food-card">
 
@@ -541,7 +709,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Veg Roll</h3>
+        <h3>
+          Veg Roll
+        </h3>
 
         <div class="price">
           ₹50
@@ -559,7 +729,7 @@ footer strong {
     </div>
 
 
-    <!-- 3 -->
+    <!-- MANCHURIAN -->
 
     <div class="food-card">
 
@@ -570,7 +740,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Manchurian</h3>
+        <h3>
+          Manchurian
+        </h3>
 
         <div class="price">
           ₹50
@@ -588,7 +760,7 @@ footer strong {
     </div>
 
 
-    <!-- 4 -->
+    <!-- PANEER TIKKA -->
 
     <div class="food-card">
 
@@ -599,7 +771,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Paneer Tikka</h3>
+        <h3>
+          Paneer Tikka
+        </h3>
 
         <div class="price">
           ₹60
@@ -617,7 +791,7 @@ footer strong {
     </div>
 
 
-    <!-- 5 -->
+    <!-- PANEER BUTTER MASALA -->
 
     <div class="food-card">
 
@@ -628,7 +802,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Paneer Butter Masala</h3>
+        <h3>
+          Paneer Butter Masala
+        </h3>
 
         <div class="price">
           ₹130
@@ -646,7 +822,7 @@ footer strong {
     </div>
 
 
-    <!-- 6 -->
+    <!-- EGG CHICKEN CHOWMIN -->
 
     <div class="food-card">
 
@@ -657,7 +833,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Egg Chicken Chowmin</h3>
+        <h3>
+          Egg Chicken Chowmin
+        </h3>
 
         <div class="price">
           ₹65
@@ -675,7 +853,7 @@ footer strong {
     </div>
 
 
-    <!-- 7 -->
+    <!-- EGG CHICKEN ROLL -->
 
     <div class="food-card">
 
@@ -686,7 +864,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Egg Chicken Roll</h3>
+        <h3>
+          Egg Chicken Roll
+        </h3>
 
         <div class="price">
           ₹60
@@ -704,7 +884,7 @@ footer strong {
     </div>
 
 
-    <!-- 8 -->
+    <!-- PAKODA -->
 
     <div class="food-card">
 
@@ -715,7 +895,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Pakoda</h3>
+        <h3>
+          Pakoda
+        </h3>
 
         <div class="price">
           ₹60
@@ -733,7 +915,7 @@ footer strong {
     </div>
 
 
-    <!-- 9 -->
+    <!-- CHILLI CHICKEN -->
 
     <div class="food-card">
 
@@ -744,7 +926,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Chilli Chicken</h3>
+        <h3>
+          Chilli Chicken
+        </h3>
 
         <div class="price">
           ₹120
@@ -762,7 +946,7 @@ footer strong {
     </div>
 
 
-    <!-- 10 -->
+    <!-- CHICKEN GARLIC -->
 
     <div class="food-card">
 
@@ -773,7 +957,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Chicken Garlic</h3>
+        <h3>
+          Chicken Garlic
+        </h3>
 
         <div class="price">
           ₹80
@@ -791,7 +977,7 @@ footer strong {
     </div>
 
 
-    <!-- 11 -->
+    <!-- CHICKEN BIRIYANI -->
 
     <div class="food-card">
 
@@ -802,7 +988,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Chicken Biriyani</h3>
+        <h3>
+          Chicken Biriyani
+        </h3>
 
         <div class="price">
           ₹120
@@ -820,7 +1008,7 @@ footer strong {
     </div>
 
 
-    <!-- 12 -->
+    <!-- VEG BIRIYANI -->
 
     <div class="food-card">
 
@@ -831,7 +1019,9 @@ footer strong {
 
       <div class="food-info">
 
-        <h3>Veg Biriyani</h3>
+        <h3>
+          Veg Biriyani
+        </h3>
 
         <div class="price">
           ₹100
@@ -853,12 +1043,17 @@ footer strong {
 </section>
 
 
-<!-- CART -->
+<!-- =========================
+     CART
+========================= -->
 
-<section class="cart-section" id="cart">
+<section
+  class="cart-section"
+  id="cart"
+>
 
   <h2 class="section-title">
-    Your Cart
+    Your Cart 🛒
   </h2>
 
   <div class="cart-box">
@@ -871,27 +1066,45 @@ footer strong {
 
     </div>
 
+
     <div class="cart-summary">
 
       <div class="summary-row">
-        <span>Subtotal</span>
+
+        <span>
+          Subtotal
+        </span>
+
         <strong id="subtotalDisplay">
           ₹0
         </strong>
+
       </div>
 
+
       <div class="summary-row">
-        <span>Delivery</span>
+
+        <span>
+          Delivery
+        </span>
+
         <strong id="cartDeliveryDisplay">
           ₹0
         </strong>
+
       </div>
 
+
       <div class="summary-row total">
-        <span>Grand Total</span>
+
+        <span>
+          Grand Total
+        </span>
+
         <strong id="cartTotalDisplay">
           ₹0
         </strong>
+
       </div>
 
     </div>
@@ -901,15 +1114,21 @@ footer strong {
 </section>
 
 
-<!-- CHECKOUT -->
+<!-- =========================
+     CHECKOUT
+========================= -->
 
-<section class="checkout-section" id="checkout">
+<section
+  class="checkout-section"
+  id="checkout"
+>
 
   <h2 class="section-title">
     Checkout
   </h2>
 
   <div class="checkout-box">
+
 
     <label for="customerName">
       Customer Name
@@ -943,7 +1162,7 @@ footer strong {
     ></textarea>
 
 
-    <!-- CURRENT LOCATION -->
+    <!-- LOCATION -->
 
     <button
       type="button"
@@ -953,6 +1172,7 @@ footer strong {
       📍 USE MY CURRENT LOCATION
     </button>
 
+
     <div
       id="locationStatus"
       class="location-status"
@@ -961,7 +1181,7 @@ footer strong {
     </div>
 
 
-    <!-- DELIVERY INFORMATION -->
+    <!-- DELIVERY -->
 
     <div class="delivery-preview">
 
@@ -1006,13 +1226,15 @@ footer strong {
     </div>
 
 
+    <!-- PAYMENT -->
+
     <label for="paymentMethod">
       Payment Method
     </label>
 
     <select id="paymentMethod">
 
-      <option value="COD">
+      <option value="Cash on Delivery">
         Cash on Delivery
       </option>
 
@@ -1022,6 +1244,8 @@ footer strong {
 
     </select>
 
+
+    <!-- PLACE ORDER -->
 
     <button
       type="button"
@@ -1036,7 +1260,9 @@ footer strong {
 </section>
 
 
-<!-- THANK YOU -->
+<!-- =========================
+     ORDER SUCCESS
+========================= -->
 
 <section>
 
@@ -1045,25 +1271,152 @@ footer strong {
     id="thankYou"
   >
 
+    <div style="font-size:50px;">
+      🎉
+    </div>
+
     <h2>
-      👑 Thank You!
+      ORDER PLACED SUCCESSFULLY!
     </h2>
 
     <p>
-      Your order has been prepared for WhatsApp confirmation.
+      Your order has been received.
     </p>
+
+    <div
+      class="order-id"
+      id="successOrderId"
+    >
+      🆔 Order ID
+    </div>
+
+    <p style="color:#aaa;">
+      👨‍🍳 Your order is being processed.
+    </p>
+
+    <br>
+
+    <button
+      class="track-btn"
+      onclick="goToTracking()"
+      style="max-width:300px;"
+    >
+      🔎 TRACK MY ORDER
+    </button>
 
   </div>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     TRACK ORDER
+========================= -->
+
+<section
+  class="track-section"
+  id="track"
+>
+
+  <h2 class="section-title">
+    Track Your Order 🔎
+  </h2>
+
+
+  <div class="track-box">
+
+    <input
+      type="text"
+      id="trackOrderId"
+      placeholder="Enter your Order ID e.g. TQF-240926-123"
+    >
+
+
+    <button
+      class="track-btn"
+      onclick="trackOrder()"
+    >
+      🔎 TRACK ORDER
+    </button>
+
+
+    <div
+      class="track-result"
+      id="trackResult"
+    >
+
+      <h3>
+        👑 THE QUEEN FAST FOOD
+      </h3>
+
+      <p>
+        🆔 <strong id="trackingOrderId"></strong>
+      </p>
+
+      <div
+        class="status-badge"
+        id="trackingStatus"
+      >
+        🟢 ORDER RECEIVED
+      </div>
+
+
+      <div class="status-flow">
+
+        <div
+          class="status-step"
+          id="stepReceived"
+        >
+          🟢 Order Received
+        </div>
+
+        <div
+          class="status-step"
+          id="stepConfirmed"
+        >
+          🟡 Order Confirmed
+        </div>
+
+        <div
+          class="status-step"
+          id="stepMaking"
+        >
+          👨‍🍳 Your Order Is Making
+        </div>
+
+        <div
+          class="status-step"
+          id="stepDelivery"
+        >
+          🛵 Out for Delivery
+        </div>
+
+        <div
+          class="status-step"
+          id="stepDelivered"
+        >
+          ✅ Delivered
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
   <p>
-    <strong>THE QUEEN FAST FOOD</strong>
+    <strong>
+      THE QUEEN FAST FOOD
+    </strong>
   </p>
 
   <p>
@@ -1072,6 +1425,10 @@ footer strong {
 
   <p>
     Your Cravings. Our Kitchen.
+  </p>
+
+  <p>
+    👑 Fresh Food • Bold Flavours
   </p>
 
 </footer>
@@ -1090,13 +1447,15 @@ let cart = [];
    RESTAURANT LOCATION
 ========================================= */
 
-const restaurantLat = 20.216780359694468;
+const restaurantLat =
+  20.216780359694468;
 
-const restaurantLng = 86.36464363454978;
+const restaurantLng =
+  86.36464363454978;
 
 
 /* =========================================
-   DELIVERY SETTINGS
+   DELIVERY RATE
 ========================================= */
 
 const deliveryRate = 6;
@@ -1112,7 +1471,7 @@ let customerLng = null;
 
 
 /* =========================================
-   DELIVERY CALCULATION
+   DELIVERY
 ========================================= */
 
 let calculatedDistance = null;
@@ -1121,36 +1480,54 @@ let calculatedDeliveryCharge = null;
 
 
 /* =========================================
+   LAST ORDER
+========================================= */
+
+let lastOrderId = null;
+
+
+/* =========================================
    ADD TO CART
 ========================================= */
 
 function addToCart(name, price) {
 
-  const existingItem = cart.find(
-    item => item.name === name
-  );
+  const existingItem =
+    cart.find(
+      item => item.name === name
+    );
+
 
   if (existingItem) {
 
     existingItem.quantity++;
 
-  } else {
+  }
+
+  else {
 
     cart.push({
+
       name: name,
+
       price: price,
+
       quantity: 1
+
     });
 
   }
 
+
   updateCart();
+
 
   document
     .getElementById("cart")
     .scrollIntoView({
       behavior: "smooth"
     });
+
 }
 
 
@@ -1162,13 +1539,16 @@ function changeQuantity(index, change) {
 
   cart[index].quantity += change;
 
+
   if (cart[index].quantity <= 0) {
 
     cart.splice(index, 1);
 
   }
 
+
   updateCart();
+
 }
 
 
@@ -1181,90 +1561,119 @@ function updateCart() {
   const cartItems =
     document.getElementById("cartItems");
 
+
   if (cart.length === 0) {
 
     cartItems.innerHTML = `
+
       <div class="empty-cart">
-        Your cart is empty.
+
+        🛒 Your cart is empty.
+
       </div>
+
     `;
 
     updateCheckoutTotal();
 
     return;
+
   }
 
 
   let html = "";
 
-  cart.forEach((item, index) => {
 
-    const itemTotal =
-      item.price * item.quantity;
+  cart.forEach(
+    (item, index) => {
 
-    html += `
+      const itemTotal =
+        item.price *
+        item.quantity;
 
-      <div class="cart-item">
 
-        <div class="cart-item-name">
-          ${item.name}
+      html += `
+
+        <div class="cart-item">
+
+          <div class="cart-item-name">
+
+            ${item.name}
+
+          </div>
+
+
+          <div class="qty-controls">
+
+            <button
+              class="qty-btn"
+              onclick="changeQuantity(${index}, -1)"
+            >
+              −
+            </button>
+
+
+            <span class="qty-number">
+
+              ${item.quantity}
+
+            </span>
+
+
+            <button
+              class="qty-btn"
+              onclick="changeQuantity(${index}, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+
+          <div class="item-total">
+
+            ₹${itemTotal}
+
+          </div>
+
         </div>
 
-        <div class="qty-controls">
+      `;
 
-          <button
-            class="qty-btn"
-            onclick="changeQuantity(${index}, -1)"
-          >
-            −
-          </button>
-
-          <span class="qty-number">
-            ${item.quantity}
-          </span>
-
-          <button
-            class="qty-btn"
-            onclick="changeQuantity(${index}, 1)"
-          >
-            +
-          </button>
-
-        </div>
-
-        <div class="item-total">
-          ₹${itemTotal}
-        </div>
-
-      </div>
-
-    `;
-
-  });
+    }
+  );
 
 
-  cartItems.innerHTML = html;
+  cartItems.innerHTML =
+    html;
+
 
   updateCheckoutTotal();
+
 }
 
 
 /* =========================================
-   GET SUBTOTAL
+   SUBTOTAL
 ========================================= */
 
 function getSubtotal() {
 
   return cart.reduce(
     (total, item) =>
-      total + (item.price * item.quantity),
+      total +
+      (
+        item.price *
+        item.quantity
+      ),
     0
   );
+
 }
 
 
 /* =========================================
-   UPDATE TOTAL
+   UPDATE TOTALS
 ========================================= */
 
 function updateCheckoutTotal() {
@@ -1272,8 +1681,10 @@ function updateCheckoutTotal() {
   const subtotal =
     getSubtotal();
 
+
   const delivery =
     calculatedDeliveryCharge || 0;
+
 
   const grandTotal =
     subtotal + delivery;
@@ -1301,11 +1712,12 @@ function updateCheckoutTotal() {
     "checkoutTotalDisplay"
   ).textContent =
     "₹" + grandTotal;
+
 }
 
 
 /* =========================================
-   GET CUSTOMER CURRENT LOCATION
+   GET CUSTOMER LOCATION
 ========================================= */
 
 function getCustomerLocation() {
@@ -1314,6 +1726,7 @@ function getCustomerLocation() {
     document.getElementById(
       "locationStatus"
     );
+
 
   const button =
     document.querySelector(
@@ -1327,10 +1740,13 @@ function getCustomerLocation() {
       "❌ Your browser does not support GPS location.";
 
     return;
+
   }
 
 
-  button.disabled = true;
+  button.disabled =
+    true;
+
 
   button.textContent =
     "⏳ GETTING LOCATION...";
@@ -1346,6 +1762,7 @@ function getCustomerLocation() {
 
       customerLat =
         position.coords.latitude;
+
 
       customerLng =
         position.coords.longitude;
@@ -1369,7 +1786,9 @@ function getCustomerLocation() {
 
     function(error) {
 
-      button.disabled = false;
+      button.disabled =
+        false;
+
 
       button.textContent =
         "📍 USE MY CURRENT LOCATION";
@@ -1407,9 +1826,13 @@ function getCustomerLocation() {
 
 
     {
+
       enableHighAccuracy: true,
+
       timeout: 20000,
+
       maximumAge: 0
+
     }
 
   );
@@ -1418,7 +1841,7 @@ function getCustomerLocation() {
 
 
 /* =========================================
-   CALCULATE ROAD DISTANCE
+   ROAD DISTANCE
 ========================================= */
 
 async function calculateRoadDistance(
@@ -1475,23 +1898,17 @@ async function calculateRoadDistance(
 
 
     const distanceKm =
-      routeData.routes[0].distance / 1000;
+      routeData.routes[0].distance /
+      1000;
 
-
-    /*
-      Example:
-
-      2.1 km → 3 km chargeable
-      2.9 km → 3 km chargeable
-      3.1 km → 4 km chargeable
-    */
 
     const chargeableKm =
       Math.ceil(distanceKm);
 
 
     const deliveryCharge =
-      chargeableKm * deliveryRate;
+      chargeableKm *
+      deliveryRate;
 
 
     calculatedDistance =
@@ -1505,13 +1922,15 @@ async function calculateRoadDistance(
     document.getElementById(
       "distanceDisplay"
     ).textContent =
-      distanceKm.toFixed(1) + " km";
+      distanceKm.toFixed(1) +
+      " km";
 
 
     document.getElementById(
       "deliveryChargeDisplay"
     ).textContent =
-      "₹" + deliveryCharge;
+      "₹" +
+      deliveryCharge;
 
 
     status.textContent =
@@ -1520,31 +1939,10 @@ async function calculateRoadDistance(
 
     updateCheckoutTotal();
 
-
-    console.log(
-      "Customer Latitude:",
-      lat
-    );
-
-    console.log(
-      "Customer Longitude:",
-      lng
-    );
-
-    console.log(
-      "Road Distance:",
-      distanceKm
-    );
-
-    console.log(
-      "Delivery Charge:",
-      deliveryCharge
-    );
-
   }
 
 
-  catch (error) {
+  catch(error) {
 
     console.error(error);
 
@@ -1553,9 +1951,12 @@ async function calculateRoadDistance(
       "❌ Could not calculate road distance. Please try again.";
 
 
-    calculatedDistance = null;
+    calculatedDistance =
+      null;
 
-    calculatedDeliveryCharge = null;
+
+    calculatedDeliveryCharge =
+      null;
 
 
     document.getElementById(
@@ -1578,28 +1979,138 @@ async function calculateRoadDistance(
 
 
 /* =========================================
+   CREATE ORDER ID
+========================================= */
+
+function generateOrderId() {
+
+  const now =
+    new Date();
+
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2, "0");
+
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
+
+
+  const year =
+    String(
+      now.getFullYear()
+    ).slice(-2);
+
+
+  const random =
+    Math.floor(
+      100 +
+      Math.random() * 900
+    );
+
+
+  return `TQF-${day}${month}${year}-${random}`;
+
+}
+
+
+/* =========================================
+   ITEM EMOJI
+========================================= */
+
+function getItemEmoji(name) {
+
+  const item =
+    name.toLowerCase();
+
+
+  if (
+    item.includes("chowmin") ||
+    item.includes("chowmein")
+  ) {
+    return "🍜";
+  }
+
+
+  if (
+    item.includes("biriyani") ||
+    item.includes("biryani")
+  ) {
+    return "🍚";
+  }
+
+
+  if (
+    item.includes("chicken")
+  ) {
+    return "🍗";
+  }
+
+
+  if (
+    item.includes("roll")
+  ) {
+    return "🌯";
+  }
+
+
+  if (
+    item.includes("paneer")
+  ) {
+    return "🧀";
+  }
+
+
+  if (
+    item.includes("manchurian")
+  ) {
+    return "🥢";
+  }
+
+
+  if (
+    item.includes("pakoda")
+  ) {
+    return "🥘";
+  }
+
+
+  return "🍽️";
+
+}
+
+
+/* =========================================
    PLACE ORDER
 ========================================= */
 
 function placeOrder() {
 
-  /* CART CHECK */
+
+  /* CART */
 
   if (cart.length === 0) {
 
     alert(
-      "Please add at least one item to your cart."
+      "🛒 Please add at least one item to your cart."
     );
 
     return;
+
   }
 
 
-  /* NAME CHECK */
+  /* NAME */
 
   const name =
     document
-      .getElementById("customerName")
+      .getElementById(
+        "customerName"
+      )
       .value
       .trim();
 
@@ -1607,18 +2118,21 @@ function placeOrder() {
   if (!name) {
 
     alert(
-      "Please enter your name."
+      "👤 Please enter your name."
     );
 
     return;
+
   }
 
 
-  /* PHONE CHECK */
+  /* PHONE */
 
   const phone =
     document
-      .getElementById("customerPhone")
+      .getElementById(
+        "customerPhone"
+      )
       .value
       .trim();
 
@@ -1626,18 +2140,21 @@ function placeOrder() {
   if (!phone) {
 
     alert(
-      "Please enter your mobile number."
+      "📱 Please enter your mobile number."
     );
 
     return;
+
   }
 
 
-  /* ADDRESS CHECK */
+  /* ADDRESS */
 
   const address =
     document
-      .getElementById("customerAddress")
+      .getElementById(
+        "customerAddress"
+      )
       .value
       .trim();
 
@@ -1645,14 +2162,15 @@ function placeOrder() {
   if (!address) {
 
     alert(
-      "Please enter your delivery address."
+      "🏠 Please enter your delivery address."
     );
 
     return;
+
   }
 
 
-  /* LOCATION CHECK */
+  /* LOCATION */
 
   if (
     customerLat === null ||
@@ -1660,24 +2178,26 @@ function placeOrder() {
   ) {
 
     alert(
-      "Please allow your current location before placing the order."
+      "📍 Please allow your current location before placing the order."
     );
 
     return;
+
   }
 
 
-  /* DISTANCE CHECK */
+  /* DELIVERY */
 
   if (
     calculatedDeliveryCharge === null
   ) {
 
     alert(
-      "Please wait until the delivery distance is calculated."
+      "🚗 Please wait until the delivery distance is calculated."
     );
 
     return;
+
   }
 
 
@@ -1685,7 +2205,9 @@ function placeOrder() {
 
   const payment =
     document
-      .getElementById("paymentMethod")
+      .getElementById(
+        "paymentMethod"
+      )
       .value;
 
 
@@ -1700,120 +2222,447 @@ function placeOrder() {
 
 
   const grandTotal =
-    subtotal + deliveryCharge;
+    subtotal +
+    deliveryCharge;
 
 
-  /* WHATSAPP MESSAGE */
+  /* ORDER ID */
 
-  let message =
-    `THE QUEEN FAST FOOD - ORDER\n\n`;
-
-
-  cart.forEach(item => {
-
-    message +=
-      `${item.name} x ${item.quantity} = ₹${item.price * item.quantity}\n`;
-
-  });
+  const orderId =
+    generateOrderId();
 
 
-  message +=
-    `\nSubtotal: ₹${subtotal}`;
+  lastOrderId =
+    orderId;
 
 
-  message +=
-    `\nDelivery Distance: ${calculatedDistance.toFixed(1)} km`;
+  localStorage.setItem(
+    "TQF_LAST_ORDER_ID",
+    orderId
+  );
 
 
-  message +=
-    `\nDelivery Charge: ₹${deliveryCharge}`;
+  /* =========================
+     ORDER ITEMS
+  ========================= */
+
+  let orderItemsText =
+    "";
 
 
-  message +=
-    `\nGrand Total: ₹${grandTotal}`;
+  cart.forEach(
+    item => {
+
+      const emoji =
+        getItemEmoji(
+          item.name
+        );
 
 
-  message +=
-    `\n\nCustomer: ${name}`;
+      const itemTotal =
+        item.price *
+        item.quantity;
 
 
-  message +=
-    `\nMobile: ${phone}`;
+      orderItemsText +=
+        `${emoji} ${item.name} × ${item.quantity} = ₹${itemTotal}\n`;
+
+    }
+  );
 
 
-  message +=
-    `\nAddress: ${address}`;
+  /* =========================
+     WHATSAPP MESSAGE
+  ========================= */
+
+  const message = `👑 *THE QUEEN FAST FOOD*
+
+🆔 *ORDER ID: ${orderId}*
+
+🛒 *ORDER DETAILS*
+━━━━━━━━━━━━━━━━━━
+${orderItemsText}━━━━━━━━━━━━━━━━━━
+
+💰 *Subtotal:* ₹${subtotal}
+📍 *Delivery Distance:* ${calculatedDistance.toFixed(1)} KM
+🛵 *Delivery Charge:* ₹${deliveryCharge}
+💵 *Grand Total:* ₹${grandTotal}
+
+👤 *CUSTOMER DETAILS*
+━━━━━━━━━━━━━━━━━━
+👤 *Name:* ${name}
+📱 *Mobile:* ${phone}
+🏠 *Address:* ${address}
+💳 *Payment:* ${payment}
+
+📍 *DELIVERY LOCATION*
+━━━━━━━━━━━━━━━━━━
+📌 *The Queen Fast Food*
+🏪 *Ibrisingh Bazar, Odisha*
+
+🗺️ *Customer Location:*
+https://www.google.com/maps?q=${customerLat},${customerLng}
+
+━━━━━━━━━━━━━━━━━━
+🙏 *THANKS FOR CHOOSING THE QUEEN FAST FOOD! 👑*
+
+❤️ *We appreciate your order.*
+🍴 *Have a delicious day!*`;
 
 
-  message +=
-    `\nPayment: ${payment}`;
+  /* =========================
+     SAVE ORDER
+  ========================= */
+
+  const orderData = {
+
+    orderId: orderId,
+
+    status: "received",
+
+    customer: {
+
+      name: name,
+
+      phone: phone,
+
+      address: address,
+
+      lat: customerLat,
+
+      lng: customerLng
+
+    },
+
+    items: cart,
+
+    subtotal: subtotal,
+
+    distanceKm: calculatedDistance,
+
+    deliveryCharge:
+      deliveryCharge,
+
+    grandTotal:
+      grandTotal,
+
+    payment:
+      payment,
+
+    createdAt:
+      new Date().toISOString()
+
+  };
 
 
-  message +=
-    `\n\nCustomer GPS Location:`;
+  localStorage.setItem(
+    "TQF_LAST_ORDER",
+    JSON.stringify(
+      orderData
+    )
+  );
 
 
-  message +=
-    `\nLatitude: ${customerLat}`;
+  /* =========================
+     SHOW SUCCESS
+  ========================= */
 
+  document.getElementById(
+    "successOrderId"
+  ).textContent =
+    "🆔 " + orderId;
 
-  message +=
-    `\nLongitude: ${customerLng}`;
-
-
-  message +=
-    `\n\nGoogle Maps Location:`;
-
-
-  message +=
-    `\nhttps://www.google.com/maps?q=${customerLat},${customerLng}`;
-
-
-  /* RESTAURANT WHATSAPP */
-
-  const restaurantPhone =
-    "9090220791";
-
-
-  const whatsappURL =
-    `https://wa.me/91${restaurantPhone}?text=` +
-    encodeURIComponent(message);
-
-
-  /* THANK YOU */
 
   document.getElementById(
     "thankYou"
-  ).style.display = "block";
+  ).style.display =
+    "block";
 
 
-  /* OPEN WHATSAPP */
+  document.getElementById(
+    "thankYou"
+  ).scrollIntoView({
+    behavior: "smooth"
+  });
 
-  window.location.href =
-    whatsappURL;
+
+  /* =========================
+     WHATSAPP
+  ========================= */
+
+  const restaurantPhone =
+    "919090220791";
+
+
+  const whatsappURL =
+    "https://wa.me/" +
+    restaurantPhone +
+    "?text=" +
+    encodeURIComponent(
+      message
+    );
+
+
+  /*
+     Open WhatsApp.
+     Same tab so mobile browsers
+     handle it properly.
+  */
+
+  setTimeout(
+    function() {
+
+      window.location.href =
+        whatsappURL;
+
+    },
+    700
+  );
 
 }
 
 
 /* =========================================
-   ADDRESS CHANGE
-   RESET LOCATION CALCULATION
+   GO TO TRACKING
 ========================================= */
 
-document
-  .getElementById("customerAddress")
-  .addEventListener(
-    "input",
+function goToTracking() {
+
+  const orderId =
+    localStorage.getItem(
+      "TQF_LAST_ORDER_ID"
+    );
+
+
+  if (!orderId) {
+
+    alert(
+      "❌ No recent order found."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "trackOrderId"
+  ).value =
+    orderId;
+
+
+  document
+    .getElementById("track")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+
+  setTimeout(
     function() {
 
-      /*
-        Address change hela
-        delivery calculation reset heba nahi,
-        because current GPS location remains valid.
-      */
+      trackOrder();
+
+    },
+    500
+  );
+
+}
+
+
+/* =========================================
+   TRACK ORDER
+========================================= */
+
+function trackOrder() {
+
+  const input =
+    document.getElementById(
+      "trackOrderId"
+    );
+
+
+  const orderId =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  if (!orderId) {
+
+    alert(
+      "🆔 Please enter your Order ID."
+    );
+
+    return;
+
+  }
+
+
+  const savedOrder =
+    JSON.parse(
+      localStorage.getItem(
+        "TQF_LAST_ORDER"
+      )
+    );
+
+
+  if (
+    !savedOrder ||
+    savedOrder.orderId !== orderId
+  ) {
+
+    alert(
+      "❌ Order not found on this device."
+    );
+
+    return;
+
+  }
+
+
+  const status =
+    savedOrder.status ||
+    "received";
+
+
+  document.getElementById(
+    "trackingOrderId"
+  ).textContent =
+    orderId;
+
+
+  updateTrackingUI(
+    status
+  );
+
+
+  document.getElementById(
+    "trackResult"
+  ).style.display =
+    "block";
+
+}
+
+
+/* =========================================
+   UPDATE TRACKING UI
+========================================= */
+
+function updateTrackingUI(
+  status
+) {
+
+  const statusBadge =
+    document.getElementById(
+      "trackingStatus"
+    );
+
+
+  const steps = [
+
+    document.getElementById(
+      "stepReceived"
+    ),
+
+    document.getElementById(
+      "stepConfirmed"
+    ),
+
+    document.getElementById(
+      "stepMaking"
+    ),
+
+    document.getElementById(
+      "stepDelivery"
+    ),
+
+    document.getElementById(
+      "stepDelivered"
+    )
+
+  ];
+
+
+  steps.forEach(
+    step => {
+
+      step.classList.remove(
+        "active"
+      );
 
     }
   );
+
+
+  let activeIndex = 0;
+
+  let statusText =
+    "🟢 ORDER RECEIVED";
+
+
+  if (
+    status === "confirmed"
+  ) {
+
+    activeIndex = 1;
+
+    statusText =
+      "🟡 ORDER CONFIRMED";
+
+  }
+
+  else if (
+    status === "making"
+  ) {
+
+    activeIndex = 2;
+
+    statusText =
+      "👨‍🍳 YOUR ORDER IS MAKING";
+
+  }
+
+  else if (
+    status === "out_for_delivery"
+  ) {
+
+    activeIndex = 3;
+
+    statusText =
+      "🛵 OUT FOR DELIVERY";
+
+  }
+
+  else if (
+    status === "delivered"
+  ) {
+
+    activeIndex = 4;
+
+    statusText =
+      "✅ DELIVERED";
+
+  }
+
+
+  for (
+    let i = 0;
+    i <= activeIndex;
+    i++
+  ) {
+
+    steps[i].classList.add(
+      "active"
+    );
+
+  }
+
+
+  statusBadge.textContent =
+    statusText;
+
+}
 
 
 /* =========================================
@@ -1821,6 +2670,7 @@ document
 ========================================= */
 
 updateCart();
+
 
 </script>
 
