@@ -1,928 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Queen Fast Food</title>
-
-  <style>
-    :root{
-      --gold:#d4af37;
-      --gold-light:#f4d77d;
-      --black:#080808;
-      --dark:#111;
-      --card:#171717;
-      --white:#fff;
-      --muted:#b8b8b8;
-      --danger:#ff5c5c;
-      --success:#55d98a;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    body{
-      font-family:Arial,Helvetica,sans-serif;
-      background:#080808;
-      color:#fff;
-      min-height:100vh;
-    }
-
-    button,input,textarea,select{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(8,8,8,.96);
-      border-bottom:1px solid rgba(212,175,55,.25);
-      backdrop-filter:blur(12px);
-    }
-
-    .nav{
-      max-width:1200px;
-      margin:auto;
-      padding:15px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      color:white;
-    }
-
-    .crown{
-      font-size:30px;
-    }
-
-    .brand-text h1{
-      font-size:20px;
-      color:var(--gold-light);
-      letter-spacing:1px;
-    }
-
-    .brand-text span{
-      font-size:11px;
-      color:#aaa;
-      letter-spacing:2px;
-    }
-
-    .cart-button{
-      border:1px solid var(--gold);
-      background:#141414;
-      color:white;
-      border-radius:25px;
-      padding:10px 15px;
-      font-weight:bold;
-      position:relative;
-    }
-
-    .cart-count{
-      position:absolute;
-      right:-7px;
-      top:-7px;
-      background:var(--gold);
-      color:#000;
-      width:22px;
-      height:22px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-    }
-
-    .hero{
-      min-height:390px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:70px 20px;
-      background:
-        linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.88)),
-        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1800&q=85")
-        center/cover;
-    }
-
-    .hero-content{
-      max-width:800px;
-    }
-
-    .hero small{
-      color:var(--gold-light);
-      letter-spacing:4px;
-      text-transform:uppercase;
-    }
-
-    .hero h2{
-      font-family:Georgia,serif;
-      font-size:clamp(42px,8vw,78px);
-      margin:12px 0;
-      color:white;
-    }
-
-    .hero p{
-      color:#ddd;
-      font-size:17px;
-      line-height:1.7;
-    }
-
-    .hero-tag{
-      display:inline-block;
-      margin-top:22px;
-      border:1px solid var(--gold);
-      color:var(--gold-light);
-      padding:10px 18px;
-      border-radius:30px;
-      font-weight:bold;
-    }
-
-    .status-box{
-      max-width:1100px;
-      margin:25px auto 0;
-      padding:0 20px;
-    }
-
-    .status{
-      border-radius:14px;
-      padding:16px 18px;
-      text-align:center;
-      font-weight:bold;
-      border:1px solid;
-    }
-
-    .status.open{
-      background:rgba(85,217,138,.08);
-      color:var(--success);
-      border-color:rgba(85,217,138,.4);
-    }
-
-    .status.closed{
-      background:rgba(255,92,92,.08);
-      color:#ff8c8c;
-      border-color:rgba(255,92,92,.4);
-    }
-
-    .status.preopen{
-      background:rgba(212,175,55,.08);
-      color:var(--gold-light);
-      border-color:rgba(212,175,55,.4);
-    }
-
-    .section{
-      max-width:1200px;
-      margin:auto;
-      padding:55px 20px;
-    }
-
-    .section-heading{
-      text-align:center;
-      margin-bottom:35px;
-    }
-
-    .section-heading .eyebrow{
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:3px;
-      font-size:12px;
-    }
-
-    .section-heading h2{
-      font-family:Georgia,serif;
-      font-size:38px;
-      margin-top:8px;
-    }
-
-    .menu-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:22px;
-    }
-
-    .food-card{
-      background:var(--card);
-      border:1px solid rgba(212,175,55,.18);
-      border-radius:18px;
-      overflow:hidden;
-      transition:.25s;
-    }
-
-    .food-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(212,175,55,.65);
-      box-shadow:0 12px 35px rgba(0,0,0,.35);
-    }
-
-    .food-image{
-      height:210px;
-      background:#222;
-      overflow:hidden;
-    }
-
-    .food-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transition:.35s;
-    }
-
-    .food-card:hover .food-image img{
-      transform:scale(1.05);
-    }
-
-    .food-info{
-      padding:18px;
-    }
-
-    .food-info h3{
-      font-size:19px;
-      margin-bottom:7px;
-    }
-
-    .food-info p{
-      color:#aaa;
-      font-size:13px;
-      min-height:38px;
-      line-height:1.5;
-    }
-
-    .food-bottom{
-      margin-top:16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .price{
-      color:var(--gold-light);
-      font-size:21px;
-      font-weight:bold;
-    }
-
-    .add-btn{
-      background:linear-gradient(135deg,#d4af37,#f4d77d);
-      color:#000;
-      border:0;
-      border-radius:25px;
-      padding:10px 17px;
-      font-weight:bold;
-    }
-
-    .add-btn:disabled{
-      opacity:.35;
-      cursor:not-allowed;
-    }
-
-    .why-section{
-      max-width:1200px;
-      margin:auto;
-      padding:25px 20px 70px;
-    }
-
-    .why-box{
-      background:
-        linear-gradient(
-          145deg,
-          rgba(212,175,55,.08),
-          rgba(255,255,255,.02)
-        );
-      border:1px solid rgba(212,175,55,.22);
-      border-radius:24px;
-      padding:45px 30px;
-    }
-
-    .why-heading{
-      text-align:center;
-      margin-bottom:35px;
-    }
-
-    .why-heading .eyebrow{
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:3px;
-      font-size:12px;
-    }
-
-    .why-heading h2{
-      font-family:Georgia,serif;
-      font-size:38px;
-      margin-top:8px;
-    }
-
-    .why-heading p{
-      max-width:720px;
-      margin:12px auto 0;
-      color:#aaa;
-      line-height:1.7;
-    }
-
-    .why-grid{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:15px;
-    }
-
-    .why-card{
-      background:#111;
-      border:1px solid rgba(212,175,55,.15);
-      border-radius:16px;
-      padding:25px 15px;
-      text-align:center;
-      transition:.25s;
-    }
-
-    .why-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(212,175,55,.55);
-    }
-
-    .why-icon{
-      font-size:30px;
-      margin-bottom:12px;
-    }
-
-    .why-card h3{
-      color:var(--gold-light);
-      font-size:15px;
-      margin-bottom:8px;
-    }
-
-    .why-card p{
-      color:#888;
-      font-size:12px;
-      line-height:1.5;
-    }
-
-    .brand-detail{
-      text-align:center;
-      margin-top:30px;
-      padding-top:25px;
-      border-top:1px solid #292929;
-      color:#aaa;
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    .brand-detail strong{
-      color:var(--gold-light);
-    }
-
-    .contact-detail{
-      margin-top:15px;
-      color:#ccc;
-    }
-
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.78);
-      z-index:3000;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:15px;
-    }
-
-    .modal.show{
-      display:flex;
-    }
-
-    .modal-box{
-      width:100%;
-      max-width:620px;
-      max-height:92vh;
-      overflow-y:auto;
-      background:#121212;
-      border:1px solid rgba(212,175,55,.45);
-      border-radius:20px;
-      padding:22px;
-      box-shadow:0 20px 70px rgba(0,0,0,.7);
-    }
-
-    .modal-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:20px;
-    }
-
-    .modal-head h2{
-      color:var(--gold-light);
-      font-family:Georgia,serif;
-    }
-
-    .close-btn{
-      border:0;
-      background:#222;
-      color:white;
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      font-size:20px;
-    }
-
-    .cart-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:13px 0;
-      border-bottom:1px solid #292929;
-    }
-
-    .cart-item-name{
-      flex:1;
-    }
-
-    .cart-item-name strong{
-      display:block;
-    }
-
-    .cart-item-name span{
-      color:#aaa;
-      font-size:12px;
-    }
-
-    .qty-controls{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .qty-controls button{
-      width:28px;
-      height:28px;
-      border:1px solid #555;
-      background:#222;
-      color:#fff;
-      border-radius:50%;
-    }
-
-    .cart-total{
-      display:flex;
-      justify-content:space-between;
-      padding:18px 0;
-      font-size:20px;
-      font-weight:bold;
-    }
-
-    .checkout-btn{
-      width:100%;
-      padding:14px;
-      border:0;
-      border-radius:28px;
-      background:linear-gradient(135deg,#d4af37,#f4d77d);
-      color:#000;
-      font-weight:bold;
-      font-size:16px;
-    }
-
-    .checkout-btn:disabled{
-      opacity:.4;
-      cursor:not-allowed;
-    }
-
-    .empty{
-      text-align:center;
-      color:#aaa;
-      padding:35px 10px;
-    }
-
-    .form-group{
-      margin-bottom:15px;
-    }
-
-    .form-group label{
-      display:block;
-      margin-bottom:7px;
-      color:#ddd;
-      font-size:13px;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select{
-      width:100%;
-      background:#1b1b1b;
-      color:white;
-      border:1px solid #363636;
-      border-radius:10px;
-      padding:12px;
-      outline:none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus{
-      border-color:var(--gold);
-    }
-
-    .form-group textarea{
-      min-height:90px;
-      resize:vertical;
-    }
-
-    .summary{
-      background:#191919;
-      border-radius:12px;
-      padding:15px;
-      margin:18px 0;
-    }
-
-    .summary-row{
-      display:flex;
-      justify-content:space-between;
-      padding:5px 0;
-      color:#bbb;
-    }
-
-    .summary-row.total{
-      border-top:1px solid #333;
-      margin-top:8px;
-      padding-top:12px;
-      color:white;
-      font-size:19px;
-      font-weight:bold;
-    }
-
-    .location-btn{
-      width:100%;
-      background:#202020;
-      color:var(--gold-light);
-      border:1px solid var(--gold);
-      border-radius:10px;
-      padding:12px;
-      margin-bottom:10px;
-    }
-
-    .location-result{
-      color:#8de0aa;
-      font-size:12px;
-      line-height:1.5;
-      margin-bottom:12px;
-    }
-
-    .track-card{
-      text-align:center;
-    }
-
-    .order-number{
-      color:var(--gold-light);
-      font-size:23px;
-      font-weight:bold;
-      margin:10px 0 25px;
-    }
-
-    .track-status{
-      display:inline-block;
-      background:#222;
-      border:1px solid var(--gold);
-      color:var(--gold-light);
-      padding:10px 18px;
-      border-radius:25px;
-      text-transform:capitalize;
-      margin-bottom:15px;
-    }
-
-    .track-note{
-      color:#aaa;
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:25px;
-      transform:translate(-50%,120px);
-      background:#1b1b1b;
-      color:white;
-      border:1px solid var(--gold);
-      padding:13px 20px;
-      border-radius:30px;
-      z-index:5000;
-      opacity:0;
-      transition:.3s;
-      max-width:90%;
-      text-align:center;
-    }
-
-    .toast.show{
-      opacity:1;
-      transform:translate(-50%,0);
-    }
-
-    footer{
-      border-top:1px solid rgba(212,175,55,.18);
-      padding:35px 20px;
-      text-align:center;
-      color:#999;
-      margin-top:30px;
-    }
-
-    footer strong{
-      color:var(--gold-light);
-    }
-
-    @media(max-width:1000px){
-      .why-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
-    }
-
-    @media(max-width:900px){
-      .menu-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:600px){
-
-      .nav{
-        padding:12px 14px;
-      }
-
-      .brand-text h1{
-        font-size:17px;
-      }
-
-      .brand-text span{
-        font-size:9px;
-      }
-
-      .hero{
-        min-height:350px;
-      }
-
-      .hero h2{
-        font-size:45px;
-      }
-
-      .menu-grid{
-        grid-template-columns:1fr;
-      }
-
-      .food-image{
-        height:230px;
-      }
-
-      .section{
-        padding:42px 14px;
-      }
-
-      .status-box{
-        padding:0 14px;
-      }
-
-      .why-section{
-        padding:15px 14px 50px;
-      }
-
-      .why-box{
-        padding:32px 15px;
-      }
-
-      .why-heading h2{
-        font-size:31px;
-      }
-
-      .why-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .why-card{
-        padding:20px 10px;
-      }
-    }
-
-    @media(max-width:400px){
-      .why-grid{
-        grid-template-columns:1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>The Queen Fast Food</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#111;
+  color:#fff;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#111;
+  border-bottom:1px solid #333;
+  padding:15px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  color:#f5c542;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.cart-btn{
+  background:#f5c542;
+  border:0;
+  padding:10px 18px;
+  border-radius:25px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.hero{
+  text-align:center;
+  padding:60px 20px;
+  background:linear-gradient(#0009,#0009),
+  url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
+}
+
+.hero h1{
+  font-size:42px;
+  color:#f5c542;
+  margin-bottom:12px;
+}
+
+.hero p{
+  font-size:18px;
+}
+
+.status{
+  margin:20px auto;
+  max-width:500px;
+  padding:14px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.open{
+  background:#123d20;
+  color:#58e477;
+}
+
+.closed{
+  background:#401616;
+  color:#ff7373;
+}
+
+.container{
+  width:92%;
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-title{
+  text-align:center;
+  margin:35px 0 25px;
+}
+
+.section-title h2{
+  color:#f5c542;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#1b1b1b;
+  border:1px solid #333;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 5px 20px #0005;
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:15px;
+}
+
+.card h3{
+  margin-bottom:8px;
+}
+
+.desc{
+  color:#aaa;
+  font-size:13px;
+  min-height:35px;
+}
+
+.price{
+  color:#f5c542;
+  font-size:20px;
+  font-weight:bold;
+  margin:12px 0;
+}
+
+.add-btn{
+  width:100%;
+  padding:12px;
+  background:#f5c542;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.add-btn:disabled{
+  background:#555;
+  color:#aaa;
+  cursor:not-allowed;
+}
+
+footer{
+  margin-top:50px;
+  padding:30px;
+  text-align:center;
+  background:#0b0b0b;
+  color:#aaa;
+}
+
+footer strong{
+  color:#f5c542;
+}
+
+/* MODALS */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000b;
+  z-index:2000;
+  overflow:auto;
+}
+
+.modal-box{
+  width:92%;
+  max-width:600px;
+  background:#181818;
+  margin:50px auto;
+  padding:25px;
+  border-radius:15px;
+  border:1px solid #444;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.close{
+  background:none;
+  border:0;
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  border-bottom:1px solid #333;
+  padding:14px 0;
+}
+
+.qty{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.qty button{
+  width:30px;
+  height:30px;
+  border:0;
+  border-radius:5px;
+  background:#f5c542;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.total-box{
+  margin-top:20px;
+  padding:15px;
+  background:#222;
+  border-radius:10px;
+}
+
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  margin:8px 0;
+}
+
+.grand{
+  color:#f5c542;
+  font-size:21px;
+  font-weight:bold;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  margin:7px 0 14px;
+  background:#111;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:8px;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.primary{
+  width:100%;
+  padding:14px;
+  background:#f5c542;
+  color:#000;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+.secondary{
+  width:100%;
+  padding:12px;
+  background:#333;
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+.order-success{
+  text-align:center;
+  padding:20px;
+}
+
+.order-id{
+  color:#f5c542;
+  font-size:25px;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.track-result{
+  background:#222;
+  padding:18px;
+  border-radius:10px;
+  line-height:1.8;
+}
+
+.status-badge{
+  display:inline-block;
+  background:#f5c542;
+  color:#000;
+  padding:7px 12px;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#f5c542;
+  color:#000;
+  padding:14px 20px;
+  border-radius:10px;
+  display:none;
+  z-index:5000;
+  font-weight:bold;
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:30px;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .card img{
+    height:130px;
+  }
+
+  .card-body{
+    padding:10px;
+  }
+
+  .card h3{
+    font-size:15px;
+  }
+
+  .price{
+    font-size:17px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="nav">
+  <div class="logo">👑 The Queen Fast Food</div>
 
-    <a href="#" class="brand">
-      <div class="crown">♛</div>
-
-      <div class="brand-text">
-        <h1>The Queen Fast Food</h1>
-        <span>IBRISINGH • TIRTOL</span>
-      </div>
-    </a>
-
-    <button class="cart-button" onclick="openCart()">
-      🛒 Cart
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-
-  </div>
+  <button class="cart-btn" onclick="openCart()">
+    🛒 Cart (<span id="cartCount">0</span>)
+  </button>
 </header>
 
-
 <section class="hero">
-
-  <div class="hero-content">
-
-    <small>Welcome to</small>
-
-    <h2>The Queen</h2>
-
-    <p>
-      Delicious food, prepared fresh and served with love.
-      Order your favourite food from home.
-    </p>
-
-    <div class="hero-tag">
-      Choose • Add • Enjoy
-    </div>
-
-  </div>
-
+  <h1>Choose. Add. Enjoy.</h1>
+  <p>Fresh Food • Fast Delivery • Great Taste</p>
 </section>
 
+<div class="container">
 
-<div class="status-box">
+  <div id="shopStatus" class="status">
+    Checking shop status...
+  </div>
 
-  <div id="shopStatus" class="status preopen">
-    Connecting to The Queen Fast Food...
+  <div class="section-title">
+    <h2>Our Menu</h2>
+    <p>Order your favourite food</p>
+  </div>
+
+  <div id="products" class="products"></div>
+
+  <div class="section-title">
+    <h2>Track Your Order</h2>
+  </div>
+
+  <div style="max-width:500px;margin:auto;">
+    <input id="trackOrderId"
+           placeholder="Enter Order ID e.g. TQF2026-001">
+
+    <button class="primary" onclick="trackOrder()">
+      🔍 Track Order
+    </button>
+
+    <div id="trackResult" style="margin-top:15px;"></div>
   </div>
 
 </div>
 
-
-<section class="section">
-
-  <div class="section-heading">
-
-    <div class="eyebrow">
-      Our Menu
-    </div>
-
-    <h2>
-      Choose Your Favourite
-    </h2>
-
-  </div>
-
-  <div class="menu-grid" id="menuGrid"></div>
-
-</section>
-
-
-<section class="why-section">
-
-  <div class="why-box">
-
-    <div class="why-heading">
-
-      <div class="eyebrow">
-        The Queen Difference
-      </div>
-
-      <h2>
-        Why Choose The Queen Fast Food?
-      </h2>
-
-      <p>
-        Fresh ingredients, tasty food and caring service —
-        everything comes together to give you the Queen touch.
-      </p>
-
-    </div>
-
-
-    <div class="why-grid">
-
-      <div class="why-card">
-        <div class="why-icon">👑</div>
-        <h3>Fresh & Quality</h3>
-        <p>Quality ingredients selected for every order.</p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-icon">🧼</div>
-        <h3>Hygienic Preparation</h3>
-        <p>Food prepared with proper care and cleanliness.</p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-icon">🚀</div>
-        <h3>Fast Delivery</h3>
-        <p>We prepare and send your order as quickly as possible.</p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-icon">💰</div>
-        <h3>Affordable Prices</h3>
-        <p>Delicious food at prices that stay friendly.</p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-icon">❤️</div>
-        <h3>Made Fresh With Care</h3>
-        <p>Every order receives our personal Queen touch.</p>
-      </div>
-
-    </div>
-
-
-    <div class="brand-detail">
-
-      At <strong>The Queen Fast Food</strong>,
-      we believe great food should be fresh, tasty,
-      hygienic and affordable.
-
-      Every order is prepared with care and delivered
-      to you with the Queen touch.
-
-      <div class="contact-detail">
-        📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha
-        &nbsp; • &nbsp;
-        📞 97768 56111
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
 <footer>
-
   <strong>The Queen Fast Food</strong>
-
-  <br>
-
-  Ibrisingh, Tirtol, Jagatsinghpur, Odisha
-
   <br><br>
-
-  📞 97768 56111
-
+  📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha
+  <br>
+  📞 9090220791
 </footer>
 
 
-<!-- CART -->
+<!-- CART MODAL -->
 
-<div class="modal" id="cartModal">
+<div id="cartModal" class="modal">
 
   <div class="modal-box">
 
-    <div class="modal-head">
-
-      <h2>Your Cart</h2>
-
-      <button
-        class="close-btn"
-        onclick="closeModal('cartModal')">
-        ×
-      </button>
-
+    <div class="modal-header">
+      <h2>🛒 Your Cart</h2>
+      <button class="close" onclick="closeCart()">×</button>
     </div>
 
     <div id="cartItems"></div>
 
-    <div class="cart-total">
+    <div class="total-box">
 
-      <span>Subtotal</span>
+      <div class="total-row">
+        <span>Food Total</span>
+        <span>₹<span id="cartSubtotal">0</span></span>
+      </div>
 
-      <span id="cartSubtotal">₹0</span>
+      <div class="total-row">
+        <span>Delivery</span>
+        <span>Calculated at checkout</span>
+      </div>
 
     </div>
 
-    <button
-      class="checkout-btn"
-      id="checkoutButton"
-      onclick="openCheckout()">
-
+    <button class="primary" onclick="openCheckout()">
       Proceed to Checkout
-
     </button>
 
   </div>
@@ -930,188 +445,75 @@
 </div>
 
 
-<!-- CHECKOUT -->
+<!-- CHECKOUT MODAL -->
 
-<div class="modal" id="checkoutModal">
+<div id="checkoutModal" class="modal">
 
   <div class="modal-box">
 
-    <div class="modal-head">
-
-      <h2>Checkout</h2>
-
-      <button
-        class="close-btn"
-        onclick="closeModal('checkoutModal')">
-        ×
-      </button>
-
+    <div class="modal-header">
+      <h2>📦 Checkout</h2>
+      <button class="close" onclick="closeCheckout()">×</button>
     </div>
 
+    <label>Customer Name</label>
+    <input id="customerName" placeholder="Enter your name">
 
-    <div class="form-group">
+    <label>Phone Number</label>
+    <input id="customerPhone"
+           type="tel"
+           maxlength="10"
+           placeholder="10 digit mobile number">
 
-      <label>Customer Name</label>
+    <label>Delivery Address</label>
+    <textarea id="customerAddress"
+              placeholder="Enter complete delivery address"></textarea>
 
-      <input
-        id="customerName"
-        type="text"
-        placeholder="Enter your name">
+    <label>Payment Method</label>
 
-    </div>
+    <select id="paymentMethod">
+      <option value="Cash on Delivery">Cash on Delivery</option>
+      <option value="UPI">UPI</option>
+    </select>
 
-
-    <div class="form-group">
-
-      <label>Mobile Number</label>
-
-      <input
-        id="customerPhone"
-        type="tel"
-        maxlength="10"
-        inputmode="numeric"
-        placeholder="10 digit mobile number">
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>Delivery Address</label>
-
-      <textarea
-        id="customerAddress"
-        placeholder="House / Village / Area / Landmark"></textarea>
-
-    </div>
-
-
-    <button
-      class="location-btn"
-      onclick="getCustomerLocation()">
-
-      📍 Use My Current Location
-
+    <button class="primary" onclick="getLocationAndPlaceOrder()">
+      📍 Place Order
     </button>
 
-
-    <div id="locationResult" class="location-result"></div>
-
-
-    <div class="form-group">
-
-      <label>Payment Method</label>
-
-      <select id="paymentMethod">
-
-        <option value="Cash on Delivery">
-          Cash on Delivery
-        </option>
-
-        <option value="UPI">
-          UPI
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="summary">
-
-      <div class="summary-row">
-
-        <span>Food Total</span>
-
-        <span id="checkoutSubtotal">₹0</span>
-
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>Distance</span>
-
-        <span id="distanceText">
-          Not calculated
-        </span>
-
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>Delivery Charge</span>
-
-        <span id="deliveryText">₹0</span>
-
-      </div>
-
-
-      <div class="summary-row total">
-
-        <span>Total</span>
-
-        <span id="checkoutTotal">₹0</span>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="checkout-btn"
-      id="placeOrderButton"
-      onclick="placeOrder()">
-
-      Place Order
-
-    </button>
+    <div id="checkoutMessage"
+         style="margin-top:15px;text-align:center;"></div>
 
   </div>
 
 </div>
 
 
-<!-- TRACKING -->
+<!-- SUCCESS MODAL -->
 
-<div class="modal" id="trackingModal">
+<div id="successModal" class="modal">
 
-  <div class="modal-box track-card">
+  <div class="modal-box">
 
-    <div class="modal-head">
+    <div class="order-success">
 
-      <h2>Track Order</h2>
+      <h2>🎉 Order Placed!</h2>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('trackingModal')">
-        ×
-      </button>
+      <p>Your order has been successfully received.</p>
 
-    </div>
-
-
-    <div id="trackingContent">
-
-      <div class="form-group">
-
-        <label>Order ID</label>
-
-        <input
-          id="trackingOrderId"
-          type="text"
-          placeholder="Enter your Order ID">
-
+      <div class="order-id" id="successOrderId">
+        TQF2026-001
       </div>
 
+      <p>
+        Please keep this Order ID for tracking.
+      </p>
 
-      <button
-        class="checkout-btn"
-        onclick="trackOrder()">
+      <button class="primary" onclick="openWhatsAppFromSuccess()">
+        📲 Send Order on WhatsApp
+      </button>
 
-        Track Order
-
+      <button class="secondary" onclick="closeSuccess()">
+        Close
       </button>
 
     </div>
@@ -1121,14 +523,10 @@
 </div>
 
 
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
 
 <script type="module">
-
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 import {
   initializeApp
@@ -1145,9 +543,17 @@ import {
   ref,
   push,
   set,
-  get
+  get,
+  runTransaction,
+  query,
+  orderByChild,
+  equalTo
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+
+/* =========================
+   FIREBASE
+========================= */
 
 const firebaseConfig = {
 
@@ -1174,149 +580,33 @@ const firebaseConfig = {
 
   measurementId:
     "G-Q1YCK636KJ"
-
 };
 
 
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getDatabase(
-    app,
-    firebaseConfig.databaseURL
-  );
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
 
 
-const ADMIN_UID =
-  "eWlMt1dG2pUOxsTo0NaXgY1avn33";
+/* =========================
+   CONSTANTS
+========================= */
 
+const restaurantLat = 20.216780359694468;
+const restaurantLng = 86.36464363454978;
 
-/* =========================================================
-   RESTAURANT
-========================================================= */
+const DELIVERY_RATE = 6;
 
-const restaurantLat =
-  20.216780359694468;
+let whatsappNumber = "9090220791";
 
-const restaurantLng =
-  86.36464363454978;
+let currentUser = null;
 
-const DELIVERY_RATE =
-  6;
+let shopOpen = false;
 
+let manualClosed = false;
 
-/* =========================================================
-   MENU
-========================================================= */
-
-const menu = [
-
-  {
-    id:1,
-    name:"Veg Chowmin",
-    price:50,
-    description:"Fresh vegetables tossed with noodles.",
-    image:"https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:2,
-    name:"Veg Roll",
-    price:50,
-    description:"Crispy roll filled with tasty vegetables.",
-    image:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:3,
-    name:"Manchurian",
-    price:50,
-    description:"Crispy manchurian tossed in rich sauce.",
-    image:"https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:4,
-    name:"Paneer Tikka",
-    price:60,
-    description:"Soft paneer with aromatic spices.",
-    image:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:5,
-    name:"Paneer Butter Masala",
-    price:130,
-    description:"Creamy paneer cooked in rich tomato gravy.",
-    image:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:6,
-    name:"Egg Chicken Chowmin",
-    price:65,
-    description:"Noodles tossed with chicken and egg.",
-    image:"https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:7,
-    name:"Egg Chicken Roll",
-    price:60,
-    description:"Egg and chicken wrapped in a delicious roll.",
-    image:"https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:8,
-    name:"Pakoda",
-    price:60,
-    description:"Crispy golden pakoda served hot.",
-    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:9,
-    name:"Chilli Chicken",
-    price:120,
-    description:"Spicy chicken tossed with chilli and vegetables.",
-    image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:10,
-    name:"Chicken Garlic",
-    price:80,
-    description:"Tender chicken with aromatic garlic flavour.",
-    image:"https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:11,
-    name:"Chicken Biriyani",
-    price:120,
-    description:"Aromatic biriyani with delicious chicken.",
-    image:"https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=900&q=85"
-  },
-
-  {
-    id:12,
-    name:"Veg Biriyani",
-    price:100,
-    description:"Fragrant rice cooked with vegetables and spices.",
-    image:"https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=900&q=85"
-  }
-
-];
-
-
-/* =========================================================
-   STATE
-========================================================= */
+let closedMessage =
+  "The Queen Fast Food is currently closed.";
 
 let cart = [];
 
@@ -1324,867 +614,600 @@ let selectedLat = null;
 let selectedLng = null;
 
 let distanceKm = 0;
+
 let deliveryCharge = 0;
 
-let shopOpen = false;
-let manualClosed = false;
-
-let closedMessage =
-  "Today The Queen Fast Food is closed. Sorry for the inconvenience.";
-
-let currentUser = null;
-
-let whatsappNumber =
-  "9090220791";
+let lastOrderData = null;
 
 
-let authReadyResolve;
+/* =========================
+   MENU
+========================= */
 
-const authReadyPromise =
-  new Promise(resolve => {
+const menu = [
 
-    authReadyResolve = resolve;
+  {
+    id:1,
+    name:"Veg Chowmin",
+    price:50,
+    image:"https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80",
+    desc:"Fresh vegetable chowmin"
+  },
 
-  });
+  {
+    id:2,
+    name:"Veg Roll",
+    price:50,
+    image:"https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80",
+    desc:"Tasty crispy veg roll"
+  },
 
+  {
+    id:3,
+    name:"Manchurian",
+    price:50,
+    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80",
+    desc:"Hot and spicy manchurian"
+  },
 
-/* =========================================================
-   HELPERS
-========================================================= */
+  {
+    id:4,
+    name:"Paneer Tikka",
+    price:60,
+    image:"https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=80",
+    desc:"Grilled paneer tikka"
+  },
 
-function escapeHtml(value){
+  {
+    id:5,
+    name:"Paneer Butter Masala",
+    price:130,
+    image:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80",
+    desc:"Creamy paneer butter masala"
+  },
 
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  {
+    id:6,
+    name:"Egg Chicken Chowmin",
+    price:65,
+    image:"https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80",
+    desc:"Egg chicken chowmin"
+  },
 
-}
+  {
+    id:7,
+    name:"Egg Chicken Roll",
+    price:60,
+    image:"https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80",
+    desc:"Egg chicken roll"
+  },
 
+  {
+    id:8,
+    name:"Pakoda",
+    price:60,
+    image:"https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=800&q=80",
+    desc:"Crispy hot pakoda"
+  },
 
-function showToast(message){
+  {
+    id:9,
+    name:"Chilli Chicken",
+    price:120,
+    image:"https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=800&q=80",
+    desc:"Spicy chilli chicken"
+  },
 
-  const toast =
-    document.getElementById("toast");
+  {
+    id:10,
+    name:"Chicken Garlic",
+    price:80,
+    image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
+    desc:"Garlic chicken"
+  },
 
-  toast.textContent =
-    message;
+  {
+    id:11,
+    name:"Chicken Biriyani",
+    price:120,
+    image:"https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=800&q=80",
+    desc:"Flavourful chicken biriyani"
+  },
 
-  toast.classList.add("show");
-
-  setTimeout(() => {
-
-    toast.classList.remove("show");
-
-  },3000);
-
-}
-
-
-window.closeModal = function(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-
-    modal.classList.remove("show");
-
+  {
+    id:12,
+    name:"Veg Biriyani",
+    price:100,
+    image:"https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=800&q=80",
+    desc:"Delicious veg biriyani"
   }
 
-};
+];
 
 
-/* =========================================================
-   CUSTOMER AUTH
-========================================================= */
+/* =========================
+   AUTH
+========================= */
 
 async function startCustomerAuth(){
 
   try{
 
-    console.log(
-      "Starting anonymous customer authentication..."
-    );
+    const result =
+      await signInAnonymously(auth);
 
+    currentUser = result.user;
 
-    let user =
-      auth.currentUser;
-
-
-    if(!user){
-
-      const credential =
-        await signInAnonymously(auth);
-
-      user =
-        credential.user;
-
-    }
-
-
-    if(!user){
-
-      throw new Error(
-        "Firebase authentication returned no user."
-      );
-
-    }
-
-
-    await getIdToken(
-      user,
-      true
-    );
-
-
-    currentUser =
-      user;
-
-
-    console.log(
-      "Anonymous customer UID:",
-      currentUser.uid
-    );
-
-
-    console.log(
-      "Firebase authentication: READY"
-    );
-
-
-    console.log(
-      "Firebase database:",
-      firebaseConfig.databaseURL
-    );
-
-
-    authReadyResolve(true);
+    await getIdToken(currentUser, true);
 
     return true;
 
-  }
+  }catch(error){
 
-  catch(error){
+    console.error("AUTH ERROR:",error);
 
-    console.error(
-      "🔥 FIREBASE AUTH ERROR:",
-      error
+    showToast(
+      "Firebase login failed. Enable Anonymous Login."
     );
-
-
-    console.error(
-      "Error code:",
-      error?.code
-    );
-
-
-    console.error(
-      "Error message:",
-      error?.message
-    );
-
-
-    currentUser =
-      null;
-
-
-    authReadyResolve(false);
-
-
-    if(
-      error?.code ===
-      "auth/operation-not-allowed"
-    ){
-
-      showToast(
-        "Anonymous Login is disabled. Enable it in Firebase Authentication."
-      );
-
-    }
-
-    else{
-
-      showToast(
-        "Customer connection failed. Please refresh."
-      );
-
-    }
-
 
     return false;
-
   }
-
 }
 
 
-/* =========================================================
-   INDIA TIME
-========================================================= */
-
-function getIndiaTime(){
-
-  const parts =
-    new Intl.DateTimeFormat(
-      "en-IN",
-      {
-        timeZone:"Asia/Kolkata",
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:false
-      }
-    ).formatToParts(new Date());
-
-
-  let hour = 0;
-  let minute = 0;
-
-
-  for(const part of parts){
-
-    if(part.type === "hour"){
-
-      hour =
-        Number(part.value);
-
-    }
-
-
-    if(part.type === "minute"){
-
-      minute =
-        Number(part.value);
-
-    }
-
-  }
-
-
-  return {
-
-    hour,
-
-    minute,
-
-    totalMinutes:
-      (hour * 60) + minute
-
-  };
-
-}
-
-
-/* =========================================================
-   SHOP STATUS
-   12:00 PM TO 11:00 PM
-========================================================= */
-
-function updateShopStatus(){
-
-  const statusBox =
-    document.getElementById(
-      "shopStatus"
-    );
-
-
-  if(manualClosed){
-
-    shopOpen = false;
-
-    statusBox.className =
-      "status closed";
-
-    statusBox.textContent =
-      closedMessage;
-
-    updateOrderButtons();
-
-    return;
-
-  }
-
-
-  const india =
-    getIndiaTime();
-
-
-  const openingTime =
-    12 * 60;
-
-
-  const closingTime =
-    23 * 60;
-
-
-  if(
-    india.totalMinutes <
-    openingTime
-  ){
-
-    shopOpen = false;
-
-    statusBox.className =
-      "status preopen";
-
-    statusBox.textContent =
-      "The Queen Fast Food opens at 12:00 PM.";
-
-  }
-
-  else if(
-    india.totalMinutes <
-    closingTime
-  ){
-
-    shopOpen = true;
-
-    statusBox.className =
-      "status open";
-
-    statusBox.textContent =
-      "🟢 The Queen Fast Food is OPEN • Orders accepted until 11:00 PM.";
-
-  }
-
-  else{
-
-    shopOpen = false;
-
-    statusBox.className =
-      "status closed";
-
-    statusBox.textContent =
-      "The Queen Fast Food is closed. You can order between 12:00 PM and 11:00 PM.";
-
-  }
-
-
-  updateOrderButtons();
-
-}
-
-
-/* =========================================================
-   LOAD SETTINGS
-========================================================= */
+/* =========================
+   SHOP SETTINGS
+========================= */
 
 async function loadShopSettings(){
 
   try{
 
-    if(!currentUser){
-
-      throw new Error(
-        "Firebase authentication is not ready."
-      );
-
-    }
-
-
     const snapshot =
-      await get(
-        ref(db,"settings")
-      );
-
+      await get(ref(db,"settings"));
 
     if(snapshot.exists()){
 
-      const settings =
-        snapshot.val();
-
+      const data = snapshot.val();
 
       manualClosed =
-        settings.manualClosed === true;
+        data.manualClosed === true;
 
+      closedMessage =
+        data.closedMessage ||
+        "The Queen Fast Food is currently closed.";
 
-      if(
-        settings.closedMessage &&
-        String(settings.closedMessage).trim()
-      ){
-
-        closedMessage =
-          String(
-            settings.closedMessage
-          ).trim();
-
-      }
-
-
-      if(
-        settings.whatsappNumber &&
-        String(settings.whatsappNumber).trim()
-      ){
-
-        whatsappNumber =
-          String(
-            settings.whatsappNumber
-          )
-          .replace(/\D/g,"");
-
-      }
+      whatsappNumber =
+        data.whatsappNumber ||
+        "9090220791";
 
     }
 
-    else{
+  }catch(error){
 
-      manualClosed =
-        false;
-
-    }
+    console.error(error);
 
   }
-
-  catch(error){
-
-    console.error(
-      "Settings error:",
-      error
-    );
-
-    manualClosed =
-      false;
-
-  }
-
-
-  console.log(
-    "WhatsApp Order Number:",
-    whatsappNumber
-  );
-
 
   updateShopStatus();
-
 }
 
 
-/* =========================================================
-   MENU
-========================================================= */
+/* =========================
+   SHOP STATUS
+========================= */
+
+function updateShopStatus(){
+
+  const el =
+    document.getElementById("shopStatus");
+
+  if(manualClosed){
+
+    shopOpen = false;
+
+    el.className = "status closed";
+
+    el.innerHTML =
+      "🔴 " + closedMessage;
+
+    disableOrdering();
+
+    return;
+  }
+
+
+  const now = new Date();
+
+  const minutes =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+  const opening =
+    12 * 60;
+
+  const closing =
+    23 * 60;
+
+
+  if(
+    minutes >= opening &&
+    minutes < closing
+  ){
+
+    shopOpen = true;
+
+    el.className = "status open";
+
+    el.innerHTML =
+      "🟢 The Queen Fast Food is OPEN • Orders accepted until 11:00 PM.";
+
+    enableOrdering();
+
+  }else{
+
+    shopOpen = false;
+
+    el.className = "status closed";
+
+    el.innerHTML =
+      "🔴 The Queen Fast Food is CLOSED • Open 12:00 PM – 11:00 PM.";
+
+    disableOrdering();
+  }
+}
+
+
+function disableOrdering(){
+
+  document
+    .querySelectorAll(".add-btn")
+    .forEach(btn=>{
+      btn.disabled = true;
+    });
+}
+
+
+function enableOrdering(){
+
+  document
+    .querySelectorAll(".add-btn")
+    .forEach(btn=>{
+      btn.disabled = false;
+    });
+}
+
+
+/* =========================
+   RENDER MENU
+========================= */
 
 function renderMenu(){
 
-  const grid =
-    document.getElementById(
-      "menuGrid"
-    );
+  const container =
+    document.getElementById("products");
 
+  container.innerHTML = "";
 
-  grid.innerHTML =
-    menu.map(item => `
+  menu.forEach(item=>{
 
-      <article class="food-card">
+    container.innerHTML += `
 
-        <div class="food-image">
+      <div class="card">
 
-          <img
-            src="${escapeHtml(item.image)}"
-            alt="${escapeHtml(item.name)}"
-            loading="lazy"
-            onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80';">
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+        >
 
-        </div>
+        <div class="card-body">
 
-        <div class="food-info">
+          <h3>${item.name}</h3>
 
-          <h3>
-            ${escapeHtml(item.name)}
-          </h3>
-
-          <p>
-            ${escapeHtml(item.description)}
-          </p>
-
-          <div class="food-bottom">
-
-            <div class="price">
-              ₹${Number(item.price).toFixed(0)}
-            </div>
-
-            <button
-              class="add-btn"
-              data-add-id="${item.id}"
-              onclick="addToCart(${item.id})">
-
-              + Add
-
-            </button>
-
+          <div class="desc">
+            ${item.desc}
           </div>
 
+          <div class="price">
+            ₹${item.price}
+          </div>
+
+          <button
+            class="add-btn"
+            onclick="addToCart(${item.id})"
+          >
+            🛒 Add to Cart
+          </button>
+
         </div>
 
-      </article>
+      </div>
 
-    `).join("");
+    `;
+
+  });
 
 }
 
 
-/* =========================================================
-   ADD TO CART
-========================================================= */
+/* =========================
+   CART
+========================= */
 
-window.addToCart =
-function(id){
+window.addToCart = function(id){
 
   if(!shopOpen){
 
     showToast(
-      "Ordering is currently closed."
+      "Sorry, shop is currently closed."
     );
 
     return;
-
   }
 
+  const product =
+    menu.find(x=>x.id === id);
 
-  const item =
-    menu.find(
-      x => x.id === id
-    );
-
-
-  if(!item){
-
-    return;
-
-  }
-
+  if(!product) return;
 
   const existing =
-    cart.find(
-      x => x.id === id
-    );
-
+    cart.find(x=>x.id === id);
 
   if(existing){
 
-    existing.quantity += 1;
+    existing.quantity++;
 
-  }
-
-  else{
+  }else{
 
     cart.push({
-
-      ...item,
-
+      ...product,
       quantity:1
-
     });
 
   }
 
-
   updateCart();
 
-
   showToast(
-    `${item.name} added to cart.`
+    product.name + " added to cart"
   );
-
 };
 
 
-/* =========================================================
-   QUANTITY
-========================================================= */
+function updateCart(){
 
-window.changeQuantity =
-function(id,change){
-
-  const item =
-    cart.find(
-      x => x.id === id
+  const count =
+    cart.reduce(
+      (sum,item)=>sum + item.quantity,
+      0
     );
 
+  document.getElementById("cartCount")
+    .textContent = count;
 
-  if(!item){
+  const subtotal =
+    cart.reduce(
+      (sum,item)=>
+        sum + item.price * item.quantity,
+      0
+    );
+
+  document.getElementById("cartSubtotal")
+    .textContent = subtotal;
+
+  renderCart();
+}
+
+
+function renderCart(){
+
+  const container =
+    document.getElementById("cartItems");
+
+  if(cart.length === 0){
+
+    container.innerHTML =
+      "<p style='text-align:center;color:#aaa'>Your cart is empty.</p>";
 
     return;
-
   }
 
+  container.innerHTML = "";
+
+  cart.forEach(item=>{
+
+    container.innerHTML += `
+
+      <div class="cart-item">
+
+        <div>
+
+          <strong>${item.name}</strong>
+
+          <br>
+
+          ₹${item.price} × ${item.quantity}
+
+          <br>
+
+          <strong>
+            ₹${item.price * item.quantity}
+          </strong>
+
+        </div>
+
+        <div class="qty">
+
+          <button
+            onclick="changeQty(${item.id},-1)"
+          >
+            -
+          </button>
+
+          <span>${item.quantity}</span>
+
+          <button
+            onclick="changeQty(${item.id},1)"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+window.changeQty = function(id,change){
+
+  const item =
+    cart.find(x=>x.id === id);
+
+  if(!item) return;
 
   item.quantity += change;
-
 
   if(item.quantity <= 0){
 
     cart =
-      cart.filter(
-        x => x.id !== id
-      );
+      cart.filter(x=>x.id !== id);
 
   }
 
-
   updateCart();
-
 };
 
 
-/* =========================================================
-   SUBTOTAL
-========================================================= */
+window.openCart = function(){
 
-function getSubtotal(){
+  renderCart();
 
-  return cart.reduce(
-
-    (sum,item) =>
-      sum +
-      (
-        item.price *
-        item.quantity
-      ),
-
-    0
-
-  );
-
-}
+  document.getElementById("cartModal")
+    .style.display = "block";
+};
 
 
-/* =========================================================
-   UPDATE CART
-========================================================= */
+window.closeCart = function(){
 
-function updateCart(){
-
-  const cartCount =
-    document.getElementById(
-      "cartCount"
-    );
+  document.getElementById("cartModal")
+    .style.display = "none";
+};
 
 
-  const count =
-    cart.reduce(
+/* =========================
+   CHECKOUT
+========================= */
 
-      (sum,item) =>
-        sum + item.quantity,
-
-      0
-
-    );
-
-
-  cartCount.textContent =
-    count;
-
-
-  const container =
-    document.getElementById(
-      "cartItems"
-    );
-
-
-  const subtotal =
-    getSubtotal();
-
-
-  document.getElementById(
-    "cartSubtotal"
-  ).textContent =
-    `₹${subtotal}`;
-
+window.openCheckout = function(){
 
   if(cart.length === 0){
 
-    container.innerHTML =
-      `<div class="empty">
-        Your cart is empty.
-      </div>`;
+    showToast("Your cart is empty.");
 
+    return;
   }
-
-  else{
-
-    container.innerHTML =
-      cart.map(item => `
-
-        <div class="cart-item">
-
-          <div class="cart-item-name">
-
-            <strong>
-              ${escapeHtml(item.name)}
-            </strong>
-
-            <span>
-              ₹${item.price} × ${item.quantity}
-            </span>
-
-          </div>
-
-          <div class="qty-controls">
-
-            <button
-              onclick="changeQuantity(${item.id},-1)">
-              −
-            </button>
-
-            <strong>
-              ${item.quantity}
-            </strong>
-
-            <button
-              onclick="changeQuantity(${item.id},1)">
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-      `).join("");
-
-  }
-
-
-  updateOrderButtons();
-
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-function updateOrderButtons(){
-
-  const checkoutButton =
-    document.getElementById(
-      "checkoutButton"
-    );
-
-
-  const placeOrderButton =
-    document.getElementById(
-      "placeOrderButton"
-    );
-
-
-  if(checkoutButton){
-
-    checkoutButton.disabled =
-      !shopOpen ||
-      cart.length === 0;
-
-  }
-
-
-  if(placeOrderButton){
-
-    placeOrderButton.disabled =
-      !shopOpen ||
-      cart.length === 0;
-
-  }
-
-
-  document
-    .querySelectorAll(
-      "[data-add-id]"
-    )
-    .forEach(button => {
-
-      button.disabled =
-        !shopOpen;
-
-    });
-
-}
-
-
-/* =========================================================
-   OPEN CART
-========================================================= */
-
-window.openCart =
-function(){
-
-  updateCart();
-
-  document
-    .getElementById("cartModal")
-    .classList.add("show");
-
-};
-
-
-/* =========================================================
-   CHECKOUT
-========================================================= */
-
-window.openCheckout =
-async function(){
 
   if(!shopOpen){
 
-    showToast(
-      "Ordering is currently closed."
-    );
+    showToast("Shop is currently closed.");
 
     return;
-
   }
 
+  closeCart();
 
-  if(cart.length === 0){
-
-    showToast(
-      "Your cart is empty."
-    );
-
-    return;
-
-  }
-
-
-  closeModal("cartModal");
-
-
-  document
-    .getElementById("checkoutModal")
-    .classList.add("show");
-
-
-  document
-    .getElementById("checkoutSubtotal")
-    .textContent =
-    `₹${getSubtotal()}`;
-
-
-  calculateDeliveryPreview();
-
+  document.getElementById("checkoutModal")
+    .style.display = "block";
 };
 
 
-/* =========================================================
-   CUSTOMER LOCATION
-========================================================= */
+window.closeCheckout = function(){
 
-window.getCustomerLocation =
-function(){
+  document.getElementById("checkoutModal")
+    .style.display = "none";
+};
 
-  if(!navigator.geolocation){
 
-    showToast(
-      "Location is not supported by your browser."
+/* =========================
+   LOCATION
+========================= */
+
+window.getLocationAndPlaceOrder = function(){
+
+  const name =
+    document.getElementById("customerName")
+      .value.trim();
+
+  const phone =
+    document.getElementById("customerPhone")
+      .value.trim();
+
+  const address =
+    document.getElementById("customerAddress")
+      .value.trim();
+
+  const payment =
+    document.getElementById("paymentMethod")
+      .value;
+
+
+  if(!name){
+
+    showCheckoutMessage(
+      "Please enter your name."
     );
 
     return;
-
   }
 
 
-  showToast(
-    "Getting your location..."
+  if(!/^[0-9]{10}$/.test(phone)){
+
+    showCheckoutMessage(
+      "Please enter a valid 10 digit phone number."
+    );
+
+    return;
+  }
+
+
+  if(!address){
+
+    showCheckoutMessage(
+      "Please enter your delivery address."
+    );
+
+    return;
+  }
+
+
+  if(!shopOpen){
+
+    showCheckoutMessage(
+      "Shop is currently closed."
+    );
+
+    return;
+  }
+
+
+  if(!navigator.geolocation){
+
+    showCheckoutMessage(
+      "Location is not supported by this browser."
+    );
+
+    return;
+  }
+
+
+  showCheckoutMessage(
+    "📍 Getting your location..."
   );
 
 
@@ -2198,45 +1221,41 @@ function(){
       selectedLng =
         position.coords.longitude;
 
+      try{
 
-      const result =
-        document.getElementById(
-          "locationResult"
+        await placeOrder(
+          name,
+          phone,
+          address,
+          payment
         );
 
+      }catch(error){
 
-      result.textContent =
-        "📍 Location selected. Calculating road distance...";
+        console.error(error);
 
+        showCheckoutMessage(
+          "❌ " + error.message
+        );
 
-      await calculateDelivery();
+      }
 
     },
-
 
     error => {
 
-      console.error(
-        "Geolocation error:",
-        error
-      );
+      console.error(error);
 
-
-      showToast(
-        "Unable to get location. Please allow location permission."
+      showCheckoutMessage(
+        "❌ Please allow location access to calculate delivery charge."
       );
 
     },
 
-
     {
-
       enableHighAccuracy:true,
-
       timeout:15000,
-
       maximumAge:0
-
     }
 
   );
@@ -2244,686 +1263,357 @@ function(){
 };
 
 
-/* =========================================================
-   DELIVERY
-========================================================= */
+/* =========================
+   DISTANCE
+========================= */
 
-async function calculateDelivery(){
+async function calculateDistance(){
 
-  if(
-    selectedLat === null ||
-    selectedLng === null
-  ){
-
-    distanceKm = 0;
-
-    deliveryCharge = 0;
+  const url =
+    `https://router.project-osrm.org/route/v1/driving/` +
+    `${restaurantLng},${restaurantLat};` +
+    `${selectedLng},${selectedLat}` +
+    `?overview=false`;
 
 
-    document
-      .getElementById(
-        "distanceText"
-      )
-      .textContent =
-      "Not selected";
+  const response =
+    await fetch(url);
 
 
-    document
-      .getElementById(
-        "deliveryText"
-      )
-      .textContent =
-      "₹0";
+  if(!response.ok){
 
-
-    updateCheckoutTotal();
-
-    return;
-
-  }
-
-
-  try{
-
-    const url =
-      `https://router.project-osrm.org/route/v1/driving/` +
-      `${restaurantLng},${restaurantLat};` +
-      `${selectedLng},${selectedLat}` +
-      `?overview=false`;
-
-
-    const response =
-      await fetch(url);
-
-
-    if(!response.ok){
-
-      throw new Error(
-        `OSRM HTTP ${response.status}`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if(
-      data.code !== "Ok" ||
-      !data.routes ||
-      !data.routes[0]
-    ){
-
-      throw new Error(
-        "Distance unavailable"
-      );
-
-    }
-
-
-    const meters =
-      data.routes[0].distance;
-
-
-    distanceKm =
-      meters / 1000;
-
-
-    const billingKm =
-      Math.ceil(distanceKm);
-
-
-    deliveryCharge =
-      billingKm *
-      DELIVERY_RATE;
-
-
-    document
-      .getElementById(
-        "distanceText"
-      )
-      .textContent =
-      `${distanceKm.toFixed(1)} km`;
-
-
-    document
-      .getElementById(
-        "deliveryText"
-      )
-      .textContent =
-      `₹${deliveryCharge}`;
-
-
-    document
-      .getElementById(
-        "locationResult"
-      )
-      .textContent =
-      `📍 Location selected • ${distanceKm.toFixed(1)} km road distance • Delivery ₹${deliveryCharge}`;
-
-
-    updateCheckoutTotal();
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Delivery calculation error:",
-      error
-    );
-
-
-    document
-      .getElementById(
-        "locationResult"
-      )
-      .textContent =
-      "Location selected, but road distance could not be calculated.";
-
-
-    showToast(
+    throw new Error(
       "Could not calculate delivery distance."
     );
-
   }
+
+
+  const data =
+    await response.json();
+
+
+  if(
+    !data.routes ||
+    !data.routes.length
+  ){
+
+    throw new Error(
+      "Delivery route not found."
+    );
+  }
+
+
+  distanceKm =
+    data.routes[0].distance / 1000;
+
+
+  deliveryCharge =
+    Math.ceil(distanceKm) * DELIVERY_RATE;
 
 }
 
 
-/* =========================================================
-   DELIVERY PREVIEW
-========================================================= */
+/* =========================
+   ORDER NUMBER
+========================= */
 
-function calculateDeliveryPreview(){
+async function generateOrderId(){
 
-  if(selectedLat !== null){
+  const year =
+    new Date().getFullYear();
 
-    calculateDelivery();
+  const counterRef =
+    ref(
+      db,
+      `counters/orders/${year}`
+    );
 
+
+  const result =
+    await runTransaction(
+      counterRef,
+      current => {
+
+        const number =
+          Number(current || 0) + 1;
+
+        return number;
+      }
+    );
+
+
+  if(!result.committed){
+
+    throw new Error(
+      "Could not generate order number."
+    );
   }
 
-  else{
 
-    distanceKm = 0;
-
-    deliveryCharge = 0;
+  const serial =
+    Number(result.snapshot.val());
 
 
-    document
-      .getElementById(
-        "distanceText"
-      )
-      .textContent =
-      "Select location";
-
-
-    document
-      .getElementById(
-        "deliveryText"
-      )
-      .textContent =
-      "₹0";
-
-
-    updateCheckoutTotal();
-
-  }
-
+  return (
+    `TQF${year}-` +
+    String(serial).padStart(3,"0")
+  );
 }
 
 
-/* =========================================================
-   TOTAL
-========================================================= */
+/* =========================
+   PLACE ORDER
+========================= */
 
-function updateCheckoutTotal(){
+async function placeOrder(
+  customerName,
+  customerPhone,
+  customerAddress,
+  paymentMethod
+){
+
+  if(!currentUser){
+
+    const logged =
+      await startCustomerAuth();
+
+    if(!logged){
+
+      throw new Error(
+        "Customer authentication failed."
+      );
+    }
+  }
+
+
+  showCheckoutMessage(
+    "📍 Calculating delivery charge..."
+  );
+
+
+  await calculateDistance();
+
+
+  showCheckoutMessage(
+    "⏳ Placing your order..."
+  );
+
+
+  const subtotal =
+    cart.reduce(
+      (sum,item)=>
+        sum + item.price * item.quantity,
+      0
+    );
+
 
   const total =
-    getSubtotal() +
-    deliveryCharge;
+    subtotal + deliveryCharge;
 
 
-  document
-    .getElementById(
-      "checkoutTotal"
-    )
-    .textContent =
-    `₹${total}`;
+  const orderItems =
+    cart.map(item=>({
+
+      id:item.id,
+
+      name:item.name,
+
+      price:item.price,
+
+      quantity:item.quantity,
+
+      amount:
+        item.price * item.quantity
+
+    }));
+
+
+  /*
+    Firebase push key is internal key.
+    Human Order ID = TQF2026-001
+  */
+
+  const orderRef =
+    push(ref(db,"orders"));
+
+
+  const orderId =
+    await generateOrderId();
+
+
+  const orderData = {
+
+    orderId:orderId,
+
+    firebaseOrderKey:orderRef.key,
+
+    ownerUid:currentUser.uid,
+
+    customerName:customerName,
+
+    phone:customerPhone,
+
+    orderContactPhone:customerPhone,
+
+    address:customerAddress,
+
+    paymentMethod:paymentMethod,
+
+    items:orderItems,
+
+    subtotal:subtotal,
+
+    distanceKm:
+      Number(distanceKm.toFixed(2)),
+
+    deliveryCharge:deliveryCharge,
+
+    total:total,
+
+    customerLat:selectedLat,
+
+    customerLng:selectedLng,
+
+    status:"received",
+
+    createdAt:
+      new Date().toISOString(),
+
+    statusUpdatedAt:
+      new Date().toISOString()
+
+  };
+
+
+  /*
+    THIS IS THE IMPORTANT PART:
+    Order is saved to Firebase first.
+    Admin will immediately see it.
+  */
+
+  await set(
+    orderRef,
+    orderData
+  );
+
+
+  /*
+    Save latest order locally
+  */
+
+  lastOrderData =
+    orderData;
+
+
+  localStorage.setItem(
+    "lastTQFOrderId",
+    orderId
+  );
+
+
+  /*
+    Show success
+  */
+
+  closeCheckout();
+
+
+  document.getElementById(
+    "successOrderId"
+  ).textContent = orderId;
+
+
+  document.getElementById(
+    "successModal"
+  ).style.display = "block";
+
+
+  cart = [];
+
+  updateCart();
 
 }
 
 
-/* =========================================================
-   PLACE ORDER
-========================================================= */
-
-window.placeOrder =
-async function(){
-
-  if(!shopOpen){
-
-    showToast(
-      "The shop is currently closed."
-    );
-
-    return;
-
-  }
-
-
-  if(cart.length === 0){
-
-    showToast(
-      "Your cart is empty."
-    );
-
-    return;
-
-  }
-
-
-  const customerName =
-    document
-      .getElementById(
-        "customerName"
-      )
-      .value
-      .trim();
-
-
-  const customerPhone =
-    document
-      .getElementById(
-        "customerPhone"
-      )
-      .value
-      .trim();
-
-
-  const customerAddress =
-    document
-      .getElementById(
-        "customerAddress"
-      )
-      .value
-      .trim();
-
-
-  const paymentMethod =
-    document
-      .getElementById(
-        "paymentMethod"
-      )
-      .value;
-
-
-  if(!customerName){
-
-    showToast(
-      "Please enter your name."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !/^[0-9]{10}$/.test(
-      customerPhone
-    )
-  ){
-
-    showToast(
-      "Please enter a valid 10 digit mobile number."
-    );
-
-    return;
-
-  }
-
-
-  if(!customerAddress){
-
-    showToast(
-      "Please enter your delivery address."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    selectedLat === null ||
-    selectedLng === null
-  ){
-
-    showToast(
-      "Please select your delivery location."
-    );
-
-    return;
-
-  }
-
-
-  const placeButton =
-    document.getElementById(
-      "placeOrderButton"
-    );
-
-
-  placeButton.disabled =
-    true;
-
-
-  placeButton.textContent =
-    "Placing Order...";
-
-
-  try{
-
-    const authReady =
-      await authReadyPromise;
-
-
-    if(
-      !authReady ||
-      !currentUser
-    ){
-
-      throw new Error(
-        "Customer authentication is not ready."
-      );
-
-    }
-
-
-    await getIdToken(
-      currentUser,
-      true
-    );
-
-
-    await calculateDelivery();
-
-
-    const subtotal =
-      getSubtotal();
-
-
-    const total =
-      subtotal +
-      deliveryCharge;
-
-
-    const orderItems =
-      cart.map(item => ({
-
-        id:item.id,
-
-        name:item.name,
-
-        price:item.price,
-
-        quantity:item.quantity,
-
-        total:
-          item.price *
-          item.quantity
-
-      }));
-
-
-    const orderRef =
-      push(
-        ref(db,"orders")
-      );
-
-
-    const orderId =
-      orderRef.key;
-
-
-    if(!orderId){
-
-      throw new Error(
-        "Could not create order ID."
-      );
-
-    }
-
-
-    const orderData = {
-
-      ownerUid:
-        currentUser.uid,
-
-      customerName:
-        customerName,
-
-      orderContactPhone:
-        customerPhone,
-
-      phone:
-        customerPhone,
-
-      address:
-        customerAddress,
-
-      paymentMethod:
-        paymentMethod,
-
-      items:
-        orderItems,
-
-      subtotal:
-        subtotal,
-
-      distanceKm:
-        Number(
-          distanceKm.toFixed(2)
-        ),
-
-      deliveryCharge:
-        deliveryCharge,
-
-      total:
-        total,
-
-      customerLat:
-        selectedLat,
-
-      customerLng:
-        selectedLng,
-
-      status:
-        "received",
-
-      createdAt:
-        new Date().toISOString(),
-
-      orderId:
-        orderId
-
-    };
-
-
-    console.log(
-      "Saving order:",
-      orderData
-    );
-
-
-    await set(
-      orderRef,
-      orderData
-    );
-
-
-    localStorage.setItem(
-      "queenLastOrderId",
-      orderId
-    );
-
-
-    closeModal(
-      "checkoutModal"
-    );
-
-
-    cart = [];
-
-
-    updateCart();
-
-
-    showToast(
-      "Order placed successfully!"
-    );
-
-
-    sendWhatsAppOrder(
-      orderData
-    );
-
-
-    setTimeout(() => {
-
-      openTrackingWithId(
-        orderId
-      );
-
-    },700);
-
-
-  }
-
-  catch(error){
-
-    console.error(
-      "ORDER ERROR:",
-      error
-    );
-
-
-    console.error(
-      "ORDER ERROR CODE:",
-      error?.code
-    );
-
-
-    console.error(
-      "ORDER ERROR MESSAGE:",
-      error?.message
-    );
-
-
-    if(
-      error?.code ===
-      "PERMISSION_DENIED"
-    ){
-
-      showToast(
-        "Firebase permission denied. Check Database Rules."
-      );
-
-    }
-
-    else if(
-      error?.code ===
-      "PERMISSION_DENIED: Permission denied"
-    ){
-
-      showToast(
-        "Firebase permission denied. Check Database Rules."
-      );
-
-    }
-
-    else if(
-      error?.code ===
-      "auth/operation-not-allowed"
-    ){
-
-      showToast(
-        "Enable Anonymous Authentication in Firebase."
-      );
-
-    }
-
-    else{
-
-      showToast(
-        error?.message ||
-        "Order could not be placed. Please try again."
-      );
-
-    }
-
-  }
-
-  finally{
-
-    placeButton.disabled =
-      !shopOpen ||
-      cart.length === 0;
-
-
-    placeButton.textContent =
-      "Place Order";
-
-  }
-
-};
-
-
-/* =========================================================
+/* =========================
    WHATSAPP
-========================================================= */
+========================= */
 
-function sendWhatsAppOrder(order){
+window.openWhatsAppFromSuccess = function(){
+
+  if(!lastOrderData){
+
+    showToast(
+      "Order information not found."
+    );
+
+    return;
+  }
+
 
   let number =
     String(
-      whatsappNumber || "9090220791"
-    )
-    .replace(/\D/g,"");
+      whatsappNumber ||
+      "9090220791"
+    ).replace(/\D/g,"");
 
 
   if(number.length === 10){
 
-    number =
-      "91" + number;
+    number = "91" + number;
 
   }
 
 
-  let message =
-    `*THE QUEEN FAST FOOD*\n` +
-    `━━━━━━━━━━━━━━━━\n` +
-    `*New Order*\n\n`;
+  let itemsText = "";
 
 
-  message +=
-    `Order ID: ${order.orderId}\n`;
+  lastOrderData.items.forEach(item=>{
 
-
-  message +=
-    `Customer: ${order.customerName}\n`;
-
-
-  message +=
-    `Phone: ${order.phone}\n`;
-
-
-  message +=
-    `Address: ${order.address}\n`;
-
-
-  message +=
-    `Payment: ${order.paymentMethod}\n\n`;
-
-
-  message +=
-    `*Items:*\n`;
-
-
-  order.items.forEach(item => {
-
-    message +=
-      `${item.name} × ${item.quantity} = ₹${item.total}\n`;
+    itemsText +=
+      `• ${item.name} × ${item.quantity} = ₹${item.amount}\n`;
 
   });
 
 
-  message +=
-    `\nFood Total: ₹${order.subtotal}\n`;
+  const message =
 
+`🍔 *THE QUEEN FAST FOOD* 👑
 
-  message +=
-    `Delivery: ₹${order.deliveryCharge}\n`;
+━━━━━━━━━━━━━━━━━━
+🆔 *ORDER ID:* ${lastOrderData.orderId}
+━━━━━━━━━━━━━━━━━━
 
+👤 *Customer:* ${lastOrderData.customerName}
+📞 *Phone:* ${lastOrderData.phone}
 
-  message +=
-    `Distance: ${order.distanceKm} km\n`;
+📍 *Delivery Address:*
+${lastOrderData.address}
 
+━━━━━━━━━━━━━━━━━━
+🍽️ *ORDER ITEMS*
+━━━━━━━━━━━━━━━━━━
 
-  message +=
-    `*TOTAL: ₹${order.total}*`;
+${itemsText}
+━━━━━━━━━━━━━━━━━━
+
+💰 *Food Total:* ₹${lastOrderData.subtotal}
+🚚 *Delivery Charge:* ₹${lastOrderData.deliveryCharge}
+📏 *Distance:* ${lastOrderData.distanceKm} KM
+
+💵 *TOTAL:* ₹${lastOrderData.total}
+
+💳 *Payment:* ${lastOrderData.paymentMethod}
+
+━━━━━━━━━━━━━━━━━━
+🙏 *Thank you for ordering!*
+👑 *The Queen Fast Food*
+`;
 
 
   const url =
-    `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-
-
-  console.log(
-    "Opening WhatsApp:",
-    url
-  );
+    `https://wa.me/${number}?text=` +
+    encodeURIComponent(message);
 
 
   window.open(
@@ -2931,293 +1621,239 @@ function sendWhatsAppOrder(order){
     "_blank"
   );
 
-}
+};
 
 
-/* =========================================================
-   TRACKING
-========================================================= */
+window.closeSuccess = function(){
 
-function openTrackingWithId(orderId){
+  document.getElementById(
+    "successModal"
+  ).style.display = "none";
 
-  document
-    .getElementById(
-      "trackingOrderId"
-    )
-    .value =
-    orderId;
+};
 
 
-  document
-    .getElementById(
-      "trackingModal"
-    )
-    .classList.add("show");
+/* =========================
+   TRACK ORDER
+========================= */
 
+window.trackOrder = async function(){
 
-  trackOrder();
-
-}
-
-
-window.trackOrder =
-async function(){
-
-  const trackingInput =
+  const input =
     document.getElementById(
-      "trackingOrderId"
+      "trackOrderId"
+    );
+
+  const result =
+    document.getElementById(
+      "trackResult"
     );
 
 
   const orderId =
-    trackingInput.value.trim();
+    input.value.trim().toUpperCase();
 
 
   if(!orderId){
 
-    showToast(
-      "Please enter your Order ID."
-    );
+    result.innerHTML =
+      "<div class='track-result'>Please enter Order ID.</div>";
 
     return;
-
   }
 
 
-  const content =
-    document.getElementById(
-      "trackingContent"
-    );
-
-
-  content.innerHTML =
-    `<div class="empty">
-      Checking order...
-    </div>`;
+  result.innerHTML =
+    "<div class='track-result'>🔍 Searching...</div>";
 
 
   try{
 
-    const authReady =
-      await authReadyPromise;
+    if(!currentUser){
 
+      const logged =
+        await startCustomerAuth();
 
-    if(
-      !authReady ||
-      !currentUser
-    ){
+      if(!logged){
 
-      throw new Error(
-        "Authentication unavailable."
-      );
-
+        throw new Error(
+          "Authentication failed."
+        );
+      }
     }
 
 
-    await getIdToken(
-      currentUser,
-      true
-    );
+    const q =
+      query(
+        ref(db,"orders"),
+        orderByChild("orderId"),
+        equalTo(orderId)
+      );
 
 
     const snapshot =
-      await get(
-        ref(
-          db,
-          `orders/${orderId}`
-        )
-      );
+      await get(q);
 
 
     if(!snapshot.exists()){
 
-      content.innerHTML = `
-
-        <div class="empty">
-          Order not found.
-        </div>
-
-        <div class="form-group">
-
-          <input
-            id="trackingOrderId"
-            value="${escapeHtml(orderId)}"
-            placeholder="Order ID">
-
-        </div>
-
-        <button
-          class="checkout-btn"
-          onclick="trackOrder()">
-
-          Try Again
-
-        </button>
-
-      `;
+      result.innerHTML =
+        "<div class='track-result'>❌ Order not found.</div>";
 
       return;
-
     }
 
 
-    const order =
-      snapshot.val();
+    let foundOrder = null;
 
 
-    if(
-      order.ownerUid !==
-      currentUser.uid
-    ){
+    snapshot.forEach(child=>{
 
-      throw new Error(
-        "Not allowed"
-      );
+      const order =
+        child.val();
 
+
+      /*
+        Customer can track only
+        their own order.
+      */
+
+      if(
+        order.ownerUid ===
+        currentUser.uid
+      ){
+
+        foundOrder = order;
+
+      }
+
+    });
+
+
+    if(!foundOrder){
+
+      result.innerHTML =
+        "<div class='track-result'>❌ Order not found for this customer.</div>";
+
+      return;
     }
 
 
-    const status =
-      order.status ||
-      "received";
+    result.innerHTML = `
 
+      <div class="track-result">
 
-    let statusText =
-      status;
+        <strong>🆔 Order ID:</strong>
+        ${foundOrder.orderId}
 
+        <br>
 
-    if(status === "received"){
-      statusText = "Order Received";
-    }
-
-    if(status === "confirmed"){
-      statusText = "Order Confirmed";
-    }
-
-    if(status === "preparing"){
-      statusText = "Preparing Your Food";
-    }
-
-    if(status === "ready"){
-      statusText = "Ready for Delivery";
-    }
-
-    if(status === "out_for_delivery"){
-      statusText = "Out for Delivery";
-    }
-
-    if(status === "delivered"){
-      statusText = "Delivered";
-    }
-
-    if(status === "cancelled"){
-      statusText = "Cancelled";
-    }
-
-
-    content.innerHTML = `
-
-      <div class="order-number">
-        #${escapeHtml(orderId)}
-      </div>
-
-      <div class="track-status">
-        ${escapeHtml(statusText)}
-      </div>
-
-      <p class="track-note">
-
-        Thank you,
-        ${escapeHtml(
-          order.customerName ||
-          "Customer"
-        )}.
+        <strong>📅 Date:</strong>
+        ${formatDate(foundOrder.createdAt)}
 
         <br><br>
 
-        Total Order Amount:
-        <strong>
-          ₹${Number(order.total || 0)}
-        </strong>
+        <strong>📦 Status:</strong>
+
+        <span class="status-badge">
+          ${formatStatus(foundOrder.status)}
+        </span>
 
         <br><br>
 
-        We will update your order status as it moves forward.
-
-      </p>
-
-      <br>
-
-      <button
-        class="checkout-btn"
-        onclick="trackOrder()">
-
-        Refresh Status
-
-      </button>
-
-    `;
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Tracking error:",
-      error
-    );
-
-
-    content.innerHTML = `
-
-      <div class="empty">
-        Unable to access this order.
-      </div>
-
-      <div class="form-group">
-
-        <input
-          id="trackingOrderId"
-          value="${escapeHtml(orderId)}"
-          placeholder="Order ID">
+        <strong>💰 Total:</strong>
+        ₹${foundOrder.total}
 
       </div>
 
-      <button
-        class="checkout-btn"
-        onclick="trackOrder()">
-
-        Try Again
-
-      </button>
-
     `;
 
+
+  }catch(error){
+
+    console.error(error);
+
+    result.innerHTML =
+      "<div class='track-result'>❌ Could not track order.</div>";
   }
 
 };
 
 
-/* =========================================================
-   AUTO SHOP STATUS
-========================================================= */
+/* =========================
+   HELPERS
+========================= */
 
-setInterval(
+function formatStatus(status){
 
-  () => {
+  const map = {
 
-    updateShopStatus();
+    received:"Received",
 
-  },
+    confirmed:"Confirmed",
 
-  30000
+    preparing:"Making / Preparing",
 
-);
+    out_for_delivery:"Out for Delivery",
+
+    delivered:"Delivered",
+
+    cancelled:"Cancelled"
+
+  };
+
+  return map[status] || status;
+
+}
 
 
-/* =========================================================
+function formatDate(value){
+
+  if(!value) return "-";
+
+  const date =
+    new Date(value);
+
+  return date.toLocaleString(
+    "en-IN",
+    {
+      dateStyle:"medium",
+      timeStyle:"short"
+    }
+  );
+}
+
+
+function showCheckoutMessage(message){
+
+  document.getElementById(
+    "checkoutMessage"
+  ).textContent = message;
+
+}
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.style.display = "block";
+
+  setTimeout(()=>{
+
+    toast.style.display = "none";
+
+  },3000);
+
+}
+
+
+/* =========================
    START APP
-========================================================= */
+========================= */
 
 async function startApp(){
 
@@ -3225,42 +1861,18 @@ async function startApp(){
 
   updateCart();
 
-
-  /* IMPORTANT:
-     AUTH FIRST
-     SETTINGS AFTER AUTH
-  */
-
   const authenticated =
     await startCustomerAuth();
-
 
   if(authenticated){
 
     await loadShopSettings();
 
-  }
-
-  else{
+  }else{
 
     shopOpen = false;
 
-
-    const statusBox =
-      document.getElementById(
-        "shopStatus"
-      );
-
-
-    statusBox.className =
-      "status closed";
-
-
-    statusBox.textContent =
-      "Firebase connection failed. Please enable Anonymous Authentication and refresh.";
-
-
-    updateOrderButtons();
+    updateShopStatus();
 
   }
 
@@ -3268,26 +1880,6 @@ async function startApp(){
 
 
 startApp();
-
-
-/* =========================================================
-   LAST ORDER
-========================================================= */
-
-const lastOrder =
-  localStorage.getItem(
-    "queenLastOrderId"
-  );
-
-
-if(lastOrder){
-
-  console.log(
-    "Last Queen order:",
-    lastOrder
-  );
-
-}
 
 </script>
 
