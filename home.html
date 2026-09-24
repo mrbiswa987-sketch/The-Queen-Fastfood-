@@ -66,7 +66,7 @@ header{
   color:#ddd;
   text-decoration:none;
   font-size:14px;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .nav-links a:hover{
@@ -74,7 +74,7 @@ header{
 }
 
 .cart-nav{
-  color:#d4af37;
+  color:#d4af37 !important;
   cursor:pointer;
   font-weight:bold;
 }
@@ -444,6 +444,52 @@ header{
   margin-top:7px;
 }
 
+/* ================= DELIVERY PREVIEW ================= */
+
+.delivery-preview{
+  margin:25px 0;
+  padding:20px;
+  background:#080808;
+  border:1px solid #292929;
+  border-radius:6px;
+}
+
+.delivery-preview p{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  color:#aaa;
+  border-bottom:1px solid #222;
+}
+
+.delivery-preview p:last-child{
+  border-bottom:0;
+  color:#fff;
+  font-size:19px;
+  font-weight:bold;
+}
+
+.delivery-preview strong{
+  color:#d4af37;
+}
+
+.calculate-btn{
+  width:100%;
+  padding:14px;
+  background:#d4af37;
+  border:0;
+  color:#000;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  border-radius:4px;
+  margin-top:5px;
+}
+
+.calculate-btn:hover{
+  background:#fff;
+}
+
 .place-order{
   width:100%;
   padding:16px;
@@ -522,6 +568,7 @@ footer p{
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
+
   .product-grid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -600,6 +647,10 @@ footer p{
   .cart-item .remove-btn{
     text-align:right;
   }
+
+  .delivery-preview p{
+    font-size:14px;
+  }
 }
 </style>
 </head>
@@ -609,6 +660,7 @@ footer p{
 <!-- ================= HEADER ================= -->
 
 <header>
+
   <div class="navbar">
 
     <a href="#home" class="logo">
@@ -616,14 +668,23 @@ footer p{
     </a>
 
     <nav class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#menu">Menu</a>
+
+      <a href="#home">
+        Home
+      </a>
+
+      <a href="#menu">
+        Menu
+      </a>
+
       <a href="#cart" class="cart-nav">
         🛒 Cart (<span id="cartCount">0</span>)
       </a>
+
     </nav>
 
   </div>
+
 </header>
 
 
@@ -633,7 +694,9 @@ footer p{
 
   <div class="hero-content">
 
-    <div class="crown">♛</div>
+    <div class="crown">
+      ♛
+    </div>
 
     <h1>
       THE <span>QUEEN</span>
@@ -666,6 +729,7 @@ footer p{
 <section class="section" id="menu">
 
   <div class="section-title">
+
     <h2>
       Our <span>Menu</span>
     </h2>
@@ -673,6 +737,7 @@ footer p{
     <p>
       Choose. Add. Enjoy.
     </p>
+
   </div>
 
 
@@ -684,15 +749,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=85"
           alt="Veg Chowmin"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Veg Chowmin</h3>
+        <h3>
+          Veg Chowmin
+        </h3>
 
         <p class="product-description">
           Fresh vegetables tossed with noodles and delicious seasoning.
@@ -700,7 +769,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹50</span>
+          <span class="price">
+            ₹50
+          </span>
 
           <button
             class="add-btn"
@@ -721,15 +792,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=900&q=85"
           alt="Veg Roll"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Veg Roll</h3>
+        <h3>
+          Veg Roll
+        </h3>
 
         <p class="product-description">
           Crispy roll filled with fresh vegetables and tasty spices.
@@ -737,7 +812,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹50</span>
+          <span class="price">
+            ₹50
+          </span>
 
           <button
             class="add-btn"
@@ -758,15 +835,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85"
           alt="Manchurian"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Manchurian</h3>
+        <h3>
+          Manchurian
+        </h3>
 
         <p class="product-description">
           Crispy vegetable balls tossed in a rich Indo-Chinese sauce.
@@ -774,7 +855,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹50</span>
+          <span class="price">
+            ₹50
+          </span>
 
           <button
             class="add-btn"
@@ -795,15 +878,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
           alt="Paneer Tikka"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Paneer Tikka</h3>
+        <h3>
+          Paneer Tikka
+        </h3>
 
         <p class="product-description">
           Soft paneer pieces grilled with aromatic spices.
@@ -811,7 +898,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹60</span>
+          <span class="price">
+            ₹60
+          </span>
 
           <button
             class="add-btn"
@@ -832,15 +921,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85"
           alt="Paneer Butter Masala"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Paneer Butter Masala</h3>
+        <h3>
+          Paneer Butter Masala
+        </h3>
 
         <p class="product-description">
           Creamy paneer cooked in a rich buttery tomato gravy.
@@ -848,7 +941,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹130</span>
+          <span class="price">
+            ₹130
+          </span>
 
           <button
             class="add-btn"
@@ -869,15 +964,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=85"
           alt="Egg Chicken Chowmin"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Egg Chicken Chowmin</h3>
+        <h3>
+          Egg Chicken Chowmin
+        </h3>
 
         <p class="product-description">
           Noodles tossed with egg, chicken, vegetables and spices.
@@ -885,7 +984,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹65</span>
+          <span class="price">
+            ₹65
+          </span>
 
           <button
             class="add-btn"
@@ -906,15 +1007,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
           alt="Egg Chicken Roll"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Egg Chicken Roll</h3>
+        <h3>
+          Egg Chicken Roll
+        </h3>
 
         <p class="product-description">
           Soft roll filled with egg, chicken and fresh vegetables.
@@ -922,7 +1027,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹60</span>
+          <span class="price">
+            ₹60
+          </span>
 
           <button
             class="add-btn"
@@ -943,15 +1050,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=85"
           alt="Pakoda"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Pakoda</h3>
+        <h3>
+          Pakoda
+        </h3>
 
         <p class="product-description">
           Crispy golden pakoda prepared with aromatic spices.
@@ -959,7 +1070,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹60</span>
+          <span class="price">
+            ₹60
+          </span>
 
           <button
             class="add-btn"
@@ -980,15 +1093,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=900&q=85"
           alt="Chilli Chicken"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Chilli Chicken</h3>
+        <h3>
+          Chilli Chicken
+        </h3>
 
         <p class="product-description">
           Tender chicken cooked with chilli, onion and special sauce.
@@ -996,7 +1113,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹120</span>
+          <span class="price">
+            ₹120
+          </span>
 
           <button
             class="add-btn"
@@ -1017,15 +1136,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85"
           alt="Chicken Garlic"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Chicken Garlic</h3>
+        <h3>
+          Chicken Garlic
+        </h3>
 
         <p class="product-description">
           Juicy chicken cooked with garlic and aromatic seasoning.
@@ -1033,7 +1156,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹80</span>
+          <span class="price">
+            ₹80
+          </span>
 
           <button
             class="add-btn"
@@ -1054,15 +1179,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1539136788836-5699e78bfc75?auto=format&fit=crop&w=900&q=85"
           alt="Chicken Biriyani"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Chicken Biriyani</h3>
+        <h3>
+          Chicken Biriyani
+        </h3>
 
         <p class="product-description">
           Fragrant basmati rice cooked with chicken and biriyani spices.
@@ -1070,7 +1199,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹120</span>
+          <span class="price">
+            ₹120
+          </span>
 
           <button
             class="add-btn"
@@ -1091,15 +1222,19 @@ footer p{
     <div class="product-card">
 
       <div class="food-image">
+
         <img
           src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85"
           alt="Veg Biriyani"
         >
+
       </div>
 
       <div class="product-info">
 
-        <h3>Veg Biriyani</h3>
+        <h3>
+          Veg Biriyani
+        </h3>
 
         <p class="product-description">
           Aromatic rice cooked with fresh vegetables and spices.
@@ -1107,7 +1242,9 @@ footer p{
 
         <div class="price-row">
 
-          <span class="price">₹100</span>
+          <span class="price">
+            ₹100
+          </span>
 
           <button
             class="add-btn"
@@ -1159,19 +1296,43 @@ footer p{
     <div class="cart-summary">
 
       <div class="summary-row">
-        <span>Subtotal</span>
-        <span>₹<span id="cartSubtotal">0</span></span>
+
+        <span>
+          Subtotal
+        </span>
+
+        <span>
+          ₹<span id="cartSubtotal">0</span>
+        </span>
+
       </div>
+
 
       <div class="summary-row">
-        <span>Delivery</span>
-        <span>₹<span id="deliveryCharge">0</span></span>
+
+        <span>
+          Delivery
+        </span>
+
+        <span>
+          ₹<span id="deliveryCharge">0</span>
+        </span>
+
       </div>
 
+
       <div class="summary-row total">
-        <span>Total</span>
-        <span>₹<span id="cartTotal">0</span></span>
+
+        <span>
+          Total
+        </span>
+
+        <span>
+          ₹<span id="cartTotal">0</span>
+        </span>
+
       </div>
+
 
       <button
         class="checkout-btn"
@@ -1210,6 +1371,8 @@ footer p{
   <div class="checkout-box">
 
 
+    <!-- NAME -->
+
     <div class="form-group">
 
       <label for="customerName">
@@ -1224,6 +1387,8 @@ footer p{
 
     </div>
 
+
+    <!-- PHONE -->
 
     <div class="form-group">
 
@@ -1241,6 +1406,8 @@ footer p{
     </div>
 
 
+    <!-- ADDRESS -->
+
     <div class="form-group">
 
       <label for="customerAddress">
@@ -1254,6 +1421,8 @@ footer p{
 
     </div>
 
+
+    <!-- PAYMENT -->
 
     <div class="form-group">
 
@@ -1280,7 +1449,69 @@ footer p{
     </div>
 
 
+    <!-- DELIVERY PREVIEW -->
+
+    <div
+      class="delivery-preview"
+      id="deliveryPreview"
+    >
+
+      <p>
+
+        <span>
+          📍 Delivery Distance
+        </span>
+
+        <strong id="distanceDisplay">
+          —
+        </strong>
+
+      </p>
+
+
+      <p>
+
+        <span>
+          🚚 Delivery Charge
+        </span>
+
+        <strong id="deliveryChargeDisplay">
+          —
+        </strong>
+
+      </p>
+
+
+      <p>
+
+        <span>
+          💰 Grand Total
+        </span>
+
+        <strong id="checkoutTotalDisplay">
+          —
+        </strong>
+
+      </p>
+
+    </div>
+
+
+    <!-- CALCULATE DELIVERY -->
+
     <button
+      type="button"
+      class="calculate-btn"
+      onclick="calculateDelivery()"
+    >
+      📍 CALCULATE DELIVERY CHARGE
+    </button>
+
+
+    <!-- PLACE ORDER -->
+
+    <button
+      type="button"
       class="place-order"
       onclick="placeOrder()"
     >
@@ -1350,9 +1581,20 @@ footer p{
 let cart = [];
 
 
+/* ================= RESTAURANT LOCATION ================= */
+
+const restaurantLat = 20.216780359694468;
+const restaurantLng = 86.36464363454978;
+
+const deliveryRate = 6;
+
+let calculatedDistance = null;
+let calculatedDeliveryCharge = null;
+
+
 /* ================= ADD TO CART ================= */
 
-function addToCart(name, price){
+function addToCart(name,price){
 
   let existing = cart.find(
     item => item.name === name
@@ -1385,20 +1627,30 @@ function addToCart(name, price){
 
 /* ================= UPDATE CART ================= */
 
-/* ================= UPDATE CART ================= */
-
 function updateCart(){
 
-  const cartItems = document.getElementById("cartItems");
-  const subtotalElement = document.getElementById("cartSubtotal");
-  const deliveryElement = document.getElementById("deliveryCharge");
-  const totalElement = document.getElementById("cartTotal");
-  const cartCountElement = document.getElementById("cartCount");
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const subtotalElement =
+    document.getElementById("cartSubtotal");
+
+  const deliveryElement =
+    document.getElementById("deliveryCharge");
+
+  const totalElement =
+    document.getElementById("cartTotal");
+
+  const cartCountElement =
+    document.getElementById("cartCount");
+
 
   cartItems.innerHTML = "";
 
+
   let subtotal = 0;
   let totalQuantity = 0;
+
 
   if(cart.length === 0){
 
@@ -1414,14 +1666,19 @@ function updateCart(){
     cartCountElement.textContent = "0";
 
     return;
+
   }
+
 
   cart.forEach((item,index)=>{
 
-    const itemTotal = item.price * item.quantity;
+    const itemTotal =
+      item.price * item.quantity;
 
     subtotal += itemTotal;
+
     totalQuantity += item.quantity;
+
 
     cartItems.innerHTML += `
 
@@ -1429,7 +1686,9 @@ function updateCart(){
 
         <div class="cart-item-info">
 
-          <h3>${item.name}</h3>
+          <h3>
+            ${item.name}
+          </h3>
 
           <p>
             ₹${item.price} × ${item.quantity}
@@ -1478,19 +1737,647 @@ function updateCart(){
   });
 
 
-  /* Delivery will be calculated after address */
-
-  const deliveryCharge = 0;
-
-  const total = subtotal + deliveryCharge;
+  subtotalElement.textContent =
+    subtotal;
 
 
-  subtotalElement.textContent = subtotal;
+  /*
+    If delivery has already been calculated,
+    keep it.
+  */
 
-  deliveryElement.textContent = deliveryCharge;
+  const delivery =
+    calculatedDeliveryCharge !== null
+      ? calculatedDeliveryCharge
+      : 0;
 
-  totalElement.textContent = total;
 
-  cartCountElement.textContent = totalQuantity;
+  const total =
+    subtotal + delivery;
+
+
+  deliveryElement.textContent =
+    delivery;
+
+
+  totalElement.textContent =
+    total;
+
+
+  cartCountElement.textContent =
+    totalQuantity;
+
+
+  updateCheckoutTotal();
 
 }
+
+
+/* ================= CHANGE QUANTITY ================= */
+
+function changeQuantity(index,change){
+
+  if(!cart[index]){
+    return;
+  }
+
+
+  cart[index].quantity += change;
+
+
+  if(cart[index].quantity <= 0){
+
+    cart.splice(index,1);
+
+  }
+
+
+  updateCart();
+
+}
+
+
+/* ================= REMOVE ITEM ================= */
+
+function removeItem(index){
+
+  if(!cart[index]){
+    return;
+  }
+
+
+  cart.splice(index,1);
+
+  updateCart();
+
+}
+
+
+/* ================= SHOW CHECKOUT ================= */
+
+function showCheckout(){
+
+  if(cart.length === 0){
+
+    alert("Your cart is empty!");
+
+    return;
+
+  }
+
+
+  const checkout =
+    document.getElementById(
+      "checkoutSection"
+    );
+
+
+  checkout.style.display =
+    "block";
+
+
+  checkout.scrollIntoView({
+    behavior:"smooth"
+  });
+
+
+  updateCheckoutTotal();
+
+}
+
+
+/* ================= GET SUBTOTAL ================= */
+
+function getSubtotal(){
+
+  return cart.reduce(
+    (sum,item) =>
+      sum + (item.price * item.quantity),
+    0
+  );
+
+}
+
+
+/* ================= UPDATE CHECKOUT TOTAL ================= */
+
+function updateCheckoutTotal(){
+
+  const subtotal =
+    getSubtotal();
+
+
+  const delivery =
+    calculatedDeliveryCharge !== null
+      ? calculatedDeliveryCharge
+      : 0;
+
+
+  const total =
+    subtotal + delivery;
+
+
+  document.getElementById(
+    "checkoutTotalDisplay"
+  ).textContent =
+    `₹${total}`;
+
+}
+
+
+/* ================= CALCULATE DELIVERY ================= */
+
+async function calculateDelivery(){
+
+  if(cart.length === 0){
+
+    alert("Your cart is empty!");
+
+    return;
+
+  }
+
+
+  const address =
+    document
+      .getElementById("customerAddress")
+      .value
+      .trim();
+
+
+  if(!address){
+
+    alert(
+      "Please enter your delivery address first."
+    );
+
+    document
+      .getElementById("customerAddress")
+      .focus();
+
+    return;
+
+  }
+
+
+  const distanceDisplay =
+    document.getElementById(
+      "distanceDisplay"
+    );
+
+  const deliveryChargeDisplay =
+    document.getElementById(
+      "deliveryChargeDisplay"
+    );
+
+  const checkoutTotalDisplay =
+    document.getElementById(
+      "checkoutTotalDisplay"
+    );
+
+
+  distanceDisplay.textContent =
+    "Calculating...";
+
+  deliveryChargeDisplay.textContent =
+    "Calculating...";
+
+  checkoutTotalDisplay.textContent =
+    "Calculating...";
+
+
+  try{
+
+    /*
+      Step 1:
+      Convert customer address into coordinates.
+    */
+
+    const geoURL =
+      "https://nominatim.openstreetmap.org/search" +
+      "?format=json" +
+      "&limit=1" +
+      "&countrycodes=in" +
+      "&q=" +
+      encodeURIComponent(
+        address + ", Odisha, India"
+      );
+
+
+    const geoResponse =
+      await fetch(geoURL);
+
+
+    if(!geoResponse.ok){
+
+      throw new Error(
+        "Geocoding failed"
+      );
+
+    }
+
+
+    const geoData =
+      await geoResponse.json();
+
+
+    if(
+      !geoData ||
+      geoData.length === 0
+    ){
+
+      throw new Error(
+        "Location not found"
+      );
+
+    }
+
+
+    const customerLat =
+      parseFloat(
+        geoData[0].lat
+      );
+
+
+    const customerLng =
+      parseFloat(
+        geoData[0].lon
+      );
+
+
+    /*
+      Step 2:
+      Calculate actual road distance.
+    */
+
+    const routeURL =
+      "https://router.project-osrm.org/route/v1/driving/" +
+      restaurantLng +
+      "," +
+      restaurantLat +
+      ";" +
+      customerLng +
+      "," +
+      customerLat +
+      "?overview=false";
+
+
+    const routeResponse =
+      await fetch(routeURL);
+
+
+    if(!routeResponse.ok){
+
+      throw new Error(
+        "Route calculation failed"
+      );
+
+    }
+
+
+    const routeData =
+      await routeResponse.json();
+
+
+    if(
+      routeData.code !== "Ok" ||
+      !routeData.routes ||
+      !routeData.routes.length
+    ){
+
+      throw new Error(
+        "Route not found"
+      );
+
+    }
+
+
+    /*
+      OSRM gives distance in meters.
+    */
+
+    const distanceKm =
+      routeData.routes[0].distance / 1000;
+
+
+    /*
+      ₹6 per KM.
+      Rounding up means:
+      2.1 KM = ₹18
+      2.9 KM = ₹18
+      3.1 KM = ₹24
+    */
+
+    const chargeableKm =
+      Math.ceil(distanceKm);
+
+
+    const deliveryCharge =
+      chargeableKm * deliveryRate;
+
+
+    calculatedDistance =
+      distanceKm;
+
+
+    calculatedDeliveryCharge =
+      deliveryCharge;
+
+
+    /*
+      Update checkout display.
+    */
+
+    distanceDisplay.textContent =
+      `${distanceKm.toFixed(1)} KM`;
+
+
+    deliveryChargeDisplay.textContent =
+      `₹${deliveryCharge}`;
+
+
+    const subtotal =
+      getSubtotal();
+
+
+    const grandTotal =
+      subtotal + deliveryCharge;
+
+
+    checkoutTotalDisplay.textContent =
+      `₹${grandTotal}`;
+
+
+    /*
+      Update cart summary also.
+    */
+
+    document.getElementById(
+      "deliveryCharge"
+    ).textContent =
+      deliveryCharge;
+
+
+    document.getElementById(
+      "cartTotal"
+    ).textContent =
+      grandTotal;
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    calculatedDistance = null;
+
+    calculatedDeliveryCharge = null;
+
+
+    distanceDisplay.textContent =
+      "Not found";
+
+
+    deliveryChargeDisplay.textContent =
+      "—";
+
+
+    checkoutTotalDisplay.textContent =
+      `₹${getSubtotal()}`;
+
+
+    alert(
+      "Delivery location could not be found. Please enter a more complete address with area and PIN code."
+    );
+
+  }
+
+}
+
+
+/* ================= PLACE ORDER ================= */
+
+async function placeOrder(){
+
+  if(cart.length === 0){
+
+    alert(
+      "Your cart is empty!"
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById("customerPhone")
+      .value
+      .trim();
+
+
+  const address =
+    document
+      .getElementById("customerAddress")
+      .value
+      .trim();
+
+
+  const payment =
+    document
+      .getElementById("paymentMethod")
+      .value;
+
+
+  if(!name){
+
+    alert(
+      "Please enter your name."
+    );
+
+    return;
+
+  }
+
+
+  if(!/^[0-9]{10}$/.test(phone)){
+
+    alert(
+      "Please enter a valid 10 digit mobile number."
+    );
+
+    return;
+
+  }
+
+
+  if(!address){
+
+    alert(
+      "Please enter your delivery address."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    If distance has not been calculated,
+    calculate it first.
+  */
+
+  if(
+    calculatedDeliveryCharge === null
+  ){
+
+    await calculateDelivery();
+
+
+    /*
+      If calculation failed,
+      stop order.
+    */
+
+    if(
+      calculatedDeliveryCharge === null
+    ){
+
+      return;
+
+    }
+
+  }
+
+
+  const subtotal =
+    getSubtotal();
+
+
+  const deliveryCharge =
+    calculatedDeliveryCharge;
+
+
+  const grandTotal =
+    subtotal + deliveryCharge;
+
+
+  /*
+    Create WhatsApp message.
+  */
+
+  let message =
+    "👑 THE QUEEN FAST FOOD\n\n";
+
+
+  message +=
+    "🛒 ORDER DETAILS\n";
+
+
+  cart.forEach(item=>{
+
+    const itemTotal =
+      item.price * item.quantity;
+
+
+    message +=
+      `${item.name} × ${item.quantity} = ₹${itemTotal}\n`;
+
+  });
+
+
+  message +=
+    "\n";
+
+
+  message +=
+    `Subtotal: ₹${subtotal}\n`;
+
+
+  message +=
+    `Delivery Distance: ${calculatedDistance.toFixed(1)} KM\n`;
+
+
+  message +=
+    `Delivery Charge: ₹${deliveryCharge}\n`;
+
+
+  message +=
+    `Grand Total: ₹${grandTotal}\n`;
+
+
+  message +=
+    "\n👤 CUSTOMER DETAILS\n";
+
+
+  message +=
+    `Name: ${name}\n`;
+
+
+  message +=
+    `Mobile: ${phone}\n`;
+
+
+  message +=
+    `Address: ${address}\n`;
+
+
+  message +=
+    `Payment: ${payment}\n`;
+
+
+  message +=
+    "\nThank you for ordering from The Queen Fast Food! 👑";
+
+
+  /*
+    Restaurant WhatsApp number.
+  */
+
+  const whatsappNumber =
+    "9090220791";
+
+
+  const whatsappURL =
+    "https://wa.me/91" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(message);
+
+
+  /*
+    Show confirmation.
+  */
+
+  document.getElementById(
+    "thankYou"
+  ).style.display =
+    "block";
+
+
+  /*
+    Open WhatsApp.
+  */
+
+  window.location.href =
+    whatsappURL;
+
+}
+
+
+/* ================= INITIAL CART ================= */
+
+updateCart();
+
+</script>
+
+</body>
+</html>
