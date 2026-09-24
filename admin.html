@@ -1,4772 +1,1016 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Queen Fast Food — Admin</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0b0b;
-      color: #fff;
-      min-height: 100vh;
-    }
-
-    button,
-    input,
-    textarea {
-      font-family: inherit;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* LOGIN */
-
-    #loginPage {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background:
-        radial-gradient(circle at top, rgba(212,175,55,.18), transparent 35%),
-        #080808;
-    }
-
-    .login-box {
-      width: 100%;
-      max-width: 420px;
-      background: #121212;
-      border: 1px solid rgba(212,175,55,.35);
-      border-radius: 20px;
-      padding: 35px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
-    }
-
-    .queen-logo {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #d4af37;
-      color: #d4af37;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    .login-box h1 {
-      text-align: center;
-      color: #d4af37;
-      font-size: 27px;
-      margin-bottom: 8px;
-    }
-
-    .login-box p {
-      text-align: center;
-      color: #aaa;
-      margin-bottom: 28px;
-    }
-
-    .field {
-      margin-bottom: 18px;
-    }
-
-    .field label {
-      display: block;
-      color: #ddd;
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-
-    .field input,
-    .field textarea {
-      width: 100%;
-      padding: 14px 15px;
-      border-radius: 10px;
-      border: 1px solid #333;
-      background: #1c1c1c;
-      color: #fff;
-      outline: none;
-      font-size: 15px;
-    }
-
-    .field textarea {
-      resize: vertical;
-      min-height: 95px;
-      line-height: 1.5;
-    }
-
-    .field input:focus,
-    .field textarea:focus {
-      border-color: #d4af37;
-    }
-
-    .login-btn,
-    .gold-btn {
-      width: 100%;
-      padding: 14px 18px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #d4af37, #f2d675);
-      color: #111;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .login-btn:hover,
-    .gold-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.06);
-    }
-
-    .error {
-      color: #ff6b6b;
-      margin-top: 14px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    /* DASHBOARD */
-
-    #dashboardPage {
-      min-height: 100vh;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(10,10,10,.96);
-      border-bottom: 1px solid #252525;
-      backdrop-filter: blur(12px);
-    }
-
-    .header-inner {
-      max-width: 1400px;
-      margin: auto;
-      padding: 17px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand h1 {
-      font-size: 22px;
-      color: #d4af37;
-    }
-
-    .brand span {
-      display: block;
-      color: #888;
-      font-size: 12px;
-      margin-top: 3px;
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 9px;
-    }
-
-    .small-btn {
-      border: 1px solid #333;
-      background: #181818;
-      color: #fff;
-      padding: 9px 13px;
-      border-radius: 9px;
-      cursor: pointer;
-    }
-
-    .small-btn:hover {
-      border-color: #d4af37;
-    }
-
-    .logout-btn {
-      border-color: #6b2424;
-      color: #ff8989;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: auto;
-      padding: 25px 22px 50px;
-    }
-
-    /* STATS */
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 22px;
-    }
-
-    .stat-card {
-      background: #131313;
-      border: 1px solid #292929;
-      border-radius: 16px;
-      padding: 20px;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .stat-card:hover {
-      border-color: #d4af37;
-      transform: translateY(-2px);
-    }
-
-    .stat-card.active {
-      border-color: #d4af37;
-      box-shadow: 0 0 0 1px rgba(212,175,55,.25);
-    }
-
-    .stat-title {
-      color: #999;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-
-    .stat-number {
-      color: #fff;
-      font-size: 29px;
-      font-weight: 700;
-    }
-
-    .stat-sub {
-      color: #d4af37;
-      font-size: 12px;
-      margin-top: 7px;
-    }
-
-    /* TODAY */
-
-    .today-summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 22px;
-    }
-
-    .summary-box {
-      background: #121212;
-      border: 1px solid #282828;
-      border-radius: 15px;
-      padding: 18px;
-    }
-
-    .summary-box .label {
-      color: #999;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .summary-box .value {
-      font-size: 25px;
-      font-weight: 700;
-      color: #d4af37;
-    }
-
-    /* SECTIONS */
-
-    .section {
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 17px;
-      padding: 22px;
-      margin-bottom: 22px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 18px;
-    }
-
-    .section-header h2 {
-      color: #d4af37;
-      font-size: 20px;
-    }
-
-    .section-header p {
-      color: #777;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    /* SHOP STATUS */
-
-    .shop-status-card {
-      background: linear-gradient(
-        145deg,
-        #151515,
-        #101010
-      );
-      border: 1px solid #292929;
-      border-radius: 16px;
-      padding: 20px;
-    }
-
-    .shop-status-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 18px;
-    }
-
-    .shop-status-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #eee;
-    }
-
-    .shop-status-subtitle {
-      margin-top: 5px;
-      color: #888;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .status-pill {
-      padding: 8px 14px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .status-pill.open {
-      color: #7ee787;
-      border: 1px solid #34724a;
-      background: rgba(52,114,74,.12);
-    }
-
-    .status-pill.closed {
-      color: #ff8585;
-      border: 1px solid #7a3030;
-      background: rgba(122,48,48,.12);
-    }
-
-    .shop-status-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .shop-control-box {
-      background: #101010;
-      border: 1px solid #252525;
-      border-radius: 13px;
-      padding: 16px;
-    }
-
-    .shop-control-box h3 {
-      color: #ddd;
-      font-size: 15px;
-      margin-bottom: 9px;
-    }
-
-    .shop-control-box p {
-      color: #777;
-      font-size: 12px;
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-
-    .shop-buttons {
-      display: flex;
-      gap: 9px;
-      flex-wrap: wrap;
-    }
-
-    .shop-open-btn,
-    .shop-close-btn {
-      border: none;
-      padding: 11px 15px;
-      border-radius: 9px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .shop-open-btn {
-      background: #7ee787;
-      color: #101010;
-    }
-
-    .shop-close-btn {
-      background: #ff6b6b;
-      color: #101010;
-    }
-
-    .shop-open-btn:hover,
-    .shop-close-btn:hover {
-      filter: brightness(1.08);
-    }
-
-    .shop-message {
-      margin-top: 12px;
-      color: #7ee787;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .shop-message.error-message {
-      color: #ff7777;
-    }
-
-    /* SETTINGS */
-
-    .settings-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
-    .settings-box {
-      background: #151515;
-      border: 1px solid #252525;
-      border-radius: 14px;
-      padding: 18px;
-    }
-
-    .settings-box h3 {
-      margin-bottom: 16px;
-      color: #eee;
-      font-size: 16px;
-    }
-
-    .password-wrap {
-      position: relative;
-    }
-
-    .password-wrap input {
-      padding-right: 48px;
-    }
-
-    .eye-btn {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      background: transparent;
-      color: #d4af37;
-      cursor: pointer;
-      font-size: 18px;
-      width: 35px;
-      height: 35px;
-    }
-
-    .menu-row {
-      display: grid;
-      grid-template-columns: 1fr 120px;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .menu-name {
-      color: #ddd;
-      font-size: 14px;
-    }
-
-    .price-input {
-      width: 100%;
-      background: #0e0e0e;
-      border: 1px solid #333;
-      color: #fff;
-      padding: 10px;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    .price-input:focus {
-      border-color: #d4af37;
-    }
-
-    .save-row {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .save-row button {
-      flex: 1;
-    }
-
-    .message {
-      font-size: 13px;
-      margin-top: 10px;
-      color: #7ee787;
-    }
-
-    /* FILTER */
-
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-bottom: 18px;
-    }
-
-    .filter-btn {
-      padding: 9px 14px;
-      border-radius: 9px;
-      border: 1px solid #333;
-      background: #181818;
-      color: #bbb;
-      cursor: pointer;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      color: #111;
-      background: #d4af37;
-      border-color: #d4af37;
-    }
-
-    .date-filter {
-      background: #181818;
-      color: #fff;
-      border: 1px solid #333;
-      border-radius: 9px;
-      padding: 9px 12px;
-      outline: none;
-    }
-
-    /* ORDERS */
-
-    .orders-info {
-      color: #999;
-      font-size: 13px;
-      margin-bottom: 15px;
-    }
-
-    .order-card {
-      background: #151515;
-      border: 1px solid #292929;
-      border-radius: 15px;
-      padding: 18px;
-      margin-bottom: 14px;
-    }
-
-    .order-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-
-    .order-id {
-      color: #d4af37;
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    .order-date {
-      color: #777;
-      font-size: 12px;
-      margin-top: 5px;
-    }
-
-    .status-badge {
-      padding: 6px 10px;
-      border-radius: 20px;
-      background: #292929;
-      color: #ddd;
-      font-size: 11px;
-      white-space: nowrap;
-    }
-
-    .status-received {
-      color: #ffd86b;
-      border: 1px solid #806b2d;
-    }
-
-    .status-confirmed {
-      color: #77b7ff;
-      border: 1px solid #315a88;
-    }
-
-    .status-making {
-      color: #ff9e5e;
-      border: 1px solid #874b27;
-    }
-
-    .status-out {
-      color: #b99cff;
-      border: 1px solid #5e4a8a;
-    }
-
-    .status-delivered {
-      color: #72e69a;
-      border: 1px solid #34724a;
-    }
-
-    .order-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .order-info-box {
-      background: #101010;
-      border-radius: 10px;
-      padding: 13px;
-    }
-
-    .order-info-box h4 {
-      color: #aaa;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .order-info-box p {
-      color: #eee;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .items-list {
-      list-style: none;
-    }
-
-    .items-list li {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 5px 0;
-      border-bottom: 1px solid #222;
-      font-size: 13px;
-    }
-
-    .billing {
-      margin-top: 12px;
-    }
-
-    .billing-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 5px 0;
-      color: #aaa;
-      font-size: 13px;
-    }
-
-    .billing-row.total {
-      color: #d4af37;
-      font-weight: 700;
-      font-size: 16px;
-      border-top: 1px solid #333;
-      margin-top: 5px;
-      padding-top: 10px;
-    }
-
-    .status-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 15px;
-    }
-
-    .status-btn {
-      border: 1px solid #333;
-      background: #1b1b1b;
-      color: #bbb;
-      padding: 8px 11px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .status-btn:hover {
-      border-color: #d4af37;
-      color: #d4af37;
-    }
-
-    .empty {
-      padding: 35px;
-      text-align: center;
-      color: #777;
-      border: 1px dashed #333;
-      border-radius: 12px;
-    }
-
-    /* DAILY SUMMARY */
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 650px;
-    }
-
-    th,
-    td {
-      text-align: left;
-      padding: 12px 10px;
-      border-bottom: 1px solid #292929;
-      font-size: 13px;
-    }
-
-    th {
-      color: #d4af37;
-      font-weight: 600;
-    }
-
-    td {
-      color: #ccc;
-    }
-
-    .date-row {
-      cursor: pointer;
-    }
-
-    .date-row:hover {
-      background: #181818;
-    }
-
-    /* PASSWORD MODAL */
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.78);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 20px;
-    }
-
-    .password-modal {
-      width: 100%;
-      max-width: 420px;
-      background: #151515;
-      border: 1px solid #d4af37;
-      border-radius: 17px;
-      padding: 25px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.7);
-    }
-
-    .password-modal h3 {
-      color: #d4af37;
-      margin-bottom: 8px;
-    }
-
-    .password-modal p {
-      color: #999;
-      font-size: 13px;
-      line-height: 1.5;
-      margin-bottom: 18px;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .modal-actions button {
-      flex: 1;
-      padding: 12px;
-      border-radius: 9px;
-      cursor: pointer;
-      border: 1px solid #333;
-    }
-
-    .cancel-btn {
-      background: #222;
-      color: #ccc;
-    }
-
-    .verify-btn {
-      background: #d4af37;
-      color: #111;
-      font-weight: 700;
-      border-color: #d4af37 !important;
-    }
-
-    .modal-error {
-      color: #ff7777;
-      font-size: 12px;
-      margin-top: 8px;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 1000px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .settings-grid,
-      .shop-status-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .container {
-        padding: 18px 12px 35px;
-      }
-
-      .header-inner {
-        padding: 14px 12px;
-      }
-
-      .brand h1 {
-        font-size: 18px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 9px;
-      }
-
-      .stat-card {
-        padding: 15px;
-      }
-
-      .stat-number {
-        font-size: 24px;
-      }
-
-      .today-summary {
-        grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 15px;
-      }
-
-      .order-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .order-top {
-        flex-direction: column;
-      }
-
-      .header-actions {
-        flex-direction: column;
-      }
-
-      .header-actions button {
-        font-size: 11px;
-      }
-
-      .login-box {
-        padding: 25px 18px;
-      }
-
-      .shop-status-top {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
+
+<title>The Queen Fast Food - Admin</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#101010;
+  color:#fff;
+}
+
+.login{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.login-box{
+  width:100%;
+  max-width:420px;
+  background:#1b1b1b;
+  padding:30px;
+  border-radius:15px;
+  border:1px solid #444;
+}
+
+h1,h2{
+  color:#f5c542;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  margin:8px 0 15px;
+  background:#111;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:8px;
+}
+
+button{
+  cursor:pointer;
+}
+
+.primary{
+  width:100%;
+  padding:13px;
+  background:#f5c542;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.logout{
+  background:#d33;
+  color:#fff;
+  border:0;
+  padding:10px 18px;
+  border-radius:8px;
+}
+
+#dashboard{
+  display:none;
+}
+
+header{
+  background:#181818;
+  border-bottom:1px solid #333;
+  padding:15px 4%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  color:#f5c542;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.container{
+  width:94%;
+  max-width:1300px;
+  margin:25px auto;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.stat{
+  background:#1b1b1b;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:20px;
+}
+
+.stat h3{
+  color:#aaa;
+  font-size:14px;
+}
+
+.stat strong{
+  display:block;
+  font-size:28px;
+  color:#f5c542;
+  margin-top:8px;
+}
+
+.panel{
+  background:#1b1b1b;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:20px;
+  margin-top:20px;
+}
+
+.panel h2{
+  margin-bottom:15px;
+}
+
+.shop-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.open-btn,
+.close-btn{
+  padding:12px 20px;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.open-btn{
+  background:#2d9b4a;
+  color:#fff;
+}
+
+.close-btn{
+  background:#d33;
+  color:#fff;
+}
+
+.order{
+  background:#111;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:18px;
+  margin-top:15px;
+}
+
+.order-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.order-id{
+  color:#f5c542;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.badge{
+  padding:6px 10px;
+  border-radius:15px;
+  background:#f5c542;
+  color:#000;
+  font-weight:bold;
+  font-size:12px;
+}
+
+.order-details{
+  margin-top:15px;
+  line-height:1.8;
+  color:#ddd;
+}
+
+.order-items{
+  margin-top:12px;
+  padding:12px;
+  background:#1c1c1c;
+  border-radius:8px;
+}
+
+.status-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.status-buttons button{
+  padding:9px 12px;
+  border:1px solid #555;
+  border-radius:7px;
+  background:#222;
+  color:#fff;
+}
+
+.status-buttons button:hover{
+  background:#f5c542;
+  color:#000;
+}
+
+.whatsapp-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 15px;
+  background:#20c65a;
+  color:#fff;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.empty{
+  color:#aaa;
+  text-align:center;
+  padding:30px;
+}
+
+.filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.filters button{
+  padding:9px 15px;
+  border-radius:20px;
+  border:1px solid #555;
+  background:#222;
+  color:#fff;
+}
+
+.filters button.active{
+  background:#f5c542;
+  color:#000;
+}
+
+.message{
+  margin-top:10px;
+  color:#f5c542;
+}
+
+@media(max-width:600px){
+
+  header{
+    padding:12px;
+  }
+
+  .logo{
+    font-size:16px;
+  }
+
+  .container{
+    width:95%;
+  }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <!-- LOGIN -->
 
-  <section id="loginPage">
+<!-- LOGIN -->
 
-    <div class="login-box">
+<div id="loginPage" class="login">
 
-      <div class="queen-logo">Q</div>
+  <div class="login-box">
 
-      <h1>The Queen Fast Food</h1>
+    <h1>👑 The Queen Fast Food</h1>
 
-      <p>Admin Dashboard</p>
+    <p style="margin:10px 0 20px;color:#aaa">
+      Admin Panel
+    </p>
 
-      <form id="loginForm">
+    <input
+      id="email"
+      type="email"
+      placeholder="Admin Email"
+    >
 
-        <div class="field">
-          <label>Email</label>
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
 
-          <input
-            id="email"
-            type="email"
-            placeholder="Admin email"
-            required
-          />
-        </div>
+    <button
+      class="primary"
+      onclick="loginAdmin()"
+    >
+      🔐 Login
+    </button>
 
-        <div class="field">
-          <label>Password</label>
+    <div id="loginMessage"
+         class="message"></div>
 
-          <input
-            id="password"
-            type="password"
-            placeholder="Admin password"
-            required
-          />
-        </div>
+  </div>
 
-        <button
-          class="login-btn"
-          type="submit"
-        >
-          Login to Admin
-        </button>
-
-        <div
-          id="loginError"
-          class="error"
-        ></div>
-
-      </form>
-
-    </div>
-
-  </section>
+</div>
 
 
-  <!-- DASHBOARD -->
+<!-- DASHBOARD -->
 
-  <section
-    id="dashboardPage"
-    class="hidden"
+<div id="dashboard">
+
+<header>
+
+  <div class="logo">
+    👑 The Queen Fast Food — Admin
+  </div>
+
+  <button
+    class="logout"
+    onclick="logoutAdmin()"
   >
+    Logout
+  </button>
 
-    <header>
+</header>
 
-      <div class="header-inner">
 
-        <div class="brand">
+<div class="container">
 
-          <h1>
-            👑 The Queen Fast Food
-          </h1>
 
-          <span>
-            Restaurant Administration Panel
-          </span>
+<!-- STATS -->
 
-        </div>
+<div class="stats">
 
-        <div class="header-actions">
+  <div class="stat">
 
-          <button
-            id="refreshBtn"
-            class="small-btn"
-          >
-            ↻ Refresh
-          </button>
+    <h3>Total Orders</h3>
 
-          <button
-            id="logoutBtn"
-            class="small-btn logout-btn"
-          >
-            Logout
-          </button>
-
-        </div>
-
-      </div>
-
-    </header>
-
-
-    <main class="container">
-
-
-      <!-- STATS -->
-
-      <div class="stats-grid">
-
-        <div
-          class="stat-card active"
-          data-filter="all"
-        >
-
-          <div class="stat-title">
-            Total Orders
-          </div>
-
-          <div
-            id="totalOrders"
-            class="stat-number"
-          >
-            0
-          </div>
-
-          <div class="stat-sub">
-            All orders
-          </div>
-
-        </div>
-
-
-        <div
-          class="stat-card"
-          data-filter="today"
-        >
-
-          <div class="stat-title">
-            Today's Orders
-          </div>
-
-          <div
-            id="todayOrders"
-            class="stat-number"
-          >
-            0
-          </div>
-
-          <div class="stat-sub">
-            Click to view today
-          </div>
-
-        </div>
-
-
-        <div
-          class="stat-card"
-          data-filter="pending"
-        >
-
-          <div class="stat-title">
-            Pending Orders
-          </div>
-
-          <div
-            id="pendingOrders"
-            class="stat-number"
-          >
-            0
-          </div>
-
-          <div class="stat-sub">
-            Click to view pending
-          </div>
-
-        </div>
-
-
-        <div
-          class="stat-card"
-          data-filter="delivered"
-        >
-
-          <div class="stat-title">
-            Delivered
-          </div>
-
-          <div
-            id="deliveredOrders"
-            class="stat-number"
-          >
-            0
-          </div>
-
-          <div class="stat-sub">
-            Completed orders
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- TODAY SUMMARY -->
-
-      <div class="today-summary">
-
-        <div class="summary-box">
-
-          <div class="label">
-            Today's Orders
-          </div>
-
-          <div
-            id="todaySummaryOrders"
-            class="value"
-          >
-            0
-          </div>
-
-        </div>
-
-
-        <div class="summary-box">
-
-          <div class="label">
-            Today's Sales
-          </div>
-
-          <div
-            id="todaySales"
-            class="value"
-          >
-            ₹0
-          </div>
-
-        </div>
-
-
-        <div class="summary-box">
-
-          <div class="label">
-            Today's Pending
-          </div>
-
-          <div
-            id="todayPending"
-            class="value"
-          >
-            0
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- SHOP CONTROL -->
-
-      <section class="section">
-
-        <div class="section-header">
-
-          <div>
-
-            <h2>
-              🏪 Shop Open / Close
-            </h2>
-
-            <p>
-              Normal ordering time is 12:00 PM to 9:30 PM.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="shop-status-card">
-
-          <div class="shop-status-top">
-
-            <div>
-
-              <div
-                id="shopStatusTitle"
-                class="shop-status-title"
-              >
-                Checking shop status...
-              </div>
-
-              <div
-                id="shopStatusSubtitle"
-                class="shop-status-subtitle"
-              >
-                Please wait...
-              </div>
-
-            </div>
-
-
-            <div
-              id="shopStatusPill"
-              class="status-pill closed"
-            >
-              Checking
-            </div>
-
-          </div>
-
-
-          <div class="shop-status-grid">
-
-
-            <!-- MANUAL CONTROL -->
-
-            <div class="shop-control-box">
-
-              <h3>
-                🔴 Manual Control
-              </h3>
-
-              <p>
-                Use this when the restaurant needs to close
-                before 9:30 PM. This closes ordering for today.
-              </p>
-
-
-              <div class="shop-buttons">
-
-                <button
-                  id="openShopBtn"
-                  class="shop-open-btn"
-                >
-                  🟢 Open Shop
-                </button>
-
-
-                <button
-                  id="closeShopBtn"
-                  class="shop-close-btn"
-                >
-                  🔴 Close Shop Today
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <!-- MESSAGE -->
-
-            <div class="shop-control-box">
-
-              <h3>
-                📝 Closed Message
-              </h3>
-
-              <p>
-                Customers will see this message when you
-                manually close the shop.
-              </p>
-
-
-              <div class="field">
-
-                <textarea
-                  id="closedMessageInput"
-                  placeholder="Today The Queen Fast Food is closed. Sorry for the inconvenience."
-                ></textarea>
-
-              </div>
-
-
-              <button
-                id="saveClosedMessageBtn"
-                class="gold-btn"
-              >
-                Save Closed Message
-              </button>
-
-
-              <div
-                id="shopMessage"
-                class="shop-message"
-              ></div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- RESTAURANT SETTINGS -->
-
-      <section class="section">
-
-        <div class="section-header">
-
-          <div>
-
-            <h2>
-              ⚙️ Restaurant Settings
-            </h2>
-
-            <p>
-              Any changes require admin password verification.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="settings-grid">
-
-
-          <!-- WHATSAPP -->
-
-          <div class="settings-box">
-
-            <h3>
-              📱 WhatsApp / Order Number
-            </h3>
-
-
-            <div class="field">
-
-              <label>
-                WhatsApp Number
-              </label>
-
-
-              <div class="password-wrap">
-
-                <input
-                  id="whatsappNumber"
-                  type="password"
-                  maxlength="10"
-                  inputmode="numeric"
-                  autocomplete="off"
-                />
-
-
-                <button
-                  type="button"
-                  id="toggleWhatsapp"
-                  class="eye-btn"
-                  title="Show / Hide number"
-                >
-                  👁️
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <div class="save-row">
-
-              <button
-                id="saveWhatsappBtn"
-                class="gold-btn"
-              >
-                Save WhatsApp
-              </button>
-
-            </div>
-
-
-            <div
-              id="whatsappMessage"
-              class="message"
-            ></div>
-
-          </div>
-
-
-          <!-- MENU -->
-
-          <div class="settings-box">
-
-            <h3>
-              🍽️ Menu Prices
-            </h3>
-
-
-            <div id="menuSettings"></div>
-
-
-            <div class="save-row">
-
-              <button
-                id="saveAllBtn"
-                class="gold-btn"
-              >
-                Save All Changes
-              </button>
-
-            </div>
-
-
-            <div
-              id="menuMessage"
-              class="message"
-            ></div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- DAILY SUMMARY -->
-
-      <section class="section">
-
-        <div class="section-header">
-
-          <div>
-
-            <h2>
-              📅 Date-wise Order Summary
-            </h2>
-
-            <p>
-              Click any date to view that day's orders.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-
-                <th>Date</th>
-                <th>Total Orders</th>
-                <th>Pending</th>
-                <th>Delivered</th>
-                <th>Total Sales</th>
-
-              </tr>
-
-            </thead>
-
-
-            <tbody
-              id="dailySummaryBody"
-            ></tbody>
-
-          </table>
-
-        </div>
-
-      </section>
-
-
-      <!-- ORDERS -->
-
-      <section class="section">
-
-        <div class="section-header">
-
-          <div>
-
-            <h2>
-              📦 Customer Orders
-            </h2>
-
-            <p id="ordersHeadingText">
-              Showing all orders
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="filter-bar">
-
-          <button
-            class="filter-btn active"
-            data-filter="all"
-          >
-            All
-          </button>
-
-
-          <button
-            class="filter-btn"
-            data-filter="pending"
-          >
-            Pending
-          </button>
-
-
-          <button
-            class="filter-btn"
-            data-filter="today"
-          >
-            Today
-          </button>
-
-
-          <button
-            class="filter-btn"
-            data-filter="delivered"
-          >
-            Delivered
-          </button>
-
-
-          <input
-            type="date"
-            id="dateFilter"
-            class="date-filter"
-          />
-
-
-          <button
-            id="clearDateBtn"
-            class="filter-btn"
-          >
-            Clear Date
-          </button>
-
-        </div>
-
-
-        <div
-          id="ordersInfo"
-          class="orders-info"
-        >
-          0 orders
-        </div>
-
-
-        <div id="ordersList"></div>
-
-      </section>
-
-    </main>
-
-  </section>
-
-
-  <!-- PASSWORD MODAL -->
-
-  <div
-    id="passwordModal"
-    class="modal-overlay hidden"
-  >
-
-    <div class="password-modal">
-
-      <h3>
-        🔐 Admin Verification
-      </h3>
-
-      <p>
-        This action will change restaurant data.
-        Enter your admin password to continue.
-      </p>
-
-
-      <div class="field">
-
-        <label>
-          Admin Password
-        </label>
-
-
-        <div class="password-wrap">
-
-          <input
-            id="confirmPassword"
-            type="password"
-            placeholder="Enter admin password"
-            autocomplete="current-password"
-          />
-
-
-          <button
-            type="button"
-            id="toggleConfirmPassword"
-            class="eye-btn"
-          >
-            👁️
-          </button>
-
-        </div>
-
-
-        <div
-          id="modalError"
-          class="modal-error"
-        ></div>
-
-      </div>
-
-
-      <div class="modal-actions">
-
-        <button
-          id="cancelPasswordBtn"
-          class="cancel-btn"
-        >
-          Cancel
-        </button>
-
-
-        <button
-          id="verifyPasswordBtn"
-          class="verify-btn"
-        >
-          Verify & Continue
-        </button>
-
-      </div>
-
-    </div>
+    <strong id="totalOrders">
+      0
+    </strong>
 
   </div>
 
 
-  <!-- FIREBASE -->
+  <div class="stat">
 
-  <script type="module">
+    <h3>Today's Orders</h3>
 
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    <strong id="todayOrders">
+      0
+    </strong>
 
+  </div>
 
-    import {
-      getAuth,
-      signInWithEmailAndPassword,
-      signOut,
-      onAuthStateChanged,
-      EmailAuthProvider,
-      reauthenticateWithCredential
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+  <div class="stat">
 
-    import {
-      getDatabase,
-      ref,
-      onValue,
-      update
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    <h3>Pending Orders</h3>
 
+    <strong id="pendingOrders">
+      0
+    </strong>
 
-    /* FIREBASE CONFIG */
+  </div>
 
-    const firebaseConfig = {
 
-      apiKey:
-        "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+  <div class="stat">
 
-      authDomain:
-        "the-queen-fast-food.firebaseapp.com",
+    <h3>Delivered</h3>
 
-      databaseURL:
-        "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+    <strong id="deliveredOrders">
+      0
+    </strong>
 
-      projectId:
-        "the-queen-fast-food",
+  </div>
 
-      storageBucket:
-        "the-queen-fast-food.firebasestorage.app",
+</div>
 
-      messagingSenderId:
-        "435721389652",
 
-      appId:
-        "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+<!-- SHOP CONTROL -->
 
-      measurementId:
-        "G-Q1YCK636KJ"
+<div class="panel">
 
-    };
+  <h2>🏪 Shop Control</h2>
 
+  <div id="shopStatus">
+    Checking...
+  </div>
 
-    const app =
-      initializeApp(firebaseConfig);
+  <br>
 
+  <div class="shop-buttons">
 
-    const auth =
-      getAuth(app);
+    <button
+      class="open-btn"
+      onclick="openShop()"
+    >
+      🟢 Open Shop
+    </button>
 
+    <button
+      class="close-btn"
+      onclick="closeShop()"
+    >
+      🔴 Close Shop
+    </button>
 
-    const db =
-      getDatabase(app);
+  </div>
 
+  <textarea
+    id="closedMessage"
+    placeholder="Closed message"
+  ></textarea>
 
-    /* ADMIN UID */
+</div>
 
-    const ADMIN_UID =
-      "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
+<!-- SETTINGS -->
 
-    /* DEFAULT CLOSED MESSAGE */
+<div class="panel">
 
-    const DEFAULT_CLOSED_MESSAGE =
-      "Today The Queen Fast Food is closed. Sorry for the inconvenience.";
+  <h2>⚙️ Restaurant Settings</h2>
 
+  <label>WhatsApp Number</label>
 
-    /* DEFAULT MENU */
+  <input
+    id="whatsappNumber"
+    value="9090220791"
+  >
 
-    const defaultMenu = [
+  <button
+    class="primary"
+    onclick="saveSettings()"
+  >
+    💾 Save Settings
+  </button>
 
-      {
-        id: "veg-chowmin",
-        name: "Veg Chowmin",
-        price: 50
-      },
+  <div
+    id="settingsMessage"
+    class="message"
+  ></div>
 
-      {
-        id: "veg-roll",
-        name: "Veg Roll",
-        price: 50
-      },
+</div>
 
-      {
-        id: "manchurian",
-        name: "Manchurian",
-        price: 50
-      },
 
-      {
-        id: "paneer-tikka",
-        name: "Paneer Tikka",
-        price: 60
-      },
+<!-- ORDERS -->
 
-      {
-        id: "paneer-butter-masala",
-        name: "Paneer Butter Masala",
-        price: 130
-      },
+<div class="panel">
 
-      {
-        id: "egg-chicken-chowmin",
-        name: "Egg Chicken Chowmin",
-        price: 65
-      },
+  <h2>📦 Customer Orders</h2>
 
-      {
-        id: "egg-chicken-roll",
-        name: "Egg Chicken Roll",
-        price: 60
-      },
+  <div class="filters">
 
-      {
-        id: "pakoda",
-        name: "Pakoda",
-        price: 60
-      },
+    <button
+      id="filterAll"
+      class="active"
+      onclick="setFilter('all')"
+    >
+      All
+    </button>
 
-      {
-        id: "chilli-chicken",
-        name: "Chilli Chicken",
-        price: 120
-      },
+    <button
+      id="filterPending"
+      onclick="setFilter('pending')"
+    >
+      Pending
+    </button>
 
-      {
-        id: "chicken-garlic",
-        name: "Chicken Garlic",
-        price: 80
-      },
+    <button
+      id="filterToday"
+      onclick="setFilter('today')"
+    >
+      Today
+    </button>
 
-      {
-        id: "chicken-biriyani",
-        name: "Chicken Biriyani",
-        price: 120
-      },
+    <button
+      id="filterDelivered"
+      onclick="setFilter('delivered')"
+    >
+      Delivered
+    </button>
 
-      {
-        id: "veg-biriyani",
-        name: "Veg Biriyani",
-        price: 100
-      }
+  </div>
 
-    ];
+  <div id="ordersList">
 
+    <div class="empty">
+      Loading orders...
+    </div>
 
-    /* DOM */
+  </div>
 
-    const loginPage =
-      document.getElementById("loginPage");
+</div>
 
-    const dashboardPage =
-      document.getElementById("dashboardPage");
+</div>
 
-    const loginForm =
-      document.getElementById("loginForm");
+</div>
 
-    const loginError =
-      document.getElementById("loginError");
 
-    const logoutBtn =
-      document.getElementById("logoutBtn");
+<script type="module">
 
-    const refreshBtn =
-      document.getElementById("refreshBtn");
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-    const ordersList =
-      document.getElementById("ordersList");
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    const ordersInfo =
-      document.getElementById("ordersInfo");
+import {
+  getDatabase,
+  ref,
+  onValue,
+  update,
+  set
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-    const ordersHeadingText =
-      document.getElementById("ordersHeadingText");
 
-    const menuSettings =
-      document.getElementById("menuSettings");
+/* =========================
+   FIREBASE
+========================= */
 
-    const whatsappNumberInput =
-      document.getElementById("whatsappNumber");
+const firebaseConfig = {
 
-    const whatsappMessage =
-      document.getElementById("whatsappMessage");
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
 
-    const menuMessage =
-      document.getElementById("menuMessage");
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
 
-    const saveWhatsappBtn =
-      document.getElementById("saveWhatsappBtn");
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
 
-    const saveAllBtn =
-      document.getElementById("saveAllBtn");
+  projectId:
+    "the-queen-fast-food",
 
-    const toggleWhatsapp =
-      document.getElementById("toggleWhatsapp");
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
 
-    const totalOrders =
-      document.getElementById("totalOrders");
+  messagingSenderId:
+    "435721389652",
 
-    const todayOrders =
-      document.getElementById("todayOrders");
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
 
-    const pendingOrders =
-      document.getElementById("pendingOrders");
+  measurementId:
+    "G-Q1YCK636KJ"
+};
 
-    const deliveredOrders =
-      document.getElementById("deliveredOrders");
 
-    const todaySummaryOrders =
-      document.getElementById("todaySummaryOrders");
+const app =
+  initializeApp(firebaseConfig);
 
-    const todaySales =
-      document.getElementById("todaySales");
+const auth =
+  getAuth(app);
 
-    const todayPending =
-      document.getElementById("todayPending");
+const db =
+  getDatabase(app);
 
-    const dailySummaryBody =
-      document.getElementById("dailySummaryBody");
 
-    const dateFilter =
-      document.getElementById("dateFilter");
+/* =========================
+   ADMIN UID
+========================= */
 
-    const clearDateBtn =
-      document.getElementById("clearDateBtn");
+const ADMIN_UID =
+  "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
-    /* SHOP CONTROL DOM */
+let ordersData = {};
 
-    const shopStatusTitle =
-      document.getElementById("shopStatusTitle");
+let currentFilter = "all";
 
-    const shopStatusSubtitle =
-      document.getElementById("shopStatusSubtitle");
+let settingsData = {};
 
-    const shopStatusPill =
-      document.getElementById("shopStatusPill");
 
-    const openShopBtn =
-      document.getElementById("openShopBtn");
+/* =========================
+   LOGIN
+========================= */
 
-    const closeShopBtn =
-      document.getElementById("closeShopBtn");
+window.loginAdmin = async function(){
 
-    const closedMessageInput =
-      document.getElementById("closedMessageInput");
+  const email =
+    document.getElementById("email")
+      .value.trim();
 
-    const saveClosedMessageBtn =
-      document.getElementById(
-        "saveClosedMessageBtn"
-      );
+  const password =
+    document.getElementById("password")
+      .value;
 
-    const shopMessage =
-      document.getElementById("shopMessage");
 
+  if(!email || !password){
 
-    /* PASSWORD MODAL */
+    document.getElementById(
+      "loginMessage"
+    ).textContent =
+      "Enter email and password.";
 
-    const passwordModal =
-      document.getElementById("passwordModal");
+    return;
+  }
 
-    const confirmPassword =
-      document.getElementById("confirmPassword");
 
-    const toggleConfirmPassword =
-      document.getElementById(
-        "toggleConfirmPassword"
-      );
+  try{
 
-    const cancelPasswordBtn =
-      document.getElementById(
-        "cancelPasswordBtn"
-      );
-
-    const verifyPasswordBtn =
-      document.getElementById(
-        "verifyPasswordBtn"
-      );
-
-    const modalError =
-      document.getElementById("modalError");
-
-
-    /* DATA */
-
-    let ordersData = {};
-
-    let menuSettingsData = {};
-
-    let currentFilter = "all";
-
-    let pendingAction = null;
-
-    let ordersListenerStarted = false;
-
-    let settingsListenerStarted = false;
-
-    let currentSettings = {};
-
-
-    /* HELPERS */
-
-    function escapeHTML(value) {
-
-      if (
-        value === null ||
-        value === undefined
-      ) {
-        return "";
-      }
-
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-    }
-
-
-    function formatMoney(value) {
-
-      const number =
-        Number(value || 0);
-
-      return "₹" +
-        number.toLocaleString("en-IN");
-
-    }
-
-
-    function formatDate(value) {
-
-      if (!value) return "-";
-
-      try {
-
-        const date =
-          new Date(value);
-
-        if (
-          isNaN(
-            date.getTime()
-          )
-        ) {
-          return String(value);
-        }
-
-        return date.toLocaleString(
-          "en-IN",
-          {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit"
-          }
-        );
-
-      } catch (error) {
-
-        return String(value);
-
-      }
-
-    }
-
-
-    function getDateKey(date) {
-
-      if (
-        !date ||
-        isNaN(date.getTime())
-      ) {
-        return null;
-      }
-
-      return date.getFullYear() +
-        "-" +
-        String(
-          date.getMonth() + 1
-        ).padStart(2, "0") +
-        "-" +
-        String(
-          date.getDate()
-        ).padStart(2, "0");
-
-    }
-
-
-    function todayKey() {
-
-      return getDateKey(
-        new Date()
-      );
-
-    }
-
-
-    function getOrderDate(order) {
-
-      if (!order) return null;
-
-      if (order.createdAt) {
-
-        const date =
-          new Date(
-            order.createdAt
-          );
-
-        if (
-          !isNaN(
-            date.getTime()
-          )
-        ) {
-          return date;
-        }
-
-      }
-
-
-      if (order.timestamp) {
-
-        const date =
-          new Date(
-            order.timestamp
-          );
-
-        if (
-          !isNaN(
-            date.getTime()
-          )
-        ) {
-          return date;
-        }
-
-      }
-
-
-      return null;
-
-    }
-
-
-    function isToday(order) {
-
-      const date =
-        getOrderDate(order);
-
-      if (!date) return false;
-
-      return (
-        getDateKey(date) ===
-        todayKey()
-      );
-
-    }
-
-
-    function isPending(order) {
-
-      return (
-        order &&
-        order.status !==
-          "delivered"
-      );
-
-    }
-
-
-    function statusLabel(status) {
-
-      const map = {
-
-        received:
-          "Received",
-
-        confirmed:
-          "Confirmed",
-
-        making:
-          "Making",
-
-        out_for_delivery:
-          "Out for Delivery",
-
-        delivered:
-          "Delivered"
-
-      };
-
-      return (
-        map[status] ||
-        "Received"
-      );
-
-    }
-
-
-    function statusClass(status) {
-
-      const map = {
-
-        received:
-          "status-received",
-
-        confirmed:
-          "status-confirmed",
-
-        making:
-          "status-making",
-
-        out_for_delivery:
-          "status-out",
-
-        delivered:
-          "status-delivered"
-
-      };
-
-      return (
-        map[status] ||
-        "status-received"
-      );
-
-    }
-
-
-    function orderTotal(order) {
-
-      return Number(
-        order?.total ||
-        order?.grandTotal ||
-        0
-      );
-
-    }
-
-
-    /* =========================
-       SHOP STATUS
-    ========================= */
-
-    function getIndiaTimeParts() {
-
-      const formatter =
-        new Intl.DateTimeFormat(
-          "en-IN",
-          {
-            timeZone:
-              "Asia/Kolkata",
-
-            hour: "2-digit",
-
-            minute: "2-digit",
-
-            hour12: false
-          }
-        );
-
-
-      const parts =
-        formatter.formatToParts(
-          new Date()
-        );
-
-
-      let hour = 0;
-
-      let minute = 0;
-
-
-      parts.forEach((part) => {
-
-        if (
-          part.type === "hour"
-        ) {
-          hour =
-            Number(part.value);
-        }
-
-        if (
-          part.type === "minute"
-        ) {
-          minute =
-            Number(part.value);
-        }
-
-      });
-
-
-      return {
-        hour,
-        minute
-      };
-
-    }
-
-
-    function getAutomaticShopState() {
-
-      const {
-        hour,
-        minute
-      } =
-        getIndiaTimeParts();
-
-
-      const totalMinutes =
-        hour * 60 + minute;
-
-
-      const openingMinutes =
-        12 * 60;
-
-
-      const closingMinutes =
-        21 * 60 + 30;
-
-
-      if (
-        totalMinutes <
-        openingMinutes
-      ) {
-
-        return {
-          open: false,
-          type: "before",
-          title:
-            "Shop is not open yet",
-          message:
-            "Normal ordering starts at 12:00 PM."
-        };
-
-      }
-
-
-      if (
-        totalMinutes <=
-        closingMinutes
-      ) {
-
-        return {
-          open: true,
-          type: "open",
-          title:
-            "Shop is open",
-          message:
-            "Customers can place orders now."
-        };
-
-      }
-
-
-      return {
-        open: false,
-        type: "after",
-        title:
-          "Shop is closed for today",
-        message:
-          "Ordering time is 12:00 PM to 9:30 PM."
-      };
-
-    }
-
-
-    function getShopState() {
-
-      const manualClosed =
-        currentSettings.manualClosed ===
-        true;
-
-
-      if (manualClosed) {
-
-        return {
-
-          open: false,
-
-          type: "manual",
-
-          title:
-            "Shop manually closed",
-
-          message:
-            currentSettings.closedMessage ||
-            DEFAULT_CLOSED_MESSAGE
-
-        };
-
-      }
-
-
-      return getAutomaticShopState();
-
-    }
-
-
-    function renderShopStatus() {
-
-      const state =
-        getShopState();
-
-
-      if (state.open) {
-
-        shopStatusPill.textContent =
-          "OPEN";
-
-        shopStatusPill.className =
-          "status-pill open";
-
-
-        shopStatusTitle.textContent =
-          "🟢 Shop is OPEN";
-
-
-        shopStatusSubtitle.textContent =
-          "Customers can place orders now. Normal timing: 12:00 PM – 9:30 PM.";
-
-        return;
-
-      }
-
-
-      shopStatusPill.textContent =
-        "CLOSED";
-
-      shopStatusPill.className =
-        "status-pill closed";
-
-
-      if (
-        state.type ===
-        "manual"
-      ) {
-
-        shopStatusTitle.textContent =
-          "🔴 Shop manually CLOSED";
-
-
-        shopStatusSubtitle.textContent =
-          currentSettings.closedMessage ||
-          DEFAULT_CLOSED_MESSAGE;
-
-      }
-
-      else if (
-        state.type ===
-        "before"
-      ) {
-
-        shopStatusTitle.textContent =
-          "⏰ Shop not open yet";
-
-
-        shopStatusSubtitle.textContent =
-          "Customer ordering will start automatically at 12:00 PM.";
-
-      }
-
-      else {
-
-        shopStatusTitle.textContent =
-          "🌙 Shop closed for today";
-
-
-        shopStatusSubtitle.textContent =
-          "Automatic closing time is 9:30 PM.";
-
-      }
-
-    }
-
-
-    /* AUTH STATE */
-
-    onAuthStateChanged(
+    await signInWithEmailAndPassword(
       auth,
-      (user) => {
-
-        if (!user) {
-
-          loginPage
-            .classList
-            .remove("hidden");
-
-          dashboardPage
-            .classList
-            .add("hidden");
-
-          return;
-
-        }
-
-
-        if (
-          user.uid !==
-          ADMIN_UID
-        ) {
-
-          signOut(auth);
-
-          loginPage
-            .classList
-            .remove("hidden");
-
-          dashboardPage
-            .classList
-            .add("hidden");
-
-
-          loginError.textContent =
-            "This account is not authorized as admin.";
-
-          return;
-
-        }
-
-
-        loginPage
-          .classList
-          .add("hidden");
-
-        dashboardPage
-          .classList
-          .remove("hidden");
-
-
-        loginError.textContent =
-          "";
-
-
-        loadSettings();
-
-        loadOrders();
-
-      }
-    );
-
-
-    /* LOGIN */
-
-    loginForm.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-        loginError.textContent =
-          "";
-
-
-        const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
-
-
-        const password =
-          document
-            .getElementById("password")
-            .value;
-
-
-        if (
-          !email ||
-          !password
-        ) {
-
-          loginError.textContent =
-            "Email and password are required.";
-
-          return;
-
-        }
-
-
-        try {
-
-          const result =
-            await signInWithEmailAndPassword(
-              auth,
-              email,
-              password
-            );
-
-
-          if (
-            !result.user ||
-            result.user.uid !==
-              ADMIN_UID
-          ) {
-
-            await signOut(auth);
-
-            loginError.textContent =
-              "This account is not the authorized admin.";
-
-            return;
-
-          }
-
-
-          document
-            .getElementById(
-              "password"
-            )
-            .value = "";
-
-
-        } catch (error) {
-
-          console.error(error);
-
-
-          if (
-            error.code ===
-            "auth/invalid-credential"
-          ) {
-
-            loginError.textContent =
-              "Incorrect email or password.";
-
-          }
-
-          else if (
-            error.code ===
-            "auth/too-many-requests"
-          ) {
-
-            loginError.textContent =
-              "Too many attempts. Try again later.";
-
-          }
-
-          else {
-
-            loginError.textContent =
-              error.message ||
-              "Login failed.";
-
-          }
-
-        }
-
-      }
-    );
-
-
-    /* LOGOUT */
-
-    logoutBtn.addEventListener(
-      "click",
-      async () => {
-
-        await signOut(auth);
-
-      }
-    );
-
-
-    /* LOAD SETTINGS */
-
-    function loadSettings() {
-
-      if (
-        settingsListenerStarted
-      ) {
-        return;
-      }
-
-
-      settingsListenerStarted =
-        true;
-
-
-      const settingsRef =
-        ref(db, "settings");
-
-
-      onValue(
-
-        settingsRef,
-
-        (snapshot) => {
-
-          const settings =
-            snapshot.val() ||
-            {};
-
-
-          currentSettings =
-            settings;
-
-
-          menuSettingsData =
-            settings.menu ||
-            {};
-
-
-          const number =
-            settings.whatsappNumber ||
-            "9776856111";
-
-
-          whatsappNumberInput.value =
-            String(number)
-              .replace(/\D/g, "");
-
-
-          closedMessageInput.value =
-            settings.closedMessage ||
-            DEFAULT_CLOSED_MESSAGE;
-
-
-          renderMenuSettings();
-
-          renderShopStatus();
-
-        },
-
-        (error) => {
-
-          console.error(error);
-
-
-          whatsappMessage.textContent =
-            "Could not load settings.";
-
-        }
-
-      );
-
-    }
-
-
-    /* SHOP CONTROL */
-
-    closeShopBtn.addEventListener(
-      "click",
-      () => {
-
-        requestPassword(
-          async () => {
-
-            const user =
-              auth.currentUser;
-
-
-            if (
-              !user ||
-              user.uid !==
-                ADMIN_UID
-            ) {
-
-              alert(
-                "Admin authorization required."
-              );
-
-              return;
-
-            }
-
-
-            const message =
-              closedMessageInput
-                .value
-                .trim() ||
-              DEFAULT_CLOSED_MESSAGE;
-
-
-            try {
-
-              await update(
-                ref(db, "settings"),
-                {
-
-                  manualClosed:
-                    true,
-
-                  closedMessage:
-                    message,
-
-                  manualClosedAt:
-                    new Date()
-                      .toISOString()
-
-                }
-              );
-
-
-              shopMessage.textContent =
-                "✓ Shop is closed for today. Customers will not be able to place orders.";
-
-
-              shopMessage.classList
-                .remove(
-                  "error-message"
-                );
-
-
-              renderShopStatus();
-
-
-              setTimeout(() => {
-
-                shopMessage.textContent =
-                  "";
-
-              }, 5000);
-
-
-            } catch (error) {
-
-              console.error(error);
-
-
-              shopMessage.textContent =
-                "❌ Could not close the shop.";
-
-              shopMessage.classList
-                .add(
-                  "error-message"
-                );
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-    openShopBtn.addEventListener(
-      "click",
-      () => {
-
-        requestPassword(
-          async () => {
-
-            const user =
-              auth.currentUser;
-
-
-            if (
-              !user ||
-              user.uid !==
-                ADMIN_UID
-            ) {
-
-              alert(
-                "Admin authorization required."
-              );
-
-              return;
-
-            }
-
-
-            try {
-
-              await update(
-                ref(db, "settings"),
-                {
-
-                  manualClosed:
-                    false,
-
-                  manualOpenedAt:
-                    new Date()
-                      .toISOString()
-
-                }
-              );
-
-
-              shopMessage.textContent =
-                "✓ Manual close removed. Shop will follow the normal 12:00 PM – 9:30 PM timing.";
-
-
-              shopMessage.classList
-                .remove(
-                  "error-message"
-                );
-
-
-              renderShopStatus();
-
-
-              setTimeout(() => {
-
-                shopMessage.textContent =
-                  "";
-
-              }, 5000);
-
-
-            } catch (error) {
-
-              console.error(error);
-
-
-              shopMessage.textContent =
-                "❌ Could not open the shop.";
-
-              shopMessage.classList
-                .add(
-                  "error-message"
-                );
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-    /* SAVE CLOSED MESSAGE */
-
-    saveClosedMessageBtn.addEventListener(
-      "click",
-      () => {
-
-        requestPassword(
-          async () => {
-
-            const user =
-              auth.currentUser;
-
-
-            if (
-              !user ||
-              user.uid !==
-                ADMIN_UID
-            ) {
-
-              alert(
-                "Admin authorization required."
-              );
-
-              return;
-
-            }
-
-
-            const message =
-              closedMessageInput
-                .value
-                .trim();
-
-
-            if (!message) {
-
-              alert(
-                "Please enter a closed message."
-              );
-
-              return;
-
-            }
-
-
-            try {
-
-              await update(
-                ref(db, "settings"),
-                {
-
-                  closedMessage:
-                    message
-
-                }
-              );
-
-
-              shopMessage.textContent =
-                "✓ Closed message saved successfully.";
-
-
-              shopMessage.classList
-                .remove(
-                  "error-message"
-                );
-
-
-              renderShopStatus();
-
-
-              setTimeout(() => {
-
-                shopMessage.textContent =
-                  "";
-
-              }, 3500);
-
-
-            } catch (error) {
-
-              console.error(error);
-
-
-              shopMessage.textContent =
-                "❌ Failed to save closed message.";
-
-              shopMessage.classList
-                .add(
-                  "error-message"
-                );
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-    /* MENU RENDER */
-
-    function renderMenuSettings() {
-
-      const html =
-        defaultMenu
-          .map((item) => {
-
-            const saved =
-              menuSettingsData[
-                item.id
-              ] || {};
-
-
-            const price =
-              saved.price !== undefined
-                ? saved.price
-                : item.price;
-
-
-            return `
-
-              <div class="menu-row">
-
-                <div class="menu-name">
-                  ${escapeHTML(
-                    item.name
-                  )}
-                </div>
-
-                <input
-                  class="price-input"
-                  data-id="${escapeHTML(
-                    item.id
-                  )}"
-                  type="number"
-                  min="0"
-                  step="1"
-                  value="${escapeHTML(
-                    price
-                  )}"
-                />
-
-              </div>
-
-            `;
-
-          })
-          .join("");
-
-
-      menuSettings.innerHTML =
-        html;
-
-    }
-
-
-    /* WHATSAPP EYE */
-
-    toggleWhatsapp.addEventListener(
-      "click",
-      () => {
-
-        if (
-          whatsappNumberInput.type ===
-          "password"
-        ) {
-
-          whatsappNumberInput.type =
-            "text";
-
-          toggleWhatsapp.textContent =
-            "🙈";
-
-        }
-
-        else {
-
-          whatsappNumberInput.type =
-            "password";
-
-          toggleWhatsapp.textContent =
-            "👁️";
-
-        }
-
-      }
-    );
-
-
-    /* PASSWORD MODAL */
-
-    function requestPassword(
-      action
-    ) {
-
-      pendingAction =
-        action;
-
-
-      confirmPassword.value =
-        "";
-
-
-      modalError.textContent =
-        "";
-
-
-      passwordModal
-        .classList
-        .remove("hidden");
-
-
-      setTimeout(() => {
-
-        confirmPassword.focus();
-
-      }, 100);
-
-    }
-
-
-    function closePasswordModal() {
-
-      pendingAction =
-        null;
-
-
-      confirmPassword.value =
-        "";
-
-
-      modalError.textContent =
-        "";
-
-
-      passwordModal
-        .classList
-        .add("hidden");
-
-    }
-
-
-    cancelPasswordBtn.addEventListener(
-      "click",
-      () => {
-
-        closePasswordModal();
-
-      }
-    );
-
-
-    passwordModal.addEventListener(
-      "click",
-      (event) => {
-
-        if (
-          event.target ===
-          passwordModal
-        ) {
-
-          closePasswordModal();
-
-        }
-
-      }
-    );
-
-
-    toggleConfirmPassword.addEventListener(
-      "click",
-      () => {
-
-        if (
-          confirmPassword.type ===
-          "password"
-        ) {
-
-          confirmPassword.type =
-            "text";
-
-          toggleConfirmPassword.textContent =
-            "🙈";
-
-        }
-
-        else {
-
-          confirmPassword.type =
-            "password";
-
-          toggleConfirmPassword.textContent =
-            "👁️";
-
-        }
-
-      }
-    );
-
-
-    confirmPassword.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key ===
-          "Enter"
-        ) {
-
-          verifyPasswordBtn.click();
-
-        }
-
-
-        if (
-          event.key ===
-          "Escape"
-        ) {
-
-          closePasswordModal();
-
-        }
-
-      }
-    );
-
-
-    /* VERIFY PASSWORD */
-
-    async function verifyAdminPassword(
+      email,
       password
-    ) {
+    );
 
-      const user =
-        auth.currentUser;
+  }catch(error){
 
+    console.error(error);
 
-      if (
-        !user ||
-        user.uid !==
-          ADMIN_UID
-      ) {
+    document.getElementById(
+      "loginMessage"
+    ).textContent =
+      "❌ Login failed: " +
+      error.message;
 
-        throw new Error(
-          "Admin authorization required."
-        );
+  }
 
-      }
+};
 
 
-      if (
-        !password.trim()
-      ) {
+/* =========================
+   AUTH STATE
+========================= */
 
-        throw new Error(
-          "Password is required."
-        );
+onAuthStateChanged(
+  auth,
+  async user => {
 
-      }
+    if(!user){
 
+      showLogin();
 
-      if (!user.email) {
-
-        throw new Error(
-          "Admin email not available."
-        );
-
-      }
-
-
-      const credential =
-        EmailAuthProvider.credential(
-          user.email,
-          password
-        );
-
-
-      await reauthenticateWithCredential(
-        user,
-        credential
-      );
-
-
-      return true;
-
+      return;
     }
 
 
-    verifyPasswordBtn.addEventListener(
-      "click",
-      async () => {
+    if(user.uid !== ADMIN_UID){
 
-        const password =
-          confirmPassword.value;
+      alert(
+        "This account is not authorized as admin."
+      );
 
+      await signOut(auth);
 
-        if (
-          !password.trim()
-        ) {
-
-          modalError.textContent =
-            "Password is required.";
-
-          return;
-
-        }
+      return;
+    }
 
 
-        verifyPasswordBtn.disabled =
-          true;
+    showDashboard();
+
+    loadSettings();
+
+    loadOrders();
+
+  }
+);
 
 
-        verifyPasswordBtn.textContent =
-          "Verifying...";
+function showLogin(){
+
+  document.getElementById(
+    "loginPage"
+  ).style.display = "flex";
+
+  document.getElementById(
+    "dashboard"
+  ).style.display = "none";
+
+}
 
 
-        try {
+function showDashboard(){
 
-          await verifyAdminPassword(
-            password
-          );
+  document.getElementById(
+    "loginPage"
+  ).style.display = "none";
 
+  document.getElementById(
+    "dashboard"
+  ).style.display = "block";
 
-          const action =
-            pendingAction;
-
-
-          closePasswordModal();
-
-
-          if (
-            typeof action ===
-            "function"
-          ) {
-
-            await action();
-
-          }
-
-        }
-
-        catch (error) {
-
-          console.error(error);
+}
 
 
-          if (
-            error.code ===
-              "auth/invalid-credential" ||
-            error.code ===
-              "auth/wrong-password"
-          ) {
+window.logoutAdmin = async function(){
 
-            modalError.textContent =
-              "❌ Incorrect admin password.";
+  await signOut(auth);
 
-          }
-
-          else if (
-            error.code ===
-            "auth/too-many-requests"
-          ) {
-
-            modalError.textContent =
-              "Too many attempts. Try again later.";
-
-          }
-
-          else {
-
-            modalError.textContent =
-              error.message ||
-              "Password verification failed.";
-
-          }
+};
 
 
-          return;
+/* =========================
+   SETTINGS
+========================= */
 
-        }
+function loadSettings(){
 
-        finally {
-
-          verifyPasswordBtn.disabled =
-            false;
+  const settingsRef =
+    ref(db,"settings");
 
 
-          verifyPasswordBtn.textContent =
-            "Verify & Continue";
+  onValue(
+    settingsRef,
+    snapshot => {
 
-        }
+      settingsData =
+        snapshot.val() || {};
+
+
+      document.getElementById(
+        "whatsappNumber"
+      ).value =
+        settingsData.whatsappNumber ||
+        "9090220791";
+
+
+      document.getElementById(
+        "closedMessage"
+      ).value =
+        settingsData.closedMessage ||
+        "The Queen Fast Food is currently closed.";
+
+
+      updateShopStatus();
+
+    },
+
+    error => {
+
+      console.error(error);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   SHOP STATUS
+========================= */
+
+function updateShopStatus(){
+
+  const manualClosed =
+    settingsData.manualClosed === true;
+
+
+  const el =
+    document.getElementById(
+      "shopStatus"
+    );
+
+
+  if(manualClosed){
+
+    el.innerHTML =
+      "🔴 Shop is manually CLOSED.";
+
+    el.style.color =
+      "#ff6666";
+
+    return;
+  }
+
+
+  const now =
+    new Date();
+
+
+  const minutes =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+
+  const opening =
+    12 * 60;
+
+  const closing =
+    23 * 60;
+
+
+  if(
+    minutes >= opening &&
+    minutes < closing
+  ){
+
+    el.innerHTML =
+      "🟢 Shop is OPEN • 12:00 PM – 11:00 PM";
+
+    el.style.color =
+      "#55dd77";
+
+  }else{
+
+    el.innerHTML =
+      "🔴 Shop is CLOSED • 12:00 PM – 11:00 PM";
+
+    el.style.color =
+      "#ff6666";
+
+  }
+
+}
+
+
+/* =========================
+   OPEN SHOP
+========================= */
+
+window.openShop = async function(){
+
+  try{
+
+    await update(
+      ref(db,"settings"),
+      {
+
+        manualClosed:false,
+
+        manualOpenedAt:
+          new Date().toISOString()
 
       }
     );
 
 
-    /* SAVE WHATSAPP */
+  }catch(error){
 
-    saveWhatsappBtn.addEventListener(
-      "click",
-      () => {
+    alert(
+      "Could not open shop."
+    );
 
-        requestPassword(
-          async () => {
+  }
 
-            const user =
-              auth.currentUser;
+};
 
 
-            if (
-              !user ||
-              user.uid !==
-                ADMIN_UID
-            ) {
+/* =========================
+   CLOSE SHOP
+========================= */
 
-              alert(
-                "Admin authorization required."
-              );
+window.closeShop = async function(){
 
-              return;
-
-            }
+  const message =
+    document.getElementById(
+      "closedMessage"
+    ).value.trim() ||
+    "The Queen Fast Food is currently closed.";
 
 
-            let number =
-              whatsappNumberInput
-                .value
-                .replace(/\D/g, "");
+  try{
 
+    await update(
+      ref(db,"settings"),
+      {
 
-            if (
-              number.length < 10
-            ) {
+        manualClosed:true,
 
-              alert(
-                "Enter a valid 10-digit WhatsApp number."
-              );
+        closedMessage:message,
 
-              return;
-
-            }
-
-
-            if (
-              number.length > 10
-            ) {
-
-              number =
-                number.slice(-10);
-
-            }
-
-
-            try {
-
-              await update(
-                ref(db, "settings"),
-                {
-
-                  whatsappNumber:
-                    number
-
-                }
-              );
-
-
-              whatsappMessage.textContent =
-                "✓ WhatsApp number updated successfully.";
-
-
-              setTimeout(() => {
-
-                whatsappMessage.textContent =
-                  "";
-
-              }, 3500);
-
-
-              whatsappNumberInput.type =
-                "password";
-
-
-              toggleWhatsapp.textContent =
-                "👁️";
-
-
-            } catch (error) {
-
-              console.error(error);
-
-
-              whatsappMessage.textContent =
-                "❌ Failed to update WhatsApp number.";
-
-            }
-
-          }
-        );
+        manualClosedAt:
+          new Date().toISOString()
 
       }
     );
 
 
-    /* SAVE ALL MENU */
+  }catch(error){
 
-    saveAllBtn.addEventListener(
-      "click",
-      () => {
+    alert(
+      "Could not close shop."
+    );
 
-        requestPassword(
-          async () => {
+  }
 
-            const user =
-              auth.currentUser;
+};
 
 
-            if (
-              !user ||
-              user.uid !==
-                ADMIN_UID
-            ) {
+/* =========================
+   SAVE SETTINGS
+========================= */
 
-              alert(
-                "Admin authorization required."
-              );
+window.saveSettings = async function(){
 
-              return;
+  const number =
+    document.getElementById(
+      "whatsappNumber"
+    ).value.trim();
 
-            }
 
+  const message =
+    document.getElementById(
+      "closedMessage"
+    ).value.trim();
 
-            const priceInputs =
-              document.querySelectorAll(
-                ".price-input"
-              );
 
+  try{
 
-            const updates = {};
+    await update(
+      ref(db,"settings"),
+      {
 
+        whatsappNumber:
+          number || "9090220791",
 
-            let valid = true;
-
-
-            let whatsapp =
-              whatsappNumberInput
-                .value
-                .replace(/\D/g, "");
-
-
-            if (
-              whatsapp.length < 10
-            ) {
-
-              alert(
-                "Enter a valid 10-digit WhatsApp number."
-              );
-
-              return;
-
-            }
-
-
-            if (
-              whatsapp.length > 10
-            ) {
-
-              whatsapp =
-                whatsapp.slice(-10);
-
-            }
-
-
-            updates[
-              "settings/whatsappNumber"
-            ] =
-              whatsapp;
-
-
-            priceInputs.forEach(
-              (input) => {
-
-                const id =
-                  input.dataset.id;
-
-
-                const value =
-                  Number(
-                    input.value
-                  );
-
-
-                if (
-                  !Number.isFinite(
-                    value
-                  ) ||
-                  value < 0
-                ) {
-
-                  valid = false;
-
-                  return;
-
-                }
-
-
-                const item =
-                  defaultMenu.find(
-                    (menuItem) =>
-                      menuItem.id ===
-                      id
-                  );
-
-
-                if (!item) return;
-
-
-                updates[
-                  "settings/menu/" +
-                  id +
-                  "/name"
-                ] =
-                  item.name;
-
-
-                updates[
-                  "settings/menu/" +
-                  id +
-                  "/price"
-                ] =
-                  value;
-
-              }
-            );
-
-
-            if (!valid) {
-
-              alert(
-                "Please enter valid menu prices."
-              );
-
-              return;
-
-            }
-
-
-            try {
-
-              await update(
-                ref(db),
-                updates
-              );
-
-
-              menuMessage.textContent =
-                "✓ All settings saved successfully.";
-
-
-              setTimeout(() => {
-
-                menuMessage.textContent =
-                  "";
-
-              }, 3500);
-
-
-              whatsappNumberInput.type =
-                "password";
-
-
-              toggleWhatsapp.textContent =
-                "👁️";
-
-
-            } catch (error) {
-
-              console.error(error);
-
-
-              menuMessage.textContent =
-                "❌ Failed to save settings.";
-
-            }
-
-          }
-        );
+        closedMessage:
+          message ||
+          "The Queen Fast Food is currently closed."
 
       }
     );
 
 
-    /* LOAD ORDERS */
+    document.getElementById(
+      "settingsMessage"
+    ).textContent =
+      "✅ Settings saved.";
 
-    function loadOrders() {
 
-      if (
-        ordersListenerStarted
-      ) {
-        return;
-      }
+  }catch(error){
 
+    console.error(error);
 
-      ordersListenerStarted =
-        true;
+    document.getElementById(
+      "settingsMessage"
+    ).textContent =
+      "❌ Could not save settings.";
 
+  }
 
-      const ordersRef =
-        ref(db, "orders");
+};
 
 
-      onValue(
+/* =========================
+   LOAD ORDERS
+========================= */
 
-        ordersRef,
+function loadOrders(){
 
-        (snapshot) => {
+  const ordersRef =
+    ref(db,"orders");
 
-          const data =
-            snapshot.val() ||
-            {};
 
+  onValue(
 
-          ordersData =
-            data;
+    ordersRef,
 
+    snapshot => {
 
-          updateStats(data);
+      ordersData =
+        snapshot.val() || {};
 
-          renderDailySummary(data);
 
-          renderOrders(data);
+      updateStats();
 
-        },
+      renderOrders();
 
-        (error) => {
+    },
 
-          console.error(error);
+    error => {
 
-
-          ordersList.innerHTML = `
-
-            <div class="empty">
-
-              ❌ Could not load orders.
-
-            </div>
-
-          `;
-
-        }
-
-      );
-
-    }
-
-
-    /* STATS */
-
-    function updateStats(data) {
-
-      const orders =
-        Object.values(
-          data || {}
-        );
-
-
-      const total =
-        orders.length;
-
-
-      const today =
-        orders.filter(
-          (order) =>
-            isToday(order)
-        );
-
-
-      const pending =
-        orders.filter(
-          (order) =>
-            isPending(order)
-        );
-
-
-      const delivered =
-        orders.filter(
-          (order) =>
-            order.status ===
-            "delivered"
-        );
-
-
-      const sales =
-        today.reduce(
-          (sum, order) =>
-            sum +
-            orderTotal(order),
-          0
-        );
-
-
-      const todayPendingCount =
-        today.filter(
-          (order) =>
-            isPending(order)
-        ).length;
-
-
-      totalOrders.textContent =
-        total;
-
-
-      todayOrders.textContent =
-        today.length;
-
-
-      pendingOrders.textContent =
-        pending.length;
-
-
-      deliveredOrders.textContent =
-        delivered.length;
-
-
-      todaySummaryOrders.textContent =
-        today.length;
-
-
-      todaySales.textContent =
-        formatMoney(
-          sales
-        );
-
-
-      todayPending.textContent =
-        todayPendingCount;
-
-    }
-
-
-    /* DAILY SUMMARY */
-
-    function renderDailySummary(
-      data
-    ) {
-
-      const grouped = {};
-
-
-      Object.values(
-        data || {}
-      )
-      .forEach((order) => {
-
-        const date =
-          getOrderDate(order);
-
-
-        if (!date) return;
-
-
-        const key =
-          getDateKey(date);
-
-
-        if (!grouped[key]) {
-
-          grouped[key] = {
-
-            date: date,
-
-            total: 0,
-
-            pending: 0,
-
-            delivered: 0,
-
-            sales: 0
-
-          };
-
-        }
-
-
-        grouped[key].total++;
-
-
-        if (
-          order.status ===
-          "delivered"
-        ) {
-
-          grouped[key]
-            .delivered++;
-
-        }
-
-        else {
-
-          grouped[key]
-            .pending++;
-
-        }
-
-
-        grouped[key].sales +=
-          orderTotal(order);
-
-      });
-
-
-      const rows =
-        Object.entries(
-          grouped
-        )
-        .sort(
-          (a, b) =>
-            new Date(
-              b[1].date
-            ) -
-            new Date(
-              a[1].date
-            )
-        )
-        .map(
-          ([key, value]) => `
-
-            <tr
-              class="date-row"
-              data-date="${key}"
-            >
-
-              <td>
-                ${new Date(
-                  value.date
-                ).toLocaleDateString(
-                  "en-IN",
-                  {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric"
-                  }
-                )}
-              </td>
-
-              <td>
-                ${value.total}
-              </td>
-
-              <td>
-                ${value.pending}
-              </td>
-
-              <td>
-                ${value.delivered}
-              </td>
-
-              <td>
-                ${formatMoney(
-                  value.sales
-                )}
-              </td>
-
-            </tr>
-
-          `
-        )
-        .join("");
-
-
-      if (!rows) {
-
-        dailySummaryBody.innerHTML = `
-
-          <tr>
-
-            <td colspan="5">
-              No order data available.
-            </td>
-
-          </tr>
-
-        `;
-
-        return;
-
-      }
-
-
-      dailySummaryBody.innerHTML =
-        rows;
-
-
-      document
-        .querySelectorAll(
-          ".date-row"
-        )
-        .forEach(
-          (row) => {
-
-            row.addEventListener(
-              "click",
-              () => {
-
-                const selectedDate =
-                  row.dataset.date;
-
-
-                dateFilter.value =
-                  selectedDate;
-
-
-                currentFilter =
-                  "date";
-
-
-                updateFilterButtons();
-
-
-                renderOrders(
-                  ordersData
-                );
-
-
-                document
-                  .getElementById(
-                    "ordersList"
-                  )
-                  .scrollIntoView({
-                    behavior:
-                      "smooth",
-                    block:
-                      "start"
-                  });
-
-              }
-            );
-
-          }
-        );
-
-    }
-
-
-    /* FILTER BUTTONS */
-
-    document
-      .querySelectorAll(
-        ".filter-btn[data-filter]"
-      )
-      .forEach(
-        (button) => {
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              currentFilter =
-                button.dataset.filter;
-
-
-              dateFilter.value =
-                "";
-
-
-              updateFilterButtons();
-
-
-              renderOrders(
-                ordersData
-              );
-
-            }
-          );
-
-        }
+      console.error(
+        "ORDER LOAD ERROR:",
+        error
       );
 
 
-    document
-      .querySelectorAll(
-        ".stat-card[data-filter]"
-      )
-      .forEach(
-        (card) => {
+      document.getElementById(
+        "ordersList"
+      ).innerHTML = `
 
-          card.addEventListener(
-            "click",
-            () => {
+        <div class="empty">
 
-              currentFilter =
-                card.dataset.filter;
+          ❌ Could not load orders.
 
+          <br><br>
 
-              dateFilter.value =
-                "";
-
-
-              updateFilterButtons();
-
-
-              renderOrders(
-                ordersData
-              );
-
-
-              document
-                .getElementById(
-                  "ordersList"
-                )
-                .scrollIntoView({
-                  behavior:
-                    "smooth",
-                  block:
-                    "start"
-                });
-
-            }
-          );
-
-        }
-      );
-
-
-    dateFilter.addEventListener(
-      "change",
-      () => {
-
-        if (
-          !dateFilter.value
-        ) {
-
-          currentFilter =
-            "all";
-
-        }
-
-        else {
-
-          currentFilter =
-            "date";
-
-        }
-
-
-        updateFilterButtons();
-
-
-        renderOrders(
-          ordersData
-        );
-
-      }
-    );
-
-
-    clearDateBtn.addEventListener(
-      "click",
-      () => {
-
-        dateFilter.value =
-          "";
-
-
-        currentFilter =
-          "all";
-
-
-        updateFilterButtons();
-
-
-        renderOrders(
-          ordersData
-        );
-
-      }
-    );
-
-
-    function updateFilterButtons() {
-
-      document
-        .querySelectorAll(
-          ".filter-btn[data-filter]"
-        )
-        .forEach(
-          (button) => {
-
-            button.classList.toggle(
-              "active",
-              button.dataset.filter ===
-                currentFilter
-            );
-
-          }
-        );
-
-
-      document
-        .querySelectorAll(
-          ".stat-card[data-filter]"
-        )
-        .forEach(
-          (card) => {
-
-            card.classList.toggle(
-              "active",
-              card.dataset.filter ===
-                currentFilter
-            );
-
-          }
-        );
-
-    }
-
-
-    /* FILTER ORDERS */
-
-    function getFilteredOrders(
-      data
-    ) {
-
-      let orders =
-        Object.entries(
-          data || {}
-        );
-
-
-      if (
-        currentFilter ===
-        "pending"
-      ) {
-
-        orders =
-          orders.filter(
-            ([, order]) =>
-              isPending(order)
-          );
-
-      }
-
-
-      else if (
-        currentFilter ===
-        "today"
-      ) {
-
-        orders =
-          orders.filter(
-            ([, order]) =>
-              isToday(order)
-          );
-
-      }
-
-
-      else if (
-        currentFilter ===
-        "delivered"
-      ) {
-
-        orders =
-          orders.filter(
-            ([, order]) =>
-              order.status ===
-              "delivered"
-          );
-
-      }
-
-
-      else if (
-        currentFilter ===
-        "date"
-      ) {
-
-        const selected =
-          dateFilter.value;
-
-
-        if (selected) {
-
-          orders =
-            orders.filter(
-              ([, order]) => {
-
-                const date =
-                  getOrderDate(
-                    order
-                  );
-
-
-                return (
-                  date &&
-                  getDateKey(
-                    date
-                  ) ===
-                  selected
-                );
-
-              }
-            );
-
-        }
-
-      }
-
-
-      orders.sort(
-        ([, a], [, b]) => {
-
-          const dateA =
-            getOrderDate(a);
-
-
-          const dateB =
-            getOrderDate(b);
-
-
-          return (
-            (
-              dateB?.getTime() ||
-              0
-            ) -
-            (
-              dateA?.getTime() ||
-              0
-            )
-          );
-
-        }
-      );
-
-
-      return orders;
-
-    }
-
-
-    /* RENDER ORDERS */
-
-    function renderOrders(
-      data
-    ) {
-
-      const orders =
-        getFilteredOrders(
-          data
-        );
-
-
-      let heading =
-        "Showing all orders";
-
-
-      if (
-        currentFilter ===
-        "pending"
-      ) {
-
-        heading =
-          "Showing pending orders";
-
-      }
-
-
-      else if (
-        currentFilter ===
-        "today"
-      ) {
-
-        heading =
-          "Showing today's orders";
-
-      }
-
-
-      else if (
-        currentFilter ===
-        "delivered"
-      ) {
-
-        heading =
-          "Showing delivered orders";
-
-      }
-
-
-      else if (
-        currentFilter ===
-        "date"
-      ) {
-
-        heading =
-          "Showing orders for " +
-          (
-            dateFilter.value ||
-            "-"
-          );
-
-      }
-
-
-      ordersHeadingText.textContent =
-        heading;
-
-
-      ordersInfo.textContent =
-        `${orders.length} order${
-          orders.length === 1
-            ? ""
-            : "s"
-        }`;
-
-
-      if (!orders.length) {
-
-        ordersList.innerHTML = `
-
-          <div class="empty">
-
-            No orders found for this filter.
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      ordersList.innerHTML =
-        orders
-          .map(
-            ([orderId, order]) =>
-              renderOrderCard(
-                orderId,
-                order
-              )
-          )
-          .join("");
-
-
-      attachStatusButtons();
-
-    }
-
-
-    /* ORDER CARD */
-
-    function renderOrderCard(
-      orderId,
-      order
-    ) {
-
-      const items =
-        Array.isArray(
-          order.items
-        )
-          ? order.items
-          : Object.values(
-              order.items || {}
-            );
-
-
-      const itemsHTML =
-        items.length
-          ? items
-              .map(
-                (item) => {
-
-                  const name =
-                    item.name ||
-                    item.title ||
-                    "Item";
-
-
-                  const qty =
-                    Number(
-                      item.quantity ||
-                      item.qty ||
-                      1
-                    );
-
-
-                  const price =
-                    Number(
-                      item.price ||
-                      0
-                    );
-
-
-                  return `
-
-                    <li>
-
-                      <span>
-                        ${escapeHTML(
-                          name
-                        )}
-                        × ${qty}
-                      </span>
-
-                      <span>
-                        ${formatMoney(
-                          price *
-                          qty
-                        )}
-                      </span>
-
-                    </li>
-
-                  `;
-
-                }
-              )
-              .join("")
-
-          : "<li>No items</li>";
-
-
-      const subtotal =
-        Number(
-          order.subtotal ||
-          0
-        );
-
-
-      const delivery =
-        Number(
-          order.deliveryCharge ||
-          0
-        );
-
-
-      const total =
-        orderTotal(order);
-
-
-      const status =
-        order.status ||
-        "received";
-
-
-      const customerName =
-        order.customerName ||
-        "Customer";
-
-
-      const phone =
-        order.phone ||
-        "-";
-
-
-      const address =
-        order.address ||
-        "-";
-
-
-      const payment =
-        order.paymentMethod ||
-        "-";
-
-
-      const distance =
-        order.distanceKm !==
-        undefined
-
-          ? Number(
-              order.distanceKm
-            ).toFixed(2) +
-            " km"
-
-          : "-";
-
-
-      return `
-
-        <div
-          class="order-card"
-          data-order-id="${escapeHTML(
-            orderId
-          )}"
-        >
-
-          <div class="order-top">
-
-            <div>
-
-              <div class="order-id">
-
-                ${escapeHTML(
-                  order.orderId ||
-                  orderId
-                )}
-
-              </div>
-
-
-              <div class="order-date">
-
-                ${formatDate(
-                  order.createdAt ||
-                  order.timestamp
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div
-              class="status-badge
-              ${statusClass(
-                status
-              )}"
-            >
-
-              ${statusLabel(
-                status
-              )}
-
-            </div>
-
-          </div>
-
-
-          <div class="order-grid">
-
-
-            <div class="order-info-box">
-
-              <h4>
-                👤 CUSTOMER
-              </h4>
-
-
-              <p>
-
-                <strong>
-                  ${escapeHTML(
-                    customerName
-                  )}
-                </strong>
-
-                <br>
-
-                📞 ${escapeHTML(
-                  phone
-                )}
-
-                <br>
-
-                📍 ${escapeHTML(
-                  address
-                )}
-
-                <br>
-
-                💳 ${escapeHTML(
-                  payment
-                )}
-
-                <br>
-
-                🚚 Distance:
-                ${escapeHTML(
-                  distance
-                )}
-
-              </p>
-
-            </div>
-
-
-            <div class="order-info-box">
-
-              <h4>
-                🍽️ ITEMS
-              </h4>
-
-
-              <ul class="items-list">
-
-                ${itemsHTML}
-
-              </ul>
-
-
-              <div class="billing">
-
-
-                <div class="billing-row">
-
-                  <span>
-                    Subtotal
-                  </span>
-
-                  <span>
-                    ${formatMoney(
-                      subtotal
-                    )}
-                  </span>
-
-                </div>
-
-
-                <div class="billing-row">
-
-                  <span>
-                    Delivery
-                  </span>
-
-                  <span>
-                    ${formatMoney(
-                      delivery
-                    )}
-                  </span>
-
-                </div>
-
-
-                <div class="billing-row total">
-
-                  <span>
-                    Total
-                  </span>
-
-                  <span>
-                    ${formatMoney(
-                      total
-                    )}
-                  </span>
-
-                </div>
-
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="status-actions">
-
-
-            <button
-              class="status-btn"
-              data-status="received"
-              data-order-id="${escapeHTML(
-                orderId
-              )}"
-            >
-              Received
-            </button>
-
-
-            <button
-              class="status-btn"
-              data-status="confirmed"
-              data-order-id="${escapeHTML(
-                orderId
-              )}"
-            >
-              Confirmed
-            </button>
-
-
-            <button
-              class="status-btn"
-              data-status="making"
-              data-order-id="${escapeHTML(
-                orderId
-              )}"
-            >
-              Making
-            </button>
-
-
-            <button
-              class="status-btn"
-              data-status="out_for_delivery"
-              data-order-id="${escapeHTML(
-                orderId
-              )}"
-            >
-              Out for Delivery
-            </button>
-
-
-            <button
-              class="status-btn"
-              data-status="delivered"
-              data-order-id="${escapeHTML(
-                orderId
-              )}"
-            >
-              Delivered
-            </button>
-
-
-          </div>
+          Firebase permission denied.
 
         </div>
 
@@ -4774,162 +1018,553 @@
 
     }
 
+  );
 
-    /* STATUS BUTTONS */
-
-    function attachStatusButtons() {
-
-      document
-        .querySelectorAll(
-          ".status-btn"
-        )
-        .forEach(
-          (button) => {
-
-            button.addEventListener(
-              "click",
-              () => {
-
-                const orderId =
-                  button.dataset
-                    .orderId;
+}
 
 
-                const newStatus =
-                  button.dataset
-                    .status;
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+  const orders =
+    Object.values(ordersData);
 
 
-                requestPassword(
-                  async () => {
-
-                    await changeStatus(
-                      orderId,
-                      newStatus
-                    );
-
-                  }
-                );
-
-              }
-            );
-
-          }
-        );
-
-    }
+  document.getElementById(
+    "totalOrders"
+  ).textContent =
+    orders.length;
 
 
-    /* CHANGE STATUS */
-
-    async function changeStatus(
-      orderId,
-      newStatus
-    ) {
-
-      const user =
-        auth.currentUser;
+  const today =
+    new Date().toDateString();
 
 
-      if (
-        !user ||
-        user.uid !==
-          ADMIN_UID
-      ) {
+  const todayOrders =
+    orders.filter(order=>{
 
-        alert(
-          "Admin authorization required."
-        );
+      if(!order.createdAt)
+        return false;
 
-        return;
+      return new Date(
+        order.createdAt
+      ).toDateString() === today;
 
-      }
+    });
 
 
-      try {
-
-        await update(
-          ref(
-            db,
-            "orders/" +
-            orderId
-          ),
-          {
-
-            status:
-              newStatus,
-
-            statusUpdatedAt:
-              new Date()
-                .toISOString()
-
-          }
-        );
+  document.getElementById(
+    "todayOrders"
+  ).textContent =
+    todayOrders.length;
 
 
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        alert(
-          "❌ Could not update order status."
-        );
-
-      }
-
-    }
-
-
-    /* REFRESH */
-
-    refreshBtn.addEventListener(
-      "click",
-      () => {
-
-        updateStats(
-          ordersData
-        );
-
-
-        renderDailySummary(
-          ordersData
-        );
-
-
-        renderOrders(
-          ordersData
-        );
-
-
-        renderShopStatus();
-
-      }
+  const pending =
+    orders.filter(order=>
+      !["delivered","cancelled"]
+      .includes(order.status)
     );
 
 
-    /* AUTO REFRESH SHOP STATUS */
+  document.getElementById(
+    "pendingOrders"
+  ).textContent =
+    pending.length;
 
-    setInterval(
-      () => {
 
-        if (
-          !dashboardPage
-            .classList
-            .contains("hidden")
-        ) {
-
-          renderShopStatus();
-
-        }
-
-      },
-      30000
+  const delivered =
+    orders.filter(order=>
+      order.status === "delivered"
     );
 
-  </script>
+
+  document.getElementById(
+    "deliveredOrders"
+  ).textContent =
+    delivered.length;
+
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+window.setFilter = function(filter){
+
+  currentFilter = filter;
+
+
+  document
+    .querySelectorAll(".filters button")
+    .forEach(btn=>
+      btn.classList.remove("active")
+    );
+
+
+  const idMap = {
+
+    all:"filterAll",
+
+    pending:"filterPending",
+
+    today:"filterToday",
+
+    delivered:"filterDelivered"
+
+  };
+
+
+  document
+    .getElementById(idMap[filter])
+    .classList.add("active");
+
+
+  renderOrders();
+
+};
+
+
+/* =========================
+   RENDER ORDERS
+========================= */
+
+function renderOrders(){
+
+  const container =
+    document.getElementById(
+      "ordersList"
+    );
+
+
+  let entries =
+    Object.entries(ordersData);
+
+
+  entries.sort(
+    (a,b)=>{
+
+      const dateA =
+        new Date(
+          a[1].createdAt || 0
+        );
+
+      const dateB =
+        new Date(
+          b[1].createdAt || 0
+        );
+
+      return dateB - dateA;
+
+    }
+  );
+
+
+  entries =
+    entries.filter(
+      ([key,order])=>
+        matchesFilter(order)
+    );
+
+
+  if(entries.length === 0){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        📦 No orders found.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML = "";
+
+
+  entries.forEach(
+    ([firebaseKey,order])=>{
+
+      container.innerHTML +=
+        createOrderHTML(
+          firebaseKey,
+          order
+        );
+
+    }
+  );
+
+}
+
+
+function matchesFilter(order){
+
+  if(currentFilter === "all")
+    return true;
+
+
+  if(currentFilter === "pending"){
+
+    return ![
+      "delivered",
+      "cancelled"
+    ].includes(order.status);
+
+  }
+
+
+  if(currentFilter === "delivered"){
+
+    return order.status ===
+      "delivered";
+
+  }
+
+
+  if(currentFilter === "today"){
+
+    if(!order.createdAt)
+      return false;
+
+
+    return new Date(
+      order.createdAt
+    ).toDateString() ===
+      new Date().toDateString();
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================
+   ORDER HTML
+========================= */
+
+function createOrderHTML(
+  firebaseKey,
+  order
+){
+
+  const humanOrderId =
+    order.orderId ||
+    firebaseKey;
+
+
+  const status =
+    formatStatus(order.status);
+
+
+  let itemsHTML = "";
+
+
+  if(Array.isArray(order.items)){
+
+    order.items.forEach(item=>{
+
+      itemsHTML += `
+
+        <div>
+          🍽️ ${item.name}
+          × ${item.quantity}
+          = ₹${item.amount ||
+          item.price * item.quantity}
+        </div>
+
+      `;
+
+    });
+
+  }
+
+
+  const whatsapp =
+    String(
+      settingsData.whatsappNumber ||
+      "9090220791"
+    ).replace(/\D/g,"");
+
+
+  return `
+
+    <div class="order">
+
+      <div class="order-top">
+
+        <div>
+
+          <div class="order-id">
+            🆔 ${humanOrderId}
+          </div>
+
+          <small>
+            ${formatDate(order.createdAt)}
+          </small>
+
+        </div>
+
+        <div class="badge">
+          ${status}
+        </div>
+
+      </div>
+
+
+      <div class="order-details">
+
+        👤 <strong>Customer:</strong>
+        ${escapeHTML(order.customerName || "-")}
+
+        <br>
+
+        📞 <strong>Phone:</strong>
+        ${escapeHTML(order.phone || "-")}
+
+        <br>
+
+        📍 <strong>Address:</strong>
+        ${escapeHTML(order.address || "-")}
+
+        <br>
+
+        💳 <strong>Payment:</strong>
+        ${escapeHTML(order.paymentMethod || "-")}
+
+        <br>
+
+        📏 <strong>Distance:</strong>
+        ${order.distanceKm || 0} KM
+
+      </div>
+
+
+      <div class="order-items">
+
+        <strong>🍽️ Items</strong>
+
+        <br><br>
+
+        ${itemsHTML}
+
+      </div>
+
+
+      <div class="order-details">
+
+        💰 Food Total:
+        ₹${order.subtotal || 0}
+
+        <br>
+
+        🚚 Delivery:
+        ₹${order.deliveryCharge || 0}
+
+        <br>
+
+        <strong style="color:#f5c542;font-size:20px">
+
+          💵 Total:
+          ₹${order.total || 0}
+
+        </strong>
+
+      </div>
+
+
+      <div class="status-buttons">
+
+        <button
+          onclick="changeOrderStatus(
+            '${firebaseKey}',
+            'received'
+          )"
+        >
+          📥 Received
+        </button>
+
+
+        <button
+          onclick="changeOrderStatus(
+            '${firebaseKey}',
+            'confirmed'
+          )"
+        >
+          ✅ Confirmed
+        </button>
+
+
+        <button
+          onclick="changeOrderStatus(
+            '${firebaseKey}',
+            'preparing'
+          )"
+        >
+          👨‍🍳 Preparing
+        </button>
+
+
+        <button
+          onclick="changeOrderStatus(
+            '${firebaseKey}',
+            'out_for_delivery'
+          )"
+        >
+          🛵 Out for Delivery
+        </button>
+
+
+        <button
+          onclick="changeOrderStatus(
+            '${firebaseKey}',
+            'delivered'
+          )"
+        >
+          🎉 Delivered
+        </button>
+
+
+        <button
+          onclick="changeOrderStatus(
+            '${firebaseKey}',
+            'cancelled'
+          )"
+        >
+          ❌ Cancelled
+        </button>
+
+      </div>
+
+
+      <a
+        class="whatsapp-btn"
+        target="_blank"
+        href="https://wa.me/91${whatsapp}"
+      >
+        📲 Open Restaurant WhatsApp
+      </a>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   CHANGE STATUS
+========================= */
+
+window.changeOrderStatus =
+async function(
+  firebaseKey,
+  newStatus
+){
+
+  try{
+
+    await update(
+
+      ref(
+        db,
+        "orders/" +
+        firebaseKey
+      ),
+
+      {
+
+        status:newStatus,
+
+        statusUpdatedAt:
+          new Date().toISOString()
+
+      }
+
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Could not update order status."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatStatus(status){
+
+  const map = {
+
+    received:"Received",
+
+    confirmed:"Confirmed",
+
+    preparing:"Making / Preparing",
+
+    out_for_delivery:
+      "Out for Delivery",
+
+    delivered:"Delivered",
+
+    cancelled:"Cancelled"
+
+  };
+
+
+  return map[status] ||
+    "Received";
+
+}
+
+
+function formatDate(value){
+
+  if(!value)
+    return "-";
+
+
+  return new Date(value)
+    .toLocaleString(
+      "en-IN",
+      {
+        dateStyle:"medium",
+        timeStyle:"short"
+      }
+    );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+</script>
 
 </body>
 </html>
