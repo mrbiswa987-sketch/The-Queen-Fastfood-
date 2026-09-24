@@ -1,543 +1,1868 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The Queen Fast Food — Admin</title>
+  <title>The Queen Fast Food - Admin</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body{
-  font-family:Arial,sans-serif;
-  background:#0b0b0b;
-  color:#fff;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background: #090909;
+      color: #fff;
+      min-height: 100vh;
+    }
 
-header{
-  background:#111;
-  padding:20px;
-  text-align:center;
-  border-bottom:1px solid #333;
-}
+    .gold {
+      color: #d4af37;
+    }
 
-.logo{
-  color:#d4af37;
-  font-size:25px;
-  font-weight:bold;
-}
+    /* ================= LOGIN ================= */
 
-.logo span{
-  display:block;
-  color:#fff;
-  font-size:15px;
-  margin-top:4px;
-}
+    #loginPage {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at top, rgba(212,175,55,0.12), transparent 35%),
+        #090909;
+    }
 
-.container{
-  max-width:1100px;
-  margin:30px auto;
-  padding:20px;
-}
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: #111;
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 18px;
+      padding: 35px 28px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+    }
 
-.card{
-  background:#151515;
-  border:1px solid #333;
-  border-radius:14px;
-  padding:22px;
-  margin-bottom:20px;
-}
+    .logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
 
-h2{
-  color:#d4af37;
-  margin-bottom:18px;
-}
+    .logo .crown {
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
 
-input{
-  width:100%;
-  padding:14px;
-  margin-bottom:12px;
-  border-radius:8px;
-  border:1px solid #444;
-  background:#222;
-  color:#fff;
-  font-size:15px;
-}
+    .logo h1 {
+      color: #d4af37;
+      font-size: 27px;
+      letter-spacing: 2px;
+    }
 
-button{
-  border:none;
-  border-radius:8px;
-  padding:12px 16px;
-  cursor:pointer;
-  font-weight:bold;
-  margin:4px;
-}
+    .logo p {
+      color: #aaa;
+      margin-top: 6px;
+      font-size: 13px;
+    }
 
-.login-btn{
-  width:100%;
-  background:#d4af37;
-  color:#000;
-}
+    .input-group {
+      margin-bottom: 17px;
+    }
 
-.logout{
-  background:#b3261e;
-  color:#fff;
-}
+    .input-group label {
+      display: block;
+      color: #ccc;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
 
-.status-btn{
-  background:#333;
-  color:#fff;
-}
+    input,
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 9px;
+      border: 1px solid #333;
+      background: #181818;
+      color: #fff;
+      outline: none;
+      font-size: 14px;
+    }
 
-.status-btn:hover{
-  background:#d4af37;
-  color:#000;
-}
+    input:focus,
+    select:focus {
+      border-color: #d4af37;
+    }
 
-.order{
-  background:#101010;
-  border:1px solid #333;
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:18px;
-}
+    button {
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-.order-id{
-  color:#d4af37;
-  font-size:20px;
-  font-weight:bold;
-}
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 9px;
+      background: #d4af37;
+      color: #000;
+      font-size: 15px;
+      margin-top: 5px;
+    }
 
-.status{
-  display:inline-block;
-  padding:7px 12px;
-  border-radius:20px;
-  background:#222;
-  margin:10px 0;
-  color:#d4af37;
-}
+    .login-btn:hover {
+      background: #e6c65a;
+    }
 
-.info{
-  line-height:1.8;
-  color:#ddd;
-}
+    .error {
+      color: #ff6565;
+      font-size: 13px;
+      margin-top: 14px;
+      text-align: center;
+      min-height: 18px;
+    }
 
-.items{
-  margin:12px 0;
-  padding:12px;
-  background:#181818;
-  border-radius:8px;
-  line-height:1.8;
-}
+    /* ================= DASHBOARD ================= */
 
-.total{
-  color:#d4af37;
-  font-size:19px;
-  font-weight:bold;
-}
+    #dashboardPage {
+      display: none;
+      min-height: 100vh;
+    }
 
-.hidden{
-  display:none;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #252525;
+      padding: 15px 22px;
+    }
 
-.empty{
-  text-align:center;
-  color:#888;
-  padding:30px;
-}
+    .topbar-inner {
+      max-width: 1250px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
 
-.error-box{
-  background:#2b1010;
-  border:1px solid #8b3030;
-  color:#ff7777;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:20px;
-}
+    .brand h2 {
+      color: #d4af37;
+      font-size: 21px;
+    }
 
-.success-box{
-  background:#102b18;
-  border:1px solid #2d7a45;
-  color:#72e39a;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:20px;
-}
+    .brand p {
+      color: #888;
+      font-size: 12px;
+      margin-top: 3px;
+    }
 
-.order-count{
-  color:#d4af37;
-  font-size:18px;
-  font-weight:bold;
-}
-</style>
+    .logout-btn {
+      padding: 9px 15px;
+      border-radius: 8px;
+      background: #1d1d1d;
+      border: 1px solid #444;
+      color: #fff;
+    }
+
+    .logout-btn:hover {
+      border-color: #d4af37;
+      color: #d4af37;
+    }
+
+    .container {
+      max-width: 1250px;
+      margin: auto;
+      padding: 25px 18px 50px;
+    }
+
+    /* ================= STATS ================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: #111;
+      border: 1px solid #282828;
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .stat-card .label {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .value {
+      color: #d4af37;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    /* ================= SECTIONS ================= */
+
+    .section {
+      background: #111;
+      border: 1px solid #282828;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      color: #d4af37;
+      font-size: 19px;
+    }
+
+    .section-header p {
+      color: #777;
+      font-size: 12px;
+    }
+
+    /* ================= SETTINGS ================= */
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 25px;
+    }
+
+    .settings-card {
+      background: #181818;
+      border: 1px solid #292929;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .settings-card h3 {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .save-btn {
+      padding: 11px 17px;
+      border-radius: 8px;
+      background: #d4af37;
+      color: #000;
+      margin-top: 5px;
+    }
+
+    .save-btn:hover {
+      background: #e6c65a;
+    }
+
+    .save-all-btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: #d4af37;
+      color: #000;
+      font-size: 14px;
+    }
+
+    .menu-settings {
+      overflow-x: auto;
+    }
+
+    .menu-row {
+      display: grid;
+      grid-template-columns: 1.8fr 110px 130px;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #292929;
+    }
+
+    .menu-row:last-child {
+      border-bottom: none;
+    }
+
+    .menu-name {
+      font-size: 14px;
+      color: #eee;
+    }
+
+    .current-price {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .price-input {
+      width: 100%;
+      padding: 9px 10px;
+    }
+
+    .setting-message {
+      margin-top: 12px;
+      font-size: 13px;
+      min-height: 18px;
+    }
+
+    .success {
+      color: #62d68a;
+    }
+
+    .danger {
+      color: #ff6565;
+    }
+
+    /* ================= ORDERS ================= */
+
+    .orders-tools {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .refresh-btn {
+      padding: 9px 14px;
+      background: #1d1d1d;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 8px;
+    }
+
+    .refresh-btn:hover {
+      border-color: #d4af37;
+      color: #d4af37;
+    }
+
+    .orders-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .order-card {
+      background: #181818;
+      border: 1px solid #2b2b2b;
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .order-card:hover {
+      border-color: rgba(212,175,55,0.45);
+    }
+
+    .order-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .order-id {
+      color: #d4af37;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .order-time {
+      color: #777;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .status-badge {
+      padding: 7px 11px;
+      border-radius: 20px;
+      background: #262626;
+      color: #d4af37;
+      font-size: 11px;
+      font-weight: bold;
+      border: 1px solid #444;
+    }
+
+    .customer-info {
+      background: #101010;
+      border-radius: 10px;
+      padding: 13px;
+      margin-bottom: 14px;
+    }
+
+    .customer-info div {
+      font-size: 13px;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+
+    .customer-info div:last-child {
+      margin-bottom: 0;
+    }
+
+    .customer-info strong {
+      color: #fff;
+    }
+
+    .items-box {
+      margin-bottom: 14px;
+    }
+
+    .items-box h4 {
+      color: #d4af37;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .item-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 7px 0;
+      border-bottom: 1px solid #292929;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .item-line:last-child {
+      border-bottom: none;
+    }
+
+    .billing {
+      background: #101010;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 15px;
+    }
+
+    .bill-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .bill-total {
+      border-top: 1px solid #333;
+      margin-top: 6px;
+      padding-top: 9px;
+      color: #d4af37;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .status-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .status-btn {
+      padding: 8px 11px;
+      border-radius: 7px;
+      background: #222;
+      color: #ccc;
+      border: 1px solid #3a3a3a;
+      font-size: 11px;
+    }
+
+    .status-btn:hover {
+      color: #d4af37;
+      border-color: #d4af37;
+    }
+
+    .status-btn.active {
+      background: #d4af37;
+      color: #000;
+      border-color: #d4af37;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #777;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: #aaa;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 900px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        padding: 13px 15px;
+      }
+
+      .container {
+        padding: 18px 12px 40px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+      }
+
+      .stat-card {
+        padding: 13px;
+      }
+
+      .stat-card .value {
+        font-size: 21px;
+      }
+
+      .section {
+        padding: 14px;
+      }
+
+      .menu-row {
+        grid-template-columns: 1fr 80px 105px;
+        gap: 7px;
+      }
+
+      .menu-name {
+        font-size: 12px;
+      }
+
+      .current-price {
+        font-size: 11px;
+      }
+
+      .order-card {
+        padding: 14px;
+      }
+
+      .status-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .status-btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">
-    👑 THE QUEEN
-    <span>FAST FOOD — ADMIN PANEL</span>
-  </div>
-</header>
+  <!-- =========================================================
+       LOGIN PAGE
+  ========================================================== -->
 
-<div class="container">
+  <div id="loginPage">
 
-  <!-- LOGIN -->
-  <div id="loginSection" class="card">
+    <div class="login-box">
 
-    <h2>🔐 Admin Login</h2>
-
-    <input
-      type="email"
-      id="email"
-      placeholder="Admin Email"
-    >
-
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    >
-
-    <button
-      class="login-btn"
-      onclick="login()">
-      LOGIN
-    </button>
-
-    <p
-      id="loginError"
-      style="color:#ff5555;margin-top:12px;">
-    </p>
-
-  </div>
-
-
-  <!-- DASHBOARD -->
-  <div id="dashboard" class="hidden">
-
-    <div class="card">
-
-      <h2>📊 Order Dashboard</h2>
-
-      <button
-        class="logout"
-        onclick="logout()">
-        Logout
-      </button>
-
-      <p style="margin-top:12px;color:#aaa;">
-        Live orders from The Queen Fast Food
-      </p>
-
-      <p
-        id="connectionStatus"
-        style="margin-top:12px;">
-        🔄 Connecting to Firebase...
-      </p>
-
-      <p
-        id="orderCount"
-        class="order-count"
-        style="margin-top:10px;">
-        Orders: 0
-      </p>
-
-    </div>
-
-    <div id="orders">
-      <div class="card empty">
-        Loading orders...
+      <div class="logo">
+        <div class="crown">👑</div>
+        <h1>THE QUEEN</h1>
+        <p>FAST FOOD • ADMIN PANEL</p>
       </div>
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <label>Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Admin email"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Admin password"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button type="submit" class="login-btn">
+          LOGIN TO ADMIN
+        </button>
+
+        <div id="loginError" class="error"></div>
+
+      </form>
+
     </div>
 
   </div>
 
-</div>
+
+  <!-- =========================================================
+       DASHBOARD
+  ========================================================== -->
+
+  <div id="dashboardPage">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+      <div class="topbar-inner">
+
+        <div class="brand">
+          <h2>👑 THE QUEEN FAST FOOD</h2>
+          <p>Admin Dashboard</p>
+        </div>
+
+        <button id="logoutBtn" class="logout-btn">
+          Logout
+        </button>
+
+      </div>
+
+    </header>
 
 
-<script type="module">
+    <main class="container">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      <!-- =====================================================
+           STATS
+      ====================================================== -->
 
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      <div class="stats">
 
-import {
-  getDatabase,
-  ref,
-  onValue,
-  update
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        <div class="stat-card">
+          <div class="label">TOTAL ORDERS</div>
+          <div id="totalOrders" class="value">0</div>
+        </div>
 
+        <div class="stat-card">
+          <div class="label">TODAY'S ORDERS</div>
+          <div id="todayOrders" class="value">0</div>
+        </div>
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+        <div class="stat-card">
+          <div class="label">PENDING</div>
+          <div id="pendingOrders" class="value">0</div>
+        </div>
 
-const firebaseConfig = {
+        <div class="stat-card">
+          <div class="label">DELIVERED</div>
+          <div id="deliveredOrders" class="value">0</div>
+        </div>
 
-  apiKey:
-    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-
-  authDomain:
-    "the-queen-fast-food.firebaseapp.com",
-
-  databaseURL:
-    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-
-  projectId:
-    "the-queen-fast-food",
-
-  storageBucket:
-    "the-queen-fast-food.firebasestorage.app",
-
-  messagingSenderId:
-    "435721389652",
-
-  appId:
-    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-
-  measurementId:
-    "G-Q1YCK636KJ"
-};
+      </div>
 
 
-const app = initializeApp(firebaseConfig);
+      <!-- =====================================================
+           RESTAURANT SETTINGS
+      ====================================================== -->
 
-const auth = getAuth(app);
+      <section class="section">
 
-const db = getDatabase(app);
+        <div class="section-header">
 
+          <div>
+            <h2>⚙️ Restaurant Settings</h2>
+            <p>Change WhatsApp number and menu prices</p>
+          </div>
 
-/* =========================
-   LOGIN
-========================= */
+          <button id="saveAllBtn" class="save-all-btn">
+            💾 SAVE ALL CHANGES
+          </button>
 
-window.login = async function(){
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-  const error =
-    document.getElementById("loginError");
-
-  error.textContent = "";
-
-  if(!email || !password){
-
-    error.textContent =
-      "Please enter email and password.";
-
-    return;
-  }
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-  }catch(err){
-
-    console.error(
-      "LOGIN ERROR:",
-      err
-    );
-
-    error.textContent =
-      err.message;
-
-  }
-
-};
+        </div>
 
 
-/* =========================
-   LOGOUT
-========================= */
+        <div class="settings-grid">
 
-window.logout = async function(){
+          <!-- MOBILE SETTINGS -->
 
-  try{
+          <div class="settings-card">
 
-    await signOut(auth);
+            <h3>📱 WhatsApp / Order Number</h3>
 
-  }catch(err){
+            <div class="input-group">
 
-    console.error(
-      "LOGOUT ERROR:",
-      err
-    );
+              <label>
+                Customer Order WhatsApp Number
+              </label>
 
-  }
+              <input
+                type="text"
+                id="whatsappNumber"
+                placeholder="9090220791"
+                inputmode="numeric"
+              >
 
-};
+            </div>
+
+            <button id="saveWhatsappBtn" class="save-btn">
+              Save Number
+            </button>
+
+            <div id="whatsappMessage" class="setting-message"></div>
+
+          </div>
 
 
-/* =========================
-   AUTH STATE
-========================= */
+          <!-- MENU SETTINGS -->
 
-onAuthStateChanged(
-  auth,
-  user => {
+          <div class="settings-card">
 
-    const loginSection =
-      document.getElementById(
-        "loginSection"
-      );
+            <h3>💰 Menu Prices</h3>
 
-    const dashboard =
-      document.getElementById(
-        "dashboard"
-      );
+            <div id="menuSettings" class="menu-settings">
+              <div class="loading">
+                Loading menu...
+              </div>
+            </div>
 
-    if(user){
+            <div id="menuMessage" class="setting-message"></div>
 
-      loginSection.classList.add(
-        "hidden"
-      );
+          </div>
 
-      dashboard.classList.remove(
-        "hidden"
-      );
+        </div>
 
-      console.log(
-        "ADMIN LOGGED IN:",
-        user.uid
-      );
+      </section>
 
-      loadOrders();
 
-    }else{
+      <!-- =====================================================
+           ORDERS
+      ====================================================== -->
 
-      loginSection.classList.remove(
-        "hidden"
-      );
+      <section class="section">
 
-      dashboard.classList.add(
-        "hidden"
+        <div class="section-header">
+
+          <div>
+            <h2>📦 Customer Orders</h2>
+            <p>Manage incoming orders and delivery status</p>
+          </div>
+
+          <div class="orders-tools">
+
+            <button id="refreshBtn" class="refresh-btn">
+              ↻ Refresh
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div id="ordersList" class="orders-list">
+
+          <div class="loading">
+            Loading orders...
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================================================
+       FIREBASE
+  ========================================================== -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    import {
+      getDatabase,
+      ref,
+      onValue,
+      update,
+      set
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+    /* ========================================================
+       FIREBASE CONFIG
+    ======================================================== */
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+      authDomain: "the-queen-fast-food.firebaseapp.com",
+      databaseURL: "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+      projectId: "the-queen-fast-food",
+      storageBucket: "the-queen-fast-food.firebasestorage.app",
+      messagingSenderId: "435721389652",
+      appId: "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+      measurementId: "G-Q1YCK636KJ"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getDatabase(app);
+
+
+    /* ========================================================
+       ADMIN UID
+    ======================================================== */
+
+    const ADMIN_UID = "eWlMt1dG2pUOxsTo0NaXgY1avn33";
+
+
+    /* ========================================================
+       DEFAULT MENU
+    ======================================================== */
+
+    const defaultMenu = [
+
+      {
+        id: "veg-chowmin",
+        name: "Veg Chowmin",
+        price: 50
+      },
+
+      {
+        id: "veg-roll",
+        name: "Veg Roll",
+        price: 50
+      },
+
+      {
+        id: "manchurian",
+        name: "Manchurian",
+        price: 50
+      },
+
+      {
+        id: "paneer-tikka",
+        name: "Paneer Tikka",
+        price: 60
+      },
+
+      {
+        id: "paneer-butter-masala",
+        name: "Paneer Butter Masala",
+        price: 130
+      },
+
+      {
+        id: "egg-chicken-chowmin",
+        name: "Egg Chicken Chowmin",
+        price: 65
+      },
+
+      {
+        id: "egg-chicken-roll",
+        name: "Egg Chicken Roll",
+        price: 60
+      },
+
+      {
+        id: "pakoda",
+        name: "Pakoda",
+        price: 60
+      },
+
+      {
+        id: "chilli-chicken",
+        name: "Chilli Chicken",
+        price: 120
+      },
+
+      {
+        id: "chicken-garlic",
+        name: "Chicken Garlic",
+        price: 80
+      },
+
+      {
+        id: "chicken-biriyani",
+        name: "Chicken Biriyani",
+        price: 120
+      },
+
+      {
+        id: "veg-biriyani",
+        name: "Veg Biriyani",
+        price: 100
+      }
+
+    ];
+
+
+    let menuSettingsData = {};
+
+    let ordersData = {};
+
+
+    /* ========================================================
+       DOM
+    ======================================================== */
+
+    const loginPage =
+      document.getElementById("loginPage");
+
+    const dashboardPage =
+      document.getElementById("dashboardPage");
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const loginError =
+      document.getElementById("loginError");
+
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
+    const ordersList =
+      document.getElementById("ordersList");
+
+    const menuSettings =
+      document.getElementById("menuSettings");
+
+    const whatsappNumberInput =
+      document.getElementById("whatsappNumber");
+
+    const whatsappMessage =
+      document.getElementById("whatsappMessage");
+
+    const menuMessage =
+      document.getElementById("menuMessage");
+
+    const saveWhatsappBtn =
+      document.getElementById("saveWhatsappBtn");
+
+    const saveAllBtn =
+      document.getElementById("saveAllBtn");
+
+    const refreshBtn =
+      document.getElementById("refreshBtn");
+
+
+    /* ========================================================
+       HELPERS
+    ======================================================== */
+
+    function escapeHTML(value) {
+
+      if (value === null || value === undefined) {
+        return "";
+      }
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    function formatMoney(value) {
+
+      const number = Number(value || 0);
+
+      return "₹" + number.toLocaleString("en-IN");
+    }
+
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "-";
+      }
+
+      try {
+
+        const date = new Date(value);
+
+        if (isNaN(date.getTime())) {
+          return value;
+        }
+
+        return date.toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+      } catch (error) {
+
+        return value;
+
+      }
+    }
+
+
+    function todayKey() {
+
+      const now = new Date();
+
+      return (
+        now.getFullYear() +
+        "-" +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(now.getDate()).padStart(2, "0")
       );
 
     }
 
-  }
-);
+
+    function getOrderDate(order) {
+
+      if (order.createdAt) {
+        return new Date(order.createdAt);
+      }
+
+      if (order.timestamp) {
+        return new Date(order.timestamp);
+      }
+
+      return null;
+    }
 
 
-/* =========================
-   LIVE ORDERS
-========================= */
+    function isToday(order) {
 
-function loadOrders(){
+      const date = getOrderDate(order);
 
-  const ordersRef =
-    ref(db,"orders");
+      if (!date || isNaN(date.getTime())) {
+        return false;
+      }
 
-  const connectionStatus =
-    document.getElementById(
-      "connectionStatus"
-    );
+      const key =
+        date.getFullYear() +
+        "-" +
+        String(date.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(date.getDate()).padStart(2, "0");
 
-  const ordersContainer =
-    document.getElementById(
-      "orders"
-    );
+      return key === todayKey();
+    }
 
-  connectionStatus.innerHTML =
-    "🔄 Connecting to Firebase...";
 
-  onValue(
+    function statusLabel(status) {
 
-    ordersRef,
+      const map = {
 
-    snapshot => {
+        received: "Received",
+
+        confirmed: "Confirmed",
+
+        making: "Making",
+
+        out_for_delivery: "Out for Delivery",
+
+        delivered: "Delivered"
+
+      };
+
+      return map[status] || "Received";
+
+    }
+
+
+    /* ========================================================
+       SHOW LOGIN / DASHBOARD
+    ======================================================== */
+
+    function showLogin() {
+
+      loginPage.style.display = "flex";
+
+      dashboardPage.style.display = "none";
+
+    }
+
+
+    function showDashboard() {
+
+      loginPage.style.display = "none";
+
+      dashboardPage.style.display = "block";
+
+    }
+
+
+    /* ========================================================
+       AUTH STATE
+    ======================================================== */
+
+    onAuthStateChanged(auth, async (user) => {
 
       console.log(
-        "FIREBASE SNAPSHOT:",
-        snapshot.val()
+        "AUTH STATE:",
+        user ? user.uid : "No user"
       );
 
-      connectionStatus.innerHTML =
-        "🟢 Firebase Connected";
 
-      ordersContainer.innerHTML = "";
+      if (!user) {
 
-      if(!snapshot.exists()){
-
-        ordersContainer.innerHTML = `
-          <div class="card empty">
-            📦 No orders yet
-          </div>
-        `;
-
-        document.getElementById(
-          "orderCount"
-        ).textContent =
-          "Orders: 0";
+        showLogin();
 
         return;
       }
 
 
-      const data =
-        snapshot.val();
+      /* IMPORTANT:
+         Only our actual admin UID is allowed.
+      */
 
+      if (user.uid !== ADMIN_UID) {
+
+        console.warn(
+          "Unauthorized Firebase user:",
+          user.uid
+        );
+
+        try {
+          await signOut(auth);
+        } catch (error) {
+          console.error(error);
+        }
+
+        showLogin();
+
+        loginError.textContent =
+          "This account is not authorized as admin.";
+
+        return;
+      }
+
+
+      console.log(
+        "✅ ADMIN AUTHORIZED:",
+        user.uid
+      );
+
+
+      showDashboard();
+
+      loginError.textContent = "";
+
+      loadSettings();
+
+      loadOrders();
+
+    });
+
+
+    /* ========================================================
+       LOGIN
+    ======================================================== */
+
+    loginForm.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      loginError.textContent = "";
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+
+      if (!email || !password) {
+
+        loginError.textContent =
+          "Please enter email and password.";
+
+        return;
+      }
+
+
+      try {
+
+        const credential =
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        const user = credential.user;
+
+
+        console.log(
+          "LOGIN UID:",
+          user.uid
+        );
+
+
+        /* Check actual admin UID */
+
+        if (user.uid !== ADMIN_UID) {
+
+          await signOut(auth);
+
+          loginError.textContent =
+            "This account is not authorized as admin.";
+
+          return;
+        }
+
+
+        loginError.textContent = "";
+
+
+      } catch (error) {
+
+        console.error(
+          "LOGIN ERROR:",
+          error
+        );
+
+
+        let message =
+          "Login failed. Check email and password.";
+
+        if (error.code === "auth/invalid-credential") {
+          message = "Invalid email or password.";
+        }
+
+        if (error.code === "auth/user-not-found") {
+          message = "Admin account not found.";
+        }
+
+        if (error.code === "auth/wrong-password") {
+          message = "Wrong password.";
+        }
+
+        if (error.code === "auth/too-many-requests") {
+          message =
+            "Too many attempts. Please try again later.";
+        }
+
+        loginError.textContent = message;
+
+      }
+
+    });
+
+
+    /* ========================================================
+       LOGOUT
+    ======================================================== */
+
+    logoutBtn.addEventListener("click", async () => {
+
+      try {
+
+        await signOut(auth);
+
+        showLogin();
+
+        document.getElementById("password").value = "";
+
+      } catch (error) {
+
+        console.error(
+          "LOGOUT ERROR:",
+          error
+        );
+
+      }
+
+    });
+
+
+    /* ========================================================
+       LOAD SETTINGS
+    ======================================================== */
+
+    function loadSettings() {
+
+      const settingsRef =
+        ref(db, "settings");
+
+
+      onValue(
+        settingsRef,
+        (snapshot) => {
+
+          const settings =
+            snapshot.val() || {};
+
+
+          console.log(
+            "SETTINGS:",
+            settings
+          );
+
+
+          menuSettingsData =
+            settings.menu || {};
+
+
+          const number =
+            settings.whatsappNumber ||
+            "9090220791";
+
+
+          whatsappNumberInput.value =
+            String(number)
+              .replace(/\D/g, "");
+
+
+          renderMenuSettings();
+
+        },
+        (error) => {
+
+          console.error(
+            "SETTINGS READ ERROR:",
+            error
+          );
+
+          menuMessage.textContent =
+            "Could not load settings.";
+
+          menuMessage.className =
+            "setting-message danger";
+
+        }
+      );
+
+    }
+
+
+    /* ========================================================
+       RENDER MENU SETTINGS
+    ======================================================== */
+
+    function renderMenuSettings() {
+
+      let html = "";
+
+
+      defaultMenu.forEach((item) => {
+
+        const firebaseItem =
+          menuSettingsData[item.id] || {};
+
+
+        const currentPrice =
+          Number(
+            firebaseItem.price ??
+            item.price
+          );
+
+
+        html += `
+
+          <div class="menu-row">
+
+            <div class="menu-name">
+              ${escapeHTML(item.name)}
+            </div>
+
+            <div class="current-price">
+              Current:
+              <strong>${formatMoney(currentPrice)}</strong>
+            </div>
+
+            <div>
+              <input
+                type="number"
+                min="1"
+                step="1"
+                class="price-input"
+                data-menu-id="${escapeHTML(item.id)}"
+                value="${currentPrice}"
+              >
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+
+      menuSettings.innerHTML = html;
+
+    }
+
+
+    /* ========================================================
+       SAVE WHATSAPP NUMBER
+    ======================================================== */
+
+    saveWhatsappBtn.addEventListener(
+      "click",
+      async () => {
+
+        const user = auth.currentUser;
+
+
+        if (!user || user.uid !== ADMIN_UID) {
+
+          whatsappMessage.textContent =
+            "Admin authorization required.";
+
+          whatsappMessage.className =
+            "setting-message danger";
+
+          return;
+        }
+
+
+        let number =
+          whatsappNumberInput.value
+            .replace(/\D/g, "");
+
+
+        if (number.length < 10) {
+
+          whatsappMessage.textContent =
+            "Enter a valid mobile number.";
+
+          whatsappMessage.className =
+            "setting-message danger";
+
+          return;
+        }
+
+
+        /* Keep only last 10 digits */
+
+        if (number.length > 10) {
+          number = number.slice(-10);
+        }
+
+
+        try {
+
+          await update(
+            ref(db, "settings"),
+            {
+              whatsappNumber: number
+            }
+          );
+
+
+          whatsappNumberInput.value = number;
+
+
+          whatsappMessage.textContent =
+            "✅ WhatsApp number saved successfully.";
+
+          whatsappMessage.className =
+            "setting-message success";
+
+
+          setTimeout(() => {
+
+            whatsappMessage.textContent = "";
+
+          }, 4000);
+
+
+        } catch (error) {
+
+          console.error(
+            "WHATSAPP SAVE ERROR:",
+            error
+          );
+
+
+          whatsappMessage.textContent =
+            "❌ Failed to save number.";
+
+          whatsappMessage.className =
+            "setting-message danger";
+
+        }
+
+      }
+    );
+
+
+    /* ========================================================
+       SAVE ALL PRICES + NUMBER
+    ======================================================== */
+
+    saveAllBtn.addEventListener(
+      "click",
+      async () => {
+
+        const user = auth.currentUser;
+
+
+        if (!user || user.uid !== ADMIN_UID) {
+
+          alert(
+            "Admin authorization required."
+          );
+
+          return;
+        }
+
+
+        const inputs =
+          document.querySelectorAll(
+            ".price-input"
+          );
+
+
+        const updates = {};
+
+
+        /* WhatsApp */
+
+        let number =
+          whatsappNumberInput.value
+            .replace(/\D/g, "");
+
+
+        if (number.length >= 10) {
+
+          if (number.length > 10) {
+            number = number.slice(-10);
+          }
+
+          updates["settings/whatsappNumber"] =
+            number;
+
+        }
+
+
+        /* Prices */
+
+        let valid = true;
+
+
+        inputs.forEach((input) => {
+
+          const id =
+            input.dataset.menuId;
+
+          const price =
+            Number(input.value);
+
+
+          if (
+            !Number.isFinite(price) ||
+            price <= 0
+          ) {
+
+            valid = false;
+
+            return;
+          }
+
+
+          updates[
+            `settings/menu/${id}/name`
+          ] =
+            defaultMenu.find(
+              item => item.id === id
+            ).name;
+
+
+          updates[
+            `settings/menu/${id}/price`
+          ] =
+            price;
+
+        });
+
+
+        if (!valid) {
+
+          alert(
+            "Please enter valid prices."
+          );
+
+          return;
+        }
+
+
+        try {
+
+          await update(
+            ref(db),
+            updates
+          );
+
+
+          menuMessage.textContent =
+            "✅ All prices and settings saved successfully.";
+
+          menuMessage.className =
+            "setting-message success";
+
+
+          if (number) {
+            whatsappMessage.textContent =
+              "✅ WhatsApp number saved.";
+            whatsappMessage.className =
+              "setting-message success";
+          }
+
+
+          setTimeout(() => {
+
+            menuMessage.textContent = "";
+
+            whatsappMessage.textContent = "";
+
+          }, 5000);
+
+
+        } catch (error) {
+
+          console.error(
+            "SAVE ALL ERROR:",
+            error
+          );
+
+
+          menuMessage.textContent =
+            "❌ Failed to save changes.";
+
+          menuMessage.className =
+            "setting-message danger";
+
+        }
+
+      }
+    );
+
+
+    /* ========================================================
+       LOAD ORDERS
+    ======================================================== */
+
+    function loadOrders() {
+
+      const ordersRef =
+        ref(db, "orders");
+
+
+      onValue(
+        ordersRef,
+        (snapshot) => {
+
+          const data =
+            snapshot.val() || {};
+
+
+          ordersData = data;
+
+
+          console.log(
+            "ORDERS:",
+            data
+          );
+
+
+          renderOrders(data);
+
+          updateStats(data);
+
+        },
+        (error) => {
+
+          console.error(
+            "FIREBASE READ ERROR:",
+            error
+          );
+
+
+          ordersList.innerHTML = `
+
+            <div class="empty">
+
+              <div style="font-size:35px;margin-bottom:10px;">
+                ⚠️
+              </div>
+
+              <div style="color:#ff6565;">
+                Could not load orders.
+              </div>
+
+              <div style="font-size:12px;margin-top:8px;color:#777;">
+                ${escapeHTML(error.message)}
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      );
+
+    }
+
+
+    /* ========================================================
+       REFRESH
+    ======================================================== */
+
+    refreshBtn.addEventListener(
+      "click",
+      () => {
+
+        loadOrders();
+
+      }
+    );
+
+
+    /* ========================================================
+       UPDATE STATS
+    ======================================================== */
+
+    function updateStats(data) {
 
       const orders =
-        Object.entries(data);
+        Object.values(data || {});
 
 
-      /* newest first */
+      const total =
+        orders.length;
+
+
+      const today =
+        orders.filter(
+          order => isToday(order)
+        ).length;
+
+
+      const pending =
+        orders.filter(
+          order =>
+            order.status !== "delivered"
+        ).length;
+
+
+      const delivered =
+        orders.filter(
+          order =>
+            order.status === "delivered"
+        ).length;
+
+
+      document.getElementById(
+        "totalOrders"
+      ).textContent = total;
+
+
+      document.getElementById(
+        "todayOrders"
+      ).textContent = today;
+
+
+      document.getElementById(
+        "pendingOrders"
+      ).textContent = pending;
+
+
+      document.getElementById(
+        "deliveredOrders"
+      ).textContent = delivered;
+
+    }
+
+
+    /* ========================================================
+       RENDER ORDERS
+    ======================================================== */
+
+    function renderOrders(data) {
+
+      const orders =
+        Object.entries(data || {});
+
+
+      if (orders.length === 0) {
+
+        ordersList.innerHTML = `
+
+          <div class="empty">
+
+            <div style="font-size:40px;margin-bottom:10px;">
+              📦
+            </div>
+
+            No orders yet.
+
+          </div>
+
+        `;
+
+        return;
+      }
+
+
+      /* Latest first */
 
       orders.sort(
-        (a,b) => {
+        (a, b) => {
 
-          const timeA =
-            Number(
-              a[1].createdAt || 0
-            );
+          const dateA =
+            getOrderDate(a[1])?.getTime() || 0;
 
-          const timeB =
-            Number(
-              b[1].createdAt || 0
-            );
+          const dateB =
+            getOrderDate(b[1])?.getTime() || 0;
 
-          return timeB - timeA;
+          return dateB - dateA;
 
         }
       );
 
 
-      document.getElementById(
-        "orderCount"
-      ).textContent =
-        "Orders: " + orders.length;
+      let html = "";
 
 
       orders.forEach(
-        ([orderId,order]) => {
+        ([orderId, order]) => {
 
-          ordersContainer.innerHTML +=
+          html +=
             createOrderCard(
               orderId,
               order
@@ -546,437 +1871,479 @@ function loadOrders(){
         }
       );
 
-    },
 
-    error => {
+      ordersList.innerHTML = html;
 
-      console.error(
-        "FIREBASE READ ERROR:",
-        error
+
+      /* Add status listeners */
+
+      document
+        .querySelectorAll(".status-btn")
+        .forEach((button) => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              const orderId =
+                button.dataset.orderId;
+
+              const status =
+                button.dataset.status;
+
+
+              changeStatus(
+                orderId,
+                status
+              );
+
+            }
+          );
+
+        });
+
+    }
+
+
+    /* ========================================================
+       CREATE ORDER CARD
+    ======================================================== */
+
+    function createOrderCard(
+      orderId,
+      order
+    ) {
+
+      const status =
+        order.status || "received";
+
+
+      const customerName =
+        order.customerName ||
+        order.name ||
+        "Customer";
+
+
+      const phone =
+        order.phone ||
+        order.mobile ||
+        "-";
+
+
+      const address =
+        order.address ||
+        order.deliveryAddress ||
+        "-";
+
+
+      const payment =
+        order.paymentMethod ||
+        order.payment ||
+        "Not specified";
+
+
+      const distance =
+        order.distanceKm !== undefined
+          ? `${Number(order.distanceKm).toFixed(2)} km`
+          : "-";
+
+
+      const subtotal =
+        Number(
+          order.subtotal ??
+          order.totalBeforeDelivery ??
+          0
+        );
+
+
+      const deliveryCharge =
+        Number(
+          order.deliveryCharge ??
+          order.deliveryFee ??
+          0
+        );
+
+
+      const total =
+        Number(
+          order.total ??
+          order.grandTotal ??
+          subtotal + deliveryCharge
+        );
+
+
+      /* ITEMS */
+
+      let itemsHTML = "";
+
+
+      const items =
+        order.items || [];
+
+
+      if (Array.isArray(items)) {
+
+        items.forEach((item) => {
+
+          const name =
+            item.name ||
+            item.title ||
+            "Item";
+
+
+          const quantity =
+            Number(
+              item.quantity ||
+              item.qty ||
+              1
+            );
+
+
+          const price =
+            Number(
+              item.price || 0
+            );
+
+
+          const lineTotal =
+            Number(
+              item.total ??
+              price * quantity
+            );
+
+
+          itemsHTML += `
+
+            <div class="item-line">
+
+              <span>
+                ${escapeHTML(name)}
+                × ${quantity}
+              </span>
+
+              <strong>
+                ${formatMoney(lineTotal)}
+              </strong>
+
+            </div>
+
+          `;
+
+        });
+
+      } else {
+
+        Object.values(items).forEach((item) => {
+
+          const name =
+            item.name ||
+            "Item";
+
+
+          const quantity =
+            Number(
+              item.quantity ||
+              item.qty ||
+              1
+            );
+
+
+          const price =
+            Number(
+              item.price || 0
+            );
+
+
+          const lineTotal =
+            Number(
+              item.total ??
+              price * quantity
+            );
+
+
+          itemsHTML += `
+
+            <div class="item-line">
+
+              <span>
+                ${escapeHTML(name)}
+                × ${quantity}
+              </span>
+
+              <strong>
+                ${formatMoney(lineTotal)}
+              </strong>
+
+            </div>
+
+          `;
+
+        });
+
+      }
+
+
+      if (!itemsHTML) {
+
+        itemsHTML = `
+          <div class="item-line">
+            <span>No item details available</span>
+          </div>
+        `;
+
+      }
+
+
+      /* STATUS BUTTONS */
+
+      const statuses = [
+
+        ["received", "Received"],
+
+        ["confirmed", "Confirmed"],
+
+        ["making", "Making"],
+
+        ["out_for_delivery", "Out for Delivery"],
+
+        ["delivered", "Delivered"]
+
+      ];
+
+
+      let statusButtonsHTML = "";
+
+
+      statuses.forEach(
+        ([value, label]) => {
+
+          statusButtonsHTML += `
+
+            <button
+              class="status-btn ${
+                status === value
+                  ? "active"
+                  : ""
+              }"
+              data-order-id="${escapeHTML(orderId)}"
+              data-status="${escapeHTML(value)}"
+            >
+              ${escapeHTML(label)}
+            </button>
+
+          `;
+
+        }
       );
 
-      connectionStatus.innerHTML =
-        "🔴 Firebase Error";
 
-      ordersContainer.innerHTML = `
-        <div class="error-box">
+      return `
 
-          <b>❌ Unable to load orders</b>
+        <div class="order-card">
 
-          <br><br>
+          <div class="order-top">
 
-          ${escapeHTML(
-            error.message ||
-            "Firebase database read failed."
-          )}
+            <div>
 
-          <br><br>
+              <div class="order-id">
+                #${escapeHTML(orderId)}
+              </div>
 
-          Check Firebase Realtime Database
-          rules and authentication.
+              <div class="order-time">
+                ${formatDate(
+                  order.createdAt ||
+                  order.timestamp
+                )}
+              </div>
+
+            </div>
+
+            <div class="status-badge">
+              ${escapeHTML(
+                statusLabel(status)
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="customer-info">
+
+            <div>
+              👤
+              <strong>
+                ${escapeHTML(customerName)}
+              </strong>
+            </div>
+
+            <div>
+              📱
+              ${escapeHTML(phone)}
+            </div>
+
+            <div>
+              📍
+              ${escapeHTML(address)}
+            </div>
+
+            <div>
+              🚗
+              Distance:
+              <strong>
+                ${escapeHTML(distance)}
+              </strong>
+            </div>
+
+            <div>
+              💳
+              Payment:
+              <strong>
+                ${escapeHTML(payment)}
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="items-box">
+
+            <h4>ORDER ITEMS</h4>
+
+            ${itemsHTML}
+
+          </div>
+
+
+          <div class="billing">
+
+            <div class="bill-line">
+
+              <span>Subtotal</span>
+
+              <span>
+                ${formatMoney(subtotal)}
+              </span>
+
+            </div>
+
+
+            <div class="bill-line">
+
+              <span>Delivery</span>
+
+              <span>
+                ${formatMoney(deliveryCharge)}
+              </span>
+
+            </div>
+
+
+            <div class="bill-line bill-total">
+
+              <span>Total</span>
+
+              <span>
+                ${formatMoney(total)}
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="status-controls">
+
+            ${statusButtonsHTML}
+
+          </div>
 
         </div>
+
       `;
 
     }
 
-  );
 
-}
+    /* ========================================================
+       CHANGE ORDER STATUS
+    ======================================================== */
 
+    async function changeStatus(
+      orderId,
+      newStatus
+    ) {
 
-/* =========================
-   ORDER CARD
-========================= */
-
-function createOrderCard(
-  orderId,
-  order
-){
-
-  const customer =
-    order.customer || {};
-
-  const items =
-    Array.isArray(order.items)
-      ? order.items
-      : [];
-
-  let itemHTML = "";
+      const user =
+        auth.currentUser;
 
 
-  items.forEach(
-    item => {
+      if (
+        !user ||
+        user.uid !== ADMIN_UID
+      ) {
 
-      const price =
-        Number(item.price || 0);
+        alert(
+          "Admin authorization required."
+        );
 
-      const quantity =
-        Number(item.quantity || 0);
+        return;
+      }
 
-      itemHTML += `
-        <div>
-          🍴 ${escapeHTML(
-            item.name || "Item"
-          )}
 
-          × ${quantity}
+      try {
 
-          = ₹${price * quantity}
-        </div>
-      `;
+        await update(
+          ref(
+            db,
+            "orders/" + orderId
+          ),
+          {
+            status: newStatus,
+            statusUpdatedAt:
+              new Date().toISOString()
+          }
+        );
+
+
+        console.log(
+          "✅ STATUS UPDATED:",
+          orderId,
+          newStatus
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "STATUS UPDATE ERROR:",
+          error
+        );
+
+
+        alert(
+          "Could not update order status.\n\n" +
+          error.message
+        );
+
+      }
 
     }
-  );
 
 
-  const status =
-    order.status || "received";
+    /* ========================================================
+       START
+    ======================================================== */
 
-
-  const createdAt =
-    order.createdAt
-      ? new Date(
-          Number(order.createdAt)
-        ).toLocaleString("en-IN")
-      : "N/A";
-
-
-  return `
-
-    <div class="order">
-
-      <div class="order-id">
-        🆔 ${escapeHTML(orderId)}
-      </div>
-
-
-      <div class="status">
-        ${getStatusText(status)}
-      </div>
-
-
-      <div class="info">
-
-        👤 <b>Name:</b>
-        ${escapeHTML(
-          customer.name || "N/A"
-        )}
-
-        <br>
-
-        📱 <b>Mobile:</b>
-        ${escapeHTML(
-          customer.phone || "N/A"
-        )}
-
-        <br>
-
-        🏠 <b>Address:</b>
-        ${escapeHTML(
-          customer.address || "N/A"
-        )}
-
-        <br>
-
-        💳 <b>Payment:</b>
-        ${escapeHTML(
-          order.payment || "N/A"
-        )}
-
-        <br>
-
-        🕐 <b>Order Time:</b>
-        ${escapeHTML(createdAt)}
-
-      </div>
-
-
-      <div class="items">
-
-        <b>🛒 ORDER ITEMS</b>
-
-        <br><br>
-
-        ${
-          itemHTML ||
-          "No items found."
-        }
-
-      </div>
-
-
-      <div class="info">
-
-        💰 Subtotal:
-        ₹${Number(
-          order.subtotal || 0
-        )}
-
-        <br>
-
-        🛵 Delivery:
-        ₹${Number(
-          order.deliveryCharge || 0
-        )}
-
-        <br><br>
-
-        <span class="total">
-
-          GRAND TOTAL:
-          ₹${Number(
-            order.grandTotal || 0
-          )}
-
-        </span>
-
-      </div>
-
-
-      <hr
-        style="
-          border-color:#333;
-          margin:18px 0;
-        "
-      >
-
-
-      <b style="color:#d4af37;">
-        UPDATE ORDER STATUS
-      </b>
-
-      <br>
-
-
-      <button
-        class="status-btn"
-        onclick="
-          changeStatus(
-            '${escapeJS(orderId)}',
-            'received'
-          )
-        ">
-        🟢 Received
-      </button>
-
-
-      <button
-        class="status-btn"
-        onclick="
-          changeStatus(
-            '${escapeJS(orderId)}',
-            'confirmed'
-          )
-        ">
-        🟡 Confirmed
-      </button>
-
-
-      <button
-        class="status-btn"
-        onclick="
-          changeStatus(
-            '${escapeJS(orderId)}',
-            'making'
-          )
-        ">
-        👨‍🍳 Making
-      </button>
-
-
-      <button
-        class="status-btn"
-        onclick="
-          changeStatus(
-            '${escapeJS(orderId)}',
-            'out_for_delivery'
-          )
-        ">
-        🛵 Out for Delivery
-      </button>
-
-
-      <button
-        class="status-btn"
-        onclick="
-          changeStatus(
-            '${escapeJS(orderId)}',
-            'delivered'
-          )
-        ">
-        ✅ Delivered
-      </button>
-
-
-      ${
-        customer.lat &&
-        customer.lng
-        ?
-        `
-
-        <br><br>
-
-        <a
-          href="
-            https://www.google.com/maps?q=
-            ${customer.lat},
-            ${customer.lng}
-          "
-          target="_blank"
-          style="
-            color:#d4af37;
-            font-weight:bold;
-          "
-        >
-          📍 Open Customer Location
-        </a>
-
-        `
-        :
-        ""
-      }
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================
-   CHANGE STATUS
-========================= */
-
-window.changeStatus =
-async function(
-  orderId,
-  status
-){
-
-  try{
-
-    await update(
-      ref(
-        db,
-        "orders/" + orderId
-      ),
-      {
-        status:
-          status,
-
-        updatedAt:
-          Date.now()
-      }
+    console.log(
+      "🔥 THE QUEEN ADMIN PANEL STARTED"
     );
 
-  }catch(err){
-
-    console.error(
-      "STATUS UPDATE ERROR:",
-      err
+    console.log(
+      "Admin UID:",
+      ADMIN_UID
     );
 
-    alert(
-      "Unable to update order status:\n" +
-      err.message
-    );
-
-  }
-
-};
-
-
-/* =========================
-   STATUS TEXT
-========================= */
-
-function getStatusText(
-  status
-){
-
-  const map = {
-
-    received:
-      "🟢 Order Received",
-
-    confirmed:
-      "🟡 Order Confirmed",
-
-    making:
-      "👨‍🍳 Your Order Is Making",
-
-    out_for_delivery:
-      "🛵 Out for Delivery",
-
-    delivered:
-      "✅ Delivered"
-
-  };
-
-  return (
-    map[status] ||
-    "🟢 Order Received"
-  );
-
-}
-
-
-/* =========================
-   HTML SECURITY
-========================= */
-
-function escapeHTML(
-  value
-){
-
-  return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
-}
-
-
-function escapeJS(
-  value
-){
-
-  return String(value)
-    .replaceAll(
-      "\\",
-      "\\\\"
-    )
-    .replaceAll(
-      "'",
-      "\\'"
-    );
-
-}
-
-</script>
+  </script>
 
 </body>
 </html>
