@@ -2239,145 +2239,78 @@ async function placeOrder(){
     calculatedDeliveryCharge === null
   ){
 
-    await calculateDelivery();
+   async function calculateDelivery() {
+  const address = document.getElementById("customerAddress").value.trim();
 
-
-    /*
-      If calculation failed,
-      stop order.
-    */
-
-    if(
-      calculatedDeliveryCharge === null
-    ){
-
-      return;
-
-    }
-
+  if (!address) {
+    alert("Please enter your delivery address.");
+    return;
   }
 
+  const button = document.querySelector(".calculate-btn");
+  button.disabled = true;
+  button.textContent = "⏳ CALCULATING...";
 
-  const subtotal =
-    getSubtotal();
+  try {
+    const query = encodeURIComponent(address + ", Odisha, India");
 
+    const geoUrl =
+      `https://geocode.maps.co/search?q=${query}&api_key=YOUR_API_KEY`;
 
-  const deliveryCharge =
-    calculatedDeliveryCharge;
+    const response = await fetch(geoUrl);
+    const locations = await response.json();
 
+    if (!locations || locations.length === 0) {
+      throw new Error("Location not found");
+    }
 
-  const grandTotal =
-    subtotal + deliveryCharge;
+    const customerLat = parseFloat(locations[0].lat);
+    const customerLng = parseFloat(locations[0].lon);
 
+    const routeUrl =
+      `https://router.project-osrm.org/route/v1/driving/` +
+      `${restaurantLng},${restaurantLat};${customerLng},${customerLat}?overview=false`;
 
-  /*
-    Create WhatsApp message.
-  */
+    const routeResponse = await fetch(routeUrl);
+    const routeData = await routeResponse.json();
 
-  let message =
-    "👑 THE QUEEN FAST FOOD\n\n";
+    if (
+      !routeData.routes ||
+      !routeData.routes.length
+    ) {
+      throw new Error("Route not found");
+    }
 
+    const distanceKm = routeData.routes[0].distance / 1000;
+    const chargeableKm = Math.ceil(distanceKm);
+    const charge = chargeableKm * deliveryRate;
 
-  message +=
-    "🛒 ORDER DETAILS\n";
+    calculatedDistance = distanceKm;
+    calculatedDeliveryCharge = charge;
 
+    document.getElementById("distanceDisplay").textContent =
+      distanceKm.toFixed(1) + " km";
 
-  cart.forEach(item=>{
+    document.getElementById("deliveryChargeDisplay").textContent =
+      "₹" + charge;
 
-    const itemTotal =
-      item.price * item.quantity;
+    updateCheckoutTotal();
 
+    alert(
+      `Delivery distance: ${distanceKm.toFixed(1)} km\n` +
+      `Delivery charge: ₹${charge}`
+    );
 
-    message +=
-      `${item.name} × ${item.quantity} = ₹${itemTotal}\n`;
+  } catch (error) {
+    console.error(error);
 
-  });
+    alert(
+      "Delivery location could not be found.\n\n" +
+      "Please enter Area + PIN code."
+    );
 
-
-  message +=
-    "\n";
-
-
-  message +=
-    `Subtotal: ₹${subtotal}\n`;
-
-
-  message +=
-    `Delivery Distance: ${calculatedDistance.toFixed(1)} KM\n`;
-
-
-  message +=
-    `Delivery Charge: ₹${deliveryCharge}\n`;
-
-
-  message +=
-    `Grand Total: ₹${grandTotal}\n`;
-
-
-  message +=
-    "\n👤 CUSTOMER DETAILS\n";
-
-
-  message +=
-    `Name: ${name}\n`;
-
-
-  message +=
-    `Mobile: ${phone}\n`;
-
-
-  message +=
-    `Address: ${address}\n`;
-
-
-  message +=
-    `Payment: ${payment}\n`;
-
-
-  message +=
-    "\nThank you for ordering from The Queen Fast Food! 👑";
-
-
-  /*
-    Restaurant WhatsApp number.
-  */
-
-  const whatsappNumber =
-    "9090220791";
-
-
-  const whatsappURL =
-    "https://wa.me/91" +
-    whatsappNumber +
-    "?text=" +
-    encodeURIComponent(message);
-
-
-  /*
-    Show confirmation.
-  */
-
-  document.getElementById(
-    "thankYou"
-  ).style.display =
-    "block";
-
-
-  /*
-    Open WhatsApp.
-  */
-
-  window.location.href =
-    whatsappURL;
-
+  } finally {
+    button.disabled = false;
+    button.textContent = "📍 CALCULATE DELIVERY CHARGE";
+  }
 }
-
-
-/* ================= INITIAL CART ================= */
-
-updateCart();
-
-</script>
-
-</body>
-</html>
