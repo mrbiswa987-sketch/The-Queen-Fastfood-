@@ -1,1973 +1,1561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#070707" />
-
-  <title>The Queen Fast Food | Ibrisingh</title>
-
-  <style>
-    :root{
-      --gold:#d4af37;
-      --gold2:#f5d76e;
-      --gold3:#fff0a8;
-      --black:#070707;
-      --dark:#0b0b0b;
-      --card:#111111;
-      --card2:#161616;
-      --border:#292929;
-      --white:#ffffff;
-      --muted:#a9a9a9;
-      --green:#25d366;
-      --danger:#ff3030;
-      --shadow:0 18px 50px rgba(0,0,0,.45);
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:Arial,Helvetica,sans-serif;
-      background:
-        radial-gradient(circle at 50% -10%,rgba(212,175,55,.10),transparent 35%),
-        var(--black);
-      color:var(--white);
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    button,
-    input,
-    textarea,
-    select{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    .container{
-      width:min(1200px,92%);
-      margin:auto;
-    }
-
-    /* ================= HEADER ================= */
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(7,7,7,.94);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(212,175,55,.16);
-    }
-
-    .nav{
-      min-height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .brand-crown{
-      width:44px;
-      height:44px;
-      border:1px solid rgba(212,175,55,.5);
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:22px;
-      background:linear-gradient(145deg,#1b1b1b,#090909);
-      box-shadow:0 0 20px rgba(212,175,55,.08);
-    }
-
-    .brand-text strong{
-      display:block;
-      font-family:Georgia,serif;
-      font-size:19px;
-      letter-spacing:.4px;
-      color:var(--gold2);
-    }
-
-    .brand-text span{
-      display:block;
-      font-size:10px;
-      letter-spacing:2px;
-      color:#aaa;
-      margin-top:3px;
-    }
-
-    .cart-btn{
-      border:1px solid rgba(212,175,55,.45);
-      background:linear-gradient(135deg,#17130a,#0d0d0d);
-      color:var(--gold2);
-      padding:11px 16px;
-      border-radius:13px;
-      font-weight:700;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      transition:.25s;
-      position:relative;
-    }
-
-    .cart-btn:hover{
-      transform:translateY(-2px);
-      border-color:var(--gold);
-      box-shadow:0 8px 25px rgba(212,175,55,.12);
-    }
-
-    .cart-btn.cart-bounce{
-      animation:cartBounce .65s ease;
-    }
-
-    @keyframes cartBounce{
-      0%{transform:scale(1)}
-      25%{transform:scale(1.12) rotate(-2deg)}
-      50%{transform:scale(.94) rotate(2deg)}
-      75%{transform:scale(1.07)}
-      100%{transform:scale(1)}
-    }
-
-    .cart-count{
-      min-width:23px;
-      height:23px;
-      padding:0 6px;
-      border-radius:50px;
-      background:var(--gold);
-      color:#000;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-    }
-
-    .cart-count.cart-count-pop{
-      animation:countPop .45s ease;
-    }
-
-    @keyframes countPop{
-      0%{transform:scale(1)}
-      45%{transform:scale(1.45)}
-      100%{transform:scale(1)}
-    }
-
-    /* ================= HERO ================= */
-
-    .hero{
-      position:relative;
-      min-height:650px;
-      display:flex;
-      align-items:center;
-      overflow:hidden;
-      border-bottom:1px solid rgba(212,175,55,.10);
-      background:
-        radial-gradient(circle at 75% 45%,rgba(212,175,55,.15),transparent 30%),
-        radial-gradient(circle at 20% 80%,rgba(212,175,55,.06),transparent 30%);
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(90deg,rgba(7,7,7,.98) 0%,rgba(7,7,7,.86) 45%,rgba(7,7,7,.40) 100%);
-      pointer-events:none;
-    }
-
-    .hero-inner{
-      position:relative;
-      z-index:2;
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      align-items:center;
-      gap:30px;
-      padding:70px 0;
-    }
-
-    .hero-copy{
-      max-width:620px;
-    }
-
-    .royal-tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 13px;
-      border:1px solid rgba(212,175,55,.35);
-      border-radius:50px;
-      color:var(--gold2);
-      background:rgba(212,175,55,.06);
-      font-size:11px;
-      letter-spacing:1.8px;
-      text-transform:uppercase;
-      margin-bottom:20px;
-    }
-
-    /* ================= SHOP STATUS ================= */
-
-    .status-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:9px;
-      margin-bottom:18px;
-      padding:9px 14px;
-      border-radius:50px;
-      background:#101010;
-      border:1px solid #303030;
-      color:#ddd;
-      font-size:12px;
-      font-weight:700;
-      transition:.25s;
-    }
-
-    .status-dot{
-      width:9px;
-      height:9px;
-      border-radius:50%;
-      background:#32d583;
-      box-shadow:0 0 10px rgba(50,213,131,.7);
-      flex:none;
-    }
-
-    .status-dot.closed{
-      background:#ff3030;
-      box-shadow:0 0 12px rgba(255,48,48,.9);
-      animation:closedLight .8s infinite;
-    }
-
-    .status-badge.closed-badge{
-      border-color:rgba(255,48,48,.65);
-      color:#ff6b6b;
-      background:rgba(255,48,48,.06);
-      box-shadow:0 0 22px rgba(255,48,48,.12);
-      animation:closedBadgeGlow 1s infinite;
-    }
-
-    @keyframes closedLight{
-      0%,100%{
-        opacity:.25;
-        box-shadow:0 0 2px rgba(255,48,48,.2);
-      }
-      50%{
-        opacity:1;
-        box-shadow:
-          0 0 8px rgba(255,48,48,.9),
-          0 0 18px rgba(255,48,48,.65);
-      }
-    }
-
-    @keyframes closedBadgeGlow{
-      0%,100%{
-        box-shadow:0 0 5px rgba(255,48,48,.08);
-      }
-      50%{
-        box-shadow:
-          0 0 15px rgba(255,48,48,.25),
-          inset 0 0 10px rgba(255,48,48,.05);
-      }
-    }
-
-    .closed-message{
-      display:none;
-      margin:-5px 0 22px;
-      color:#ff5555;
-      font-size:15px;
-      font-weight:900;
-      letter-spacing:.5px;
-      text-transform:uppercase;
-      animation:closedTextPulse 1s infinite;
-    }
-
-    .closed-message.show{
-      display:block;
-    }
-
-    @keyframes closedTextPulse{
-      0%,100%{opacity:.55}
-      50%{
-        opacity:1;
-        text-shadow:0 0 15px rgba(255,48,48,.55);
-      }
-    }
-
-    .hero h1{
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(45px,7vw,82px);
-      line-height:.95;
-      letter-spacing:-2px;
-      margin-bottom:22px;
-    }
-
-    .hero h1 span{
-      color:var(--gold2);
-      text-shadow:0 0 35px rgba(212,175,55,.14);
-    }
-
-    .hero-sub{
-      color:#c2c2c2;
-      font-size:17px;
-      line-height:1.7;
-      max-width:520px;
-      margin-bottom:28px;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-    }
-
-    .btn{
-      border:none;
-      border-radius:13px;
-      padding:13px 20px;
-      font-weight:800;
-      transition:.25s;
-    }
-
-    .btn-gold{
-      background:linear-gradient(135deg,var(--gold2),var(--gold));
-      color:#090909;
-      box-shadow:0 12px 30px rgba(212,175,55,.16);
-    }
-
-    .btn-gold:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 35px rgba(212,175,55,.23);
-    }
-
-    .btn-dark{
-      background:#111;
-      color:#eee;
-      border:1px solid #333;
-    }
-
-    .btn-dark:hover{
-      border-color:var(--gold);
-      color:var(--gold2);
-    }
-
-    /* ================= QUEEN ================= */
-
-    .queen-stage{
-      position:relative;
-      min-height:510px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .queen-glow{
-      position:absolute;
-      width:360px;
-      height:360px;
-      border-radius:50%;
-      background:radial-gradient(circle,rgba(212,175,55,.26),rgba(212,175,55,.05) 40%,transparent 70%);
-      filter:blur(5px);
-    }
-
-    .queen-frame{
-      position:relative;
-      width:min(430px,90%);
-      height:500px;
-      border:1px solid rgba(212,175,55,.35);
-      border-radius:220px 220px 30px 30px;
-      overflow:hidden;
-      background:
-        linear-gradient(180deg,rgba(212,175,55,.09),rgba(0,0,0,.15)),
-        #101010;
-      box-shadow:
-        0 25px 80px rgba(0,0,0,.65),
-        inset 0 0 70px rgba(212,175,55,.05);
-    }
-
-    .queen-frame::before{
-      content:"";
-      position:absolute;
-      inset:12px;
-      border:1px solid rgba(212,175,55,.16);
-      border-radius:210px 210px 22px 22px;
-      z-index:2;
-      pointer-events:none;
-    }
-
-    .queen-image{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
-      filter:contrast(1.04) saturate(.78);
-    }
-
-    .queen-overlay{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg,rgba(0,0,0,.08) 25%,rgba(0,0,0,.72) 100%);
-      z-index:1;
-    }
-
-    .queen-caption{
-      position:absolute;
-      z-index:3;
-      left:28px;
-      right:28px;
-      bottom:28px;
-      text-align:center;
-    }
-
-    .queen-caption small{
-      color:var(--gold2);
-      text-transform:uppercase;
-      letter-spacing:4px;
-      font-size:9px;
-    }
-
-    .queen-caption h2{
-      font-family:Georgia,serif;
-      font-size:30px;
-      margin-top:7px;
-    }
-
-    /* ================= COMMON ================= */
-
-    section{
-      padding:78px 0;
-    }
-
-    .section-head{
-      text-align:center;
-      max-width:700px;
-      margin:0 auto 38px;
-    }
-
-    .eyebrow{
-      color:var(--gold2);
-      text-transform:uppercase;
-      letter-spacing:3px;
-      font-size:10px;
-      font-weight:800;
-      margin-bottom:10px;
-    }
-
-    .section-head h2{
-      font-family:Georgia,serif;
-      font-size:clamp(30px,5vw,48px);
-      margin-bottom:12px;
-    }
-
-    .section-head p{
-      color:#9f9f9f;
-      line-height:1.7;
-    }
-
-    /* ================= MENU ================= */
-
-    .menu-section{
-      background:linear-gradient(180deg,#080808,#0c0c0c);
-    }
-
-    .products-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:18px;
-    }
-
-    .product-card{
-      background:linear-gradient(145deg,#151515,#0e0e0e);
-      border:1px solid var(--border);
-      border-radius:20px;
-      overflow:hidden;
-      transition:.28s;
-      position:relative;
-    }
-
-    .product-card:hover{
-      transform:translateY(-6px);
-      border-color:rgba(212,175,55,.45);
-      box-shadow:0 18px 40px rgba(0,0,0,.4);
-    }
-
-    .product-image-wrap{
-      position:relative;
-      aspect-ratio:4/3;
-      overflow:hidden;
-      background:#181818;
-    }
-
-    .product-image{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:.45s;
-    }
-
-    .product-card:hover .product-image{
-      transform:scale(1.06);
-    }
-
-    .food-number{
-      position:absolute;
-      top:10px;
-      left:10px;
-      min-width:28px;
-      height:28px;
-      padding:0 8px;
-      border-radius:30px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,.72);
-      color:var(--gold2);
-      border:1px solid rgba(212,175,55,.35);
-      font-size:11px;
-      font-weight:800;
-    }
-
-    .product-body{
-      padding:16px;
-    }
-
-    .product-name{
-      font-size:16px;
-      font-weight:800;
-      margin-bottom:8px;
-      min-height:38px;
-      line-height:1.25;
-    }
-
-    .product-bottom{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .price{
-      color:var(--gold2);
-      font-size:18px;
-      font-weight:900;
-    }
-
-    .add-btn{
-      border:1px solid rgba(212,175,55,.45);
-      background:#17130a;
-      color:var(--gold2);
-      border-radius:10px;
-      padding:9px 12px;
-      font-size:12px;
-      font-weight:800;
-      transition:.2s;
-    }
-
-    .add-btn:hover{
-      background:var(--gold);
-      color:#000;
-    }
-
-    /* ================= WHY ================= */
-
-    .why-section{
-      background:
-        radial-gradient(circle at 20% 40%,rgba(212,175,55,.08),transparent 30%),
-        #080808;
-      border-top:1px solid rgba(212,175,55,.08);
-      border-bottom:1px solid rgba(212,175,55,.08);
-    }
-
-    .why-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .why-card{
-      position:relative;
-      padding:28px;
-      min-height:190px;
-      border-radius:22px;
-      background:
-        linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
-      border:1px solid #272727;
-      overflow:hidden;
-      transition:.25s;
-    }
-
-    .why-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(212,175,55,.35);
-    }
-
-    .why-card::after{
-      content:"";
-      position:absolute;
-      width:110px;
-      height:110px;
-      right:-45px;
-      top:-45px;
-      border-radius:50%;
-      border:1px solid rgba(212,175,55,.15);
-    }
-
-    .why-icon{
-      width:48px;
-      height:48px;
-      border-radius:15px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(212,175,55,.08);
-      border:1px solid rgba(212,175,55,.25);
-      font-size:22px;
-      margin-bottom:18px;
-    }
-
-    .why-card h3{
-      font-family:Georgia,serif;
-      color:#f3f3f3;
-      margin-bottom:9px;
-      font-size:21px;
-    }
-
-    .why-card p{
-      color:#999;
-      font-size:13px;
-      line-height:1.65;
-    }
-
-    /* ================= STORY ================= */
-
-    .story-section{
-      padding:90px 0;
-    }
-
-    .story-box{
-      display:grid;
-      grid-template-columns:.85fr 1.15fr;
-      gap:45px;
-      align-items:center;
-    }
-
-    .story-visual{
-      min-height:410px;
-      border-radius:28px;
-      overflow:hidden;
-      position:relative;
-      border:1px solid rgba(212,175,55,.25);
-      background:#111;
-    }
-
-    .story-visual img{
-      width:100%;
-      height:100%;
-      min-height:410px;
-      object-fit:cover;
-      filter:brightness(.65) saturate(.8);
-    }
-
-    .story-visual::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.8));
-    }
-
-    .story-badge{
-      position:absolute;
-      z-index:2;
-      left:25px;
-      bottom:24px;
-      right:25px;
-    }
-
-    .story-badge small{
-      color:var(--gold2);
-      letter-spacing:3px;
-      text-transform:uppercase;
-    }
-
-    .story-badge h3{
-      font-family:Georgia,serif;
-      font-size:28px;
-      margin-top:5px;
-    }
-
-    .story-content .eyebrow{
-      text-align:left;
-    }
-
-    .story-content h2{
-      font-family:Georgia,serif;
-      font-size:clamp(34px,5vw,52px);
-      line-height:1.05;
-      margin-bottom:20px;
-    }
-
-    .story-content h2 span{
-      color:var(--gold2);
-    }
-
-    .story-content p{
-      color:#a6a6a6;
-      line-height:1.85;
-      margin-bottom:18px;
-    }
-
-    .story-points{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:25px;
-    }
-
-    .story-point{
-      padding:14px;
-      border:1px solid #282828;
-      background:#101010;
-      border-radius:14px;
-      color:#ddd;
-      font-size:13px;
-    }
-
-    .story-point span{
-      color:var(--gold2);
-      margin-right:6px;
-    }
-
-    /* ================= CTA ================= */
-
-    .cta-section{
-      padding:25px 0 85px;
-    }
-
-    .cta-box{
-      position:relative;
-      overflow:hidden;
-      border:1px solid rgba(212,175,55,.35);
-      border-radius:28px;
-      padding:55px 35px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(212,175,55,.18),transparent 45%),
-        linear-gradient(145deg,#17130a,#0c0c0c);
-    }
-
-    .cta-box h2{
-      font-family:Georgia,serif;
-      font-size:clamp(32px,5vw,52px);
-      margin-bottom:13px;
-    }
-
-    .cta-box p{
-      color:#aaa;
-      max-width:580px;
-      margin:0 auto 25px;
-      line-height:1.7;
-    }
-
-    /* ================= TRACK ================= */
-
-    .track-section{
-      background:#0a0a0a;
-      border-top:1px solid #191919;
-    }
-
-    .track-box{
-      max-width:700px;
-      margin:auto;
-      padding:30px;
-      border:1px solid #292929;
-      border-radius:22px;
-      background:#111;
-    }
-
-    .track-form{
-      display:flex;
-      gap:10px;
-    }
-
-    .input{
-      width:100%;
-      border:1px solid #303030;
-      background:#090909;
-      color:white;
-      border-radius:11px;
-      padding:13px 14px;
-      outline:none;
-    }
-
-    .input:focus{
-      border-color:var(--gold);
-    }
-
-    .track-result{
-      margin-top:20px;
-    }
-
-    .track-order-head{
-      display:flex;
-      justify-content:space-between;
-      gap:15px;
-      padding-bottom:16px;
-      border-bottom:1px solid #272727;
-    }
-
-    .track-order-id{
-      color:var(--gold2);
-      font-weight:900;
-    }
-
-    .status-track{
-      display:flex;
-      justify-content:space-between;
-      gap:5px;
-      margin-top:25px;
-      position:relative;
-    }
-
-    .status-track::before{
-      content:"";
-      position:absolute;
-      top:14px;
-      left:5%;
-      right:5%;
-      height:2px;
-      background:#303030;
-    }
-
-    .status-step{
-      position:relative;
-      z-index:2;
-      width:20%;
-      text-align:center;
-      color:#777;
-      font-size:10px;
-    }
-
-    .status-circle{
-      width:29px;
-      height:29px;
-      margin:auto auto 8px;
-      border-radius:50%;
-      background:#171717;
-      border:1px solid #3a3a3a;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .status-step.active{
-      color:var(--gold2);
-    }
-
-    .status-step.active .status-circle{
-      background:var(--gold);
-      border-color:var(--gold);
-      color:#000;
-    }
-
-    /* ================= FOOTER ================= */
-
-    footer{
-      border-top:1px solid #222;
-      background:#050505;
-      padding:45px 0 25px;
-    }
-
-    .footer-grid{
-      display:grid;
-      grid-template-columns:1.4fr 1fr 1fr;
-      gap:30px;
-      padding-bottom:30px;
-    }
-
-    .footer-brand{
-      font-family:Georgia,serif;
-      font-size:25px;
-      color:var(--gold2);
-      margin-bottom:10px;
-    }
-
-    .footer-col p,
-    .footer-col li{
-      color:#888;
-      font-size:13px;
-      line-height:1.8;
-      list-style:none;
-    }
-
-    .footer-col h4{
-      color:#eee;
-      margin-bottom:10px;
-    }
-
-    .footer-bottom{
-      padding-top:20px;
-      border-top:1px solid #1b1b1b;
-      display:flex;
-      justify-content:space-between;
-      gap:15px;
-      color:#666;
-      font-size:11px;
-    }
-
-    /* ================= MODAL ================= */
-
-    .modal{
-      position:fixed;
-      inset:0;
-      z-index:2000;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      background:rgba(0,0,0,.78);
-      backdrop-filter:blur(8px);
-    }
-
-    .modal.show{
-      display:flex;
-    }
-
-    .modal-card{
-      width:min(620px,100%);
-      max-height:92vh;
-      overflow:auto;
-      background:#111;
-      border:1px solid #333;
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      animation:modalIn .22s ease;
-    }
-
-    @keyframes modalIn{
-      from{
-        opacity:0;
-        transform:translateY(15px) scale(.98);
-      }
-      to{
-        opacity:1;
-        transform:none;
-      }
-    }
-
-    .modal-head{
-      position:sticky;
-      top:0;
-      z-index:3;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 20px;
-      background:#111;
-      border-bottom:1px solid #292929;
-    }
-
-    .modal-head h3{
-      font-family:Georgia,serif;
-      font-size:23px;
-    }
-
-    .close-btn{
-      width:35px;
-      height:35px;
-      border-radius:10px;
-      border:1px solid #333;
-      background:#181818;
-      color:#ddd;
-    }
-
-    .modal-body{
-      padding:20px;
-    }
-
-    /* ================= CART ================= */
-
-    .cart-item{
-      display:grid;
-      grid-template-columns:1fr auto auto;
-      gap:12px;
-      align-items:center;
-      padding:14px 0;
-      border-bottom:1px solid #252525;
-    }
-
-    .cart-item-name{
-      font-weight:800;
-      font-size:14px;
-    }
-
-    .cart-item-price{
-      color:#aaa;
-      font-size:12px;
-      margin-top:4px;
-    }
-
-    .qty-box{
-      display:flex;
-      align-items:center;
-      gap:7px;
-    }
-
-    .qty-btn{
-      width:29px;
-      height:29px;
-      border-radius:8px;
-      border:1px solid #333;
-      background:#181818;
-      color:#ddd;
-    }
-
-    .qty-value{
-      min-width:20px;
-      text-align:center;
-      font-weight:800;
-    }
-
-    .remove-btn{
-      color:#ff7777;
-      background:none;
-      border:none;
-      font-size:11px;
-    }
-
-    .cart-total{
-      display:flex;
-      justify-content:space-between;
-      padding:18px 0;
-      font-weight:900;
-      font-size:18px;
-    }
-
-    .cart-total span:last-child{
-      color:var(--gold2);
-    }
-
-    /* ================= CHECKOUT ================= */
-
-    .form-group{
-      margin-bottom:14px;
-    }
-
-    .form-group label{
-      display:block;
-      color:#aaa;
-      font-size:12px;
-      margin-bottom:7px;
-    }
-
-    textarea.input{
-      resize:vertical;
-      min-height:85px;
-    }
-
-    .location-box{
-      padding:15px;
-      border:1px solid #292929;
-      border-radius:14px;
-      background:#0c0c0c;
-      margin-bottom:15px;
-    }
-
-    .location-status{
-      color:#aaa;
-      font-size:12px;
-      line-height:1.5;
-      margin-bottom:10px;
-    }
-
-    .location-status.success{
-      color:#58dd8d;
-    }
-
-    .checkout-summary{
-      padding:15px;
-      border:1px solid #292929;
-      border-radius:14px;
-      background:#0c0c0c;
-      margin-top:18px;
-    }
-
-    .summary-row{
-      display:flex;
-      justify-content:space-between;
-      gap:15px;
-      padding:6px 0;
-      color:#aaa;
-      font-size:13px;
-    }
-
-    .summary-row strong{
-      color:#eee;
-    }
-
-    .summary-row.total{
-      border-top:1px solid #292929;
-      margin-top:7px;
-      padding-top:12px;
-      color:#fff;
-      font-size:17px;
-    }
-
-    .summary-row.total strong{
-      color:var(--gold2);
-    }
-
-    /* ================= SUCCESS ================= */
-
-    .success-content{
-      text-align:center;
-      padding:35px 25px;
-    }
-
-    .success-icon{
-      width:70px;
-      height:70px;
-      margin:0 auto 18px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:30px;
-      background:rgba(37,211,102,.10);
-      border:1px solid rgba(37,211,102,.35);
-      color:var(--green);
-    }
-
-    .success-content h3{
-      font-family:Georgia,serif;
-      font-size:28px;
-      margin-bottom:8px;
-    }
-
-    .order-id-big{
-      color:var(--gold2);
-      font-weight:900;
-      font-size:20px;
-      margin:15px 0 22px;
-    }
-
-    /* ================= RATING ================= */
-
-    .stars{
-      display:flex;
-      justify-content:center;
-      gap:8px;
-      margin:20px 0;
-    }
-
-    .star{
-      border:none;
-      background:none;
-      color:#444;
-      font-size:35px;
-      transition:.2s;
-    }
-
-    .star.active{
-      color:var(--gold2);
-    }
-
-    /* ================= TOAST ================= */
-
-    #toast{
-      position:fixed;
-      z-index:5000;
-      left:50%;
-      bottom:25px;
-      transform:translate(-50%,20px);
-      opacity:0;
-      pointer-events:none;
-      background:#151515;
-      color:#fff;
-      border:1px solid #3b3b3b;
-      padding:12px 17px;
-      border-radius:12px;
-      font-size:13px;
-      transition:.25s;
-      max-width:90%;
-      text-align:center;
-    }
-
-    #toast.show{
-      opacity:1;
-      transform:translate(-50%,0);
-    }
-
-    /* ================= WEBSITE OVERLAY ================= */
-
-    #websiteOverlay{
-      position:fixed;
-      inset:0;
-      z-index:6000;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:#070707;
-      text-align:center;
-      padding:25px;
-    }
-
-    #websiteOverlay.show{
-      display:flex;
-    }
-
-    .overlay-box{
-      max-width:520px;
-    }
-
-    .overlay-crown{
-      font-size:55px;
-      margin-bottom:20px;
-    }
-
-    .overlay-box h2{
-      font-family:Georgia,serif;
-      font-size:35px;
-      color:var(--gold2);
-      margin-bottom:12px;
-    }
-
-    .overlay-box p{
-      color:#999;
-      line-height:1.7;
-    }
-
-    /* ================= EMPTY ================= */
-
-    .empty{
-      text-align:center;
-      padding:35px 10px;
-      color:#777;
-    }
-
-    /* ================= RESPONSIVE ================= */
-
-    @media(max-width:1000px){
-
-      .products-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
-
-      .hero-inner{
-        grid-template-columns:1fr .8fr;
-      }
-
-      .queen-frame{
-        height:440px;
-      }
-
-    }
-
-    @media(max-width:800px){
-
-      .hero{
-        min-height:auto;
-      }
-
-      .hero-inner{
-        grid-template-columns:1fr;
-        padding:55px 0 30px;
-      }
-
-      .hero-copy{
-        text-align:center;
-        margin:auto;
-      }
-
-      .hero-sub{
-        margin-left:auto;
-        margin-right:auto;
-      }
-
-      .hero-actions{
-        justify-content:center;
-      }
-
-      .queen-stage{
-        min-height:430px;
-      }
-
-      .queen-frame{
-        width:330px;
-        height:410px;
-      }
-
-      .why-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .story-box{
-        grid-template-columns:1fr;
-      }
-
-      .footer-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-    }
-
-    @media(max-width:700px){
-
-      section{
-        padding:60px 0;
-      }
-
-      .products-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:12px;
-      }
-
-      .product-body{
-        padding:13px;
-      }
-
-      .product-name{
-        font-size:14px;
-      }
-
-      .price{
-        font-size:16px;
-      }
-
-      .add-btn{
-        padding:8px 9px;
-      }
-
-      .why-grid{
-        grid-template-columns:1fr;
-      }
-
-      .story-points{
-        grid-template-columns:1fr;
-      }
-
-      .track-form{
-        flex-direction:column;
-      }
-
-      .footer-grid{
-        grid-template-columns:1fr;
-      }
-
-      .footer-bottom{
-        flex-direction:column;
-        text-align:center;
-      }
-
-    }
-
-    @media(max-width:430px){
-
-      .container{
-        width:94%;
-      }
-
-      .brand-text strong{
-        font-size:16px;
-      }
-
-      .brand-text span{
-        font-size:8px;
-      }
-
-      .cart-btn{
-        padding:9px 11px;
-      }
-
-      .hero h1{
-        font-size:47px;
-      }
-
-      .hero-sub{
-        font-size:15px;
-      }
-
-      .queen-frame{
-        width:290px;
-        height:370px;
-      }
-
-      .products-grid{
-        gap:9px;
-      }
-
-      .product-card{
-        border-radius:15px;
-      }
-
-      .product-body{
-        padding:11px;
-      }
-
-      .product-bottom{
-        align-items:flex-end;
-      }
-
-      .add-btn{
-        font-size:10px;
-      }
-
-      .cart-item{
-        grid-template-columns:1fr auto;
-      }
-
-      .cart-item > .remove-btn{
-        grid-column:2;
-      }
-
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#070707">
+<title>The Queen Fast Food | Ibrisingh</title>
+
+<style>
+:root{
+--gold:#d4af37;
+--gold2:#f5d76e;
+--black:#070707;
+--card:#111;
+--border:#292929;
+--white:#fff;
+--muted:#999;
+--green:#25d366;
+--danger:#ff3030;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:
+radial-gradient(circle at 50% -10%,rgba(212,175,55,.1),transparent 35%),
+#070707;
+color:white;
+min-height:100vh;
+overflow-x:hidden
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+.container{
+width:min(1200px,92%);
+margin:auto
+}
+
+/* HEADER */
+header{
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(7,7,7,.95);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(212,175,55,.16)
+}
+
+.nav{
+min-height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px
+}
+
+.brand-crown{
+width:44px;
+height:44px;
+border:1px solid rgba(212,175,55,.5);
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+background:linear-gradient(145deg,#1b1b1b,#090909)
+}
+
+.brand-text strong{
+display:block;
+font-family:Georgia,serif;
+font-size:19px;
+color:var(--gold2)
+}
+
+.brand-text span{
+display:block;
+font-size:10px;
+letter-spacing:2px;
+color:#aaa;
+margin-top:3px
+}
+
+/* CART BUTTON */
+.cart-btn{
+border:1px solid rgba(212,175,55,.45);
+background:linear-gradient(135deg,#17130a,#0d0d0d);
+color:var(--gold2);
+padding:11px 16px;
+border-radius:13px;
+font-weight:700;
+display:flex;
+align-items:center;
+gap:8px;
+position:relative
+}
+
+.cart-btn:hover{
+border-color:var(--gold);
+box-shadow:0 8px 25px rgba(212,175,55,.18)
+}
+
+.cart-btn.cart-bounce{
+animation:cartBounce .65s ease
+}
+
+@keyframes cartBounce{
+0%{transform:scale(1)}
+15%{transform:scale(1.15) rotate(-4deg)}
+30%{transform:scale(.92) rotate(4deg)}
+50%{transform:scale(1.12) rotate(-2deg)}
+70%{transform:scale(.98)}
+100%{transform:scale(1)}
+}
+
+.cart-btn.cart-flash{
+animation:cartFlash .7s ease
+}
+
+@keyframes cartFlash{
+0%,100%{
+box-shadow:0 0 0 rgba(212,175,55,0)
+}
+25%{
+box-shadow:
+0 0 15px rgba(212,175,55,.8),
+0 0 35px rgba(212,175,55,.45)
+}
+55%{
+box-shadow:
+0 0 25px rgba(212,175,55,.7),
+0 0 55px rgba(212,175,55,.35)
+}
+}
+
+.cart-count{
+min-width:23px;
+height:23px;
+padding:0 6px;
+border-radius:50px;
+background:var(--gold);
+color:#000;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+font-size:12px
+}
+
+.cart-count.cart-count-pop{
+animation:countPop .45s ease
+}
+
+@keyframes countPop{
+0%{transform:scale(1)}
+45%{transform:scale(1.5)}
+100%{transform:scale(1)}
+}
+
+/* HERO */
+.hero{
+position:relative;
+min-height:650px;
+display:flex;
+align-items:center;
+overflow:hidden;
+border-bottom:1px solid rgba(212,175,55,.1);
+background:
+radial-gradient(circle at 75% 45%,rgba(212,175,55,.15),transparent 30%),
+radial-gradient(circle at 20% 80%,rgba(212,175,55,.06),transparent 30%)
+}
+
+.hero:before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+90deg,
+rgba(7,7,7,.98),
+rgba(7,7,7,.86) 45%,
+rgba(7,7,7,.4)
+);
+pointer-events:none
+}
+
+.hero-inner{
+position:relative;
+z-index:2;
+display:grid;
+grid-template-columns:1.05fr .95fr;
+align-items:center;
+gap:30px;
+padding:70px 0
+}
+
+.hero-copy{max-width:620px}
+
+.royal-tag{
+display:inline-flex;
+padding:8px 13px;
+border:1px solid rgba(212,175,55,.35);
+border-radius:50px;
+color:var(--gold2);
+background:rgba(212,175,55,.06);
+font-size:11px;
+letter-spacing:1.8px;
+margin-bottom:20px
+}
+
+/* SHOP STATUS */
+.status-badge{
+display:inline-flex;
+align-items:center;
+gap:9px;
+margin-bottom:18px;
+padding:9px 14px;
+border-radius:50px;
+background:#101010;
+border:1px solid #303030;
+color:#ddd;
+font-size:12px;
+font-weight:700
+}
+
+.status-dot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#32d583;
+box-shadow:0 0 10px rgba(50,213,131,.7)
+}
+
+.status-dot.closed{
+background:#ff3030;
+box-shadow:0 0 12px rgba(255,48,48,.9);
+animation:closedLight .8s infinite
+}
+
+.status-badge.closed-badge{
+border-color:rgba(255,48,48,.65);
+color:#ff6b6b;
+background:rgba(255,48,48,.06);
+animation:closedBadgeGlow 1s infinite
+}
+
+@keyframes closedLight{
+0%,100%{opacity:.25}
+50%{opacity:1}
+}
+
+@keyframes closedBadgeGlow{
+0%,100%{box-shadow:0 0 5px rgba(255,48,48,.08)}
+50%{box-shadow:0 0 18px rgba(255,48,48,.3)}
+}
+
+.closed-message{
+display:none;
+margin:-5px 0 22px;
+color:#ff5555;
+font-size:15px;
+font-weight:900;
+animation:closedTextPulse 1s infinite
+}
+
+.closed-message.show{display:block}
+
+@keyframes closedTextPulse{
+0%,100%{opacity:.55}
+50%{
+opacity:1;
+text-shadow:0 0 15px rgba(255,48,48,.55)
+}
+}
+
+.hero h1{
+font-family:Georgia,serif;
+font-size:clamp(45px,7vw,82px);
+line-height:.95;
+letter-spacing:-2px;
+margin-bottom:22px
+}
+
+.hero h1 span{
+color:var(--gold2)
+}
+
+.hero-sub{
+color:#c2c2c2;
+font-size:17px;
+line-height:1.7;
+max-width:520px;
+margin-bottom:28px
+}
+
+.hero-actions{
+display:flex;
+flex-wrap:wrap;
+gap:12px
+}
+
+.btn{
+border:none;
+border-radius:13px;
+padding:13px 20px;
+font-weight:800;
+transition:.25s
+}
+
+.btn-gold{
+background:linear-gradient(135deg,var(--gold2),var(--gold));
+color:#090909;
+box-shadow:0 12px 30px rgba(212,175,55,.16)
+}
+
+.btn-gold:hover{
+transform:translateY(-2px);
+box-shadow:0 16px 35px rgba(212,175,55,.23)
+}
+
+.btn-dark{
+background:#111;
+color:#eee;
+border:1px solid #333
+}
+
+.btn-dark:hover{
+border-color:var(--gold);
+color:var(--gold2)
+}
+
+/* QUEEN */
+.queen-stage{
+position:relative;
+min-height:510px;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.queen-glow{
+position:absolute;
+width:360px;
+height:360px;
+border-radius:50%;
+background:radial-gradient(
+circle,
+rgba(212,175,55,.26),
+rgba(212,175,55,.05) 40%,
+transparent 70%
+)
+}
+
+.queen-frame{
+position:relative;
+width:min(430px,90%);
+height:500px;
+border:1px solid rgba(212,175,55,.35);
+border-radius:220px 220px 30px 30px;
+overflow:hidden;
+background:#101010;
+box-shadow:0 25px 80px rgba(0,0,0,.65)
+}
+
+.queen-image{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:contrast(1.04) saturate(.78)
+}
+
+.queen-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(
+180deg,
+rgba(0,0,0,.08),
+rgba(0,0,0,.72)
+)
+}
+
+.queen-caption{
+position:absolute;
+z-index:3;
+left:28px;
+right:28px;
+bottom:28px;
+text-align:center
+}
+
+.queen-caption small{
+color:var(--gold2);
+text-transform:uppercase;
+letter-spacing:4px;
+font-size:9px
+}
+
+.queen-caption h2{
+font-family:Georgia,serif;
+font-size:30px;
+margin-top:7px
+}
+
+/* COMMON */
+section{padding:78px 0}
+
+.section-head{
+text-align:center;
+max-width:700px;
+margin:0 auto 38px
+}
+
+.eyebrow{
+color:var(--gold2);
+text-transform:uppercase;
+letter-spacing:3px;
+font-size:10px;
+font-weight:800;
+margin-bottom:10px
+}
+
+.section-head h2{
+font-family:Georgia,serif;
+font-size:clamp(30px,5vw,48px);
+margin-bottom:12px
+}
+
+.section-head p{
+color:#9f9f9f;
+line-height:1.7
+}
+
+/* MENU */
+.menu-section{
+background:linear-gradient(180deg,#080808,#0c0c0c)
+}
+
+.products-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px
+}
+
+.product-card{
+background:linear-gradient(145deg,#151515,#0e0e0e);
+border:1px solid var(--border);
+border-radius:20px;
+overflow:hidden;
+transition:.28s;
+position:relative
+}
+
+.product-card:hover{
+transform:translateY(-6px);
+border-color:rgba(212,175,55,.45);
+box-shadow:0 18px 40px rgba(0,0,0,.4)
+}
+
+.product-image-wrap{
+position:relative;
+aspect-ratio:4/3;
+overflow:hidden;
+background:#181818
+}
+
+.product-image{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.45s
+}
+
+.product-card:hover .product-image{
+transform:scale(1.06)
+}
+
+.food-number{
+position:absolute;
+top:10px;
+left:10px;
+min-width:28px;
+height:28px;
+padding:0 8px;
+border-radius:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,.72);
+color:var(--gold2);
+border:1px solid rgba(212,175,55,.35);
+font-size:11px;
+font-weight:800
+}
+
+.product-body{padding:16px}
+
+.product-name{
+font-size:16px;
+font-weight:800;
+margin-bottom:8px;
+min-height:38px
+}
+
+.product-bottom{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
+}
+
+.price{
+color:var(--gold2);
+font-size:18px;
+font-weight:900
+}
+
+.add-btn{
+border:1px solid rgba(212,175,55,.45);
+background:#17130a;
+color:var(--gold2);
+border-radius:10px;
+padding:9px 12px;
+font-size:12px;
+font-weight:800;
+transition:.2s
+}
+
+.add-btn:hover{
+background:var(--gold);
+color:#000
+}
+
+.add-btn.added{
+background:var(--gold);
+color:#000;
+animation:addSuccess .45s ease
+}
+
+@keyframes addSuccess{
+0%{transform:scale(1)}
+50%{transform:scale(1.15)}
+100%{transform:scale(1)}
+}
+
+/* WHY */
+.why-section{
+background:
+radial-gradient(circle at 20% 40%,rgba(212,175,55,.08),transparent 30%),
+#080808;
+border-top:1px solid rgba(212,175,55,.08);
+border-bottom:1px solid rgba(212,175,55,.08)
+}
+
+.why-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px
+}
+
+.why-card{
+padding:28px;
+min-height:190px;
+border-radius:22px;
+background:linear-gradient(
+145deg,
+rgba(255,255,255,.035),
+rgba(255,255,255,.01)
+);
+border:1px solid #272727
+}
+
+.why-icon{
+width:48px;
+height:48px;
+border-radius:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(212,175,55,.08);
+border:1px solid rgba(212,175,55,.25);
+font-size:22px;
+margin-bottom:18px
+}
+
+.why-card h3{
+font-family:Georgia,serif;
+margin-bottom:9px;
+font-size:21px
+}
+
+.why-card p{
+color:#999;
+font-size:13px;
+line-height:1.65
+}
+
+/* STORY */
+.story-section{padding:90px 0}
+
+.story-box{
+display:grid;
+grid-template-columns:.85fr 1.15fr;
+gap:45px;
+align-items:center
+}
+
+.story-visual{
+min-height:410px;
+border-radius:28px;
+overflow:hidden;
+position:relative;
+border:1px solid rgba(212,175,55,.25);
+background:#111
+}
+
+.story-visual img{
+width:100%;
+height:100%;
+min-height:410px;
+object-fit:cover;
+filter:brightness(.65) saturate(.8)
+}
+
+.story-visual:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+180deg,
+transparent 35%,
+rgba(0,0,0,.8)
+)
+}
+
+.story-badge{
+position:absolute;
+z-index:2;
+left:25px;
+bottom:24px
+}
+
+.story-badge small{
+color:var(--gold2);
+letter-spacing:3px;
+text-transform:uppercase
+}
+
+.story-badge h3{
+font-family:Georgia,serif;
+font-size:28px;
+margin-top:5px
+}
+
+.story-content .eyebrow{text-align:left}
+
+.story-content h2{
+font-family:Georgia,serif;
+font-size:clamp(34px,5vw,52px);
+line-height:1.05;
+margin-bottom:20px
+}
+
+.story-content h2 span{color:var(--gold2)}
+
+.story-content p{
+color:#a6a6a6;
+line-height:1.85;
+margin-bottom:18px
+}
+
+.story-points{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:25px
+}
+
+.story-point{
+padding:14px;
+border:1px solid #282828;
+background:#101010;
+border-radius:14px;
+color:#ddd;
+font-size:13px
+}
+
+.story-point span{
+color:var(--gold2);
+margin-right:6px
+}
+
+/* CTA */
+.cta-section{padding:25px 0 85px}
+
+.cta-box{
+border:1px solid rgba(212,175,55,.35);
+border-radius:28px;
+padding:55px 35px;
+text-align:center;
+background:
+radial-gradient(circle at 50% 0%,rgba(212,175,55,.18),transparent 45%),
+linear-gradient(145deg,#17130a,#0c0c0c)
+}
+
+.cta-box h2{
+font-family:Georgia,serif;
+font-size:clamp(32px,5vw,52px);
+margin-bottom:13px
+}
+
+.cta-box p{
+color:#aaa;
+max-width:580px;
+margin:0 auto 25px;
+line-height:1.7
+}
+
+/* TRACK */
+.track-section{
+background:#0a0a0a;
+border-top:1px solid #191919
+}
+
+.track-box{
+max-width:700px;
+margin:auto;
+padding:30px;
+border:1px solid #292929;
+border-radius:22px;
+background:#111
+}
+
+.track-form{
+display:flex;
+gap:10px
+}
+
+.input{
+width:100%;
+border:1px solid #303030;
+background:#090909;
+color:white;
+border-radius:11px;
+padding:13px 14px;
+outline:none
+}
+
+.input:focus{border-color:var(--gold)}
+
+.track-result{margin-top:20px}
+
+.track-order-head{
+display:flex;
+justify-content:space-between;
+gap:15px;
+padding-bottom:16px;
+border-bottom:1px solid #272727
+}
+
+.track-order-id{
+color:var(--gold2);
+font-weight:900
+}
+
+.status-track{
+display:flex;
+justify-content:space-between;
+gap:5px;
+margin-top:25px;
+position:relative
+}
+
+.status-track:before{
+content:"";
+position:absolute;
+top:14px;
+left:5%;
+right:5%;
+height:2px;
+background:#303030
+}
+
+.status-step{
+position:relative;
+z-index:2;
+width:20%;
+text-align:center;
+color:#777;
+font-size:10px
+}
+
+.status-circle{
+width:29px;
+height:29px;
+margin:auto auto 8px;
+border-radius:50%;
+background:#171717;
+border:1px solid #3a3a3a;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.status-step.active{color:var(--gold2)}
+
+.status-step.active .status-circle{
+background:var(--gold);
+border-color:var(--gold);
+color:#000
+}
+
+/* FOOTER */
+footer{
+border-top:1px solid #222;
+background:#050505;
+padding:45px 0 25px
+}
+
+.footer-grid{
+display:grid;
+grid-template-columns:1.4fr 1fr 1fr;
+gap:30px;
+padding-bottom:30px
+}
+
+.footer-brand{
+font-family:Georgia,serif;
+font-size:25px;
+color:var(--gold2);
+margin-bottom:10px
+}
+
+.footer-col p,
+.footer-col li{
+color:#888;
+font-size:13px;
+line-height:1.8;
+list-style:none
+}
+
+.footer-col h4{
+color:#eee;
+margin-bottom:10px
+}
+
+.footer-bottom{
+padding-top:20px;
+border-top:1px solid #1b1b1b;
+display:flex;
+justify-content:space-between;
+color:#666;
+font-size:11px
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+inset:0;
+z-index:2000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+background:rgba(0,0,0,.78);
+backdrop-filter:blur(8px)
+}
+
+.modal.show{display:flex}
+
+.modal-card{
+width:min(620px,100%);
+max-height:92vh;
+overflow:auto;
+background:#111;
+border:1px solid #333;
+border-radius:22px;
+box-shadow:0 18px 50px rgba(0,0,0,.6);
+animation:modalIn .22s ease
+}
+
+@keyframes modalIn{
+from{opacity:0;transform:translateY(15px) scale(.98)}
+to{opacity:1;transform:none}
+}
+
+.modal-head{
+position:sticky;
+top:0;
+z-index:3;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:18px 20px;
+background:#111;
+border-bottom:1px solid #292929
+}
+
+.modal-head h3{
+font-family:Georgia,serif;
+font-size:23px
+}
+
+.close-btn{
+width:35px;
+height:35px;
+border-radius:10px;
+border:1px solid #333;
+background:#181818;
+color:#ddd
+}
+
+.modal-body{padding:20px}
+
+/* CART */
+.cart-item{
+display:grid;
+grid-template-columns:1fr auto auto;
+gap:12px;
+align-items:center;
+padding:14px 0;
+border-bottom:1px solid #252525
+}
+
+.cart-item-name{
+font-weight:800;
+font-size:14px
+}
+
+.cart-item-price{
+color:#aaa;
+font-size:12px;
+margin-top:4px
+}
+
+.qty-box{
+display:flex;
+align-items:center;
+gap:7px
+}
+
+.qty-btn{
+width:29px;
+height:29px;
+border-radius:8px;
+border:1px solid #333;
+background:#181818;
+color:#ddd
+}
+
+.qty-value{
+min-width:20px;
+text-align:center;
+font-weight:800
+}
+
+.remove-btn{
+color:#ff7777;
+background:none;
+border:none;
+font-size:11px
+}
+
+.cart-total{
+display:flex;
+justify-content:space-between;
+padding:18px 0;
+font-weight:900;
+font-size:18px
+}
+
+.cart-total span:last-child{color:var(--gold2)}
+
+/* CHECKOUT */
+.form-group{margin-bottom:14px}
+
+.form-group label{
+display:block;
+color:#aaa;
+font-size:12px;
+margin-bottom:7px
+}
+
+textarea.input{
+resize:vertical;
+min-height:85px
+}
+
+.location-box{
+padding:15px;
+border:1px solid #292929;
+border-radius:14px;
+background:#0c0c0c;
+margin-bottom:15px
+}
+
+.location-status{
+color:#aaa;
+font-size:12px;
+line-height:1.5;
+margin-bottom:10px
+}
+
+.location-status.success{color:#58dd8d}
+
+.checkout-summary{
+padding:15px;
+border:1px solid #292929;
+border-radius:14px;
+background:#0c0c0c;
+margin-top:18px
+}
+
+.summary-row{
+display:flex;
+justify-content:space-between;
+padding:6px 0;
+color:#aaa;
+font-size:13px
+}
+
+.summary-row strong{color:#eee}
+
+.summary-row.total{
+border-top:1px solid #292929;
+margin-top:7px;
+padding-top:12px;
+color:#fff;
+font-size:17px
+}
+
+.summary-row.total strong{color:var(--gold2)}
+
+/* SUCCESS */
+.success-content{
+text-align:center;
+padding:35px 25px
+}
+
+.success-icon{
+width:70px;
+height:70px;
+margin:0 auto 18px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+background:rgba(37,211,102,.1);
+border:1px solid rgba(37,211,102,.35);
+color:var(--green)
+}
+
+.success-content h3{
+font-family:Georgia,serif;
+font-size:28px;
+margin-bottom:8px
+}
+
+.order-id-big{
+color:var(--gold2);
+font-weight:900;
+font-size:20px;
+margin:15px 0 22px
+}
+
+/* RATING */
+.stars{
+display:flex;
+justify-content:center;
+gap:8px;
+margin:20px 0
+}
+
+.star{
+border:none;
+background:none;
+color:#444;
+font-size:35px
+}
+
+.star.active{color:var(--gold2)}
+
+/* TOAST */
+#toast{
+position:fixed;
+z-index:5000;
+left:50%;
+bottom:25px;
+transform:translate(-50%,20px);
+opacity:0;
+pointer-events:none;
+background:#151515;
+color:#fff;
+border:1px solid #3b3b3b;
+padding:12px 17px;
+border-radius:12px;
+font-size:13px;
+transition:.25s;
+max-width:90%;
+text-align:center
+}
+
+#toast.show{
+opacity:1;
+transform:translate(-50%,0)
+}
+
+/* WEBSITE OVERLAY */
+#websiteOverlay{
+position:fixed;
+inset:0;
+z-index:6000;
+display:none;
+align-items:center;
+justify-content:center;
+background:#070707;
+text-align:center;
+padding:25px
+}
+
+#websiteOverlay.show{display:flex}
+
+.overlay-box{max-width:520px}
+
+.overlay-crown{
+font-size:55px;
+margin-bottom:20px
+}
+
+.overlay-box h2{
+font-family:Georgia,serif;
+font-size:35px;
+color:var(--gold2);
+margin-bottom:12px
+}
+
+.overlay-box p{
+color:#999;
+line-height:1.7
+}
+
+.empty{
+text-align:center;
+padding:35px 10px;
+color:#777
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+.products-grid{grid-template-columns:repeat(3,1fr)}
+.hero-inner{grid-template-columns:1fr .8fr}
+.queen-frame{height:440px}
+}
+
+@media(max-width:800px){
+.hero{min-height:auto}
+.hero-inner{
+grid-template-columns:1fr;
+padding:55px 0 30px
+}
+.hero-copy{
+text-align:center;
+margin:auto
+}
+.hero-sub{
+margin-left:auto;
+margin-right:auto
+}
+.hero-actions{justify-content:center}
+.queen-stage{min-height:430px}
+.queen-frame{
+width:330px;
+height:410px
+}
+.why-grid{grid-template-columns:1fr 1fr}
+.story-box{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:700px){
+section{padding:60px 0}
+.products-grid{
+grid-template-columns:repeat(2,1fr);
+gap:12px
+}
+.product-body{padding:13px}
+.product-name{font-size:14px}
+.price{font-size:16px}
+.add-btn{padding:8px 9px}
+.why-grid{grid-template-columns:1fr}
+.story-points{grid-template-columns:1fr}
+.track-form{flex-direction:column}
+.footer-grid{grid-template-columns:1fr}
+.footer-bottom{
+flex-direction:column;
+text-align:center;
+gap:8px
+}
+}
+
+@media(max-width:430px){
+.container{width:94%}
+.brand-text strong{font-size:16px}
+.brand-text span{font-size:8px}
+.cart-btn{padding:9px 11px}
+.hero h1{font-size:47px}
+.hero-sub{font-size:15px}
+.queen-frame{
+width:290px;
+height:370px
+}
+.products-grid{gap:9px}
+.product-card{border-radius:15px}
+.product-body{padding:11px}
+.add-btn{font-size:10px}
+.cart-item{grid-template-columns:1fr auto}
+.cart-item>.remove-btn{grid-column:2}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="container nav">
+<div class="container nav">
 
-    <a href="#" class="brand">
+<a href="#" class="brand">
+<div class="brand-crown">♛</div>
+<div class="brand-text">
+<strong>The Queen Fast Food</strong>
+<span>IBRISINGH • ODISHA</span>
+</div>
+</a>
 
-      <div class="brand-crown">
-        ♛
-      </div>
+<button class="cart-btn" id="cartButton" onclick="openCart()">
+🛒 Cart
+<span class="cart-count" id="cartCount">0</span>
+</button>
 
-      <div class="brand-text">
-        <strong>The Queen Fast Food</strong>
-        <span>IBRISINGH • ODISHA</span>
-      </div>
-
-    </a>
-
-    <button
-      class="cart-btn"
-      id="cartButton"
-      onclick="openCart()"
-    >
-      🛒 Cart
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-
-  </div>
+</div>
 </header>
-
 
 <main>
 
-  <!-- HERO -->
+<section class="hero">
+<div class="container hero-inner">
 
-  <section class="hero">
+<div class="hero-copy">
 
-    <div class="container hero-inner">
+<div class="royal-tag">👑 The Royal Taste of Ibrisingh</div>
 
-      <div class="hero-copy">
+<div class="status-badge" id="statusBadge">
+<span class="status-dot" id="statusDot"></span>
+<span id="shopStatus">Checking shop status...</span>
+</div>
 
-        <div class="royal-tag">
-          👑 The Royal Taste of Ibrisingh
-        </div>
+<div class="closed-message" id="closedMessage">
+🔴 SHOP IS CLOSED
+</div>
 
-        <div class="status-badge" id="statusBadge">
+<h1>
+Choose.<br>
+<span>Add. Enjoy.</span>
+</h1>
 
-          <span
-            class="status-dot"
-            id="statusDot"
-          ></span>
+<p class="hero-sub">
+Freshly prepared food, bold flavours and royal-quality taste —
+delivered from <strong>The Queen Fast Food</strong> straight to your doorstep.
+</p>
 
-          <span id="shopStatus">
-            Checking shop status...
-          </span>
+<div class="hero-actions">
 
-        </div>
+<button class="btn btn-gold"
+onclick="document.getElementById('menu').scrollIntoView()">
+Explore Menu
+</button>
 
-        <div
-          class="closed-message"
-          id="closedMessage"
-        >
-          🔴 SHOP IS CLOSED
-        </div>
+<button class="btn btn-dark" onclick="openCart()">
+View Cart
+</button>
 
-        <h1>
-          Choose.<br>
-          <span>Add. Enjoy.</span>
-        </h1>
+</div>
+</div>
 
-        <p class="hero-sub">
-          Freshly prepared food, bold flavours and royal-quality taste —
-          delivered from <strong>The Queen Fast Food</strong> straight to your doorstep.
-        </p>
+<div class="queen-stage">
+<div class="queen-glow"></div>
 
-        <div class="hero-actions">
+<div class="queen-frame">
 
-          <button
-            class="btn btn-gold"
-            onclick="document.getElementById('menu').scrollIntoView()"
-          >
-            Explore Menu
-          </button>
+<img
+class="queen-image"
+src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=90"
+alt="The Queen Fast Food">
 
-          <button
-            class="btn btn-dark"
-            onclick="openCart()"
-          >
-            View Cart
-          </button>
+<div class="queen-overlay"></div>
 
-        </div>
+<div class="queen-caption">
+<small>Welcome to</small>
+<h2>The Queen</h2>
+</div>
 
-      </div>
+</div>
+</div>
 
+</div>
+</section>
 
-      <div class="queen-stage">
 
-        <div class="queen-glow"></div>
+<section class="menu-section" id="menu">
 
-        <div class="queen-frame">
+<div class="container">
 
-          <img
-            class="queen-image"
-            src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=90"
-            alt="The Queen Fast Food Royal Queen"
-          />
+<div class="section-head">
+<div class="eyebrow">Made Fresh • Served Hot</div>
+<h2>Our Menu</h2>
+<p>
+Your favourites, prepared fresh and served with the taste
+you expect from The Queen.
+</p>
+</div>
 
-          <div class="queen-overlay"></div>
+<div class="products-grid" id="productsGrid"></div>
 
-          <div class="queen-caption">
-            <small>Welcome to</small>
-            <h2>The Queen</h2>
-          </div>
+</div>
+</section>
 
-        </div>
 
-      </div>
+<section class="why-section">
 
-    </div>
+<div class="container">
 
-  </section>
+<div class="section-head">
+<div class="eyebrow">More Than Just Food</div>
+<h2>Why Choose The Queen?</h2>
+<p>
+Because every order should feel worth it — from the first bite
+to the final delivery.
+</p>
+</div>
 
+<div class="why-grid">
 
-  <!-- MENU -->
+<div class="why-card">
+<div class="why-icon">👑</div>
+<h3>Royal Taste</h3>
+<p>Bold flavours and satisfying portions for every meal.</p>
+</div>
 
-  <section class="menu-section" id="menu">
+<div class="why-card">
+<div class="why-icon">🔥</div>
+<h3>Freshly Prepared</h3>
+<p>Your food is prepared fresh for your order.</p>
+</div>
 
-    <div class="container">
+<div class="why-card">
+<div class="why-icon">⚡</div>
+<h3>Quick Service</h3>
+<p>Simple ordering and straightforward delivery.</p>
+</div>
 
-      <div class="section-head">
+<div class="why-card">
+<div class="why-icon">📍</div>
+<h3>Local & Trusted</h3>
+<p>Proudly serving customers around Ibrisingh.</p>
+</div>
 
-        <div class="eyebrow">
-          Made Fresh • Served Hot
-        </div>
-
-        <h2>
-          Our Menu
-        </h2>
-
-        <p>
-          Your favourites, prepared fresh and served with the taste
-          you expect from The Queen.
-        </p>
+<div class="why-card">
+<div class="why-icon">💰</div>
+<h3>Fair Pricing</h3>
+<p>Clear food pricing and transparent delivery charges.</p>
+</div>
 
-      </div>
+<div class="why-card">
+<div class="why-icon">❤️</div>
+<h3>Made With Care</h3>
+<p>Every order deserves attention from preparation to packing.</p>
+</div>
 
-      <div
-        class="products-grid"
-        id="productsGrid"
-      ></div>
+</div>
+</div>
+</section>
 
-    </div>
 
-  </section>
+<section class="story-section">
 
+<div class="container">
 
-  <!-- WHY -->
+<div class="story-box">
 
-  <section class="why-section">
+<div class="story-visual">
 
-    <div class="container">
+<img
+src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1000&q=90"
+alt="Fresh food">
 
-      <div class="section-head">
+<div class="story-badge">
+<small>Ibrisingh • Odisha</small>
+<h3>Food With A Royal Feeling</h3>
+</div>
 
-        <div class="eyebrow">
-          More Than Just Food
-        </div>
+</div>
 
-        <h2>
-          Why Choose The Queen?
-        </h2>
+<div class="story-content">
 
-        <p>
-          Because every order should feel worth it — from the first bite
-          to the final delivery.
-        </p>
+<div class="eyebrow">The Queen Experience</div>
 
-      </div>
+<h2>
+Simple food.<br>
+<span>Special feeling.</span>
+</h2>
 
+<p>
+The Queen Fast Food is built around one simple idea:
+good food should be easy to order, enjoyable to eat and memorable enough to come back for.
+</p>
 
-      <div class="why-grid">
+<p>
+Whether you are ordering a quick evening snack, a filling biriyani
+or a proper meal, every order should feel fresh, tasty and worth it.
+</p>
 
-        <div class="why-card">
-          <div class="why-icon">👑</div>
-          <h3>Royal Taste</h3>
-          <p>
-            We focus on bold flavours and satisfying portions so every
-            meal feels special.
-          </p>
-        </div>
+<div class="story-points">
 
-        <div class="why-card">
-          <div class="why-icon">🔥</div>
-          <h3>Freshly Prepared</h3>
-          <p>
-            Your food is prepared fresh for the order instead of simply
-            sitting around waiting.
-          </p>
-        </div>
+<div class="story-point"><span>✓</span>Fresh preparation</div>
+<div class="story-point"><span>✓</span>Clear pricing</div>
+<div class="story-point"><span>✓</span>Easy online ordering</div>
+<div class="story-point"><span>✓</span>Local delivery</div>
 
-        <div class="why-card">
-          <div class="why-icon">⚡</div>
-          <h3>Quick Service</h3>
-          <p>
-            Simple ordering and a straightforward delivery process help
-            get your food to you without unnecessary steps.
-          </p>
-        </div>
+</div>
 
-        <div class="why-card">
-          <div class="why-icon">📍</div>
-          <h3>Local & Trusted</h3>
-          <p>
-            Proudly serving customers around Ibrisingh with a local food
-            experience.
-          </p>
-        </div>
+</div>
+</div>
+</div>
+</section>
 
-        <div class="why-card">
-          <div class="why-icon">💰</div>
-          <h3>Fair Pricing</h3>
-          <p>
-            Good food should remain accessible, with clear food pricing
-            and transparent delivery charges.
-          </p>
-        </div>
 
-        <div class="why-card">
-          <div class="why-icon">❤️</div>
-          <h3>Made With Care</h3>
-          <p>
-            From preparation to packing, every order deserves attention
-            because your meal matters.
-          </p>
-        </div>
+<section class="cta-section">
 
-      </div>
+<div class="container">
 
-    </div>
+<div class="cta-box">
 
-  </section>
+<div class="eyebrow">Your Next Meal Is Waiting</div>
 
+<h2>Ready to Taste The Queen?</h2>
 
-  <!-- STORY -->
+<p>
+Pick your favourite food, add it to your cart and place your order.
+</p>
 
-  <section class="story-section">
+<button class="btn btn-gold"
+onclick="document.getElementById('menu').scrollIntoView()">
+Order Your Favourite 🍽️
+</button>
 
-    <div class="container">
+</div>
+</div>
+</section>
 
-      <div class="story-box">
 
-        <div class="story-visual">
+<section class="track-section" id="track">
 
-          <img
-            src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1000&q=90"
-            alt="Fresh food at The Queen Fast Food"
-          />
+<div class="container">
 
-          <div class="story-badge">
+<div class="section-head">
+<div class="eyebrow">Already Ordered?</div>
+<h2>Track Your Order</h2>
+<p>Enter your Order ID to check the current status.</p>
+</div>
 
-            <small>
-              Ibrisingh • Odisha
-            </small>
+<div class="track-box">
 
-            <h3>
-              Food With A Royal Feeling
-            </h3>
+<div class="track-form">
 
-          </div>
+<input
+class="input"
+id="trackOrderInput"
+placeholder="Example: TQF2026-001">
 
-        </div>
+<button class="btn btn-gold" onclick="trackOrder()">
+Track
+</button>
 
+</div>
 
-        <div class="story-content">
+<div id="trackResult" class="track-result"></div>
 
-          <div class="eyebrow">
-            The Queen Experience
-          </div>
-
-          <h2>
-            Simple food.<br>
-            <span>Special feeling.</span>
-          </h2>
-
-          <p>
-            The Queen Fast Food is built around one simple idea:
-            good food should be easy to order, enjoyable to eat and
-            memorable enough to come back for.
-          </p>
-
-          <p>
-            Whether you are ordering a quick evening snack, a filling
-            biriyani or a proper meal, we want every order to carry
-            the same feeling — fresh, tasty and worth it.
-          </p>
-
-          <div class="story-points">
-
-            <div class="story-point">
-              <span>✓</span>
-              Fresh preparation
-            </div>
-
-            <div class="story-point">
-              <span>✓</span>
-              Clear pricing
-            </div>
-
-            <div class="story-point">
-              <span>✓</span>
-              Easy online ordering
-            </div>
-
-            <div class="story-point">
-              <span>✓</span>
-              Local delivery
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CTA -->
-
-  <section class="cta-section">
-
-    <div class="container">
-
-      <div class="cta-box">
-
-        <div class="eyebrow">
-          Your Next Meal Is Waiting
-        </div>
-
-        <h2>
-          Ready to Taste The Queen?
-        </h2>
-
-        <p>
-          Pick your favourite food, add it to your cart and place your
-          order in just a few simple steps.
-        </p>
-
-        <button
-          class="btn btn-gold"
-          onclick="document.getElementById('menu').scrollIntoView()"
-        >
-          Order Your Favourite 🍽️
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- TRACK -->
-
-  <section class="track-section">
-
-    <div class="container">
-
-      <div class="section-head">
-
-        <div class="eyebrow">
-          Already Ordered?
-        </div>
-
-        <h2>
-          Track Your Order
-        </h2>
-
-        <p>
-          Enter your Order ID to check the current status of your order.
-        </p>
-
-      </div>
-
-
-      <div class="track-box">
-
-        <div class="track-form">
-
-          <input
-            class="input"
-            id="trackOrderInput"
-            placeholder="Example: TQF2026-001"
-          />
-
-          <button
-            class="btn btn-gold"
-            onclick="trackOrder()"
-          >
-            Track
-          </button>
-
-        </div>
-
-        <div
-          id="trackResult"
-          class="track-result"
-        ></div>
-
-      </div>
-
-    </div>
-
-  </section>
+</div>
+</div>
+</section>
 
 </main>
 
 
-<!-- FOOTER -->
-
 <footer>
 
-  <div class="container">
+<div class="container">
 
-    <div class="footer-grid">
+<div class="footer-grid">
 
-      <div class="footer-col">
+<div class="footer-col">
 
-        <div class="footer-brand">
-          The Queen Fast Food 👑
-        </div>
+<div class="footer-brand">
+The Queen Fast Food 👑
+</div>
 
-        <p>
-          Fresh food. Bold taste. Royal feeling.
-        </p>
+<p>Fresh food. Bold taste. Royal feeling.</p>
 
-        <p style="margin-top:10px;">
-          📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha
-        </p>
+<p style="margin-top:10px;">
+📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha
+</p>
 
-      </div>
+</div>
 
+<div class="footer-col">
 
-      <div class="footer-col">
+<h4>Quick Links</h4>
 
-        <h4>
-          Quick Links
-        </h4>
+<ul>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#menu">Order Food</a></li>
+<li><a href="#menu">Our Food</a></li>
+<li><a href="#track">Track Order</a></li>
+</ul>
 
-        <ul>
+</div>
 
-          <li>
-            <a href="#menu">
-              Menu
-            </a>
-          </li>
+<div class="footer-col">
 
-          <li>
-            <a href="#menu">
-              Order Food
-            </a>
-          </li>
+<h4>Service</h4>
+<p>🕛 12:00 PM – 11:00 PM</p>
+<p>🚴 Local Delivery</p>
+<p>💵 Cash on Delivery</p>
+<p>📱 WhatsApp Ordering</p>
 
-          <li>
-            <a href="#menu">
-              Our Food
-            </a>
-          </li>
+</div>
 
-          <li>
-            <a href="#track">
-              Track Order
-            </a>
-          </li>
+</div>
 
-        </ul>
+<div class="footer-bottom">
 
-      </div>
+<span>
+© <span id="footerYear"></span> The Queen Fast Food
+</span>
 
+<span>Made with ❤️ for Ibrisingh</span>
 
-      <div class="footer-col">
+</div>
 
-        <h4>
-          Service
-        </h4>
-
-        <p>
-          🕛 12:00 PM – 11:00 PM
-        </p>
-
-        <p>
-          🚴 Local Delivery
-        </p>
-
-        <p>
-          💵 Cash on Delivery
-        </p>
-
-        <p>
-          📱 WhatsApp Ordering
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-      <span>
-        © <span id="footerYear"></span>
-        The Queen Fast Food
-      </span>
-
-      <span>
-        Made with ❤️ for Ibrisingh
-      </span>
-
-    </div>
-
-  </div>
-
+</div>
 </footer>
 
 
@@ -1975,51 +1563,35 @@
 
 <div class="modal" id="cartModal">
 
-  <div class="modal-card">
+<div class="modal-card">
 
-    <div class="modal-head">
+<div class="modal-head">
+<h3>Your Cart</h3>
 
-      <h3>
-        Your Cart
-      </h3>
+<button class="close-btn"
+onclick="closeModal('cartModal')">
+✕
+</button>
+</div>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('cartModal')"
-      >
-        ✕
-      </button>
+<div class="modal-body">
 
-    </div>
+<div id="cartItems"></div>
 
-    <div class="modal-body">
+<div class="cart-total">
+<span>Food Total</span>
+<span id="cartTotal">₹0</span>
+</div>
 
-      <div id="cartItems"></div>
+<button
+class="btn btn-gold"
+style="width:100%;"
+onclick="openCheckout()">
+Proceed to Checkout
+</button>
 
-      <div class="cart-total">
-
-        <span>
-          Food Total
-        </span>
-
-        <span id="cartTotal">
-          ₹0
-        </span>
-
-      </div>
-
-      <button
-        class="btn btn-gold"
-        style="width:100%;"
-        onclick="openCheckout()"
-      >
-        Proceed to Checkout
-      </button>
-
-    </div>
-
-  </div>
-
+</div>
+</div>
 </div>
 
 
@@ -2027,182 +1599,106 @@
 
 <div class="modal" id="checkoutModal">
 
-  <div class="modal-card">
+<div class="modal-card">
 
-    <div class="modal-head">
+<div class="modal-head">
+<h3>Checkout</h3>
 
-      <h3>
-        Checkout
-      </h3>
+<button class="close-btn"
+onclick="closeModal('checkoutModal')">
+✕
+</button>
+</div>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('checkoutModal')"
-      >
-        ✕
-      </button>
+<div class="modal-body">
 
-    </div>
+<div class="form-group">
+<label>Customer Name</label>
 
+<input
+class="input"
+id="customerName"
+placeholder="Enter your name">
+</div>
 
-    <div class="modal-body">
+<div class="form-group">
+<label>Phone Number</label>
 
-      <div class="form-group">
+<input
+class="input"
+id="customerPhone"
+type="tel"
+maxlength="10"
+placeholder="10-digit mobile number">
+</div>
 
-        <label>
-          Customer Name
-        </label>
+<div class="form-group">
+<label>Delivery Address</label>
 
-        <input
-          class="input"
-          id="customerName"
-          placeholder="Enter your name"
-        />
+<textarea
+class="input"
+id="customerAddress"
+placeholder="Enter complete delivery address"></textarea>
+</div>
 
-      </div>
+<div class="form-group">
+<label>Payment Method</label>
 
+<select class="input" id="paymentMethod">
+<option value="Cash on Delivery">Cash on Delivery</option>
+</select>
 
-      <div class="form-group">
+</div>
 
-        <label>
-          Phone Number
-        </label>
+<div class="location-box">
 
-        <input
-          class="input"
-          id="customerPhone"
-          type="tel"
-          maxlength="10"
-          placeholder="10-digit mobile number"
-        />
+<div class="location-status" id="locationStatus">
+📍 Your location is required to calculate road delivery distance.
+</div>
 
-      </div>
+<button
+class="btn btn-dark"
+style="width:100%;"
+onclick="getLocation(true)">
+📍 Detect My Location
+</button>
 
+</div>
 
-      <div class="form-group">
+<div class="checkout-summary">
 
-        <label>
-          Delivery Address
-        </label>
+<div class="summary-row">
+<span>Food Total</span>
+<strong id="checkoutFoodTotal">₹0</strong>
+</div>
 
-        <textarea
-          class="input"
-          id="customerAddress"
-          placeholder="Enter complete delivery address"
-        ></textarea>
+<div class="summary-row">
+<span>Road Distance</span>
+<strong id="checkoutDistance">--</strong>
+</div>
 
-      </div>
+<div class="summary-row">
+<span>Delivery Charge</span>
+<strong id="checkoutDelivery">₹0</strong>
+</div>
 
+<div class="summary-row total">
+<span>Total</span>
+<strong id="checkoutGrandTotal">₹0</strong>
+</div>
 
-      <div class="form-group">
+</div>
 
-        <label>
-          Payment Method
-        </label>
+<button
+class="btn btn-gold"
+style="width:100%;margin-top:18px;"
+id="placeOrderBtn"
+onclick="placeOrder()">
+Place Order
+</button>
 
-        <select
-          class="input"
-          id="paymentMethod"
-        >
-
-          <option value="Cash on Delivery">
-            Cash on Delivery
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="location-box">
-
-        <div
-          class="location-status"
-          id="locationStatus"
-        >
-          📍 Your location is required to calculate road delivery distance.
-        </div>
-
-        <button
-          class="btn btn-dark"
-          style="width:100%;"
-          onclick="getLocation(true)"
-        >
-          📍 Detect My Location
-        </button>
-
-      </div>
-
-
-      <div class="checkout-summary">
-
-        <div class="summary-row">
-
-          <span>
-            Food Total
-          </span>
-
-          <strong id="checkoutFoodTotal">
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <div class="summary-row">
-
-          <span>
-            Road Distance
-          </span>
-
-          <strong id="checkoutDistance">
-            --
-          </strong>
-
-        </div>
-
-
-        <div class="summary-row">
-
-          <span>
-            Delivery Charge
-          </span>
-
-          <strong id="checkoutDelivery">
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <div class="summary-row total">
-
-          <span>
-            Total
-          </span>
-
-          <strong id="checkoutGrandTotal">
-            ₹0
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="btn btn-gold"
-        style="width:100%;margin-top:18px;"
-        id="placeOrderBtn"
-        onclick="placeOrder()"
-      >
-        Place Order
-      </button>
-
-    </div>
-
-  </div>
-
+</div>
+</div>
 </div>
 
 
@@ -2210,54 +1706,43 @@
 
 <div class="modal" id="successModal">
 
-  <div class="modal-card">
+<div class="modal-card">
 
-    <div class="success-content">
+<div class="success-content">
 
-      <div class="success-icon">
-        ✓
-      </div>
+<div class="success-icon">✓</div>
 
-      <h3>
-        Order Received!
-      </h3>
+<h3>Order Received!</h3>
 
-      <p style="color:#999;">
-        Your order has been successfully placed.
-      </p>
+<p style="color:#999;">
+Your order has been successfully placed.
+</p>
 
-      <div
-        class="order-id-big"
-        id="successOrderId"
-      >
-        TQF2026-001
-      </div>
+<div class="order-id-big" id="successOrderId">
+TQF2026-001
+</div>
 
-      <button
-        class="btn"
-        style="
-          width:100%;
-          background:#25d366;
-          color:#000;
-          margin-bottom:10px;
-        "
-        onclick="openWhatsApp()"
-      >
-        WhatsApp Order Details
-      </button>
+<button
+class="btn"
+style="
+width:100%;
+background:#25d366;
+color:#000;
+margin-bottom:10px;
+"
+onclick="openWhatsApp()">
+WhatsApp Order Details
+</button>
 
-      <button
-        class="btn btn-dark"
-        style="width:100%;"
-        onclick="closeModal('successModal')"
-      >
-        Done
-      </button>
+<button
+class="btn btn-dark"
+style="width:100%;"
+onclick="closeModal('successModal')">
+Done
+</button>
 
-    </div>
-
-  </div>
-
+</div>
+</div>
 </div>
 
 
@@ -2265,82 +1750,50 @@
 
 <div class="modal" id="ratingModal">
 
-  <div class="modal-card">
+<div class="modal-card">
 
-    <div class="modal-head">
+<div class="modal-head">
 
-      <h3>
-        Rate Your Order
-      </h3>
+<h3>Rate Your Order</h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('ratingModal')"
-      >
-        ✕
-      </button>
+<button class="close-btn"
+onclick="closeModal('ratingModal')">
+✕
+</button>
 
-    </div>
+</div>
 
+<div class="modal-body">
 
-    <div class="modal-body">
+<p style="text-align:center;color:#999;font-size:13px;">
+How was your experience with The Queen?
+</p>
 
-      <p
-        style="
-          text-align:center;
-          color:#999;
-          font-size:13px;
-        "
-      >
-        How was your experience with The Queen?
-      </p>
+<div class="stars" id="stars">
 
+<button class="star" data-rating="1">★</button>
+<button class="star" data-rating="2">★</button>
+<button class="star" data-rating="3">★</button>
+<button class="star" data-rating="4">★</button>
+<button class="star" data-rating="5">★</button>
 
-      <div class="stars" id="stars">
+</div>
 
-        <button class="star" data-rating="1">
-          ★
-        </button>
+<textarea
+class="input"
+id="ratingFeedback"
+placeholder="Write your feedback..."
+style="min-height:100px;"></textarea>
 
-        <button class="star" data-rating="2">
-          ★
-        </button>
+<button
+class="btn btn-gold"
+style="width:100%;margin-top:15px;"
+onclick="submitRating()">
+Submit Rating
+</button>
 
-        <button class="star" data-rating="3">
-          ★
-        </button>
-
-        <button class="star" data-rating="4">
-          ★
-        </button>
-
-        <button class="star" data-rating="5">
-          ★
-        </button>
-
-      </div>
-
-
-      <textarea
-        class="input"
-        id="ratingFeedback"
-        placeholder="Write your feedback..."
-        style="min-height:100px;"
-      ></textarea>
-
-
-      <button
-        class="btn btn-gold"
-        style="width:100%;margin-top:15px;"
-        onclick="submitRating()"
-      >
-        Submit Rating
-      </button>
-
-    </div>
-
-  </div>
-
+</div>
+</div>
 </div>
 
 
@@ -2348,2430 +1801,1915 @@
 
 <div id="websiteOverlay">
 
-  <div class="overlay-box">
+<div class="overlay-box">
 
-    <div class="overlay-crown">
-      ♛
-    </div>
+<div class="overlay-crown">♛</div>
 
-    <h2>
-      The Queen
-    </h2>
+<h2>The Queen</h2>
 
-    <p id="overlayMessage">
-      We are making some improvements.
-      Please wait a little while and refresh the page.
-    </p>
-
-  </div>
+<p id="overlayMessage">
+We are making some improvements.
+Please wait a little while and refresh the page.
+</p>
 
 </div>
-
+</div>
 
 <div id="toast"></div>
 
 
 <script type="module">
 
-  import {
-    initializeApp
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-  import {
-    getAuth,
-    signInAnonymously,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+getAuth,
+signInAnonymously,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  import {
-    getDatabase,
-    ref,
-    get,
-    set,
-    push,
-    runTransaction,
-    onValue
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import {
+getDatabase,
+ref,
+get,
+set,
+push,
+runTransaction,
+onValue
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-  /* =========================================================
-     FIREBASE
-  ========================================================= */
+/* FIREBASE */
 
-  const firebaseConfig = {
+const firebaseConfig={
+apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+authDomain:"the-queen-fast-food.firebaseapp.com",
+databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
+projectId:"the-queen-fast-food",
+storageBucket:"the-queen-fast-food.firebasestorage.app",
+messagingSenderId:"435721389652",
+appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+measurementId:"G-Q1YCK636KJ"
+};
 
-    apiKey:
-      "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getDatabase(app);
 
-    authDomain:
-      "the-queen-fast-food.firebaseapp.com",
 
-    databaseURL:
-      "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+/* CONSTANTS */
 
-    projectId:
-      "the-queen-fast-food",
+const RESTAURANT_LAT=20.216780359694468;
+const RESTAURANT_LNG=86.36464363454978;
+const DELIVERY_RATE=6;
+const DEFAULT_WHATSAPP="9090220791";
 
-    storageBucket:
-      "the-queen-fast-food.firebasestorage.app",
 
-    messagingSenderId:
-      "435721389652",
+const DEFAULT_SCHEDULE={
+scheduleEnabled:true,
+openTime:"12:00",
+closeTime:"23:00"
+};
 
-    appId:
-      "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
 
-    measurementId:
-      "G-Q1YCK636KJ"
+/* IMAGES */
 
-  };
+const DEFAULT_IMAGES={
 
+1:"https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=90",
 
-  const app =
-    initializeApp(firebaseConfig);
+2:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=90",
 
-  const auth =
-    getAuth(app);
+3:"https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=90",
 
-  const db =
-    getDatabase(app);
+4:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=900&q=90",
 
+5:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=90",
 
-  /* =========================================================
-     CONSTANTS
-  ========================================================= */
+6:"https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=900&q=90",
 
-  const RESTAURANT_LAT =
-    20.216780359694468;
+7:"https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=900&q=90",
 
-  const RESTAURANT_LNG =
-    86.36464363454978;
+8:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=90",
 
-  const DELIVERY_RATE =
-    6;
+9:"https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=900&q=90",
 
-  const DEFAULT_WHATSAPP =
-    "9090220791";
+10:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=90",
 
+11:"https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=900&q=90",
 
-  /*
-    DEFAULT SHOP TIMING
+12:"https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=900&q=90"
 
-    12:00 PM -> 11:00 PM
-  */
+};
 
-  const DEFAULT_SCHEDULE = {
+const FALLBACK_IMAGE=
+"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85";
 
-    scheduleEnabled:
-      true,
 
-    openTime:
-      "12:00",
+/* STATE */
 
-    closeTime:
-      "23:00"
+let currentUser=null;
+let menu=[];
+let cart=[];
+let deliveryDistance=null;
+let deliveryCharge=0;
+let customerLocation=null;
+let currentOrder=null;
+let selectedRating=0;
 
-  };
 
+/*
+IMPORTANT
+
+manualOpen=true
+ADMIN FORCE OPEN
+
+manualClosed=true
+ADMIN FORCE CLOSED
+
+both false
+NORMAL TIME SCHEDULE
+*/
+
+let settings={
+whatsappNumber:DEFAULT_WHATSAPP,
+manualOpen:false,
+manualClosed:false,
+closedMessage:"",
+fontSize:"medium",
+websiteMode:"normal",
+updateMessage:"We are making some improvements. Please wait a little while and refresh the page.",
+...DEFAULT_SCHEDULE
+};
+
+
+/* =====================================================
+   DEFAULT MENU
+===================================================== */
+
+function getDefaultMenu(){
+
+return [
+
+{
+id:1,
+name:"Veg Chowmin",
+price:50,
+image:DEFAULT_IMAGES[1]
+},
+
+{
+id:2,
+name:"Veg Roll",
+price:50,
+image:DEFAULT_IMAGES[2]
+},
+
+{
+id:3,
+name:"Manchurian",
+price:50,
+image:DEFAULT_IMAGES[3]
+},
+
+{
+id:4,
+name:"Paneer Tikka",
+price:60,
+image:DEFAULT_IMAGES[4]
+},
+
+{
+id:5,
+name:"Paneer Butter Masala",
+price:130,
+image:DEFAULT_IMAGES[5]
+},
 
-  /* =========================================================
-     DEFAULT IMAGES
-  ========================================================= */
+{
+id:6,
+name:"Egg Chicken Chowmin",
+price:65,
+image:DEFAULT_IMAGES[6]
+},
 
-  const DEFAULT_IMAGES = {
+{
+id:7,
+name:"Egg Chicken Roll",
+price:60,
+image:DEFAULT_IMAGES[7]
+},
 
-    1:
-      "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=90",
+{
+id:8,
+name:"Pakoda",
+price:60,
+image:DEFAULT_IMAGES[8]
+},
 
-    2:
-      "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=90",
+{
+id:9,
+name:"Chilli Chicken",
+price:120,
+image:DEFAULT_IMAGES[9]
+},
 
-    3:
-      "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=90",
+{
+id:10,
+name:"Chicken Garlic",
+price:80,
+image:DEFAULT_IMAGES[10]
+},
 
-    4:
-      "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=900&q=90",
+{
+id:11,
+name:"Chicken Biriyani",
+price:120,
+image:DEFAULT_IMAGES[11]
+},
 
-    5:
-      "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=90",
+{
+id:12,
+name:"Veg Biriyani",
+price:100,
+image:DEFAULT_IMAGES[12]
+}
 
-    6:
-      "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=900&q=90",
+];
 
-    7:
-      "https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=900&q=90",
+}
 
-    8:
-      "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=90",
 
-    9:
-      "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=900&q=90",
+/* =====================================================
+   FIREBASE AUTH
+===================================================== */
 
-    10:
-      "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=90",
+signInAnonymously(auth)
 
-    11:
-      "https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=900&q=90",
+.then(()=>{
+console.log("Anonymous authentication successful");
+})
 
-    12:
-      "https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=900&q=90"
+.catch(error=>{
+console.error(error);
+showToast("Firebase authentication failed. Please refresh.");
+});
 
-  };
 
+onAuthStateChanged(auth,user=>{
 
-  const FALLBACK_IMAGE =
-    "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85";
+currentUser=user;
 
+if(user){
 
-  /* =========================================================
-     STATE
-  ========================================================= */
+loadSettings();
+loadMenu();
 
-  let currentUser = null;
+}
 
-  let menu = [];
+});
 
-  let cart = [];
 
-  let deliveryDistance = null;
+/* =====================================================
+   SETTINGS
+===================================================== */
 
-  let deliveryCharge = 0;
+function loadSettings(){
 
-  let customerLocation = null;
+const settingsRef=ref(db,"settings");
 
-  let currentOrder = null;
+onValue(
+settingsRef,
 
-  let selectedRating = 0;
+snapshot=>{
 
+const data=snapshot.val()||{};
 
-  /*
-    IMPORTANT:
+settings={
+...settings,
+...data
+};
 
-    manualOpen:
-      true  = ADMIN FORCE OPEN
 
-    manualClosed:
-      true  = ADMIN FORCE CLOSED
+/* SAFE DEFAULTS */
 
-    Both false:
-      NORMAL AUTOMATIC SCHEDULE
-  */
+if(!settings.openTime)
+settings.openTime=DEFAULT_SCHEDULE.openTime;
 
-  let settings = {
+if(!settings.closeTime)
+settings.closeTime=DEFAULT_SCHEDULE.closeTime;
 
-    whatsappNumber:
-      DEFAULT_WHATSAPP,
+if(typeof settings.scheduleEnabled!=="boolean")
+settings.scheduleEnabled=true;
 
-    manualOpen:
-      false,
+if(typeof settings.manualOpen!=="boolean")
+settings.manualOpen=false;
 
-    manualClosed:
-      false,
+if(typeof settings.manualClosed!=="boolean")
+settings.manualClosed=false;
 
-    closedMessage:
-      "",
+applyFontSize();
+applyWebsiteMode();
+updateShopStatus();
 
-    fontSize:
-      "medium",
+},
 
-    websiteMode:
-      "normal",
+error=>{
 
-    updateMessage:
-      "We are making some improvements. Please wait a little while and refresh the page.",
+console.error("Settings error:",error);
 
-    ...DEFAULT_SCHEDULE
+showToast("Unable to load website settings.");
 
-  };
+}
 
+);
 
-  /* =========================================================
-     AUTH
-  ========================================================= */
+}
 
-  signInAnonymously(auth)
 
-    .then(() => {
+/* =====================================================
+   MENU LOAD
+===================================================== */
 
-      console.log(
-        "Anonymous authentication successful"
-      );
+function loadMenu(){
 
-    })
+/*
+IMPORTANT FIX:
 
-    .catch(error => {
+Default menu is loaded immediately.
+So Add To Cart will NOT say
+Food item not found while Firebase is loading.
+*/
 
-      console.error(
-        "Anonymous auth error:",
-        error
-      );
+if(!menu.length){
+menu=getDefaultMenu();
+renderProducts();
+}
 
-      showToast(
-        "Firebase authentication failed. Please refresh."
-      );
 
-    });
+const menuRef=ref(db,"settings/menu");
 
+onValue(
 
-  onAuthStateChanged(
-    auth,
-    user => {
+menuRef,
 
-      currentUser =
-        user;
+snapshot=>{
 
-      if(user){
+const data=snapshot.val();
 
-        loadSettings();
 
-        loadMenu();
+/*
+Firebase menu does not exist:
+keep default menu.
+*/
 
-      }
+if(!data){
 
-    }
-  );
+if(!menu.length)
+menu=getDefaultMenu();
 
+}else{
 
-  /* =========================================================
-     SETTINGS
-  ========================================================= */
+const firebaseMenu=Object.entries(data)
+.map(([key,item])=>{
 
-  function loadSettings(){
+const numericId=Number(item.id||key);
 
-    const settingsRef =
-      ref(
-        db,
-        "settings"
-      );
+return {
 
+id:numericId,
 
-    onValue(
+name:item.name||"Food Item",
 
-      settingsRef,
+price:Number(item.price??0),
 
-      snapshot => {
+image:
+item.image ||
+DEFAULT_IMAGES[numericId] ||
+FALLBACK_IMAGE
 
-        const data =
-          snapshot.val() || {};
+};
 
+})
+.filter(item=>item.id);
 
-        settings = {
+if(firebaseMenu.length){
 
-          ...settings,
+menu=firebaseMenu.sort(
+(a,b)=>a.id-b.id
+);
 
-          ...data
+}else{
 
-        };
+menu=getDefaultMenu();
 
+}
 
-        /*
-          SAFE DEFAULTS
-        */
+}
 
-        if(
-          !settings.openTime
-        ){
+renderProducts();
 
-          settings.openTime =
-            DEFAULT_SCHEDULE.openTime;
+},
 
-        }
+error=>{
 
+console.error("Menu error:",error);
 
-        if(
-          !settings.closeTime
-        ){
+/*
+IMPORTANT:
+Do NOT empty menu on Firebase error.
+Keep default/current menu.
+*/
 
-          settings.closeTime =
-            DEFAULT_SCHEDULE.closeTime;
+if(!menu.length)
+menu=getDefaultMenu();
 
-        }
+renderProducts();
 
+}
 
-        if(
-          typeof settings.scheduleEnabled !==
-          "boolean"
-        ){
+);
 
-          settings.scheduleEnabled =
-            true;
+}
 
-        }
 
+/* =====================================================
+   SHOP TIME
+===================================================== */
 
-        if(
-          typeof settings.manualOpen !==
-          "boolean"
-        ){
+function timeToMinutes(time){
 
-          settings.manualOpen =
-            false;
+if(
+!time ||
+!/^\d{2}:\d{2}$/.test(String(time))
+){
+return null;
+}
 
-        }
+const [hours,minutes]=String(time)
+.split(":")
+.map(Number);
 
+if(
+hours<0 ||
+hours>23 ||
+minutes<0 ||
+minutes>59
+){
+return null;
+}
 
-        if(
-          typeof settings.manualClosed !==
-          "boolean"
-        ){
+return hours*60+minutes;
 
-          settings.manualClosed =
-            false;
+}
 
-        }
 
+function isWithinSchedule(){
 
-        applyFontSize();
+const openMinutes=
+timeToMinutes(
+settings.openTime ||
+DEFAULT_SCHEDULE.openTime
+);
 
-        applyWebsiteMode();
+const closeMinutes=
+timeToMinutes(
+settings.closeTime ||
+DEFAULT_SCHEDULE.closeTime
+);
 
-        /*
-          Only update status.
-          No recursive render loop.
-        */
+if(openMinutes===null||closeMinutes===null)
+return true;
 
-        updateShopStatus();
+const now=new Date();
 
-      },
+const currentMinutes=
+now.getHours()*60+
+now.getMinutes();
 
-      error => {
 
-        console.error(
-          "Settings error:",
-          error
-        );
+/* NORMAL */
 
-        showToast(
-          "Unable to load website settings."
-        );
+if(openMinutes<closeMinutes){
 
-      }
+return (
+currentMinutes>=openMinutes &&
+currentMinutes<closeMinutes
+);
 
-    );
+}
 
-  }
 
+/* OVERNIGHT */
 
-  /* =========================================================
-     MENU
-  ========================================================= */
+if(openMinutes>closeMinutes){
 
-  function loadMenu(){
+return (
+currentMinutes>=openMinutes ||
+currentMinutes<closeMinutes
+);
 
-    const menuRef =
-      ref(
-        db,
-        "settings/menu"
-      );
+}
 
 
-    onValue(
+/* SAME TIME = 24 HOURS */
 
-      menuRef,
+return true;
 
-      snapshot => {
+}
 
-        const data =
-          snapshot.val();
 
+/* =====================================================
+   FINAL SHOP STATUS
+===================================================== */
 
-        if(!data){
+function isShopOpen(){
 
-          menu =
-            getDefaultMenu();
+/*
+1. FORCE CLOSED
+*/
 
-        }else{
+if(settings.manualClosed===true)
+return false;
 
-          menu =
-            Object.entries(data)
 
-              .map(
-                ([key,item]) => {
+/*
+2. FORCE OPEN
+*/
 
-                  return {
+if(settings.manualOpen===true)
+return true;
 
-                    id:
-                      Number(
-                        item.id ||
-                        key
-                      ),
 
-                    name:
-                      item.name ||
-                      "Food Item",
+/*
+3. AUTOMATIC
+*/
 
-                    price:
-                      Number(
-                        item.price ||
-                        0
-                      ),
+if(settings.scheduleEnabled===false)
+return true;
 
-                    image:
-                      item.image ||
-                      DEFAULT_IMAGES[
-                        Number(
-                          item.id ||
-                          key
-                        )
-                      ] ||
-                      FALLBACK_IMAGE
+return isWithinSchedule();
 
-                  };
+}
 
-                }
-              )
 
-              .sort(
-                (a,b) =>
-                  a.id - b.id
-              );
+function formatTimeForDisplay(time){
 
-        }
+const minutes=timeToMinutes(time);
 
+if(minutes===null)
+return time;
 
-        renderProducts();
+let hours=Math.floor(minutes/60);
 
-      },
+const mins=minutes%60;
 
-      error => {
+const suffix=hours>=12?"PM":"AM";
 
-        console.error(
-          "Menu error:",
-          error
-        );
+hours=hours%12;
 
-        menu =
-          getDefaultMenu();
+if(hours===0)
+hours=12;
 
-        renderProducts();
+return (
+hours+
+":"+
+String(mins).padStart(2,"0")+
+" "+
+suffix
+);
 
-      }
+}
 
-    );
 
-  }
+function getNextOpenTime(){
 
+return formatTimeForDisplay(
+settings.openTime ||
+DEFAULT_SCHEDULE.openTime
+);
 
-  function getDefaultMenu(){
+}
 
-    return [
 
-      {
-        id:1,
-        name:"Veg Chowmin",
-        price:50,
-        image:DEFAULT_IMAGES[1]
-      },
+/* =====================================================
+   UPDATE SHOP STATUS
+===================================================== */
 
-      {
-        id:2,
-        name:"Veg Roll",
-        price:50,
-        image:DEFAULT_IMAGES[2]
-      },
+function updateShopStatus(){
 
-      {
-        id:3,
-        name:"Manchurian",
-        price:50,
-        image:DEFAULT_IMAGES[3]
-      },
+const badge=document.getElementById("shopStatus");
+const dot=document.getElementById("statusDot");
+const statusBadge=document.getElementById("statusBadge");
+const closedMessage=document.getElementById("closedMessage");
 
-      {
-        id:4,
-        name:"Paneer Tikka",
-        price:60,
-        image:DEFAULT_IMAGES[4]
-      },
+if(!badge||!dot)
+return;
 
-      {
-        id:5,
-        name:"Paneer Butter Masala",
-        price:130,
-        image:DEFAULT_IMAGES[5]
-      },
+const open=isShopOpen();
 
-      {
-        id:6,
-        name:"Egg Chicken Chowmin",
-        price:65,
-        image:DEFAULT_IMAGES[6]
-      },
 
-      {
-        id:7,
-        name:"Egg Chicken Roll",
-        price:60,
-        image:DEFAULT_IMAGES[7]
-      },
+if(open){
 
-      {
-        id:8,
-        name:"Pakoda",
-        price:60,
-        image:DEFAULT_IMAGES[8]
-      },
+badge.textContent="Open • Taking Orders";
 
-      {
-        id:9,
-        name:"Chilli Chicken",
-        price:120,
-        image:DEFAULT_IMAGES[9]
-      },
+dot.classList.remove("closed");
 
-      {
-        id:10,
-        name:"Chicken Garlic",
-        price:80,
-        image:DEFAULT_IMAGES[10]
-      },
+if(statusBadge)
+statusBadge.classList.remove("closed-badge");
 
-      {
-        id:11,
-        name:"Chicken Biriyani",
-        price:120,
-        image:DEFAULT_IMAGES[11]
-      },
+if(closedMessage)
+closedMessage.classList.remove("show");
 
-      {
-        id:12,
-        name:"Veg Biriyani",
-        price:100,
-        image:DEFAULT_IMAGES[12]
-      }
+}else{
 
-    ];
+let text="";
 
-  }
+if(settings.manualClosed===true){
 
+text=
+String(
+settings.closedMessage ||
+"Closed • Temporarily not accepting orders"
+).trim();
 
-  /* =========================================================
-     SHOP STATUS
-  ========================================================= */
+}else{
 
-  function timeToMinutes(time){
+text=
+"Closed • Opens at "+
+getNextOpenTime();
 
-    if(
-      !time ||
-      !/^\d{2}:\d{2}$/.test(
-        String(time)
-      )
-    ){
+}
 
-      return null;
+badge.textContent=text;
 
-    }
+dot.classList.add("closed");
 
+if(statusBadge)
+statusBadge.classList.add("closed-badge");
 
-    const parts =
-      String(time)
-        .split(":")
-        .map(Number);
+if(closedMessage){
 
+closedMessage.textContent="🔴 SHOP IS CLOSED";
+closedMessage.classList.add("show");
 
-    const hours =
-      parts[0];
+}
 
-    const minutes =
-      parts[1];
+}
 
 
-    if(
-      hours < 0 ||
-      hours > 23 ||
-      minutes < 0 ||
-      minutes > 59
-    ){
+/*
+Update buttons.
 
-      return null;
+This is safe because renderProducts()
+does NOT call updateShopStatus().
+*/
 
-    }
+renderProducts();
 
+}
 
-    return (
-      hours * 60 +
-      minutes
-    );
 
-  }
+/*
+Automatic status check.
+*/
 
+setInterval(
+()=>{
+updateShopStatus();
+},
+15000
+);
 
-  function isWithinSchedule(){
 
-    const openMinutes =
-      timeToMinutes(
-        settings.openTime ||
-        DEFAULT_SCHEDULE.openTime
-      );
+/* =====================================================
+   PRODUCTS
+===================================================== */
 
+function renderProducts(){
 
-    const closeMinutes =
-      timeToMinutes(
-        settings.closeTime ||
-        DEFAULT_SCHEDULE.closeTime
-      );
+const grid=document.getElementById("productsGrid");
 
+if(!grid)
+return;
 
-    /*
-      Invalid timing = keep shop open
-      rather than incorrectly showing closed.
-    */
 
-    if(
-      openMinutes === null ||
-      closeMinutes === null
-    ){
+/*
+IMPORTANT FIX:
+Never show Food item not found because
+menu is temporarily empty.
+*/
 
-      return true;
+if(!Array.isArray(menu)||!menu.length){
 
-    }
+grid.innerHTML=`
+<div class="empty">
+Menu is currently loading...
+</div>
+`;
 
+return;
 
-    const now =
-      new Date();
+}
 
 
-    const currentMinutes =
-      now.getHours() * 60 +
-      now.getMinutes();
+const shopOpen=isShopOpen();
 
+grid.innerHTML=menu.map(item=>{
 
-    /*
-      SAME DAY
+const safeId=Number(item.id);
 
-      Example:
-      12:00 -> 23:00
+let addButton="";
 
-      Open:
-      12:00 inclusive
-      23:00 exclusive
-    */
 
-    if(
-      openMinutes <
-      closeMinutes
-    ){
+if(shopOpen){
 
-      return (
-        currentMinutes >=
-        openMinutes &&
-        currentMinutes <
-        closeMinutes
-      );
+addButton=`
 
-    }
+<button
+class="add-btn"
+id="addBtn-${safeId}"
+onclick="addToCart(${safeId})">
++ Add
+</button>
 
+`;
 
-    /*
-      OVERNIGHT
+}else{
 
-      Example:
-      18:00 -> 02:00
+addButton=`
 
-      Open:
-      18:00 -> 23:59
-      00:00 -> 01:59
-    */
+<button
+class="add-btn"
+disabled
+style="opacity:.45;cursor:not-allowed;">
+Closed
+</button>
 
-    if(
-      openMinutes >
-      closeMinutes
-    ){
+`;
 
-      return (
-        currentMinutes >=
-        openMinutes ||
-        currentMinutes <
-        closeMinutes
-      );
+}
 
-    }
 
+return `
 
-    /*
-      openTime == closeTime
+<div class="product-card">
 
-      Treat as 24-hour open.
-    */
+<div class="product-image-wrap">
 
-    return true;
+<img
+class="product-image"
+src="${escapeHtml(
+item.image||
+DEFAULT_IMAGES[safeId]||
+FALLBACK_IMAGE
+)}"
+alt="${escapeHtml(item.name)}"
+loading="lazy"
+onerror="this.src='${FALLBACK_IMAGE}'">
 
-  }
+<div class="food-number">
+#${safeId}
+</div>
 
+</div>
 
-  /*
-    FINAL SHOP OPEN LOGIC
+<div class="product-body">
 
-    Priority:
+<div class="product-name">
+${escapeHtml(item.name)}
+</div>
 
-    1. manualClosed
-    2. manualOpen
-    3. schedule
-  */
+<div class="product-bottom">
 
-  function isShopOpen(){
+<div class="price">
+₹${Number(item.price)}
+</div>
 
-    /*
-      ADMIN FORCE CLOSED
-    */
+${addButton}
 
-    if(
-      settings.manualClosed ===
-      true
-    ){
+</div>
 
-      return false;
+</div>
+</div>
 
-    }
+`;
 
+}).join("");
 
-    /*
-      ADMIN FORCE OPEN
+}
 
-      This works even if current time
-      is outside normal schedule.
-    */
 
-    if(
-      settings.manualOpen ===
-      true
-    ){
+/* =====================================================
+   CART
+===================================================== */
 
-      return true;
+function loadCart(){
 
-    }
+try{
 
+const saved=localStorage.getItem("tqf_cart");
 
-    /*
-      AUTOMATIC MODE
-    */
+cart=saved?JSON.parse(saved):[];
 
-    if(
-      settings.scheduleEnabled ===
-      false
-    ){
+if(!Array.isArray(cart))
+cart=[];
 
-      return true;
+}catch(error){
 
-    }
+cart=[];
 
+}
 
-    return isWithinSchedule();
+renderCart();
 
-  }
+}
 
 
-  function formatTimeForDisplay(time){
+function saveCart(){
 
-    const minutes =
-      timeToMinutes(
-        time
-      );
+localStorage.setItem(
+"tqf_cart",
+JSON.stringify(cart)
+);
 
+renderCart();
 
-    if(
-      minutes === null
-    ){
+}
 
-      return time;
 
-    }
+/* =====================================================
+   CART ANIMATION
+===================================================== */
 
+function animateCart(){
 
-    let hours =
-      Math.floor(
-        minutes / 60
-      );
+const cartButton=
+document.getElementById("cartButton");
 
+const cartCount=
+document.getElementById("cartCount");
 
-    const mins =
-      minutes % 60;
 
+if(cartButton){
 
-    const suffix =
-      hours >= 12
-        ? "PM"
-        : "AM";
+cartButton.classList.remove(
+"cart-bounce",
+"cart-flash"
+);
 
+void cartButton.offsetWidth;
 
-    hours =
-      hours % 12;
+cartButton.classList.add(
+"cart-bounce",
+"cart-flash"
+);
 
+}
 
-    if(
-      hours === 0
-    ){
 
-      hours = 12;
+if(cartCount){
 
-    }
+cartCount.classList.remove(
+"cart-count-pop"
+);
 
+void cartCount.offsetWidth;
 
-    return (
-      hours +
-      ":" +
-      String(mins)
-        .padStart(2,"0") +
-      " " +
-      suffix
-    );
+cartCount.classList.add(
+"cart-count-pop"
+);
 
-  }
+}
 
 
-  function getNextOpenTime(){
+setTimeout(()=>{
 
-    return formatTimeForDisplay(
-      settings.openTime ||
-      DEFAULT_SCHEDULE.openTime
-    );
+if(cartButton){
 
-  }
+cartButton.classList.remove(
+"cart-bounce",
+"cart-flash"
+);
 
+}
 
-  /*
-    THIS FUNCTION ONLY UPDATES STATUS UI.
+if(cartCount){
 
-    It DOES NOT call itself.
-    It DOES NOT call updateShopStatus again.
-  */
+cartCount.classList.remove(
+"cart-count-pop"
+);
 
-  function updateShopStatus(){
+}
 
-    const badge =
-      document.getElementById(
-        "shopStatus"
-      );
+},750);
 
-    const dot =
-      document.getElementById(
-        "statusDot"
-      );
+}
 
-    const statusBadge =
-      document.getElementById(
-        "statusBadge"
-      );
 
-    const closedMessage =
-      document.getElementById(
-        "closedMessage"
-      );
+/* =====================================================
+   ADD TO CART
+===================================================== */
 
+function addToCart(id){
 
-    if(
-      !badge ||
-      !dot
-    ){
+/*
+CHECK SHOP
+*/
 
-      return;
+if(!isShopOpen()){
 
-    }
+updateShopStatus();
 
+showToast(
+settings.manualClosed &&
+settings.closedMessage
+?
+settings.closedMessage
+:
+"SHOP IS CLOSED."
+);
 
-    const open =
-      isShopOpen();
+return;
 
+}
 
-    if(open){
 
-      badge.textContent =
-        "Open • Taking Orders";
+/*
+IMPORTANT FIX:
 
+Convert id to Number.
+Firebase IDs and HTML IDs can be strings.
+*/
 
-      dot.classList.remove(
-        "closed"
-      );
+const numericId=Number(id);
 
 
-      if(statusBadge){
+/*
+Find food item.
+*/
 
-        statusBadge.classList.remove(
-          "closed-badge"
-        );
+let item=menu.find(
+product=>Number(product.id)===numericId
+);
 
-      }
 
+/*
+If Firebase menu is still loading,
+try default menu.
+*/
 
-      if(closedMessage){
+if(!item){
 
-        closedMessage.classList.remove(
-          "show"
-        );
+const defaultItem=
+getDefaultMenu().find(
+product=>Number(product.id)===numericId
+);
 
-      }
+if(defaultItem){
 
-    }else{
+item=defaultItem;
 
-      let statusText =
-        "";
+/*
+Put it into current menu only
+if current menu is empty.
+*/
 
+if(!menu.length){
 
-      /*
-        If admin manually closed,
-        show custom/manual message.
-      */
+menu=getDefaultMenu();
 
-      if(
-        settings.manualClosed ===
-        true
-      ){
+}
 
-        statusText =
-          String(
-            settings.closedMessage ||
-            "Closed • Temporarily not accepting orders"
-          ).trim();
+}
 
-      }else{
+}
 
-        statusText =
-          "Closed • Opens at " +
-          getNextOpenTime();
 
-      }
+/*
+Only show error if item REALLY does not exist.
+*/
 
+if(!item){
 
-      badge.textContent =
-        statusText;
+console.error(
+"Food item not found. ID:",
+numericId,
+"Current menu:",
+menu
+);
 
+showToast(
+"Food item is currently unavailable."
+);
 
-      dot.classList.add(
-        "closed"
-      );
+return;
 
+}
 
-      if(statusBadge){
 
-        statusBadge.classList.add(
-          "closed-badge"
-        );
+/*
+Find existing cart item.
+*/
 
-      }
+const existing=cart.find(
+product=>Number(product.id)===numericId
+);
 
 
-      if(closedMessage){
+if(existing){
 
-        closedMessage.textContent =
-          "🔴 SHOP IS CLOSED";
+existing.qty=
+Number(existing.qty||0)+1;
 
-        closedMessage.classList.add(
-          "show"
-        );
+}else{
 
-      }
+cart.push({
 
-    }
+id:numericId,
 
+name:item.name,
 
-    /*
-      Update menu buttons after status changed.
-    */
+price:Number(item.price||0),
 
-    renderProducts();
+qty:1,
 
-  }
+image:item.image||FALLBACK_IMAGE
 
+});
 
-  /*
-    Check every 15 seconds.
+}
 
-    This means if shop becomes 11:00 PM closed,
-    website will update automatically without refresh.
-  */
 
-  setInterval(
-    () => {
+/*
+SAVE
+*/
 
-      updateShopStatus();
+saveCart();
 
-    },
-    15000
-  );
 
+/*
+CART ANIMATION
+*/
 
-  /* =========================================================
-     PRODUCTS
-  ========================================================= */
+animateCart();
 
-  function renderProducts(){
 
-    const grid =
-      document.getElementById(
-        "productsGrid"
-      );
+/*
+BUTTON ANIMATION
+*/
 
+const button=
+document.getElementById(
+"addBtn-"+numericId
+);
 
-    if(!grid){
+if(button){
 
-      return;
+const oldText=button.textContent;
 
-    }
+button.classList.add("added");
 
+button.textContent="✓ Added";
 
-    if(!menu.length){
+setTimeout(()=>{
 
-      grid.innerHTML =
-        `
-          <div class="empty">
-            Menu is currently unavailable.
-          </div>
-        `;
+if(button){
 
-      return;
+button.classList.remove("added");
 
-    }
+button.textContent=oldText;
 
+}
 
-    const shopOpen =
-      isShopOpen();
+},700);
 
+}
 
-    grid.innerHTML =
 
-      menu.map(
-        item => {
+/*
+TOAST
+*/
 
-          const addButton =
-            shopOpen
+showToast(
+item.name+
+" added to cart. 🛒"
+);
 
-              ? `
+}
 
-                <button
-                  class="add-btn"
-                  onclick="addToCart(${item.id})"
-                >
-                  + Add
-                </button>
 
-              `
+/* =====================================================
+   QUANTITY
+===================================================== */
 
-              : `
+function changeQty(id,change){
 
-                <button
-                  class="add-btn"
-                  disabled
-                  style="
-                    opacity:.45;
-                    cursor:not-allowed;
-                  "
-                >
-                  Closed
-                </button>
+const numericId=Number(id);
 
-              `;
+const item=cart.find(
+product=>Number(product.id)===numericId
+);
 
+if(!item)
+return;
 
-          return `
+item.qty=Number(item.qty)+Number(change);
 
-            <div class="product-card">
+if(item.qty<=0){
 
-              <div class="product-image-wrap">
+cart=cart.filter(
+product=>Number(product.id)!==numericId
+);
 
-                <img
-                  class="product-image"
-                  src="${escapeHtml(
-                    item.image ||
-                    DEFAULT_IMAGES[item.id] ||
-                    FALLBACK_IMAGE
-                  )}"
-                  alt="${escapeHtml(item.name)}"
-                  loading="lazy"
-                  onerror="this.src='${FALLBACK_IMAGE}'"
-                />
+}
 
-                <div class="food-number">
-                  #${item.id}
-                </div>
+saveCart();
 
-              </div>
+}
 
 
-              <div class="product-body">
+function removeFromCart(id){
 
-                <div class="product-name">
-                  ${escapeHtml(item.name)}
-                </div>
+const numericId=Number(id);
 
+cart=cart.filter(
+item=>Number(item.id)!==numericId
+);
 
-                <div class="product-bottom">
+saveCart();
 
-                  <div class="price">
-                    ₹${item.price}
-                  </div>
+}
 
-                  ${addButton}
 
-                </div>
+function getFoodTotal(){
 
-              </div>
+return cart.reduce(
+(sum,item)=>
+sum+
+Number(item.price)*
+Number(item.qty),
+0
+);
 
-            </div>
+}
 
-          `;
 
-        }
-      ).join("");
+/* =====================================================
+   RENDER CART
+===================================================== */
 
-  }
+function renderCart(){
 
+const count=cart.reduce(
+(sum,item)=>
+sum+Number(item.qty),
+0
+);
 
-  /* =========================================================
-     CART
-  ========================================================= */
+const countElement=
+document.getElementById("cartCount");
 
-  function loadCart(){
+if(countElement)
+countElement.textContent=count;
 
-    try{
 
-      const saved =
-        localStorage.getItem(
-          "tqf_cart"
-        );
+const container=
+document.getElementById("cartItems");
 
+const total=
+document.getElementById("cartTotal");
 
-      cart =
-        saved
-          ? JSON.parse(saved)
-          : [];
+if(!container)
+return;
 
-    }catch(error){
 
-      cart = [];
+if(!cart.length){
 
-    }
+container.innerHTML=`
 
+<div class="empty">
 
-    renderCart();
+🛒 Your cart is empty.
 
-  }
+<br><br>
 
+Add something delicious.
 
-  function saveCart(){
+</div>
 
-    localStorage.setItem(
-      "tqf_cart",
-      JSON.stringify(cart)
-    );
+`;
 
+}else{
 
-    renderCart();
+container.innerHTML=
 
-  }
+cart.map(item=>{
 
+const subtotal=
+Number(item.price)*
+Number(item.qty);
 
-  function animateCart(){
+return `
 
-    const cartButton =
-      document.getElementById(
-        "cartButton"
-      );
+<div class="cart-item">
 
+<div>
 
-    const cartCount =
-      document.getElementById(
-        "cartCount"
-      );
+<div class="cart-item-name">
+${escapeHtml(item.name)}
+</div>
 
+<div class="cart-item-price">
+₹${item.price} × ${item.qty}
+= ₹${subtotal}
+</div>
 
-    if(cartButton){
+</div>
 
-      cartButton.classList.remove(
-        "cart-bounce"
-      );
+<div class="qty-box">
 
+<button
+class="qty-btn"
+onclick="changeQty(${Number(item.id)},-1)">
+−
+</button>
 
-      void cartButton.offsetWidth;
+<span class="qty-value">
+${item.qty}
+</span>
 
+<button
+class="qty-btn"
+onclick="changeQty(${Number(item.id)},1)">
++
+</button>
 
-      cartButton.classList.add(
-        "cart-bounce"
-      );
+</div>
 
-    }
+<button
+class="remove-btn"
+onclick="removeFromCart(${Number(item.id)})">
+Remove
+</button>
 
+</div>
 
-    if(cartCount){
+`;
 
-      cartCount.classList.remove(
-        "cart-count-pop"
-      );
+}).join("");
 
+}
 
-      void cartCount.offsetWidth;
 
+if(total)
+total.textContent="₹"+getFoodTotal();
 
-      cartCount.classList.add(
-        "cart-count-pop"
-      );
+}
 
-    }
 
+function openCart(){
 
-    setTimeout(
-      () => {
+renderCart();
 
-        if(cartButton){
+openModal("cartModal");
 
-          cartButton.classList.remove(
-            "cart-bounce"
-          );
+}
 
-        }
 
-        if(cartCount){
+/* =====================================================
+   CHECKOUT
+===================================================== */
 
-          cartCount.classList.remove(
-            "cart-count-pop"
-          );
+function openCheckout(){
 
-        }
+if(!cart.length){
 
-      },
-      700
-    );
+showToast("Your cart is empty.");
 
-  }
+return;
 
+}
 
-  function addToCart(id){
 
-    /*
-      ALWAYS check latest status.
-    */
+if(!isShopOpen()){
 
-    if(
-      !isShopOpen()
-    ){
+updateShopStatus();
 
-      updateShopStatus();
+closeModal("cartModal");
 
-      showToast(
-        settings.manualClosed &&
-        settings.closedMessage
-          ? settings.closedMessage
-          : "SHOP IS CLOSED."
-      );
+showToast(
+settings.closedMessage||
+"SHOP IS CLOSED."
+);
 
-      return;
+return;
 
-    }
+}
 
 
-    const item =
-      menu.find(
-        product =>
-          Number(product.id) ===
-          Number(id)
-      );
+closeModal("cartModal");
 
+openModal("checkoutModal");
 
-    if(!item){
+updateCheckoutSummary();
 
-      showToast(
-        "Food item not found."
-      );
 
-      return;
+if(!customerLocation){
 
-    }
+setTimeout(
+()=>getLocation(false),
+300
+);
 
+}
 
-    const existing =
-      cart.find(
-        product =>
-          Number(product.id) ===
-          Number(id)
-      );
+}
 
 
-    if(existing){
+/* =====================================================
+   CHECKOUT SUMMARY
+===================================================== */
 
-      existing.qty += 1;
+function updateCheckoutSummary(){
 
-    }else{
+const foodTotal=getFoodTotal();
 
-      cart.push({
+const foodElement=
+document.getElementById("checkoutFoodTotal");
 
-        id:
-          item.id,
+if(foodElement)
+foodElement.textContent="₹"+foodTotal;
 
-        name:
-          item.name,
 
-        price:
-          Number(item.price),
+const distanceElement=
+document.getElementById("checkoutDistance");
 
-        qty:
-          1,
+const deliveryElement=
+document.getElementById("checkoutDelivery");
 
-        image:
-          item.image
+const grandTotalElement=
+document.getElementById("checkoutGrandTotal");
 
-      });
 
-    }
+if(deliveryDistance!==null){
 
+if(distanceElement)
+distanceElement.textContent=
+formatDistance(deliveryDistance);
 
-    saveCart();
+if(deliveryElement)
+deliveryElement.textContent=
+"₹"+deliveryCharge;
 
-    animateCart();
+}else{
 
+if(distanceElement)
+distanceElement.textContent="--";
 
-    showToast(
-      item.name +
-      " added to cart. 🛒"
-    );
+if(deliveryElement)
+deliveryElement.textContent="₹0";
 
-  }
+}
 
 
-  function changeQty(
-    id,
-    change
-  ){
+if(grandTotalElement){
 
-    const item =
-      cart.find(
-        product =>
-          Number(product.id) ===
-          Number(id)
-      );
+grandTotalElement.textContent=
+"₹"+
+(foodTotal+deliveryCharge);
 
+}
 
-    if(!item){
+}
 
-      return;
 
-    }
+/* =====================================================
+   LOCATION
+===================================================== */
 
+function getLocation(showMessage=true){
 
-    item.qty += change;
+if(!navigator.geolocation){
 
+setLocationStatus(
+"Your browser does not support location.",
+false
+);
 
-    if(item.qty <= 0){
+return;
 
-      cart =
-        cart.filter(
-          product =>
-            Number(product.id) !==
-            Number(id)
-        );
+}
 
-    }
 
+setLocationStatus(
+"📍 Detecting your location...",
+false
+);
 
-    saveCart();
 
-  }
+navigator.geolocation.getCurrentPosition(
 
+async position=>{
 
-  function removeFromCart(id){
+customerLocation={
 
-    cart =
-      cart.filter(
-        item =>
-          Number(item.id) !==
-          Number(id)
-      );
+lat:position.coords.latitude,
 
+lng:position.coords.longitude
 
-    saveCart();
+};
 
-  }
 
+setLocationStatus(
+"📍 Location detected. Calculating road distance...",
+false
+);
 
-  function getFoodTotal(){
 
-    return cart.reduce(
+try{
 
-      (sum,item) =>
-        sum +
-        Number(item.price) *
-        Number(item.qty),
+await calculateRoadDistance(
+customerLocation.lat,
+customerLocation.lng
+);
 
-      0
+setLocationStatus(
+"✓ Location detected and road delivery distance calculated.",
+true
+);
 
-    );
+}catch(error){
 
-  }
+console.error(error);
 
+setLocationStatus(
+"Location detected, but road distance could not be calculated.",
+false
+);
 
-  function renderCart(){
+}
 
-    const count =
-      cart.reduce(
+},
 
-        (sum,item) =>
-          sum +
-          Number(item.qty),
+error=>{
 
-        0
+console.error(
+"Geolocation error:",
+error
+);
 
-      );
+setLocationStatus(
+"Please allow location permission and try again.",
+false
+);
 
+if(showMessage){
 
-    const countElement =
-      document.getElementById(
-        "cartCount"
-      );
+showToast(
+"Location permission is required."
+);
 
+}
 
-    if(countElement){
+},
 
-      countElement.textContent =
-        count;
+{
+enableHighAccuracy:true,
+timeout:15000,
+maximumAge:0
+}
 
-    }
+);
 
+}
 
-    const container =
-      document.getElementById(
-        "cartItems"
-      );
 
+function setLocationStatus(message,success){
 
-    const total =
-      document.getElementById(
-        "cartTotal"
-      );
+const element=
+document.getElementById("locationStatus");
 
+if(!element)
+return;
 
-    if(!container){
+element.textContent=message;
 
-      return;
+element.className=
+success
+?
+"location-status success"
+:
+"location-status";
 
-    }
+}
 
 
-    if(!cart.length){
+/* =====================================================
+   ROAD DISTANCE
+===================================================== */
 
-      container.innerHTML =
-        `
-          <div class="empty">
-            🛒 Your cart is empty.
-            <br><br>
-            Add something delicious.
-          </div>
-        `;
+async function calculateRoadDistance(lat,lng){
 
-    }else{
+const url=
+"https://router.project-osrm.org/route/v1/driving/"+
+`${RESTAURANT_LNG},${RESTAURANT_LAT};`+
+`${lng},${lat}?overview=false`;
 
-      container.innerHTML =
 
-        cart.map(
-          item => {
+const response=await fetch(url);
 
-            const subtotal =
-              Number(item.price) *
-              Number(item.qty);
+if(!response.ok)
+throw new Error("OSRM request failed");
 
 
-            return `
+const data=await response.json();
 
-              <div class="cart-item">
+if(!data.routes||!data.routes.length)
+throw new Error("No road route found");
 
-                <div>
 
-                  <div class="cart-item-name">
-                    ${escapeHtml(item.name)}
-                  </div>
+const meters=data.routes[0].distance;
 
-                  <div class="cart-item-price">
-                    ₹${item.price} × ${item.qty}
-                    = ₹${subtotal}
-                  </div>
+deliveryDistance=meters/1000;
 
-                </div>
 
+/*
+₹6 per KM.
+Partial KM rounded UP.
+*/
 
-                <div class="qty-box">
+deliveryCharge=
+Math.ceil(deliveryDistance)*
+DELIVERY_RATE;
 
-                  <button
-                    class="qty-btn"
-                    onclick="changeQty(${item.id},-1)"
-                  >
-                    −
-                  </button>
+updateCheckoutSummary();
 
-                  <span class="qty-value">
-                    ${item.qty}
-                  </span>
+return deliveryDistance;
 
-                  <button
-                    class="qty-btn"
-                    onclick="changeQty(${item.id},1)"
-                  >
-                    +
-                  </button>
+}
 
-                </div>
 
+function formatDistance(km){
 
-                <button
-                  class="remove-btn"
-                  onclick="removeFromCart(${item.id})"
-                >
-                  Remove
-                </button>
+return Number(km).toFixed(1)+" KM";
 
-              </div>
+}
 
-            `;
 
-          }
-        ).join("");
+/* =====================================================
+   PLACE ORDER
+===================================================== */
 
-    }
+async function placeOrder(){
 
+if(!currentUser){
 
-    if(total){
+showToast(
+"Please wait for authentication."
+);
 
-      total.textContent =
-        "₹" +
-        getFoodTotal();
+return;
 
-    }
+}
 
-  }
 
+if(!cart.length){
 
-  function openCart(){
+showToast(
+"Your cart is empty."
+);
 
-    renderCart();
+return;
 
-    openModal(
-      "cartModal"
-    );
+}
 
-  }
 
+if(!isShopOpen()){
 
-  /* =========================================================
-     CHECKOUT
-  ========================================================= */
+updateShopStatus();
 
-  function openCheckout(){
+showToast(
+settings.closedMessage||
+"SHOP IS CLOSED."
+);
 
-    if(!cart.length){
+return;
 
-      showToast(
-        "Your cart is empty."
-      );
+}
 
-      return;
 
-    }
+const name=
+document.getElementById(
+"customerName"
+).value.trim();
 
+const phone=
+document.getElementById(
+"customerPhone"
+).value.trim();
 
-    if(!isShopOpen()){
+const address=
+document.getElementById(
+"customerAddress"
+).value.trim();
 
-      updateShopStatus();
+const paymentMethod=
+document.getElementById(
+"paymentMethod"
+).value;
 
-      closeModal(
-        "cartModal"
-      );
 
-      showToast(
-        settings.closedMessage ||
-        "SHOP IS CLOSED."
-      );
+if(!name){
 
-      return;
+showToast(
+"Please enter your name."
+);
 
-    }
+return;
 
+}
 
-    closeModal(
-      "cartModal"
-    );
 
+if(!/^[6-9]\d{9}$/.test(phone)){
 
-    openModal(
-      "checkoutModal"
-    );
+showToast(
+"Please enter a valid 10-digit phone number."
+);
 
+return;
 
-    updateCheckoutSummary();
+}
 
 
-    if(!customerLocation){
+if(!address){
 
-      setTimeout(
-        () => {
+showToast(
+"Please enter delivery address."
+);
 
-          getLocation(false);
+return;
 
-        },
-        300
-      );
+}
 
-    }
 
-  }
+if(!customerLocation){
 
+showToast(
+"Please detect your location first."
+);
 
-  function updateCheckoutSummary(){
+getLocation(true);
 
-    const foodTotal =
-      getFoodTotal();
+return;
 
+}
 
-    const foodElement =
-      document.getElementById(
-        "checkoutFoodTotal"
-      );
 
+const button=
+document.getElementById(
+"placeOrderBtn"
+);
 
-    if(foodElement){
+button.disabled=true;
+button.textContent="Placing Order...";
 
-      foodElement.textContent =
-        "₹" +
-        foodTotal;
 
-    }
+try{
 
+/*
+Final shop check.
+*/
 
-    const distanceElement =
-      document.getElementById(
-        "checkoutDistance"
-      );
+if(!isShopOpen()){
 
+throw new Error(
+"SHOP IS CLOSED."
+);
 
-    const deliveryElement =
-      document.getElementById(
-        "checkoutDelivery"
-      );
+}
 
 
-    const grandTotalElement =
-      document.getElementById(
-        "checkoutGrandTotal"
-      );
+await calculateRoadDistance(
+customerLocation.lat,
+customerLocation.lng
+);
 
 
-    if(
-      deliveryDistance !== null
-    ){
+const orderId=
+await generateOrderId();
 
-      if(distanceElement){
 
-        distanceElement.textContent =
-          formatDistance(
-            deliveryDistance
-          );
+const foodTotal=
+getFoodTotal();
 
-      }
+const total=
+foodTotal+
+deliveryCharge;
 
 
-      if(deliveryElement){
+const orderKey=
+push(ref(db,"orders")).key;
 
-        deliveryElement.textContent =
-          "₹" +
-          deliveryCharge;
 
-      }
+const orderItems=
+cart.map(item=>({
 
-    }else{
+id:Number(item.id),
 
-      if(distanceElement){
+name:item.name,
 
-        distanceElement.textContent =
-          "--";
+price:Number(item.price),
 
-      }
+qty:Number(item.qty),
 
+subtotal:
+Number(item.price)*
+Number(item.qty)
 
-      if(deliveryElement){
+}));
 
-        deliveryElement.textContent =
-          "₹0";
 
-      }
+const now=Date.now();
 
-    }
 
+const order={
 
-    if(grandTotalElement){
+orderId,
 
-      grandTotalElement.textContent =
-        "₹" +
-        (
-          foodTotal +
-          deliveryCharge
-        );
+ownerUid:currentUser.uid,
 
-    }
+customerName:name,
 
-  }
+customerPhone:phone,
 
+address,
 
-  /* =========================================================
-     LOCATION
-  ========================================================= */
+latitude:customerLocation.lat,
 
-  function getLocation(
-    showMessage=true
-  ){
+longitude:customerLocation.lng,
 
-    if(
-      !navigator.geolocation
-    ){
+distanceKm:deliveryDistance,
 
-      setLocationStatus(
-        "Your browser does not support location.",
-        false
-      );
+deliveryCharge,
 
-      return;
+foodTotal,
 
-    }
+total,
 
+paymentMethod,
 
-    setLocationStatus(
-      "📍 Detecting your location...",
-      false
-    );
+status:"Received",
 
+items:orderItems,
 
-    navigator.geolocation.getCurrentPosition(
+createdAt:now,
 
-      async position => {
+updatedAt:now
 
-        customerLocation = {
+};
 
-          lat:
-            position.coords.latitude,
 
-          lng:
-            position.coords.longitude
+await set(
+ref(db,"orders/"+orderKey),
+order
+);
 
-        };
 
+await set(
+ref(
+db,
+"customerOrders/"+
+currentUser.uid+
+"/"+
+orderKey
+),
+order
+);
 
-        setLocationStatus(
-          "📍 Location detected. Calculating road distance...",
-          false
-        );
 
+currentOrder={
+key:orderKey,
+...order
+};
 
-        try{
 
-          await calculateRoadDistance(
-            customerLocation.lat,
-            customerLocation.lng
-          );
+document.getElementById(
+"successOrderId"
+).textContent=orderId;
 
 
-          setLocationStatus(
-            "✓ Location detected and road delivery distance calculated.",
-            true
-          );
+closeModal("checkoutModal");
 
-        }catch(error){
+openModal("successModal");
 
-          console.error(
-            error
-          );
 
+cart=[];
 
-          setLocationStatus(
-            "Location detected, but road distance could not be calculated.",
-            false
-          );
+saveCart();
 
-        }
+deliveryDistance=null;
+deliveryCharge=0;
+customerLocation=null;
 
-      },
 
+document.getElementById(
+"customerName"
+).value="";
 
-      error => {
+document.getElementById(
+"customerPhone"
+).value="";
 
-        console.error(
-          "Geolocation error:",
-          error
-        );
+document.getElementById(
+"customerAddress"
+).value="";
 
 
-        setLocationStatus(
-          "Please allow location permission and try again.",
-          false
-        );
+}catch(error){
 
+console.error(
+"Order error:",
+error
+);
 
-        if(showMessage){
+showToast(
+"Order failed: "+
+(error.message||"Please try again.")
+);
 
-          showToast(
-            "Location permission is required."
-          );
+}finally{
 
-        }
+button.disabled=false;
+button.textContent="Place Order";
 
-      },
+}
 
+}
 
-      {
 
-        enableHighAccuracy:
-          true,
+/* =====================================================
+   ORDER ID
+===================================================== */
 
-        timeout:
-          15000,
+async function generateOrderId(){
 
-        maximumAge:
-          0
+const year=
+new Date().getFullYear();
 
-      }
+const counterRef=
+ref(
+db,
+`counters/orders/${year}`
+);
 
-    );
 
-  }
+const result=
+await runTransaction(
+counterRef,
+current=>{
 
+if(current===null)
+return 1;
 
-  function setLocationStatus(
-    message,
-    success
-  ){
+return Number(current)+1;
 
-    const element =
-      document.getElementById(
-        "locationStatus"
-      );
+}
+);
 
 
-    if(!element){
+const serial=
+result.snapshot.val();
 
-      return;
 
-    }
+return (
+"TQF"+
+year+
+"-"+
+String(serial).padStart(3,"0")
+);
 
+}
 
-    element.textContent =
-      message;
 
+/* =====================================================
+   WHATSAPP
+===================================================== */
 
-    element.className =
-      success
-        ? "location-status success"
-        : "location-status";
+function buildWhatsAppMessage(order){
 
-  }
+const itemLines=
+order.items
+.map(
+item=>
+`• ${item.name} × ${item.qty} = ₹${item.subtotal}`
+)
+.join("\n");
 
 
-  /* =========================================================
-     ROAD DISTANCE
-  ========================================================= */
-
-  async function calculateRoadDistance(
-    lat,
-    lng
-  ){
-
-    const url =
-      `https://router.project-osrm.org/route/v1/driving/` +
-      `${RESTAURANT_LNG},${RESTAURANT_LAT};` +
-      `${lng},${lat}?overview=false`;
-
-
-    const response =
-      await fetch(url);
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "OSRM request failed"
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if(
-      !data.routes ||
-      !data.routes.length
-    ){
-
-      throw new Error(
-        "No road route found"
-      );
-
-    }
-
-
-    const meters =
-      data.routes[0].distance;
-
-
-    deliveryDistance =
-      meters / 1000;
-
-
-    deliveryCharge =
-      Math.ceil(
-        deliveryDistance
-      ) *
-      DELIVERY_RATE;
-
-
-    updateCheckoutSummary();
-
-
-    return deliveryDistance;
-
-  }
-
-
-  function formatDistance(km){
-
-    return (
-      Number(km).toFixed(1) +
-      " KM"
-    );
-
-  }
-
-
-  /* =========================================================
-     PLACE ORDER
-  ========================================================= */
-
-  async function placeOrder(){
-
-    if(!currentUser){
-
-      showToast(
-        "Please wait for authentication."
-      );
-
-      return;
-
-    }
-
-
-    if(!cart.length){
-
-      showToast(
-        "Your cart is empty."
-      );
-
-      return;
-
-    }
-
-
-    if(!isShopOpen()){
-
-      updateShopStatus();
-
-      showToast(
-        settings.closedMessage ||
-        "SHOP IS CLOSED."
-      );
-
-      return;
-
-    }
-
-
-    const name =
-      document.getElementById(
-        "customerName"
-      ).value.trim();
-
-
-    const phone =
-      document.getElementById(
-        "customerPhone"
-      ).value.trim();
-
-
-    const address =
-      document.getElementById(
-        "customerAddress"
-      ).value.trim();
-
-
-    const paymentMethod =
-      document.getElementById(
-        "paymentMethod"
-      ).value;
-
-
-    if(!name){
-
-      showToast(
-        "Please enter your name."
-      );
-
-      return;
-
-    }
-
-
-    if(
-      !/^[6-9]\d{9}$/.test(phone)
-    ){
-
-      showToast(
-        "Please enter a valid 10-digit phone number."
-      );
-
-      return;
-
-    }
-
-
-    if(!address){
-
-      showToast(
-        "Please enter delivery address."
-      );
-
-      return;
-
-    }
-
-
-    if(!customerLocation){
-
-      showToast(
-        "Please detect your location first."
-      );
-
-
-      getLocation(true);
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "placeOrderBtn"
-      );
-
-
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "Placing Order...";
-
-
-    try{
-
-      /*
-        Check shop again immediately
-        before saving order.
-      */
-
-      if(!isShopOpen()){
-
-        throw new Error(
-          "SHOP IS CLOSED."
-        );
-
-      }
-
-
-      await calculateRoadDistance(
-        customerLocation.lat,
-        customerLocation.lng
-      );
-
-
-      const orderId =
-        await generateOrderId();
-
-
-      const foodTotal =
-        getFoodTotal();
-
-
-      const total =
-        foodTotal +
-        deliveryCharge;
-
-
-      const orderKey =
-        push(
-          ref(db,"orders")
-        ).key;
-
-
-      const orderItems =
-        cart.map(
-          item => ({
-
-            id:
-              item.id,
-
-            name:
-              item.name,
-
-            price:
-              Number(item.price),
-
-            qty:
-              Number(item.qty),
-
-            subtotal:
-              Number(item.price) *
-              Number(item.qty)
-
-          })
-        );
-
-
-      const now =
-        Date.now();
-
-
-      const order = {
-
-        orderId,
-
-        ownerUid:
-          currentUser.uid,
-
-        customerName:
-          name,
-
-        customerPhone:
-          phone,
-
-        address,
-
-        latitude:
-          customerLocation.lat,
-
-        longitude:
-          customerLocation.lng,
-
-        distanceKm:
-          deliveryDistance,
-
-        deliveryCharge,
-
-        foodTotal,
-
-        total,
-
-        paymentMethod,
-
-        status:
-          "Received",
-
-        items:
-          orderItems,
-
-        createdAt:
-          now,
-
-        updatedAt:
-          now
-
-      };
-
-
-      await set(
-        ref(
-          db,
-          "orders/" +
-          orderKey
-        ),
-        order
-      );
-
-
-      await set(
-        ref(
-          db,
-          "customerOrders/" +
-          currentUser.uid +
-          "/" +
-          orderKey
-        ),
-        order
-      );
-
-
-      currentOrder = {
-
-        key:
-          orderKey,
-
-        ...order
-
-      };
-
-
-      document.getElementById(
-        "successOrderId"
-      ).textContent =
-        orderId;
-
-
-      closeModal(
-        "checkoutModal"
-      );
-
-
-      openModal(
-        "successModal"
-      );
-
-
-      cart =
-        [];
-
-
-      saveCart();
-
-
-      deliveryDistance =
-        null;
-
-
-      deliveryCharge =
-        0;
-
-
-      customerLocation =
-        null;
-
-
-      document.getElementById(
-        "customerName"
-      ).value =
-        "";
-
-
-      document.getElementById(
-        "customerPhone"
-      ).value =
-        "";
-
-
-      document.getElementById(
-        "customerAddress"
-      ).value =
-        "";
-
-
-    }catch(error){
-
-      console.error(
-        "Order error:",
-        error
-      );
-
-
-      showToast(
-        "Order failed: " +
-        (
-          error.message ||
-          "Please try again."
-        )
-      );
-
-    }finally{
-
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "Place Order";
-
-    }
-
-  }
-
-
-  /* =========================================================
-     ORDER ID
-  ========================================================= */
-
-  async function generateOrderId(){
-
-    const year =
-      new Date()
-        .getFullYear();
-
-
-    const counterRef =
-      ref(
-        db,
-        `counters/orders/${year}`
-      );
-
-
-    const result =
-      await runTransaction(
-
-        counterRef,
-
-        current => {
-
-          if(
-            current === null
-          ){
-
-            return 1;
-
-          }
-
-
-          return (
-            Number(current) +
-            1
-          );
-
-        }
-
-      );
-
-
-    const serial =
-      result.snapshot.val();
-
-
-    return (
-      "TQF" +
-      year +
-      "-" +
-      String(serial)
-        .padStart(3,"0")
-    );
-
-  }
-
-
-  /* =========================================================
-     WHATSAPP
-  ========================================================= */
-
-  function buildWhatsAppMessage(
-    order
-  ){
-
-    const itemLines =
-      order.items
-        .map(
-          item =>
-            `• ${item.name} × ${item.qty} = ₹${item.subtotal}`
-        )
-        .join("\n");
-
-
-    return `👑 *THE QUEEN FAST FOOD*
+return `👑 *THE QUEEN FAST FOOD*
 
 🧾 *Order ID:* ${order.orderId}
 
@@ -4797,1003 +3735,768 @@ ${itemLines}
 
 Thank you for ordering from *The Queen Fast Food* 👑`;
 
-  }
+}
 
 
-  function openWhatsApp(){
+function openWhatsApp(){
 
-    if(!currentOrder){
+if(!currentOrder){
 
-      showToast(
-        "Order information not found."
-      );
+showToast(
+"Order information not found."
+);
 
-      return;
+return;
 
-    }
+}
 
 
-    let number =
-      settings.whatsappNumber ||
-      DEFAULT_WHATSAPP;
+let number=
+settings.whatsappNumber||
+DEFAULT_WHATSAPP;
 
+number=
+String(number).replace(/\D/g,"");
 
-    number =
-      String(number)
-        .replace(/\D/g,"");
+if(number.length===10)
+number="91"+number;
 
 
-    if(
-      number.length === 10
-    ){
+const message=
+buildWhatsAppMessage(currentOrder);
 
-      number =
-        "91" +
-        number;
 
-    }
+const url=
+"https://wa.me/"+
+number+
+"?text="+
+encodeURIComponent(message);
 
 
-    const message =
-      buildWhatsAppMessage(
-        currentOrder
-      );
+window.open(
+url,
+"_blank"
+);
 
+}
 
-    const url =
-      "https://wa.me/" +
-      number +
-      "?text=" +
-      encodeURIComponent(
-        message
-      );
 
+/* =====================================================
+   TRACK ORDER
+===================================================== */
 
-    window.open(
-      url,
-      "_blank"
-    );
+async function trackOrder(){
 
-  }
+const input=
+document.getElementById(
+"trackOrderInput"
+);
 
+const orderId=
+input.value.trim().toUpperCase();
 
-  /* =========================================================
-     TRACK ORDER
-  ========================================================= */
+const result=
+document.getElementById(
+"trackResult"
+);
 
-  async function trackOrder(){
 
-    const input =
-      document.getElementById(
-        "trackOrderInput"
-      );
+if(!orderId){
 
+showToast(
+"Enter your Order ID."
+);
 
-    const orderId =
-      input.value
-        .trim()
-        .toUpperCase();
+return;
 
+}
 
-    const result =
-      document.getElementById(
-        "trackResult"
-      );
 
+if(!currentUser){
 
-    if(!orderId){
+showToast(
+"Please wait for authentication."
+);
 
-      showToast(
-        "Enter your Order ID."
-      );
+return;
 
-      return;
+}
 
-    }
 
+result.innerHTML=`
+<div class="empty">
+Checking order...
+</div>
+`;
 
-    if(!currentUser){
 
-      showToast(
-        "Please wait for authentication."
-      );
+try{
 
-      return;
+const snapshot=
+await get(
+ref(
+db,
+`customerOrders/${currentUser.uid}`
+)
+);
 
-    }
 
+const data=
+snapshot.val()||{};
 
-    result.innerHTML =
-      `
-        <div class="empty">
-          Checking order...
-        </div>
-      `;
+let found=null;
 
 
-    try{
+for(
+const [key,order]
+of Object.entries(data)
+){
 
-      const snapshot =
-        await get(
-          ref(
-            db,
-            `customerOrders/${currentUser.uid}`
-          )
-        );
+if(
+String(order.orderId)
+.toUpperCase()===
+orderId
+){
 
+found={
+key,
+...order
+};
 
-      const data =
-        snapshot.val() ||
-        {};
+break;
 
+}
 
-      let found =
-        null;
+}
 
 
-      for(
-        const [key,order]
-        of Object.entries(data)
-      ){
+if(!found){
 
-        if(
-          String(order.orderId)
-            .toUpperCase() ===
-          orderId
-        ){
+result.innerHTML=`
+<div class="empty">
+❌ Order not found on this device.
+<br><br>
+Please use the same browser/device used to place the order.
+</div>
+`;
 
-          found = {
+return;
 
-            key,
+}
 
-            ...order
 
-          };
+renderTrackResult(found);
 
-          break;
+}catch(error){
 
-        }
+console.error(error);
 
-      }
+result.innerHTML=`
+<div class="empty">
+Unable to track order.
+</div>
+`;
 
+}
 
-      if(!found){
+}
 
-        result.innerHTML =
-          `
-            <div class="empty">
-              ❌ Order not found on this device.
-              <br><br>
-              Please use the same browser/device used to place the order.
-            </div>
-          `;
 
-        return;
+/* =====================================================
+   TRACK RESULT
+===================================================== */
 
-      }
+function renderTrackResult(order){
 
+const statuses=[
+"Received",
+"Confirmed",
+"Preparing",
+"Out for Delivery",
+"Delivered"
+];
 
-      renderTrackResult(
-        found
-      );
+const currentIndex=
+statuses.indexOf(order.status);
 
+let steps="";
 
-    }catch(error){
 
-      console.error(
-        error
-      );
+statuses.forEach(
+(status,index)=>{
 
+const active=
+index<=currentIndex &&
+currentIndex>=0
+?
+"active"
+:
+"";
 
-      result.innerHTML =
-        `
-          <div class="empty">
-            Unable to track order.
-          </div>
-        `;
+const icon=
+index===0
+?
+"✓"
+:
+index===1
+?
+"✓"
+:
+index===2
+?
+"🍳"
+:
+index===3
+?
+"🛵"
+:
+"★";
 
-    }
 
-  }
+steps+=`
 
+<div class="status-step ${active}">
 
-  function renderTrackResult(
-    order
-  ){
+<div class="status-circle">
+${icon}
+</div>
 
-    const statuses = [
+${status}
 
-      "Received",
+</div>
 
-      "Confirmed",
+`;
 
-      "Preparing",
+});
 
-      "Out for Delivery",
 
-      "Delivered"
+const cancelled=
+order.status==="Cancelled";
 
-    ];
 
+document.getElementById(
+"trackResult"
+).innerHTML=`
 
-    const currentIndex =
-      statuses.indexOf(
-        order.status
-      );
+<div class="track-order-head">
 
+<div>
 
-    let steps =
-      "";
+<div style="color:#888;font-size:11px;">
+ORDER ID
+</div>
 
+<div class="track-order-id">
+${escapeHtml(order.orderId)}
+</div>
 
-    statuses.forEach(
-      (status,index) => {
+</div>
 
-        const active =
-          index <=
-          currentIndex &&
-          currentIndex >= 0
-            ? "active"
-            : "";
+<div style="text-align:right;">
 
+<div style="color:#888;font-size:11px;">
+TOTAL
+</div>
 
-        const icon =
-          index === 0
-            ? "✓"
-            : index === 1
-            ? "✓"
-            : index === 2
-            ? "🍳"
-            : index === 3
-            ? "🛵"
-            : "★";
+<strong>
+₹${order.total}
+</strong>
 
+</div>
 
-        steps += `
+</div>
 
-          <div class="status-step ${active}">
+${
+cancelled
+?
+`
+<div style="
+margin-top:20px;
+padding:15px;
+border:1px solid rgba(255,77,77,.3);
+border-radius:13px;
+color:#ff7777;
+background:rgba(255,77,77,.05);
+">
+❌ This order has been cancelled.
+</div>
+`
+:
+`
+<div class="status-track">
+${steps}
+</div>
+`
+}
 
-            <div class="status-circle">
-              ${icon}
-            </div>
+${
+order.status==="Delivered"
+?
+`
+<button
+class="btn btn-gold"
+style="width:100%;margin-top:25px;"
+onclick='openRating(${JSON.stringify(order)})'>
+⭐ Rate Your Order
+</button>
+`
+:
+""
+}
 
-            ${status}
+`;
 
-          </div>
+}
 
-        `;
 
-      }
-    );
+/* =====================================================
+   RATING
+===================================================== */
 
+function openRating(order){
 
-    const cancelled =
-      order.status ===
-      "Cancelled";
+if(!currentUser){
 
+showToast(
+"Please wait for authentication."
+);
 
-    document.getElementById(
-      "trackResult"
-    ).innerHTML = `
+return;
 
-      <div class="track-order-head">
+}
 
-        <div>
 
-          <div
-            style="
-              color:#888;
-              font-size:11px;
-            "
-          >
-            ORDER ID
-          </div>
+currentOrder=order;
 
-          <div class="track-order-id">
-            ${escapeHtml(order.orderId)}
-          </div>
+selectedRating=0;
 
-        </div>
 
+document
+.querySelectorAll(".star")
+.forEach(
+star=>
+star.classList.remove("active")
+);
 
-        <div style="text-align:right;">
 
-          <div
-            style="
-              color:#888;
-              font-size:11px;
-            "
-          >
-            TOTAL
-          </div>
+document.getElementById(
+"ratingFeedback"
+).value="";
 
-          <strong>
-            ₹${order.total}
-          </strong>
 
-        </div>
+openModal("ratingModal");
 
-      </div>
+loadExistingRating();
 
+}
 
-      ${
-        cancelled
 
-        ?
+async function loadExistingRating(){
 
-        `
+if(!currentUser||!currentOrder)
+return;
 
-          <div
-            style="
-              margin-top:20px;
-              padding:15px;
-              border:1px solid rgba(255,77,77,.3);
-              border-radius:13px;
-              color:#ff7777;
-              background:rgba(255,77,77,.05);
-            "
-          >
-            ❌ This order has been cancelled.
-          </div>
 
-        `
+try{
 
-        :
+const snapshot=
+await get(
+ref(
+db,
+`customerRatings/${currentUser.uid}/${currentOrder.key}`
+)
+);
 
-        `
 
-          <div class="status-track">
-            ${steps}
-          </div>
+if(snapshot.exists()){
 
-        `
+const rating=snapshot.val();
 
-      }
+selectedRating=
+Number(rating.rating||0);
 
+updateStars();
 
-      ${
-        order.status ===
-        "Delivered"
+document.getElementById(
+"ratingFeedback"
+).value=
+rating.feedback||"";
 
-        ?
+}
 
-        `
+}catch(error){
 
-          <button
-            class="btn btn-gold"
-            style="
-              width:100%;
-              margin-top:25px;
-            "
-            onclick='openRating(${JSON.stringify(order)})'
-          >
-            ⭐ Rate Your Order
-          </button>
+console.error(error);
 
-        `
+}
 
-        :
+}
 
-        ""
 
-      }
+document
+.querySelectorAll(".star")
+.forEach(
+star=>{
 
-    `;
+star.addEventListener(
+"click",
+()=>{
 
-  }
+selectedRating=
+Number(star.dataset.rating);
 
+updateStars();
 
-  /* =========================================================
-     RATING
-  ========================================================= */
+}
+);
 
-  function openRating(
-    order
-  ){
+}
+);
 
-    if(!currentUser){
 
-      showToast(
-        "Please wait for authentication."
-      );
+function updateStars(){
 
-      return;
+document
+.querySelectorAll(".star")
+.forEach(
+star=>{
 
-    }
+const rating=
+Number(star.dataset.rating);
 
+star.classList.toggle(
+"active",
+rating<=selectedRating
+);
 
-    currentOrder =
-      order;
+}
+);
 
+}
 
-    selectedRating =
-      0;
 
+async function submitRating(){
 
-    document
-      .querySelectorAll(".star")
-      .forEach(
-        star =>
-          star.classList.remove(
-            "active"
-          )
-      );
+if(!currentUser||!currentOrder)
+return;
 
 
-    document.getElementById(
-      "ratingFeedback"
-    ).value =
-      "";
+if(selectedRating<1){
 
+showToast(
+"Please select a rating."
+);
 
-    openModal(
-      "ratingModal"
-    );
+return;
 
+}
 
-    loadExistingRating();
 
-  }
+const feedback=
+document.getElementById(
+"ratingFeedback"
+).value.trim();
 
 
-  async function loadExistingRating(){
+const ratingData={
 
-    if(
-      !currentUser ||
-      !currentOrder
-    ){
+ownerUid:currentUser.uid,
 
-      return;
+orderId:currentOrder.orderId,
 
-    }
+rating:selectedRating,
 
+feedback,
 
-    try{
+updatedAt:Date.now()
 
-      const snapshot =
-        await get(
-          ref(
-            db,
-            `customerRatings/${currentUser.uid}/${currentOrder.key}`
-          )
-        );
+};
 
 
-      if(
-        snapshot.exists()
-      ){
+try{
 
-        const rating =
-          snapshot.val();
+await set(
+ref(
+db,
+`ratings/${currentOrder.key}`
+),
+ratingData
+);
 
 
-        selectedRating =
-          Number(
-            rating.rating ||
-            0
-          );
+await set(
+ref(
+db,
+`customerRatings/${currentUser.uid}/${currentOrder.key}`
+),
+ratingData
+);
 
 
-        updateStars();
+closeModal("ratingModal");
 
+showToast(
+"Thank you for your feedback! ❤️"
+);
 
-        document.getElementById(
-          "ratingFeedback"
-        ).value =
-          rating.feedback ||
-          "";
+}catch(error){
 
-      }
+console.error(error);
 
-    }catch(error){
+showToast(
+"Could not submit rating."
+);
 
-      console.error(
-        error
-      );
+}
 
-    }
+}
 
-  }
 
+/* =====================================================
+   FONT SIZE
+===================================================== */
 
-  document
-    .querySelectorAll(".star")
-    .forEach(
-      star => {
+function applyFontSize(){
 
-        star.addEventListener(
-          "click",
-          () => {
+let size=settings.fontSize;
 
-            selectedRating =
-              Number(
-                star.dataset.rating
-              );
+let percentage=100;
 
+if(size==="small")
+percentage=90;
 
-            updateStars();
+else if(size==="large")
+percentage=115;
 
-          }
-        );
+else if(size==="medium")
+percentage=100;
 
-      }
-    );
+else{
 
+const match=
+String(size).match(/\d+/);
 
-  function updateStars(){
+if(match){
 
-    document
-      .querySelectorAll(".star")
-      .forEach(
-        star => {
+percentage=
+Math.min(
+140,
+Math.max(
+80,
+Number(match[0])
+)
+);
 
-          const rating =
-            Number(
-              star.dataset.rating
-            );
+}
 
+}
 
-          star.classList.toggle(
-            "active",
-            rating <=
-            selectedRating
-          );
+document.documentElement.style.fontSize=
+percentage+"%";
 
-        }
-      );
+}
 
-  }
 
+/* =====================================================
+   WEBSITE MODE
+===================================================== */
 
-  async function submitRating(){
+function applyWebsiteMode(){
 
-    if(
-      !currentUser ||
-      !currentOrder
-    ){
+const overlay=
+document.getElementById(
+"websiteOverlay"
+);
 
-      return;
+const message=
+document.getElementById(
+"overlayMessage"
+);
 
-    }
 
+if(settings.websiteMode==="normal"){
 
-    if(
-      selectedRating < 1
-    ){
+overlay.classList.remove("show");
 
-      showToast(
-        "Please select a rating."
-      );
+return;
 
-      return;
+}
 
-    }
 
+if(settings.websiteMode==="maintenance"){
 
-    const feedback =
-      document.getElementById(
-        "ratingFeedback"
-      ).value.trim();
+message.textContent=
+settings.updateMessage||
+"Website is currently under maintenance. Please check again later.";
 
+}else{
 
-    const ratingData = {
+message.textContent=
+settings.updateMessage||
+"We are making some improvements. Please wait a little while and refresh the page.";
 
-      ownerUid:
-        currentUser.uid,
+}
 
-      orderId:
-        currentOrder.orderId,
 
-      rating:
-        selectedRating,
+overlay.classList.add("show");
 
-      feedback,
+}
 
-      updatedAt:
-        Date.now()
 
-    };
+/* =====================================================
+   MODALS
+===================================================== */
 
+window.openModal=function(id){
 
-    try{
+const element=
+document.getElementById(id);
 
-      await set(
-        ref(
-          db,
-          `ratings/${currentOrder.key}`
-        ),
-        ratingData
-      );
+if(element)
+element.classList.add("show");
 
+};
 
-      await set(
-        ref(
-          db,
-          `customerRatings/${currentUser.uid}/${currentOrder.key}`
-        ),
-        ratingData
-      );
 
+window.closeModal=function(id){
 
-      closeModal(
-        "ratingModal"
-      );
+const element=
+document.getElementById(id);
 
+if(element)
+element.classList.remove("show");
 
-      showToast(
-        "Thank you for your feedback! ❤️"
-      );
+};
 
 
-    }catch(error){
+document
+.querySelectorAll(".modal")
+.forEach(
+modal=>{
 
-      console.error(
-        error
-      );
+modal.addEventListener(
+"click",
+event=>{
 
+if(event.target===modal)
+modal.classList.remove("show");
 
-      showToast(
-        "Could not submit rating."
-      );
+}
+);
 
-    }
+}
+);
 
-  }
 
+/* =====================================================
+   TOAST
+===================================================== */
 
-  /* =========================================================
-     FONT SIZE
-  ========================================================= */
+let toastTimer;
 
-  function applyFontSize(){
+function showToast(message){
 
-    let size =
-      settings.fontSize;
+const toast=
+document.getElementById("toast");
 
+if(!toast)
+return;
 
-    let percentage =
-      100;
+toast.textContent=message;
 
+toast.classList.add("show");
 
-    if(
-      size === "small"
-    ){
+clearTimeout(toastTimer);
 
-      percentage =
-        90;
+toastTimer=
+setTimeout(
+()=>{
+toast.classList.remove("show");
+},
+2800
+);
 
-    }else if(
-      size === "large"
-    ){
+}
 
-      percentage =
-        115;
 
-    }else if(
-      size === "medium"
-    ){
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-      percentage =
-        100;
+function escapeHtml(value){
 
-    }else{
+return String(value)
 
-      const match =
-        String(size)
-          .match(/\d+/);
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
+}
 
-      if(match){
 
-        percentage =
-          Math.min(
-            140,
-            Math.max(
-              80,
-              Number(
-                match[0]
-              )
-            )
-          );
+/* =====================================================
+   INIT
+===================================================== */
 
-      }
+function init(){
 
-    }
+document.getElementById(
+"footerYear"
+).textContent=
+new Date().getFullYear();
 
 
-    document.documentElement.style.fontSize =
-      percentage +
-      "%";
+/*
+Load local cart.
+*/
 
-  }
+loadCart();
 
 
-  /* =========================================================
-     WEBSITE MODE
-  ========================================================= */
+/*
+IMPORTANT:
+Load default menu immediately.
 
-  function applyWebsiteMode(){
+This prevents:
+Food item not found
+*/
 
-    const overlay =
-      document.getElementById(
-        "websiteOverlay"
-      );
+menu=getDefaultMenu();
 
+renderProducts();
 
-    const message =
-      document.getElementById(
-        "overlayMessage"
-      );
 
+/*
+Initial shop status.
+*/
 
-    if(
-      settings.websiteMode ===
-      "normal"
-    ){
+updateShopStatus();
 
-      overlay.classList.remove(
-        "show"
-      );
+applyFontSize();
 
-      return;
+}
 
-    }
 
+init();
 
-    if(
-      settings.websiteMode ===
-      "maintenance"
-    ){
 
-      message.textContent =
-        settings.updateMessage ||
-        "Website is currently under maintenance. Please check again later.";
+/* =====================================================
+   GLOBAL FUNCTIONS
+===================================================== */
 
-    }else{
-
-      message.textContent =
-        settings.updateMessage ||
-        "We are making some improvements. Please wait a little while and refresh the page.";
-
-    }
-
-
-    overlay.classList.add(
-      "show"
-    );
-
-  }
-
-
-  /* =========================================================
-     MODALS
-  ========================================================= */
-
-  window.openModal =
-    function(id){
-
-      const element =
-        document.getElementById(
-          id
-        );
-
-
-      if(element){
-
-        element.classList.add(
-          "show"
-        );
-
-      }
-
-    };
-
-
-  window.closeModal =
-    function(id){
-
-      const element =
-        document.getElementById(
-          id
-        );
-
-
-      if(element){
-
-        element.classList.remove(
-          "show"
-        );
-
-      }
-
-    };
-
-
-  document
-    .querySelectorAll(".modal")
-    .forEach(
-      modal => {
-
-        modal.addEventListener(
-          "click",
-          event => {
-
-            if(
-              event.target ===
-              modal
-            ){
-
-              modal.classList.remove(
-                "show"
-              );
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-  /* =========================================================
-     TOAST
-  ========================================================= */
-
-  let toastTimer;
-
-
-  function showToast(
-    message
-  ){
-
-    const toast =
-      document.getElementById(
-        "toast"
-      );
-
-
-    if(!toast){
-
-      return;
-
-    }
-
-
-    toast.textContent =
-      message;
-
-
-    toast.classList.add(
-      "show"
-    );
-
-
-    clearTimeout(
-      toastTimer
-    );
-
-
-    toastTimer =
-      setTimeout(
-        () => {
-
-          toast.classList.remove(
-            "show"
-          );
-
-        },
-        2800
-      );
-
-  }
-
-
-  /* =========================================================
-     ESCAPE HTML
-  ========================================================= */
-
-  function escapeHtml(
-    value
-  ){
-
-    return String(value)
-
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-
-      .replace(
-        /</g,
-        "&lt;"
-      )
-
-      .replace(
-        />/g,
-        "&gt;"
-      )
-
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-  }
-
-
-  /* =========================================================
-     INIT
-  ========================================================= */
-
-  function init(){
-
-    document.getElementById(
-      "footerYear"
-    ).textContent =
-      new Date()
-        .getFullYear();
-
-
-    loadCart();
-
-
-    /*
-      Initial status.
-    */
-
-    updateShopStatus();
-
-
-    applyFontSize();
-
-  }
-
-
-  init();
-
-
-  /* =========================================================
-     GLOBAL FUNCTIONS
-  ========================================================= */
-
-  window.openCart =
-    openCart;
-
-  window.addToCart =
-    addToCart;
-
-  window.changeQty =
-    changeQty;
-
-  window.removeFromCart =
-    removeFromCart;
-
-  window.openCheckout =
-    openCheckout;
-
-  window.getLocation =
-    getLocation;
-
-  window.placeOrder =
-    placeOrder;
-
-  window.openWhatsApp =
-    openWhatsApp;
-
-  window.trackOrder =
-    trackOrder;
-
-  window.openRating =
-    openRating;
-
-  window.submitRating =
-    submitRating;
+window.openCart=openCart;
+window.addToCart=addToCart;
+window.changeQty=changeQty;
+window.removeFromCart=removeFromCart;
+window.openCheckout=openCheckout;
+window.getLocation=getLocation;
+window.placeOrder=placeOrder;
+window.openWhatsApp=openWhatsApp;
+window.trackOrder=trackOrder;
+window.openRating=openRating;
+window.submitRating=submitRating;
 
 </script>
 
