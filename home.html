@@ -743,6 +743,7 @@
   </div>
 </header>
 
+
 <section class="hero">
 
   <div class="hero-content">
@@ -764,13 +765,15 @@
 
 </section>
 
+
 <div class="status-box">
 
   <div id="shopStatus" class="status preopen">
-    Checking shop status...
+    Connecting to The Queen Fast Food...
   </div>
 
 </div>
+
 
 <section class="section">
 
@@ -789,6 +792,7 @@
   <div class="menu-grid" id="menuGrid"></div>
 
 </section>
+
 
 <section class="why-section">
 
@@ -810,6 +814,7 @@
       </p>
 
     </div>
+
 
     <div class="why-grid">
 
@@ -845,6 +850,7 @@
 
     </div>
 
+
     <div class="brand-detail">
 
       At <strong>The Queen Fast Food</strong>,
@@ -865,6 +871,7 @@
   </div>
 
 </section>
+
 
 <footer>
 
@@ -941,6 +948,7 @@
 
     </div>
 
+
     <div class="form-group">
 
       <label>Customer Name</label>
@@ -951,6 +959,7 @@
         placeholder="Enter your name">
 
     </div>
+
 
     <div class="form-group">
 
@@ -965,6 +974,7 @@
 
     </div>
 
+
     <div class="form-group">
 
       <label>Delivery Address</label>
@@ -975,6 +985,7 @@
 
     </div>
 
+
     <button
       class="location-btn"
       onclick="getCustomerLocation()">
@@ -983,7 +994,9 @@
 
     </button>
 
+
     <div id="locationResult" class="location-result"></div>
+
 
     <div class="form-group">
 
@@ -1003,6 +1016,7 @@
 
     </div>
 
+
     <div class="summary">
 
       <div class="summary-row">
@@ -1012,6 +1026,7 @@
         <span id="checkoutSubtotal">₹0</span>
 
       </div>
+
 
       <div class="summary-row">
 
@@ -1023,6 +1038,7 @@
 
       </div>
 
+
       <div class="summary-row">
 
         <span>Delivery Charge</span>
@@ -1030,6 +1046,7 @@
         <span id="deliveryText">₹0</span>
 
       </div>
+
 
       <div class="summary-row total">
 
@@ -1040,6 +1057,7 @@
       </div>
 
     </div>
+
 
     <button
       class="checkout-btn"
@@ -1073,6 +1091,7 @@
 
     </div>
 
+
     <div id="trackingContent">
 
       <div class="form-group">
@@ -1085,6 +1104,7 @@
           placeholder="Enter your Order ID">
 
       </div>
+
 
       <button
         class="checkout-btn"
@@ -1414,14 +1434,14 @@ async function startCustomerAuth(){
     }
 
 
-    currentUser =
-      user;
-
-
     await getIdToken(
-      currentUser,
+      user,
       true
     );
+
+
+    currentUser =
+      user;
 
 
     console.log(
@@ -1441,7 +1461,9 @@ async function startCustomerAuth(){
     );
 
 
-    authReadyResolve();
+    authReadyResolve(true);
+
+    return true;
 
   }
 
@@ -1469,7 +1491,7 @@ async function startCustomerAuth(){
       null;
 
 
-    authReadyResolve();
+    authReadyResolve(false);
 
 
     if(
@@ -1490,6 +1512,9 @@ async function startCustomerAuth(){
       );
 
     }
+
+
+    return false;
 
   }
 
@@ -1610,7 +1635,7 @@ function updateShopStatus(){
   }
 
   else if(
-    india.totalMinutes <=
+    india.totalMinutes <
     closingTime
   ){
 
@@ -1649,6 +1674,15 @@ function updateShopStatus(){
 async function loadShopSettings(){
 
   try{
+
+    if(!currentUser){
+
+      throw new Error(
+        "Firebase authentication is not ready."
+      );
+
+    }
+
 
     const snapshot =
       await get(
@@ -2552,10 +2586,14 @@ async function(){
 
   try{
 
-    await authReadyPromise;
+    const authReady =
+      await authReadyPromise;
 
 
-    if(!currentUser){
+    if(
+      !authReady ||
+      !currentUser
+    ){
 
       throw new Error(
         "Customer authentication is not ready."
@@ -2750,7 +2788,7 @@ async function(){
     ){
 
       showToast(
-        "Firebase permission denied. Check Anonymous Authentication."
+        "Firebase permission denied. Check Database Rules."
       );
 
     }
@@ -2960,10 +2998,14 @@ async function(){
 
   try{
 
-    await authReadyPromise;
+    const authReady =
+      await authReadyPromise;
 
 
-    if(!currentUser){
+    if(
+      !authReady ||
+      !currentUser
+    ){
 
       throw new Error(
         "Authentication unavailable."
@@ -3174,16 +3216,58 @@ setInterval(
 
 
 /* =========================================================
-   START
+   START APP
 ========================================================= */
 
-renderMenu();
+async function startApp(){
 
-updateCart();
+  renderMenu();
 
-startCustomerAuth();
+  updateCart();
 
-loadShopSettings();
+
+  /* IMPORTANT:
+     AUTH FIRST
+     SETTINGS AFTER AUTH
+  */
+
+  const authenticated =
+    await startCustomerAuth();
+
+
+  if(authenticated){
+
+    await loadShopSettings();
+
+  }
+
+  else{
+
+    shopOpen = false;
+
+
+    const statusBox =
+      document.getElementById(
+        "shopStatus"
+      );
+
+
+    statusBox.className =
+      "status closed";
+
+
+    statusBox.textContent =
+      "Firebase connection failed. Please enable Anonymous Authentication and refresh.";
+
+
+    updateOrderButtons();
+
+  }
+
+}
+
+
+startApp();
 
 
 /* =========================================================
