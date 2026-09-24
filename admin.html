@@ -31,7 +31,7 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   background:#070707;
   color:#fff;
-  font-size:14px;
+  font-size:13px;
 }
 
 button,
@@ -79,31 +79,31 @@ button{
 }
 
 .logo-icon{
-  font-size:48px;
+  font-size:44px;
 }
 
 .logo h1{
-  font-size:23px;
+  font-size:21px;
   color:var(--gold2);
   margin-top:4px;
 }
 
 .logo p{
   color:#666;
-  font-size:10px;
+  font-size:9px;
   letter-spacing:2px;
   margin-top:5px;
 }
 
 .field{
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .field label{
   display:block;
   color:#999;
-  font-size:11px;
-  margin-bottom:6px;
+  font-size:10px;
+  margin-bottom:5px;
   letter-spacing:.3px;
 }
 
@@ -111,13 +111,13 @@ button{
 .field textarea,
 .field select{
   width:100%;
-  padding:10px 11px;
-  border-radius:9px;
+  padding:9px 10px;
+  border-radius:8px;
   border:1px solid #303030;
   background:#171717;
   color:white;
   outline:none;
-  font-size:13px;
+  font-size:12px;
 }
 
 .field input:focus,
@@ -127,15 +127,15 @@ button{
 }
 
 textarea{
-  min-height:75px;
+  min-height:70px;
   resize:vertical;
 }
 
 .btn{
   border:0;
-  border-radius:8px;
-  padding:8px 12px;
-  font-size:12px;
+  border-radius:7px;
+  padding:7px 10px;
+  font-size:11px;
   font-weight:800;
   transition:.18s;
 }
@@ -187,7 +187,7 @@ textarea{
   z-index:100;
   background:rgba(7,7,7,.97);
   border-bottom:1px solid #222;
-  padding:11px 18px;
+  padding:9px 16px;
   backdrop-filter:blur(12px);
 }
 
@@ -197,11 +197,11 @@ textarea{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:10px;
 }
 
 .brand{
-  font-size:14px;
+  font-size:13px;
   font-weight:900;
 }
 
@@ -212,7 +212,7 @@ textarea{
 .dashboard{
   max-width:1400px;
   margin:auto;
-  padding:20px 18px 50px;
+  padding:17px 16px 45px;
 }
 
 /* =========================
@@ -222,27 +222,27 @@ textarea{
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-bottom:18px;
+  gap:9px;
+  margin-bottom:14px;
 }
 
 .stat{
   background:#111;
   border:1px solid #292929;
-  border-radius:12px;
-  padding:14px;
+  border-radius:10px;
+  padding:11px;
 }
 
 .stat small{
   color:#777;
-  font-size:10px;
+  font-size:9px;
 }
 
 .stat strong{
   display:block;
-  font-size:25px;
+  font-size:22px;
   color:var(--gold2);
-  margin-top:3px;
+  margin-top:2px;
 }
 
 /* =========================
@@ -252,32 +252,32 @@ textarea{
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-bottom:15px;
+  gap:11px;
+  margin-bottom:12px;
 }
 
 .card{
   background:#111;
   border:1px solid #292929;
-  border-radius:13px;
-  padding:16px;
+  border-radius:11px;
+  padding:13px;
 }
 
 .card h2{
-  font-size:15px;
-  margin-bottom:14px;
+  font-size:13px;
+  margin-bottom:11px;
   color:var(--gold2);
   letter-spacing:.2px;
 }
 
 .card h3{
-  font-size:13px;
-  margin-bottom:8px;
+  font-size:12px;
+  margin-bottom:7px;
 }
 
 .row{
   display:flex;
-  gap:8px;
+  gap:7px;
   align-items:center;
 }
 
@@ -297,15 +297,15 @@ textarea{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:12px;
+  padding:10px;
   background:#171717;
-  border-radius:10px;
-  margin-bottom:11px;
+  border-radius:9px;
+  margin-bottom:10px;
 }
 
 .switch{
-  width:48px;
-  height:26px;
+  width:46px;
+  height:24px;
   border-radius:30px;
   background:#444;
   position:relative;
@@ -315,8 +315,8 @@ textarea{
 .switch:after{
   content:"";
   position:absolute;
-  width:20px;
-  height:20px;
+  width:18px;
+  height:18px;
   border-radius:50%;
   background:#fff;
   top:3px;
@@ -333,6 +333,56 @@ textarea{
 }
 
 /* =========================
+   SHOP STATUS
+========================= */
+
+.shop-status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-bottom:10px;
+  padding:8px 10px;
+  border-radius:8px;
+  background:#121212;
+  border:1px solid #282828;
+}
+
+.shop-light{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#25d366;
+  box-shadow:0 0 8px #25d366;
+}
+
+.shop-light.closed{
+  background:#ff3030;
+  box-shadow:0 0 10px #ff3030;
+  animation:redBlink .8s infinite;
+}
+
+.shop-status-text{
+  font-size:10px;
+  font-weight:900;
+}
+
+.shop-status-text.closed{
+  color:#ff5c5c;
+  font-weight:900;
+}
+
+@keyframes redBlink{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+  }
+  50%{
+    opacity:.25;
+    transform:scale(.75);
+  }
+}
+
+/* =========================
    NOTICE
 ========================= */
 
@@ -340,11 +390,11 @@ textarea{
   background:#19170c;
   border:1px solid #55450e;
   color:#d9bd55;
-  border-radius:8px;
-  padding:9px 10px;
-  font-size:11px;
-  margin-bottom:12px;
-  line-height:1.5;
+  border-radius:7px;
+  padding:8px 9px;
+  font-size:10px;
+  margin-bottom:10px;
+  line-height:1.45;
 }
 
 .success{
@@ -356,43 +406,43 @@ textarea{
 }
 
 /* =========================
-   DELIVERY RATE
+   DELIVERY
 ========================= */
 
 .delivery-box{
   background:
     linear-gradient(135deg,#17140a,#111);
   border:1px solid #4c3d13;
-  border-radius:11px;
-  padding:13px;
+  border-radius:10px;
+  padding:11px;
 }
 
 .delivery-title{
-  font-size:12px;
+  font-size:11px;
   font-weight:900;
   color:#ddd;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .delivery-rate-row{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:7px;
 }
 
 .delivery-rate-row input{
-  width:100px;
+  width:90px;
   background:#171717;
   border:1px solid #444;
   color:#fff;
-  border-radius:8px;
-  padding:9px;
+  border-radius:7px;
+  padding:8px;
   font-weight:800;
 }
 
 .rate-unit{
   color:#aaa;
-  font-size:12px;
+  font-size:11px;
 }
 
 /* =========================
@@ -402,26 +452,30 @@ textarea{
 .menu-list{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:7px 18px;
+  gap:7px 15px;
 }
 
 .menu-item{
-  display:grid;
-  grid-template-columns:1fr auto;
-  align-items:center;
-  gap:10px;
-  padding:10px 0;
+  display:block;
+  padding:8px 0;
   border-bottom:1px solid #222;
 }
 
+.menu-top{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:8px;
+}
+
 .menu-name{
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
   color:#eee;
 }
 
 .menu-id{
-  font-size:9px;
+  font-size:8px;
   color:#555;
   margin-top:2px;
 }
@@ -429,19 +483,61 @@ textarea{
 .menu-price-area{
   display:flex;
   align-items:center;
-  gap:6px;
+  gap:5px;
 }
 
 .menu-price-input{
-  width:75px!important;
-  padding:7px!important;
+  width:68px!important;
+  padding:6px!important;
   text-align:center;
-  font-size:12px!important;
+  font-size:11px!important;
 }
 
 .menu-save{
-  padding:7px 9px;
-  font-size:10px;
+  padding:6px 8px;
+  font-size:9px;
+}
+
+.image-area{
+  margin-top:7px;
+  display:grid;
+  grid-template-columns:72px 1fr auto;
+  gap:6px;
+  align-items:center;
+}
+
+.image-preview{
+  width:72px;
+  height:48px;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid #333;
+  background:#181818;
+}
+
+.image-url{
+  min-width:0;
+}
+
+.image-url input{
+  width:100%;
+  padding:7px 8px;
+  border-radius:6px;
+  border:1px solid #303030;
+  background:#171717;
+  color:#fff;
+  font-size:9px;
+  outline:none;
+}
+
+.image-url input:focus{
+  border-color:var(--gold);
+}
+
+.image-save{
+  padding:6px 7px;
+  font-size:9px;
+  white-space:nowrap;
 }
 
 /* =========================
@@ -450,18 +546,18 @@ textarea{
 
 .order-filter{
   display:flex;
-  gap:6px;
+  gap:5px;
   flex-wrap:wrap;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .filter{
-  padding:7px 11px;
-  border-radius:7px;
+  padding:6px 9px;
+  border-radius:6px;
   border:1px solid #333;
   background:#171717;
   color:#aaa;
-  font-size:11px;
+  font-size:10px;
 }
 
 .filter.active{
@@ -471,61 +567,67 @@ textarea{
 }
 
 /* =========================
-   ORDER SECTIONS
-========================= */
-
-.order-section{
-  margin-top:8px;
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.section-title h3{
-  font-size:13px;
-  color:#ddd;
-}
-
-.section-count{
-  font-size:10px;
-  color:#777;
-}
-
-/* =========================
    ORDERS
 ========================= */
 
 .orders{
   display:grid;
-  gap:10px;
+  gap:7px;
 }
 
 .order{
   background:#161616;
   border:1px solid #292929;
-  border-radius:11px;
-  padding:13px;
+  border-radius:9px;
+  padding:10px;
   position:relative;
   overflow:hidden;
+  transition:.2s;
 }
 
-/* NEW ORDER SPECIAL */
+/* NEW ORDER */
 .order.new-order{
   border:1px solid #d4af37;
   background:
     linear-gradient(
       135deg,
-      rgba(212,175,55,.14),
+      rgba(212,175,55,.15),
       rgba(37,211,102,.05),
       #161616
     );
   box-shadow:
-    0 0 0 1px rgba(212,175,55,.08),
-    0 8px 25px rgba(212,175,55,.06);
+    0 0 0 1px rgba(212,175,55,.1),
+    0 5px 18px rgba(212,175,55,.08);
+}
+
+/* NEW ORDER STRONG BLINK */
+.order.new-order.new-arrival{
+  animation:
+    newOrderBlink .9s infinite;
+}
+
+@keyframes newOrderBlink{
+  0%,100%{
+    border-color:#d4af37;
+    box-shadow:
+      0 0 0 1px rgba(212,175,55,.12),
+      0 0 8px rgba(212,175,55,.15);
+  }
+
+  50%{
+    border-color:#fff0a0;
+    box-shadow:
+      0 0 0 2px rgba(245,215,110,.55),
+      0 0 25px rgba(245,215,110,.65),
+      0 0 50px rgba(212,175,55,.25);
+    background:
+      linear-gradient(
+        135deg,
+        rgba(212,175,55,.3),
+        rgba(255,255,255,.06),
+        #181818
+      );
+  }
 }
 
 .order.new-order:before{
@@ -535,10 +637,10 @@ textarea{
   right:0;
   background:linear-gradient(135deg,#d4af37,#f5d76e);
   color:#000;
-  font-size:9px;
+  font-size:8px;
   font-weight:900;
-  padding:5px 9px;
-  border-bottom-left-radius:8px;
+  padding:4px 7px;
+  border-bottom-left-radius:7px;
 }
 
 .order.delivered-order{
@@ -554,20 +656,20 @@ textarea{
 .order-head{
   display:flex;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
   flex-wrap:wrap;
 }
 
 .order-id{
   color:var(--gold2);
   font-weight:900;
-  font-size:15px;
+  font-size:13px;
 }
 
 .status{
-  padding:5px 8px;
-  border-radius:15px;
-  font-size:10px;
+  padding:4px 7px;
+  border-radius:13px;
+  font-size:9px;
   font-weight:900;
   background:#242424;
 }
@@ -605,44 +707,45 @@ textarea{
 .order-info{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin:12px 0;
+  gap:5px;
+  margin:9px 0;
 }
 
 .info-box{
   background:#101010;
-  padding:9px;
-  border-radius:8px;
-  font-size:11px;
-  line-height:1.4;
+  padding:7px;
+  border-radius:6px;
+  font-size:10px;
+  line-height:1.35;
+  overflow-wrap:anywhere;
 }
 
 .info-box small{
   color:#666;
   display:block;
   margin-bottom:2px;
-  font-size:9px;
+  font-size:8px;
 }
 
 .order-items{
-  margin:11px 0;
+  margin:8px 0;
   border-top:1px solid #292929;
   border-bottom:1px solid #292929;
-  padding:8px 0;
+  padding:6px 0;
 }
 
 .order-item{
   display:flex;
   justify-content:space-between;
-  padding:3px 0;
+  padding:2px 0;
   color:#bbb;
-  font-size:11px;
+  font-size:10px;
 }
 
 .order-total{
   display:flex;
   justify-content:space-between;
-  font-size:14px;
+  font-size:12px;
   font-weight:900;
 }
 
@@ -652,30 +755,30 @@ textarea{
 
 .status-buttons{
   display:flex;
-  gap:5px;
+  gap:4px;
   flex-wrap:wrap;
-  margin-top:11px;
+  margin-top:8px;
 }
 
 .status-buttons .btn{
-  font-size:10px;
-  padding:6px 8px;
+  font-size:9px;
+  padding:5px 7px;
 }
 
 /* =========================
-   DELIVERED FOLDER
+   DELIVERED
 ========================= */
 
 .delivered-folder{
-  margin-top:15px;
+  margin-top:13px;
   border:1px solid #245b38;
   background:#0e1711;
-  border-radius:12px;
+  border-radius:10px;
   overflow:hidden;
 }
 
 .delivered-folder-head{
-  padding:12px 14px;
+  padding:10px 12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -690,16 +793,16 @@ textarea{
 
 .delivered-folder-head strong{
   color:#69ed91;
-  font-size:13px;
+  font-size:11px;
 }
 
 .delivered-folder-head span{
-  font-size:10px;
+  font-size:9px;
   color:#6c9b7b;
 }
 
 .delivered-content{
-  padding:10px;
+  padding:8px;
 }
 
 /* =========================
@@ -709,22 +812,50 @@ textarea{
 .rating{
   background:#171717;
   border:1px solid #292929;
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:8px;
+  border-radius:8px;
+  padding:10px;
+  margin-bottom:6px;
 }
 
 .rating-stars{
   color:var(--gold);
-  font-size:17px;
-  margin-top:3px;
+  font-size:15px;
+  margin-top:2px;
 }
 
 .rating-feedback{
   color:#aaa;
-  margin-top:6px;
-  font-size:12px;
-  line-height:1.5;
+  margin-top:5px;
+  font-size:10px;
+  line-height:1.45;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%) translateY(20px);
+  background:#181818;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:8px;
+  padding:9px 13px;
+  font-size:10px;
+  font-weight:800;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
 /* =========================
@@ -754,45 +885,58 @@ textarea{
 @media(max-width:600px){
 
   .dashboard{
-    padding:14px 10px 40px;
+    padding:12px 9px 35px;
   }
 
   .topbar{
-    padding:10px;
+    padding:8px 9px;
   }
 
   .brand{
-    font-size:12px;
+    font-size:11px;
   }
 
   .stats{
-    gap:7px;
+    gap:6px;
   }
 
   .stat{
-    padding:11px;
+    padding:9px;
   }
 
   .stat strong{
-    font-size:21px;
+    font-size:19px;
   }
 
   .card{
-    padding:12px;
-    border-radius:11px;
+    padding:11px;
+    border-radius:10px;
   }
 
   .card h2{
-    font-size:14px;
+    font-size:13px;
   }
 
   .order-info{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
   }
 
   .status-buttons .btn{
     flex:1;
     min-width:max-content;
+  }
+
+  .image-area{
+    grid-template-columns:60px 1fr;
+  }
+
+  .image-preview{
+    width:60px;
+    height:42px;
+  }
+
+  .image-save{
+    grid-column:2;
   }
 
 }
@@ -801,9 +945,7 @@ textarea{
 
 <body>
 
-<!-- =========================
-     LOGIN
-========================= -->
+<!-- LOGIN -->
 
 <div class="login-screen" id="loginScreen">
 
@@ -844,7 +986,7 @@ textarea{
     <p
       id="loginError"
       class="danger"
-      style="margin-top:10px;text-align:center;font-size:11px;"
+      style="margin-top:9px;text-align:center;font-size:10px;"
     ></p>
 
   </div>
@@ -852,9 +994,7 @@ textarea{
 </div>
 
 
-<!-- =========================
-     ADMIN
-========================= -->
+<!-- ADMIN -->
 
 <div class="admin" id="adminPanel">
 
@@ -880,9 +1020,7 @@ textarea{
 
   <div class="dashboard">
 
-    <!-- =========================
-         STATS
-    ========================= -->
+    <!-- STATS -->
 
     <div class="stats">
 
@@ -909,9 +1047,7 @@ textarea{
     </div>
 
 
-    <!-- =========================
-         SETTINGS
-    ========================= -->
+    <!-- SETTINGS -->
 
     <div class="grid">
 
@@ -921,21 +1057,37 @@ textarea{
 
         <h2>🏪 Shop Control</h2>
 
+        <div class="shop-status">
+
+          <span
+            id="shopLight"
+            class="shop-light"
+          ></span>
+
+          <span
+            id="shopStatusText"
+            class="shop-status-text"
+          >
+            SHOP OPEN
+          </span>
+
+        </div>
+
         <div class="switch-row">
 
           <div>
             <strong
               id="shopControlTitle"
-              style="font-size:12px;"
+              style="font-size:11px;"
             >
               Shop Open
             </strong>
 
             <div
               id="shopControlText"
-              style="color:#777;font-size:10px;margin-top:3px;"
+              style="color:#777;font-size:9px;margin-top:3px;"
             >
-              Normal schedule: 12 PM – 11 PM
+              Automatic schedule: 12 PM – 11 PM
             </div>
           </div>
 
@@ -945,6 +1097,12 @@ textarea{
             onclick="toggleShop()"
           ></button>
 
+        </div>
+
+        <div class="notice">
+          <strong>Automatic timing:</strong>
+          12:00 PM to 11:00 PM.
+          Manual Close overrides the normal schedule.
         </div>
 
         <div class="field">
@@ -1133,8 +1291,8 @@ textarea{
           <div
             style="
               color:#666;
-              font-size:10px;
-              margin-top:8px;
+              font-size:9px;
+              margin-top:7px;
             "
           >
             Example: 3.2 KM × ₹6 = ₹24
@@ -1147,19 +1305,18 @@ textarea{
     </div>
 
 
-    <!-- =========================
-         MENU PRICE
-    ========================= -->
+    <!-- MENU -->
 
     <div
       class="card"
-      style="margin-bottom:15px;"
+      style="margin-bottom:12px;"
     >
 
-      <h2>🍽️ Menu Price Management</h2>
+      <h2>🍽️ Menu Price & Food Image Management</h2>
 
       <div class="notice">
-        Food photos are managed separately. Here you can change only the selling price.
+        Change food price and set the exact food photo URL.
+        Image changes are saved separately from the price.
       </div>
 
       <div
@@ -1172,13 +1329,11 @@ textarea{
     </div>
 
 
-    <!-- =========================
-         ACTIVE ORDERS
-    ========================= -->
+    <!-- ORDERS -->
 
     <div
       class="card"
-      style="margin-bottom:15px;"
+      style="margin-bottom:12px;"
     >
 
       <h2>📦 Order Management</h2>
@@ -1229,9 +1384,7 @@ textarea{
     </div>
 
 
-    <!-- =========================
-         DELIVERED FOLDER
-    ========================= -->
+    <!-- DELIVERED -->
 
     <div class="delivered-folder">
 
@@ -1257,13 +1410,11 @@ textarea{
     </div>
 
 
-    <!-- =========================
-         RATINGS
-    ========================= -->
+    <!-- RATINGS -->
 
     <div
       class="card"
-      style="margin-top:15px;"
+      style="margin-top:12px;"
     >
 
       <h2>⭐ Customer Ratings</h2>
@@ -1286,6 +1437,12 @@ textarea{
 </div>
 
 
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
 <script type="module">
 
 import {
@@ -1294,6 +1451,8 @@ import {
 
 import {
   getAuth,
+  setPersistence,
+  browserLocalPersistence,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
@@ -1326,11 +1485,14 @@ const firebaseConfig = {
   measurementId: "G-Q1YCK636KJ"
 };
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
-const db = getDatabase(app);
+const db =
+  getDatabase(app);
 
 
 /* =========================
@@ -1340,6 +1502,10 @@ const db = getDatabase(app);
 const ADMIN_UID =
   "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
+
+/* =========================
+   VARIABLES
+========================= */
 
 let currentAdmin = null;
 
@@ -1351,9 +1517,36 @@ let currentFilter = "all";
 
 let shopClosed = false;
 
+let initialOrdersLoaded = false;
+
+let knownOrderKeys = new Set();
+
+let audioContext = null;
+
 
 /* =========================
-   AUTH
+   AUTH PERSISTENCE
+========================= */
+
+try{
+
+  await setPersistence(
+    auth,
+    browserLocalPersistence
+  );
+
+}catch(error){
+
+  console.warn(
+    "Auth persistence setup failed:",
+    error
+  );
+
+}
+
+
+/* =========================
+   AUTH STATE
 ========================= */
 
 onAuthStateChanged(
@@ -1361,6 +1554,8 @@ onAuthStateChanged(
   user => {
 
     if(!user){
+
+      currentAdmin = null;
 
       showLogin();
 
@@ -1388,6 +1583,10 @@ onAuthStateChanged(
   }
 );
 
+
+/* =========================
+   LOGIN UI
+========================= */
 
 function showLogin(){
 
@@ -1419,7 +1618,8 @@ function showAdmin(){
    LOGIN
 ========================= */
 
-window.adminLogin = async function(){
+window.adminLogin =
+async function(){
 
   const email =
     document.getElementById(
@@ -1448,6 +1648,11 @@ window.adminLogin = async function(){
 
   try{
 
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
     await signInWithEmailAndPassword(
       auth,
       email,
@@ -1467,9 +1672,22 @@ window.adminLogin = async function(){
 };
 
 
-window.adminLogout = function(){
+/* =========================
+   LOGOUT
+========================= */
 
-  signOut(auth);
+window.adminLogout =
+async function(){
+
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(error);
+
+  }
 
 };
 
@@ -1551,10 +1769,117 @@ function loadSettings(){
 
 
 /* =========================
+   AUTOMATIC SHOP TIME
+========================= */
+
+function isWithinShopHours(){
+
+  const now =
+    new Date();
+
+  const minutes =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+  return (
+    minutes >= 720 &&
+    minutes < 1380
+  );
+
+}
+
+
+function getAutomaticShopStatus(){
+
+  return isWithinShopHours();
+
+}
+
+
+function updateAutomaticShopDisplay(){
+
+  if(shopClosed){
+
+    updateShopVisual(true);
+
+    return;
+  }
+
+  const autoOpen =
+    getAutomaticShopStatus();
+
+  updateShopVisual(
+    !autoOpen
+  );
+
+}
+
+
+function updateShopVisual(closed){
+
+  const light =
+    document.getElementById(
+      "shopLight"
+    );
+
+  const text =
+    document.getElementById(
+      "shopStatusText"
+    );
+
+  if(closed){
+
+    light.classList.add(
+      "closed"
+    );
+
+    text.classList.add(
+      "closed"
+    );
+
+    text.textContent =
+      "SHOP IS CLOSED";
+
+  }else{
+
+    light.classList.remove(
+      "closed"
+    );
+
+    text.classList.remove(
+      "closed"
+    );
+
+    text.textContent =
+      "SHOP IS OPEN";
+
+  }
+
+}
+
+
+/* Check status every 30 seconds */
+
+setInterval(
+  () => {
+
+    if(!shopClosed){
+
+      updateAutomaticShopDisplay();
+
+    }
+
+  },
+  30000
+);
+
+
+/* =========================
    SHOP
 ========================= */
 
-window.toggleShop = function(){
+window.toggleShop =
+function(){
 
   shopClosed =
     !shopClosed;
@@ -1566,7 +1891,9 @@ window.toggleShop = function(){
 };
 
 
-function updateShopSwitch(closed){
+function updateShopSwitch(
+  closed
+){
 
   shopClosed =
     Boolean(closed);
@@ -1588,45 +1915,67 @@ function updateShopSwitch(closed){
 
   if(shopClosed){
 
-    btn.classList.remove("on");
+    btn.classList.remove(
+      "on"
+    );
 
     title.textContent =
-      "Shop Closed";
+      "Shop Manually Closed";
 
     text.textContent =
       "Customers cannot place new orders.";
 
+    updateShopVisual(true);
+
   }else{
 
-    btn.classList.add("on");
+    btn.classList.add(
+      "on"
+    );
 
     title.textContent =
-      "Shop Open";
+      "Automatic Schedule";
 
     text.textContent =
-      "Normal schedule: 12 PM – 11 PM";
+      "12 PM – 11 PM";
+
+    updateAutomaticShopDisplay();
 
   }
 
 }
 
 
-window.saveShopSettings = async function(){
+window.saveShopSettings =
+async function(){
 
   try{
 
     await update(
       ref(db,"settings"),
       {
-        manualClosed:shopClosed,
+
+        manualClosed:
+          shopClosed,
+
+        autoSchedule:
+          true,
+
+        openingTime:
+          "12:00",
+
+        closingTime:
+          "23:00",
+
         closedMessage:
           document.getElementById(
             "closedMessage"
           ).value.trim()
+
       }
     );
 
-    alert(
+    showToast(
       "Shop settings saved."
     );
 
@@ -1634,8 +1983,9 @@ window.saveShopSettings = async function(){
 
     console.error(error);
 
-    alert(
-      error.message
+    showToast(
+      error.message ||
+      "Could not save shop settings."
     );
 
   }
@@ -1665,14 +2015,18 @@ async function(){
     await update(
       ref(db,"settings"),
       {
-        websiteMode:mode,
+
+        websiteMode:
+          mode,
+
         updateMessage:
           message ||
           "We are making some improvements. Please wait a little while and refresh the page."
+
       }
     );
 
-    alert(
+    showToast(
       "Website settings updated."
     );
 
@@ -1680,7 +2034,7 @@ async function(){
 
     console.error(error);
 
-    alert(
+    showToast(
       error.message
     );
 
@@ -1747,7 +2101,7 @@ async function(){
 
   if(!/^[0-9]{10}$/.test(number)){
 
-    alert(
+    showToast(
       "Enter a valid 10 digit WhatsApp number."
     );
 
@@ -1761,7 +2115,10 @@ async function(){
     );
 
     await set(
-      ref(db,"settings/whatsappNumber"),
+      ref(
+        db,
+        "settings/whatsappNumber"
+      ),
       number
     );
 
@@ -1769,15 +2126,15 @@ async function(){
       "whatsappPassword"
     ).value = "";
 
-    alert(
-      "WhatsApp number updated successfully."
+    showToast(
+      "WhatsApp number updated."
     );
 
   }catch(error){
 
     console.error(error);
 
-    alert(
+    showToast(
       error.message ||
       "Could not update WhatsApp number."
     );
@@ -1788,7 +2145,7 @@ async function(){
 
 
 /* =========================
-   FONT SIZE
+   FONT
 ========================= */
 
 window.saveFontSize =
@@ -1802,11 +2159,14 @@ async function(){
   try{
 
     await set(
-      ref(db,"settings/fontSize"),
+      ref(
+        db,
+        "settings/fontSize"
+      ),
       size
     );
 
-    alert(
+    showToast(
       "Customer font size updated."
     );
 
@@ -1814,7 +2174,7 @@ async function(){
 
     console.error(error);
 
-    alert(
+    showToast(
       error.message
     );
 
@@ -1843,7 +2203,7 @@ async function(){
     rate < 0
   ){
 
-    alert(
+    showToast(
       "Enter a valid delivery rate."
     );
 
@@ -1853,11 +2213,14 @@ async function(){
   try{
 
     await set(
-      ref(db,"settings/deliveryRate"),
+      ref(
+        db,
+        "settings/deliveryRate"
+      ),
       rate
     );
 
-    alert(
+    showToast(
       `Delivery charge updated to ₹${rate}/KM`
     );
 
@@ -1865,7 +2228,7 @@ async function(){
 
     console.error(error);
 
-    alert(
+    showToast(
       error.message
     );
 
@@ -1937,43 +2300,87 @@ function renderMenuAdmin(data){
     entries.map(
       ([id,item]) => {
 
+        const image =
+          item.image ||
+          "";
+
         return `
 
           <div class="menu-item">
 
-            <div>
+            <div class="menu-top">
 
-              <div class="menu-name">
-                ${escapeHtml(
-                  item.name ||
-                  "Food Item"
-                )}
+              <div>
+
+                <div class="menu-name">
+                  ${escapeHtml(
+                    item.name ||
+                    "Food Item"
+                  )}
+                </div>
+
+                <div class="menu-id">
+                  ITEM ${escapeHtml(id)}
+                </div>
+
               </div>
 
-              <div class="menu-id">
-                ITEM ${escapeHtml(id)}
+              <div class="menu-price-area">
+
+                <input
+                  id="price-${id}"
+                  class="menu-price-input"
+                  type="number"
+                  min="0"
+                  step="1"
+                  value="${Number(
+                    item.price || 0
+                  )}"
+                >
+
+                <button
+                  class="btn btn-gold menu-save"
+                  onclick="saveMenuItem('${id}')"
+                >
+                  Save
+                </button>
+
               </div>
 
             </div>
 
-            <div class="menu-price-area">
 
-              <input
-                id="price-${id}"
-                class="menu-price-input"
-                type="number"
-                min="0"
-                step="1"
-                value="${Number(
-                  item.price || 0
+            <div class="image-area">
+
+              <img
+                id="preview-${id}"
+                class="image-preview"
+                src="${escapeAttribute(
+                  image
                 )}"
+                alt=""
+                onerror="this.src='https://via.placeholder.com/150x100/171717/777?text=Food'"
               >
+
+              <div class="image-url">
+
+                <input
+                  id="image-${id}"
+                  type="url"
+                  placeholder="Paste exact food photo URL"
+                  value="${escapeAttribute(
+                    image
+                  )}"
+                  oninput="previewMenuImage('${id}')"
+                >
+
+              </div>
 
               <button
-                class="btn btn-gold menu-save"
-                onclick="saveMenuItem('${id}')"
+                class="btn btn-blue image-save"
+                onclick="saveMenuImage('${id}')"
               >
-                Save
+                Save Image
               </button>
 
             </div>
@@ -1987,6 +2394,10 @@ function renderMenuAdmin(data){
 
 }
 
+
+/* =========================
+   SAVE PRICE
+========================= */
 
 window.saveMenuItem =
 async function(id){
@@ -2004,7 +2415,7 @@ async function(id){
     price < 0
   ){
 
-    alert(
+    showToast(
       "Enter a valid price."
     );
 
@@ -2021,7 +2432,7 @@ async function(id){
       price
     );
 
-    alert(
+    showToast(
       "Price updated successfully."
     );
 
@@ -2029,8 +2440,110 @@ async function(id){
 
     console.error(error);
 
-    alert(
+    showToast(
       error.message
+    );
+
+  }
+
+};
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+window.previewMenuImage =
+function(id){
+
+  const input =
+    document.getElementById(
+      `image-${id}`
+    );
+
+  const preview =
+    document.getElementById(
+      `preview-${id}`
+    );
+
+  const url =
+    input.value.trim();
+
+  if(!url){
+
+    preview.src =
+      "https://via.placeholder.com/150x100/171717/777?text=Food";
+
+    return;
+  }
+
+  preview.src =
+    url;
+
+};
+
+
+/* =========================
+   SAVE IMAGE URL
+========================= */
+
+window.saveMenuImage =
+async function(id){
+
+  const input =
+    document.getElementById(
+      `image-${id}`
+    );
+
+  const imageUrl =
+    input.value.trim();
+
+  if(!imageUrl){
+
+    showToast(
+      "Please enter an image URL."
+    );
+
+    return;
+  }
+
+  if(
+    !/^https?:\/\//i.test(
+      imageUrl
+    )
+  ){
+
+    showToast(
+      "Image URL must start with http:// or https://"
+    );
+
+    return;
+  }
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `settings/menu/${id}`
+      ),
+      {
+        image:
+          imageUrl
+      }
+    );
+
+    showToast(
+      "Food image updated successfully."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Image update failed."
     );
 
   }
@@ -2048,8 +2561,15 @@ function loadOrders(){
     ref(db,"orders"),
     snapshot => {
 
-      allOrders =
+      const newData =
         snapshot.val() || {};
+
+      detectNewOrders(
+        newData
+      );
+
+      allOrders =
+        newData;
 
       updateStats();
 
@@ -2079,43 +2599,240 @@ function loadOrders(){
 
 
 /* =========================
+   NEW ORDER DETECTION
+========================= */
+
+function detectNewOrders(
+  orders
+){
+
+  const keys =
+    Object.keys(orders);
+
+  /*
+    First Firebase load:
+    remember existing orders.
+    No sound.
+  */
+
+  if(!initialOrdersLoaded){
+
+    keys.forEach(
+      key =>
+        knownOrderKeys.add(key)
+    );
+
+    initialOrdersLoaded =
+      true;
+
+    return;
+  }
+
+
+  const newlyArrived =
+    keys.filter(
+      key =>
+        !knownOrderKeys.has(key)
+    );
+
+
+  keys.forEach(
+    key =>
+      knownOrderKeys.add(key)
+  );
+
+
+  if(!newlyArrived.length){
+
+    return;
+  }
+
+
+  const receivedNew =
+    newlyArrived.filter(
+      key => {
+
+        const order =
+          orders[key];
+
+        return (
+          order &&
+          (
+            !order.status ||
+            order.status ===
+            "Received"
+          )
+        );
+
+      }
+    );
+
+
+  if(!receivedNew.length){
+
+    return;
+  }
+
+
+  /*
+    Browser sound may require
+    previous user interaction.
+  */
+
+  playNewOrderSound();
+
+  showToast(
+    `🔔 ${receivedNew.length} NEW ORDER RECEIVED`
+  );
+
+}
+
+
+/* =========================
+   NEW ORDER SOUND
+========================= */
+
+function playNewOrderSound(){
+
+  try{
+
+    if(!audioContext){
+
+      audioContext =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+    if(
+      audioContext.state ===
+      "suspended"
+    ){
+
+      audioContext.resume();
+
+    }
+
+
+    const now =
+      audioContext.currentTime;
+
+
+    /*
+      Three short premium
+      notification tones.
+    */
+
+    [0,0.18,0.36].forEach(
+      (delay,index) => {
+
+        const oscillator =
+          audioContext.createOscillator();
+
+        const gain =
+          audioContext.createGain();
+
+        oscillator.type =
+          "sine";
+
+        oscillator.frequency.value =
+          index === 2
+            ? 1100
+            : 850;
+
+        gain.gain.setValueAtTime(
+          0.0001,
+          now + delay
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          0.18,
+          now + delay + 0.02
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          0.0001,
+          now + delay + 0.13
+        );
+
+        oscillator.connect(
+          gain
+        );
+
+        gain.connect(
+          audioContext.destination
+        );
+
+        oscillator.start(
+          now + delay
+        );
+
+        oscillator.stop(
+          now + delay + 0.14
+        );
+
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Notification sound unavailable:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
    STATS
 ========================= */
 
 function updateStats(){
 
   const orders =
-    Object.values(allOrders);
+    Object.values(
+      allOrders
+    );
 
   const todayDate =
     new Date().toDateString();
 
   const todayCount =
-    orders.filter(order => {
+    orders.filter(
+      order => {
 
-      if(!order.createdAt)
-        return false;
+        if(!order.createdAt)
+          return false;
 
-      return new Date(
-        order.createdAt
-      ).toDateString()
-      === todayDate;
+        return new Date(
+          order.createdAt
+        ).toDateString()
+        === todayDate;
 
-    }).length;
+      }
+    ).length;
 
   const active =
-    orders.filter(order =>
-      ![
-        "Delivered",
-        "Cancelled"
-      ].includes(
-        order.status
-      )
+    orders.filter(
+      order =>
+        ![
+          "Delivered",
+          "Cancelled"
+        ].includes(
+          order.status
+        )
     ).length;
 
   const delivered =
-    orders.filter(order =>
-      order.status === "Delivered"
+    orders.filter(
+      order =>
+        order.status ===
+        "Delivered"
     ).length;
 
   document.getElementById(
@@ -2184,7 +2901,9 @@ function renderOrders(){
     );
 
   let entries =
-    Object.entries(allOrders);
+    Object.entries(
+      allOrders
+    );
 
   entries.sort(
     (a,b) =>
@@ -2214,16 +2933,10 @@ function renderOrders(){
           "Cancelled"
         ){
 
-          if(
+          return (
             currentFilter ===
             "all"
-          ){
-
-            return true;
-
-          }
-
-          return false;
+          );
 
         }
 
@@ -2275,6 +2988,7 @@ function renderOrders(){
       }
     );
 
+
   if(!entries.length){
 
     container.innerHTML =
@@ -2282,9 +2996,9 @@ function renderOrders(){
       <div
         style="
           color:#666;
-          padding:22px 5px;
+          padding:18px 5px;
           text-align:center;
-          font-size:11px;
+          font-size:10px;
         "
       >
         No active orders found.
@@ -2294,6 +3008,7 @@ function renderOrders(){
     return;
 
   }
+
 
   container.innerHTML =
     entries.map(
@@ -2309,7 +3024,7 @@ function renderOrders(){
 
 
 /* =========================
-   DELIVERED ORDERS FOLDER
+   DELIVERED
 ========================= */
 
 function renderDeliveredOrders(){
@@ -2320,7 +3035,9 @@ function renderDeliveredOrders(){
     );
 
   let entries =
-    Object.entries(allOrders)
+    Object.entries(
+      allOrders
+    )
       .filter(
         ([,order]) =>
           order.status ===
@@ -2341,6 +3058,7 @@ function renderDeliveredOrders(){
       )
   );
 
+
   if(!entries.length){
 
     container.innerHTML =
@@ -2349,8 +3067,8 @@ function renderDeliveredOrders(){
         style="
           color:#577763;
           text-align:center;
-          padding:20px;
-          font-size:11px;
+          padding:18px;
+          font-size:10px;
         "
       >
         📦 No delivered orders yet.
@@ -2361,13 +3079,14 @@ function renderDeliveredOrders(){
 
   }
 
+
   container.innerHTML =
     `
       <div
         style="
           color:#669d78;
-          font-size:10px;
-          margin-bottom:9px;
+          font-size:9px;
+          margin-bottom:8px;
         "
       >
         ${entries.length}
@@ -2438,7 +3157,9 @@ function renderOrderCard(
 
 
   const items =
-    Array.isArray(order.items)
+    Array.isArray(
+      order.items
+    )
       ? order.items
       : Object.values(
           order.items || {}
@@ -2448,6 +3169,7 @@ function renderOrderCard(
   const itemHtml =
     items.map(
       item => `
+
         <div class="order-item">
 
           <span>
@@ -2466,6 +3188,7 @@ function renderOrderCard(
           </strong>
 
         </div>
+
       `
     ).join("");
 
@@ -2475,11 +3198,12 @@ function renderOrderCard(
     <div
       class="
         order
-        ${isNew ? "new-order" : ""}
+        ${isNew ? "new-order new-arrival" : ""}
         ${deliveredFolder
           ? "delivered-order"
           : ""}
       "
+      data-order-key="${escapeAttribute(key)}"
     >
 
       <div class="order-head">
@@ -2496,8 +3220,8 @@ function renderOrderCard(
           <div
             style="
               color:#777;
-              font-size:9px;
-              margin-top:3px;
+              font-size:8px;
+              margin-top:2px;
             "
           >
             ${formatDate(
@@ -2594,9 +3318,9 @@ function renderOrderCard(
           ? `
             <div
               style="
-                margin-top:9px;
+                margin-top:7px;
                 color:#69ed91;
-                font-size:10px;
+                font-size:9px;
               "
             >
               ✓ Delivered & stored
@@ -2639,7 +3363,7 @@ function renderOrderCard(
                 class="btn btn-red"
                 onclick="
                   updateOrderStatus(
-                    '${key}',
+                    '${escapeAttribute(key)}',
                     'Cancelled'
                   )
                 "
@@ -2677,7 +3401,7 @@ function statusButton(
       }"
       onclick="
         updateOrderStatus(
-          '${key}',
+          '${escapeAttribute(key)}',
           '${status}'
         )
       "
@@ -2728,8 +3452,6 @@ async function(
     };
 
 
-    /* CUSTOMER ORDER */
-
     if(order.ownerUid){
 
       updates[
@@ -2742,11 +3464,6 @@ async function(
 
     }
 
-
-    /*
-      WHEN DELIVERED:
-      STORE A COPY IN deliveredOrders
-    */
 
     if(
       status ===
@@ -2773,39 +3490,21 @@ async function(
     }
 
 
-    /*
-      IF CANCELLED:
-      NO DELIVERED COPY
-    */
-
-
     await update(
       ref(db),
       updates
     );
 
 
-    /*
-      Small confirmation
-    */
-
-    if(
-      status ===
-      "Delivered"
-    ){
-
-      console.log(
-        "Order stored in Delivered Orders:",
-        key
-      );
-
-    }
+    showToast(
+      `Order ${status}.`
+    );
 
   }catch(error){
 
     console.error(error);
 
-    alert(
+    showToast(
       error.message ||
       "Could not update order."
     );
@@ -2864,7 +3563,7 @@ function renderRatings(){
       "ratings"
     ).innerHTML =
       `
-      <p style="color:#777;font-size:11px;">
+      <p style="color:#777;font-size:10px;">
         No customer feedback yet.
       </p>
       `;
@@ -2896,7 +3595,7 @@ function renderRatings(){
     "ratingSummary"
   ).innerHTML =
     `
-      <strong style="font-size:12px;">
+      <strong style="font-size:11px;">
         Average Rating:
         ${average.toFixed(1)}
         ⭐
@@ -2904,7 +3603,7 @@ function renderRatings(){
 
       <br>
 
-      <span style="font-size:10px;">
+      <span style="font-size:9px;">
         ${entries.length}
         customer rating(s)
       </span>
@@ -2931,7 +3630,7 @@ function renderRatings(){
         <div class="rating">
 
           <div
-            style="font-size:11px;"
+            style="font-size:10px;"
           >
             <strong>
               ${escapeHtml(
@@ -2978,9 +3677,9 @@ function renderRatings(){
 
           <div
             style="
-              font-size:9px;
+              font-size:8px;
               color:#777;
-              margin-top:3px;
+              margin-top:2px;
             "
           >
             ${formatDate(
@@ -3004,6 +3703,47 @@ function renderRatings(){
 
       `
     ).join("");
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer = null;
+
+function showToast(
+  message
+){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2500
+    );
 
 }
 
@@ -3057,6 +3797,60 @@ function escapeHtml(
     );
 
 }
+
+
+function escapeAttribute(
+  value
+){
+
+  return escapeHtml(
+    value
+  );
+
+}
+
+
+/* =========================
+   ACTIVATE SOUND AFTER
+   FIRST USER INTERACTION
+========================= */
+
+document.addEventListener(
+  "click",
+  () => {
+
+    try{
+
+      if(!audioContext){
+
+        audioContext =
+          new (
+            window.AudioContext ||
+            window.webkitAudioContext
+          )();
+
+      }
+
+      if(
+        audioContext.state ===
+        "suspended"
+      ){
+
+        audioContext.resume();
+
+      }
+
+    }catch(error){
+
+      console.warn(error);
+
+    }
+
+  },
+  {
+    once:true
+  }
+);
 
 </script>
 
