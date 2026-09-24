@@ -8,196 +8,299 @@
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Arial, sans-serif;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  background:#f7f7f7;
-  color:#222;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#050505;
+  color:#f5f5f5;
+  line-height:1.6;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
+
 header{
-  background:#111;
-  color:white;
-  text-align:center;
-  padding:25px 15px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(0,0,0,0.96);
+  border-bottom:1px solid #292929;
+  backdrop-filter:blur(10px);
 }
 
-.brand{
-  font-size:34px;
-  font-weight:800;
-  letter-spacing:3px;
-}
-
-.brand span{
-  color:#f5b400;
-}
-
-.tagline{
-  margin-top:6px;
-  font-size:14px;
-  color:#ddd;
-  letter-spacing:1px;
-}
-
-.location{
-  margin-top:8px;
-  font-size:13px;
-  color:#aaa;
-}
-
-/* HERO */
-.hero{
-  text-align:center;
-  padding:55px 20px;
-  background:linear-gradient(135deg,#fff,#f1f1f1);
-}
-
-.hero h1{
-  font-size:38px;
-  margin-bottom:12px;
-}
-
-.hero p{
-  color:#666;
-  font-size:16px;
-}
-
-.hero button{
-  margin-top:22px;
-  padding:13px 28px;
-  border:0;
-  border-radius:8px;
-  background:#111;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* PRODUCTS */
-.products{
+.navbar{
   max-width:1200px;
   margin:auto;
-  padding:45px 20px;
+  height:75px;
+  padding:0 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-.products h2{
-  text-align:center;
-  font-size:30px;
-  margin-bottom:30px;
+.logo{
+  text-decoration:none;
+  color:#fff;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:2px;
 }
 
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:22px;
+.logo span{
+  color:#d4af37;
 }
 
-.card{
-  background:white;
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
+.nav-links{
+  display:flex;
+  gap:28px;
 }
 
-.food-image{
-  height:190px;
-  background:#eee;
+.nav-links a{
+  color:#ddd;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#d4af37;
+}
+
+.cart-nav{
+  color:#d4af37;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:520px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:60px;
+  text-align:center;
+  padding:70px 20px;
+  background:
+    linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.9)),
+    url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1800&q=85");
+  background-size:cover;
+  background-position:center;
+}
+
+.hero-content{
+  max-width:850px;
+}
+
+.crown{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  font-size:58px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  margin-bottom:15px;
+}
+
+.hero h1 span{
+  color:#d4af37;
+}
+
+.hero-tagline{
+  color:#d4af37;
+  font-size:18px;
+  letter-spacing:3px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  color:#ddd;
+  max-width:650px;
+  margin:auto;
+  font-size:17px;
+}
+
+.hero-btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 32px;
+  border:1px solid #d4af37;
+  background:#d4af37;
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
+  border-radius:3px;
+  transition:.3s;
+}
+
+.hero-btn:hover{
+  background:#fff;
+  border-color:#fff;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
+}
+
+.section-title h2{
+  font-size:38px;
+  letter-spacing:2px;
+}
+
+.section-title h2 span{
+  color:#d4af37;
+}
+
+.section-title p{
+  margin-top:8px;
+  color:#999;
+}
+
+/* ================= PRODUCTS ================= */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.product-card{
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:8px;
+  overflow:hidden;
+  transition:.35s;
+}
+
+.product-card:hover{
+  transform:translateY(-6px);
+  border-color:#d4af37;
+  box-shadow:0 12px 35px rgba(212,175,55,.12);
+}
+
+.food-image{
+  height:210px;
+  background:#151515;
+  overflow:hidden;
 }
 
 .food-image img{
   width:100%;
   height:100%;
   object-fit:cover;
+  display:block;
+  transition:.5s;
 }
 
-.card-content{
-  padding:17px;
+.product-card:hover .food-image img{
+  transform:scale(1.06);
 }
 
-.card h3{
-  font-size:18px;
+.product-info{
+  padding:20px;
+}
+
+.product-info h3{
+  font-size:20px;
   margin-bottom:8px;
 }
 
+.product-description{
+  color:#888;
+  font-size:13px;
+  min-height:42px;
+}
+
+.price-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:18px;
+}
+
 .price{
-  font-size:18px;
+  color:#d4af37;
+  font-size:21px;
   font-weight:bold;
-  margin-bottom:14px;
 }
 
 .add-btn{
-  width:100%;
-  padding:11px;
-  border:0;
-  border-radius:8px;
-  background:#111;
-  color:white;
+  border:1px solid #d4af37;
+  background:#d4af37;
+  color:#000;
+  padding:10px 17px;
+  border-radius:3px;
   cursor:pointer;
   font-weight:bold;
+  transition:.3s;
 }
 
 .add-btn:hover{
-  background:#333;
+  background:#fff;
+  border-color:#fff;
 }
 
-/* CART */
+/* ================= CART ================= */
+
 .cart-section{
-  background:#eee;
-  padding:55px 20px;
-  margin-top:20px;
+  background:#0b0b0b;
+  border-top:1px solid #222;
+  border-bottom:1px solid #222;
 }
 
-.cart-container{
-  max-width:900px;
+.cart-box{
+  max-width:1000px;
   margin:auto;
-  background:white;
-  border-radius:18px;
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:8px;
   padding:30px;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
-.cart-heading{
-  text-align:center;
+.cart-items{
   margin-bottom:25px;
 }
 
-.cart-heading h2{
-  font-size:30px;
-}
-
-.cart-heading p{
-  margin-top:7px;
+.empty-cart{
+  text-align:center;
   color:#777;
+  padding:30px;
 }
 
 .cart-item{
-  display:flex;
+  display:grid;
+  grid-template-columns:1fr auto auto auto;
+  gap:20px;
   align-items:center;
-  gap:15px;
   padding:18px 0;
-  border-bottom:1px solid #eee;
-}
-
-.cart-item-info{
-  flex:1;
+  border-bottom:1px solid #242424;
 }
 
 .cart-item-info h3{
   font-size:17px;
-  margin-bottom:5px;
 }
 
 .cart-item-info p{
-  color:#777;
+  color:#888;
+  font-size:13px;
 }
 
 .quantity-controls{
@@ -209,60 +312,63 @@ header{
 .quantity-controls button{
   width:32px;
   height:32px;
-  border:0;
-  border-radius:7px;
-  background:#111;
-  color:white;
-  font-size:18px;
+  border:1px solid #555;
+  background:#181818;
+  color:#fff;
   cursor:pointer;
+  border-radius:3px;
+}
+
+.quantity-controls button:hover{
+  border-color:#d4af37;
+  color:#d4af37;
 }
 
 .quantity{
   min-width:20px;
   text-align:center;
-  font-weight:bold;
 }
 
 .item-total{
-  min-width:70px;
-  text-align:right;
+  color:#d4af37;
   font-weight:bold;
 }
 
 .remove-btn{
-  border:0;
   background:none;
-  color:#d00;
+  border:0;
+  color:#bdbdbd;
   cursor:pointer;
-  font-size:13px;
 }
 
-.empty-cart{
-  text-align:center;
-  color:#888;
-  padding:30px;
+.remove-btn:hover{
+  color:#ff5555;
 }
 
 .cart-summary{
+  max-width:400px;
+  margin-left:auto;
   margin-top:25px;
 }
 
 .summary-row{
   display:flex;
   justify-content:space-between;
-  margin:12px 0;
-  font-size:16px;
+  padding:9px 0;
+  color:#bbb;
 }
 
-.divider{
-  height:1px;
-  background:#ddd;
-  margin:18px 0;
-}
-
-.grand-total{
-  font-size:22px;
+.summary-row.total{
+  border-top:1px solid #333;
+  margin-top:8px;
+  padding-top:15px;
+  color:#fff;
+  font-size:21px;
   font-weight:bold;
+}
+
+.summary-row.total span:last-child{
+  color:#d4af37;
 }
 
 .checkout-btn{
@@ -270,115 +376,229 @@ header{
   margin-top:20px;
   padding:15px;
   border:0;
-  border-radius:10px;
-  background:#111;
-  color:white;
-  font-size:17px;
+  background:#d4af37;
+  color:#000;
+  font-size:16px;
   font-weight:bold;
   cursor:pointer;
+  border-radius:3px;
 }
 
-/* CHECKOUT */
-.checkout{
+.checkout-btn:hover{
+  background:#fff;
+}
+
+/* ================= CHECKOUT ================= */
+
+.checkout-section{
   display:none;
-  max-width:700px;
-  margin:40px auto;
-  background:white;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
-.checkout h2{
-  text-align:center;
-  margin-bottom:25px;
+.checkout-box{
+  max-width:800px;
+  margin:auto;
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:35px;
 }
 
 .form-group{
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 .form-group label{
   display:block;
-  margin-bottom:7px;
-  font-weight:bold;
+  margin-bottom:8px;
+  color:#ddd;
+  font-size:14px;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select{
   width:100%;
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  font-size:15px;
+  background:#080808;
+  border:1px solid #333;
+  color:#fff;
+  padding:13px;
+  border-radius:3px;
+  outline:none;
+  font-family:inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:#d4af37;
 }
 
 .form-group textarea{
-  min-height:100px;
+  min-height:110px;
   resize:vertical;
 }
 
-.place-btn{
+.payment-note{
+  color:#777;
+  font-size:12px;
+  margin-top:7px;
+}
+
+.place-order{
   width:100%;
-  padding:15px;
+  padding:16px;
+  background:#25D366;
   border:0;
-  border-radius:10px;
-  background:#111;
-  color:white;
-  font-size:17px;
+  color:#fff;
+  font-size:16px;
   font-weight:bold;
   cursor:pointer;
+  border-radius:4px;
+  margin-top:10px;
 }
 
-/* FOOTER */
-footer{
-  background:#111;
-  color:white;
+.place-order:hover{
+  background:#1ebe5d;
+}
+
+/* ================= THANK YOU ================= */
+
+.thank-you{
+  display:none;
   text-align:center;
-  padding:30px 15px;
-  margin-top:40px;
+  max-width:650px;
+  margin:40px auto;
+  padding:40px 25px;
+  background:#101010;
+  border:1px solid #d4af37;
+  border-radius:8px;
 }
 
-footer h3{
-  margin-bottom:8px;
+.thank-you .icon{
+  font-size:48px;
+  margin-bottom:15px;
+}
+
+.thank-you h2{
+  color:#d4af37;
+  margin-bottom:10px;
+}
+
+.thank-you p{
+  color:#aaa;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:#000;
+  border-top:1px solid #222;
+  text-align:center;
+  padding:40px 20px;
+}
+
+.footer-logo{
+  color:#fff;
+  font-size:23px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+.footer-logo span{
+  color:#d4af37;
 }
 
 footer p{
-  color:#aaa;
+  color:#777;
+  margin-top:8px;
   font-size:14px;
 }
 
-/* MOBILE */
+.location{
+  color:#d4af37;
+  margin-top:12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
 @media(max-width:900px){
   .product-grid{
     grid-template-columns:repeat(2,1fr);
   }
+
+  .hero h1{
+    font-size:44px;
+  }
 }
 
 @media(max-width:600px){
-  .brand{
-    font-size:27px;
+
+  .navbar{
+    height:65px;
+    padding:0 15px;
+  }
+
+  .logo{
+    font-size:17px;
+  }
+
+  .nav-links{
+    gap:12px;
+  }
+
+  .nav-links a{
+    font-size:12px;
+  }
+
+  .hero{
+    min-height:470px;
   }
 
   .hero h1{
-    font-size:30px;
+    font-size:35px;
+    letter-spacing:3px;
+  }
+
+  .hero-tagline{
+    font-size:14px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .section{
+    padding:55px 15px;
+  }
+
+  .section-title h2{
+    font-size:29px;
   }
 
   .product-grid{
     grid-template-columns:1fr;
   }
 
-  .cart-container{
+  .food-image{
+    height:220px;
+  }
+
+  .cart-box,
+  .checkout-box{
     padding:20px;
   }
 
   .cart-item{
-    flex-wrap:wrap;
+    grid-template-columns:1fr auto;
+    gap:12px;
   }
 
-  .item-total{
-    margin-left:auto;
+  .cart-item .item-total{
+    text-align:right;
+  }
+
+  .cart-item .remove-btn{
+    text-align:right;
   }
 }
 </style>
@@ -386,275 +606,802 @@ footer p{
 
 <body>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
+
 <header>
-  <div class="brand">
-    👑 THE <span>QUEEN</span>
-  </div>
+  <div class="navbar">
 
-  <div class="tagline">
-    FAST FOOD • Your Cravings. Our Kitchen.
-  </div>
+    <a href="#home" class="logo">
+      👑 THE <span>QUEEN</span>
+    </a>
 
-  <div class="location">
-    Ibrisingh Bazar, Odisha
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#cart" class="cart-nav">
+        🛒 Cart (<span id="cartCount">0</span>)
+      </a>
+    </nav>
+
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Fresh Food. Bold Flavours.</h1>
-  <p>Made fresh, served hot, and prepared just for you.</p>
 
-  <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
-    Order Now 🍴
-  </button>
-</section>
+<!-- ================= HERO ================= -->
 
-<!-- PRODUCTS -->
-<section class="products" id="menu">
+<section class="hero" id="home">
 
-<h2>Our Menu</h2>
+  <div class="hero-content">
 
-<div class="product-grid">
+    <div class="crown">♛</div>
 
-<!-- 1 -->
-<div class="card">
-<div class="food-image">🍜</div>
-<div class="card-content">
-<h3>Veg Chowmin</h3>
-<div class="price">₹50</div>
-<button class="add-btn" onclick="addToCart('Veg Chowmin',50)">Add to Cart</button>
-</div>
-</div>
+    <h1>
+      THE <span>QUEEN</span>
+    </h1>
 
-<!-- 2 -->
-<div class="card">
-<div class="food-image">🌯</div>
-<div class="card-content">
-<h3>Veg Roll</h3>
-<div class="price">₹50</div>
-<button class="add-btn" onclick="addToCart('Veg Roll',50)">Add to Cart</button>
-</div>
-</div>
+    <div class="hero-tagline">
+      FAST FOOD
+    </div>
 
-<!-- 3 -->
-<div class="card">
-<div class="food-image">🥘</div>
-<div class="card-content">
-<h3>Manchurian</h3>
-<div class="price">₹50</div>
-<button class="add-btn" onclick="addToCart('Manchurian',50)">Add to Cart</button>
-</div>
-</div>
+    <p>
+      Your Cravings. Our Kitchen.
+    </p>
 
-<!-- 4 -->
-<div class="card">
-<div class="food-image">🍢</div>
-<div class="card-content">
-<h3>Paneer Tikka</h3>
-<div class="price">₹60</div>
-<button class="add-btn" onclick="addToCart('Paneer Tikka',60)">Add to Cart</button>
-</div>
-</div>
+    <p style="margin-top:10px;">
+      Fresh food, bold flavours, and delicious moments —
+      made fresh and served hot.
+    </p>
 
-<!-- 5 -->
-<div class="card">
-<div class="food-image">🍛</div>
-<div class="card-content">
-<h3>Paneer Butter Masala</h3>
-<div class="price">₹130</div>
-<button class="add-btn" onclick="addToCart('Paneer Butter Masala',130)">Add to Cart</button>
-</div>
-</div>
+    <a href="#menu" class="hero-btn">
+      ORDER NOW
+    </a>
 
-<!-- 6 -->
-<div class="card">
-<div class="food-image">🍜</div>
-<div class="card-content">
-<h3>Egg Chicken Chowmin</h3>
-<div class="price">₹65</div>
-<button class="add-btn" onclick="addToCart('Egg Chicken Chowmin',65)">Add to Cart</button>
-</div>
-</div>
-
-<!-- 7 -->
-<div class="card">
-<div class="food-image">🌯</div>
-<div class="card-content">
-<h3>Egg Chicken Roll</h3>
-<div class="price">₹60</div>
-<button class="add-btn" onclick="addToCart('Egg Chicken Roll',60)">Add to Cart</button>
-</div>
-</div>
-
-<!-- 8 -->
-<div class="card">
-<div class="food-image">🍗</div>
-<div class="card-content">
-<h3>Pakoda</h3>
-<div class="price">₹60</div>
-<button class="add-btn" onclick="addToCart('Pakoda',60)">Add to Cart</button>
-</div>
-</div>
-
-<!-- 9 -->
-<div class="card">
-<div class="food-image">🍗</div>
-<div class="card-content">
-<h3>Chilli Chicken</h3>
-<div class="price">₹120</div>
-<button class="add-btn" onclick="addToCart('Chilli Chicken',120)">Add to Cart</button>
-</div>
-</div>
-
-<!-- 10 -->
-<div class="card">
-<div class="food-image">🍗</div>
-<div class="card-content">
-<h3>Chicken Garlic</h3>
-<div class="price">₹80</div>
-<button class="add-btn" onclick="addToCart('Chicken Garlic',80)">Add to Cart</button>
-</div>
-</div>
-
-<!-- 11 -->
-<div class="card">
-<div class="food-image">🍗</div>
-<div class="card-content">
-<h3>Chicken Biriyani</h3>
-<div class="price">₹120</div>
-<button class="add-btn" onclick="addToCart('Chicken Biriyani',120)">Add to Cart</button>
-</div>
-</div>
-
-<!-- 12 -->
-<div class="card">
-<div class="food-image">🍚</div>
-<div class="card-content">
-<h3>Veg Biriyani</h3>
-<div class="price">₹100</div>
-<button class="add-btn" onclick="addToCart('Veg Biriyani',100)">Add to Cart</button>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- CART -->
-<section class="cart-section" id="cartSection">
-
-<div class="cart-container">
-
-<div class="cart-heading">
-<h2>🛒 Your Cart</h2>
-<p>Review your items before checkout</p>
-</div>
-
-<div id="cartItems">
-<p class="empty-cart">Your cart is empty.</p>
-</div>
-
-<div class="cart-summary">
-
-<div class="summary-row">
-<span>Subtotal</span>
-<span>₹<span id="cartSubtotal">0</span></span>
-</div>
-
-<div class="summary-row">
-<span>Delivery Charge</span>
-<span>₹<span id="deliveryCharge">0</span></span>
-</div>
-
-<div class="divider"></div>
-
-<div class="summary-row grand-total">
-<span>Grand Total</span>
-<span>₹<span id="cartTotal">0</span></span>
-</div>
-
-<button class="checkout-btn" onclick="showCheckout()">
-Proceed to Checkout →
-</button>
-
-</div>
-
-</div>
-</section>
-
-<!-- CHECKOUT -->
-<section class="checkout" id="checkoutSection">
-
-<h2>Checkout</h2>
-
-<div class="form-group">
-<label>Full Name</label>
-<input type="text" id="customerName" placeholder="Enter your name">
-</div>
-
-<div class="form-group">
-<label>Mobile Number</label>
-<input type="tel" id="customerPhone" maxlength="10" placeholder="10 digit mobile number">
-</div>
-
-<div class="form-group">
-<label>Delivery Address</label>
-<textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea>
-</div>
-
-<div class="form-group">
-<label>Payment Method</label>
-
-<select id="paymentMethod">
-<option value="COD">Cash on Delivery</option>
-<option value="UPI">UPI Payment</option>
-</select>
-
-</div>
-
-<button class="place-btn" onclick="placeOrder()">
-Place Order
-</button>
+  </div>
 
 </section>
 
-<!-- FOOTER -->
+
+<!-- ================= MENU ================= -->
+
+<section class="section" id="menu">
+
+  <div class="section-title">
+    <h2>
+      Our <span>Menu</span>
+    </h2>
+
+    <p>
+      Choose. Add. Enjoy.
+    </p>
+  </div>
+
+
+  <div class="product-grid">
+
+
+    <!-- 1 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=85"
+          alt="Veg Chowmin"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Veg Chowmin</h3>
+
+        <p class="product-description">
+          Fresh vegetables tossed with noodles and delicious seasoning.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹50</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Veg Chowmin',50)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=900&q=85"
+          alt="Veg Roll"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Veg Roll</h3>
+
+        <p class="product-description">
+          Crispy roll filled with fresh vegetables and tasty spices.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹50</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Veg Roll',50)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85"
+          alt="Manchurian"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Manchurian</h3>
+
+        <p class="product-description">
+          Crispy vegetable balls tossed in a rich Indo-Chinese sauce.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹50</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Manchurian',50)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+          alt="Paneer Tikka"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Paneer Tikka</h3>
+
+        <p class="product-description">
+          Soft paneer pieces grilled with aromatic spices.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹60</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Paneer Tikka',60)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 5 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85"
+          alt="Paneer Butter Masala"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Paneer Butter Masala</h3>
+
+        <p class="product-description">
+          Creamy paneer cooked in a rich buttery tomato gravy.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹130</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Paneer Butter Masala',130)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 6 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=85"
+          alt="Egg Chicken Chowmin"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Egg Chicken Chowmin</h3>
+
+        <p class="product-description">
+          Noodles tossed with egg, chicken, vegetables and spices.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹65</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Egg Chicken Chowmin',65)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 7 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
+          alt="Egg Chicken Roll"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Egg Chicken Roll</h3>
+
+        <p class="product-description">
+          Soft roll filled with egg, chicken and fresh vegetables.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹60</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Egg Chicken Roll',60)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 8 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=85"
+          alt="Pakoda"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Pakoda</h3>
+
+        <p class="product-description">
+          Crispy golden pakoda prepared with aromatic spices.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹60</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Pakoda',60)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 9 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=900&q=85"
+          alt="Chilli Chicken"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Chilli Chicken</h3>
+
+        <p class="product-description">
+          Tender chicken cooked with chilli, onion and special sauce.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹120</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Chilli Chicken',120)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85"
+          alt="Chicken Garlic"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Chicken Garlic</h3>
+
+        <p class="product-description">
+          Juicy chicken cooked with garlic and aromatic seasoning.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹80</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Chicken Garlic',80)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 11 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1539136788836-5699e78bfc75?auto=format&fit=crop&w=900&q=85"
+          alt="Chicken Biriyani"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Chicken Biriyani</h3>
+
+        <p class="product-description">
+          Fragrant basmati rice cooked with chicken and biriyani spices.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹120</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Chicken Biriyani',120)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 12 -->
+
+    <div class="product-card">
+
+      <div class="food-image">
+        <img
+          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85"
+          alt="Veg Biriyani"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <h3>Veg Biriyani</h3>
+
+        <p class="product-description">
+          Aromatic rice cooked with fresh vegetables and spices.
+        </p>
+
+        <div class="price-row">
+
+          <span class="price">₹100</span>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Veg Biriyani',100)"
+          >
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- ================= CART ================= -->
+
+<section class="section cart-section" id="cart">
+
+  <div class="section-title">
+
+    <h2>
+      Your <span>Cart</span>
+    </h2>
+
+    <p>
+      Review your order before checkout.
+    </p>
+
+  </div>
+
+
+  <div class="cart-box">
+
+    <div id="cartItems" class="cart-items">
+
+      <p class="empty-cart">
+        Your cart is empty.
+      </p>
+
+    </div>
+
+
+    <div class="cart-summary">
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>₹<span id="cartSubtotal">0</span></span>
+      </div>
+
+      <div class="summary-row">
+        <span>Delivery</span>
+        <span>₹<span id="deliveryCharge">0</span></span>
+      </div>
+
+      <div class="summary-row total">
+        <span>Total</span>
+        <span>₹<span id="cartTotal">0</span></span>
+      </div>
+
+      <button
+        class="checkout-btn"
+        onclick="showCheckout()"
+      >
+        PROCEED TO CHECKOUT
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CHECKOUT ================= -->
+
+<section
+  class="section checkout-section"
+  id="checkoutSection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      <span>Checkout</span>
+    </h2>
+
+    <p>
+      Enter your delivery details.
+    </p>
+
+  </div>
+
+
+  <div class="checkout-box">
+
+
+    <div class="form-group">
+
+      <label for="customerName">
+        Full Name
+      </label>
+
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Enter your name"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="customerPhone">
+        Mobile Number
+      </label>
+
+      <input
+        type="tel"
+        id="customerPhone"
+        maxlength="10"
+        placeholder="10 digit mobile number"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="customerAddress">
+        Delivery Address
+      </label>
+
+      <textarea
+        id="customerAddress"
+        placeholder="House / Shop / Area / Landmark / PIN"
+      ></textarea>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="paymentMethod">
+        Payment Method
+      </label>
+
+      <select id="paymentMethod">
+
+        <option value="Cash on Delivery">
+          Cash on Delivery
+        </option>
+
+        <option value="UPI">
+          UPI
+        </option>
+
+      </select>
+
+      <p class="payment-note">
+        UPI payment will be handled separately for now.
+      </p>
+
+    </div>
+
+
+    <button
+      class="place-order"
+      onclick="placeOrder()"
+    >
+      📲 PLACE ORDER ON WHATSAPP
+    </button>
+
+
+  </div>
+
+</section>
+
+
+<!-- ================= THANK YOU ================= -->
+
+<section
+  class="thank-you"
+  id="thankYou"
+>
+
+  <div class="icon">
+    👑
+  </div>
+
+  <h2>
+    Thank You!
+  </h2>
+
+  <p>
+    Your order details have been prepared for
+    The Queen Fast Food.
+  </p>
+
+  <p style="margin-top:10px;">
+    Please complete the order conversation on WhatsApp.
+  </p>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
-<h3>👑 The Queen Fast Food</h3>
-<p>Fresh • Hot • Delicious</p>
-<p>Ibrisingh Bazar, Odisha</p>
+
+  <div class="footer-logo">
+    👑 THE <span>QUEEN</span>
+  </div>
+
+  <p>
+    Your Cravings. Our Kitchen.
+  </p>
+
+  <p class="location">
+    📍 Ibrisingh Bazar, Odisha
+  </p>
+
+  <p style="margin-top:20px;">
+    © 2026 The Queen Fast Food. All Rights Reserved.
+  </p>
+
 </footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
 
 <script>
 
 let cart = [];
 
-/* ADD TO CART */
+
+/* ================= ADD TO CART ================= */
+
 function addToCart(name, price){
 
-  let existing = cart.find(item => item.name === name);
+  let existing = cart.find(
+    item => item.name === name
+  );
 
   if(existing){
+
     existing.quantity++;
+
   }else{
+
     cart.push({
       name:name,
       price:price,
       quantity:1
     });
+
   }
 
   updateCart();
 
-  document.getElementById("cartSection")
-    .scrollIntoView({behavior:"smooth"});
+  document
+    .getElementById("cart")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
 }
 
-/* UPDATE CART */
+
+/* ================= UPDATE CART ================= */
+
 function updateCart(){
 
-  const cartItems = document.getElementById("cartItems");
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const cartCount =
+    document.getElementById("cartCount");
+
+
+  let totalQuantity = 0;
+
+  cart.forEach(item => {
+    totalQuantity += item.quantity;
+  });
+
+  cartCount.innerText = totalQuantity;
+
 
   if(cart.length === 0){
 
@@ -662,33 +1409,50 @@ function updateCart(){
       '<p class="empty-cart">Your cart is empty.</p>';
 
     document.getElementById("cartSubtotal").innerText = "0";
+
+    document.getElementById("deliveryCharge").innerText = "0";
+
     document.getElementById("cartTotal").innerText = "0";
 
     return;
   }
 
+
   let subtotal = 0;
 
   cartItems.innerHTML = "";
 
+
   cart.forEach((item,index)=>{
 
-    let itemTotal = item.price * item.quantity;
+    let itemTotal =
+      item.price * item.quantity;
 
     subtotal += itemTotal;
+
 
     cartItems.innerHTML += `
 
       <div class="cart-item">
 
         <div class="cart-item-info">
-          <h3>${item.name}</h3>
-          <p>₹${item.price} × ${item.quantity}</p>
+
+          <h3>
+            ${item.name}
+          </h3>
+
+          <p>
+            ₹${item.price} × ${item.quantity}
+          </p>
+
         </div>
+
 
         <div class="quantity-controls">
 
-          <button onclick="changeQuantity(${index},-1)">
+          <button
+            onclick="changeQuantity(${index},-1)"
+          >
             −
           </button>
 
@@ -696,130 +1460,274 @@ function updateCart(){
             ${item.quantity}
           </span>
 
-          <button onclick="changeQuantity(${index},1)">
+          <button
+            onclick="changeQuantity(${index},1)"
+          >
             +
           </button>
 
         </div>
 
+
         <div class="item-total">
           ₹${itemTotal}
         </div>
 
+
         <button
           class="remove-btn"
-          onclick="removeItem(${index})">
+          onclick="removeItem(${index})"
+        >
           Remove
         </button>
 
       </div>
+
     `;
+
   });
+
+
+  /* Delivery currently 0.
+     ₹6/km distance delivery can be added later. */
 
   let delivery = 0;
 
-  document.getElementById("cartSubtotal").innerText = subtotal;
-  document.getElementById("deliveryCharge").innerText = delivery;
-  document.getElementById("cartTotal").innerText = subtotal + delivery;
+  let grandTotal =
+    subtotal + delivery;
+
+
+  document.getElementById(
+    "cartSubtotal"
+  ).innerText = subtotal;
+
+
+  document.getElementById(
+    "deliveryCharge"
+  ).innerText = delivery;
+
+
+  document.getElementById(
+    "cartTotal"
+  ).innerText = grandTotal;
+
 }
 
-/* CHANGE QUANTITY */
+
+/* ================= QUANTITY ================= */
+
 function changeQuantity(index,change){
 
   cart[index].quantity += change;
 
+
   if(cart[index].quantity <= 0){
+
     cart.splice(index,1);
+
   }
 
+
   updateCart();
+
 }
 
-/* REMOVE ITEM */
+
+/* ================= REMOVE ================= */
+
 function removeItem(index){
 
   cart.splice(index,1);
 
   updateCart();
+
 }
 
-/* CHECKOUT */
+
+/* ================= CHECKOUT ================= */
+
 function showCheckout(){
 
   if(cart.length === 0){
-    alert("Please add at least one item to your cart.");
+
+    alert(
+      "Please add at least one item to your cart."
+    );
+
     return;
   }
 
-  document.getElementById("checkoutSection").style.display = "block";
 
-  document.getElementById("checkoutSection")
-    .scrollIntoView({behavior:"smooth"});
+  const checkout =
+    document.getElementById(
+      "checkoutSection"
+    );
+
+
+  checkout.style.display = "block";
+
+
+  checkout.scrollIntoView({
+    behavior:"smooth"
+  });
+
 }
 
-/* PLACE ORDER */
+
+/* ================= PLACE ORDER ================= */
+
 function placeOrder(){
 
-  let name = document.getElementById("customerName").value.trim();
-  let phone = document.getElementById("customerPhone").value.trim();
-  let address = document.getElementById("customerAddress").value.trim();
-  let payment = document.getElementById("paymentMethod").value;
+  let name =
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
+
+
+  let phone =
+    document
+      .getElementById("customerPhone")
+      .value
+      .trim();
+
+
+  let address =
+    document
+      .getElementById("customerAddress")
+      .value
+      .trim();
+
+
+  let payment =
+    document
+      .getElementById("paymentMethod")
+      .value;
+
+
+  /* Validation */
 
   if(name === ""){
+
     alert("Please enter your name.");
+
     return;
   }
+
 
   if(!/^[0-9]{10}$/.test(phone)){
-    alert("Please enter a valid 10 digit mobile number.");
+
+    alert(
+      "Please enter a valid 10 digit mobile number."
+    );
+
     return;
   }
+
 
   if(address === ""){
-    alert("Please enter your delivery address.");
+
+    alert(
+      "Please enter your delivery address."
+    );
+
     return;
   }
+
 
   if(cart.length === 0){
-    alert("Your cart is empty.");
+
+    alert(
+      "Your cart is empty."
+    );
+
     return;
   }
 
+
+  /* Calculate totals */
+
   let subtotal = 0;
+
   let orderItems = "";
 
-  cart.forEach(item => {
 
-    let itemTotal = item.price * item.quantity;
+  cart.forEach(item=>{
+
+    let itemTotal =
+      item.price * item.quantity;
+
 
     subtotal += itemTotal;
 
+
     orderItems +=
-      "• " + item.name +
-      " × " + item.quantity +
-      " = ₹" + itemTotal + "\n";
+      "• " +
+      item.name +
+      " × " +
+      item.quantity +
+      " = ₹" +
+      itemTotal +
+      "\n";
+
   });
 
+
   let delivery = 0;
-  let grandTotal = subtotal + delivery;
+
+  let grandTotal =
+    subtotal + delivery;
+
+
+  /* WhatsApp Message */
 
   let message =
-    "👑 *THE QUEEN FAST FOOD*\n\n" +
-    "🛍️ *NEW ORDER*\n\n" +
-    "👤 Name: " + name + "\n" +
-    "📱 Phone: " + phone + "\n" +
-    "📍 Address: " + address + "\n\n" +
 
-    "🍽️ *ORDER ITEMS*\n" +
-    orderItems + "\n" +
+    "👑 *THE QUEEN FAST FOOD*" +
+    "\n\n" +
 
-    "💰 Subtotal: ₹" + subtotal + "\n" +
-    "🚚 Delivery: ₹" + delivery + "\n" +
-    "💵 *TOTAL: ₹" + grandTotal + "*\n\n" +
+    "🛍️ *NEW ORDER*" +
+    "\n\n" +
 
-    "💳 Payment: " + payment;
+    "👤 Name: " +
+    name +
+    "\n" +
 
-  let whatsappNumber = "9090220791";
+    "📱 Phone: " +
+    phone +
+    "\n" +
+
+    "📍 Address: " +
+    address +
+    "\n\n" +
+
+    "🍽️ *ORDER ITEMS*" +
+    "\n" +
+
+    orderItems +
+    "\n" +
+
+    "💰 Subtotal: ₹" +
+    subtotal +
+    "\n" +
+
+    "🚚 Delivery: ₹" +
+    delivery +
+    "\n" +
+
+    "💵 *TOTAL: ₹" +
+    grandTotal +
+    "*\n\n" +
+
+    "💳 Payment: " +
+    payment;
+
+
+  /* Restaurant WhatsApp number */
+
+  let whatsappNumber =
+    "9090220791";
+
 
   let whatsappURL =
     "https://wa.me/91" +
@@ -827,5 +1735,36 @@ function placeOrder(){
     "?text=" +
     encodeURIComponent(message);
 
-  window.open(whatsappURL, "_blank");
+
+  /* Open WhatsApp */
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+
+  /* Show confirmation */
+
+  document.getElementById(
+    "thankYou"
+  ).style.display = "block";
+
+
+  document.getElementById(
+    "thankYou"
+  ).scrollIntoView({
+    behavior:"smooth"
+  });
+
 }
+
+
+/* ================= INITIAL CART ================= */
+
+updateCart();
+
+</script>
+
+</body>
+</html>
