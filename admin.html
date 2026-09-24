@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Queen Fast Food — Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+}
+
+header{
+  background:#111;
+  padding:20px;
+  text-align:center;
+  border-bottom:1px solid #333;
+}
+
+.logo{
+  color:#d4af37;
+  font-size:25px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#fff;
+  font-size:15px;
+  display:block;
+  margin-top:4px;
+}
+
+.container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:20px;
+}
+
+.card{
+  background:#151515;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:22px;
+  margin-bottom:20px;
+}
+
+h2{
+  color:#d4af37;
+  margin-bottom:18px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-bottom:12px;
+  border-radius:8px;
+  border:1px solid #444;
+  background:#222;
+  color:#fff;
+  font-size:15px;
+}
+
+button{
+  border:none;
+  border-radius:8px;
+  padding:12px 16px;
+  cursor:pointer;
+  font-weight:bold;
+  margin:4px;
+}
+
+.login-btn{
+  width:100%;
+  background:#d4af37;
+  color:#000;
+}
+
+.logout{
+  background:#b3261e;
+  color:#fff;
+}
+
+.status-btn{
+  background:#333;
+  color:#fff;
+}
+
+.status-btn:hover{
+  background:#d4af37;
+  color:#000;
+}
+
+.order{
+  background:#101010;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:18px;
+}
+
+.order-id{
+  color:#d4af37;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.status{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  background:#222;
+  margin:10px 0;
+  color:#d4af37;
+}
+
+.info{
+  line-height:1.8;
+  color:#ddd;
+}
+
+.items{
+  margin:12px 0;
+  padding:12px;
+  background:#181818;
+  border-radius:8px;
+}
+
+.total{
+  color:#d4af37;
+  font-size:19px;
+  font-weight:bold;
+}
+
+.hidden{
+  display:none;
+}
+
+.empty{
+  text-align:center;
+  color:#888;
+  padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    👑 THE QUEEN
+    <span>FAST FOOD — ADMIN PANEL</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div id="loginSection" class="card">
+
+    <h2>🔐 Admin Login</h2>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Admin Email"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
+
+    <button class="login-btn" onclick="login()">
+      LOGIN
+    </button>
+
+    <p id="loginError" style="color:#ff5555;margin-top:12px;"></p>
+
+  </div>
+
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden">
+
+    <div class="card">
+
+      <h2>📊 Order Dashboard</h2>
+
+      <button class="logout" onclick="logout()">
+        Logout
+      </button>
+
+      <p style="margin-top:12px;color:#aaa;">
+        Live orders from The Queen Fast Food
+      </p>
+
+    </div>
+
+    <div id="orders">
+      <div class="empty">
+        Loading orders...
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue,
+  update
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+  "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+  "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+  "the-queen-fast-food",
+
+  storageBucket:
+  "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+  "435721389652",
+
+  appId:
+  "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+  "G-Q1YCK636KJ"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getDatabase(app);
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.login = async function(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("loginError");
+
+  error.textContent = "";
+
+  if(!email || !password){
+
+    error.textContent =
+      "Please enter email and password.";
+
+    return;
+  }
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(err){
+
+    console.error(err);
+
+    error.textContent =
+      "Login failed. Check email/password.";
+
+  }
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout = async function(){
+
+  await signOut(auth);
+
+};
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(auth, user => {
+
+  const loginSection =
+    document.getElementById("loginSection");
+
+  const dashboard =
+    document.getElementById("dashboard");
+
+  if(user){
+
+    loginSection.classList.add("hidden");
+
+    dashboard.classList.remove("hidden");
+
+    loadOrders();
+
+  }else{
+
+    loginSection.classList.remove("hidden");
+
+    dashboard.classList.add("hidden");
+
+  }
+
+});
+
+
+/* =========================
+   LOAD LIVE ORDERS
+========================= */
+
+function loadOrders(){
+
+  const ordersRef =
+    ref(db, "orders");
+
+  onValue(ordersRef, snapshot => {
+
+    const container =
+      document.getElementById("orders");
+
+    container.innerHTML = "";
+
+    if(!snapshot.exists()){
+
+      container.innerHTML =
+        `<div class="card empty">
+          📦 No orders yet
+        </div>`;
+
+      return;
+
+    }
+
+    const data =
+      snapshot.val();
+
+    const orders =
+      Object.entries(data).reverse();
+
+    orders.forEach(([orderId, order]) => {
+
+      container.innerHTML +=
+        createOrderCard(orderId, order);
+
+    });
+
+  });
+
+}
+
+
+/* =========================
+   ORDER CARD
+========================= */
+
+function createOrderCard(orderId, order){
+
+  const customer =
+    order.customer || {};
+
+  const items =
+    order.items || [];
+
+  let itemHTML = "";
+
+  items.forEach(item => {
+
+    itemHTML += `
+      <div>
+        🍴 ${escapeHTML(item.name)}
+        × ${item.quantity}
+        = ₹${Number(item.price) * Number(item.quantity)}
+      </div>
+    `;
+
+  });
+
+
+  const status =
+    order.status || "received";
+
+
+  return `
+
+    <div class="order">
+
+      <div class="order-id">
+        🆔 ${escapeHTML(orderId)}
+      </div>
+
+      <div class="status">
+        ${getStatusText(status)}
+      </div>
+
+      <div class="info">
+
+        👤 <b>Name:</b>
+        ${escapeHTML(customer.name || "N/A")}
+        <br>
+
+        📱 <b>Mobile:</b>
+        ${escapeHTML(customer.phone || "N/A")}
+        <br>
+
+        🏠 <b>Address:</b>
+        ${escapeHTML(customer.address || "N/A")}
+        <br>
+
+        💳 <b>Payment:</b>
+        ${escapeHTML(order.payment || "N/A")}
+
+      </div>
+
+
+      <div class="items">
+
+        <b>🛒 ORDER ITEMS</b>
+
+        <br><br>
+
+        ${itemHTML}
+
+      </div>
+
+
+      <div class="info">
+
+        💰 Subtotal:
+        ₹${Number(order.subtotal || 0)}
+
+        <br>
+
+        🛵 Delivery:
+        ₹${Number(order.deliveryCharge || 0)}
+
+        <br><br>
+
+        <span class="total">
+          GRAND TOTAL:
+          ₹${Number(order.grandTotal || 0)}
+        </span>
+
+      </div>
+
+
+      <hr style="border-color:#333;margin:18px 0;">
+
+
+      <b style="color:#d4af37;">
+        UPDATE ORDER STATUS
+      </b>
+
+      <br>
+
+      <button
+        class="status-btn"
+        onclick="changeStatus('${orderId}','received')">
+        🟢 Received
+      </button>
+
+      <button
+        class="status-btn"
+        onclick="changeStatus('${orderId}','confirmed')">
+        🟡 Confirmed
+      </button>
+
+      <button
+        class="status-btn"
+        onclick="changeStatus('${orderId}','making')">
+        👨‍🍳 Making
+      </button>
+
+      <button
+        class="status-btn"
+        onclick="changeStatus('${orderId}','out_for_delivery')">
+        🛵 Out for Delivery
+      </button>
+
+      <button
+        class="status-btn"
+        onclick="changeStatus('${orderId}','delivered')">
+        ✅ Delivered
+      </button>
+
+
+      ${
+        customer.lat && customer.lng
+        ?
+        `
+        <br><br>
+
+        <a
+          href="https://www.google.com/maps?q=${customer.lat},${customer.lng}"
+          target="_blank"
+          style="color:#d4af37;">
+          📍 Open Customer Location
+        </a>
+        `
+        :
+        ""
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   CHANGE STATUS
+========================= */
+
+window.changeStatus =
+async function(orderId, status){
+
+  try{
+
+    await update(
+      ref(db, "orders/" + orderId),
+      {
+        status: status,
+        updatedAt: Date.now()
+      }
+    );
+
+  }catch(err){
+
+    console.error(err);
+
+    alert(
+      "Unable to update order status."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   STATUS TEXT
+========================= */
+
+function getStatusText(status){
+
+  const map = {
+
+    received:
+      "🟢 Order Received",
+
+    confirmed:
+      "🟡 Order Confirmed",
+
+    making:
+      "👨‍🍳 Your Order Is Making",
+
+    out_for_delivery:
+      "🛵 Out for Delivery",
+
+    delivered:
+      "✅ Delivered"
+
+  };
+
+  return map[status] || "🟢 Order Received";
+
+}
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
