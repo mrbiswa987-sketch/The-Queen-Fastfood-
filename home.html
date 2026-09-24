@@ -14,7 +14,7 @@
 }
 
 body{
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#080808;
   color:#fff;
 }
@@ -304,6 +304,7 @@ footer{
 }
 
 @media(max-width:600px){
+
   header{
     padding:15px;
   }
@@ -320,6 +321,7 @@ footer{
   .cart-item{
     flex-direction:column;
   }
+
 }
 </style>
 </head>
@@ -343,8 +345,6 @@ footer{
 </header>
 
 
-<!-- HERO -->
-
 <section class="hero" id="home">
 
   <div>
@@ -359,8 +359,6 @@ footer{
 
 </section>
 
-
-<!-- MENU -->
 
 <section class="section" id="menu">
 
@@ -377,8 +375,6 @@ footer{
 </section>
 
 
-<!-- CART -->
-
 <section class="section" id="cart">
 
   <div class="cart-box">
@@ -388,9 +384,11 @@ footer{
     </div>
 
     <div id="cartItems">
+
       <p style="color:#888;text-align:center;">
         Your cart is empty.
       </p>
+
     </div>
 
     <div class="cart-total" id="cartTotal">
@@ -399,8 +397,6 @@ footer{
 
   </div>
 
-
-  <!-- CHECKOUT -->
 
   <div class="checkout-box">
 
@@ -438,7 +434,6 @@ footer{
 
     </select>
 
-
     <button
       class="location-btn"
       onclick="getLocation()">
@@ -460,7 +455,6 @@ footer{
       onclick="placeOrder()">
       👑 PLACE ORDER
     </button>
-
 
     <div id="successBox" class="success">
 
@@ -485,15 +479,18 @@ footer{
 </section>
 
 
-<!-- TRACKING -->
-
 <section class="section" id="track">
 
   <div class="track-box">
 
     <div class="section-title">
+
       <h2>📦 Track Your Order</h2>
-      <p>Enter your Order ID to see live status.</p>
+
+      <p>
+        Enter your Order ID to see live status.
+      </p>
+
     </div>
 
     <input
@@ -532,6 +529,7 @@ footer{
 
 <script type="module">
 
+
 /* =========================================
    FIREBASE
 ========================================= */
@@ -541,12 +539,14 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+
 import {
   getAuth,
   signInAnonymously,
   onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 import {
   getDatabase,
@@ -589,30 +589,82 @@ const firebaseConfig = {
 const app =
   initializeApp(firebaseConfig);
 
+
 const auth =
   getAuth(app);
 
+
 const db =
   getDatabase(app);
+
 
 let currentUser = null;
 
 
 /* =========================================
-   CUSTOMER AUTH
+   AUTH READY SYSTEM
 ========================================= */
 
-onAuthStateChanged(auth, user => {
+let authReadyResolve;
 
-  currentUser = user;
+const authReady = new Promise(resolve => {
+
+  authReadyResolve = resolve;
 
 });
 
+
+onAuthStateChanged(auth, user => {
+
+  console.log(
+    "🔥 Firebase Auth State:",
+    user
+  );
+
+
+  currentUser = user;
+
+
+  if(user){
+
+    console.log(
+      "✅ Anonymous login successful"
+    );
+
+    console.log(
+      "UID:",
+      user.uid
+    );
+
+  }else{
+
+    console.log(
+      "❌ No Firebase user"
+    );
+
+  }
+
+
+  authReadyResolve(user);
+
+});
+
+
 signInAnonymously(auth)
+
+  .then(result => {
+
+    console.log(
+      "✅ Anonymous authentication started:",
+      result.user.uid
+    );
+
+  })
+
   .catch(error => {
 
     console.error(
-      "Anonymous login error:",
+      "❌ Anonymous login error:",
       error
     );
 
@@ -626,15 +678,21 @@ signInAnonymously(auth)
 const restaurantLat =
   20.216780359694468;
 
+
 const restaurantLng =
   86.36464363454978;
+
 
 const deliveryRate =
   6;
 
+
 let customerLat = null;
+
 let customerLng = null;
+
 let distanceKm = 0;
+
 let deliveryCharge = 0;
 
 
@@ -648,84 +706,96 @@ const menu = [
     id:"veg-chowmin",
     name:"Veg Chowmin",
     price:50,
-    image:"https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"veg-roll",
     name:"Veg Roll",
     price:50,
-    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"manchurian",
     name:"Manchurian",
     price:50,
-    image:"https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"paneer-tikka",
     name:"Paneer Tikka",
     price:60,
-    image:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"paneer-butter-masala",
     name:"Paneer Butter Masala",
     price:130,
-    image:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"egg-chicken-chowmin",
     name:"Egg Chicken Chowmin",
     price:65,
-    image:"https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"egg-chicken-roll",
     name:"Egg Chicken Roll",
     price:60,
-    image:"https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"pakoda",
     name:"Pakoda",
     price:60,
-    image:"https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"chilli-chicken",
     name:"Chilli Chicken",
     price:120,
-    image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"chicken-garlic",
     name:"Chicken Garlic",
     price:80,
-    image:"https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"chicken-biriyani",
     name:"Chicken Biriyani",
     price:120,
-    image:"https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=800&q=80"
   },
 
   {
     id:"veg-biriyani",
     name:"Veg Biriyani",
     price:100,
-    image:"https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?auto=format&fit=crop&w=800&q=80"
+    image:
+    "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?auto=format&fit=crop&w=800&q=80"
   }
 
 ];
@@ -743,12 +813,15 @@ function renderMenu(){
   const grid =
     document.getElementById("menuGrid");
 
+
   grid.innerHTML = "";
+
 
   menu.forEach(item => {
 
     const quantity =
       cart[item.id] || 0;
+
 
     grid.innerHTML += `
 
@@ -803,7 +876,6 @@ function renderMenu(){
 
             </div>
             `
-
           }
 
         </div>
@@ -832,16 +904,18 @@ window.addToCart = function(id){
 };
 
 
-window.changeQty = function(id, amount){
+window.changeQty = function(id,amount){
 
   cart[id] =
     (cart[id] || 0) + amount;
+
 
   if(cart[id] <= 0){
 
     delete cart[id];
 
   }
+
 
   renderMenu();
 
@@ -855,23 +929,31 @@ function renderCart(){
   const box =
     document.getElementById("cartItems");
 
+
   let subtotal = 0;
 
+
   box.innerHTML = "";
+
 
   const ids =
     Object.keys(cart);
 
+
   if(ids.length === 0){
 
     box.innerHTML =
-      `<p style="color:#888;text-align:center;">
+      `
+      <p style="color:#888;text-align:center;">
         Your cart is empty.
-      </p>`;
+      </p>
+      `;
+
 
     document.getElementById("cartTotal")
       .textContent =
       "Total: ₹0";
+
 
     updateDistanceDisplay();
 
@@ -885,27 +967,36 @@ function renderCart(){
     const item =
       menu.find(x => x.id === id);
 
+
     const qty =
       cart[id];
+
 
     const amount =
       item.price * qty;
 
+
     subtotal += amount;
+
 
     box.innerHTML += `
 
       <div class="cart-item">
 
         <div>
+
           <b>${item.name}</b>
+
           <br>
+
           <span style="color:#aaa;">
             ₹${item.price} × ${qty}
           </span>
+
         </div>
 
-        <div style="color:#d4af37;font-weight:bold;">
+        <div
+          style="color:#d4af37;font-weight:bold;">
           ₹${amount}
         </div>
 
@@ -920,6 +1011,7 @@ function renderCart(){
     .textContent =
     "Subtotal: ₹" + subtotal;
 
+
   updateDistanceDisplay();
 
 }
@@ -933,6 +1025,7 @@ window.getLocation = function(){
 
   const msg =
     document.getElementById("locationMessage");
+
 
   if(!navigator.geolocation){
 
@@ -955,6 +1048,7 @@ window.getLocation = function(){
       customerLat =
         position.coords.latitude;
 
+
       customerLng =
         position.coords.longitude;
 
@@ -962,18 +1056,25 @@ window.getLocation = function(){
       msg.textContent =
         "✅ Location captured successfully.";
 
+
       await calculateDistance();
 
     },
 
+
     error => {
 
-      console.error(error);
+      console.error(
+        "❌ Location error:",
+        error
+      );
+
 
       msg.textContent =
         "❌ Location permission denied. Please allow location.";
 
     },
+
 
     {
       enableHighAccuracy:true,
@@ -1000,18 +1101,23 @@ async function calculateDistance(){
       `${customerLng},${customerLat}` +
       `?overview=false`;
 
+
     const response =
       await fetch(url);
 
+
     const data =
       await response.json();
+
 
     if(
       !data.routes ||
       !data.routes.length
     ){
 
-      throw new Error("Distance unavailable");
+      throw new Error(
+        "Distance unavailable"
+      );
 
     }
 
@@ -1019,11 +1125,14 @@ async function calculateDistance(){
     const meters =
       data.routes[0].distance;
 
+
     distanceKm =
       meters / 1000;
 
+
     const billableKm =
       Math.ceil(distanceKm);
+
 
     deliveryCharge =
       billableKm * deliveryRate;
@@ -1031,12 +1140,20 @@ async function calculateDistance(){
 
     updateDistanceDisplay();
 
-  }catch(error){
+  }
 
-    console.error(error);
 
-    document.getElementById("distanceInfo")
-      .textContent =
+  catch(error){
+
+    console.error(
+      "❌ Distance error:",
+      error
+    );
+
+
+    document.getElementById(
+      "distanceInfo"
+    ).textContent =
       "Unable to calculate delivery distance.";
 
   }
@@ -1052,15 +1169,18 @@ function getSubtotal(){
 
   let subtotal = 0;
 
+
   Object.keys(cart).forEach(id => {
 
     const item =
       menu.find(x => x.id === id);
 
+
     subtotal +=
       item.price * cart[id];
 
   });
+
 
   return subtotal;
 
@@ -1070,7 +1190,10 @@ function getSubtotal(){
 function updateDistanceDisplay(){
 
   const info =
-    document.getElementById("distanceInfo");
+    document.getElementById(
+      "distanceInfo"
+    );
+
 
   const subtotal =
     getSubtotal();
@@ -1079,7 +1202,10 @@ function updateDistanceDisplay(){
   if(customerLat === null){
 
     info.innerHTML =
-      `📍 Delivery charge: Please use your current location.`;
+      `
+      📍 Delivery charge:
+      Please use your current location.
+      `;
 
     return;
 
@@ -1119,19 +1245,30 @@ function generateOrderId(){
   const date =
     new Date();
 
+
   const yy =
-    String(date.getFullYear()).slice(-2);
+    String(
+      date.getFullYear()
+    ).slice(-2);
+
 
   const mm =
-    String(date.getMonth()+1).padStart(2,"0");
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
+
 
   const dd =
-    String(date.getDate()).padStart(2,"0");
+    String(
+      date.getDate()
+    ).padStart(2,"0");
+
 
   const random =
     Math.floor(
       100 + Math.random()*900
     );
+
 
   return `TQF-${yy}${mm}${dd}-${random}`;
 
@@ -1144,16 +1281,45 @@ function generateOrderId(){
 
 window.placeOrder = async function(){
 
-  if(!currentUser){
+  console.log(
+    "🟡 PLACE ORDER clicked"
+  );
+
+
+  /* WAIT FOR FIREBASE AUTH */
+
+  const user =
+    await authReady;
+
+
+  if(!user){
+
+    console.error(
+      "❌ Firebase authentication failed"
+    );
+
 
     alert(
-      "Connecting to order system. Please try again."
+      "Order system connection failed. Please refresh and try again."
     );
+
 
     return;
 
   }
 
+
+  currentUser =
+    user;
+
+
+  console.log(
+    "✅ Order user UID:",
+    currentUser.uid
+  );
+
+
+  /* CART CHECK */
 
   if(
     Object.keys(cart).length === 0
@@ -1168,26 +1334,37 @@ window.placeOrder = async function(){
   }
 
 
+  /* CUSTOMER DETAILS */
+
   const name =
-    document.getElementById("customerName")
-      .value.trim();
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
 
   const phone =
-    document.getElementById("customerPhone")
-      .value.trim();
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
 
   const address =
-    document.getElementById("customerAddress")
-      .value.trim();
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
 
   const payment =
-    document.getElementById("paymentMethod")
-      .value;
+    document.getElementById(
+      "paymentMethod"
+    ).value;
 
 
   if(!name){
 
-    alert("Please enter your name.");
+    alert(
+      "Please enter your name."
+    );
 
     return;
 
@@ -1240,8 +1417,10 @@ window.placeOrder = async function(){
   const subtotal =
     getSubtotal();
 
+
   const grandTotal =
     subtotal + deliveryCharge;
+
 
   const orderId =
     generateOrderId();
@@ -1253,7 +1432,10 @@ window.placeOrder = async function(){
   Object.keys(cart).forEach(id => {
 
     const item =
-      menu.find(x => x.id === id);
+      menu.find(
+        x => x.id === id
+      );
+
 
     items.push({
 
@@ -1274,11 +1456,14 @@ window.placeOrder = async function(){
 
     status:"received",
 
-    ownerUid:currentUser.uid,
+    ownerUid:
+      currentUser.uid,
 
-    createdAt:Date.now(),
+    createdAt:
+      Date.now(),
 
-    updatedAt:Date.now(),
+    updatedAt:
+      Date.now(),
 
     customer:{
 
@@ -1299,7 +1484,9 @@ window.placeOrder = async function(){
     subtotal:subtotal,
 
     distanceKm:
-      Number(distanceKm.toFixed(2)),
+      Number(
+        distanceKm.toFixed(2)
+      ),
 
     deliveryCharge:
       deliveryCharge,
@@ -1313,20 +1500,70 @@ window.placeOrder = async function(){
   };
 
 
+  /* =========================================
+     SAVE ORDER TO FIREBASE
+  ========================================= */
+
   try{
 
-    await set(
-      ref(db,"orders/"+orderId),
+    console.log(
+      "🟡 Saving order to Firebase..."
+    );
+
+
+    console.log(
+      "Order ID:",
+      orderId
+    );
+
+
+    console.log(
+      "Order:",
       order
     );
 
 
-    document.getElementById("successBox")
-      .style.display = "block";
+    console.log(
+      "User UID:",
+      currentUser.uid
+    );
 
 
-    document.getElementById("successOrderId")
-      .textContent =
+    const orderRef =
+      ref(
+        db,
+        "orders/" + orderId
+      );
+
+
+    await set(
+      orderRef,
+      order
+    );
+
+
+    console.log(
+      "✅ ORDER SAVED SUCCESSFULLY TO FIREBASE"
+    );
+
+
+    console.log(
+      "Firebase path:",
+      "orders/" + orderId
+    );
+
+
+    /* SUCCESS UI */
+
+    document.getElementById(
+      "successBox"
+    ).style.display =
+      "block";
+
+
+    document.getElementById(
+      "successOrderId"
+    ).textContent =
       "🆔 " + orderId;
 
 
@@ -1336,21 +1573,50 @@ window.placeOrder = async function(){
     );
 
 
-    sendWhatsAppOrder(order);
+    /* WHATSAPP */
 
+    sendWhatsAppOrder(
+      order
+    );
+
+
+    /* CLEAR CART */
 
     cart = {};
+
 
     renderMenu();
 
     renderCart();
 
-  }catch(error){
+  }
 
-    console.error(error);
+
+  catch(error){
+
+    console.error(
+      "❌ FIREBASE ORDER SAVE ERROR:",
+      error
+    );
+
+
+    console.error(
+      "Error code:",
+      error.code
+    );
+
+
+    console.error(
+      "Error message:",
+      error.message
+    );
+
 
     alert(
-      "Order could not be placed. Please try again."
+      "Firebase order save failed:\n\n" +
+      error.code +
+      "\n" +
+      error.message
     );
 
   }
@@ -1365,6 +1631,7 @@ window.placeOrder = async function(){
 function sendWhatsAppOrder(order){
 
   let itemText = "";
+
 
   order.items.forEach(item => {
 
@@ -1420,6 +1687,11 @@ https://www.google.com/maps?q=${order.customer.lat},${order.customer.lng}
     encodeURIComponent(message);
 
 
+  console.log(
+    "📱 Opening WhatsApp..."
+  );
+
+
   window.open(
     url,
     "_blank"
@@ -1435,21 +1707,25 @@ https://www.google.com/maps?q=${order.customer.lat},${order.customer.lng}
 window.trackOrder = function(){
 
   const orderId =
-    document.getElementById("trackOrderId")
-      .value.trim()
-      .toUpperCase();
+    document.getElementById(
+      "trackOrderId"
+    ).value.trim().toUpperCase();
 
 
   const result =
-    document.getElementById("trackingResult");
+    document.getElementById(
+      "trackingResult"
+    );
 
 
   if(!orderId){
 
     result.innerHTML =
-      `<p style="color:#ff5555;margin-top:15px;">
+      `
+      <p style="color:#ff5555;margin-top:15px;">
         Please enter your Order ID.
-      </p>`;
+      </p>
+      `;
 
     return;
 
@@ -1457,19 +1733,26 @@ window.trackOrder = function(){
 
 
   const orderRef =
-    ref(db,"orders/"+orderId);
+    ref(
+      db,
+      "orders/" + orderId
+    );
 
 
   onValue(
+
     orderRef,
+
     snapshot => {
 
       if(!snapshot.exists()){
 
         result.innerHTML =
-          `<p style="color:#ff5555;margin-top:15px;">
+          `
+          <p style="color:#ff5555;margin-top:15px;">
             ❌ Order not found.
-          </p>`;
+          </p>
+          `;
 
         return;
 
@@ -1486,9 +1769,24 @@ window.trackOrder = function(){
       );
 
     },
-    {
-      onlyOnce:false
+
+    error => {
+
+      console.error(
+        "❌ Tracking error:",
+        error
+      );
+
+
+      result.innerHTML =
+        `
+        <p style="color:#ff5555;margin-top:15px;">
+          ❌ Unable to load order status.
+        </p>
+        `;
+
     }
+
   );
 
 };
@@ -1504,11 +1802,14 @@ function renderTracking(
 ){
 
   const result =
-    document.getElementById("trackingResult");
+    document.getElementById(
+      "trackingResult"
+    );
 
 
   const current =
-    order.status || "received";
+    order.status ||
+    "received";
 
 
   const statuses = [
@@ -1565,19 +1866,22 @@ function renderTracking(
   statuses.forEach(
     (status,index) => {
 
-      let className = "status-step";
+      let className =
+        "status-step";
 
 
       if(index < currentIndex){
 
-        className += " done";
+        className +=
+          " done";
 
       }
 
 
       if(index === currentIndex){
 
-        className += " active";
+        className +=
+          " active";
 
       }
 
@@ -1633,6 +1937,7 @@ function(){
       "trackOrderId"
     ).value =
       lastOrder;
+
 
     trackOrder();
 
