@@ -6,7 +6,11 @@
 <title>The Queen Fast Food 👑</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -40,6 +44,10 @@ header{
   border-radius:25px;
   font-weight:bold;
   cursor:pointer;
+}
+
+.cart-btn:hover{
+  opacity:.9;
 }
 
 .hero{
@@ -145,6 +153,11 @@ header{
   opacity:.9;
 }
 
+.primary:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
 .secondary{
   width:100%;
   border:1px solid #555;
@@ -154,6 +167,10 @@ header{
   color:#fff;
   font-weight:bold;
   cursor:pointer;
+}
+
+.secondary:hover{
+  border-color:#f5c542;
 }
 
 .modal{
@@ -192,6 +209,10 @@ header{
   color:#aaa;
 }
 
+.close:hover{
+  color:#fff;
+}
+
 .cart-item{
   display:flex;
   justify-content:space-between;
@@ -221,7 +242,9 @@ header{
   font-weight:bold;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
   padding:13px;
   margin:8px 0 15px;
@@ -230,6 +253,12 @@ input,textarea,select{
   background:#222;
   color:#fff;
   outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#f5c542;
 }
 
 textarea{
@@ -248,6 +277,28 @@ label{
   border-radius:12px;
   padding:13px;
   margin-bottom:15px;
+}
+
+.location-status{
+  line-height:1.7;
+}
+
+.distance-success{
+  margin-top:10px;
+  padding:12px;
+  border-radius:10px;
+  background:#122414;
+  border:1px solid #2f8f46;
+  color:#dfffe4;
+}
+
+.distance-error{
+  margin-top:10px;
+  padding:12px;
+  border-radius:10px;
+  background:#241010;
+  border:1px solid #8f3030;
+  color:#ffdede;
 }
 
 .track-box{
@@ -368,10 +419,32 @@ footer{
 }
 
 @media(max-width:600px){
-  .hero h1{font-size:34px}
-  .steps{gap:2px}
-  .step{font-size:9px}
-  .step-circle{width:32px;height:32px}
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .steps{
+    gap:2px;
+  }
+
+  .step{
+    font-size:9px;
+  }
+
+  .step-circle{
+    width:32px;
+    height:32px;
+  }
+
+  .logo{
+    font-size:17px;
+  }
+
+  .cart-btn{
+    padding:9px 13px;
+  }
+
 }
 </style>
 </head>
@@ -379,185 +452,382 @@ footer{
 <body>
 
 <header>
-  <div class="logo">👑 The Queen Fast Food</div>
+
+  <div class="logo">
+    👑 The Queen Fast Food
+  </div>
+
   <button class="cart-btn" onclick="openCart()">
     🛒 Cart (<span id="cartCount">0</span>)
   </button>
+
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero">
-  <h1>Choose. Add. Enjoy.</h1>
-  <p>Fresh food delivered from The Queen Fast Food 👑</p>
-  <div id="shopStatus" class="shop-status">Checking shop...</div>
+
+  <h1>
+    Choose. Add. Enjoy.
+  </h1>
+
+  <p>
+    Fresh food delivered from The Queen Fast Food 👑
+  </p>
+
+  <div id="shopStatus" class="shop-status">
+    Checking shop...
+  </div>
+
 </section>
+
+
+<!-- MENU -->
 
 <section class="section">
-<div class="container">
 
-  <div class="section-title">
-    <h2>🍽️ Our Menu</h2>
+  <div class="container">
+
+    <div class="section-title">
+      <h2>🍽️ Our Menu</h2>
+    </div>
+
+    <div id="products" class="products"></div>
+
   </div>
 
-  <div id="products" class="products"></div>
-
-</div>
 </section>
+
+
+<!-- TRACK ORDER -->
 
 <section class="section">
-<div class="container">
 
-  <div class="section-title">
-    <h2>📦 Track Your Order</h2>
+  <div class="container">
+
+    <div class="section-title">
+      <h2>📦 Track Your Order</h2>
+    </div>
+
+    <div class="track-box">
+
+      <input
+        id="trackOrderId"
+        placeholder="Enter Order ID e.g. TQF2026-001"
+      >
+
+      <button
+        class="primary"
+        onclick="trackOrder()"
+      >
+        🔍 Track Order
+      </button>
+
+      <div id="trackResult"></div>
+
+    </div>
+
   </div>
 
-  <div class="track-box">
-
-    <input
-      id="trackOrderId"
-      placeholder="Enter Order ID e.g. TQF2026-001"
-    >
-
-    <button class="primary" onclick="trackOrder()">
-      🔍 Track Order
-    </button>
-
-    <div id="trackResult"></div>
-
-  </div>
-
-</div>
 </section>
+
 
 <footer>
-  👑 The Queen Fast Food<br>
+
+  👑 The Queen Fast Food
+  <br>
+
   Ibrisingh, Tirtol, Jagatsinghpur, Odisha
+
 </footer>
 
-<!-- CART MODAL -->
+
+<!-- =========================
+     CART MODAL
+========================= -->
+
 <div id="cartModal" class="modal">
-<div class="modal-box">
 
-  <div class="modal-title">
-    <h2>🛒 Your Cart</h2>
-    <span class="close" onclick="closeCart()">×</span>
-  </div>
+  <div class="modal-box">
 
-  <div id="cartItems"></div>
+    <div class="modal-title">
 
-  <div class="total-row">
-    <span>Food Total</span>
-    <span>₹<span id="cartTotal">0</span></span>
-  </div>
+      <h2>
+        🛒 Your Cart
+      </h2>
 
-  <br>
+      <span
+        class="close"
+        onclick="closeCart()"
+      >
+        ×
+      </span>
 
-  <button class="primary" onclick="openCheckout()">
-    Proceed to Checkout
-  </button>
-
-</div>
-</div>
-
-<!-- CHECKOUT MODAL -->
-<div id="checkoutModal" class="modal">
-<div class="modal-box">
-
-  <div class="modal-title">
-    <h2>🧾 Checkout</h2>
-    <span class="close" onclick="closeCheckout()">×</span>
-  </div>
-
-  <label>Customer Name</label>
-  <input id="customerName" placeholder="Enter your name">
-
-  <label>Phone Number</label>
-  <input id="customerPhone" placeholder="Enter phone number">
-
-  <label>Delivery Address</label>
-  <textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea>
-
-  <div class="location-box">
-    📍 <strong>Delivery Location</strong>
-    <br><br>
-    <button class="secondary" onclick="getLocation()">
-      📍 Use My Current Location
-    </button>
-    <div id="locationStatus" class="small" style="margin-top:10px">
-      Location not selected
-    </div>
-  </div>
-
-  <label>Payment Method</label>
-
-  <select id="paymentMethod">
-    <option value="Cash on Delivery">Cash on Delivery</option>
-    <option value="UPI">UPI</option>
-  </select>
-
-  <div class="total-row">
-    <span>Food Total</span>
-    <span>₹<span id="checkoutFoodTotal">0</span></span>
-  </div>
-
-  <div class="total-row">
-    <span>Delivery Charge</span>
-    <span>₹<span id="deliveryCharge">0</span></span>
-  </div>
-
-  <div class="total-row" style="font-size:20px;color:#f5c542">
-    <span>Total</span>
-    <span>₹<span id="checkoutTotal">0</span></span>
-  </div>
-
-  <br>
-
-  <button id="placeOrderBtn" class="primary" onclick="placeOrder()">
-    👑 Place Order
-  </button>
-
-</div>
-</div>
-
-<!-- SUCCESS MODAL -->
-<div id="successModal" class="modal">
-<div class="modal-box">
-
-  <div class="success">
-
-    <div class="success-icon">🎉</div>
-
-    <h2>Order Placed Successfully!</h2>
-
-    <div class="order-id" id="successOrderId">
-      TQF2026-001
     </div>
 
-    <p>
-      Please save this Order ID to track your order.
-    </p>
+
+    <div id="cartItems"></div>
+
+
+    <div class="total-row">
+
+      <span>
+        Food Total
+      </span>
+
+      <span>
+        ₹<span id="cartTotal">0</span>
+      </span>
+
+    </div>
 
     <br>
 
-    <button class="primary" onclick="sendWhatsApp()">
-      📲 Send Order on WhatsApp
-    </button>
 
-    <br><br>
-
-    <button class="secondary" onclick="closeSuccessAndTrack()">
-      📦 Track Your Order
+    <button
+      class="primary"
+      onclick="openCheckout()"
+    >
+      Proceed to Checkout
     </button>
 
   </div>
 
 </div>
+
+
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
+
+<div id="checkoutModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-title">
+
+      <h2>
+        🧾 Checkout
+      </h2>
+
+      <span
+        class="close"
+        onclick="closeCheckout()"
+      >
+        ×
+      </span>
+
+    </div>
+
+
+    <label>
+      Customer Name
+    </label>
+
+    <input
+      id="customerName"
+      placeholder="Enter your name"
+    >
+
+
+    <label>
+      Phone Number
+    </label>
+
+    <input
+      id="customerPhone"
+      placeholder="Enter phone number"
+      inputmode="numeric"
+      maxlength="10"
+    >
+
+
+    <label>
+      Delivery Address
+    </label>
+
+    <textarea
+      id="customerAddress"
+      placeholder="Enter complete delivery address"
+    ></textarea>
+
+
+    <!-- LOCATION -->
+
+    <div class="location-box">
+
+      📍 <strong>
+        Delivery Location
+      </strong>
+
+      <br><br>
+
+      <button
+        class="secondary"
+        onclick="getLocation()"
+      >
+        📍 Use My Current Location
+      </button>
+
+      <div
+        id="locationStatus"
+        class="small location-status"
+        style="margin-top:10px"
+      >
+        Location not selected
+      </div>
+
+    </div>
+
+
+    <!-- PAYMENT -->
+
+    <label>
+      Payment Method
+    </label>
+
+    <select id="paymentMethod">
+
+      <option value="Cash on Delivery">
+        Cash on Delivery
+      </option>
+
+      <option value="UPI">
+        UPI
+      </option>
+
+    </select>
+
+
+    <!-- FOOD TOTAL -->
+
+    <div class="total-row">
+
+      <span>
+        Food Total
+      </span>
+
+      <span>
+        ₹<span id="checkoutFoodTotal">0</span>
+      </span>
+
+    </div>
+
+
+    <!-- DELIVERY CHARGE -->
+
+    <div class="total-row">
+
+      <span>
+        🚚 Delivery Charge
+      </span>
+
+      <span>
+        ₹<span id="deliveryCharge">0</span>
+      </span>
+
+    </div>
+
+
+    <!-- TOTAL -->
+
+    <div
+      class="total-row"
+      style="font-size:20px;color:#f5c542"
+    >
+
+      <span>
+        Total
+      </span>
+
+      <span>
+        ₹<span id="checkoutTotal">0</span>
+      </span>
+
+    </div>
+
+    <br>
+
+
+    <button
+      id="placeOrderBtn"
+      class="primary"
+      onclick="placeOrder()"
+      disabled
+    >
+      📍 Calculate Delivery First
+    </button>
+
+  </div>
+
 </div>
 
+
+<!-- =========================
+     SUCCESS MODAL
+========================= -->
+
+<div id="successModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="success">
+
+      <div class="success-icon">
+        🎉
+      </div>
+
+      <h2>
+        Order Placed Successfully!
+      </h2>
+
+      <div
+        class="order-id"
+        id="successOrderId"
+      >
+        TQF2026-001
+      </div>
+
+      <p>
+        Please save this Order ID to track your order.
+      </p>
+
+      <br>
+
+      <button
+        class="primary"
+        onclick="sendWhatsApp()"
+      >
+        📲 Send Order on WhatsApp
+      </button>
+
+      <br><br>
+
+      <button
+        class="secondary"
+        onclick="closeSuccessAndTrack()"
+      >
+        📦 Track Your Order
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script type="module">
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
 
 import {
   initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
   getDatabase,
@@ -572,6 +842,7 @@ import {
   update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+
 import {
   getAuth,
   signInAnonymously
@@ -579,47 +850,85 @@ import {
 
 
 /* =========================
-   FIREBASE
+   FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain: "the-queen-fast-food.firebaseapp.com",
-  databaseURL: "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId: "the-queen-fast-food",
-  storageBucket: "the-queen-fast-food.firebasestorage.app",
-  messagingSenderId: "435721389652",
-  appId: "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId: "G-Q1YCK636KJ"
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
 };
 
-const app = initializeApp(firebaseConfig);
 
-const db = getDatabase(app);
-const auth = getAuth(app);
+const app =
+  initializeApp(firebaseConfig);
+
+
+const db =
+  getDatabase(app);
+
+
+const auth =
+  getAuth(app);
 
 
 /* =========================
    RESTAURANT
 ========================= */
 
-const RESTAURANT_LAT = 20.216780359694468;
-const RESTAURANT_LNG = 86.36464363454978;
+const RESTAURANT_LAT =
+  20.216780359694468;
+
+const RESTAURANT_LNG =
+  86.36464363454978;
+
+
+/*
+  ₹6 PER KM
+*/
 
 const DELIVERY_RATE = 6;
 
-let whatsappNumber = "9090220791";
+
+let whatsappNumber =
+  "9090220791";
+
 
 let currentUser = null;
 
 let cart = [];
 
 let customerLat = null;
+
 let customerLng = null;
 
 let selectedRating = 0;
 
 let latestOrder = null;
+
+let whatsappLink = "";
 
 
 /* =========================
@@ -627,25 +936,88 @@ let latestOrder = null;
 ========================= */
 
 const defaultMenu = [
-  {id:1,name:"Veg Chowmin",price:50},
-  {id:2,name:"Veg Roll",price:50},
-  {id:3,name:"Manchurian",price:50},
-  {id:4,name:"Paneer Tikka",price:60},
-  {id:5,name:"Paneer Butter Masala",price:130},
-  {id:6,name:"Egg Chicken Chowmin",price:65},
-  {id:7,name:"Egg Chicken Roll",price:60},
-  {id:8,name:"Pakoda",price:60},
-  {id:9,name:"Chilli Chicken",price:120},
-  {id:10,name:"Chicken Garlic",price:80},
-  {id:11,name:"Chicken Biriyani",price:120},
-  {id:12,name:"Veg Biriyani",price:100}
+
+  {
+    id:1,
+    name:"Veg Chowmin",
+    price:50
+  },
+
+  {
+    id:2,
+    name:"Veg Roll",
+    price:50
+  },
+
+  {
+    id:3,
+    name:"Manchurian",
+    price:50
+  },
+
+  {
+    id:4,
+    name:"Paneer Tikka",
+    price:60
+  },
+
+  {
+    id:5,
+    name:"Paneer Butter Masala",
+    price:130
+  },
+
+  {
+    id:6,
+    name:"Egg Chicken Chowmin",
+    price:65
+  },
+
+  {
+    id:7,
+    name:"Egg Chicken Roll",
+    price:60
+  },
+
+  {
+    id:8,
+    name:"Pakoda",
+    price:60
+  },
+
+  {
+    id:9,
+    name:"Chilli Chicken",
+    price:120
+  },
+
+  {
+    id:10,
+    name:"Chicken Garlic",
+    price:80
+  },
+
+  {
+    id:11,
+    name:"Chicken Biriyani",
+    price:120
+  },
+
+  {
+    id:12,
+    name:"Veg Biriyani",
+    price:100
+  }
+
 ];
 
-let menu = defaultMenu;
+
+let menu =
+  defaultMenu;
 
 
 /* =========================
-   AUTH
+   CUSTOMER AUTH
 ========================= */
 
 async function startCustomerAuth(){
@@ -654,26 +1026,38 @@ async function startCustomerAuth(){
 
     if(auth.currentUser){
 
-      currentUser = auth.currentUser;
+      currentUser =
+        auth.currentUser;
 
       return currentUser;
 
     }
 
-    const result = await signInAnonymously(auth);
 
-    currentUser = result.user;
+    const result =
+      await signInAnonymously(auth);
+
+
+    currentUser =
+      result.user;
+
 
     return currentUser;
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "AUTH ERROR:",
+      error
+    );
+
 
     alert(
       "Firebase Authentication failed.\n\n" +
       "Please enable Anonymous Authentication in Firebase Console."
     );
+
 
     return null;
 
@@ -683,22 +1067,28 @@ async function startCustomerAuth(){
 
 
 /* =========================
-   INIT
+   INITIALIZE
 ========================= */
 
 async function init(){
 
-  currentUser = await startCustomerAuth();
+  currentUser =
+    await startCustomerAuth();
+
 
   await loadSettings();
 
+
   await loadMenu();
 
+
   renderProducts();
+
 
   updateCartCount();
 
 }
+
 
 init();
 
@@ -711,18 +1101,27 @@ async function loadSettings(){
 
   try{
 
-    const snap = await get(ref(db,"settings"));
+    const snap =
+      await get(
+        ref(db,"settings")
+      );
+
 
     if(snap.exists()){
 
-      const data = snap.val();
+      const data =
+        snap.val();
+
 
       if(data.whatsappNumber){
 
-        whatsappNumber = String(data.whatsappNumber)
-          .replace(/\D/g,"");
+        whatsappNumber =
+          String(
+            data.whatsappNumber
+          ).replace(/\D/g,"");
 
       }
+
 
       updateShopStatus(data);
 
@@ -734,9 +1133,14 @@ async function loadSettings(){
 
     }
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "SETTINGS ERROR:",
+      error
+    );
+
 
     updateShopStatus({
       manualClosed:false
@@ -747,32 +1151,56 @@ async function loadSettings(){
 }
 
 
+/* =========================
+   SHOP OPEN/CLOSE
+========================= */
+
 function isShopOpen(data){
 
-  if(data && data.manualClosed === true){
+  if(
+    data &&
+    data.manualClosed === true
+  ){
 
     return false;
 
   }
 
-  const now = new Date();
+
+  const now =
+    new Date();
+
 
   const minutes =
     now.getHours() * 60 +
     now.getMinutes();
 
-  return minutes >= 720 && minutes < 1380;
+
+  /*
+    12:00 PM = 720
+    11:00 PM = 1380
+  */
+
+  return (
+    minutes >= 720 &&
+    minutes < 1380
+  );
 
 }
 
 
 function updateShopStatus(data){
 
-  const el = document.getElementById("shopStatus");
+  const el =
+    document.getElementById(
+      "shopStatus"
+    );
+
 
   if(isShopOpen(data)){
 
-    el.innerHTML = "🟢 OPEN • 12:00 PM - 11:00 PM";
+    el.innerHTML =
+      "🟢 OPEN • 12:00 PM - 11:00 PM";
 
   }else{
 
@@ -785,60 +1213,91 @@ function updateShopStatus(data){
 
 
 /* =========================
-   MENU
+   LOAD MENU
 ========================= */
 
 async function loadMenu(){
 
   try{
 
-    const snap = await get(ref(db,"settings/menu"));
+    const snap =
+      await get(
+        ref(db,"settings/menu")
+      );
+
 
     if(snap.exists()){
 
-      const firebaseMenu = snap.val();
+      const firebaseMenu =
+        snap.val();
+
 
       const converted = [];
 
-      Object.keys(firebaseMenu).forEach(key=>{
 
-        const item = firebaseMenu[key];
+      Object.keys(firebaseMenu)
+        .forEach(key=>{
 
-        converted.push({
-          id:key,
-          name:item.name,
-          price:Number(item.price)
+          const item =
+            firebaseMenu[key];
+
+
+          converted.push({
+
+            id:key,
+
+            name:item.name,
+
+            price:Number(
+              item.price
+            )
+
+          });
+
         });
 
-      });
 
       if(converted.length){
 
-        menu = converted;
+        menu =
+          converted;
 
       }
 
     }
 
+
   }catch(error){
 
-    console.log("Using default menu.");
+    console.log(
+      "Using default menu."
+    );
 
   }
 
 }
 
 
+/* =========================
+   RENDER PRODUCTS
+========================= */
+
 function renderProducts(){
 
-  const box = document.getElementById("products");
+  const box =
+    document.getElementById(
+      "products"
+    );
+
 
   box.innerHTML = "";
+
 
   menu.forEach(item=>{
 
     const imageUrl =
       "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80";
+
 
     box.innerHTML += `
 
@@ -852,7 +1311,9 @@ function renderProducts(){
 
         <div class="product-body">
 
-          <h3>${escapeHtml(item.name)}</h3>
+          <h3>
+            ${escapeHtml(item.name)}
+          </h3>
 
           <div class="price">
             ₹${item.price}
@@ -877,20 +1338,30 @@ function renderProducts(){
 
 
 /* =========================
-   CART
+   ADD TO CART
 ========================= */
 
-window.addToCart = function(id){
+window.addToCart =
+function(id){
 
-  const item = menu.find(
-    x => String(x.id) === String(id)
-  );
+  const item =
+    menu.find(
+      x =>
+        String(x.id) ===
+        String(id)
+    );
+
 
   if(!item) return;
 
-  const existing = cart.find(
-    x => String(x.id) === String(id)
-  );
+
+  const existing =
+    cart.find(
+      x =>
+        String(x.id) ===
+        String(id)
+    );
+
 
   if(existing){
 
@@ -899,85 +1370,141 @@ window.addToCart = function(id){
   }else{
 
     cart.push({
+
       id:item.id,
+
       name:item.name,
-      price:Number(item.price),
+
+      price:Number(
+        item.price
+      ),
+
       qty:1
+
     });
 
   }
 
+
   updateCartCount();
+
 
   openCart();
 
 };
 
 
-window.changeQty = function(id,change){
+/* =========================
+   CHANGE QUANTITY
+========================= */
 
-  const item = cart.find(
-    x => String(x.id) === String(id)
-  );
+window.changeQty =
+function(id,change){
+
+  const item =
+    cart.find(
+      x =>
+        String(x.id) ===
+        String(id)
+    );
+
 
   if(!item) return;
 
+
   item.qty += change;
+
 
   if(item.qty <= 0){
 
-    cart = cart.filter(
-      x => String(x.id) !== String(id)
-    );
+    cart =
+      cart.filter(
+        x =>
+          String(x.id) !==
+          String(id)
+      );
 
   }
 
+
   renderCart();
+
 
   updateCartCount();
 
 };
 
 
+/* =========================
+   CART COUNT
+========================= */
+
 function updateCartCount(){
 
-  const count = cart.reduce(
-    (sum,item)=>sum + item.qty,
-    0
-  );
+  const count =
+    cart.reduce(
+      (sum,item)=>
+        sum + item.qty,
+      0
+    );
 
-  document.getElementById("cartCount").textContent = count;
+
+  document.getElementById(
+    "cartCount"
+  ).textContent =
+    count;
 
 }
 
+
+/* =========================
+   FOOD TOTAL
+========================= */
 
 function getFoodTotal(){
 
   return cart.reduce(
-    (sum,item)=>sum + item.price * item.qty,
+    (sum,item)=>
+      sum +
+      item.price *
+      item.qty,
     0
   );
 
 }
 
 
+/* =========================
+   RENDER CART
+========================= */
+
 function renderCart(){
 
   const box =
-    document.getElementById("cartItems");
+    document.getElementById(
+      "cartItems"
+    );
+
 
   if(cart.length === 0){
 
     box.innerHTML =
       "<p style='color:#aaa'>Your cart is empty.</p>";
 
-    document.getElementById("cartTotal").textContent = "0";
+
+    document.getElementById(
+      "cartTotal"
+    ).textContent =
+      "0";
+
 
     return;
 
   }
 
+
   box.innerHTML = "";
+
 
   cart.forEach(item=>{
 
@@ -986,12 +1513,19 @@ function renderCart(){
       <div class="cart-item">
 
         <div>
-          <strong>${escapeHtml(item.name)}</strong>
+
+          <strong>
+            ${escapeHtml(item.name)}
+          </strong>
+
           <br>
+
           <span style="color:#f5c542">
             ₹${item.price}
           </span>
+
         </div>
+
 
         <div class="qty">
 
@@ -1001,7 +1535,9 @@ function renderCart(){
             −
           </button>
 
-          <strong>${item.qty}</strong>
+          <strong>
+            ${item.qty}
+          </strong>
 
           <button
             onclick="changeQty('${String(item.id)}',1)"
@@ -1017,102 +1553,236 @@ function renderCart(){
 
   });
 
-  document.getElementById("cartTotal").textContent =
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
     getFoodTotal();
 
 }
 
 
-window.openCart = function(){
+/* =========================
+   OPEN CART
+========================= */
+
+window.openCart =
+function(){
 
   renderCart();
 
-  document.getElementById("cartModal").style.display = "block";
 
-};
-
-
-window.closeCart = function(){
-
-  document.getElementById("cartModal").style.display = "none";
+  document.getElementById(
+    "cartModal"
+  ).style.display =
+    "block";
 
 };
 
 
 /* =========================
-   CHECKOUT
+   CLOSE CART
 ========================= */
 
-window.openCheckout = function(){
+window.closeCart =
+function(){
+
+  document.getElementById(
+    "cartModal"
+  ).style.display =
+    "none";
+
+};
+
+
+/* =========================
+   OPEN CHECKOUT
+========================= */
+
+window.openCheckout =
+async function(){
 
   if(cart.length === 0){
 
-    alert("Your cart is empty.");
+    alert(
+      "Your cart is empty."
+    );
 
     return;
 
   }
 
+
   closeCart();
 
-  const total = getFoodTotal();
 
-  document.getElementById("checkoutFoodTotal")
-    .textContent = total;
-
-  document.getElementById("deliveryCharge")
-    .textContent = "0";
-
-  document.getElementById("checkoutTotal")
-    .textContent = total;
-
-  document.getElementById("checkoutModal")
-    .style.display = "block";
-
-};
+  const foodTotal =
+    getFoodTotal();
 
 
-window.closeCheckout = function(){
+  document.getElementById(
+    "checkoutFoodTotal"
+  ).textContent =
+    foodTotal;
 
-  document.getElementById("checkoutModal")
-    .style.display = "none";
+
+  document.getElementById(
+    "deliveryCharge"
+  ).textContent =
+    "Calculating...";
+
+
+  document.getElementById(
+    "checkoutTotal"
+  ).textContent =
+    "Calculating...";
+
+
+  document.getElementById(
+    "locationStatus"
+  ).innerHTML =
+    "📍 Getting your current location...";
+
+
+  const btn =
+    document.getElementById(
+      "placeOrderBtn"
+    );
+
+
+  btn.disabled =
+    true;
+
+
+  btn.textContent =
+    "📍 Calculate Delivery First";
+
+
+  document.getElementById(
+    "checkoutModal"
+  ).style.display =
+    "block";
+
+
+  /*
+    Automatically get location
+    when checkout opens.
+  */
+
+  getLocation();
 
 };
 
 
 /* =========================
-   LOCATION
+   CLOSE CHECKOUT
 ========================= */
 
-window.getLocation = function(){
+window.closeCheckout =
+function(){
+
+  document.getElementById(
+    "checkoutModal"
+  ).style.display =
+    "none";
+
+};
+
+
+/* =========================
+   GET LOCATION
+========================= */
+
+window.getLocation =
+function(){
 
   if(!navigator.geolocation){
 
-    alert("Geolocation is not supported.");
+    document.getElementById(
+      "locationStatus"
+    ).innerHTML =
+      `<div class="distance-error">
+        ❌ Geolocation is not supported by this browser.
+      </div>`;
 
     return;
 
   }
 
-  document.getElementById("locationStatus")
-    .textContent =
-    "📍 Getting your location...";
+
+  const status =
+    document.getElementById(
+      "locationStatus"
+    );
+
+
+  const btn =
+    document.getElementById(
+      "placeOrderBtn"
+    );
+
+
+  btn.disabled =
+    true;
+
+
+  btn.textContent =
+    "📍 Calculating Delivery...";
+
+
+  status.innerHTML =
+    "📍 Getting your current location...";
+
+
+  /*
+    Reset old location.
+  */
+
+  customerLat =
+    null;
+
+  customerLng =
+    null;
+
 
   navigator.geolocation.getCurrentPosition(
 
-    async position => {
-
-      customerLat =
-        position.coords.latitude;
-
-      customerLng =
-        position.coords.longitude;
-
-      document.getElementById("locationStatus")
-        .textContent =
-        "✅ Location captured successfully.";
+    async position=>{
 
       try{
+
+        customerLat =
+          Number(
+            position.coords.latitude
+          );
+
+
+        customerLng =
+          Number(
+            position.coords.longitude
+          );
+
+
+        if(
+          !Number.isFinite(customerLat) ||
+          !Number.isFinite(customerLng)
+        ){
+
+          throw new Error(
+            "Invalid GPS coordinates."
+          );
+
+        }
+
+
+        status.innerHTML =
+          "📍 Location captured.<br>" +
+          "🚚 Calculating road distance...";
+
+
+        /*
+          ACTUAL ROAD DISTANCE
+        */
 
         const distance =
           await calculateRoadDistance(
@@ -1120,40 +1790,230 @@ window.getLocation = function(){
             customerLng
           );
 
-        const charge =
-          Math.ceil(distance) * DELIVERY_RATE;
+
+        /*
+          ₹6 PER KM
+          Always round UP.
+
+          1.1 KM = ₹12
+          2.1 KM = ₹18
+          3.2 KM = ₹24
+          5.7 KM = ₹36
+        */
+
+        const deliveryCharge =
+          Math.ceil(
+            distance
+          ) *
+          DELIVERY_RATE;
+
+
+        /*
+          UPDATE CHECKOUT
+        */
 
         updateCheckoutTotals(
           distance,
-          charge
+          deliveryCharge
         );
+
+
+        status.innerHTML = `
+
+          <div class="distance-success">
+
+            ✅ <strong>Location Confirmed</strong>
+
+            <br><br>
+
+            📏 Road Distance:
+            <strong>
+              ${distance.toFixed(2)} KM
+            </strong>
+
+            <br>
+
+            🚚 Delivery Charge:
+            <strong>
+              ₹${deliveryCharge}
+            </strong>
+
+            <br>
+
+            💰 Rate:
+            <strong>
+              ₹6 / KM
+            </strong>
+
+          </div>
+
+        `;
+
+
+        /*
+          NOW PLACE ORDER IS ENABLED
+        */
+
+        btn.disabled =
+          false;
+
+
+        btn.textContent =
+          "👑 Place Order";
+
 
       }catch(error){
 
-        console.error(error);
+        console.error(
+          "DISTANCE ERROR:",
+          error
+        );
+
+
+        customerLat =
+          null;
+
+        customerLng =
+          null;
+
+
+        status.innerHTML = `
+
+          <div class="distance-error">
+
+            ❌ Could not calculate road distance.
+
+            <br><br>
+
+            Please check your internet
+            connection and try again.
+
+          </div>
+
+        `;
+
+
+        document.getElementById(
+          "deliveryCharge"
+        ).textContent =
+          "0";
+
+
+        document.getElementById(
+          "checkoutTotal"
+        ).textContent =
+          getFoodTotal();
+
+
+        btn.disabled =
+          true;
+
+
+        btn.textContent =
+          "📍 Calculate Delivery First";
+
 
         alert(
-          "Could not calculate delivery distance."
+          "Could not calculate delivery distance. Please try again."
         );
 
       }
 
     },
 
-    error => {
 
-      console.error(error);
+    error=>{
 
-      document.getElementById("locationStatus")
-        .textContent =
-        "❌ Location permission denied.";
+      console.error(
+        "GEOLOCATION ERROR:",
+        error
+      );
+
+
+      customerLat =
+        null;
+
+      customerLng =
+        null;
+
+
+      let message =
+        "❌ Location could not be detected.";
+
+
+      if(error.code === 1){
+
+        message =
+          "❌ Location permission denied.\n\n" +
+          "Please allow location access and try again.";
+
+      }
+
+
+      if(error.code === 2){
+
+        message =
+          "❌ Your location could not be detected.\n\n" +
+          "Please try again.";
+
+      }
+
+
+      if(error.code === 3){
+
+        message =
+          "❌ Location request timed out.\n\n" +
+          "Please try again.";
+
+      }
+
+
+      status.innerHTML = `
+
+        <div class="distance-error">
+
+          ${message.replace(
+            /\n/g,
+            "<br>"
+          )}
+
+        </div>
+
+      `;
+
+
+      document.getElementById(
+        "deliveryCharge"
+      ).textContent =
+        "0";
+
+
+      document.getElementById(
+        "checkoutTotal"
+      ).textContent =
+        getFoodTotal();
+
+
+      btn.disabled =
+        true;
+
+
+      btn.textContent =
+        "📍 Calculate Delivery First";
+
+
+      alert(message);
 
     },
 
+
     {
       enableHighAccuracy:true,
-      timeout:15000,
+
+      timeout:20000,
+
       maximumAge:0
+
     }
 
   );
@@ -1161,53 +2021,125 @@ window.getLocation = function(){
 };
 
 
-async function calculateRoadDistance(lat,lng){
+/* =========================
+   OSRM ROAD DISTANCE
+========================= */
+
+async function calculateRoadDistance(
+  lat,
+  lng
+){
+
+  /*
+    Restaurant:
+    20.216780359694468
+    86.36464363454978
+
+    Customer:
+    lat / lng
+  */
 
   const url =
     `https://router.project-osrm.org/route/v1/driving/` +
     `${RESTAURANT_LNG},${RESTAURANT_LAT};` +
-    `${lng},${lat}?overview=false`;
+    `${lng},${lat}` +
+    `?overview=false`;
 
-  const response = await fetch(url);
+
+  const response =
+    await fetch(
+      url
+    );
+
 
   if(!response.ok){
 
-    throw new Error("Distance service failed.");
+    throw new Error(
+      "OSRM server error."
+    );
 
   }
 
-  const data = await response.json();
+
+  const data =
+    await response.json();
+
 
   if(
+    data.code !== "Ok" ||
     !data.routes ||
     !data.routes.length
   ){
 
-    throw new Error("Route not found.");
+    throw new Error(
+      "Road route not found."
+    );
 
   }
 
-  return data.routes[0].distance / 1000;
+
+  const distanceMeters =
+    Number(
+      data.routes[0].distance
+    );
+
+
+  const distanceKm =
+    distanceMeters / 1000;
+
+
+  if(
+    !Number.isFinite(distanceKm) ||
+    distanceKm < 0
+  ){
+
+    throw new Error(
+      "Invalid road distance."
+    );
+
+  }
+
+
+  return distanceKm;
 
 }
 
 
-function updateCheckoutTotals(distance,charge){
+/* =========================
+   UPDATE CHECKOUT TOTALS
+========================= */
 
-  const foodTotal = getFoodTotal();
+function updateCheckoutTotals(
+  distance,
+  charge
+){
 
-  document.getElementById("deliveryCharge")
-    .textContent = charge;
+  const foodTotal =
+    getFoodTotal();
 
-  document.getElementById("checkoutTotal")
-    .textContent =
+
+  document.getElementById(
+    "checkoutFoodTotal"
+  ).textContent =
+    foodTotal;
+
+
+  document.getElementById(
+    "deliveryCharge"
+  ).textContent =
+    charge;
+
+
+  document.getElementById(
+    "checkoutTotal"
+  ).textContent =
     foodTotal + charge;
 
 }
 
 
 /* =========================
-   ORDER ID
+   GENERATE ORDER ID
 ========================= */
 
 async function generateOrderId(){
@@ -1215,14 +2147,23 @@ async function generateOrderId(){
   const year =
     new Date().getFullYear();
 
+
   const counterRef =
-    ref(db,`counters/orders/${year}`);
+    ref(
+      db,
+      `counters/orders/${year}`
+    );
+
 
   const result =
     await runTransaction(
       counterRef,
-      current => Number(current || 0) + 1
+      current =>
+        Number(
+          current || 0
+        ) + 1
     );
+
 
   if(!result.committed){
 
@@ -1232,8 +2173,12 @@ async function generateOrderId(){
 
   }
 
+
   const serial =
-    Number(result.snapshot.val());
+    Number(
+      result.snapshot.val()
+    );
+
 
   return `TQF${year}-${String(serial).padStart(3,"0")}`;
 
@@ -1244,58 +2189,86 @@ async function generateOrderId(){
    PLACE ORDER
 ========================= */
 
-window.placeOrder = async function(){
+window.placeOrder =
+async function(){
 
   const btn =
-    document.getElementById("placeOrderBtn");
+    document.getElementById(
+      "placeOrderBtn"
+    );
+
 
   const name =
-    document.getElementById("customerName")
-      .value.trim();
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
 
   const phone =
-    document.getElementById("customerPhone")
-      .value.trim();
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
 
   const address =
-    document.getElementById("customerAddress")
-      .value.trim();
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
 
   const payment =
-    document.getElementById("paymentMethod")
-      .value;
+    document.getElementById(
+      "paymentMethod"
+    ).value;
+
 
   if(!name){
 
-    alert("Please enter your name.");
+    alert(
+      "Please enter your name."
+    );
 
     return;
 
   }
+
 
   if(!/^[0-9]{10}$/.test(phone)){
 
-    alert("Please enter a valid 10 digit phone number.");
+    alert(
+      "Please enter a valid 10 digit phone number."
+    );
 
     return;
 
   }
+
 
   if(!address){
 
-    alert("Please enter delivery address.");
+    alert(
+      "Please enter delivery address."
+    );
 
     return;
 
   }
+
 
   if(cart.length === 0){
 
-    alert("Your cart is empty.");
+    alert(
+      "Your cart is empty."
+    );
 
     return;
 
   }
+
+
+  /*
+    LOCATION MUST EXIST
+  */
 
   if(
     customerLat === null ||
@@ -1303,25 +2276,34 @@ window.placeOrder = async function(){
   ){
 
     alert(
-      "Please click 'Use My Current Location' before placing the order."
+      "Please allow your current location first."
     );
 
     return;
 
   }
 
-  btn.disabled = true;
+
+  btn.disabled =
+    true;
+
 
   btn.textContent =
     "⏳ Placing Order...";
 
+
   try{
+
+    /*
+      AUTH
+    */
 
     if(!currentUser){
 
       await startCustomerAuth();
 
     }
+
 
     if(!currentUser){
 
@@ -1331,13 +2313,22 @@ window.placeOrder = async function(){
 
     }
 
+
+    /*
+      CHECK SHOP STATUS
+    */
+
     const settingsSnap =
-      await get(ref(db,"settings"));
+      await get(
+        ref(db,"settings")
+      );
+
 
     const settings =
       settingsSnap.exists()
       ? settingsSnap.val()
       : {};
+
 
     if(!isShopOpen(settings)){
 
@@ -1348,32 +2339,71 @@ window.placeOrder = async function(){
 
     }
 
+
+    /*
+      FINAL ROAD DISTANCE CHECK
+
+      We calculate again at order time
+      so Firebase always receives the
+      latest correct distance.
+    */
+
     const distance =
       await calculateRoadDistance(
         customerLat,
         customerLng
       );
 
+
+    /*
+      ₹6 / KM
+    */
+
     const deliveryCharge =
-      Math.ceil(distance) * DELIVERY_RATE;
+      Math.ceil(
+        distance
+      ) *
+      DELIVERY_RATE;
+
 
     const foodTotal =
       getFoodTotal();
 
+
     const total =
-      foodTotal + deliveryCharge;
+      foodTotal +
+      deliveryCharge;
+
+
+    /*
+      ORDER ID
+    */
 
     const orderId =
       await generateOrderId();
 
+
+    /*
+      FIREBASE PUSH KEY
+    */
+
     const orderRef =
-      push(ref(db,"orders"));
+      push(
+        ref(db,"orders")
+      );
+
 
     const firebaseOrderKey =
       orderRef.key;
 
+
     const now =
       new Date().toISOString();
+
+
+    /*
+      ORDER OBJECT
+    */
 
     const order = {
 
@@ -1384,70 +2414,90 @@ window.placeOrder = async function(){
       ownerUid:
         currentUser.uid,
 
-      customerName:name,
+      customerName:
+        name,
 
-      phone:phone,
+      phone:
+        phone,
 
-      orderContactPhone:phone,
+      orderContactPhone:
+        phone,
 
-      address:address,
+      address:
+        address,
 
-      paymentMethod:payment,
+      paymentMethod:
+        payment,
 
-      items:cart.map(item=>({
+      items:
+        cart.map(item=>({
 
-        name:item.name,
+          name:
+            item.name,
 
-        price:item.price,
+          price:
+            item.price,
 
-        quantity:item.qty,
+          quantity:
+            item.qty,
 
-        total:item.price * item.qty
+          total:
+            item.price *
+            item.qty
 
-      })),
+        })),
 
-      subtotal:foodTotal,
+      subtotal:
+        foodTotal,
 
       distanceKm:
-        Number(distance.toFixed(2)),
+        Number(
+          distance.toFixed(2)
+        ),
 
-      deliveryCharge,
+      deliveryCharge:
+        deliveryCharge,
 
-      total,
+      total:
+        total,
 
-      customerLat,
+      customerLat:
+        customerLat,
 
-      customerLng,
+      customerLng:
+        customerLng,
 
-      status:"received",
+      status:
+        "received",
 
-      createdAt:now,
+      createdAt:
+        now,
 
-      statusUpdatedAt:now
+      statusUpdatedAt:
+        now
 
     };
 
 
     /*
-      SAVE IN TWO PLACES
-
-      1. orders
-      2. customerOrders/UID
-
-      This allows:
-      - admin to read all orders
-      - customer to read only own orders
+      SAVE BOTH:
+      orders
+      customerOrders
     */
 
     const updates = {};
 
+
     updates[
       `orders/${firebaseOrderKey}`
-    ] = order;
+    ] =
+      order;
+
 
     updates[
       `customerOrders/${currentUser.uid}/${firebaseOrderKey}`
-    ] = order;
+    ] =
+      order;
 
 
     await update(
@@ -1456,51 +2506,94 @@ window.placeOrder = async function(){
     );
 
 
-    latestOrder = order;
+    /*
+      SAVE LOCAL ORDER
+    */
+
+    latestOrder =
+      order;
 
 
-    document.getElementById("successOrderId")
-      .textContent = orderId;
+    /*
+      SUCCESS MODAL
+    */
+
+    document.getElementById(
+      "successOrderId"
+    ).textContent =
+      orderId;
 
 
-    document.getElementById("successModal")
-      .style.display = "block";
+    document.getElementById(
+      "successModal"
+    ).style.display =
+      "block";
 
 
     closeCheckout();
 
 
     /*
-      Clear cart after successful Firebase save.
+      CLEAR CART
     */
 
     cart = [];
+
 
     updateCartCount();
 
 
     /*
-      Prepare WhatsApp message.
+      PREPARE WHATSAPP
     */
 
-    prepareWhatsAppMessage(order);
+    prepareWhatsAppMessage(
+      order
+    );
 
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "PLACE ORDER ERROR:",
+      error
+    );
+
 
     alert(
       error.message ||
       "Could not place order."
     );
 
+
   }finally{
 
-    btn.disabled = false;
+    btn.disabled =
+      false;
 
-    btn.textContent =
-      "👑 Place Order";
+
+    /*
+      If location is valid,
+      keep button ready.
+    */
+
+    if(
+      customerLat !== null &&
+      customerLng !== null
+    ){
+
+      btn.textContent =
+        "👑 Place Order";
+
+    }else{
+
+      btn.textContent =
+        "📍 Calculate Delivery First";
+
+      btn.disabled =
+        true;
+
+    }
 
   }
 
@@ -1511,19 +2604,22 @@ window.placeOrder = async function(){
    WHATSAPP
 ========================= */
 
-let whatsappLink = "";
+function prepareWhatsAppMessage(
+  order
+){
+
+  let itemsText =
+    "";
 
 
-function prepareWhatsAppMessage(order){
+  order.items.forEach(
+    item=>{
 
-  let itemsText = "";
+      itemsText +=
+        `• ${item.name} × ${item.quantity} = ₹${item.total}\n`;
 
-  order.items.forEach(item=>{
-
-    itemsText +=
-      `• ${item.name} × ${item.quantity} = ₹${item.total}\n`;
-
-  });
+    }
+  );
 
 
   const message =
@@ -1559,20 +2655,30 @@ ${itemsText}
 
   whatsappLink =
     `https://wa.me/${whatsappNumber}?text=` +
-    encodeURIComponent(message);
+    encodeURIComponent(
+      message
+    );
 
 }
 
 
-window.sendWhatsApp = function(){
+/* =========================
+   SEND WHATSAPP
+========================= */
+
+window.sendWhatsApp =
+function(){
 
   if(!whatsappLink){
 
-    alert("WhatsApp message is not ready.");
+    alert(
+      "WhatsApp message is not ready."
+    );
 
     return;
 
   }
+
 
   window.open(
     whatsappLink,
@@ -1582,22 +2688,41 @@ window.sendWhatsApp = function(){
 };
 
 
-window.closeSuccessAndTrack = function(){
+/* =========================
+   SUCCESS → TRACK
+========================= */
 
-  document.getElementById("successModal")
-    .style.display = "none";
+window.closeSuccessAndTrack =
+function(){
+
+  document.getElementById(
+    "successModal"
+  ).style.display =
+    "none";
+
 
   const input =
-    document.getElementById("trackOrderId");
+    document.getElementById(
+      "trackOrderId"
+    );
+
 
   input.value =
-    latestOrder ? latestOrder.orderId : "";
+    latestOrder
+    ? latestOrder.orderId
+    : "";
 
-  document.getElementById("trackOrderId")
-    .scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
+
+  document.getElementById(
+    "trackOrderId"
+  ).scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"center"
+
+  });
+
 
   if(latestOrder){
 
@@ -1612,32 +2737,53 @@ window.closeSuccessAndTrack = function(){
    TRACK ORDER
 ========================= */
 
-window.trackOrder = async function(){
+window.trackOrder =
+async function(){
 
   const input =
-    document.getElementById("trackOrderId");
+    document.getElementById(
+      "trackOrderId"
+    );
+
 
   const result =
-    document.getElementById("trackResult");
+    document.getElementById(
+      "trackResult"
+    );
+
 
   const orderId =
-    input.value.trim().toUpperCase();
+    input.value
+      .trim()
+      .toUpperCase();
+
 
   if(!orderId){
 
-    result.innerHTML =
-      `<div class="track-result">
+    result.innerHTML = `
+
+      <div class="track-result">
+
         ❌ Please enter Order ID.
-      </div>`;
+
+      </div>
+
+    `;
 
     return;
 
   }
 
-  result.innerHTML =
-    `<div class="track-result">
+
+  result.innerHTML = `
+
+    <div class="track-result">
+
       🔍 Searching order...
-    </div>`;
+
+    </div>
+
+  `;
 
 
   try{
@@ -1648,6 +2794,7 @@ window.trackOrder = async function(){
 
     }
 
+
     if(!currentUser){
 
       throw new Error(
@@ -1657,22 +2804,24 @@ window.trackOrder = async function(){
     }
 
 
-    /*
-      Search only inside customer's own orders.
-    */
-
     const ordersRef =
       ref(
         db,
         `customerOrders/${currentUser.uid}`
       );
 
+
     const q =
       query(
+
         ordersRef,
+
         orderByChild("orderId"),
+
         equalTo(orderId)
+
       );
+
 
     const snapshot =
       await get(q);
@@ -1680,82 +2829,140 @@ window.trackOrder = async function(){
 
     if(!snapshot.exists()){
 
-      result.innerHTML =
-        `<div class="track-result">
+      result.innerHTML = `
+
+        <div class="track-result">
+
           ❌ Order not found.
-        </div>`;
+
+          <br><br>
+
+          <span class="small">
+            Please enter the same Order ID
+            generated after your order.
+          </span>
+
+        </div>
+
+      `;
 
       return;
 
     }
 
 
-    let foundOrder = null;
+    let foundOrder =
+      null;
 
-    snapshot.forEach(child=>{
 
-      foundOrder = child.val();
+    snapshot.forEach(
+      child=>{
 
-    });
+        foundOrder =
+          child.val();
+
+      }
+    );
 
 
     if(!foundOrder){
 
-      result.innerHTML =
-        `<div class="track-result">
+      result.innerHTML = `
+
+        <div class="track-result">
+
           ❌ Order not found.
-        </div>`;
+
+        </div>
+
+      `;
 
       return;
 
     }
 
 
-    renderTracking(foundOrder);
+    renderTracking(
+      foundOrder
+    );
+
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "TRACK ERROR:",
+      error
+    );
 
-    result.innerHTML =
-      `<div class="track-result">
+
+    result.innerHTML = `
+
+      <div class="track-result">
+
         ❌ Could not track order.
-      </div>`;
+
+      </div>
+
+    `;
 
   }
 
 };
 
 
-function renderTracking(order){
+/* =========================
+   RENDER TRACKING
+========================= */
+
+function renderTracking(
+  order
+){
 
   const result =
-    document.getElementById("trackResult");
+    document.getElementById(
+      "trackResult"
+    );
+
 
   const status =
-    order.status || "received";
+    order.status ||
+    "received";
 
 
   let html = `
 
     <div class="track-result">
 
-      <strong>🆔 Order ID:</strong>
-      ${escapeHtml(order.orderId)}
+      <strong>
+        🆔 Order ID:
+      </strong>
+
+      ${escapeHtml(
+        order.orderId
+      )}
 
       <br><br>
 
-      <strong>📅 Date:</strong>
-      ${formatDate(order.createdAt)}
+      <strong>
+        📅 Date:
+      </strong>
+
+      ${formatDate(
+        order.createdAt
+      )}
 
       <br><br>
 
-      <strong>📦 Status:</strong>
+      <strong>
+        📦 Status:
+      </strong>
+
       <br>
 
       <span class="status-badge">
         ${formatStatus(status)}
       </span>
+
 
       <div class="steps">
 
@@ -1798,28 +3005,45 @@ function renderTracking(order){
 
       <br>
 
-      <strong>💰 Total:</strong>
+      <strong>
+        💰 Total:
+      </strong>
+
       ₹${order.total}
 
   `;
 
 
-  if(status === "delivered"){
+  if(
+    status === "delivered"
+  ){
 
-    html += buildRatingSection(order);
+    html +=
+      buildRatingSection(
+        order
+      );
 
   }
 
 
-  if(status === "cancelled"){
+  if(
+    status === "cancelled"
+  ){
 
     html += `
 
-      <div class="rating-box"
-           style="border-color:#e74c3c;background:#241010">
+      <div
+        class="rating-box"
+        style="
+          border-color:#e74c3c;
+          background:#241010
+        "
+      >
 
         ❌
-        <strong>Order Cancelled</strong>
+        <strong>
+          Order Cancelled
+        </strong>
 
       </div>
 
@@ -1828,38 +3052,63 @@ function renderTracking(order){
   }
 
 
-  html += `</div>`;
+  html +=
+    `</div>`;
 
 
-  result.innerHTML = html;
+  result.innerHTML =
+    html;
 
 
-  if(status === "delivered"){
+  if(
+    status === "delivered"
+  ){
 
-    loadExistingRating(order);
+    loadExistingRating(
+      order
+    );
 
   }
 
 }
 
 
-function stepHtml(icon,label,status,index){
+/* =========================
+   TRACKING STEPS
+========================= */
+
+function stepHtml(
+  icon,
+  label,
+  status,
+  index
+){
 
   const map = {
+
     received:0,
+
     confirmed:1,
+
     preparing:2,
+
     out_for_delivery:3,
+
     delivered:4
+
   };
 
+
   const current =
-    map[status] ?? 0;
+    map[status] ??
+    0;
+
 
   const active =
     index <= current
     ? "active"
     : "";
+
 
   return `
 
@@ -1878,34 +3127,52 @@ function stepHtml(icon,label,status,index){
 }
 
 
-function formatStatus(status){
+/* =========================
+   FORMAT STATUS
+========================= */
+
+function formatStatus(
+  status
+){
 
   const map = {
 
-    received:"📥 Received",
+    received:
+      "📥 Received",
 
-    confirmed:"✅ Confirmed",
+    confirmed:
+      "✅ Confirmed",
 
-    preparing:"👨‍🍳 Preparing",
+    preparing:
+      "👨‍🍳 Preparing",
 
-    out_for_delivery:"🛵 Out for Delivery",
+    out_for_delivery:
+      "🛵 Out for Delivery",
 
-    delivered:"🎉 Delivered",
+    delivered:
+      "🎉 Delivered",
 
-    cancelled:"❌ Cancelled"
+    cancelled:
+      "❌ Cancelled"
 
   };
 
-  return map[status] || status;
+
+  return (
+    map[status] ||
+    status
+  );
 
 }
 
 
 /* =========================
-   RATING
+   RATING SECTION
 ========================= */
 
-function buildRatingSection(order){
+function buildRatingSection(
+  order
+){
 
   return `
 
@@ -1915,9 +3182,16 @@ function buildRatingSection(order){
         🎉 Order Delivered!
       </h3>
 
-      <p style="text-align:center;margin-top:8px">
+
+      <p
+        style="
+          text-align:center;
+          margin-top:8px
+        "
+      >
         How was your experience?
       </p>
+
 
       <div class="stars">
 
@@ -1925,38 +3199,50 @@ function buildRatingSection(order){
           class="star"
           data-rating="1"
           onclick="selectRating(1)"
-        >⭐</span>
+        >
+          ⭐
+        </span>
 
         <span
           class="star"
           data-rating="2"
           onclick="selectRating(2)"
-        >⭐</span>
+        >
+          ⭐
+        </span>
 
         <span
           class="star"
           data-rating="3"
           onclick="selectRating(3)"
-        >⭐</span>
+        >
+          ⭐
+        </span>
 
         <span
           class="star"
           data-rating="4"
           onclick="selectRating(4)"
-        >⭐</span>
+        >
+          ⭐
+        </span>
 
         <span
           class="star"
           data-rating="5"
           onclick="selectRating(5)"
-        >⭐</span>
+        >
+          ⭐
+        </span>
 
       </div>
+
 
       <textarea
         id="ratingFeedback"
         placeholder="Tell us about your food and delivery..."
       ></textarea>
+
 
       <button
         class="primary"
@@ -1965,9 +3251,13 @@ function buildRatingSection(order){
         ⭐ Submit Rating
       </button>
 
+
       <div
         id="ratingMessage"
-        style="text-align:center;margin-top:12px"
+        style="
+          text-align:center;
+          margin-top:12px
+        "
       ></div>
 
     </div>
@@ -1977,87 +3267,147 @@ function buildRatingSection(order){
 }
 
 
-window.selectRating = function(value){
+/* =========================
+   SELECT RATING
+========================= */
 
-  selectedRating = value;
+window.selectRating =
+function(value){
+
+  selectedRating =
+    value;
+
 
   document
-    .querySelectorAll(".star")
-    .forEach(star=>{
+    .querySelectorAll(
+      ".star"
+    )
+    .forEach(
+      star=>{
 
-      const rating =
-        Number(star.dataset.rating);
+        const rating =
+          Number(
+            star.dataset.rating
+          );
 
-      if(rating <= value){
 
-        star.classList.add("selected");
+        if(
+          rating <= value
+        ){
 
-      }else{
+          star.classList.add(
+            "selected"
+          );
 
-        star.classList.remove("selected");
+        }else{
+
+          star.classList.remove(
+            "selected"
+          );
+
+        }
 
       }
-
-    });
+    );
 
 };
 
 
-async function loadExistingRating(order){
+/* =========================
+   LOAD EXISTING RATING
+========================= */
+
+async function loadExistingRating(
+  order
+){
 
   try{
 
     const q =
       query(
-        ref(db,"ratings"),
-        orderByChild("orderId"),
-        equalTo(order.orderId)
+
+        ref(
+          db,
+          "ratings"
+        ),
+
+        orderByChild(
+          "orderId"
+        ),
+
+        equalTo(
+          order.orderId
+        )
+
       );
+
 
     const snap =
       await get(q);
 
-    if(!snap.exists()) return;
+
+    if(!snap.exists())
+      return;
 
 
-    let existing = null;
+    let existing =
+      null;
 
-    snap.forEach(child=>{
 
-      const rating =
-        child.val();
+    snap.forEach(
+      child=>{
 
-      if(
-        rating.ownerUid ===
-        currentUser.uid
-      ){
+        const rating =
+          child.val();
 
-        existing = rating;
+
+        if(
+          rating.ownerUid ===
+          currentUser.uid
+        ){
+
+          existing =
+            rating;
+
+        }
 
       }
-
-    });
+    );
 
 
     if(existing){
 
       selectedRating =
-        Number(existing.rating);
+        Number(
+          existing.rating
+        );
+
 
       document
-        .querySelectorAll(".star")
-        .forEach(star=>{
+        .querySelectorAll(
+          ".star"
+        )
+        .forEach(
+          star=>{
 
-          const r =
-            Number(star.dataset.rating);
+            const r =
+              Number(
+                star.dataset.rating
+              );
 
-          if(r <= selectedRating){
 
-            star.classList.add("selected");
+            if(
+              r <= selectedRating
+            ){
+
+              star.classList.add(
+                "selected"
+              );
+
+            }
 
           }
-
-        });
+        );
 
 
       const feedback =
@@ -2065,10 +3415,12 @@ async function loadExistingRating(order){
           "ratingFeedback"
         );
 
+
       if(feedback){
 
         feedback.value =
-          existing.feedback || "";
+          existing.feedback ||
+          "";
 
       }
 
@@ -2077,6 +3429,7 @@ async function loadExistingRating(order){
         document.getElementById(
           "ratingMessage"
         );
+
 
       if(msg){
 
@@ -2087,18 +3440,29 @@ async function loadExistingRating(order){
 
     }
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "RATING LOAD ERROR:",
+      error
+    );
 
   }
 
 }
 
 
-window.submitRating = async function(orderId){
+/* =========================
+   SUBMIT RATING
+========================= */
 
-  if(selectedRating < 1){
+window.submitRating =
+async function(orderId){
+
+  if(
+    selectedRating < 1
+  ){
 
     alert(
       "Please select a star rating."
@@ -2109,10 +3473,16 @@ window.submitRating = async function(orderId){
   }
 
 
-  const feedback =
+  const feedbackEl =
     document.getElementById(
       "ratingFeedback"
-    ).value.trim();
+    );
+
+
+  const feedback =
+    feedbackEl
+    ? feedbackEl.value.trim()
+    : "";
 
 
   try{
@@ -2124,9 +3494,17 @@ window.submitRating = async function(orderId){
     }
 
 
+    if(!currentUser){
+
+      throw new Error(
+        "Authentication failed."
+      );
+
+    }
+
+
     /*
-      Verify order belongs to customer
-      and is delivered.
+      Verify customer order
     */
 
     const ordersRef =
@@ -2135,12 +3513,22 @@ window.submitRating = async function(orderId){
         `customerOrders/${currentUser.uid}`
       );
 
+
     const q =
       query(
+
         ordersRef,
-        orderByChild("orderId"),
-        equalTo(orderId)
+
+        orderByChild(
+          "orderId"
+        ),
+
+        equalTo(
+          orderId
+        )
+
       );
+
 
     const snap =
       await get(q);
@@ -2148,32 +3536,44 @@ window.submitRating = async function(orderId){
 
     if(!snap.exists()){
 
-      alert("Order not found.");
+      alert(
+        "Order not found."
+      );
 
       return;
 
     }
 
 
-    let order = null;
+    let order =
+      null;
 
-    snap.forEach(child=>{
 
-      order = child.val();
+    snap.forEach(
+      child=>{
 
-    });
+        order =
+          child.val();
+
+      }
+    );
 
 
     if(!order){
 
-      alert("Order not found.");
+      alert(
+        "Order not found."
+      );
 
       return;
 
     }
 
 
-    if(order.status !== "delivered"){
+    if(
+      order.status !==
+      "delivered"
+    ){
 
       alert(
         "Rating is available after delivery."
@@ -2185,52 +3585,81 @@ window.submitRating = async function(orderId){
 
 
     /*
-      Check if already rated.
+      Check existing rating
     */
 
     const ratingQuery =
       query(
-        ref(db,"ratings"),
-        orderByChild("orderId"),
-        equalTo(orderId)
+
+        ref(
+          db,
+          "ratings"
+        ),
+
+        orderByChild(
+          "orderId"
+        ),
+
+        equalTo(
+          orderId
+        )
+
       );
 
+
     const ratingSnap =
-      await get(ratingQuery);
+      await get(
+        ratingQuery
+      );
 
 
-    let existingKey = null;
+    let existingKey =
+      null;
 
-    ratingSnap.forEach(child=>{
 
-      const rating =
-        child.val();
+    ratingSnap.forEach(
+      child=>{
 
-      if(
-        rating.ownerUid ===
-        currentUser.uid
-      ){
+        const rating =
+          child.val();
 
-        existingKey = child.key;
+
+        if(
+          rating.ownerUid ===
+          currentUser.uid
+        ){
+
+          existingKey =
+            child.key;
+
+        }
 
       }
-
-    });
+    );
 
 
     const ratingData = {
 
-      orderId,
+      orderId:
+
+        orderId,
 
       ownerUid:
+
         currentUser.uid,
 
-      rating:selectedRating,
+      rating:
 
-      feedback,
+        selectedRating,
+
+      feedback:
+
+        feedback,
 
       createdAt:
-        new Date().toISOString()
+
+        new Date()
+          .toISOString()
 
     };
 
@@ -2238,14 +3667,26 @@ window.submitRating = async function(orderId){
     if(existingKey){
 
       await update(
-        ref(db,`ratings/${existingKey}`),
+
+        ref(
+          db,
+          `ratings/${existingKey}`
+        ),
+
         ratingData
+
       );
 
     }else{
 
       const ratingRef =
-        push(ref(db,"ratings"));
+        push(
+          ref(
+            db,
+            "ratings"
+          )
+        );
+
 
       await set(
         ratingRef,
@@ -2255,14 +3696,27 @@ window.submitRating = async function(orderId){
     }
 
 
-    document.getElementById(
-      "ratingMessage"
-    ).innerHTML =
-      "⭐ Thank you! Your feedback has been submitted.";
+    const msg =
+      document.getElementById(
+        "ratingMessage"
+      );
+
+
+    if(msg){
+
+      msg.innerHTML =
+        "⭐ Thank you! Your feedback has been submitted.";
+
+    }
+
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "RATING ERROR:",
+      error
+    );
+
 
     alert(
       "Could not submit rating."
@@ -2274,50 +3728,96 @@ window.submitRating = async function(orderId){
 
 
 /* =========================
-   HELPERS
+   FORMAT DATE
 ========================= */
 
-function formatDate(date){
+function formatDate(
+  date
+){
 
-  if(!date) return "-";
-
-  return new Date(date)
-    .toLocaleString("en-IN");
-
-}
+  if(!date)
+    return "-";
 
 
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return new Date(
+    date
+  ).toLocaleString(
+    "en-IN"
+  );
 
 }
 
 
 /* =========================
-   CLOSE MODAL ON OUTSIDE
+   ESCAPE HTML
 ========================= */
 
-window.addEventListener("click",event=>{
+function escapeHtml(
+  value
+){
 
-  document
-    .querySelectorAll(".modal")
-    .forEach(modal=>{
+  return String(
+    value ?? ""
+  )
 
-      if(event.target === modal){
+  .replace(
+    /&/g,
+    "&amp;"
+  )
 
-        modal.style.display = "none";
+  .replace(
+    /</g,
+    "&lt;"
+  )
 
-      }
+  .replace(
+    />/g,
+    "&gt;"
+  )
 
-    });
+  .replace(
+    /"/g,
+    "&quot;"
+  )
 
-});
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================
+   CLOSE MODALS
+========================= */
+
+window.addEventListener(
+  "click",
+  event=>{
+
+    document
+      .querySelectorAll(
+        ".modal"
+      )
+      .forEach(
+        modal=>{
+
+          if(
+            event.target ===
+            modal
+          ){
+
+            modal.style.display =
+              "none";
+
+          }
+
+        }
+      );
+
+  }
+);
 
 </script>
 
