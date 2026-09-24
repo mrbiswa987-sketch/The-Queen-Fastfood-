@@ -1385,59 +1385,112 @@ function addToCart(name, price){
 
 /* ================= UPDATE CART ================= */
 
-function updateCart() {
+/* ================= UPDATE CART ================= */
+
+function updateCart(){
+
   const cartItems = document.getElementById("cartItems");
-  const subtotalElement = document.getElementById("subtotal");
-  const deliveryElement = document.getElementById("delivery");
-  const totalElement = document.getElementById("total");
+  const subtotalElement = document.getElementById("cartSubtotal");
+  const deliveryElement = document.getElementById("deliveryCharge");
+  const totalElement = document.getElementById("cartTotal");
+  const cartCountElement = document.getElementById("cartCount");
 
   cartItems.innerHTML = "";
 
-  if (cart.length === 0) {
-    cartItems.innerHTML = "<p>Your cart is empty.</p>";
+  let subtotal = 0;
+  let totalQuantity = 0;
 
-    subtotalElement.textContent = "₹0";
-    deliveryElement.textContent = "₹0";
-    totalElement.textContent = "₹0";
+  if(cart.length === 0){
+
+    cartItems.innerHTML = `
+      <p class="empty-cart">
+        Your cart is empty.
+      </p>
+    `;
+
+    subtotalElement.textContent = "0";
+    deliveryElement.textContent = "0";
+    totalElement.textContent = "0";
+    cartCountElement.textContent = "0";
 
     return;
   }
 
-  let subtotal = 0;
+  cart.forEach((item,index)=>{
 
-  cart.forEach((item, index) => {
     const itemTotal = item.price * item.quantity;
+
     subtotal += itemTotal;
+    totalQuantity += item.quantity;
 
     cartItems.innerHTML += `
+
       <div class="cart-item">
-        <div>
-          <strong>${item.name}</strong>
-          <p>₹${item.price} × ${item.quantity}</p>
+
+        <div class="cart-item-info">
+
+          <h3>${item.name}</h3>
+
+          <p>
+            ₹${item.price} × ${item.quantity}
+          </p>
+
         </div>
 
-        <div class="quantity-control">
-          <button onclick="changeQuantity(${index}, -1)">−</button>
-          <span>${item.quantity}</span>
-          <button onclick="changeQuantity(${index}, 1)">+</button>
+
+        <div class="quantity-controls">
+
+          <button
+            onclick="changeQuantity(${index},-1)"
+          >
+            −
+          </button>
+
+          <span class="quantity">
+            ${item.quantity}
+          </span>
+
+          <button
+            onclick="changeQuantity(${index},1)"
+          >
+            +
+          </button>
+
         </div>
 
-        <strong>₹${itemTotal}</strong>
+
+        <div class="item-total">
+          ₹${itemTotal}
+        </div>
+
 
         <button
           class="remove-btn"
-          onclick="removeItem(${index})">
+          onclick="removeItem(${index})"
+        >
           Remove
         </button>
+
       </div>
+
     `;
+
   });
 
-  subtotalElement.textContent = `₹${subtotal}`;
 
-  // Delivery charge will be calculated at checkout
-  deliveryElement.textContent = "Calculated at checkout";
+  /* Delivery will be calculated after address */
 
-  // Before address/distance calculation
-  totalElement.textContent = `₹${subtotal}`;
+  const deliveryCharge = 0;
+
+  const total = subtotal + deliveryCharge;
+
+
+  subtotalElement.textContent = subtotal;
+
+  deliveryElement.textContent = deliveryCharge;
+
+  totalElement.textContent = total;
+
+  cartCountElement.textContent = totalQuantity;
+
 }
