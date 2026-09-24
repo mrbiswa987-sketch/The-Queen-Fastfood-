@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>The Queen Fast Food - Admin</title>
 
@@ -20,76 +16,17 @@
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#101010;
+  background:#0d0d0d;
   color:#fff;
-}
-
-.login{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
-
-.login-box{
-  width:100%;
-  max-width:420px;
-  background:#1b1b1b;
-  padding:30px;
-  border-radius:15px;
-  border:1px solid #444;
-}
-
-h1,h2{
-  color:#f5c542;
-}
-
-input,textarea,select{
-  width:100%;
-  padding:12px;
-  margin:8px 0 15px;
-  background:#111;
-  color:#fff;
-  border:1px solid #444;
-  border-radius:8px;
-}
-
-button{
-  cursor:pointer;
-}
-
-.primary{
-  width:100%;
-  padding:13px;
-  background:#f5c542;
-  border:0;
-  border-radius:8px;
-  font-weight:bold;
-}
-
-.logout{
-  background:#d33;
-  color:#fff;
-  border:0;
-  padding:10px 18px;
-  border-radius:8px;
-}
-
-#dashboard{
-  display:none;
 }
 
 header{
-  background:#181818;
+  background:#111;
   border-bottom:1px solid #333;
-  padding:15px 4%;
+  padding:18px 5%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  position:sticky;
-  top:0;
-  z-index:100;
 }
 
 .logo{
@@ -99,9 +36,64 @@ header{
 }
 
 .container{
-  width:94%;
-  max-width:1300px;
-  margin:25px auto;
+  width:92%;
+  max-width:1200px;
+  margin:auto;
+}
+
+.section{
+  padding:30px 0;
+}
+
+.card{
+  background:#161616;
+  border:1px solid #333;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+h2,h3{
+  color:#f5c542;
+  margin-bottom:15px;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  margin:7px 0 14px;
+  border-radius:10px;
+  border:1px solid #444;
+  background:#222;
+  color:#fff;
+}
+
+button{
+  border:0;
+  border-radius:9px;
+  padding:10px 15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.primary{
+  background:#f5c542;
+  color:#111;
+}
+
+.danger{
+  background:#d9534f;
+  color:#fff;
+}
+
+.gray{
+  background:#333;
+  color:#fff;
+}
+
+.login{
+  max-width:450px;
+  margin:100px auto;
 }
 
 .stats{
@@ -111,69 +103,27 @@ header{
 }
 
 .stat{
-  background:#1b1b1b;
+  background:#181818;
   border:1px solid #333;
-  border-radius:12px;
+  border-radius:15px;
   padding:20px;
 }
 
-.stat h3{
-  color:#aaa;
-  font-size:14px;
-}
-
-.stat strong{
-  display:block;
-  font-size:28px;
+.stat-number{
+  font-size:30px;
   color:#f5c542;
-  margin-top:8px;
-}
-
-.panel{
-  background:#1b1b1b;
-  border:1px solid #333;
-  border-radius:12px;
-  padding:20px;
-  margin-top:20px;
-}
-
-.panel h2{
-  margin-bottom:15px;
-}
-
-.shop-buttons{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.open-btn,
-.close-btn{
-  padding:12px 20px;
-  border:0;
-  border-radius:8px;
   font-weight:bold;
 }
 
-.open-btn{
-  background:#2d9b4a;
-  color:#fff;
-}
-
-.close-btn{
-  background:#d33;
-  color:#fff;
-}
-
 .order{
-  background:#111;
+  background:#181818;
   border:1px solid #333;
-  border-radius:12px;
-  padding:18px;
-  margin-top:15px;
+  border-radius:17px;
+  padding:20px;
+  margin-bottom:15px;
 }
 
-.order-top{
+.order-header{
   display:flex;
   justify-content:space-between;
   gap:10px;
@@ -182,169 +132,70 @@ header{
 
 .order-id{
   color:#f5c542;
-  font-size:20px;
+  font-size:21px;
   font-weight:bold;
 }
 
-.badge{
-  padding:6px 10px;
-  border-radius:15px;
+.status{
+  display:inline-block;
+  padding:6px 11px;
   background:#f5c542;
-  color:#000;
+  color:#111;
+  border-radius:20px;
   font-weight:bold;
-  font-size:12px;
-}
-
-.order-details{
-  margin-top:15px;
-  line-height:1.8;
-  color:#ddd;
 }
 
 .order-items{
-  margin-top:12px;
-  padding:12px;
-  background:#1c1c1c;
-  border-radius:8px;
+  margin:15px 0;
+  padding:15px;
+  background:#222;
+  border-radius:10px;
 }
 
-.status-buttons{
+.actions{
   display:flex;
-  gap:8px;
   flex-wrap:wrap;
+  gap:8px;
   margin-top:15px;
 }
 
-.status-buttons button{
-  padding:9px 12px;
-  border:1px solid #555;
-  border-radius:7px;
-  background:#222;
-  color:#fff;
-}
-
-.status-buttons button:hover{
-  background:#f5c542;
-  color:#000;
-}
-
-.whatsapp-btn{
-  display:inline-block;
-  margin-top:12px;
-  padding:10px 15px;
-  background:#20c65a;
-  color:#fff;
-  text-decoration:none;
-  border-radius:8px;
-  font-weight:bold;
-}
-
-.empty{
-  color:#aaa;
-  text-align:center;
-  padding:30px;
-}
-
-.filters{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+.rating{
+  background:#181818;
+  border:1px solid #333;
+  border-radius:17px;
+  padding:20px;
   margin-bottom:15px;
 }
 
-.filters button{
-  padding:9px 15px;
-  border-radius:20px;
-  border:1px solid #555;
-  background:#222;
-  color:#fff;
+.stars{
+  font-size:25px;
+  margin:8px 0;
 }
 
-.filters button.active{
-  background:#f5c542;
-  color:#000;
+.hidden{
+  display:none;
 }
 
-.message{
-  margin-top:10px;
-  color:#f5c542;
-}
-
-@media(max-width:600px){
-
-  header{
-    padding:12px;
-  }
-
-  .logo{
-    font-size:16px;
-  }
-
-  .container{
-    width:95%;
-  }
-
+.small{
+  color:#aaa;
+  font-size:13px;
 }
 
 </style>
-
 </head>
 
 <body>
 
-
-<!-- LOGIN -->
-
-<div id="loginPage" class="login">
-
-  <div class="login-box">
-
-    <h1>👑 The Queen Fast Food</h1>
-
-    <p style="margin:10px 0 20px;color:#aaa">
-      Admin Panel
-    </p>
-
-    <input
-      id="email"
-      type="email"
-      placeholder="Admin Email"
-    >
-
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-    >
-
-    <button
-      class="primary"
-      onclick="loginAdmin()"
-    >
-      🔐 Login
-    </button>
-
-    <div id="loginMessage"
-         class="message"></div>
-
-  </div>
-
-</div>
-
-
-<!-- DASHBOARD -->
-
-<div id="dashboard">
-
 <header>
 
   <div class="logo">
-    👑 The Queen Fast Food — Admin
+    👑 The Queen Fast Food
   </div>
 
   <button
-    class="logout"
-    onclick="logoutAdmin()"
+    id="logoutBtn"
+    class="danger hidden"
+    onclick="logout()"
   >
     Logout
   </button>
@@ -352,175 +203,189 @@ header{
 </header>
 
 
-<div class="container">
+<!-- LOGIN -->
 
+<div id="loginScreen" class="login card">
 
-<!-- STATS -->
-
-<div class="stats">
-
-  <div class="stat">
-
-    <h3>Total Orders</h3>
-
-    <strong id="totalOrders">
-      0
-    </strong>
-
-  </div>
-
-
-  <div class="stat">
-
-    <h3>Today's Orders</h3>
-
-    <strong id="todayOrders">
-      0
-    </strong>
-
-  </div>
-
-
-  <div class="stat">
-
-    <h3>Pending Orders</h3>
-
-    <strong id="pendingOrders">
-      0
-    </strong>
-
-  </div>
-
-
-  <div class="stat">
-
-    <h3>Delivered</h3>
-
-    <strong id="deliveredOrders">
-      0
-    </strong>
-
-  </div>
-
-</div>
-
-
-<!-- SHOP CONTROL -->
-
-<div class="panel">
-
-  <h2>🏪 Shop Control</h2>
-
-  <div id="shopStatus">
-    Checking...
-  </div>
-
-  <br>
-
-  <div class="shop-buttons">
-
-    <button
-      class="open-btn"
-      onclick="openShop()"
-    >
-      🟢 Open Shop
-    </button>
-
-    <button
-      class="close-btn"
-      onclick="closeShop()"
-    >
-      🔴 Close Shop
-    </button>
-
-  </div>
-
-  <textarea
-    id="closedMessage"
-    placeholder="Closed message"
-  ></textarea>
-
-</div>
-
-
-<!-- SETTINGS -->
-
-<div class="panel">
-
-  <h2>⚙️ Restaurant Settings</h2>
-
-  <label>WhatsApp Number</label>
+  <h2>🔐 Admin Login</h2>
 
   <input
-    id="whatsappNumber"
-    value="9090220791"
+    id="email"
+    type="email"
+    placeholder="Admin Email"
+  >
+
+  <input
+    id="password"
+    type="password"
+    placeholder="Password"
   >
 
   <button
     class="primary"
-    onclick="saveSettings()"
+    style="width:100%"
+    onclick="adminLogin()"
   >
-    💾 Save Settings
+    Login
   </button>
 
-  <div
-    id="settingsMessage"
-    class="message"
-  ></div>
+  <p
+    id="loginMessage"
+    class="small"
+    style="margin-top:15px"
+  ></p>
 
 </div>
 
 
-<!-- ORDERS -->
+<!-- ADMIN -->
 
-<div class="panel">
+<div
+  id="adminPanel"
+  class="container section hidden"
+>
 
-  <h2>📦 Customer Orders</h2>
+  <h2>📊 Admin Dashboard</h2>
 
-  <div class="filters">
+  <div class="stats">
 
-    <button
-      id="filterAll"
-      class="active"
-      onclick="setFilter('all')"
-    >
-      All
-    </button>
+    <div class="stat">
+      <div>Total Orders</div>
+      <div id="totalOrders" class="stat-number">
+        0
+      </div>
+    </div>
 
-    <button
-      id="filterPending"
-      onclick="setFilter('pending')"
-    >
-      Pending
-    </button>
+    <div class="stat">
+      <div>Today's Orders</div>
+      <div id="todayOrders" class="stat-number">
+        0
+      </div>
+    </div>
 
-    <button
-      id="filterToday"
-      onclick="setFilter('today')"
-    >
-      Today
-    </button>
+    <div class="stat">
+      <div>Pending</div>
+      <div id="pendingOrders" class="stat-number">
+        0
+      </div>
+    </div>
 
-    <button
-      id="filterDelivered"
-      onclick="setFilter('delivered')"
-    >
-      Delivered
-    </button>
-
-  </div>
-
-  <div id="ordersList">
-
-    <div class="empty">
-      Loading orders...
+    <div class="stat">
+      <div>Delivered</div>
+      <div id="deliveredOrders" class="stat-number">
+        0
+      </div>
     </div>
 
   </div>
 
-</div>
 
-</div>
+  <!-- SHOP SETTINGS -->
+
+  <div class="card">
+
+    <h3>🏪 Shop Control</h3>
+
+    <button
+      class="primary"
+      onclick="toggleShop()"
+    >
+      Toggle Shop Open / Closed
+    </button>
+
+    <p
+      id="shopStatus"
+      style="margin-top:15px"
+    >
+      Loading...
+    </p>
+
+    <br>
+
+    <label>Closed Message</label>
+
+    <input
+      id="closedMessage"
+      placeholder="Shop is currently closed."
+    >
+
+    <button
+      class="primary"
+      onclick="saveShopSettings()"
+    >
+      Save Shop Settings
+    </button>
+
+  </div>
+
+
+  <!-- WHATSAPP -->
+
+  <div class="card">
+
+    <h3>📲 WhatsApp Number</h3>
+
+    <input
+      id="whatsappNumber"
+      value="9090220791"
+      placeholder="WhatsApp Number"
+    >
+
+    <button
+      class="primary"
+      onclick="saveWhatsApp()"
+    >
+      Save WhatsApp
+    </button>
+
+  </div>
+
+
+  <!-- FILTER -->
+
+  <div class="card">
+
+    <h3>🔎 Orders</h3>
+
+    <select
+      id="orderFilter"
+      onchange="renderOrders()"
+    >
+
+      <option value="all">
+        All Orders
+      </option>
+
+      <option value="pending">
+        Pending
+      </option>
+
+      <option value="today">
+        Today
+      </option>
+
+      <option value="delivered">
+        Delivered
+      </option>
+
+    </select>
+
+    <div id="ordersList"></div>
+
+  </div>
+
+
+  <!-- RATINGS -->
+
+  <div class="card">
+
+    <h3>⭐ Customer Ratings & Feedback</h3>
+
+    <div id="ratingsList">
+      Loading ratings...
+    </div>
+
+  </div>
 
 </div>
 
@@ -532,19 +397,19 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
   getDatabase,
   ref,
-  onValue,
+  get,
   update,
-  set
+  onValue
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 /* =========================
@@ -576,17 +441,18 @@ const firebaseConfig = {
 
   measurementId:
     "G-Q1YCK636KJ"
+
 };
 
 
 const app =
   initializeApp(firebaseConfig);
 
-const auth =
-  getAuth(app);
-
 const db =
   getDatabase(app);
+
+const auth =
+  getAuth(app);
 
 
 /* =========================
@@ -597,18 +463,54 @@ const ADMIN_UID =
   "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
-let ordersData = {};
+let allOrders = {};
 
-let currentFilter = "all";
+let allRatings = {};
 
-let settingsData = {};
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+  auth,
+  user => {
+
+    if(!user){
+
+      showLogin();
+
+      return;
+
+    }
+
+
+    if(user.uid !== ADMIN_UID){
+
+      alert(
+        "Access denied. Admin account only."
+      );
+
+      signOut(auth);
+
+      return;
+
+    }
+
+
+    showAdmin();
+
+    startRealtimeListeners();
+
+  }
+);
 
 
 /* =========================
    LOGIN
 ========================= */
 
-window.loginAdmin = async function(){
+window.adminLogin = async function(){
 
   const email =
     document.getElementById("email")
@@ -621,12 +523,12 @@ window.loginAdmin = async function(){
 
   if(!email || !password){
 
-    document.getElementById(
-      "loginMessage"
-    ).textContent =
-      "Enter email and password.";
+    document.getElementById("loginMessage")
+      .textContent =
+      "Please enter email and password.";
 
     return;
+
   }
 
 
@@ -642,11 +544,9 @@ window.loginAdmin = async function(){
 
     console.error(error);
 
-    document.getElementById(
-      "loginMessage"
-    ).textContent =
-      "❌ Login failed: " +
-      error.message;
+    document.getElementById("loginMessage")
+      .textContent =
+      "❌ Login failed. Check email/password.";
 
   }
 
@@ -654,370 +554,88 @@ window.loginAdmin = async function(){
 
 
 /* =========================
-   AUTH STATE
+   LOGOUT
 ========================= */
 
-onAuthStateChanged(
-  auth,
-  async user => {
-
-    if(!user){
-
-      showLogin();
-
-      return;
-    }
-
-
-    if(user.uid !== ADMIN_UID){
-
-      alert(
-        "This account is not authorized as admin."
-      );
-
-      await signOut(auth);
-
-      return;
-    }
-
-
-    showDashboard();
-
-    loadSettings();
-
-    loadOrders();
-
-  }
-);
-
-
-function showLogin(){
-
-  document.getElementById(
-    "loginPage"
-  ).style.display = "flex";
-
-  document.getElementById(
-    "dashboard"
-  ).style.display = "none";
-
-}
-
-
-function showDashboard(){
-
-  document.getElementById(
-    "loginPage"
-  ).style.display = "none";
-
-  document.getElementById(
-    "dashboard"
-  ).style.display = "block";
-
-}
-
-
-window.logoutAdmin = async function(){
+window.logout = async function(){
 
   await signOut(auth);
 
 };
 
 
-/* =========================
-   SETTINGS
-========================= */
+function showLogin(){
 
-function loadSettings(){
+  document.getElementById("loginScreen")
+    .classList.remove("hidden");
 
-  const settingsRef =
-    ref(db,"settings");
+  document.getElementById("adminPanel")
+    .classList.add("hidden");
 
+  document.getElementById("logoutBtn")
+    .classList.add("hidden");
 
-  onValue(
-    settingsRef,
-    snapshot => {
-
-      settingsData =
-        snapshot.val() || {};
+}
 
 
-      document.getElementById(
-        "whatsappNumber"
-      ).value =
-        settingsData.whatsappNumber ||
-        "9090220791";
+function showAdmin(){
 
+  document.getElementById("loginScreen")
+    .classList.add("hidden");
 
-      document.getElementById(
-        "closedMessage"
-      ).value =
-        settingsData.closedMessage ||
-        "The Queen Fast Food is currently closed.";
+  document.getElementById("adminPanel")
+    .classList.remove("hidden");
 
-
-      updateShopStatus();
-
-    },
-
-    error => {
-
-      console.error(error);
-
-    }
-  );
+  document.getElementById("logoutBtn")
+    .classList.remove("hidden");
 
 }
 
 
 /* =========================
-   SHOP STATUS
+   REALTIME
 ========================= */
 
-function updateShopStatus(){
-
-  const manualClosed =
-    settingsData.manualClosed === true;
-
-
-  const el =
-    document.getElementById(
-      "shopStatus"
-    );
-
-
-  if(manualClosed){
-
-    el.innerHTML =
-      "🔴 Shop is manually CLOSED.";
-
-    el.style.color =
-      "#ff6666";
-
-    return;
-  }
-
-
-  const now =
-    new Date();
-
-
-  const minutes =
-    now.getHours() * 60 +
-    now.getMinutes();
-
-
-  const opening =
-    12 * 60;
-
-  const closing =
-    23 * 60;
-
-
-  if(
-    minutes >= opening &&
-    minutes < closing
-  ){
-
-    el.innerHTML =
-      "🟢 Shop is OPEN • 12:00 PM – 11:00 PM";
-
-    el.style.color =
-      "#55dd77";
-
-  }else{
-
-    el.innerHTML =
-      "🔴 Shop is CLOSED • 12:00 PM – 11:00 PM";
-
-    el.style.color =
-      "#ff6666";
-
-  }
-
-}
-
-
-/* =========================
-   OPEN SHOP
-========================= */
-
-window.openShop = async function(){
-
-  try{
-
-    await update(
-      ref(db,"settings"),
-      {
-
-        manualClosed:false,
-
-        manualOpenedAt:
-          new Date().toISOString()
-
-      }
-    );
-
-
-  }catch(error){
-
-    alert(
-      "Could not open shop."
-    );
-
-  }
-
-};
-
-
-/* =========================
-   CLOSE SHOP
-========================= */
-
-window.closeShop = async function(){
-
-  const message =
-    document.getElementById(
-      "closedMessage"
-    ).value.trim() ||
-    "The Queen Fast Food is currently closed.";
-
-
-  try{
-
-    await update(
-      ref(db,"settings"),
-      {
-
-        manualClosed:true,
-
-        closedMessage:message,
-
-        manualClosedAt:
-          new Date().toISOString()
-
-      }
-    );
-
-
-  }catch(error){
-
-    alert(
-      "Could not close shop."
-    );
-
-  }
-
-};
-
-
-/* =========================
-   SAVE SETTINGS
-========================= */
-
-window.saveSettings = async function(){
-
-  const number =
-    document.getElementById(
-      "whatsappNumber"
-    ).value.trim();
-
-
-  const message =
-    document.getElementById(
-      "closedMessage"
-    ).value.trim();
-
-
-  try{
-
-    await update(
-      ref(db,"settings"),
-      {
-
-        whatsappNumber:
-          number || "9090220791",
-
-        closedMessage:
-          message ||
-          "The Queen Fast Food is currently closed."
-
-      }
-    );
-
-
-    document.getElementById(
-      "settingsMessage"
-    ).textContent =
-      "✅ Settings saved.";
-
-
-  }catch(error){
-
-    console.error(error);
-
-    document.getElementById(
-      "settingsMessage"
-    ).textContent =
-      "❌ Could not save settings.";
-
-  }
-
-};
-
-
-/* =========================
-   LOAD ORDERS
-========================= */
-
-function loadOrders(){
-
-  const ordersRef =
-    ref(db,"orders");
-
+function startRealtimeListeners(){
 
   onValue(
-
-    ordersRef,
-
+    ref(db,"orders"),
     snapshot => {
 
-      ordersData =
+      allOrders =
         snapshot.val() || {};
-
 
       updateStats();
 
       renderOrders();
 
-    },
-
-    error => {
-
-      console.error(
-        "ORDER LOAD ERROR:",
-        error
-      );
+    }
+  );
 
 
-      document.getElementById(
-        "ordersList"
-      ).innerHTML = `
+  onValue(
+    ref(db,"ratings"),
+    snapshot => {
 
-        <div class="empty">
+      allRatings =
+        snapshot.val() || {};
 
-          ❌ Could not load orders.
-
-          <br><br>
-
-          Firebase permission denied.
-
-        </div>
-
-      `;
+      renderRatings();
 
     }
+  );
 
+
+  onValue(
+    ref(db,"settings"),
+    snapshot => {
+
+      const settings =
+        snapshot.val() || {};
+
+      updateSettingsUI(settings);
+
+    }
   );
 
 }
@@ -1030,21 +648,14 @@ function loadOrders(){
 function updateStats(){
 
   const orders =
-    Object.values(ordersData);
-
-
-  document.getElementById(
-    "totalOrders"
-  ).textContent =
-    orders.length;
-
+    Object.values(allOrders);
 
   const today =
     new Date().toDateString();
 
 
   const todayOrders =
-    orders.filter(order=>{
+    orders.filter(order => {
 
       if(!order.createdAt)
         return false;
@@ -1056,29 +667,37 @@ function updateStats(){
     });
 
 
+  const pending =
+    orders.filter(order =>
+      ![
+        "delivered",
+        "cancelled"
+      ].includes(order.status)
+    );
+
+
+  const delivered =
+    orders.filter(order =>
+      order.status === "delivered"
+    );
+
+
+  document.getElementById(
+    "totalOrders"
+  ).textContent =
+    orders.length;
+
+
   document.getElementById(
     "todayOrders"
   ).textContent =
     todayOrders.length;
 
 
-  const pending =
-    orders.filter(order=>
-      !["delivered","cancelled"]
-      .includes(order.status)
-    );
-
-
   document.getElementById(
     "pendingOrders"
   ).textContent =
     pending.length;
-
-
-  const delivered =
-    orders.filter(order=>
-      order.status === "delivered"
-    );
 
 
   document.getElementById(
@@ -1090,405 +709,319 @@ function updateStats(){
 
 
 /* =========================
-   FILTER
+   RENDER ORDERS
 ========================= */
 
-window.setFilter = function(filter){
+window.renderOrders = function(){
 
-  currentFilter = filter;
+  const box =
+    document.getElementById("ordersList");
+
+  const filter =
+    document.getElementById("orderFilter")
+      .value;
 
 
-  document
-    .querySelectorAll(".filters button")
-    .forEach(btn=>
-      btn.classList.remove("active")
+  let orders =
+    Object.entries(allOrders);
+
+
+  orders.sort((a,b)=>{
+
+    return new Date(
+      b[1].createdAt || 0
+    ) -
+    new Date(
+      a[1].createdAt || 0
     );
 
-
-  const idMap = {
-
-    all:"filterAll",
-
-    pending:"filterPending",
-
-    today:"filterToday",
-
-    delivered:"filterDelivered"
-
-  };
+  });
 
 
-  document
-    .getElementById(idMap[filter])
-    .classList.add("active");
+  orders =
+    orders.filter(([key,order])=>{
+
+      if(filter === "pending"){
+
+        return ![
+          "delivered",
+          "cancelled"
+        ].includes(order.status);
+
+      }
 
 
-  renderOrders();
+      if(filter === "delivered"){
+
+        return order.status === "delivered";
+
+      }
+
+
+      if(filter === "today"){
+
+        if(!order.createdAt)
+          return false;
+
+        return new Date(
+          order.createdAt
+        ).toDateString()
+        ===
+        new Date().toDateString();
+
+      }
+
+
+      return true;
+
+    });
+
+
+  if(!orders.length){
+
+    box.innerHTML =
+      "<p class='small'>No orders found.</p>";
+
+    return;
+
+  }
+
+
+  box.innerHTML = "";
+
+
+  orders.forEach(
+    ([firebaseKey,order])=>{
+
+      let itemsHtml = "";
+
+
+      (order.items || []).forEach(item=>{
+
+        itemsHtml += `
+          • ${escapeHtml(item.name)}
+          × ${item.quantity}
+          = ₹${item.total}
+          <br>
+        `;
+
+      });
+
+
+      box.innerHTML += `
+
+        <div class="order">
+
+          <div class="order-header">
+
+            <div>
+
+              <div class="order-id">
+                🆔 ${escapeHtml(order.orderId)}
+              </div>
+
+              <div class="small">
+                ${formatDate(order.createdAt)}
+              </div>
+
+            </div>
+
+            <div class="status">
+              ${formatStatus(order.status)}
+            </div>
+
+          </div>
+
+
+          <br>
+
+
+          <strong>👤 Customer:</strong>
+          ${escapeHtml(order.customerName)}
+
+          <br>
+
+          <strong>📞 Phone:</strong>
+          ${escapeHtml(order.phone)}
+
+          <br><br>
+
+          <strong>📍 Address:</strong>
+          ${escapeHtml(order.address)}
+
+          <div class="order-items">
+
+            <strong>🍽️ Items</strong>
+
+            <br><br>
+
+            ${itemsHtml}
+
+          </div>
+
+
+          <strong>💰 Food Total:</strong>
+          ₹${order.subtotal}
+
+          <br>
+
+          <strong>🚚 Delivery:</strong>
+          ₹${order.deliveryCharge}
+
+          <br>
+
+          <strong>📏 Distance:</strong>
+          ${order.distanceKm} KM
+
+          <br>
+
+          <strong>💵 Total:</strong>
+          ₹${order.total}
+
+          <br>
+
+          <strong>💳 Payment:</strong>
+          ${escapeHtml(order.paymentMethod)}
+
+
+          <div class="actions">
+
+            <button
+              class="gray"
+              onclick="updateOrderStatus(
+                '${firebaseKey}',
+                'received'
+              )"
+            >
+              📥 Received
+            </button>
+
+
+            <button
+              class="gray"
+              onclick="updateOrderStatus(
+                '${firebaseKey}',
+                'confirmed'
+              )"
+            >
+              ✅ Confirmed
+            </button>
+
+
+            <button
+              class="gray"
+              onclick="updateOrderStatus(
+                '${firebaseKey}',
+                'preparing'
+              )"
+            >
+              👨‍🍳 Preparing
+            </button>
+
+
+            <button
+              class="gray"
+              onclick="updateOrderStatus(
+                '${firebaseKey}',
+                'out_for_delivery'
+              )"
+            >
+              🛵 Out for Delivery
+            </button>
+
+
+            <button
+              class="primary"
+              onclick="updateOrderStatus(
+                '${firebaseKey}',
+                'delivered'
+              )"
+            >
+              🎉 Delivered
+            </button>
+
+
+            <button
+              class="danger"
+              onclick="updateOrderStatus(
+                '${firebaseKey}',
+                'cancelled'
+              )"
+            >
+              ❌ Cancel
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
 
 };
 
 
 /* =========================
-   RENDER ORDERS
+   UPDATE ORDER STATUS
 ========================= */
 
-function renderOrders(){
-
-  const container =
-    document.getElementById(
-      "ordersList"
-    );
-
-
-  let entries =
-    Object.entries(ordersData);
-
-
-  entries.sort(
-    (a,b)=>{
-
-      const dateA =
-        new Date(
-          a[1].createdAt || 0
-        );
-
-      const dateB =
-        new Date(
-          b[1].createdAt || 0
-        );
-
-      return dateB - dateA;
-
-    }
-  );
-
-
-  entries =
-    entries.filter(
-      ([key,order])=>
-        matchesFilter(order)
-    );
-
-
-  if(entries.length === 0){
-
-    container.innerHTML = `
-
-      <div class="empty">
-
-        📦 No orders found.
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  container.innerHTML = "";
-
-
-  entries.forEach(
-    ([firebaseKey,order])=>{
-
-      container.innerHTML +=
-        createOrderHTML(
-          firebaseKey,
-          order
-        );
-
-    }
-  );
-
-}
-
-
-function matchesFilter(order){
-
-  if(currentFilter === "all")
-    return true;
-
-
-  if(currentFilter === "pending"){
-
-    return ![
-      "delivered",
-      "cancelled"
-    ].includes(order.status);
-
-  }
-
-
-  if(currentFilter === "delivered"){
-
-    return order.status ===
-      "delivered";
-
-  }
-
-
-  if(currentFilter === "today"){
-
-    if(!order.createdAt)
-      return false;
-
-
-    return new Date(
-      order.createdAt
-    ).toDateString() ===
-      new Date().toDateString();
-
-  }
-
-
-  return true;
-
-}
-
-
-/* =========================
-   ORDER HTML
-========================= */
-
-function createOrderHTML(
-  firebaseKey,
-  order
-){
-
-  const humanOrderId =
-    order.orderId ||
-    firebaseKey;
-
-
-  const status =
-    formatStatus(order.status);
-
-
-  let itemsHTML = "";
-
-
-  if(Array.isArray(order.items)){
-
-    order.items.forEach(item=>{
-
-      itemsHTML += `
-
-        <div>
-          🍽️ ${item.name}
-          × ${item.quantity}
-          = ₹${item.amount ||
-          item.price * item.quantity}
-        </div>
-
-      `;
-
-    });
-
-  }
-
-
-  const whatsapp =
-    String(
-      settingsData.whatsappNumber ||
-      "9090220791"
-    ).replace(/\D/g,"");
-
-
-  return `
-
-    <div class="order">
-
-      <div class="order-top">
-
-        <div>
-
-          <div class="order-id">
-            🆔 ${humanOrderId}
-          </div>
-
-          <small>
-            ${formatDate(order.createdAt)}
-          </small>
-
-        </div>
-
-        <div class="badge">
-          ${status}
-        </div>
-
-      </div>
-
-
-      <div class="order-details">
-
-        👤 <strong>Customer:</strong>
-        ${escapeHTML(order.customerName || "-")}
-
-        <br>
-
-        📞 <strong>Phone:</strong>
-        ${escapeHTML(order.phone || "-")}
-
-        <br>
-
-        📍 <strong>Address:</strong>
-        ${escapeHTML(order.address || "-")}
-
-        <br>
-
-        💳 <strong>Payment:</strong>
-        ${escapeHTML(order.paymentMethod || "-")}
-
-        <br>
-
-        📏 <strong>Distance:</strong>
-        ${order.distanceKm || 0} KM
-
-      </div>
-
-
-      <div class="order-items">
-
-        <strong>🍽️ Items</strong>
-
-        <br><br>
-
-        ${itemsHTML}
-
-      </div>
-
-
-      <div class="order-details">
-
-        💰 Food Total:
-        ₹${order.subtotal || 0}
-
-        <br>
-
-        🚚 Delivery:
-        ₹${order.deliveryCharge || 0}
-
-        <br>
-
-        <strong style="color:#f5c542;font-size:20px">
-
-          💵 Total:
-          ₹${order.total || 0}
-
-        </strong>
-
-      </div>
-
-
-      <div class="status-buttons">
-
-        <button
-          onclick="changeOrderStatus(
-            '${firebaseKey}',
-            'received'
-          )"
-        >
-          📥 Received
-        </button>
-
-
-        <button
-          onclick="changeOrderStatus(
-            '${firebaseKey}',
-            'confirmed'
-          )"
-        >
-          ✅ Confirmed
-        </button>
-
-
-        <button
-          onclick="changeOrderStatus(
-            '${firebaseKey}',
-            'preparing'
-          )"
-        >
-          👨‍🍳 Preparing
-        </button>
-
-
-        <button
-          onclick="changeOrderStatus(
-            '${firebaseKey}',
-            'out_for_delivery'
-          )"
-        >
-          🛵 Out for Delivery
-        </button>
-
-
-        <button
-          onclick="changeOrderStatus(
-            '${firebaseKey}',
-            'delivered'
-          )"
-        >
-          🎉 Delivered
-        </button>
-
-
-        <button
-          onclick="changeOrderStatus(
-            '${firebaseKey}',
-            'cancelled'
-          )"
-        >
-          ❌ Cancelled
-        </button>
-
-      </div>
-
-
-      <a
-        class="whatsapp-btn"
-        target="_blank"
-        href="https://wa.me/91${whatsapp}"
-      >
-        📲 Open Restaurant WhatsApp
-      </a>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================
-   CHANGE STATUS
-========================= */
-
-window.changeOrderStatus =
-async function(
-  firebaseKey,
-  newStatus
-){
+window.updateOrderStatus =
+async function(firebaseKey,newStatus){
 
   try{
 
+    const order =
+      allOrders[firebaseKey];
+
+    if(!order){
+
+      alert("Order not found.");
+
+      return;
+
+    }
+
+
+    const now =
+      new Date().toISOString();
+
+
+    const updates = {};
+
+
+    /*
+      Update main admin order
+    */
+
+    updates[
+      `orders/${firebaseKey}/status`
+    ] = newStatus;
+
+
+    updates[
+      `orders/${firebaseKey}/statusUpdatedAt`
+    ] = now;
+
+
+    /*
+      Update customer's copy
+    */
+
+    updates[
+      `customerOrders/${order.ownerUid}/${firebaseKey}/status`
+    ] = newStatus;
+
+
+    updates[
+      `customerOrders/${order.ownerUid}/${firebaseKey}/statusUpdatedAt`
+    ] = now;
+
+
     await update(
-
-      ref(
-        db,
-        "orders/" +
-        firebaseKey
-      ),
-
-      {
-
-        status:newStatus,
-
-        statusUpdatedAt:
-          new Date().toISOString()
-
-      }
-
+      ref(db),
+      updates
     );
 
 
@@ -1506,6 +1039,246 @@ async function(
 
 
 /* =========================
+   SETTINGS
+========================= */
+
+function updateSettingsUI(settings){
+
+  const manualClosed =
+    settings.manualClosed === true;
+
+
+  document.getElementById(
+    "shopStatus"
+  ).innerHTML = manualClosed
+    ? "🔴 MANUALLY CLOSED"
+    : "🟢 SHOP OPEN / AUTO TIMING";
+
+
+  document.getElementById(
+    "closedMessage"
+  ).value =
+    settings.closedMessage ||
+    "Shop is currently closed.";
+
+
+  document.getElementById(
+    "whatsappNumber"
+  ).value =
+    settings.whatsappNumber ||
+    "9090220791";
+
+}
+
+
+window.toggleShop = async function(){
+
+  const snap =
+    await get(ref(db,"settings"));
+
+  const settings =
+    snap.exists()
+    ? snap.val()
+    : {};
+
+
+  const current =
+    settings.manualClosed === true;
+
+
+  await update(
+    ref(db,"settings"),
+    {
+      manualClosed:!current
+    }
+  );
+
+};
+
+
+window.saveShopSettings = async function(){
+
+  const message =
+    document.getElementById(
+      "closedMessage"
+    ).value.trim();
+
+
+  await update(
+    ref(db,"settings"),
+    {
+      closedMessage:
+        message ||
+        "Shop is currently closed."
+    }
+  );
+
+
+  alert(
+    "Shop settings saved."
+  );
+
+};
+
+
+window.saveWhatsApp = async function(){
+
+  const number =
+    document.getElementById(
+      "whatsappNumber"
+    ).value
+      .replace(/\D/g,"");
+
+
+  if(number.length < 10){
+
+    alert(
+      "Please enter valid WhatsApp number."
+    );
+
+    return;
+
+  }
+
+
+  await update(
+    ref(db,"settings"),
+    {
+      whatsappNumber:number
+    }
+  );
+
+
+  alert(
+    "WhatsApp number saved."
+  );
+
+};
+
+
+/* =========================
+   RATINGS
+========================= */
+
+function renderRatings(){
+
+  const box =
+    document.getElementById(
+      "ratingsList"
+    );
+
+
+  const ratings =
+    Object.entries(allRatings);
+
+
+  ratings.sort((a,b)=>{
+
+    return new Date(
+      b[1].createdAt || 0
+    ) -
+    new Date(
+      a[1].createdAt || 0
+    );
+
+  });
+
+
+  if(!ratings.length){
+
+    box.innerHTML =
+      "<p class='small'>No ratings yet.</p>";
+
+    return;
+
+  }
+
+
+  let total = 0;
+
+
+  ratings.forEach(
+    ([key,rating])=>{
+
+      total +=
+        Number(rating.rating || 0);
+
+    }
+  );
+
+
+  const average =
+    total / ratings.length;
+
+
+  box.innerHTML = `
+
+    <div class="card">
+
+      <h3>
+        ⭐ Average Rating:
+        ${average.toFixed(1)} / 5
+      </h3>
+
+      <p class="small">
+        ${ratings.length}
+        customer rating(s)
+      </p>
+
+    </div>
+
+  `;
+
+
+  ratings.forEach(
+    ([key,rating])=>{
+
+      const stars =
+        "⭐".repeat(
+          Number(rating.rating || 0)
+        );
+
+
+      box.innerHTML += `
+
+        <div class="rating">
+
+          <strong>
+            🆔 Order ID:
+            ${escapeHtml(rating.orderId)}
+          </strong>
+
+          <div class="stars">
+            ${stars}
+          </div>
+
+          <p>
+            ${escapeHtml(
+              rating.feedback ||
+              "No written feedback."
+            )}
+          </p>
+
+          <br>
+
+          <div class="small">
+            📅
+            ${formatDate(
+              rating.createdAt
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+}
+
+
+/* =========================
    HELPERS
 ========================= */
 
@@ -1513,54 +1286,44 @@ function formatStatus(status){
 
   const map = {
 
-    received:"Received",
+    received:"📥 Received",
 
-    confirmed:"Confirmed",
+    confirmed:"✅ Confirmed",
 
-    preparing:"Making / Preparing",
+    preparing:"👨‍🍳 Preparing",
 
-    out_for_delivery:
-      "Out for Delivery",
+    out_for_delivery:"🛵 Out for Delivery",
 
-    delivered:"Delivered",
+    delivered:"🎉 Delivered",
 
-    cancelled:"Cancelled"
+    cancelled:"❌ Cancelled"
 
   };
 
-
-  return map[status] ||
-    "Received";
+  return map[status] || status;
 
 }
 
 
-function formatDate(value){
+function formatDate(date){
 
-  if(!value)
+  if(!date)
     return "-";
 
-
-  return new Date(value)
-    .toLocaleString(
-      "en-IN",
-      {
-        dateStyle:"medium",
-        timeStyle:"short"
-      }
-    );
+  return new Date(date)
+    .toLocaleString("en-IN");
 
 }
 
 
-function escapeHTML(value){
+function escapeHtml(value){
 
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
