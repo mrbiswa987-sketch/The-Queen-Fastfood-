@@ -34,10 +34,7 @@ body{
   font-size:13px;
 }
 
-button,
-input,
-textarea,
-select{
+button,input,textarea,select{
   font:inherit;
 }
 
@@ -48,10 +45,6 @@ button{
 .hidden{
   display:none!important;
 }
-
-/* =========================
-   LOGIN
-========================= */
 
 .login-screen{
   min-height:100vh;
@@ -173,9 +166,11 @@ textarea{
   color:#73baff;
 }
 
-/* =========================
-   ADMIN
-========================= */
+.btn-purple{
+  background:#24153c;
+  border:1px solid #6639a0;
+  color:#c99cff;
+}
 
 .admin{
   display:none;
@@ -215,10 +210,6 @@ textarea{
   padding:17px 16px 45px;
 }
 
-/* =========================
-   STATS
-========================= */
-
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -244,10 +235,6 @@ textarea{
   color:var(--gold2);
   margin-top:2px;
 }
-
-/* =========================
-   CARDS
-========================= */
 
 .grid{
   display:grid;
@@ -289,10 +276,6 @@ textarea{
   grid-column:1/-1;
 }
 
-/* =========================
-   SHOP SWITCH
-========================= */
-
 .switch-row{
   display:flex;
   justify-content:space-between;
@@ -332,10 +315,6 @@ textarea{
   left:25px;
 }
 
-/* =========================
-   SHOP STATUS
-========================= */
-
 .shop-status{
   display:flex;
   align-items:center;
@@ -368,7 +347,6 @@ textarea{
 
 .shop-status-text.closed{
   color:#ff5c5c;
-  font-weight:900;
 }
 
 @keyframes redBlink{
@@ -376,15 +354,12 @@ textarea{
     opacity:1;
     transform:scale(1);
   }
+
   50%{
     opacity:.25;
     transform:scale(.75);
   }
 }
-
-/* =========================
-   NOTICE
-========================= */
 
 .notice{
   background:#19170c;
@@ -404,10 +379,6 @@ textarea{
 .danger{
   color:#ff7777;
 }
-
-/* =========================
-   DELIVERY
-========================= */
 
 .delivery-box{
   background:
@@ -444,10 +415,6 @@ textarea{
   color:#aaa;
   font-size:11px;
 }
-
-/* =========================
-   MENU
-========================= */
 
 .menu-list{
   display:grid;
@@ -540,10 +507,6 @@ textarea{
   white-space:nowrap;
 }
 
-/* =========================
-   ORDER FILTER
-========================= */
-
 .order-filter{
   display:flex;
   gap:5px;
@@ -566,10 +529,6 @@ textarea{
   border-color:var(--gold);
 }
 
-/* =========================
-   ORDERS
-========================= */
-
 .orders{
   display:grid;
   gap:7px;
@@ -585,7 +544,6 @@ textarea{
   transition:.2s;
 }
 
-/* NEW ORDER */
 .order.new-order{
   border:1px solid #d4af37;
   background:
@@ -600,10 +558,8 @@ textarea{
     0 5px 18px rgba(212,175,55,.08);
 }
 
-/* NEW ORDER STRONG BLINK */
 .order.new-order.new-arrival{
-  animation:
-    newOrderBlink .9s infinite;
+  animation:newOrderBlink .9s infinite;
 }
 
 @keyframes newOrderBlink{
@@ -620,13 +576,6 @@ textarea{
       0 0 0 2px rgba(245,215,110,.55),
       0 0 25px rgba(245,215,110,.65),
       0 0 50px rgba(212,175,55,.25);
-    background:
-      linear-gradient(
-        135deg,
-        rgba(212,175,55,.3),
-        rgba(255,255,255,.06),
-        #181818
-      );
   }
 }
 
@@ -765,10 +714,6 @@ textarea{
   padding:5px 7px;
 }
 
-/* =========================
-   DELIVERED
-========================= */
-
 .delivered-folder{
   margin-top:13px;
   border:1px solid #245b38;
@@ -805,10 +750,6 @@ textarea{
   padding:8px;
 }
 
-/* =========================
-   RATINGS
-========================= */
-
 .rating{
   background:#171717;
   border:1px solid #292929;
@@ -829,10 +770,6 @@ textarea{
   font-size:10px;
   line-height:1.45;
 }
-
-/* =========================
-   TOAST
-========================= */
 
 .toast{
   position:fixed;
@@ -858,9 +795,40 @@ textarea{
   transform:translateX(-50%) translateY(0);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.override-buttons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  margin-top:10px;
+}
+
+.override-btn{
+  padding:8px 5px;
+  border-radius:7px;
+  border:1px solid #333;
+  background:#171717;
+  color:#aaa;
+  font-size:9px;
+  font-weight:900;
+}
+
+.override-btn.active-auto{
+  background:#29220b;
+  border-color:var(--gold);
+  color:var(--gold2);
+}
+
+.override-btn.active-open{
+  background:#12351f;
+  border-color:#25d366;
+  color:#69ed91;
+}
+
+.override-btn.active-closed{
+  background:#351414;
+  border-color:#ff4d4d;
+  color:#ff8888;
+}
 
 @media(max-width:900px){
 
@@ -939,13 +907,15 @@ textarea{
     grid-column:2;
   }
 
+  .override-buttons{
+    grid-template-columns:1fr;
+  }
+
 }
 </style>
 </head>
 
 <body>
-
-<!-- LOGIN -->
 
 <div class="login-screen" id="loginScreen">
 
@@ -994,8 +964,6 @@ textarea{
 </div>
 
 
-<!-- ADMIN -->
-
 <div class="admin" id="adminPanel">
 
   <div class="topbar">
@@ -1019,8 +987,6 @@ textarea{
 
 
   <div class="dashboard">
-
-    <!-- STATS -->
 
     <div class="stats">
 
@@ -1047,9 +1013,8 @@ textarea{
     </div>
 
 
-    <!-- SETTINGS -->
-
     <div class="grid">
+
 
       <!-- SHOP CONTROL -->
 
@@ -1068,42 +1033,114 @@ textarea{
             id="shopStatusText"
             class="shop-status-text"
           >
-            SHOP OPEN
+            CHECKING...
           </span>
 
         </div>
 
-        <div class="switch-row">
+
+        <div class="notice">
+
+          <strong>Restaurant Time:</strong>
+          India Standard Time (IST)
+
+          <br>
+
+          <strong>Automatic Schedule:</strong>
+          12:00 PM – 11:00 PM
+
+        </div>
+
+
+        <h3>
+          Shop Status Control
+        </h3>
+
+
+        <div class="override-buttons">
+
+          <button
+            id="overrideAuto"
+            class="override-btn"
+            onclick="setShopOverride('auto')"
+          >
+            🕐 AUTO
+          </button>
+
+          <button
+            id="overrideOpen"
+            class="override-btn"
+            onclick="setShopOverride('open')"
+          >
+            🟢 FORCE OPEN
+          </button>
+
+          <button
+            id="overrideClosed"
+            class="override-btn"
+            onclick="setShopOverride('closed')"
+          >
+            🔴 FORCE CLOSED
+          </button>
+
+        </div>
+
+
+        <div
+          class="switch-row"
+          style="margin-top:10px;"
+        >
 
           <div>
+
             <strong
               id="shopControlTitle"
               style="font-size:11px;"
             >
-              Shop Open
+              Automatic Schedule
             </strong>
 
             <div
               id="shopControlText"
-              style="color:#777;font-size:9px;margin-top:3px;"
+              style="
+                color:#777;
+                font-size:9px;
+                margin-top:3px;
+              "
             >
-              Automatic schedule: 12 PM – 11 PM
+              Shop follows 12 PM – 11 PM schedule.
             </div>
+
           </div>
 
-          <button
-            class="switch"
-            id="shopSwitch"
-            onclick="toggleShop()"
-          ></button>
+        </div>
+
+
+        <div class="field">
+
+          <label>Opening Time</label>
+
+          <input
+            id="openingTime"
+            type="time"
+            value="12:00"
+          >
 
         </div>
 
-        <div class="notice">
-          <strong>Automatic timing:</strong>
-          12:00 PM to 11:00 PM.
-          Manual Close overrides the normal schedule.
+
+        <div class="field">
+
+          <label>Closing Time</label>
+
+          <input
+            id="closingTime"
+            type="time"
+            value="23:00"
+          >
+
         </div>
+
 
         <div class="field">
 
@@ -1115,6 +1152,7 @@ textarea{
           ></textarea>
 
         </div>
+
 
         <button
           class="btn btn-gold"
@@ -1138,9 +1176,17 @@ textarea{
 
           <select id="websiteMode">
 
-            <option value="normal">Normal</option>
-            <option value="updating">Updating</option>
-            <option value="maintenance">Maintenance</option>
+            <option value="normal">
+              Normal
+            </option>
+
+            <option value="updating">
+              Updating
+            </option>
+
+            <option value="maintenance">
+              Maintenance
+            </option>
 
           </select>
 
@@ -1148,7 +1194,9 @@ textarea{
 
         <div class="field">
 
-          <label>Update / Maintenance Message</label>
+          <label>
+            Update / Maintenance Message
+          </label>
 
           <textarea
             id="updateMessage"
@@ -1251,7 +1299,7 @@ textarea{
       </div>
 
 
-      <!-- DELIVERY RATE -->
+      <!-- DELIVERY -->
 
       <div class="card">
 
@@ -1312,7 +1360,9 @@ textarea{
       style="margin-bottom:12px;"
     >
 
-      <h2>🍽️ Menu Price & Food Image Management</h2>
+      <h2>
+        🍽️ Menu Price & Food Image Management
+      </h2>
 
       <div class="notice">
         Change food price and set the exact food photo URL.
@@ -1342,7 +1392,6 @@ textarea{
 
         <button
           class="filter active"
-          data-filter="all"
           onclick="setFilter('all',this)"
         >
           All
@@ -1350,7 +1399,6 @@ textarea{
 
         <button
           class="filter"
-          data-filter="new"
           onclick="setFilter('new',this)"
         >
           🟡 New
@@ -1358,7 +1406,6 @@ textarea{
 
         <button
           class="filter"
-          data-filter="active"
           onclick="setFilter('active',this)"
         >
           Active
@@ -1366,7 +1413,6 @@ textarea{
 
         <button
           class="filter"
-          data-filter="today"
           onclick="setFilter('today',this)"
         >
           Today
@@ -1475,18 +1521,37 @@ import {
 ========================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain: "the-queen-fast-food.firebaseapp.com",
-  databaseURL: "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId: "the-queen-fast-food",
-  storageBucket: "the-queen-fast-food.firebasestorage.app",
-  messagingSenderId: "435721389652",
-  appId: "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId: "G-Q1YCK636KJ"
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
 };
 
 const app =
-  initializeApp(firebaseConfig);
+  initializeApp(
+    firebaseConfig
+  );
 
 const auth =
   getAuth(app);
@@ -1515,13 +1580,61 @@ let allRatings = {};
 
 let currentFilter = "all";
 
-let shopClosed = false;
+let shopOverride = "auto";
 
 let initialOrdersLoaded = false;
 
 let knownOrderKeys = new Set();
 
 let audioContext = null;
+
+
+/* =========================
+   DEFAULT SETTINGS
+========================= */
+
+const DEFAULT_SETTINGS = {
+
+  statusOverride:
+    "auto",
+
+  scheduleEnabled:
+    true,
+
+  openTime:
+    "12:00",
+
+  closeTime:
+    "23:00",
+
+  openingTime:
+    "12:00",
+
+  closingTime:
+    "23:00",
+
+  manualClosed:
+    false,
+
+  closedMessage:
+    "",
+
+  whatsappNumber:
+    "9090220791",
+
+  fontSize:
+    "medium",
+
+  websiteMode:
+    "normal",
+
+  updateMessage:
+    "We are making some improvements. Please wait a little while and refresh the page.",
+
+  deliveryRate:
+    6
+
+};
 
 
 /* =========================
@@ -1555,14 +1668,20 @@ onAuthStateChanged(
 
     if(!user){
 
-      currentAdmin = null;
+      currentAdmin =
+        null;
 
       showLogin();
 
       return;
+
     }
 
-    if(user.uid !== ADMIN_UID){
+
+    if(
+      user.uid !==
+      ADMIN_UID
+    ){
 
       signOut(auth);
 
@@ -1572,9 +1691,12 @@ onAuthStateChanged(
         "Access denied.";
 
       return;
+
     }
 
-    currentAdmin = user;
+
+    currentAdmin =
+      user;
 
     showAdmin();
 
@@ -1592,11 +1714,13 @@ function showLogin(){
 
   document.getElementById(
     "loginScreen"
-  ).style.display = "flex";
+  ).style.display =
+    "flex";
 
   document.getElementById(
     "adminPanel"
-  ).style.display = "none";
+  ).style.display =
+    "none";
 
 }
 
@@ -1605,11 +1729,13 @@ function showAdmin(){
 
   document.getElementById(
     "loginScreen"
-  ).style.display = "none";
+  ).style.display =
+    "none";
 
   document.getElementById(
     "adminPanel"
-  ).style.display = "block";
+  ).style.display =
+    "block";
 
 }
 
@@ -1636,15 +1762,21 @@ async function(){
       "loginError"
     );
 
-  error.textContent = "";
+  error.textContent =
+    "";
 
-  if(!email || !password){
+  if(
+    !email ||
+    !password
+  ){
 
     error.textContent =
       "Enter email and password.";
 
     return;
+
   }
+
 
   try{
 
@@ -1710,56 +1842,246 @@ function loadAll(){
 
 
 /* =========================
-   SETTINGS
+   NORMALIZE BOOLEAN
+========================= */
+
+function normalizeBoolean(
+  value,
+  fallback = false
+){
+
+  if(
+    typeof value ===
+    "boolean"
+  ){
+
+    return value;
+
+  }
+
+
+  if(
+    typeof value ===
+    "number"
+  ){
+
+    return value === 1;
+
+  }
+
+
+  if(
+    typeof value ===
+    "string"
+  ){
+
+    const v =
+      value
+        .trim()
+        .toLowerCase();
+
+    if(
+      [
+        "true",
+        "1",
+        "yes",
+        "on"
+      ].includes(v)
+    ){
+
+      return true;
+
+    }
+
+    if(
+      [
+        "false",
+        "0",
+        "no",
+        "off"
+      ].includes(v)
+    ){
+
+      return false;
+
+    }
+
+  }
+
+
+  return fallback;
+
+}
+
+
+/* =========================
+   NORMALIZE OVERRIDE
+========================= */
+
+function normalizeOverride(
+  data
+){
+
+  let value =
+    data.statusOverride;
+
+  if(
+    typeof value ===
+    "string"
+  ){
+
+    value =
+      value
+        .trim()
+        .toLowerCase();
+
+    if(
+      [
+        "auto",
+        "open",
+        "closed"
+      ].includes(value)
+    ){
+
+      return value;
+
+    }
+
+  }
+
+
+  /*
+    Backward compatibility
+    with old manualClosed.
+  */
+
+  if(
+    normalizeBoolean(
+      data.manualClosed,
+      false
+    )
+  ){
+
+    return "closed";
+
+  }
+
+
+  return "auto";
+
+}
+
+
+/* =========================
+   LOAD SETTINGS
 ========================= */
 
 function loadSettings(){
 
   onValue(
-    ref(db,"settings"),
+    ref(
+      db,
+      "settings"
+    ),
     snapshot => {
 
       const data =
         snapshot.val() || {};
 
+
+      const opening =
+        data.openTime ||
+        data.openingTime ||
+        DEFAULT_SETTINGS.openTime;
+
+      const closing =
+        data.closeTime ||
+        data.closingTime ||
+        DEFAULT_SETTINGS.closeTime;
+
+
       document.getElementById(
         "closedMessage"
       ).value =
-        data.closedMessage || "";
+        data.closedMessage ||
+        "";
+
 
       document.getElementById(
         "whatsappNumber"
       ).value =
         data.whatsappNumber ||
-        "9090220791";
+        DEFAULT_SETTINGS.whatsappNumber;
+
 
       document.getElementById(
         "fontSize"
       ).value =
         data.fontSize ||
-        "medium";
+        DEFAULT_SETTINGS.fontSize;
+
 
       document.getElementById(
         "websiteMode"
       ).value =
         data.websiteMode ||
-        "normal";
+        DEFAULT_SETTINGS.websiteMode;
+
 
       document.getElementById(
         "updateMessage"
       ).value =
         data.updateMessage ||
-        "We are making some improvements. Please wait a little while and refresh the page.";
+        DEFAULT_SETTINGS.updateMessage;
+
 
       document.getElementById(
         "deliveryRate"
       ).value =
         Number(
-          data.deliveryRate ?? 6
+          data.deliveryRate ??
+          DEFAULT_SETTINGS.deliveryRate
         );
 
-      updateShopSwitch(
-        data.manualClosed === true
+
+      document.getElementById(
+        "openingTime"
+      ).value =
+        normalizeTimeInput(
+          opening,
+          "12:00"
+        );
+
+
+      document.getElementById(
+        "closingTime"
+      ).value =
+        normalizeTimeInput(
+          closing,
+          "23:00"
+        );
+
+
+      shopOverride =
+        normalizeOverride(
+          data
+        );
+
+
+      updateOverrideUI();
+
+      updateShopStatusDisplay();
+
+    },
+    error => {
+
+      console.error(
+        "Settings error:",
+        error
+      );
+
+      showToast(
+        "Could not load shop settings."
       );
 
     }
@@ -1769,53 +2091,580 @@ function loadSettings(){
 
 
 /* =========================
-   AUTOMATIC SHOP TIME
+   TIME PARSER
 ========================= */
 
-function isWithinShopHours(){
+function parseTimeToMinutes(
+  value
+){
 
-  const now =
-    new Date();
+  if(
+    value === null ||
+    value === undefined
+  ){
 
-  const minutes =
-    now.getHours() * 60 +
-    now.getMinutes();
+    return null;
+
+  }
+
+
+  let text =
+    String(value)
+      .trim()
+      .toUpperCase();
+
+
+  if(!text){
+
+    return null;
+
+  }
+
+
+  /*
+    Supports:
+
+    12:00
+    23:00
+    12:00 PM
+    11:00 PM
+    12 PM
+    11 PM
+  */
+
+  const ampmMatch =
+    text.match(
+      /\s*(AM|PM)\s*$/
+    );
+
+
+  if(ampmMatch){
+
+    const ampm =
+      ampmMatch[1];
+
+    text =
+      text
+        .replace(
+          /\s*(AM|PM)\s*$/,
+          ""
+        )
+        .trim();
+
+
+    const match =
+      text.match(
+        /^(\d{1,2})(?::(\d{1,2}))?$/
+      );
+
+
+    if(!match){
+
+      return null;
+
+    }
+
+
+    let hour =
+      Number(
+        match[1]
+      );
+
+    const minute =
+      Number(
+        match[2] ||
+        0
+      );
+
+
+    if(
+      hour < 1 ||
+      hour > 12 ||
+      minute < 0 ||
+      minute > 59
+    ){
+
+      return null;
+
+    }
+
+
+    if(
+      ampm ===
+      "AM"
+    ){
+
+      if(
+        hour ===
+        12
+      ){
+
+        hour =
+          0;
+
+      }
+
+    }else{
+
+      if(
+        hour !==
+        12
+      ){
+
+        hour +=
+          12;
+
+      }
+
+    }
+
+
+    return (
+      hour * 60 +
+      minute
+    );
+
+  }
+
+
+  const normal =
+    text.match(
+      /^(\d{1,2}):(\d{1,2})$/
+    );
+
+
+  if(!normal){
+
+    return null;
+
+  }
+
+
+  const hour =
+    Number(
+      normal[1]
+    );
+
+  const minute =
+    Number(
+      normal[2]
+    );
+
+
+  if(
+    hour < 0 ||
+    hour > 23 ||
+    minute < 0 ||
+    minute > 59
+  ){
+
+    return null;
+
+  }
+
 
   return (
-    minutes >= 720 &&
-    minutes < 1380
+    hour * 60 +
+    minute
   );
 
 }
 
 
-function getAutomaticShopStatus(){
+/* =========================
+   NORMALIZE TIME INPUT
+========================= */
+
+function normalizeTimeInput(
+  value,
+  fallback
+){
+
+  const minutes =
+    parseTimeToMinutes(
+      value
+    );
+
+
+  if(
+    minutes ===
+    null
+  ){
+
+    return fallback;
+
+  }
+
+
+  const hour =
+    Math.floor(
+      minutes / 60
+    );
+
+  const minute =
+    minutes % 60;
+
+
+  return (
+    String(hour)
+      .padStart(2,"0")
+    +
+    ":" +
+    String(minute)
+      .padStart(2,"0")
+  );
+
+}
+
+
+/* =========================
+   INDIA TIME
+========================= */
+
+function getIndiaCurrentMinutes(){
+
+  try{
+
+    const parts =
+      new Intl.DateTimeFormat(
+        "en-IN",
+        {
+          timeZone:
+            "Asia/Kolkata",
+
+          hour:
+            "2-digit",
+
+          minute:
+            "2-digit",
+
+          hour12:
+            false
+        }
+      ).formatToParts(
+        new Date()
+      );
+
+
+    const hourPart =
+      parts.find(
+        p =>
+          p.type ===
+          "hour"
+      );
+
+    const minutePart =
+      parts.find(
+        p =>
+          p.type ===
+          "minute"
+      );
+
+
+    let hour =
+      Number(
+        hourPart?.value
+      );
+
+    const minute =
+      Number(
+        minutePart?.value
+      );
+
+
+    /*
+      Some browsers can return
+      24 for midnight.
+    */
+
+    if(
+      hour ===
+      24
+    ){
+
+      hour =
+        0;
+
+    }
+
+
+    return (
+      hour * 60 +
+      minute
+    );
+
+  }catch(error){
+
+    console.warn(
+      "IST time error:",
+      error
+    );
+
+
+    const now =
+      new Date();
+
+
+    return (
+      now.getHours() * 60 +
+      now.getMinutes()
+    );
+
+  }
+
+}
+
+
+/* =========================
+   AUTOMATIC SCHEDULE
+========================= */
+
+function isWithinShopHours(){
+
+  const opening =
+    document.getElementById(
+      "openingTime"
+    ).value ||
+    "12:00";
+
+
+  const closing =
+    document.getElementById(
+      "closingTime"
+    ).value ||
+    "23:00";
+
+
+  const openMinutes =
+    parseTimeToMinutes(
+      opening
+    );
+
+
+  const closeMinutes =
+    parseTimeToMinutes(
+      closing
+    );
+
+
+  if(
+    openMinutes ===
+    null ||
+    closeMinutes ===
+    null
+  ){
+
+    /*
+      Safe fallback:
+      default 12 PM – 11 PM
+    */
+
+    const current =
+      getIndiaCurrentMinutes();
+
+    return (
+      current >=
+      720 &&
+      current <
+      1380
+    );
+
+  }
+
+
+  const current =
+    getIndiaCurrentMinutes();
+
+
+  /*
+    Normal same-day schedule.
+
+    Example:
+    12:00 → 23:00
+  */
+
+  if(
+    openMinutes <
+    closeMinutes
+  ){
+
+    return (
+      current >=
+      openMinutes &&
+      current <
+      closeMinutes
+    );
+
+  }
+
+
+  /*
+    Overnight schedule.
+
+    Example:
+    18:00 → 02:00
+  */
+
+  if(
+    openMinutes >
+    closeMinutes
+  ){
+
+    return (
+      current >=
+      openMinutes ||
+      current <
+      closeMinutes
+    );
+
+  }
+
+
+  /*
+    Same opening and closing
+    means 24 hours.
+  */
+
+  return true;
+
+}
+
+
+/* =========================
+   SHOP OPEN/CLOSED
+========================= */
+
+function isShopOpen(){
+
+  /*
+    FORCE OPEN
+  */
+
+  if(
+    shopOverride ===
+    "open"
+  ){
+
+    return true;
+
+  }
+
+
+  /*
+    FORCE CLOSED
+  */
+
+  if(
+    shopOverride ===
+    "closed"
+  ){
+
+    return false;
+
+  }
+
+
+  /*
+    AUTO
+  */
 
   return isWithinShopHours();
 
 }
 
 
-function updateAutomaticShopDisplay(){
+/* =========================
+   STATUS DISPLAY
+========================= */
 
-  if(shopClosed){
+function updateShopStatusDisplay(){
 
-    updateShopVisual(true);
+  const open =
+    isShopOpen();
 
-    return;
-  }
-
-  const autoOpen =
-    getAutomaticShopStatus();
 
   updateShopVisual(
-    !autoOpen
+    !open
   );
+
+
+  updateOverrideUI();
+
+
+  const title =
+    document.getElementById(
+      "shopControlTitle"
+    );
+
+  const text =
+    document.getElementById(
+      "shopControlText"
+    );
+
+
+  if(
+    shopOverride ===
+    "open"
+  ){
+
+    title.textContent =
+      "Force Open";
+
+    text.textContent =
+      "Customers can order even outside normal hours.";
+
+    return;
+
+  }
+
+
+  if(
+    shopOverride ===
+    "closed"
+  ){
+
+    title.textContent =
+      "Force Closed";
+
+    text.textContent =
+      "Customers cannot place new orders.";
+
+    return;
+
+  }
+
+
+  const opening =
+    document.getElementById(
+      "openingTime"
+    ).value ||
+    "12:00";
+
+
+  const closing =
+    document.getElementById(
+      "closingTime"
+    ).value ||
+    "23:00";
+
+
+  title.textContent =
+    "Automatic Schedule";
+
+
+  text.textContent =
+    `Shop follows ${formatTimeDisplay(opening)} – ${formatTimeDisplay(closing)}.`;
 
 }
 
 
-function updateShopVisual(closed){
+/* =========================
+   SHOP VISUAL
+========================= */
+
+function updateShopVisual(
+  closed
+){
 
   const light =
     document.getElementById(
@@ -1826,6 +2675,7 @@ function updateShopVisual(closed){
     document.getElementById(
       "shopStatusText"
     );
+
 
   if(closed){
 
@@ -1858,16 +2708,166 @@ function updateShopVisual(closed){
 }
 
 
-/* Check status every 30 seconds */
+/* =========================
+   OVERRIDE UI
+========================= */
+
+function updateOverrideUI(){
+
+  const auto =
+    document.getElementById(
+      "overrideAuto"
+    );
+
+  const open =
+    document.getElementById(
+      "overrideOpen"
+    );
+
+  const closed =
+    document.getElementById(
+      "overrideClosed"
+    );
+
+
+  auto.classList.remove(
+    "active-auto"
+  );
+
+  open.classList.remove(
+    "active-open"
+  );
+
+  closed.classList.remove(
+    "active-closed"
+  );
+
+
+  if(
+    shopOverride ===
+    "auto"
+  ){
+
+    auto.classList.add(
+      "active-auto"
+    );
+
+  }
+
+
+  if(
+    shopOverride ===
+    "open"
+  ){
+
+    open.classList.add(
+      "active-open"
+    );
+
+  }
+
+
+  if(
+    shopOverride ===
+    "closed"
+  ){
+
+    closed.classList.add(
+      "active-closed"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SET SHOP OVERRIDE
+========================= */
+
+window.setShopOverride =
+async function(
+  mode
+){
+
+  if(
+    ![
+      "auto",
+      "open",
+      "closed"
+    ].includes(mode)
+  ){
+
+    return;
+
+  }
+
+
+  shopOverride =
+    mode;
+
+
+  updateOverrideUI();
+
+  updateShopStatusDisplay();
+
+
+  try{
+
+    await update(
+      ref(
+        db,
+        "settings"
+      ),
+      {
+
+        statusOverride:
+          mode,
+
+        /*
+          Keep old field compatible.
+        */
+
+        manualClosed:
+          mode ===
+          "closed"
+
+      }
+    );
+
+
+    showToast(
+      mode === "auto"
+        ? "Automatic schedule enabled."
+        : mode === "open"
+          ? "Shop forced OPEN."
+          : "Shop forced CLOSED."
+    );
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Could not update shop status."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   AUTO STATUS REFRESH
+========================= */
 
 setInterval(
   () => {
 
-    if(!shopClosed){
-
-      updateAutomaticShopDisplay();
-
-    }
+    updateShopStatusDisplay();
 
   },
   30000
@@ -1875,113 +2875,123 @@ setInterval(
 
 
 /* =========================
-   SHOP
+   SAVE SHOP SETTINGS
 ========================= */
-
-window.toggleShop =
-function(){
-
-  shopClosed =
-    !shopClosed;
-
-  updateShopSwitch(
-    shopClosed
-  );
-
-};
-
-
-function updateShopSwitch(
-  closed
-){
-
-  shopClosed =
-    Boolean(closed);
-
-  const btn =
-    document.getElementById(
-      "shopSwitch"
-    );
-
-  const title =
-    document.getElementById(
-      "shopControlTitle"
-    );
-
-  const text =
-    document.getElementById(
-      "shopControlText"
-    );
-
-  if(shopClosed){
-
-    btn.classList.remove(
-      "on"
-    );
-
-    title.textContent =
-      "Shop Manually Closed";
-
-    text.textContent =
-      "Customers cannot place new orders.";
-
-    updateShopVisual(true);
-
-  }else{
-
-    btn.classList.add(
-      "on"
-    );
-
-    title.textContent =
-      "Automatic Schedule";
-
-    text.textContent =
-      "12 PM – 11 PM";
-
-    updateAutomaticShopDisplay();
-
-  }
-
-}
-
 
 window.saveShopSettings =
 async function(){
 
+  const opening =
+    document.getElementById(
+      "openingTime"
+    ).value;
+
+
+  const closing =
+    document.getElementById(
+      "closingTime"
+    ).value;
+
+
+  const closedMessage =
+    document.getElementById(
+      "closedMessage"
+    ).value.trim();
+
+
+  if(
+    parseTimeToMinutes(
+      opening
+    ) === null
+  ){
+
+    showToast(
+      "Invalid opening time."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    parseTimeToMinutes(
+      closing
+    ) === null
+  ){
+
+    showToast(
+      "Invalid closing time."
+    );
+
+    return;
+
+  }
+
+
   try{
 
     await update(
-      ref(db,"settings"),
+      ref(
+        db,
+        "settings"
+      ),
       {
 
-        manualClosed:
-          shopClosed,
+        /*
+          New fields
+        */
+
+        statusOverride:
+          shopOverride,
+
+        scheduleEnabled:
+          true,
+
+        openTime:
+          opening,
+
+        closeTime:
+          closing,
+
+
+        /*
+          Old fields kept for
+          compatibility
+        */
+
+        openingTime:
+          opening,
+
+        closingTime:
+          closing,
 
         autoSchedule:
           true,
 
-        openingTime:
-          "12:00",
-
-        closingTime:
-          "23:00",
+        manualClosed:
+          shopOverride ===
+          "closed",
 
         closedMessage:
-          document.getElementById(
-            "closedMessage"
-          ).value.trim()
+          closedMessage
 
       }
     );
 
+
+    updateShopStatusDisplay();
+
+
     showToast(
-      "Shop settings saved."
+      "Shop settings saved successfully."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showToast(
       error.message ||
@@ -2005,15 +3015,20 @@ async function(){
       "websiteMode"
     ).value;
 
+
   const message =
     document.getElementById(
       "updateMessage"
     ).value.trim();
 
+
   try{
 
     await update(
-      ref(db,"settings"),
+      ref(
+        db,
+        "settings"
+      ),
       {
 
         websiteMode:
@@ -2021,10 +3036,11 @@ async function(){
 
         updateMessage:
           message ||
-          "We are making some improvements. Please wait a little while and refresh the page."
+          DEFAULT_SETTINGS.updateMessage
 
       }
     );
+
 
     showToast(
       "Website settings updated."
@@ -2032,10 +3048,13 @@ async function(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showToast(
-      error.message
+      error.message ||
+      "Could not update website."
     );
 
   }
@@ -2059,6 +3078,7 @@ async function verifyAdminPassword(
 
   }
 
+
   if(!password){
 
     throw new Error(
@@ -2067,11 +3087,13 @@ async function verifyAdminPassword(
 
   }
 
+
   const credential =
     EmailAuthProvider.credential(
       currentAdmin.email,
       password
     );
+
 
   await reauthenticateWithCredential(
     currentAdmin,
@@ -2092,27 +3114,39 @@ async function(){
     document.getElementById(
       "whatsappNumber"
     ).value
-      .replace(/\D/g,"");
+      .replace(
+        /\D/g,
+        ""
+      );
+
 
   const password =
     document.getElementById(
       "whatsappPassword"
     ).value;
 
-  if(!/^[0-9]{10}$/.test(number)){
+
+  if(
+    !/^[0-9]{10}$/.test(
+      number
+    )
+  ){
 
     showToast(
       "Enter a valid 10 digit WhatsApp number."
     );
 
     return;
+
   }
+
 
   try{
 
     await verifyAdminPassword(
       password
     );
+
 
     await set(
       ref(
@@ -2122,9 +3156,12 @@ async function(){
       number
     );
 
+
     document.getElementById(
       "whatsappPassword"
-    ).value = "";
+    ).value =
+      "";
+
 
     showToast(
       "WhatsApp number updated."
@@ -2132,7 +3169,9 @@ async function(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showToast(
       error.message ||
@@ -2156,6 +3195,7 @@ async function(){
       "fontSize"
     ).value;
 
+
   try{
 
     await set(
@@ -2166,16 +3206,20 @@ async function(){
       size
     );
 
+
     showToast(
       "Customer font size updated."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showToast(
-      error.message
+      error.message ||
+      "Could not save font size."
     );
 
   }
@@ -2195,8 +3239,12 @@ async function(){
       "deliveryRate"
     );
 
+
   const rate =
-    Number(input.value);
+    Number(
+      input.value
+    );
+
 
   if(
     !Number.isFinite(rate) ||
@@ -2208,7 +3256,9 @@ async function(){
     );
 
     return;
+
   }
+
 
   try{
 
@@ -2220,16 +3270,20 @@ async function(){
       rate
     );
 
+
     showToast(
       `Delivery charge updated to ₹${rate}/KM`
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showToast(
-      error.message
+      error.message ||
+      "Could not update delivery rate."
     );
 
   }
@@ -2244,25 +3298,37 @@ async function(){
 function loadMenu(){
 
   onValue(
-    ref(db,"settings/menu"),
+    ref(
+      db,
+      "settings/menu"
+    ),
     snapshot => {
 
       const data =
-        snapshot.val() || {};
+        snapshot.val() ||
+        {};
 
-      renderMenuAdmin(data);
+
+      renderMenuAdmin(
+        data
+      );
 
     },
     error => {
 
-      console.error(error);
+      console.error(
+        error
+      );
+
 
       document.getElementById(
         "menuAdmin"
       ).innerHTML =
-        `<p class="danger">
-          Could not load menu.
-        </p>`;
+        `
+          <p class="danger">
+            Could not load menu.
+          </p>
+        `;
 
     }
   );
@@ -2270,31 +3336,44 @@ function loadMenu(){
 }
 
 
-function renderMenuAdmin(data){
+function renderMenuAdmin(
+  data
+){
 
   const container =
     document.getElementById(
       "menuAdmin"
     );
 
-  const entries =
-    Object.entries(data);
 
-  if(!entries.length){
+  const entries =
+    Object.entries(
+      data
+    );
+
+
+  if(
+    !entries.length
+  ){
 
     container.innerHTML =
-      `<p style="color:#777;">
-        No menu items found.
-      </p>`;
+      `
+        <p style="color:#777;">
+          No menu items found.
+        </p>
+      `;
 
     return;
+
   }
+
 
   entries.sort(
     (a,b) =>
       Number(a[0]) -
       Number(b[0])
   );
+
 
   container.innerHTML =
     entries.map(
@@ -2303,6 +3382,7 @@ function renderMenuAdmin(data){
         const image =
           item.image ||
           "";
+
 
         return `
 
@@ -2334,13 +3414,14 @@ function renderMenuAdmin(data){
                   min="0"
                   step="1"
                   value="${Number(
-                    item.price || 0
+                    item.price ||
+                    0
                   )}"
                 >
 
                 <button
                   class="btn btn-gold menu-save"
-                  onclick="saveMenuItem('${id}')"
+                  onclick="saveMenuItem('${escapeAttribute(id)}')"
                 >
                   Save
                 </button>
@@ -2355,12 +3436,11 @@ function renderMenuAdmin(data){
               <img
                 id="preview-${id}"
                 class="image-preview"
-                src="${escapeAttribute(
-                  image
-                )}"
+                src="${escapeAttribute(image)}"
                 alt=""
                 onerror="this.src='https://via.placeholder.com/150x100/171717/777?text=Food'"
               >
+
 
               <div class="image-url">
 
@@ -2368,17 +3448,16 @@ function renderMenuAdmin(data){
                   id="image-${id}"
                   type="url"
                   placeholder="Paste exact food photo URL"
-                  value="${escapeAttribute(
-                    image
-                  )}"
-                  oninput="previewMenuImage('${id}')"
+                  value="${escapeAttribute(image)}"
+                  oninput="previewMenuImage('${escapeAttribute(id)}')"
                 >
 
               </div>
 
+
               <button
                 class="btn btn-blue image-save"
-                onclick="saveMenuImage('${id}')"
+                onclick="saveMenuImage('${escapeAttribute(id)}')"
               >
                 Save Image
               </button>
@@ -2400,15 +3479,21 @@ function renderMenuAdmin(data){
 ========================= */
 
 window.saveMenuItem =
-async function(id){
+async function(
+  id
+){
 
   const input =
     document.getElementById(
       `price-${id}`
     );
 
+
   const price =
-    Number(input.value);
+    Number(
+      input.value
+    );
+
 
   if(
     !Number.isFinite(price) ||
@@ -2420,7 +3505,9 @@ async function(id){
     );
 
     return;
+
   }
+
 
   try{
 
@@ -2432,16 +3519,20 @@ async function(id){
       price
     );
 
+
     showToast(
       "Price updated successfully."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showToast(
-      error.message
+      error.message ||
+      "Could not update price."
     );
 
   }
@@ -2454,20 +3545,25 @@ async function(id){
 ========================= */
 
 window.previewMenuImage =
-function(id){
+function(
+  id
+){
 
   const input =
     document.getElementById(
       `image-${id}`
     );
 
+
   const preview =
     document.getElementById(
       `preview-${id}`
     );
 
+
   const url =
     input.value.trim();
+
 
   if(!url){
 
@@ -2475,7 +3571,9 @@ function(id){
       "https://via.placeholder.com/150x100/171717/777?text=Food";
 
     return;
+
   }
+
 
   preview.src =
     url;
@@ -2484,19 +3582,23 @@ function(id){
 
 
 /* =========================
-   SAVE IMAGE URL
+   SAVE IMAGE
 ========================= */
 
 window.saveMenuImage =
-async function(id){
+async function(
+  id
+){
 
   const input =
     document.getElementById(
       `image-${id}`
     );
 
+
   const imageUrl =
     input.value.trim();
+
 
   if(!imageUrl){
 
@@ -2505,7 +3607,9 @@ async function(id){
     );
 
     return;
+
   }
+
 
   if(
     !/^https?:\/\//i.test(
@@ -2518,7 +3622,9 @@ async function(id){
     );
 
     return;
+
   }
+
 
   try{
 
@@ -2533,13 +3639,16 @@ async function(id){
       }
     );
 
+
     showToast(
       "Food image updated successfully."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     showToast(
       error.message ||
@@ -2558,18 +3667,25 @@ async function(id){
 function loadOrders(){
 
   onValue(
-    ref(db,"orders"),
+    ref(
+      db,
+      "orders"
+    ),
     snapshot => {
 
       const newData =
-        snapshot.val() || {};
+        snapshot.val() ||
+        {};
+
 
       detectNewOrders(
         newData
       );
 
+
       allOrders =
         newData;
+
 
       updateStats();
 
@@ -2580,12 +3696,16 @@ function loadOrders(){
     },
     error => {
 
-      console.error(error);
+      console.error(
+        error
+      );
+
 
       document.getElementById(
         "orders"
       ).textContent =
         "Could not load orders.";
+
 
       document.getElementById(
         "deliveredOrdersList"
@@ -2607,44 +3727,54 @@ function detectNewOrders(
 ){
 
   const keys =
-    Object.keys(orders);
+    Object.keys(
+      orders
+    );
 
-  /*
-    First Firebase load:
-    remember existing orders.
-    No sound.
-  */
 
-  if(!initialOrdersLoaded){
+  if(
+    !initialOrdersLoaded
+  ){
 
     keys.forEach(
       key =>
-        knownOrderKeys.add(key)
+        knownOrderKeys.add(
+          key
+        )
     );
+
 
     initialOrdersLoaded =
       true;
 
     return;
+
   }
 
 
   const newlyArrived =
     keys.filter(
       key =>
-        !knownOrderKeys.has(key)
+        !knownOrderKeys.has(
+          key
+        )
     );
 
 
   keys.forEach(
     key =>
-      knownOrderKeys.add(key)
+      knownOrderKeys.add(
+        key
+      )
   );
 
 
-  if(!newlyArrived.length){
+  if(
+    !newlyArrived.length
+  ){
 
     return;
+
   }
 
 
@@ -2654,6 +3784,7 @@ function detectNewOrders(
 
         const order =
           orders[key];
+
 
         return (
           order &&
@@ -2668,18 +3799,17 @@ function detectNewOrders(
     );
 
 
-  if(!receivedNew.length){
+  if(
+    !receivedNew.length
+  ){
 
     return;
+
   }
 
 
-  /*
-    Browser sound may require
-    previous user interaction.
-  */
-
   playNewOrderSound();
+
 
   showToast(
     `🔔 ${receivedNew.length} NEW ORDER RECEIVED`
@@ -2696,7 +3826,9 @@ function playNewOrderSound(){
 
   try{
 
-    if(!audioContext){
+    if(
+      !audioContext
+    ){
 
       audioContext =
         new (
@@ -2705,6 +3837,7 @@ function playNewOrderSound(){
         )();
 
     }
+
 
     if(
       audioContext.state ===
@@ -2720,54 +3853,62 @@ function playNewOrderSound(){
       audioContext.currentTime;
 
 
-    /*
-      Three short premium
-      notification tones.
-    */
-
     [0,0.18,0.36].forEach(
-      (delay,index) => {
+      (
+        delay,
+        index
+      ) => {
 
         const oscillator =
           audioContext.createOscillator();
 
+
         const gain =
           audioContext.createGain();
 
+
         oscillator.type =
           "sine";
+
 
         oscillator.frequency.value =
           index === 2
             ? 1100
             : 850;
 
+
         gain.gain.setValueAtTime(
           0.0001,
           now + delay
         );
+
 
         gain.gain.exponentialRampToValueAtTime(
           0.18,
           now + delay + 0.02
         );
 
+
         gain.gain.exponentialRampToValueAtTime(
           0.0001,
           now + delay + 0.13
         );
 
+
         oscillator.connect(
           gain
         );
+
 
         gain.connect(
           audioContext.destination
         );
 
+
         oscillator.start(
           now + delay
         );
+
 
         oscillator.stop(
           now + delay + 0.14
@@ -2799,23 +3940,34 @@ function updateStats(){
       allOrders
     );
 
+
   const todayDate =
     new Date().toDateString();
+
 
   const todayCount =
     orders.filter(
       order => {
 
-        if(!order.createdAt)
+        if(
+          !order.createdAt
+        ){
+
           return false;
 
-        return new Date(
-          order.createdAt
-        ).toDateString()
-        === todayDate;
+        }
+
+
+        return (
+          new Date(
+            order.createdAt
+          ).toDateString() ===
+          todayDate
+        );
 
       }
     ).length;
+
 
   const active =
     orders.filter(
@@ -2828,6 +3980,7 @@ function updateStats(){
         )
     ).length;
 
+
   const delivered =
     orders.filter(
       order =>
@@ -2835,20 +3988,24 @@ function updateStats(){
         "Delivered"
     ).length;
 
+
   document.getElementById(
     "totalOrders"
   ).textContent =
     orders.length;
+
 
   document.getElementById(
     "todayOrders"
   ).textContent =
     todayCount;
 
+
   document.getElementById(
     "pendingOrders"
   ).textContent =
     active;
+
 
   document.getElementById(
     "deliveredOrders"
@@ -2871,6 +4028,7 @@ function(
   currentFilter =
     filter;
 
+
   document.querySelectorAll(
     ".filter"
   ).forEach(
@@ -2880,9 +4038,11 @@ function(
       )
   );
 
+
   button.classList.add(
     "active"
   );
+
 
   renderOrders();
 
@@ -2900,20 +4060,25 @@ function renderOrders(){
       "orders"
     );
 
+
   let entries =
     Object.entries(
       allOrders
     );
 
+
   entries.sort(
     (a,b) =>
       Number(
-        b[1].createdAt || 0
+        b[1].createdAt ||
+        0
       ) -
       Number(
-        a[1].createdAt || 0
+        a[1].createdAt ||
+        0
       )
   );
+
 
   entries =
     entries.filter(
@@ -2928,6 +4093,7 @@ function renderOrders(){
 
         }
 
+
         if(
           order.status ===
           "Cancelled"
@@ -2939,6 +4105,7 @@ function renderOrders(){
           );
 
         }
+
 
         if(
           currentFilter ===
@@ -2952,6 +4119,7 @@ function renderOrders(){
           );
 
         }
+
 
         if(
           currentFilter ===
@@ -2967,21 +4135,30 @@ function renderOrders(){
 
         }
 
+
         if(
           currentFilter ===
           "today"
         ){
 
-          if(!order.createdAt)
+          if(
+            !order.createdAt
+          ){
+
             return false;
 
-          return new Date(
-            order.createdAt
-          ).toDateString()
-          ===
-          new Date().toDateString();
+          }
+
+
+          return (
+            new Date(
+              order.createdAt
+            ).toDateString() ===
+            new Date().toDateString()
+          );
 
         }
+
 
         return true;
 
@@ -2989,7 +4166,9 @@ function renderOrders(){
     );
 
 
-  if(!entries.length){
+  if(
+    !entries.length
+  ){
 
     container.innerHTML =
       `
@@ -3034,6 +4213,7 @@ function renderDeliveredOrders(){
       "deliveredOrdersList"
     );
 
+
   let entries =
     Object.entries(
       allOrders
@@ -3043,6 +4223,7 @@ function renderDeliveredOrders(){
           order.status ===
           "Delivered"
       );
+
 
   entries.sort(
     (a,b) =>
@@ -3059,7 +4240,9 @@ function renderDeliveredOrders(){
   );
 
 
-  if(!entries.length){
+  if(
+    !entries.length
+  ){
 
     container.innerHTML =
       `
@@ -3126,25 +4309,57 @@ function renderOrderCard(
     order.status ||
     "Received";
 
-  let statusClass = "";
 
-  if(status === "Received")
-    statusClass = "received";
+  let statusClass =
+    "";
 
-  if(status === "Confirmed")
-    statusClass = "confirmed";
 
-  if(status === "Preparing")
-    statusClass = "preparing";
+  if(
+    status ===
+    "Received"
+  )
+    statusClass =
+      "received";
 
-  if(status === "Out for Delivery")
-    statusClass = "out";
 
-  if(status === "Delivered")
-    statusClass = "delivered";
+  if(
+    status ===
+    "Confirmed"
+  )
+    statusClass =
+      "confirmed";
 
-  if(status === "Cancelled")
-    statusClass = "cancelled";
+
+  if(
+    status ===
+    "Preparing"
+  )
+    statusClass =
+      "preparing";
+
+
+  if(
+    status ===
+    "Out for Delivery"
+  )
+    statusClass =
+      "out";
+
+
+  if(
+    status ===
+    "Delivered"
+  )
+    statusClass =
+      "delivered";
+
+
+  if(
+    status ===
+    "Cancelled"
+  )
+    statusClass =
+      "cancelled";
 
 
   const isNew =
@@ -3162,7 +4377,8 @@ function renderOrderCard(
     )
       ? order.items
       : Object.values(
-          order.items || {}
+          order.items ||
+          {}
         );
 
 
@@ -3173,18 +4389,25 @@ function renderOrderCard(
         <div class="order-item">
 
           <span>
+
             ${escapeHtml(
               item.name
             )}
+
             × ${Number(
-              item.qty || 0
+              item.qty ||
+              0
             )}
+
           </span>
 
           <strong>
+
             ₹${Number(
-              item.subtotal || 0
+              item.subtotal ||
+              0
             )}
+
           </strong>
 
         </div>
@@ -3198,10 +4421,14 @@ function renderOrderCard(
     <div
       class="
         order
-        ${isNew ? "new-order new-arrival" : ""}
+        ${isNew
+          ? "new-order new-arrival"
+          : ""
+        }
         ${deliveredFolder
           ? "delivered-order"
-          : ""}
+          : ""
+        }
       "
       data-order-key="${escapeAttribute(key)}"
     >
@@ -3211,10 +4438,12 @@ function renderOrderCard(
         <div>
 
           <div class="order-id">
+
             ${escapeHtml(
               order.orderId ||
               key
             )}
+
           </div>
 
           <div
@@ -3224,17 +4453,24 @@ function renderOrderCard(
               margin-top:2px;
             "
           >
+
             ${formatDate(
               order.createdAt
             )}
+
           </div>
 
         </div>
 
+
         <div
           class="status ${statusClass}"
         >
-          ${escapeHtml(status)}
+
+          ${escapeHtml(
+            status
+          )}
+
         </div>
 
       </div>
@@ -3243,51 +4479,87 @@ function renderOrderCard(
       <div class="order-info">
 
         <div class="info-box">
-          <small>Customer</small>
+
+          <small>
+            Customer
+          </small>
+
           ${escapeHtml(
             order.customerName ||
             "-"
           )}
+
         </div>
 
+
         <div class="info-box">
-          <small>Phone</small>
+
+          <small>
+            Phone
+          </small>
+
           ${escapeHtml(
             order.customerPhone ||
             "-"
           )}
+
         </div>
 
+
         <div class="info-box">
-          <small>Payment</small>
+
+          <small>
+            Payment
+          </small>
+
           ${escapeHtml(
             order.paymentMethod ||
             "-"
           )}
+
         </div>
 
+
         <div class="info-box">
-          <small>Address</small>
+
+          <small>
+            Address
+          </small>
+
           ${escapeHtml(
             order.address ||
             "-"
           )}
+
         </div>
 
+
         <div class="info-box">
-          <small>Distance</small>
+
+          <small>
+            Distance
+          </small>
+
           ${Number(
-            order.distanceKm || 0
+            order.distanceKm ||
+            0
           ).toFixed(1)}
           KM
+
         </div>
 
+
         <div class="info-box">
-          <small>Delivery Charge</small>
+
+          <small>
+            Delivery Charge
+          </small>
+
           ₹${Number(
             order.deliveryCharge ||
             0
           )}
+
         </div>
 
       </div>
@@ -3302,12 +4574,17 @@ function renderOrderCard(
 
       <div class="order-total">
 
-        <span>Total</span>
+        <span>
+          Total
+        </span>
 
         <strong>
+
           ₹${Number(
-            order.total || 0
+            order.total ||
+            0
           )}
+
         </strong>
 
       </div>
@@ -3315,64 +4592,73 @@ function renderOrderCard(
 
       ${
         deliveredFolder
-          ? `
-            <div
-              style="
-                margin-top:7px;
-                color:#69ed91;
-                font-size:9px;
+
+        ? `
+
+          <div
+            style="
+              margin-top:7px;
+              color:#69ed91;
+              font-size:9px;
+            "
+          >
+
+            ✓ Delivered & stored
+
+          </div>
+
+        `
+
+        : `
+
+          <div class="status-buttons">
+
+            ${statusButton(
+              key,
+              "Received",
+              status
+            )}
+
+            ${statusButton(
+              key,
+              "Confirmed",
+              status
+            )}
+
+            ${statusButton(
+              key,
+              "Preparing",
+              status
+            )}
+
+            ${statusButton(
+              key,
+              "Out for Delivery",
+              status
+            )}
+
+            ${statusButton(
+              key,
+              "Delivered",
+              status
+            )}
+
+
+            <button
+              class="btn btn-red"
+              onclick="
+                updateOrderStatus(
+                  '${escapeAttribute(key)}',
+                  'Cancelled'
+                )
               "
             >
-              ✓ Delivered & stored
-            </div>
-          `
-          : `
-            <div class="status-buttons">
+              Cancel
+            </button>
 
-              ${statusButton(
-                key,
-                "Received",
-                status
-              )}
+          </div>
 
-              ${statusButton(
-                key,
-                "Confirmed",
-                status
-              )}
-
-              ${statusButton(
-                key,
-                "Preparing",
-                status
-              )}
-
-              ${statusButton(
-                key,
-                "Out for Delivery",
-                status
-              )}
-
-              ${statusButton(
-                key,
-                "Delivered",
-                status
-              )}
-
-              <button
-                class="btn btn-red"
-                onclick="
-                  updateOrderStatus(
-                    '${escapeAttribute(key)}',
-                    'Cancelled'
-                  )
-                "
-              >
-                Cancel
-              </button>
-
-            </div>
-          `
+        `
       }
 
     </div>
@@ -3393,9 +4679,11 @@ function statusButton(
 ){
 
   return `
+
     <button
       class="btn ${
-        current === status
+        current ===
+        status
           ? "btn-gold"
           : "btn-dark"
       }"
@@ -3406,8 +4694,11 @@ function statusButton(
         )
       "
     >
+
       ${status}
+
     </button>
+
   `;
 
 }
@@ -3427,6 +4718,7 @@ async function(
 
     const order =
       allOrders[key];
+
 
     if(!order){
 
@@ -3452,15 +4744,20 @@ async function(
     };
 
 
-    if(order.ownerUid){
+    if(
+      order.ownerUid
+    ){
 
       updates[
         `customerOrders/${order.ownerUid}/${key}/status`
-      ] = status;
+      ] =
+        status;
+
 
       updates[
         `customerOrders/${order.ownerUid}/${key}/updatedAt`
-      ] = now;
+      ] =
+        now;
 
     }
 
@@ -3502,7 +4799,10 @@ async function(
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -3521,18 +4821,26 @@ async function(
 function loadRatings(){
 
   onValue(
-    ref(db,"ratings"),
+    ref(
+      db,
+      "ratings"
+    ),
     snapshot => {
 
       allRatings =
-        snapshot.val() || {};
+        snapshot.val() ||
+        {};
+
 
       renderRatings();
 
     },
     error => {
 
-      console.error(error);
+      console.error(
+        error
+      );
+
 
       document.getElementById(
         "ratings"
@@ -3552,12 +4860,16 @@ function renderRatings(){
       allRatings
     );
 
-  if(!entries.length){
+
+  if(
+    !entries.length
+  ){
 
     document.getElementById(
       "ratingSummary"
     ).textContent =
       "No ratings yet.";
+
 
     document.getElementById(
       "ratings"
@@ -3569,6 +4881,7 @@ function renderRatings(){
       `;
 
     return;
+
   }
 
 
@@ -3580,7 +4893,8 @@ function renderRatings(){
       ) =>
         sum +
         Number(
-          item.rating || 0
+          item.rating ||
+          0
         ),
       0
     );
@@ -3595,28 +4909,40 @@ function renderRatings(){
     "ratingSummary"
   ).innerHTML =
     `
-      <strong style="font-size:11px;">
+
+      <strong
+        style="font-size:11px;"
+      >
+
         Average Rating:
         ${average.toFixed(1)}
         ⭐
+
       </strong>
 
       <br>
 
-      <span style="font-size:9px;">
+      <span
+        style="font-size:9px;"
+      >
+
         ${entries.length}
         customer rating(s)
+
       </span>
+
     `;
 
 
   entries.sort(
     (a,b) =>
       Number(
-        b[1].createdAt || 0
+        b[1].createdAt ||
+        0
       ) -
       Number(
-        a[1].createdAt || 0
+        a[1].createdAt ||
+        0
       )
   );
 
@@ -3632,36 +4958,25 @@ function renderRatings(){
           <div
             style="font-size:10px;"
           >
+
             <strong>
+
               ${escapeHtml(
                 rating.orderId ||
                 key
               )}
+
             </strong>
+
           </div>
+
 
           <div class="rating-stars">
 
-            ${"★".repeat(
-              Math.max(
-                0,
-                Math.min(
-                  5,
-                  Number(
-                    rating.rating ||
-                    0
-                  )
-                )
-              )
-            )}
-
-            <span
-              style="color:#555;"
-            >
-              ${"★".repeat(
+            ${
+              "★".repeat(
                 Math.max(
                   0,
-                  5 -
                   Math.min(
                     5,
                     Number(
@@ -3670,10 +4985,34 @@ function renderRatings(){
                     )
                   )
                 )
-              )}
+              )
+            }
+
+
+            <span
+              style="color:#555;"
+            >
+
+              ${
+                "★".repeat(
+                  Math.max(
+                    0,
+                    5 -
+                    Math.min(
+                      5,
+                      Number(
+                        rating.rating ||
+                        0
+                      )
+                    )
+                  )
+                )
+              }
+
             </span>
 
           </div>
+
 
           <div
             style="
@@ -3682,21 +5021,33 @@ function renderRatings(){
               margin-top:2px;
             "
           >
+
             ${formatDate(
               rating.createdAt
             )}
+
           </div>
+
 
           ${
             rating.feedback
-              ? `
-                <div class="rating-feedback">
-                  "${escapeHtml(
-                    rating.feedback
-                  )}"
-                </div>
-              `
-              : ""
+
+            ? `
+
+              <div
+                class="rating-feedback"
+              >
+
+                "${escapeHtml(
+                  rating.feedback
+                )}"
+
+              </div>
+
+            `
+
+            : ""
+
           }
 
         </div>
@@ -3711,7 +5062,9 @@ function renderRatings(){
    TOAST
 ========================= */
 
-let toastTimer = null;
+let toastTimer =
+  null;
+
 
 function showToast(
   message
@@ -3722,16 +5075,20 @@ function showToast(
       "toast"
     );
 
+
   toast.textContent =
     message;
+
 
   toast.classList.add(
     "show"
   );
 
+
   clearTimeout(
     toastTimer
   );
+
 
   toastTimer =
     setTimeout(
@@ -3749,31 +5106,100 @@ function showToast(
 
 
 /* =========================
-   HELPERS
+   TIME DISPLAY
+========================= */
+
+function formatTimeDisplay(
+  value
+){
+
+  const minutes =
+    parseTimeToMinutes(
+      value
+    );
+
+
+  if(
+    minutes ===
+    null
+  ){
+
+    return value;
+
+  }
+
+
+  let hour =
+    Math.floor(
+      minutes / 60
+    );
+
+  const minute =
+    minutes %
+    60;
+
+
+  const suffix =
+    hour >=
+    12
+      ? "PM"
+      : "AM";
+
+
+  hour =
+    hour %
+    12 ||
+    12;
+
+
+  return (
+    `${hour}:${String(minute).padStart(2,"0")} ${suffix}`
+  );
+
+}
+
+
+/* =========================
+   DATE
 ========================= */
 
 function formatDate(
   timestamp
 ){
 
-  if(!timestamp)
+  if(
+    !timestamp
+  ){
+
     return "-";
+
+  }
+
 
   return new Date(
     timestamp
   ).toLocaleString(
-    "en-IN"
+    "en-IN",
+    {
+      timeZone:
+        "Asia/Kolkata"
+    }
   );
 
 }
 
+
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHtml(
   value
 ){
 
   return String(
-    value ?? ""
+    value ??
+    ""
   )
     .replace(
       /&/g,
@@ -3799,6 +5225,10 @@ function escapeHtml(
 }
 
 
+/* =========================
+   ESCAPE ATTRIBUTE
+========================= */
+
 function escapeAttribute(
   value
 ){
@@ -3811,8 +5241,7 @@ function escapeAttribute(
 
 
 /* =========================
-   ACTIVATE SOUND AFTER
-   FIRST USER INTERACTION
+   ACTIVATE SOUND
 ========================= */
 
 document.addEventListener(
@@ -3821,7 +5250,9 @@ document.addEventListener(
 
     try{
 
-      if(!audioContext){
+      if(
+        !audioContext
+      ){
 
         audioContext =
           new (
@@ -3830,6 +5261,7 @@ document.addEventListener(
           )();
 
       }
+
 
       if(
         audioContext.state ===
@@ -3842,7 +5274,9 @@ document.addEventListener(
 
     }catch(error){
 
-      console.warn(error);
+      console.warn(
+        error
+      );
 
     }
 
