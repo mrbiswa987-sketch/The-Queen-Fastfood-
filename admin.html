@@ -20,7 +20,8 @@
     }
 
     button,
-    input {
+    input,
+    textarea {
       font-family: inherit;
     }
 
@@ -28,9 +29,7 @@
       display: none !important;
     }
 
-    /* =========================
-       LOGIN
-    ========================= */
+    /* LOGIN */
 
     #loginPage {
       min-height: 100vh;
@@ -91,7 +90,8 @@
       font-size: 14px;
     }
 
-    .field input {
+    .field input,
+    .field textarea {
       width: 100%;
       padding: 14px 15px;
       border-radius: 10px;
@@ -102,7 +102,14 @@
       font-size: 15px;
     }
 
-    .field input:focus {
+    .field textarea {
+      resize: vertical;
+      min-height: 95px;
+      line-height: 1.5;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
       border-color: #d4af37;
     }
 
@@ -132,9 +139,7 @@
       font-size: 14px;
     }
 
-    /* =========================
-       DASHBOARD
-    ========================= */
+    /* DASHBOARD */
 
     #dashboardPage {
       min-height: 100vh;
@@ -200,9 +205,7 @@
       padding: 25px 22px 50px;
     }
 
-    /* =========================
-       STAT CARDS
-    ========================= */
+    /* STATS */
 
     .stats-grid {
       display: grid;
@@ -248,9 +251,7 @@
       margin-top: 7px;
     }
 
-    /* =========================
-       TODAY SUMMARY
-    ========================= */
+    /* TODAY */
 
     .today-summary {
       display: grid;
@@ -278,9 +279,7 @@
       color: #d4af37;
     }
 
-    /* =========================
-       SECTIONS
-    ========================= */
+    /* SECTIONS */
 
     .section {
       background: #111;
@@ -309,9 +308,128 @@
       margin-top: 4px;
     }
 
-    /* =========================
-       SETTINGS
-    ========================= */
+    /* SHOP STATUS */
+
+    .shop-status-card {
+      background: linear-gradient(
+        145deg,
+        #151515,
+        #101010
+      );
+      border: 1px solid #292929;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .shop-status-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+
+    .shop-status-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #eee;
+    }
+
+    .shop-status-subtitle {
+      margin-top: 5px;
+      color: #888;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .status-pill {
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status-pill.open {
+      color: #7ee787;
+      border: 1px solid #34724a;
+      background: rgba(52,114,74,.12);
+    }
+
+    .status-pill.closed {
+      color: #ff8585;
+      border: 1px solid #7a3030;
+      background: rgba(122,48,48,.12);
+    }
+
+    .shop-status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .shop-control-box {
+      background: #101010;
+      border: 1px solid #252525;
+      border-radius: 13px;
+      padding: 16px;
+    }
+
+    .shop-control-box h3 {
+      color: #ddd;
+      font-size: 15px;
+      margin-bottom: 9px;
+    }
+
+    .shop-control-box p {
+      color: #777;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .shop-buttons {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .shop-open-btn,
+    .shop-close-btn {
+      border: none;
+      padding: 11px 15px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .shop-open-btn {
+      background: #7ee787;
+      color: #101010;
+    }
+
+    .shop-close-btn {
+      background: #ff6b6b;
+      color: #101010;
+    }
+
+    .shop-open-btn:hover,
+    .shop-close-btn:hover {
+      filter: brightness(1.08);
+    }
+
+    .shop-message {
+      margin-top: 12px;
+      color: #7ee787;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .shop-message.error-message {
+      color: #ff7777;
+    }
+
+    /* SETTINGS */
 
     .settings-grid {
       display: grid;
@@ -397,9 +515,7 @@
       color: #7ee787;
     }
 
-    /* =========================
-       FILTER
-    ========================= */
+    /* FILTER */
 
     .filter-bar {
       display: flex;
@@ -433,9 +549,7 @@
       outline: none;
     }
 
-    /* =========================
-       ORDERS
-    ========================= */
+    /* ORDERS */
 
     .orders-info {
       color: #999;
@@ -593,9 +707,7 @@
       border-radius: 12px;
     }
 
-    /* =========================
-       DAILY SUMMARY
-    ========================= */
+    /* DAILY SUMMARY */
 
     .table-wrap {
       overflow-x: auto;
@@ -632,9 +744,7 @@
       background: #181818;
     }
 
-    /* =========================
-       PASSWORD MODAL
-    ========================= */
+    /* PASSWORD MODAL */
 
     .modal-overlay {
       position: fixed;
@@ -701,16 +811,15 @@
       margin-top: 8px;
     }
 
-    /* =========================
-       RESPONSIVE
-    ========================= */
+    /* RESPONSIVE */
 
     @media (max-width: 1000px) {
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .settings-grid {
+      .settings-grid,
+      .shop-status-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -768,15 +877,18 @@
       .login-box {
         padding: 25px 18px;
       }
+
+      .shop-status-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =========================
-       LOGIN PAGE
-  ========================== -->
+  <!-- LOGIN -->
 
   <section id="loginPage">
 
@@ -785,12 +897,14 @@
       <div class="queen-logo">Q</div>
 
       <h1>The Queen Fast Food</h1>
+
       <p>Admin Dashboard</p>
 
       <form id="loginForm">
 
         <div class="field">
           <label>Email</label>
+
           <input
             id="email"
             type="email"
@@ -801,6 +915,7 @@
 
         <div class="field">
           <label>Password</label>
+
           <input
             id="password"
             type="password"
@@ -809,11 +924,17 @@
           />
         </div>
 
-        <button class="login-btn" type="submit">
+        <button
+          class="login-btn"
+          type="submit"
+        >
           Login to Admin
         </button>
 
-        <div id="loginError" class="error"></div>
+        <div
+          id="loginError"
+          class="error"
+        ></div>
 
       </form>
 
@@ -822,29 +943,45 @@
   </section>
 
 
-  <!-- =========================
-       DASHBOARD
-  ========================== -->
+  <!-- DASHBOARD -->
 
-  <section id="dashboardPage" class="hidden">
+  <section
+    id="dashboardPage"
+    class="hidden"
+  >
 
     <header>
 
       <div class="header-inner">
 
         <div class="brand">
-          <h1>👑 The Queen Fast Food</h1>
-          <span>Restaurant Administration Panel</span>
+
+          <h1>
+            👑 The Queen Fast Food
+          </h1>
+
+          <span>
+            Restaurant Administration Panel
+          </span>
+
         </div>
 
         <div class="header-actions">
-          <button id="refreshBtn" class="small-btn">
+
+          <button
+            id="refreshBtn"
+            class="small-btn"
+          >
             ↻ Refresh
           </button>
 
-          <button id="logoutBtn" class="small-btn logout-btn">
+          <button
+            id="logoutBtn"
+            class="small-btn logout-btn"
+          >
             Logout
           </button>
+
         </div>
 
       </div>
@@ -854,87 +991,337 @@
 
     <main class="container">
 
-      <!-- =========================
-           STATS
-      ========================== -->
+
+      <!-- STATS -->
 
       <div class="stats-grid">
 
-        <div class="stat-card active" data-filter="all">
-          <div class="stat-title">Total Orders</div>
-          <div id="totalOrders" class="stat-number">0</div>
-          <div class="stat-sub">All orders</div>
+        <div
+          class="stat-card active"
+          data-filter="all"
+        >
+
+          <div class="stat-title">
+            Total Orders
+          </div>
+
+          <div
+            id="totalOrders"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-sub">
+            All orders
+          </div>
+
         </div>
 
-        <div class="stat-card" data-filter="today">
-          <div class="stat-title">Today's Orders</div>
-          <div id="todayOrders" class="stat-number">0</div>
-          <div class="stat-sub">Click to view today</div>
+
+        <div
+          class="stat-card"
+          data-filter="today"
+        >
+
+          <div class="stat-title">
+            Today's Orders
+          </div>
+
+          <div
+            id="todayOrders"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-sub">
+            Click to view today
+          </div>
+
         </div>
 
-        <div class="stat-card" data-filter="pending">
-          <div class="stat-title">Pending Orders</div>
-          <div id="pendingOrders" class="stat-number">0</div>
-          <div class="stat-sub">Click to view pending</div>
+
+        <div
+          class="stat-card"
+          data-filter="pending"
+        >
+
+          <div class="stat-title">
+            Pending Orders
+          </div>
+
+          <div
+            id="pendingOrders"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-sub">
+            Click to view pending
+          </div>
+
         </div>
 
-        <div class="stat-card" data-filter="delivered">
-          <div class="stat-title">Delivered</div>
-          <div id="deliveredOrders" class="stat-number">0</div>
-          <div class="stat-sub">Completed orders</div>
+
+        <div
+          class="stat-card"
+          data-filter="delivered"
+        >
+
+          <div class="stat-title">
+            Delivered
+          </div>
+
+          <div
+            id="deliveredOrders"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-sub">
+            Completed orders
+          </div>
+
         </div>
 
       </div>
 
 
-      <!-- =========================
-           TODAY SUMMARY
-      ========================== -->
+      <!-- TODAY SUMMARY -->
 
       <div class="today-summary">
 
         <div class="summary-box">
-          <div class="label">Today's Orders</div>
-          <div id="todaySummaryOrders" class="value">0</div>
+
+          <div class="label">
+            Today's Orders
+          </div>
+
+          <div
+            id="todaySummaryOrders"
+            class="value"
+          >
+            0
+          </div>
+
         </div>
 
-        <div class="summary-box">
-          <div class="label">Today's Sales</div>
-          <div id="todaySales" class="value">₹0</div>
-        </div>
 
         <div class="summary-box">
-          <div class="label">Today's Pending</div>
-          <div id="todayPending" class="value">0</div>
+
+          <div class="label">
+            Today's Sales
+          </div>
+
+          <div
+            id="todaySales"
+            class="value"
+          >
+            ₹0
+          </div>
+
+        </div>
+
+
+        <div class="summary-box">
+
+          <div class="label">
+            Today's Pending
+          </div>
+
+          <div
+            id="todayPending"
+            class="value"
+          >
+            0
+          </div>
+
         </div>
 
       </div>
 
 
-      <!-- =========================
-           RESTAURANT SETTINGS
-      ========================== -->
+      <!-- SHOP CONTROL -->
 
       <section class="section">
 
         <div class="section-header">
+
           <div>
-            <h2>⚙️ Restaurant Settings</h2>
-            <p>Any changes require admin password verification.</p>
+
+            <h2>
+              🏪 Shop Open / Close
+            </h2>
+
+            <p>
+              Normal ordering time is 12:00 PM to 9:30 PM.
+            </p>
+
           </div>
+
         </div>
+
+
+        <div class="shop-status-card">
+
+          <div class="shop-status-top">
+
+            <div>
+
+              <div
+                id="shopStatusTitle"
+                class="shop-status-title"
+              >
+                Checking shop status...
+              </div>
+
+              <div
+                id="shopStatusSubtitle"
+                class="shop-status-subtitle"
+              >
+                Please wait...
+              </div>
+
+            </div>
+
+
+            <div
+              id="shopStatusPill"
+              class="status-pill closed"
+            >
+              Checking
+            </div>
+
+          </div>
+
+
+          <div class="shop-status-grid">
+
+
+            <!-- MANUAL CONTROL -->
+
+            <div class="shop-control-box">
+
+              <h3>
+                🔴 Manual Control
+              </h3>
+
+              <p>
+                Use this when the restaurant needs to close
+                before 9:30 PM. This closes ordering for today.
+              </p>
+
+
+              <div class="shop-buttons">
+
+                <button
+                  id="openShopBtn"
+                  class="shop-open-btn"
+                >
+                  🟢 Open Shop
+                </button>
+
+
+                <button
+                  id="closeShopBtn"
+                  class="shop-close-btn"
+                >
+                  🔴 Close Shop Today
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="shop-control-box">
+
+              <h3>
+                📝 Closed Message
+              </h3>
+
+              <p>
+                Customers will see this message when you
+                manually close the shop.
+              </p>
+
+
+              <div class="field">
+
+                <textarea
+                  id="closedMessageInput"
+                  placeholder="Today The Queen Fast Food is closed. Sorry for the inconvenience."
+                ></textarea>
+
+              </div>
+
+
+              <button
+                id="saveClosedMessageBtn"
+                class="gold-btn"
+              >
+                Save Closed Message
+              </button>
+
+
+              <div
+                id="shopMessage"
+                class="shop-message"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- RESTAURANT SETTINGS -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <div>
+
+            <h2>
+              ⚙️ Restaurant Settings
+            </h2>
+
+            <p>
+              Any changes require admin password verification.
+            </p>
+
+          </div>
+
+        </div>
+
 
         <div class="settings-grid">
 
-          <!-- WhatsApp -->
+
+          <!-- WHATSAPP -->
 
           <div class="settings-box">
 
-            <h3>📱 WhatsApp / Order Number</h3>
+            <h3>
+              📱 WhatsApp / Order Number
+            </h3>
+
 
             <div class="field">
 
-              <label>WhatsApp Number</label>
+              <label>
+                WhatsApp Number
+              </label>
+
 
               <div class="password-wrap">
 
@@ -945,6 +1332,7 @@
                   inputmode="numeric"
                   autocomplete="off"
                 />
+
 
                 <button
                   type="button"
@@ -959,6 +1347,7 @@
 
             </div>
 
+
             <div class="save-row">
 
               <button
@@ -970,18 +1359,26 @@
 
             </div>
 
-            <div id="whatsappMessage" class="message"></div>
+
+            <div
+              id="whatsappMessage"
+              class="message"
+            ></div>
 
           </div>
 
 
-          <!-- Menu -->
+          <!-- MENU -->
 
           <div class="settings-box">
 
-            <h3>🍽️ Menu Prices</h3>
+            <h3>
+              🍽️ Menu Prices
+            </h3>
+
 
             <div id="menuSettings"></div>
+
 
             <div class="save-row">
 
@@ -994,7 +1391,11 @@
 
             </div>
 
-            <div id="menuMessage" class="message"></div>
+
+            <div
+              id="menuMessage"
+              class="message"
+            ></div>
 
           </div>
 
@@ -1003,36 +1404,49 @@
       </section>
 
 
-      <!-- =========================
-           DAILY SUMMARY
-      ========================== -->
+      <!-- DAILY SUMMARY -->
 
       <section class="section">
 
         <div class="section-header">
 
           <div>
-            <h2>📅 Date-wise Order Summary</h2>
-            <p>Click any date to view that day's orders.</p>
+
+            <h2>
+              📅 Date-wise Order Summary
+            </h2>
+
+            <p>
+              Click any date to view that day's orders.
+            </p>
+
           </div>
 
         </div>
+
 
         <div class="table-wrap">
 
           <table>
 
             <thead>
+
               <tr>
+
                 <th>Date</th>
                 <th>Total Orders</th>
                 <th>Pending</th>
                 <th>Delivered</th>
                 <th>Total Sales</th>
+
               </tr>
+
             </thead>
 
-            <tbody id="dailySummaryBody"></tbody>
+
+            <tbody
+              id="dailySummaryBody"
+            ></tbody>
 
           </table>
 
@@ -1041,25 +1455,26 @@
       </section>
 
 
-      <!-- =========================
-           ORDERS
-      ========================== -->
+      <!-- ORDERS -->
 
       <section class="section">
 
         <div class="section-header">
 
           <div>
-            <h2>📦 Customer Orders</h2>
+
+            <h2>
+              📦 Customer Orders
+            </h2>
+
             <p id="ordersHeadingText">
               Showing all orders
             </p>
+
           </div>
 
         </div>
 
-
-        <!-- FILTERS -->
 
         <div class="filter-bar">
 
@@ -1070,12 +1485,14 @@
             All
           </button>
 
+
           <button
             class="filter-btn"
             data-filter="pending"
           >
             Pending
           </button>
+
 
           <button
             class="filter-btn"
@@ -1084,6 +1501,7 @@
             Today
           </button>
 
+
           <button
             class="filter-btn"
             data-filter="delivered"
@@ -1091,11 +1509,13 @@
             Delivered
           </button>
 
+
           <input
             type="date"
             id="dateFilter"
             class="date-filter"
           />
+
 
           <button
             id="clearDateBtn"
@@ -1124,9 +1544,7 @@
   </section>
 
 
-  <!-- =========================
-       PASSWORD MODAL
-  ========================== -->
+  <!-- PASSWORD MODAL -->
 
   <div
     id="passwordModal"
@@ -1135,16 +1553,22 @@
 
     <div class="password-modal">
 
-      <h3>🔐 Admin Verification</h3>
+      <h3>
+        🔐 Admin Verification
+      </h3>
 
       <p>
         This action will change restaurant data.
         Enter your admin password to continue.
       </p>
 
+
       <div class="field">
 
-        <label>Admin Password</label>
+        <label>
+          Admin Password
+        </label>
+
 
         <div class="password-wrap">
 
@@ -1154,6 +1578,7 @@
             placeholder="Enter admin password"
             autocomplete="current-password"
           />
+
 
           <button
             type="button"
@@ -1165,12 +1590,14 @@
 
         </div>
 
+
         <div
           id="modalError"
           class="modal-error"
         ></div>
 
       </div>
+
 
       <div class="modal-actions">
 
@@ -1180,6 +1607,7 @@
         >
           Cancel
         </button>
+
 
         <button
           id="verifyPasswordBtn"
@@ -1195,15 +1623,14 @@
   </div>
 
 
-  <!-- =========================
-       FIREBASE
-  ========================== -->
+  <!-- FIREBASE -->
 
   <script type="module">
 
     import {
       initializeApp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
     import {
       getAuth,
@@ -1214,6 +1641,7 @@
       reauthenticateWithCredential
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+
     import {
       getDatabase,
       ref,
@@ -1222,40 +1650,62 @@
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-    /* =========================
-       FIREBASE CONFIG
-    ========================== */
+    /* FIREBASE CONFIG */
 
     const firebaseConfig = {
-      apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-      authDomain: "the-queen-fast-food.firebaseapp.com",
-      databaseURL: "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-      projectId: "the-queen-fast-food",
-      storageBucket: "the-queen-fast-food.firebasestorage.app",
-      messagingSenderId: "435721389652",
-      appId: "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-      measurementId: "G-Q1YCK636KJ"
+
+      apiKey:
+        "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+      authDomain:
+        "the-queen-fast-food.firebaseapp.com",
+
+      databaseURL:
+        "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+      projectId:
+        "the-queen-fast-food",
+
+      storageBucket:
+        "the-queen-fast-food.firebasestorage.app",
+
+      messagingSenderId:
+        "435721389652",
+
+      appId:
+        "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+      measurementId:
+        "G-Q1YCK636KJ"
+
     };
 
 
-    const app = initializeApp(firebaseConfig);
-
-    const auth = getAuth(app);
-
-    const db = getDatabase(app);
+    const app =
+      initializeApp(firebaseConfig);
 
 
-    /* =========================
-       ADMIN UID
-    ========================== */
+    const auth =
+      getAuth(app);
+
+
+    const db =
+      getDatabase(app);
+
+
+    /* ADMIN UID */
 
     const ADMIN_UID =
       "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
-    /* =========================
-       DEFAULT MENU
-    ========================== */
+    /* DEFAULT CLOSED MESSAGE */
+
+    const DEFAULT_CLOSED_MESSAGE =
+      "Today The Queen Fast Food is closed. Sorry for the inconvenience.";
+
+
+    /* DEFAULT MENU */
 
     const defaultMenu = [
 
@@ -1334,9 +1784,7 @@
     ];
 
 
-    /* =========================
-       DOM
-    ========================== */
+    /* DOM */
 
     const loginPage =
       document.getElementById("loginPage");
@@ -1417,6 +1865,35 @@
       document.getElementById("clearDateBtn");
 
 
+    /* SHOP CONTROL DOM */
+
+    const shopStatusTitle =
+      document.getElementById("shopStatusTitle");
+
+    const shopStatusSubtitle =
+      document.getElementById("shopStatusSubtitle");
+
+    const shopStatusPill =
+      document.getElementById("shopStatusPill");
+
+    const openShopBtn =
+      document.getElementById("openShopBtn");
+
+    const closeShopBtn =
+      document.getElementById("closeShopBtn");
+
+    const closedMessageInput =
+      document.getElementById("closedMessageInput");
+
+    const saveClosedMessageBtn =
+      document.getElementById(
+        "saveClosedMessageBtn"
+      );
+
+    const shopMessage =
+      document.getElementById("shopMessage");
+
+
     /* PASSWORD MODAL */
 
     const passwordModal =
@@ -1426,21 +1903,25 @@
       document.getElementById("confirmPassword");
 
     const toggleConfirmPassword =
-      document.getElementById("toggleConfirmPassword");
+      document.getElementById(
+        "toggleConfirmPassword"
+      );
 
     const cancelPasswordBtn =
-      document.getElementById("cancelPasswordBtn");
+      document.getElementById(
+        "cancelPasswordBtn"
+      );
 
     const verifyPasswordBtn =
-      document.getElementById("verifyPasswordBtn");
+      document.getElementById(
+        "verifyPasswordBtn"
+      );
 
     const modalError =
       document.getElementById("modalError");
 
 
-    /* =========================
-       DATA
-    ========================== */
+    /* DATA */
 
     let ordersData = {};
 
@@ -1454,14 +1935,17 @@
 
     let settingsListenerStarted = false;
 
+    let currentSettings = {};
 
-    /* =========================
-       HELPERS
-    ========================== */
+
+    /* HELPERS */
 
     function escapeHTML(value) {
 
-      if (value === null || value === undefined) {
+      if (
+        value === null ||
+        value === undefined
+      ) {
         return "";
       }
 
@@ -1471,15 +1955,18 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+
     }
 
 
     function formatMoney(value) {
 
-      const number = Number(value || 0);
+      const number =
+        Number(value || 0);
 
       return "₹" +
         number.toLocaleString("en-IN");
+
     }
 
 
@@ -1489,25 +1976,27 @@
 
       try {
 
-        const date = new Date(value);
+        const date =
+          new Date(value);
 
-        if (isNaN(date.getTime())) {
+        if (
+          isNaN(
+            date.getTime()
+          )
+        ) {
           return String(value);
         }
 
-        return date.toLocaleString("en-IN", {
-
-          day: "2-digit",
-
-          month: "short",
-
-          year: "numeric",
-
-          hour: "2-digit",
-
-          minute: "2-digit"
-
-        });
+        return date.toLocaleString(
+          "en-IN",
+          {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        );
 
       } catch (error) {
 
@@ -1520,22 +2009,31 @@
 
     function getDateKey(date) {
 
-      if (!date || isNaN(date.getTime())) {
+      if (
+        !date ||
+        isNaN(date.getTime())
+      ) {
         return null;
       }
 
       return date.getFullYear() +
         "-" +
-        String(date.getMonth() + 1).padStart(2, "0") +
+        String(
+          date.getMonth() + 1
+        ).padStart(2, "0") +
         "-" +
-        String(date.getDate()).padStart(2, "0");
+        String(
+          date.getDate()
+        ).padStart(2, "0");
 
     }
 
 
     function todayKey() {
 
-      return getDateKey(new Date());
+      return getDateKey(
+        new Date()
+      );
 
     }
 
@@ -1547,24 +2045,38 @@
       if (order.createdAt) {
 
         const date =
-          new Date(order.createdAt);
+          new Date(
+            order.createdAt
+          );
 
-        if (!isNaN(date.getTime())) {
+        if (
+          !isNaN(
+            date.getTime()
+          )
+        ) {
           return date;
         }
 
       }
+
 
       if (order.timestamp) {
 
         const date =
-          new Date(order.timestamp);
+          new Date(
+            order.timestamp
+          );
 
-        if (!isNaN(date.getTime())) {
+        if (
+          !isNaN(
+            date.getTime()
+          )
+        ) {
           return date;
         }
 
       }
+
 
       return null;
 
@@ -1578,15 +2090,21 @@
 
       if (!date) return false;
 
-      return getDateKey(date) === todayKey();
+      return (
+        getDateKey(date) ===
+        todayKey()
+      );
 
     }
 
 
     function isPending(order) {
 
-      return order &&
-        order.status !== "delivered";
+      return (
+        order &&
+        order.status !==
+          "delivered"
+      );
 
     }
 
@@ -1595,19 +2113,27 @@
 
       const map = {
 
-        received: "Received",
+        received:
+          "Received",
 
-        confirmed: "Confirmed",
+        confirmed:
+          "Confirmed",
 
-        making: "Making",
+        making:
+          "Making",
 
-        out_for_delivery: "Out for Delivery",
+        out_for_delivery:
+          "Out for Delivery",
 
-        delivered: "Delivered"
+        delivered:
+          "Delivered"
 
       };
 
-      return map[status] || "Received";
+      return (
+        map[status] ||
+        "Received"
+      );
 
     }
 
@@ -1616,19 +2142,27 @@
 
       const map = {
 
-        received: "status-received",
+        received:
+          "status-received",
 
-        confirmed: "status-confirmed",
+        confirmed:
+          "status-confirmed",
 
-        making: "status-making",
+        making:
+          "status-making",
 
-        out_for_delivery: "status-out",
+        out_for_delivery:
+          "status-out",
 
-        delivered: "status-delivered"
+        delivered:
+          "status-delivered"
 
       };
 
-      return map[status] || "status-received";
+      return (
+        map[status] ||
+        "status-received"
+      );
 
     }
 
@@ -1645,55 +2179,308 @@
 
 
     /* =========================
-       AUTH STATE
-    ========================== */
+       SHOP STATUS
+    ========================= */
 
-    onAuthStateChanged(auth, (user) => {
+    function getIndiaTimeParts() {
 
-      if (!user) {
+      const formatter =
+        new Intl.DateTimeFormat(
+          "en-IN",
+          {
+            timeZone:
+              "Asia/Kolkata",
 
-        loginPage.classList.remove("hidden");
+            hour: "2-digit",
 
-        dashboardPage.classList.add("hidden");
+            minute: "2-digit",
+
+            hour12: false
+          }
+        );
+
+
+      const parts =
+        formatter.formatToParts(
+          new Date()
+        );
+
+
+      let hour = 0;
+
+      let minute = 0;
+
+
+      parts.forEach((part) => {
+
+        if (
+          part.type === "hour"
+        ) {
+          hour =
+            Number(part.value);
+        }
+
+        if (
+          part.type === "minute"
+        ) {
+          minute =
+            Number(part.value);
+        }
+
+      });
+
+
+      return {
+        hour,
+        minute
+      };
+
+    }
+
+
+    function getAutomaticShopState() {
+
+      const {
+        hour,
+        minute
+      } =
+        getIndiaTimeParts();
+
+
+      const totalMinutes =
+        hour * 60 + minute;
+
+
+      const openingMinutes =
+        12 * 60;
+
+
+      const closingMinutes =
+        21 * 60 + 30;
+
+
+      if (
+        totalMinutes <
+        openingMinutes
+      ) {
+
+        return {
+          open: false,
+          type: "before",
+          title:
+            "Shop is not open yet",
+          message:
+            "Normal ordering starts at 12:00 PM."
+        };
+
+      }
+
+
+      if (
+        totalMinutes <=
+        closingMinutes
+      ) {
+
+        return {
+          open: true,
+          type: "open",
+          title:
+            "Shop is open",
+          message:
+            "Customers can place orders now."
+        };
+
+      }
+
+
+      return {
+        open: false,
+        type: "after",
+        title:
+          "Shop is closed for today",
+        message:
+          "Ordering time is 12:00 PM to 9:30 PM."
+      };
+
+    }
+
+
+    function getShopState() {
+
+      const manualClosed =
+        currentSettings.manualClosed ===
+        true;
+
+
+      if (manualClosed) {
+
+        return {
+
+          open: false,
+
+          type: "manual",
+
+          title:
+            "Shop manually closed",
+
+          message:
+            currentSettings.closedMessage ||
+            DEFAULT_CLOSED_MESSAGE
+
+        };
+
+      }
+
+
+      return getAutomaticShopState();
+
+    }
+
+
+    function renderShopStatus() {
+
+      const state =
+        getShopState();
+
+
+      if (state.open) {
+
+        shopStatusPill.textContent =
+          "OPEN";
+
+        shopStatusPill.className =
+          "status-pill open";
+
+
+        shopStatusTitle.textContent =
+          "🟢 Shop is OPEN";
+
+
+        shopStatusSubtitle.textContent =
+          "Customers can place orders now. Normal timing: 12:00 PM – 9:30 PM.";
 
         return;
 
       }
 
 
-      if (user.uid !== ADMIN_UID) {
+      shopStatusPill.textContent =
+        "CLOSED";
 
-        signOut(auth);
+      shopStatusPill.className =
+        "status-pill closed";
 
-        loginPage.classList.remove("hidden");
 
-        dashboardPage.classList.add("hidden");
+      if (
+        state.type ===
+        "manual"
+      ) {
+
+        shopStatusTitle.textContent =
+          "🔴 Shop manually CLOSED";
+
+
+        shopStatusSubtitle.textContent =
+          currentSettings.closedMessage ||
+          DEFAULT_CLOSED_MESSAGE;
+
+      }
+
+      else if (
+        state.type ===
+        "before"
+      ) {
+
+        shopStatusTitle.textContent =
+          "⏰ Shop not open yet";
+
+
+        shopStatusSubtitle.textContent =
+          "Customer ordering will start automatically at 12:00 PM.";
+
+      }
+
+      else {
+
+        shopStatusTitle.textContent =
+          "🌙 Shop closed for today";
+
+
+        shopStatusSubtitle.textContent =
+          "Automatic closing time is 9:30 PM.";
+
+      }
+
+    }
+
+
+    /* AUTH STATE */
+
+    onAuthStateChanged(
+      auth,
+      (user) => {
+
+        if (!user) {
+
+          loginPage
+            .classList
+            .remove("hidden");
+
+          dashboardPage
+            .classList
+            .add("hidden");
+
+          return;
+
+        }
+
+
+        if (
+          user.uid !==
+          ADMIN_UID
+        ) {
+
+          signOut(auth);
+
+          loginPage
+            .classList
+            .remove("hidden");
+
+          dashboardPage
+            .classList
+            .add("hidden");
+
+
+          loginError.textContent =
+            "This account is not authorized as admin.";
+
+          return;
+
+        }
+
+
+        loginPage
+          .classList
+          .add("hidden");
+
+        dashboardPage
+          .classList
+          .remove("hidden");
+
 
         loginError.textContent =
-          "This account is not authorized as admin.";
+          "";
 
-        return;
+
+        loadSettings();
+
+        loadOrders();
 
       }
+    );
 
 
-      loginPage.classList.add("hidden");
-
-      dashboardPage.classList.remove("hidden");
-
-      loginError.textContent = "";
-
-
-      loadSettings();
-
-      loadOrders();
-
-    });
-
-
-    /* =========================
-       LOGIN
-    ========================== */
+    /* LOGIN */
 
     loginForm.addEventListener(
       "submit",
@@ -1701,18 +2488,27 @@
 
         event.preventDefault();
 
-        loginError.textContent = "";
+        loginError.textContent =
+          "";
+
 
         const email =
-          document.getElementById("email")
+          document
+            .getElementById("email")
             .value
             .trim();
 
+
         const password =
-          document.getElementById("password")
+          document
+            .getElementById("password")
             .value;
 
-        if (!email || !password) {
+
+        if (
+          !email ||
+          !password
+        ) {
 
           loginError.textContent =
             "Email and password are required.";
@@ -1734,7 +2530,8 @@
 
           if (
             !result.user ||
-            result.user.uid !== ADMIN_UID
+            result.user.uid !==
+              ADMIN_UID
           ) {
 
             await signOut(auth);
@@ -1747,11 +2544,17 @@
           }
 
 
-          document.getElementById("password").value = "";
+          document
+            .getElementById(
+              "password"
+            )
+            .value = "";
+
 
         } catch (error) {
 
           console.error(error);
+
 
           if (
             error.code ===
@@ -1761,7 +2564,9 @@
             loginError.textContent =
               "Incorrect email or password.";
 
-          } else if (
+          }
+
+          else if (
             error.code ===
             "auth/too-many-requests"
           ) {
@@ -1769,7 +2574,9 @@
             loginError.textContent =
               "Too many attempts. Try again later.";
 
-          } else {
+          }
+
+          else {
 
             loginError.textContent =
               error.message ||
@@ -1783,9 +2590,7 @@
     );
 
 
-    /* =========================
-       LOGOUT
-    ========================== */
+    /* LOGOUT */
 
     logoutBtn.addEventListener(
       "click",
@@ -1797,17 +2602,20 @@
     );
 
 
-    /* =========================
-       LOAD SETTINGS
-    ========================== */
+    /* LOAD SETTINGS */
 
     function loadSettings() {
 
-      if (settingsListenerStarted) {
+      if (
+        settingsListenerStarted
+      ) {
         return;
       }
 
-      settingsListenerStarted = true;
+
+      settingsListenerStarted =
+        true;
+
 
       const settingsRef =
         ref(db, "settings");
@@ -1820,11 +2628,17 @@
         (snapshot) => {
 
           const settings =
-            snapshot.val() || {};
+            snapshot.val() ||
+            {};
+
+
+          currentSettings =
+            settings;
 
 
           menuSettingsData =
-            settings.menu || {};
+            settings.menu ||
+            {};
 
 
           const number =
@@ -1837,13 +2651,21 @@
               .replace(/\D/g, "");
 
 
+          closedMessageInput.value =
+            settings.closedMessage ||
+            DEFAULT_CLOSED_MESSAGE;
+
+
           renderMenuSettings();
+
+          renderShopStatus();
 
         },
 
         (error) => {
 
           console.error(error);
+
 
           whatsappMessage.textContent =
             "Could not load settings.";
@@ -1855,9 +2677,292 @@
     }
 
 
-    /* =========================
-       MENU RENDER
-    ========================== */
+    /* SHOP CONTROL */
+
+    closeShopBtn.addEventListener(
+      "click",
+      () => {
+
+        requestPassword(
+          async () => {
+
+            const user =
+              auth.currentUser;
+
+
+            if (
+              !user ||
+              user.uid !==
+                ADMIN_UID
+            ) {
+
+              alert(
+                "Admin authorization required."
+              );
+
+              return;
+
+            }
+
+
+            const message =
+              closedMessageInput
+                .value
+                .trim() ||
+              DEFAULT_CLOSED_MESSAGE;
+
+
+            try {
+
+              await update(
+                ref(db, "settings"),
+                {
+
+                  manualClosed:
+                    true,
+
+                  closedMessage:
+                    message,
+
+                  manualClosedAt:
+                    new Date()
+                      .toISOString()
+
+                }
+              );
+
+
+              shopMessage.textContent =
+                "✓ Shop is closed for today. Customers will not be able to place orders.";
+
+
+              shopMessage.classList
+                .remove(
+                  "error-message"
+                );
+
+
+              renderShopStatus();
+
+
+              setTimeout(() => {
+
+                shopMessage.textContent =
+                  "";
+
+              }, 5000);
+
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              shopMessage.textContent =
+                "❌ Could not close the shop.";
+
+              shopMessage.classList
+                .add(
+                  "error-message"
+                );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    openShopBtn.addEventListener(
+      "click",
+      () => {
+
+        requestPassword(
+          async () => {
+
+            const user =
+              auth.currentUser;
+
+
+            if (
+              !user ||
+              user.uid !==
+                ADMIN_UID
+            ) {
+
+              alert(
+                "Admin authorization required."
+              );
+
+              return;
+
+            }
+
+
+            try {
+
+              await update(
+                ref(db, "settings"),
+                {
+
+                  manualClosed:
+                    false,
+
+                  manualOpenedAt:
+                    new Date()
+                      .toISOString()
+
+                }
+              );
+
+
+              shopMessage.textContent =
+                "✓ Manual close removed. Shop will follow the normal 12:00 PM – 9:30 PM timing.";
+
+
+              shopMessage.classList
+                .remove(
+                  "error-message"
+                );
+
+
+              renderShopStatus();
+
+
+              setTimeout(() => {
+
+                shopMessage.textContent =
+                  "";
+
+              }, 5000);
+
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              shopMessage.textContent =
+                "❌ Could not open the shop.";
+
+              shopMessage.classList
+                .add(
+                  "error-message"
+                );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    /* SAVE CLOSED MESSAGE */
+
+    saveClosedMessageBtn.addEventListener(
+      "click",
+      () => {
+
+        requestPassword(
+          async () => {
+
+            const user =
+              auth.currentUser;
+
+
+            if (
+              !user ||
+              user.uid !==
+                ADMIN_UID
+            ) {
+
+              alert(
+                "Admin authorization required."
+              );
+
+              return;
+
+            }
+
+
+            const message =
+              closedMessageInput
+                .value
+                .trim();
+
+
+            if (!message) {
+
+              alert(
+                "Please enter a closed message."
+              );
+
+              return;
+
+            }
+
+
+            try {
+
+              await update(
+                ref(db, "settings"),
+                {
+
+                  closedMessage:
+                    message
+
+                }
+              );
+
+
+              shopMessage.textContent =
+                "✓ Closed message saved successfully.";
+
+
+              shopMessage.classList
+                .remove(
+                  "error-message"
+                );
+
+
+              renderShopStatus();
+
+
+              setTimeout(() => {
+
+                shopMessage.textContent =
+                  "";
+
+              }, 3500);
+
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              shopMessage.textContent =
+                "❌ Failed to save closed message.";
+
+              shopMessage.classList
+                .add(
+                  "error-message"
+                );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    /* MENU RENDER */
 
     function renderMenuSettings() {
 
@@ -1866,7 +2971,10 @@
           .map((item) => {
 
             const saved =
-              menuSettingsData[item.id] || {};
+              menuSettingsData[
+                item.id
+              ] || {};
+
 
             const price =
               saved.price !== undefined
@@ -1879,16 +2987,22 @@
               <div class="menu-row">
 
                 <div class="menu-name">
-                  ${escapeHTML(item.name)}
+                  ${escapeHTML(
+                    item.name
+                  )}
                 </div>
 
                 <input
                   class="price-input"
-                  data-id="${escapeHTML(item.id)}"
+                  data-id="${escapeHTML(
+                    item.id
+                  )}"
                   type="number"
                   min="0"
                   step="1"
-                  value="${escapeHTML(price)}"
+                  value="${escapeHTML(
+                    price
+                  )}"
                 />
 
               </div>
@@ -1899,14 +3013,13 @@
           .join("");
 
 
-      menuSettings.innerHTML = html;
+      menuSettings.innerHTML =
+        html;
 
     }
 
 
-    /* =========================
-       WHATSAPP EYE
-    ========================== */
+    /* WHATSAPP EYE */
 
     toggleWhatsapp.addEventListener(
       "click",
@@ -1923,7 +3036,9 @@
           toggleWhatsapp.textContent =
             "🙈";
 
-        } else {
+        }
+
+        else {
 
           whatsappNumberInput.type =
             "password";
@@ -1937,24 +3052,33 @@
     );
 
 
-    /* =========================
-       PASSWORD MODAL
-    ========================== */
+    /* PASSWORD MODAL */
 
-    function requestPassword(action) {
+    function requestPassword(
+      action
+    ) {
 
-      pendingAction = action;
+      pendingAction =
+        action;
 
-      confirmPassword.value = "";
 
-      modalError.textContent = "";
+      confirmPassword.value =
+        "";
 
-      passwordModal.classList.remove(
-        "hidden"
-      );
+
+      modalError.textContent =
+        "";
+
+
+      passwordModal
+        .classList
+        .remove("hidden");
+
 
       setTimeout(() => {
+
         confirmPassword.focus();
+
       }, 100);
 
     }
@@ -1962,15 +3086,21 @@
 
     function closePasswordModal() {
 
-      pendingAction = null;
+      pendingAction =
+        null;
 
-      confirmPassword.value = "";
 
-      modalError.textContent = "";
+      confirmPassword.value =
+        "";
 
-      passwordModal.classList.add(
-        "hidden"
-      );
+
+      modalError.textContent =
+        "";
+
+
+      passwordModal
+        .classList
+        .add("hidden");
 
     }
 
@@ -2017,7 +3147,9 @@
           toggleConfirmPassword.textContent =
             "🙈";
 
-        } else {
+        }
+
+        else {
 
           confirmPassword.type =
             "password";
@@ -2035,13 +3167,20 @@
       "keydown",
       (event) => {
 
-        if (event.key === "Enter") {
+        if (
+          event.key ===
+          "Enter"
+        ) {
 
           verifyPasswordBtn.click();
 
         }
 
-        if (event.key === "Escape") {
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
 
           closePasswordModal();
 
@@ -2051,9 +3190,7 @@
     );
 
 
-    /* =========================
-       VERIFY ADMIN PASSWORD
-    ========================== */
+    /* VERIFY PASSWORD */
 
     async function verifyAdminPassword(
       password
@@ -2065,7 +3202,8 @@
 
       if (
         !user ||
-        user.uid !== ADMIN_UID
+        user.uid !==
+          ADMIN_UID
       ) {
 
         throw new Error(
@@ -2075,7 +3213,9 @@
       }
 
 
-      if (!password.trim()) {
+      if (
+        !password.trim()
+      ) {
 
         throw new Error(
           "Password is required."
@@ -2119,7 +3259,9 @@
           confirmPassword.value;
 
 
-        if (!password.trim()) {
+        if (
+          !password.trim()
+        ) {
 
           modalError.textContent =
             "Password is required.";
@@ -2131,6 +3273,7 @@
 
         verifyPasswordBtn.disabled =
           true;
+
 
         verifyPasswordBtn.textContent =
           "Verifying...";
@@ -2150,13 +3293,18 @@
           closePasswordModal();
 
 
-          if (typeof action === "function") {
+          if (
+            typeof action ===
+            "function"
+          ) {
 
             await action();
 
           }
 
-        } catch (error) {
+        }
+
+        catch (error) {
 
           console.error(error);
 
@@ -2171,7 +3319,9 @@
             modalError.textContent =
               "❌ Incorrect admin password.";
 
-          } else if (
+          }
+
+          else if (
             error.code ===
             "auth/too-many-requests"
           ) {
@@ -2179,7 +3329,9 @@
             modalError.textContent =
               "Too many attempts. Try again later.";
 
-          } else {
+          }
+
+          else {
 
             modalError.textContent =
               error.message ||
@@ -2190,10 +3342,13 @@
 
           return;
 
-        } finally {
+        }
+
+        finally {
 
           verifyPasswordBtn.disabled =
             false;
+
 
           verifyPasswordBtn.textContent =
             "Verify & Continue";
@@ -2204,9 +3359,7 @@
     );
 
 
-    /* =========================
-       SAVE WHATSAPP
-    ========================== */
+    /* SAVE WHATSAPP */
 
     saveWhatsappBtn.addEventListener(
       "click",
@@ -2221,7 +3374,8 @@
 
             if (
               !user ||
-              user.uid !== ADMIN_UID
+              user.uid !==
+                ADMIN_UID
             ) {
 
               alert(
@@ -2234,11 +3388,14 @@
 
 
             let number =
-              whatsappNumberInput.value
+              whatsappNumberInput
+                .value
                 .replace(/\D/g, "");
 
 
-            if (number.length < 10) {
+            if (
+              number.length < 10
+            ) {
 
               alert(
                 "Enter a valid 10-digit WhatsApp number."
@@ -2249,7 +3406,9 @@
             }
 
 
-            if (number.length > 10) {
+            if (
+              number.length > 10
+            ) {
 
               number =
                 number.slice(-10);
@@ -2262,8 +3421,10 @@
               await update(
                 ref(db, "settings"),
                 {
+
                   whatsappNumber:
                     number
+
                 }
               );
 
@@ -2283,6 +3444,7 @@
               whatsappNumberInput.type =
                 "password";
 
+
               toggleWhatsapp.textContent =
                 "👁️";
 
@@ -2290,6 +3452,7 @@
             } catch (error) {
 
               console.error(error);
+
 
               whatsappMessage.textContent =
                 "❌ Failed to update WhatsApp number.";
@@ -2303,9 +3466,7 @@
     );
 
 
-    /* =========================
-       SAVE ALL MENU
-    ========================== */
+    /* SAVE ALL MENU */
 
     saveAllBtn.addEventListener(
       "click",
@@ -2320,7 +3481,8 @@
 
             if (
               !user ||
-              user.uid !== ADMIN_UID
+              user.uid !==
+                ADMIN_UID
             ) {
 
               alert(
@@ -2345,11 +3507,14 @@
 
 
             let whatsapp =
-              whatsappNumberInput.value
+              whatsappNumberInput
+                .value
                 .replace(/\D/g, "");
 
 
-            if (whatsapp.length < 10) {
+            if (
+              whatsapp.length < 10
+            ) {
 
               alert(
                 "Enter a valid 10-digit WhatsApp number."
@@ -2360,7 +3525,9 @@
             }
 
 
-            if (whatsapp.length > 10) {
+            if (
+              whatsapp.length > 10
+            ) {
 
               whatsapp =
                 whatsapp.slice(-10);
@@ -2370,7 +3537,8 @@
 
             updates[
               "settings/whatsappNumber"
-            ] = whatsapp;
+            ] =
+              whatsapp;
 
 
             priceInputs.forEach(
@@ -2379,12 +3547,17 @@
                 const id =
                   input.dataset.id;
 
+
                 const value =
-                  Number(input.value);
+                  Number(
+                    input.value
+                  );
 
 
                 if (
-                  !Number.isFinite(value) ||
+                  !Number.isFinite(
+                    value
+                  ) ||
                   value < 0
                 ) {
 
@@ -2398,7 +3571,8 @@
                 const item =
                   defaultMenu.find(
                     (menuItem) =>
-                      menuItem.id === id
+                      menuItem.id ===
+                      id
                   );
 
 
@@ -2409,14 +3583,16 @@
                   "settings/menu/" +
                   id +
                   "/name"
-                ] = item.name;
+                ] =
+                  item.name;
 
 
                 updates[
                   "settings/menu/" +
                   id +
                   "/price"
-                ] = value;
+                ] =
+                  value;
 
               }
             );
@@ -2456,6 +3632,7 @@
               whatsappNumberInput.type =
                 "password";
 
+
               toggleWhatsapp.textContent =
                 "👁️";
 
@@ -2463,6 +3640,7 @@
             } catch (error) {
 
               console.error(error);
+
 
               menuMessage.textContent =
                 "❌ Failed to save settings.";
@@ -2476,17 +3654,19 @@
     );
 
 
-    /* =========================
-       LOAD ORDERS
-    ========================== */
+    /* LOAD ORDERS */
 
     function loadOrders() {
 
-      if (ordersListenerStarted) {
+      if (
+        ordersListenerStarted
+      ) {
         return;
       }
 
-      ordersListenerStarted = true;
+
+      ordersListenerStarted =
+        true;
 
 
       const ordersRef =
@@ -2500,10 +3680,12 @@
         (snapshot) => {
 
           const data =
-            snapshot.val() || {};
+            snapshot.val() ||
+            {};
 
 
-          ordersData = data;
+          ordersData =
+            data;
 
 
           updateStats(data);
@@ -2518,10 +3700,15 @@
 
           console.error(error);
 
+
           ordersList.innerHTML = `
+
             <div class="empty">
+
               ❌ Could not load orders.
+
             </div>
+
           `;
 
         }
@@ -2531,14 +3718,14 @@
     }
 
 
-    /* =========================
-       STATS
-    ========================== */
+    /* STATS */
 
     function updateStats(data) {
 
       const orders =
-        Object.values(data || {});
+        Object.values(
+          data || {}
+        );
 
 
       const total =
@@ -2562,14 +3749,16 @@
       const delivered =
         orders.filter(
           (order) =>
-            order.status === "delivered"
+            order.status ===
+            "delivered"
         );
 
 
       const sales =
         today.reduce(
           (sum, order) =>
-            sum + orderTotal(order),
+            sum +
+            orderTotal(order),
           0
         );
 
@@ -2602,7 +3791,9 @@
 
 
       todaySales.textContent =
-        formatMoney(sales);
+        formatMoney(
+          sales
+        );
 
 
       todayPending.textContent =
@@ -2611,132 +3802,148 @@
     }
 
 
-    /* =========================
-       DAILY SUMMARY
-    ========================== */
+    /* DAILY SUMMARY */
 
-    function renderDailySummary(data) {
+    function renderDailySummary(
+      data
+    ) {
 
       const grouped = {};
 
 
-      Object.values(data || {})
-        .forEach((order) => {
+      Object.values(
+        data || {}
+      )
+      .forEach((order) => {
 
-          const date =
-            getOrderDate(order);
-
-
-          if (!date) return;
-
-
-          const key =
-            getDateKey(date);
+        const date =
+          getOrderDate(order);
 
 
-          if (!grouped[key]) {
-
-            grouped[key] = {
-
-              date: date,
-
-              total: 0,
-
-              pending: 0,
-
-              delivered: 0,
-
-              sales: 0
-
-            };
-
-          }
+        if (!date) return;
 
 
-          grouped[key].total++;
+        const key =
+          getDateKey(date);
 
 
-          if (
-            order.status ===
-            "delivered"
-          ) {
+        if (!grouped[key]) {
 
-            grouped[key].delivered++;
+          grouped[key] = {
 
-          } else {
+            date: date,
 
-            grouped[key].pending++;
+            total: 0,
 
-          }
+            pending: 0,
+
+            delivered: 0,
+
+            sales: 0
+
+          };
+
+        }
 
 
-          grouped[key].sales +=
-            orderTotal(order);
+        grouped[key].total++;
 
-        });
+
+        if (
+          order.status ===
+          "delivered"
+        ) {
+
+          grouped[key]
+            .delivered++;
+
+        }
+
+        else {
+
+          grouped[key]
+            .pending++;
+
+        }
+
+
+        grouped[key].sales +=
+          orderTotal(order);
+
+      });
 
 
       const rows =
-        Object.entries(grouped)
-          .sort(
-            (a, b) =>
-              new Date(b[1].date) -
-              new Date(a[1].date)
-          )
-          .map(
-            ([key, value]) => `
+        Object.entries(
+          grouped
+        )
+        .sort(
+          (a, b) =>
+            new Date(
+              b[1].date
+            ) -
+            new Date(
+              a[1].date
+            )
+        )
+        .map(
+          ([key, value]) => `
 
-              <tr
-                class="date-row"
-                data-date="${key}"
-              >
+            <tr
+              class="date-row"
+              data-date="${key}"
+            >
 
-                <td>
-                  ${new Date(
-                    value.date
-                  ).toLocaleDateString(
-                    "en-IN",
-                    {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric"
-                    }
-                  )}
-                </td>
+              <td>
+                ${new Date(
+                  value.date
+                ).toLocaleDateString(
+                  "en-IN",
+                  {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                  }
+                )}
+              </td>
 
-                <td>
-                  ${value.total}
-                </td>
+              <td>
+                ${value.total}
+              </td>
 
-                <td>
-                  ${value.pending}
-                </td>
+              <td>
+                ${value.pending}
+              </td>
 
-                <td>
-                  ${value.delivered}
-                </td>
+              <td>
+                ${value.delivered}
+              </td>
 
-                <td>
-                  ${formatMoney(
-                    value.sales
-                  )}
-                </td>
+              <td>
+                ${formatMoney(
+                  value.sales
+                )}
+              </td>
 
-              </tr>
+            </tr>
 
-            `
-          )
-          .join("");
+          `
+        )
+        .join("");
 
 
       if (!rows) {
 
         dailySummaryBody.innerHTML = `
+
           <tr>
+
             <td colspan="5">
               No order data available.
             </td>
+
           </tr>
+
         `;
 
         return;
@@ -2749,26 +3956,112 @@
 
 
       document
-        .querySelectorAll(".date-row")
-        .forEach((row) => {
+        .querySelectorAll(
+          ".date-row"
+        )
+        .forEach(
+          (row) => {
 
-          row.addEventListener(
+            row.addEventListener(
+              "click",
+              () => {
+
+                const selectedDate =
+                  row.dataset.date;
+
+
+                dateFilter.value =
+                  selectedDate;
+
+
+                currentFilter =
+                  "date";
+
+
+                updateFilterButtons();
+
+
+                renderOrders(
+                  ordersData
+                );
+
+
+                document
+                  .getElementById(
+                    "ordersList"
+                  )
+                  .scrollIntoView({
+                    behavior:
+                      "smooth",
+                    block:
+                      "start"
+                  });
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    /* FILTER BUTTONS */
+
+    document
+      .querySelectorAll(
+        ".filter-btn[data-filter]"
+      )
+      .forEach(
+        (button) => {
+
+          button.addEventListener(
             "click",
             () => {
 
-              const selectedDate =
-                row.dataset.date;
+              currentFilter =
+                button.dataset.filter;
 
 
               dateFilter.value =
-                selectedDate;
-
-
-              currentFilter =
-                "date";
+                "";
 
 
               updateFilterButtons();
+
+
+              renderOrders(
+                ordersData
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        ".stat-card[data-filter]"
+      )
+      .forEach(
+        (card) => {
+
+          card.addEventListener(
+            "click",
+            () => {
+
+              currentFilter =
+                card.dataset.filter;
+
+
+              dateFilter.value =
+                "";
+
+
+              updateFilterButtons();
+
 
               renderOrders(
                 ordersData
@@ -2780,100 +4073,33 @@
                   "ordersList"
                 )
                 .scrollIntoView({
-                  behavior: "smooth",
-                  block: "start"
+                  behavior:
+                    "smooth",
+                  block:
+                    "start"
                 });
 
             }
           );
 
-        });
-
-    }
-
-
-    /* =========================
-       FILTER BUTTONS
-    ========================== */
-
-    document
-      .querySelectorAll(
-        ".filter-btn[data-filter]"
-      )
-      .forEach((button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            currentFilter =
-              button.dataset.filter;
-
-
-            dateFilter.value = "";
-
-
-            updateFilterButtons();
-
-            renderOrders(
-              ordersData
-            );
-
-          }
-        );
-
-      });
-
-
-    document
-      .querySelectorAll(
-        ".stat-card[data-filter]"
-      )
-      .forEach((card) => {
-
-        card.addEventListener(
-          "click",
-          () => {
-
-            currentFilter =
-              card.dataset.filter;
-
-
-            dateFilter.value = "";
-
-
-            updateFilterButtons();
-
-            renderOrders(
-              ordersData
-            );
-
-
-            document
-              .getElementById(
-                "ordersList"
-              )
-              .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-              });
-
-          }
-        );
-
-      });
+        }
+      );
 
 
     dateFilter.addEventListener(
       "change",
       () => {
 
-        if (!dateFilter.value) {
+        if (
+          !dateFilter.value
+        ) {
 
           currentFilter =
             "all";
 
-        } else {
+        }
+
+        else {
 
           currentFilter =
             "date";
@@ -2882,6 +4108,7 @@
 
 
         updateFilterButtons();
+
 
         renderOrders(
           ordersData
@@ -2895,12 +4122,16 @@
       "click",
       () => {
 
-        dateFilter.value = "";
+        dateFilter.value =
+          "";
+
 
         currentFilter =
           "all";
 
+
         updateFilterButtons();
+
 
         renderOrders(
           ordersData
@@ -2916,45 +4147,54 @@
         .querySelectorAll(
           ".filter-btn[data-filter]"
         )
-        .forEach((button) => {
+        .forEach(
+          (button) => {
 
-          button.classList.toggle(
-            "active",
-            button.dataset.filter ===
-              currentFilter
-          );
+            button.classList.toggle(
+              "active",
+              button.dataset.filter ===
+                currentFilter
+            );
 
-        });
+          }
+        );
 
 
       document
         .querySelectorAll(
           ".stat-card[data-filter]"
         )
-        .forEach((card) => {
+        .forEach(
+          (card) => {
 
-          card.classList.toggle(
-            "active",
-            card.dataset.filter ===
-              currentFilter
-          );
+            card.classList.toggle(
+              "active",
+              card.dataset.filter ===
+                currentFilter
+            );
 
-        });
+          }
+        );
 
     }
 
 
-    /* =========================
-       FILTER ORDERS
-    ========================== */
+    /* FILTER ORDERS */
 
-    function getFilteredOrders(data) {
+    function getFilteredOrders(
+      data
+    ) {
 
       let orders =
-        Object.entries(data || {});
+        Object.entries(
+          data || {}
+        );
 
 
-      if (currentFilter === "pending") {
+      if (
+        currentFilter ===
+        "pending"
+      ) {
 
         orders =
           orders.filter(
@@ -2966,7 +4206,8 @@
 
 
       else if (
-        currentFilter === "today"
+        currentFilter ===
+        "today"
       ) {
 
         orders =
@@ -2979,7 +4220,8 @@
 
 
       else if (
-        currentFilter === "delivered"
+        currentFilter ===
+        "delivered"
       ) {
 
         orders =
@@ -2993,7 +4235,8 @@
 
 
       else if (
-        currentFilter === "date"
+        currentFilter ===
+        "date"
       ) {
 
         const selected =
@@ -3007,12 +4250,17 @@
               ([, order]) => {
 
                 const date =
-                  getOrderDate(order);
+                  getOrderDate(
+                    order
+                  );
+
 
                 return (
                   date &&
-                  getDateKey(date) ===
-                    selected
+                  getDateKey(
+                    date
+                  ) ===
+                  selected
                 );
 
               }
@@ -3029,13 +4277,20 @@
           const dateA =
             getOrderDate(a);
 
+
           const dateB =
             getOrderDate(b);
 
 
           return (
-            (dateB?.getTime() || 0) -
-            (dateA?.getTime() || 0)
+            (
+              dateB?.getTime() ||
+              0
+            ) -
+            (
+              dateA?.getTime() ||
+              0
+            )
           );
 
         }
@@ -3047,21 +4302,26 @@
     }
 
 
-    /* =========================
-       RENDER ORDERS
-    ========================== */
+    /* RENDER ORDERS */
 
-    function renderOrders(data) {
+    function renderOrders(
+      data
+    ) {
 
       const orders =
-        getFilteredOrders(data);
+        getFilteredOrders(
+          data
+        );
 
 
       let heading =
         "Showing all orders";
 
 
-      if (currentFilter === "pending") {
+      if (
+        currentFilter ===
+        "pending"
+      ) {
 
         heading =
           "Showing pending orders";
@@ -3070,7 +4330,8 @@
 
 
       else if (
-        currentFilter === "today"
+        currentFilter ===
+        "today"
       ) {
 
         heading =
@@ -3080,7 +4341,8 @@
 
 
       else if (
-        currentFilter === "delivered"
+        currentFilter ===
+        "delivered"
       ) {
 
         heading =
@@ -3090,12 +4352,16 @@
 
 
       else if (
-        currentFilter === "date"
+        currentFilter ===
+        "date"
       ) {
 
         heading =
           "Showing orders for " +
-          (dateFilter.value || "-");
+          (
+            dateFilter.value ||
+            "-"
+          );
 
       }
 
@@ -3115,9 +4381,13 @@
       if (!orders.length) {
 
         ordersList.innerHTML = `
+
           <div class="empty">
+
             No orders found for this filter.
+
           </div>
+
         `;
 
         return;
@@ -3142,9 +4412,7 @@
     }
 
 
-    /* =========================
-       ORDER CARD
-    ========================== */
+    /* ORDER CARD */
 
     function renderOrderCard(
       orderId,
@@ -3152,7 +4420,9 @@
     ) {
 
       const items =
-        Array.isArray(order.items)
+        Array.isArray(
+          order.items
+        )
           ? order.items
           : Object.values(
               order.items || {}
@@ -3162,60 +4432,70 @@
       const itemsHTML =
         items.length
           ? items
-              .map((item) => {
+              .map(
+                (item) => {
 
-                const name =
-                  item.name ||
-                  item.title ||
-                  "Item";
-
-                const qty =
-                  Number(
-                    item.quantity ||
-                    item.qty ||
-                    1
-                  );
-
-                const price =
-                  Number(
-                    item.price ||
-                    0
-                  );
+                  const name =
+                    item.name ||
+                    item.title ||
+                    "Item";
 
 
-                return `
+                  const qty =
+                    Number(
+                      item.quantity ||
+                      item.qty ||
+                      1
+                    );
 
-                  <li>
 
-                    <span>
-                      ${escapeHTML(name)}
-                      × ${qty}
-                    </span>
+                  const price =
+                    Number(
+                      item.price ||
+                      0
+                    );
 
-                    <span>
-                      ${formatMoney(
-                        price * qty
-                      )}
-                    </span>
 
-                  </li>
+                  return `
 
-                `;
+                    <li>
 
-              })
+                      <span>
+                        ${escapeHTML(
+                          name
+                        )}
+                        × ${qty}
+                      </span>
+
+                      <span>
+                        ${formatMoney(
+                          price *
+                          qty
+                        )}
+                      </span>
+
+                    </li>
+
+                  `;
+
+                }
+              )
               .join("")
+
           : "<li>No items</li>";
 
 
       const subtotal =
         Number(
-          order.subtotal || 0
+          order.subtotal ||
+          0
         );
 
 
       const delivery =
         Number(
-          order.deliveryCharge || 0
+          order.deliveryCharge ||
+          0
         );
 
 
@@ -3249,11 +4529,14 @@
 
 
       const distance =
-        order.distanceKm !== undefined
+        order.distanceKm !==
+        undefined
+
           ? Number(
               order.distanceKm
             ).toFixed(2) +
             " km"
+
           : "-";
 
 
@@ -3271,17 +4554,22 @@
             <div>
 
               <div class="order-id">
+
                 ${escapeHTML(
                   order.orderId ||
                   orderId
                 )}
+
               </div>
 
+
               <div class="order-date">
+
                 ${formatDate(
                   order.createdAt ||
                   order.timestamp
                 )}
+
               </div>
 
             </div>
@@ -3289,9 +4577,15 @@
 
             <div
               class="status-badge
-              ${statusClass(status)}"
+              ${statusClass(
+                status
+              )}"
             >
-              ${statusLabel(status)}
+
+              ${statusLabel(
+                status
+              )}
+
             </div>
 
           </div>
@@ -3299,29 +4593,47 @@
 
           <div class="order-grid">
 
+
             <div class="order-info-box">
 
-              <h4>👤 CUSTOMER</h4>
+              <h4>
+                👤 CUSTOMER
+              </h4>
+
 
               <p>
+
                 <strong>
                   ${escapeHTML(
                     customerName
                   )}
                 </strong>
+
                 <br>
 
-                📞 ${escapeHTML(phone)}
+                📞 ${escapeHTML(
+                  phone
+                )}
+
                 <br>
 
-                📍 ${escapeHTML(address)}
+                📍 ${escapeHTML(
+                  address
+                )}
+
                 <br>
 
-                💳 ${escapeHTML(payment)}
+                💳 ${escapeHTML(
+                  payment
+                )}
+
                 <br>
 
                 🚚 Distance:
-                ${escapeHTML(distance)}
+                ${escapeHTML(
+                  distance
+                )}
+
               </p>
 
             </div>
@@ -3329,7 +4641,10 @@
 
             <div class="order-info-box">
 
-              <h4>🍽️ ITEMS</h4>
+              <h4>
+                🍽️ ITEMS
+              </h4>
+
 
               <ul class="items-list">
 
@@ -3340,34 +4655,51 @@
 
               <div class="billing">
 
+
                 <div class="billing-row">
-                  <span>Subtotal</span>
+
+                  <span>
+                    Subtotal
+                  </span>
+
                   <span>
                     ${formatMoney(
                       subtotal
                     )}
                   </span>
+
                 </div>
 
 
                 <div class="billing-row">
-                  <span>Delivery</span>
+
+                  <span>
+                    Delivery
+                  </span>
+
                   <span>
                     ${formatMoney(
                       delivery
                     )}
                   </span>
+
                 </div>
 
 
                 <div class="billing-row total">
-                  <span>Total</span>
+
+                  <span>
+                    Total
+                  </span>
+
                   <span>
                     ${formatMoney(
                       total
                     )}
                   </span>
+
                 </div>
+
 
               </div>
 
@@ -3377,6 +4709,7 @@
 
 
           <div class="status-actions">
+
 
             <button
               class="status-btn"
@@ -3388,6 +4721,7 @@
               Received
             </button>
 
+
             <button
               class="status-btn"
               data-status="confirmed"
@@ -3397,6 +4731,7 @@
             >
               Confirmed
             </button>
+
 
             <button
               class="status-btn"
@@ -3408,6 +4743,7 @@
               Making
             </button>
 
+
             <button
               class="status-btn"
               data-status="out_for_delivery"
@@ -3417,6 +4753,7 @@
             >
               Out for Delivery
             </button>
+
 
             <button
               class="status-btn"
@@ -3428,6 +4765,7 @@
               Delivered
             </button>
 
+
           </div>
 
         </div>
@@ -3437,9 +4775,7 @@
     }
 
 
-    /* =========================
-       STATUS BUTTONS
-    ========================== */
+    /* STATUS BUTTONS */
 
     function attachStatusButtons() {
 
@@ -3447,41 +4783,44 @@
         .querySelectorAll(
           ".status-btn"
         )
-        .forEach((button) => {
+        .forEach(
+          (button) => {
 
-          button.addEventListener(
-            "click",
-            () => {
+            button.addEventListener(
+              "click",
+              () => {
 
-              const orderId =
-                button.dataset.orderId;
-
-              const newStatus =
-                button.dataset.status;
+                const orderId =
+                  button.dataset
+                    .orderId;
 
 
-              requestPassword(
-                async () => {
+                const newStatus =
+                  button.dataset
+                    .status;
 
-                  await changeStatus(
-                    orderId,
-                    newStatus
-                  );
 
-                }
-              );
+                requestPassword(
+                  async () => {
 
-            }
-          );
+                    await changeStatus(
+                      orderId,
+                      newStatus
+                    );
 
-        });
+                  }
+                );
+
+              }
+            );
+
+          }
+        );
 
     }
 
 
-    /* =========================
-       CHANGE ORDER STATUS
-    ========================== */
+    /* CHANGE STATUS */
 
     async function changeStatus(
       orderId,
@@ -3494,7 +4833,8 @@
 
       if (
         !user ||
-        user.uid !== ADMIN_UID
+        user.uid !==
+          ADMIN_UID
       ) {
 
         alert(
@@ -3520,7 +4860,8 @@
               newStatus,
 
             statusUpdatedAt:
-              new Date().toISOString()
+              new Date()
+                .toISOString()
 
           }
         );
@@ -3528,7 +4869,10 @@
 
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          error
+        );
+
 
         alert(
           "❌ Could not update order status."
@@ -3539,32 +4883,50 @@
     }
 
 
-    /* =========================
-       REFRESH
-    ========================== */
+    /* REFRESH */
 
     refreshBtn.addEventListener(
       "click",
       () => {
 
-        /*
-          Firebase onValue listener is already live.
-          So we don't create another listener here.
-        */
-
         updateStats(
           ordersData
         );
+
 
         renderDailySummary(
           ordersData
         );
 
+
         renderOrders(
           ordersData
         );
 
+
+        renderShopStatus();
+
       }
+    );
+
+
+    /* AUTO REFRESH SHOP STATUS */
+
+    setInterval(
+      () => {
+
+        if (
+          !dashboardPage
+            .classList
+            .contains("hidden")
+        ) {
+
+          renderShopStatus();
+
+        }
+
+      },
+      30000
     );
 
   </script>
