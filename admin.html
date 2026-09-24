@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>The Queen Fast Food — Admin</title>
 
 <style>
@@ -13,7 +14,7 @@
 }
 
 body{
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#0b0b0b;
   color:#fff;
 }
@@ -32,9 +33,9 @@ header{
 }
 
 .logo span{
+  display:block;
   color:#fff;
   font-size:15px;
-  display:block;
   margin-top:4px;
 }
 
@@ -131,6 +132,7 @@ button{
   padding:12px;
   background:#181818;
   border-radius:8px;
+  line-height:1.8;
 }
 
 .total{
@@ -147,6 +149,30 @@ button{
   text-align:center;
   color:#888;
   padding:30px;
+}
+
+.error-box{
+  background:#2b1010;
+  border:1px solid #8b3030;
+  color:#ff7777;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.success-box{
+  background:#102b18;
+  border:1px solid #2d7a45;
+  color:#72e39a;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.order-count{
+  color:#d4af37;
+  font-size:18px;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -179,11 +205,16 @@ button{
       placeholder="Password"
     >
 
-    <button class="login-btn" onclick="login()">
+    <button
+      class="login-btn"
+      onclick="login()">
       LOGIN
     </button>
 
-    <p id="loginError" style="color:#ff5555;margin-top:12px;"></p>
+    <p
+      id="loginError"
+      style="color:#ff5555;margin-top:12px;">
+    </p>
 
   </div>
 
@@ -195,7 +226,9 @@ button{
 
       <h2>📊 Order Dashboard</h2>
 
-      <button class="logout" onclick="logout()">
+      <button
+        class="logout"
+        onclick="logout()">
         Logout
       </button>
 
@@ -203,10 +236,23 @@ button{
         Live orders from The Queen Fast Food
       </p>
 
+      <p
+        id="connectionStatus"
+        style="margin-top:12px;">
+        🔄 Connecting to Firebase...
+      </p>
+
+      <p
+        id="orderCount"
+        class="order-count"
+        style="margin-top:10px;">
+        Orders: 0
+      </p>
+
     </div>
 
     <div id="orders">
-      <div class="empty">
+      <div class="card empty">
         Loading orders...
       </div>
     </div>
@@ -244,29 +290,29 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
 
   authDomain:
-  "the-queen-fast-food.firebaseapp.com",
+    "the-queen-fast-food.firebaseapp.com",
 
   databaseURL:
-  "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
 
   projectId:
-  "the-queen-fast-food",
+    "the-queen-fast-food",
 
   storageBucket:
-  "the-queen-fast-food.firebasestorage.app",
+    "the-queen-fast-food.firebasestorage.app",
 
   messagingSenderId:
-  "435721389652",
+    "435721389652",
 
   appId:
-  "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
 
   measurementId:
-  "G-Q1YCK636KJ"
-
+    "G-Q1YCK636KJ"
 };
 
 
@@ -312,10 +358,13 @@ window.login = async function(){
 
   }catch(err){
 
-    console.error(err);
+    console.error(
+      "LOGIN ERROR:",
+      err
+    );
 
     error.textContent =
-      "Login failed. Check email/password.";
+      err.message;
 
   }
 
@@ -328,7 +377,18 @@ window.login = async function(){
 
 window.logout = async function(){
 
-  await signOut(auth);
+  try{
+
+    await signOut(auth);
+
+  }catch(err){
+
+    console.error(
+      "LOGOUT ERROR:",
+      err
+    );
+
+  }
 
 };
 
@@ -337,74 +397,190 @@ window.logout = async function(){
    AUTH STATE
 ========================= */
 
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(
+  auth,
+  user => {
 
-  const loginSection =
-    document.getElementById("loginSection");
+    const loginSection =
+      document.getElementById(
+        "loginSection"
+      );
 
-  const dashboard =
-    document.getElementById("dashboard");
+    const dashboard =
+      document.getElementById(
+        "dashboard"
+      );
 
-  if(user){
+    if(user){
 
-    loginSection.classList.add("hidden");
+      loginSection.classList.add(
+        "hidden"
+      );
 
-    dashboard.classList.remove("hidden");
+      dashboard.classList.remove(
+        "hidden"
+      );
 
-    loadOrders();
+      console.log(
+        "ADMIN LOGGED IN:",
+        user.uid
+      );
 
-  }else{
+      loadOrders();
 
-    loginSection.classList.remove("hidden");
+    }else{
 
-    dashboard.classList.add("hidden");
+      loginSection.classList.remove(
+        "hidden"
+      );
+
+      dashboard.classList.add(
+        "hidden"
+      );
+
+    }
 
   }
-
-});
+);
 
 
 /* =========================
-   LOAD LIVE ORDERS
+   LIVE ORDERS
 ========================= */
 
 function loadOrders(){
 
   const ordersRef =
-    ref(db, "orders");
+    ref(db,"orders");
 
-  onValue(ordersRef, snapshot => {
+  const connectionStatus =
+    document.getElementById(
+      "connectionStatus"
+    );
 
-    const container =
-      document.getElementById("orders");
+  const ordersContainer =
+    document.getElementById(
+      "orders"
+    );
 
-    container.innerHTML = "";
+  connectionStatus.innerHTML =
+    "🔄 Connecting to Firebase...";
 
-    if(!snapshot.exists()){
+  onValue(
 
-      container.innerHTML =
-        `<div class="card empty">
-          📦 No orders yet
-        </div>`;
+    ordersRef,
 
-      return;
+    snapshot => {
+
+      console.log(
+        "FIREBASE SNAPSHOT:",
+        snapshot.val()
+      );
+
+      connectionStatus.innerHTML =
+        "🟢 Firebase Connected";
+
+      ordersContainer.innerHTML = "";
+
+      if(!snapshot.exists()){
+
+        ordersContainer.innerHTML = `
+          <div class="card empty">
+            📦 No orders yet
+          </div>
+        `;
+
+        document.getElementById(
+          "orderCount"
+        ).textContent =
+          "Orders: 0";
+
+        return;
+      }
+
+
+      const data =
+        snapshot.val();
+
+
+      const orders =
+        Object.entries(data);
+
+
+      /* newest first */
+
+      orders.sort(
+        (a,b) => {
+
+          const timeA =
+            Number(
+              a[1].createdAt || 0
+            );
+
+          const timeB =
+            Number(
+              b[1].createdAt || 0
+            );
+
+          return timeB - timeA;
+
+        }
+      );
+
+
+      document.getElementById(
+        "orderCount"
+      ).textContent =
+        "Orders: " + orders.length;
+
+
+      orders.forEach(
+        ([orderId,order]) => {
+
+          ordersContainer.innerHTML +=
+            createOrderCard(
+              orderId,
+              order
+            );
+
+        }
+      );
+
+    },
+
+    error => {
+
+      console.error(
+        "FIREBASE READ ERROR:",
+        error
+      );
+
+      connectionStatus.innerHTML =
+        "🔴 Firebase Error";
+
+      ordersContainer.innerHTML = `
+        <div class="error-box">
+
+          <b>❌ Unable to load orders</b>
+
+          <br><br>
+
+          ${escapeHTML(
+            error.message ||
+            "Firebase database read failed."
+          )}
+
+          <br><br>
+
+          Check Firebase Realtime Database
+          rules and authentication.
+
+        </div>
+      `;
 
     }
 
-    const data =
-      snapshot.val();
-
-    const orders =
-      Object.entries(data).reverse();
-
-    orders.forEach(([orderId, order]) => {
-
-      container.innerHTML +=
-        createOrderCard(orderId, order);
-
-    });
-
-  });
+  );
 
 }
 
@@ -413,31 +589,57 @@ function loadOrders(){
    ORDER CARD
 ========================= */
 
-function createOrderCard(orderId, order){
+function createOrderCard(
+  orderId,
+  order
+){
 
   const customer =
     order.customer || {};
 
   const items =
-    order.items || [];
+    Array.isArray(order.items)
+      ? order.items
+      : [];
 
   let itemHTML = "";
 
-  items.forEach(item => {
 
-    itemHTML += `
-      <div>
-        🍴 ${escapeHTML(item.name)}
-        × ${item.quantity}
-        = ₹${Number(item.price) * Number(item.quantity)}
-      </div>
-    `;
+  items.forEach(
+    item => {
 
-  });
+      const price =
+        Number(item.price || 0);
+
+      const quantity =
+        Number(item.quantity || 0);
+
+      itemHTML += `
+        <div>
+          🍴 ${escapeHTML(
+            item.name || "Item"
+          )}
+
+          × ${quantity}
+
+          = ₹${price * quantity}
+        </div>
+      `;
+
+    }
+  );
 
 
   const status =
     order.status || "received";
+
+
+  const createdAt =
+    order.createdAt
+      ? new Date(
+          Number(order.createdAt)
+        ).toLocaleString("en-IN")
+      : "N/A";
 
 
   return `
@@ -448,26 +650,44 @@ function createOrderCard(orderId, order){
         🆔 ${escapeHTML(orderId)}
       </div>
 
+
       <div class="status">
         ${getStatusText(status)}
       </div>
 
+
       <div class="info">
 
         👤 <b>Name:</b>
-        ${escapeHTML(customer.name || "N/A")}
+        ${escapeHTML(
+          customer.name || "N/A"
+        )}
+
         <br>
 
         📱 <b>Mobile:</b>
-        ${escapeHTML(customer.phone || "N/A")}
+        ${escapeHTML(
+          customer.phone || "N/A"
+        )}
+
         <br>
 
         🏠 <b>Address:</b>
-        ${escapeHTML(customer.address || "N/A")}
+        ${escapeHTML(
+          customer.address || "N/A"
+        )}
+
         <br>
 
         💳 <b>Payment:</b>
-        ${escapeHTML(order.payment || "N/A")}
+        ${escapeHTML(
+          order.payment || "N/A"
+        )}
+
+        <br>
+
+        🕐 <b>Order Time:</b>
+        ${escapeHTML(createdAt)}
 
       </div>
 
@@ -478,7 +698,10 @@ function createOrderCard(orderId, order){
 
         <br><br>
 
-        ${itemHTML}
+        ${
+          itemHTML ||
+          "No items found."
+        }
 
       </div>
 
@@ -486,24 +709,37 @@ function createOrderCard(orderId, order){
       <div class="info">
 
         💰 Subtotal:
-        ₹${Number(order.subtotal || 0)}
+        ₹${Number(
+          order.subtotal || 0
+        )}
 
         <br>
 
         🛵 Delivery:
-        ₹${Number(order.deliveryCharge || 0)}
+        ₹${Number(
+          order.deliveryCharge || 0
+        )}
 
         <br><br>
 
         <span class="total">
+
           GRAND TOTAL:
-          ₹${Number(order.grandTotal || 0)}
+          ₹${Number(
+            order.grandTotal || 0
+          )}
+
         </span>
 
       </div>
 
 
-      <hr style="border-color:#333;margin:18px 0;">
+      <hr
+        style="
+          border-color:#333;
+          margin:18px 0;
+        "
+      >
 
 
       <b style="color:#d4af37;">
@@ -512,49 +748,90 @@ function createOrderCard(orderId, order){
 
       <br>
 
+
       <button
         class="status-btn"
-        onclick="changeStatus('${orderId}','received')">
+        onclick="
+          changeStatus(
+            '${escapeJS(orderId)}',
+            'received'
+          )
+        ">
         🟢 Received
       </button>
 
+
       <button
         class="status-btn"
-        onclick="changeStatus('${orderId}','confirmed')">
+        onclick="
+          changeStatus(
+            '${escapeJS(orderId)}',
+            'confirmed'
+          )
+        ">
         🟡 Confirmed
       </button>
 
+
       <button
         class="status-btn"
-        onclick="changeStatus('${orderId}','making')">
+        onclick="
+          changeStatus(
+            '${escapeJS(orderId)}',
+            'making'
+          )
+        ">
         👨‍🍳 Making
       </button>
 
-      <button
-        class="status-btn"
-        onclick="changeStatus('${orderId}','out_for_delivery')">
-        🛵 Out for Delivery
-      </button>
 
       <button
         class="status-btn"
-        onclick="changeStatus('${orderId}','delivered')">
+        onclick="
+          changeStatus(
+            '${escapeJS(orderId)}',
+            'out_for_delivery'
+          )
+        ">
+        🛵 Out for Delivery
+      </button>
+
+
+      <button
+        class="status-btn"
+        onclick="
+          changeStatus(
+            '${escapeJS(orderId)}',
+            'delivered'
+          )
+        ">
         ✅ Delivered
       </button>
 
 
       ${
-        customer.lat && customer.lng
+        customer.lat &&
+        customer.lng
         ?
         `
+
         <br><br>
 
         <a
-          href="https://www.google.com/maps?q=${customer.lat},${customer.lng}"
+          href="
+            https://www.google.com/maps?q=
+            ${customer.lat},
+            ${customer.lng}
+          "
           target="_blank"
-          style="color:#d4af37;">
+          style="
+            color:#d4af37;
+            font-weight:bold;
+          "
+        >
           📍 Open Customer Location
         </a>
+
         `
         :
         ""
@@ -572,24 +849,37 @@ function createOrderCard(orderId, order){
 ========================= */
 
 window.changeStatus =
-async function(orderId, status){
+async function(
+  orderId,
+  status
+){
 
   try{
 
     await update(
-      ref(db, "orders/" + orderId),
+      ref(
+        db,
+        "orders/" + orderId
+      ),
       {
-        status: status,
-        updatedAt: Date.now()
+        status:
+          status,
+
+        updatedAt:
+          Date.now()
       }
     );
 
   }catch(err){
 
-    console.error(err);
+    console.error(
+      "STATUS UPDATE ERROR:",
+      err
+    );
 
     alert(
-      "Unable to update order status."
+      "Unable to update order status:\n" +
+      err.message
     );
 
   }
@@ -601,7 +891,9 @@ async function(orderId, status){
    STATUS TEXT
 ========================= */
 
-function getStatusText(status){
+function getStatusText(
+  status
+){
 
   const map = {
 
@@ -622,7 +914,10 @@ function getStatusText(status){
 
   };
 
-  return map[status] || "🟢 Order Received";
+  return (
+    map[status] ||
+    "🟢 Order Received"
+  );
 
 }
 
@@ -631,14 +926,53 @@ function getStatusText(status){
    HTML SECURITY
 ========================= */
 
-function escapeHTML(value){
+function escapeHTML(
+  value
+){
 
   return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+function escapeJS(
+  value
+){
+
+  return String(value)
+    .replaceAll(
+      "\\",
+      "\\\\"
+    )
+    .replaceAll(
+      "'",
+      "\\'"
+    );
 
 }
 
