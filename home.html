@@ -291,6 +291,109 @@
       cursor:not-allowed;
     }
 
+    /* WHY CHOOSE */
+
+    .why-section{
+      max-width:1200px;
+      margin:auto;
+      padding:25px 20px 70px;
+    }
+
+    .why-box{
+      background:
+        linear-gradient(
+          145deg,
+          rgba(212,175,55,.08),
+          rgba(255,255,255,.02)
+        );
+      border:1px solid rgba(212,175,55,.22);
+      border-radius:24px;
+      padding:45px 30px;
+    }
+
+    .why-heading{
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .why-heading .eyebrow{
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:3px;
+      font-size:12px;
+    }
+
+    .why-heading h2{
+      font-family:Georgia,serif;
+      font-size:38px;
+      margin-top:8px;
+    }
+
+    .why-heading p{
+      max-width:720px;
+      margin:12px auto 0;
+      color:#aaa;
+      line-height:1.7;
+    }
+
+    .why-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:15px;
+    }
+
+    .why-card{
+      background:#111;
+      border:1px solid rgba(212,175,55,.15);
+      border-radius:16px;
+      padding:25px 15px;
+      text-align:center;
+      transition:.25s;
+    }
+
+    .why-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(212,175,55,.55);
+    }
+
+    .why-icon{
+      font-size:30px;
+      margin-bottom:12px;
+    }
+
+    .why-card h3{
+      color:var(--gold-light);
+      font-size:15px;
+      margin-bottom:8px;
+    }
+
+    .why-card p{
+      color:#888;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .brand-detail{
+      text-align:center;
+      margin-top:30px;
+      padding-top:25px;
+      border-top:1px solid #292929;
+      color:#aaa;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .brand-detail strong{
+      color:var(--gold-light);
+    }
+
+    .contact-detail{
+      margin-top:15px;
+      color:#ccc;
+    }
+
+    /* MODALS */
+
     .modal{
       position:fixed;
       inset:0;
@@ -543,6 +646,12 @@
       color:var(--gold-light);
     }
 
+    @media(max-width:1000px){
+      .why-grid{
+        grid-template-columns:repeat(3,1fr);
+      }
+    }
+
     @media(max-width:900px){
       .menu-grid{
         grid-template-columns:repeat(2,1fr);
@@ -550,6 +659,7 @@
     }
 
     @media(max-width:600px){
+
       .nav{
         padding:12px 14px;
       }
@@ -584,6 +694,32 @@
 
       .status-box{
         padding:0 14px;
+      }
+
+      .why-section{
+        padding:15px 14px 50px;
+      }
+
+      .why-box{
+        padding:32px 15px;
+      }
+
+      .why-heading h2{
+        font-size:31px;
+      }
+
+      .why-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .why-card{
+        padding:20px 10px;
+      }
+    }
+
+    @media(max-width:400px){
+      .why-grid{
+        grid-template-columns:1fr;
       }
     }
   </style>
@@ -660,6 +796,143 @@
   <div
     class="menu-grid"
     id="menuGrid">
+  </div>
+
+</section>
+
+
+<!-- WHY CHOOSE -->
+
+<section class="why-section">
+
+  <div class="why-box">
+
+    <div class="why-heading">
+
+      <div class="eyebrow">
+        The Queen Difference
+      </div>
+
+      <h2>
+        Why Choose The Queen Fast Food?
+      </h2>
+
+      <p>
+        Fresh ingredients, tasty food and caring service —
+        everything comes together to give you the Queen touch.
+      </p>
+
+    </div>
+
+
+    <div class="why-grid">
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          👑
+        </div>
+
+        <h3>
+          Fresh & Quality
+        </h3>
+
+        <p>
+          Quality ingredients selected for every order.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          🧼
+        </div>
+
+        <h3>
+          Hygienic Preparation
+        </h3>
+
+        <p>
+          Food prepared with proper care and cleanliness.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          🚀
+        </div>
+
+        <h3>
+          Fast Delivery
+        </h3>
+
+        <p>
+          We prepare and send your order as quickly as possible.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          💰
+        </div>
+
+        <h3>
+          Affordable Prices
+        </h3>
+
+        <p>
+          Delicious food at prices that stay friendly.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          ❤️
+        </div>
+
+        <h3>
+          Made Fresh With Care
+        </h3>
+
+        <p>
+          Every order receives our personal Queen touch.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="brand-detail">
+
+      At <strong>The Queen Fast Food</strong>,
+      we believe great food should be fresh, tasty,
+      hygienic and affordable.
+
+      Every order is prepared with care and delivered
+      to you with the Queen touch.
+
+      <div class="contact-detail">
+
+        📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha
+        &nbsp; • &nbsp;
+        📞 97768 56111
+
+      </div>
+
+    </div>
+
   </div>
 
 </section>
@@ -1162,6 +1435,9 @@ let deliveryCharge = 0;
 let shopOpen = false;
 let manualClosed = false;
 
+let closedMessage =
+  "Today The Queen Fast Food is closed. Sorry for the inconvenience.";
+
 let currentUser = null;
 
 let authReadyResolve;
@@ -1220,9 +1496,6 @@ window.closeModal = function(id){
 
 /* =========================================================
    CUSTOMER AUTH
-   IMPORTANT:
-   Silent anonymous login.
-   No customer login screen.
 ========================================================= */
 
 async function startCustomerAuth(){
@@ -1234,6 +1507,15 @@ async function startCustomerAuth(){
     );
 
 
+    /*
+      IMPORTANT FIX:
+
+      If Firebase already has a customer user,
+      use currentUser.
+
+      We never use admin account as customer.
+    */
+
     if(auth.currentUser){
 
       if(auth.currentUser.uid === ADMIN_UID){
@@ -1244,34 +1526,45 @@ async function startCustomerAuth(){
           "Admin account detected on customer page."
         );
 
-      }else{
-
-        currentUser =
-          auth.currentUser;
+        throw new Error(
+          "Admin account detected on customer page."
+        );
 
       }
 
-      authReadyResolve();
+
+      currentUser =
+        auth.currentUser;
+
 
       console.log(
         "Existing customer UID:",
-        currentUser?.uid
+        currentUser.uid
       );
+
+
+      authReadyResolve();
 
       return;
 
     }
 
 
+    /*
+      Anonymous customer login
+    */
+
     const credential =
       await signInAnonymously(auth);
 
 
-    if(!credential ||
-       !credential.user){
+    if(
+      !credential ||
+      !credential.user
+    ){
 
       throw new Error(
-        "Anonymous authentication failed."
+        "Anonymous authentication returned no user."
       );
 
     }
@@ -1293,8 +1586,18 @@ async function startCustomerAuth(){
   }catch(error){
 
     console.error(
-      "Anonymous authentication error:",
+      "🔥 FIREBASE AUTH ERROR:",
       error
+    );
+
+    console.error(
+      "Firebase error code:",
+      error?.code
+    );
+
+    console.error(
+      "Firebase error message:",
+      error?.message
     );
 
 
@@ -1305,9 +1608,42 @@ async function startCustomerAuth(){
     authReadyResolve();
 
 
-    showToast(
-      "Online order service is unavailable. Please refresh the page."
-    );
+    let message =
+      "Customer connection failed.";
+
+
+    if(
+      error?.code ===
+      "auth/unauthorized-domain"
+    ){
+
+      message =
+        "Firebase blocked this website domain.";
+
+    }
+
+    else if(
+      error?.code ===
+      "auth/operation-not-allowed"
+    ){
+
+      message =
+        "Anonymous Authentication is disabled.";
+
+    }
+
+    else if(
+      error?.code ===
+      "auth/network-request-failed"
+    ){
+
+      message =
+        "Firebase network connection failed.";
+
+    }
+
+
+    showToast(message);
 
   }
 
@@ -1365,6 +1701,10 @@ function getIndiaTime(){
 }
 
 
+/* =========================================================
+   SHOP STATUS
+========================================================= */
+
 function updateShopStatus(){
 
   const statusBox =
@@ -1372,6 +1712,10 @@ function updateShopStatus(){
       "shopStatus"
     );
 
+
+  /*
+    MANUAL CLOSE HAS PRIORITY
+  */
 
   if(manualClosed){
 
@@ -1381,7 +1725,7 @@ function updateShopStatus(){
       "status closed";
 
     statusBox.textContent =
-      "Today The Queen Fast Food is closed. Sorry for the inconvenience.";
+      closedMessage;
 
     updateOrderButtons();
 
@@ -1402,7 +1746,14 @@ function updateShopStatus(){
     (21 * 60) + 30;
 
 
-  if(india.totalMinutes < openingTime){
+  /*
+    BEFORE 12:00 PM
+  */
+
+  if(
+    india.totalMinutes <
+    openingTime
+  ){
 
     shopOpen = false;
 
@@ -1415,8 +1766,13 @@ function updateShopStatus(){
   }
 
 
+  /*
+    12:00 PM TO 9:30 PM
+  */
+
   else if(
-    india.totalMinutes <= closingTime
+    india.totalMinutes <=
+    closingTime
   ){
 
     shopOpen = true;
@@ -1429,6 +1785,10 @@ function updateShopStatus(){
 
   }
 
+
+  /*
+    AFTER 9:30 PM
+  */
 
   else{
 
@@ -1470,6 +1830,17 @@ async function loadShopSettings(){
 
       manualClosed =
         settings.manualClosed === true;
+
+
+      if(
+        settings.closedMessage &&
+        String(settings.closedMessage).trim()
+      ){
+
+        closedMessage =
+          String(settings.closedMessage).trim();
+
+      }
 
     }else{
 
@@ -1764,6 +2135,10 @@ function updateCart(){
 }
 
 
+/* =========================================================
+   BUTTON CONTROL
+========================================================= */
+
 function updateOrderButtons(){
 
   const checkoutButton =
@@ -1809,6 +2184,10 @@ function updateOrderButtons(){
 
 }
 
+
+/* =========================================================
+   OPEN CART
+========================================================= */
 
 window.openCart =
 function(){
@@ -1922,6 +2301,7 @@ function(){
     error => {
 
       console.error(
+        "Geolocation error:",
         error
       );
 
@@ -1947,6 +2327,10 @@ function(){
 
 };
 
+
+/* =========================================================
+   DELIVERY CALCULATION
+========================================================= */
 
 async function calculateDelivery(){
 
@@ -1994,6 +2378,15 @@ async function calculateDelivery(){
 
     const response =
       await fetch(url);
+
+
+    if(!response.ok){
+
+      throw new Error(
+        `OSRM HTTP ${response.status}`
+      );
+
+    }
 
 
     const data =
@@ -2059,6 +2452,7 @@ async function calculateDelivery(){
   }catch(error){
 
     console.error(
+      "Delivery calculation error:",
       error
     );
 
@@ -2135,6 +2529,7 @@ function updateCheckoutTotal(){
 
 /* =========================================================
    PLACE ORDER
+   IMPORTANT FIXED VERSION
 ========================================================= */
 
 window.placeOrder =
@@ -2265,18 +2660,22 @@ async function(){
   try{
 
     /* -----------------------------------------
-       WAIT FOR AUTH
+       WAIT FOR CUSTOMER AUTH
     ----------------------------------------- */
 
     await authReadyPromise;
 
 
-    /* -----------------------------------------
-       GET ACTUAL AUTH USER
-       This is the important permission fix.
-    ----------------------------------------- */
+    /*
+      IMPORTANT FIX:
 
-    if(!auth.currentUser){
+      Do NOT check auth.currentUser here.
+
+      Firebase anonymous login already stored
+      the authenticated customer in currentUser.
+    */
+
+    if(!currentUser){
 
       throw new Error(
         "Customer authentication is not ready."
@@ -2285,13 +2684,9 @@ async function(){
     }
 
 
-    currentUser =
-      auth.currentUser;
-
-
-    /* -----------------------------------------
-       ADMIN PROTECTION
-    ----------------------------------------- */
+    /*
+      Make sure customer is still authenticated.
+    */
 
     if(
       currentUser.uid === ADMIN_UID
@@ -2373,7 +2768,6 @@ async function(){
 
     /* -----------------------------------------
        ORDER DATA
-       ownerUid is required by Firebase Rules.
     ----------------------------------------- */
 
     const orderData = {
@@ -2441,7 +2835,7 @@ async function(){
 
 
     /* -----------------------------------------
-       SAVE ORDER
+       SAVE TO FIREBASE
     ----------------------------------------- */
 
     await set(
@@ -2498,6 +2892,17 @@ async function(){
     );
 
 
+    console.error(
+      "ORDER ERROR CODE:",
+      error?.code
+    );
+
+    console.error(
+      "ORDER ERROR MESSAGE:",
+      error?.message
+    );
+
+
     if(
       error?.code ===
       "PERMISSION_DENIED"
@@ -2516,6 +2921,17 @@ async function(){
 
       showToast(
         "Customer connection failed. Please refresh and try again."
+      );
+
+    }
+
+    else if(
+      error?.message ===
+      "Admin account cannot place customer orders."
+    ){
+
+      showToast(
+        "Please open the customer page in a normal browser session."
       );
 
     }
@@ -2688,7 +3104,13 @@ async function(){
     await authReadyPromise;
 
 
-    if(!auth.currentUser){
+    /*
+      IMPORTANT FIX:
+
+      Use currentUser instead of auth.currentUser.
+    */
+
+    if(!currentUser){
 
       throw new Error(
         "Authentication unavailable."
@@ -2697,8 +3119,22 @@ async function(){
     }
 
 
-    currentUser =
-      auth.currentUser;
+    if(
+      currentUser.uid ===
+      ADMIN_UID
+    ){
+
+      throw new Error(
+        "Admin account cannot track customer orders here."
+      );
+
+    }
+
+
+    console.log(
+      "Tracking customer UID:",
+      currentUser.uid
+    );
 
 
     const snapshot =
@@ -2746,11 +3182,13 @@ async function(){
       snapshot.val();
 
 
+    /*
+      CUSTOMER OWNERSHIP CHECK
+    */
+
     if(
       order.ownerUid !==
-      currentUser.uid &&
-      currentUser.uid !==
-      ADMIN_UID
+      currentUser.uid
     ){
 
       throw new Error(
