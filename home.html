@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +26,10 @@
       line-height: 1.5;
     }
 
+    body.login-locked {
+      overflow: hidden;
+    }
+
     button,
     input,
     select,
@@ -45,6 +48,295 @@
       --card: #111;
       --line: #292929;
       --muted: #888;
+    }
+
+    /* ======================================================
+       CUSTOMER LOGIN
+    ======================================================= */
+
+    #customerLoginScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(
+          circle at 50% 15%,
+          rgba(212,175,55,0.13),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 10% 90%,
+          rgba(212,175,55,0.06),
+          transparent 30%
+        ),
+        #070707;
+      overflow-y: auto;
+    }
+
+    #customerLoginScreen.hidden {
+      display: none;
+    }
+
+    .login-card {
+      position: relative;
+      width: min(430px, 100%);
+      padding: 42px 28px 30px;
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 24px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.055),
+          rgba(255,255,255,0.015)
+        ),
+        #0d0d0d;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.65),
+        0 0 60px rgba(212,175,55,0.06);
+      overflow: hidden;
+      animation: loginCardIn 0.5s ease;
+    }
+
+    .login-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(212,175,55,0.10);
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+    @keyframes loginCardIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .login-crown {
+      position: relative;
+      text-align: center;
+      color: var(--gold);
+      font-size: 52px;
+      line-height: 1;
+      margin-bottom: 18px;
+      text-shadow: 0 0 35px rgba(212,175,55,0.28);
+    }
+
+    .login-small-title {
+      position: relative;
+      text-align: center;
+      color: #d4af37;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+
+    .login-title {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      font-size: clamp(27px, 7vw, 38px);
+      line-height: 1.05;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .login-title span {
+      color: var(--gold);
+    }
+
+    .login-tagline {
+      position: relative;
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      font-style: italic;
+      margin-bottom: 28px;
+    }
+
+    .login-divider {
+      height: 1px;
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(212,175,55,0.4),
+          transparent
+        );
+      margin-bottom: 25px;
+    }
+
+    .login-step {
+      position: relative;
+    }
+
+    .login-step.hidden {
+      display: none;
+    }
+
+    .login-label {
+      display: block;
+      color: #ddd;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .phone-input-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid #333;
+      background: #151515;
+      border-radius: 11px;
+      overflow: hidden;
+      transition: 0.2s;
+    }
+
+    .phone-input-wrap:focus-within {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.07);
+    }
+
+    .country-code {
+      color: var(--gold);
+      font-weight: bold;
+      padding: 13px 12px;
+      border-right: 1px solid #333;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .phone-input-wrap input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+      padding: 13px 12px;
+      font-size: 14px;
+    }
+
+    .phone-input-wrap input::placeholder {
+      color: #666;
+    }
+
+    .otp-input {
+      width: 100%;
+      background: #151515;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 11px;
+      padding: 15px;
+      text-align: center;
+      letter-spacing: 8px;
+      font-size: 22px;
+      font-weight: bold;
+      outline: none;
+    }
+
+    .otp-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.07);
+    }
+
+    .send-otp-btn,
+    .verify-otp-btn {
+      width: 100%;
+      border: none;
+      border-radius: 11px;
+      background: var(--gold);
+      color: #000;
+      padding: 14px;
+      margin-top: 13px;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      transition: 0.2s;
+    }
+
+    .send-otp-btn:hover,
+    .verify-otp-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .send-otp-btn:disabled,
+    .verify-otp-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .login-note {
+      color: #666;
+      text-align: center;
+      font-size: 10px;
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+
+    .login-status {
+      min-height: 18px;
+      color: #999;
+      text-align: center;
+      font-size: 11px;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .login-status.success {
+      color: #8fd694;
+    }
+
+    .login-status.error {
+      color: #ff7777;
+    }
+
+    .change-number-btn {
+      display: block;
+      margin: 12px auto 0;
+      border: none;
+      background: transparent;
+      color: var(--gold);
+      font-size: 11px;
+      text-decoration: underline;
+    }
+
+    .otp-sent-number {
+      color: #aaa;
+      text-align: center;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    #recaptcha-container {
+      margin-top: 10px;
+      min-height: 0;
+    }
+
+    .login-footer {
+      position: relative;
+      text-align: center;
+      color: #555;
+      font-size: 9px;
+      margin-top: 25px;
+      letter-spacing: 0.3px;
     }
 
     /* ================= HEADER ================= */
@@ -952,6 +1244,56 @@
       border-color: var(--gold);
     }
 
+    .login-number-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: #181818;
+      border: 1px solid #333;
+      border-radius: 9px;
+      padding: 11px 12px;
+    }
+
+    .login-number-text {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .phone-choice-btn {
+      flex-shrink: 0;
+      border: 1px solid #555;
+      background: #222;
+      color: #fff;
+      border-radius: 7px;
+      padding: 7px 9px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .phone-choice-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .alternate-phone-wrap {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .alternate-phone-wrap.show {
+      display: block;
+    }
+
+    .phone-helper {
+      display: block;
+      color: #666;
+      font-size: 10px;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
     .location-btn {
       width: 100%;
       padding: 11px;
@@ -995,7 +1337,7 @@
 
     .toast {
       position: fixed;
-      z-index: 5000;
+      z-index: 11000;
       left: 50%;
       bottom: 25px;
       transform: translateX(-50%) translateY(120px);
@@ -1040,7 +1382,6 @@
     /* ================= RESPONSIVE ================= */
 
     @media (max-width: 1000px) {
-
       .menu-grid {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -1048,11 +1389,9 @@
       .why-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-
     }
 
     @media (max-width: 700px) {
-
       .header-inner {
         min-height: 67px;
       }
@@ -1129,10 +1468,29 @@
         width: 100%;
       }
 
+      .login-card {
+        padding: 35px 20px 25px;
+      }
+
+      .login-title {
+        font-size: 28px;
+      }
+
+      .login-crown {
+        font-size: 45px;
+      }
+
+      .login-number-box {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .phone-choice-btn {
+        width: 100%;
+      }
     }
 
     @media (max-width: 400px) {
-
       .menu-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -1144,13 +1502,155 @@
       .cart-button {
         padding: 9px 11px;
       }
-
     }
-
   </style>
 </head>
 
-<body>
+<body class="login-locked">
+
+  <!-- ======================================================
+       CUSTOMER PHONE LOGIN SCREEN
+  ======================================================= -->
+
+  <div id="customerLoginScreen">
+
+    <div class="login-card">
+
+      <div class="login-crown">
+        👑
+      </div>
+
+      <div class="login-small-title">
+        WELCOME TO
+      </div>
+
+      <h1 class="login-title">
+        THE QUEEN <span>FAST FOOD</span>
+      </h1>
+
+      <p class="login-tagline">
+        Your cravings deserve the royal treatment.
+      </p>
+
+      <div class="login-divider"></div>
+
+
+      <!-- PHONE STEP -->
+
+      <div
+        id="phoneLoginStep"
+        class="login-step"
+      >
+
+        <label class="login-label">
+          Enter your mobile number
+        </label>
+
+        <div class="phone-input-wrap">
+
+          <span class="country-code">
+            +91
+          </span>
+
+          <input
+            type="tel"
+            id="loginPhone"
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="tel"
+            placeholder="Enter 10-digit mobile number"
+          >
+
+        </div>
+
+
+        <button
+          id="sendOtpButton"
+          class="send-otp-btn"
+        >
+          SEND OTP
+        </button>
+
+
+        <div
+          id="phoneLoginStatus"
+          class="login-status"
+        ></div>
+
+
+        <p class="login-note">
+          Login to order your favourites & enjoy
+          a royal food experience.
+        </p>
+
+      </div>
+
+
+      <!-- OTP STEP -->
+
+      <div
+        id="otpLoginStep"
+        class="login-step hidden"
+      >
+
+        <label class="login-label">
+          Enter verification code
+        </label>
+
+        <div
+          id="otpSentNumber"
+          class="otp-sent-number"
+        ></div>
+
+        <input
+          type="tel"
+          id="loginOtp"
+          class="otp-input"
+          maxlength="6"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          placeholder="••••••"
+        >
+
+
+        <button
+          id="verifyOtpButton"
+          class="verify-otp-btn"
+        >
+          VERIFY & ENTER THE QUEEN
+        </button>
+
+
+        <button
+          id="changeLoginNumber"
+          class="change-number-btn"
+          type="button"
+        >
+          ← Change mobile number
+        </button>
+
+
+        <div
+          id="otpLoginStatus"
+          class="login-status"
+        ></div>
+
+      </div>
+
+
+      <!-- Firebase reCAPTCHA -->
+
+      <div id="recaptcha-container"></div>
+
+
+      <div class="login-footer">
+        Secure login powered by Firebase
+      </div>
+
+    </div>
+
+  </div>
+
 
   <!-- ======================================================
        HEADER
@@ -1504,10 +2004,8 @@
       </h2>
 
       <p class="visit-address">
-
         📍 Ibrisingh, Tirtol, Jagatsinghpur,<br>
         Odisha – 754138
-
       </p>
 
 
@@ -1745,18 +2243,70 @@
       </div>
 
 
+      <!-- ==================================================
+           ORDER CONTACT PHONE
+      =================================================== -->
+
       <div class="form-group">
 
         <label>
-          Mobile Number
+          Order Contact Number
         </label>
 
-        <input
-          type="tel"
-          id="customerPhone"
-          placeholder="Enter mobile number"
-          inputmode="numeric"
+
+        <div class="login-number-box">
+
+          <span
+            id="loginPhoneDisplay"
+            class="login-number-text"
+          >
+            +91 —
+          </span>
+
+
+          <button
+            type="button"
+            id="toggleAlternatePhone"
+            class="phone-choice-btn"
+          >
+            Use Another Number
+          </button>
+
+        </div>
+
+
+        <div
+          id="alternatePhoneWrap"
+          class="alternate-phone-wrap"
         >
+
+          <input
+            type="tel"
+            id="customerPhone"
+            maxlength="10"
+            placeholder="Enter 10-digit order contact number"
+            inputmode="numeric"
+          >
+
+          <button
+            type="button"
+            id="useLoginPhoneButton"
+            class="phone-choice-btn"
+            style="
+              margin-top:7px;
+              width:100%;
+            "
+          >
+            Use Login Number Instead
+          </button>
+
+        </div>
+
+
+        <small class="phone-helper">
+          Your login number is used by default.
+          You can use another number only for this order.
+        </small>
 
       </div>
 
@@ -1903,12 +2453,15 @@
       initializeApp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+
     import {
       getAuth,
-      signInAnonymously,
       onAuthStateChanged,
-      signOut
+      signOut,
+      RecaptchaVerifier,
+      signInWithPhoneNumber
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
     import {
       getDatabase,
@@ -1954,11 +2507,22 @@
     const app =
       initializeApp(firebaseConfig);
 
+
     const auth =
       getAuth(app);
 
+
     const db =
       getDatabase(app);
+
+
+    /* ======================================================
+       ADMIN UID
+       Prevent admin session from being used on customer page.
+    ======================================================= */
+
+    const ADMIN_UID =
+      "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
     /* ======================================================
@@ -2104,23 +2668,403 @@
     let selectedDistanceKm =
       null;
 
+    let confirmationResult =
+      null;
+
+    let recaptchaVerifier =
+      null;
+
+    let loginPhoneNumber =
+      "";
+
 
     /* ======================================================
-       AUTH
+       DOM - LOGIN
     ======================================================= */
 
-    onAuthStateChanged(
-      auth,
-      (user) => {
+    const customerLoginScreen =
+      document.getElementById(
+        "customerLoginScreen"
+      );
 
-        currentUser = user;
+    const phoneLoginStep =
+      document.getElementById(
+        "phoneLoginStep"
+      );
 
-        if (user) {
+    const otpLoginStep =
+      document.getElementById(
+        "otpLoginStep"
+      );
 
-          console.log(
-            "✅ Customer Firebase UID:",
-            user.uid
+    const loginPhoneInput =
+      document.getElementById(
+        "loginPhone"
+      );
+
+    const loginOtpInput =
+      document.getElementById(
+        "loginOtp"
+      );
+
+    const sendOtpButton =
+      document.getElementById(
+        "sendOtpButton"
+      );
+
+    const verifyOtpButton =
+      document.getElementById(
+        "verifyOtpButton"
+      );
+
+    const changeLoginNumber =
+      document.getElementById(
+        "changeLoginNumber"
+      );
+
+    const phoneLoginStatus =
+      document.getElementById(
+        "phoneLoginStatus"
+      );
+
+    const otpLoginStatus =
+      document.getElementById(
+        "otpLoginStatus"
+      );
+
+    const otpSentNumber =
+      document.getElementById(
+        "otpSentNumber"
+      );
+
+
+    /* ======================================================
+       LOGIN HELPERS
+    ======================================================= */
+
+    function phoneDigits(phone) {
+
+      return String(phone || "")
+        .replace(/\D/g, "")
+        .slice(-10);
+
+    }
+
+
+    function formatIndianPhone(phone) {
+
+      const digits =
+        phoneDigits(phone);
+
+      if (
+        digits.length === 10
+      ) {
+
+        return (
+          "+91 " +
+          digits.slice(0, 5) +
+          " " +
+          digits.slice(5)
+        );
+
+      }
+
+      return "+91 " + digits;
+
+    }
+
+
+    function setLoginStatus(
+      element,
+      message,
+      type = ""
+    ) {
+
+      element.textContent =
+        message;
+
+      element.className =
+        "login-status";
+
+      if (type) {
+        element.classList.add(type);
+      }
+
+    }
+
+
+    /* ======================================================
+       FIREBASE RECAPTCHA
+    ======================================================= */
+
+    function setupRecaptcha() {
+
+      if (recaptchaVerifier) {
+        return recaptchaVerifier;
+      }
+
+
+      recaptchaVerifier =
+        new RecaptchaVerifier(
+          auth,
+          "recaptcha-container",
+          {
+            size: "invisible",
+            callback: () => {
+              console.log(
+                "✅ reCAPTCHA verified"
+              );
+            },
+            "expired-callback": () => {
+
+              console.log(
+                "⚠️ reCAPTCHA expired"
+              );
+
+              if (
+                recaptchaVerifier
+              ) {
+
+                try {
+                  recaptchaVerifier.clear();
+                } catch (error) {
+                  console.log(error);
+                }
+
+                recaptchaVerifier =
+                  null;
+
+              }
+
+            }
+          }
+        );
+
+
+      return recaptchaVerifier;
+
+    }
+
+
+    /* ======================================================
+       SEND OTP
+    ======================================================= */
+
+    async function sendLoginOtp() {
+
+      const digits =
+        phoneDigits(
+          loginPhoneInput.value
+        );
+
+
+      if (
+        digits.length !== 10
+      ) {
+
+        setLoginStatus(
+          phoneLoginStatus,
+          "Please enter a valid 10-digit mobile number.",
+          "error"
+        );
+
+        loginPhoneInput.focus();
+
+        return;
+
+      }
+
+
+      const fullPhone =
+        "+91" + digits;
+
+
+      sendOtpButton.disabled =
+        true;
+
+      sendOtpButton.textContent =
+        "SENDING OTP...";
+
+
+      setLoginStatus(
+        phoneLoginStatus,
+        "Please wait..."
+      );
+
+
+      try {
+
+        if (
+          auth.currentUser &&
+          auth.currentUser.uid === ADMIN_UID
+        ) {
+
+          await signOut(auth);
+
+        }
+
+
+        const appVerifier =
+          setupRecaptcha();
+
+
+        confirmationResult =
+          await signInWithPhoneNumber(
+            auth,
+            fullPhone,
+            appVerifier
           );
+
+
+        loginPhoneNumber =
+          digits;
+
+
+        otpSentNumber.textContent =
+          `OTP sent to ${formatIndianPhone(digits)}`;
+
+
+        phoneLoginStep.classList.add(
+          "hidden"
+        );
+
+        otpLoginStep.classList.remove(
+          "hidden"
+        );
+
+
+        setLoginStatus(
+          otpLoginStatus,
+          "Enter the 6-digit OTP sent to your phone.",
+          "success"
+        );
+
+
+        loginOtpInput.value =
+          "";
+
+        loginOtpInput.focus();
+
+
+      } catch (error) {
+
+        console.error(
+          "❌ SEND OTP ERROR:",
+          error
+        );
+
+
+        let message =
+          "Unable to send OTP. Please try again.";
+
+
+        if (
+          error.code ===
+          "auth/invalid-phone-number"
+        ) {
+
+          message =
+            "Invalid mobile number.";
+
+        } else if (
+          error.code ===
+          "auth/too-many-requests"
+        ) {
+
+          message =
+            "Too many attempts. Please try again later.";
+
+        } else if (
+          error.code ===
+          "auth/quota-exceeded"
+        ) {
+
+          message =
+            "OTP limit reached. Please try again later.";
+
+        } else if (
+          error.code ===
+          "auth/unauthorized-domain"
+        ) {
+
+          message =
+            "This website domain is not authorized in Firebase.";
+
+        } else if (
+          error.message
+        ) {
+
+          message =
+            error.message;
+
+        }
+
+
+        setLoginStatus(
+          phoneLoginStatus,
+          message,
+          "error"
+        );
+
+
+        if (
+          recaptchaVerifier
+        ) {
+
+          try {
+
+            recaptchaVerifier.clear();
+
+          } catch (e) {
+            console.log(e);
+          }
+
+          recaptchaVerifier =
+            null;
+
+        }
+
+      } finally {
+
+        sendOtpButton.disabled =
+          false;
+
+        sendOtpButton.textContent =
+          "SEND OTP";
+
+      }
+
+    }
+
+
+    sendOtpButton.addEventListener(
+      "click",
+      sendLoginOtp
+    );
+
+
+    loginPhoneInput.addEventListener(
+      "input",
+      () => {
+
+        loginPhoneInput.value =
+          loginPhoneInput.value
+            .replace(/\D/g, "")
+            .slice(0, 10);
+
+      }
+    );
+
+
+    loginPhoneInput.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          sendLoginOtp();
 
         }
 
@@ -2128,48 +3072,352 @@
     );
 
 
-    async function startCustomerAuth() {
+    /* ======================================================
+       VERIFY OTP
+    ======================================================= */
+
+    async function verifyLoginOtp() {
+
+      const otp =
+        loginOtpInput.value
+          .replace(/\D/g, "")
+          .slice(0, 6);
+
+
+      if (
+        otp.length !== 6
+      ) {
+
+        setLoginStatus(
+          otpLoginStatus,
+          "Please enter the complete 6-digit OTP.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !confirmationResult
+      ) {
+
+        setLoginStatus(
+          otpLoginStatus,
+          "OTP session expired. Please request a new OTP.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      verifyOtpButton.disabled =
+        true;
+
+      verifyOtpButton.textContent =
+        "VERIFYING...";
+
+
+      setLoginStatus(
+        otpLoginStatus,
+        "Verifying your mobile number..."
+      );
+
 
       try {
 
-        if (auth.currentUser) {
-
-          console.log(
-            "Existing Firebase session found. Signing out..."
+        const result =
+          await confirmationResult.confirm(
+            otp
           );
-
-          await signOut(auth);
-
-        }
-
-
-        const credential =
-          await signInAnonymously(auth);
 
 
         currentUser =
-          credential.user;
+          result.user;
 
 
         console.log(
-          "✅ Anonymous customer authentication started:",
+          "✅ Phone customer logged in:",
           currentUser.uid
+        );
+
+
+        loginPhoneNumber =
+          phoneDigits(
+            currentUser.phoneNumber
+          );
+
+
+        setLoginStatus(
+          otpLoginStatus,
+          "Login successful. Welcome to The Queen! 👑",
+          "success"
+        );
+
+
+        setTimeout(
+          () => {
+
+            hideCustomerLogin();
+
+          },
+          600
         );
 
 
       } catch (error) {
 
         console.error(
-          "❌ Anonymous authentication error:",
+          "❌ VERIFY OTP ERROR:",
           error
         );
+
+
+        let message =
+          "Invalid OTP. Please check and try again.";
+
+
+        if (
+          error.code ===
+          "auth/invalid-verification-code"
+        ) {
+
+          message =
+            "Incorrect OTP. Please enter the correct code.";
+
+        } else if (
+          error.code ===
+          "auth/code-expired"
+        ) {
+
+          message =
+            "OTP expired. Please request a new OTP.";
+
+        } else if (
+          error.message
+        ) {
+
+          message =
+            error.message;
+
+        }
+
+
+        setLoginStatus(
+          otpLoginStatus,
+          message,
+          "error"
+        );
+
+      } finally {
+
+        verifyOtpButton.disabled =
+          false;
+
+        verifyOtpButton.textContent =
+          "VERIFY & ENTER THE QUEEN";
 
       }
 
     }
 
 
-    startCustomerAuth();
+    verifyOtpButton.addEventListener(
+      "click",
+      verifyLoginOtp
+    );
+
+
+    loginOtpInput.addEventListener(
+      "input",
+      () => {
+
+        loginOtpInput.value =
+          loginOtpInput.value
+            .replace(/\D/g, "")
+            .slice(0, 6);
+
+      }
+    );
+
+
+    loginOtpInput.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          verifyLoginOtp();
+
+        }
+
+      }
+    );
+
+
+    /* ======================================================
+       CHANGE LOGIN NUMBER
+    ======================================================= */
+
+    changeLoginNumber.addEventListener(
+      "click",
+      () => {
+
+        confirmationResult =
+          null;
+
+        loginOtpInput.value =
+          "";
+
+        otpLoginStep.classList.add(
+          "hidden"
+        );
+
+        phoneLoginStep.classList.remove(
+          "hidden"
+        );
+
+        setLoginStatus(
+          phoneLoginStatus,
+          ""
+        );
+
+        setLoginStatus(
+          otpLoginStatus,
+          ""
+        );
+
+        loginPhoneInput.focus();
+
+      }
+    );
+
+
+    /* ======================================================
+       HIDE LOGIN
+    ======================================================= */
+
+    function hideCustomerLogin() {
+
+      customerLoginScreen.classList.add(
+        "hidden"
+      );
+
+      document.body.classList.remove(
+        "login-locked"
+      );
+
+      updateLoginPhoneDisplay();
+
+      console.log(
+        "👑 Customer area unlocked"
+      );
+
+    }
+
+
+    /* ======================================================
+       SHOW LOGIN
+    ======================================================= */
+
+    function showCustomerLogin() {
+
+      customerLoginScreen.classList.remove(
+        "hidden"
+      );
+
+      document.body.classList.add(
+        "login-locked"
+      );
+
+    }
+
+
+    /* ======================================================
+       AUTH STATE
+    ======================================================= */
+
+    onAuthStateChanged(
+      auth,
+      async (user) => {
+
+        if (!user) {
+
+          currentUser =
+            null;
+
+          showCustomerLogin();
+
+          return;
+
+        }
+
+
+        /* Admin account should never be used
+           as customer account on home.html */
+
+        if (
+          user.uid === ADMIN_UID
+        ) {
+
+          console.log(
+            "Admin session detected on customer page. Signing out."
+          );
+
+          try {
+
+            await signOut(auth);
+
+          } catch (error) {
+
+            console.error(
+              error
+            );
+
+          }
+
+          return;
+
+        }
+
+
+        if (
+          user.phoneNumber
+        ) {
+
+          currentUser =
+            user;
+
+          loginPhoneNumber =
+            phoneDigits(
+              user.phoneNumber
+            );
+
+
+          console.log(
+            "✅ Customer Firebase UID:",
+            user.uid
+          );
+
+
+          hideCustomerLogin();
+
+        } else {
+
+          currentUser =
+            null;
+
+          showCustomerLogin();
+
+        }
+
+      }
+    );
 
 
     /* ======================================================
@@ -2179,7 +3427,10 @@
     function loadRestaurantSettings() {
 
       const settingsRef =
-        ref(db, "settings");
+        ref(
+          db,
+          "settings"
+        );
 
 
       onValue(
@@ -2209,15 +3460,18 @@
           }
 
 
-          if (settings.menu) {
+          if (
+            settings.menu
+          ) {
 
             menu =
               defaultMenu.map(
                 (item) => {
 
                   const firebaseItem =
-                    settings.menu[item.id] ||
-                    {};
+                    settings.menu[
+                      item.id
+                    ] || {};
 
 
                   return {
@@ -2279,61 +3533,253 @@
     ======================================================= */
 
     const menuGrid =
-      document.getElementById("menuGrid");
+      document.getElementById(
+        "menuGrid"
+      );
 
     const cartButton =
-      document.getElementById("cartButton");
+      document.getElementById(
+        "cartButton"
+      );
 
     const cartCount =
-      document.getElementById("cartCount");
+      document.getElementById(
+        "cartCount"
+      );
 
     const cartDrawer =
-      document.getElementById("cartDrawer");
+      document.getElementById(
+        "cartDrawer"
+      );
 
     const overlay =
-      document.getElementById("overlay");
+      document.getElementById(
+        "overlay"
+      );
 
     const closeCart =
-      document.getElementById("closeCart");
+      document.getElementById(
+        "closeCart"
+      );
 
     const cartItems =
-      document.getElementById("cartItems");
+      document.getElementById(
+        "cartItems"
+      );
 
     const cartSubtotal =
-      document.getElementById("cartSubtotal");
+      document.getElementById(
+        "cartSubtotal"
+      );
 
     const cartTotal =
-      document.getElementById("cartTotal");
+      document.getElementById(
+        "cartTotal"
+      );
 
     const checkoutButton =
-      document.getElementById("checkoutButton");
+      document.getElementById(
+        "checkoutButton"
+      );
 
     const checkoutModal =
-      document.getElementById("checkoutModal");
+      document.getElementById(
+        "checkoutModal"
+      );
 
     const closeCheckout =
-      document.getElementById("closeCheckout");
+      document.getElementById(
+        "closeCheckout"
+      );
 
     const placeOrderButton =
-      document.getElementById("placeOrderButton");
+      document.getElementById(
+        "placeOrderButton"
+      );
 
     const locationButton =
-      document.getElementById("locationButton");
+      document.getElementById(
+        "locationButton"
+      );
 
     const locationStatus =
-      document.getElementById("locationStatus");
+      document.getElementById(
+        "locationStatus"
+      );
 
     const trackingOrderId =
-      document.getElementById("trackingOrderId");
+      document.getElementById(
+        "trackingOrderId"
+      );
 
     const trackBtn =
-      document.getElementById("trackBtn");
+      document.getElementById(
+        "trackBtn"
+      );
 
     const trackingResult =
-      document.getElementById("trackingResult");
+      document.getElementById(
+        "trackingResult"
+      );
 
     const toast =
-      document.getElementById("toast");
+      document.getElementById(
+        "toast"
+      );
+
+
+    /* ======================================================
+       CHECKOUT PHONE DOM
+    ======================================================= */
+
+    const loginPhoneDisplay =
+      document.getElementById(
+        "loginPhoneDisplay"
+      );
+
+    const toggleAlternatePhone =
+      document.getElementById(
+        "toggleAlternatePhone"
+      );
+
+    const alternatePhoneWrap =
+      document.getElementById(
+        "alternatePhoneWrap"
+      );
+
+    const customerPhone =
+      document.getElementById(
+        "customerPhone"
+      );
+
+    const useLoginPhoneButton =
+      document.getElementById(
+        "useLoginPhoneButton"
+      );
+
+
+    /* ======================================================
+       PHONE DISPLAY
+    ======================================================= */
+
+    function updateLoginPhoneDisplay() {
+
+      const phone =
+        loginPhoneNumber ||
+        (
+          currentUser &&
+          currentUser.phoneNumber
+            ? phoneDigits(
+                currentUser.phoneNumber
+              )
+            : ""
+        );
+
+
+      if (
+        phone.length === 10
+      ) {
+
+        loginPhoneDisplay.textContent =
+          formatIndianPhone(phone);
+
+      } else {
+
+        loginPhoneDisplay.textContent =
+          "+91 —";
+
+      }
+
+    }
+
+
+    /* ======================================================
+       RESET CHECKOUT PHONE
+    ======================================================= */
+
+    function resetCheckoutPhone() {
+
+      updateLoginPhoneDisplay();
+
+      alternatePhoneWrap.classList.remove(
+        "show"
+      );
+
+      customerPhone.value =
+        "";
+
+      toggleAlternatePhone.textContent =
+        "Use Another Number";
+
+    }
+
+
+    toggleAlternatePhone.addEventListener(
+      "click",
+      () => {
+
+        if (
+          alternatePhoneWrap.classList.contains(
+            "show"
+          )
+        ) {
+
+          alternatePhoneWrap.classList.remove(
+            "show"
+          );
+
+          customerPhone.value =
+            "";
+
+          toggleAlternatePhone.textContent =
+            "Use Another Number";
+
+        } else {
+
+          alternatePhoneWrap.classList.add(
+            "show"
+          );
+
+          toggleAlternatePhone.textContent =
+            "Using Another Number";
+
+          customerPhone.focus();
+
+        }
+
+      }
+    );
+
+
+    useLoginPhoneButton.addEventListener(
+      "click",
+      () => {
+
+        alternatePhoneWrap.classList.remove(
+          "show"
+        );
+
+        customerPhone.value =
+          "";
+
+        toggleAlternatePhone.textContent =
+          "Use Another Number";
+
+      }
+    );
+
+
+    customerPhone.addEventListener(
+      "input",
+      () => {
+
+        customerPhone.value =
+          customerPhone.value
+            .replace(/\D/g, "")
+            .slice(0, 10);
+
+      }
+    );
 
 
     /* ======================================================
@@ -2357,15 +3803,32 @@
         value === null ||
         value === undefined
       ) {
+
         return "";
+
       }
 
       return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
     }
 
@@ -2375,14 +3838,21 @@
       toast.textContent =
         message;
 
-      toast.classList.add("show");
+      toast.classList.add(
+        "show"
+      );
 
 
-      setTimeout(() => {
+      setTimeout(
+        () => {
 
-        toast.classList.remove("show");
+          toast.classList.remove(
+            "show"
+          );
 
-      }, 2800);
+        },
+        2800
+      );
 
     }
 
@@ -2396,6 +3866,7 @@
       if (!menu.length) {
 
         menuGrid.innerHTML = `
+
           <div style="
             grid-column:1/-1;
             text-align:center;
@@ -2404,6 +3875,7 @@
           ">
             Menu unavailable.
           </div>
+
         `;
 
         return;
@@ -2455,7 +3927,9 @@
 
 
       document
-        .querySelectorAll(".add-btn")
+        .querySelectorAll(
+          ".add-btn"
+        )
         .forEach(
           (button) => {
 
@@ -2481,6 +3955,19 @@
     ======================================================= */
 
     function addToCart(id) {
+
+      if (!currentUser) {
+
+        showToast(
+          "Please login first."
+        );
+
+        showCustomerLogin();
+
+        return;
+
+      }
+
 
       const item =
         menu.find(
@@ -2509,15 +3996,20 @@
 
         cart.push({
 
-          id: item.id,
+          id:
+            item.id,
 
-          name: item.name,
+          name:
+            item.name,
 
-          price: Number(item.price),
+          price:
+            Number(item.price),
 
-          image: item.image,
+          image:
+            item.image,
 
-          quantity: 1
+          quantity:
+            1
 
         });
 
@@ -2525,6 +4017,7 @@
 
 
       renderCart();
+
 
       showToast(
         `${item.name} added to cart`
@@ -2590,17 +4083,22 @@
 
         `;
 
+
         cartSubtotal.textContent =
           "₹0";
+
 
         cartTotal.textContent =
           "₹0";
 
+
         checkoutButton.disabled =
           true;
 
+
         checkoutButton.style.opacity =
           "0.5";
+
 
         return;
 
@@ -2609,6 +4107,7 @@
 
       checkoutButton.disabled =
         false;
+
 
       checkoutButton.style.opacity =
         "1";
@@ -2687,6 +4186,7 @@
       cartSubtotal.textContent =
         money(subtotal);
 
+
       cartTotal.textContent =
         money(subtotal);
 
@@ -2733,18 +4233,25 @@
       }
 
 
-      if (action === "plus") {
+      if (
+        action === "plus"
+      ) {
 
         item.quantity += 1;
 
       }
 
 
-      if (action === "minus") {
+      if (
+        action === "minus"
+      ) {
 
         item.quantity -= 1;
 
-        if (item.quantity <= 0) {
+
+        if (
+          item.quantity <= 0
+        ) {
 
           cart =
             cart.filter(
@@ -2757,7 +4264,9 @@
       }
 
 
-      if (action === "remove") {
+      if (
+        action === "remove"
+      ) {
 
         cart =
           cart.filter(
@@ -2779,18 +4288,39 @@
 
     function openCart() {
 
-      cartDrawer.classList.add("open");
+      if (!currentUser) {
 
-      overlay.classList.add("show");
+        showToast(
+          "Please login first."
+        );
+
+        showCustomerLogin();
+
+        return;
+
+      }
+
+
+      cartDrawer.classList.add(
+        "open"
+      );
+
+      overlay.classList.add(
+        "show"
+      );
 
     }
 
 
     function closeCartDrawer() {
 
-      cartDrawer.classList.remove("open");
+      cartDrawer.classList.remove(
+        "open"
+      );
 
-      overlay.classList.remove("show");
+      overlay.classList.remove(
+        "show"
+      );
 
     }
 
@@ -2821,6 +4351,17 @@
       "click",
       () => {
 
+        if (!currentUser) {
+
+          showToast(
+            "Please login first."
+          );
+
+          return;
+
+        }
+
+
         if (!cart.length) {
 
           showToast(
@@ -2828,12 +4369,20 @@
           );
 
           return;
+
         }
 
 
         closeCartDrawer();
 
-        checkoutModal.classList.add("show");
+
+        resetCheckoutPhone();
+
+
+        checkoutModal.classList.add(
+          "show"
+        );
+
 
         updateCheckoutSummary();
 
@@ -2964,6 +4513,7 @@
             "Location is not supported by this browser.";
 
           return;
+
         }
 
 
@@ -2976,6 +4526,7 @@
 
             selectedLat =
               position.coords.latitude;
+
 
             selectedLng =
               position.coords.longitude;
@@ -3042,9 +4593,15 @@
 
           },
           {
-            enableHighAccuracy: true,
-            timeout: 15000,
-            maximumAge: 0
+            enableHighAccuracy:
+              true,
+
+            timeout:
+              15000,
+
+            maximumAge:
+              0
+
           }
         );
 
@@ -3126,13 +4683,19 @@
       const mm =
         String(
           now.getMonth() + 1
-        ).padStart(2, "0");
+        ).padStart(
+          2,
+          "0"
+        );
 
 
       const dd =
         String(
           now.getDate()
-        ).padStart(2, "0");
+        ).padStart(
+          2,
+          "0"
+        );
 
 
       const random =
@@ -3164,6 +4727,20 @@
           );
 
           return;
+
+        }
+
+
+        if (!currentUser) {
+
+          showToast(
+            "Please login first."
+          );
+
+          showCustomerLogin();
+
+          return;
+
         }
 
 
@@ -3173,11 +4750,32 @@
           ).value.trim();
 
 
-        const customerPhone =
-          document.getElementById(
-            "customerPhone"
-          ).value
-            .replace(/\D/g, "");
+        const loginPhone =
+          phoneDigits(
+            currentUser.phoneNumber ||
+            loginPhoneNumber
+          );
+
+
+        let orderContactPhone =
+          loginPhone;
+
+
+        /* ================================================
+           If user selected another number
+        ================================================= */
+
+        if (
+          alternatePhoneWrap.classList.contains(
+            "show"
+          )
+        ) {
+
+          orderContactPhone =
+            customerPhone.value
+              .replace(/\D/g, "");
+
+        }
 
 
         const customerAddress =
@@ -3199,18 +4797,33 @@
           );
 
           return;
+
         }
 
 
         if (
-          customerPhone.length !== 10
+          loginPhone.length !== 10
         ) {
 
           showToast(
-            "Please enter a valid 10-digit mobile number."
+            "Your login mobile number is invalid. Please login again."
           );
 
           return;
+
+        }
+
+
+        if (
+          orderContactPhone.length !== 10
+        ) {
+
+          showToast(
+            "Please enter a valid 10-digit order contact number."
+          );
+
+          return;
+
         }
 
 
@@ -3221,12 +4834,13 @@
           );
 
           return;
+
         }
 
 
         if (
-          !selectedLat ||
-          !selectedLng
+          selectedLat === null ||
+          selectedLng === null
         ) {
 
           showToast(
@@ -3234,11 +4848,13 @@
           );
 
           return;
+
         }
 
 
         placeOrderButton.disabled =
           true;
+
 
         placeOrderButton.textContent =
           "PLACING ORDER...";
@@ -3246,12 +4862,9 @@
 
         try {
 
-          if (!currentUser) {
-
-            await startCustomerAuth();
-
-          }
-
+          /* ==============================================
+             AUTH CHECK
+          ============================================== */
 
           if (!currentUser) {
 
@@ -3281,6 +4894,7 @@
                 selectedLat,
                 selectedLng
               );
+
 
             selectedDistanceKm =
               distanceKm;
@@ -3312,11 +4926,14 @@
             cart.map(
               (item) => ({
 
-                id: item.id,
+                id:
+                  item.id,
 
-                name: item.name,
+                name:
+                  item.name,
 
-                price: Number(item.price),
+                price:
+                  Number(item.price),
 
                 quantity:
                   Number(item.quantity),
@@ -3329,68 +4946,65 @@
             );
 
 
+          /* ==============================================
+             IMPORTANT:
+             loginPhone and orderContactPhone are separate.
+             phone is kept for old admin compatibility.
+          ============================================== */
+
           const order = {
 
             orderId:
-
               orderId,
 
             ownerUid:
-
               currentUser.uid,
 
             customerName:
-
               customerName,
 
-            phone:
+            loginPhone:
+              loginPhone,
 
-              customerPhone,
+            orderContactPhone:
+              orderContactPhone,
+
+            phone:
+              orderContactPhone,
 
             address:
-
               customerAddress,
 
             paymentMethod:
-
               paymentMethod,
 
             items:
-
               orderItems,
 
             subtotal:
-
               subtotal,
 
             distanceKm:
-
               Number(
                 distanceKm.toFixed(2)
               ),
 
             deliveryCharge:
-
               deliveryCharge,
 
             total:
-
               grandTotal,
 
             customerLat:
-
               selectedLat,
 
             customerLng:
-
               selectedLng,
 
             status:
-
               "received",
 
             createdAt:
-
               new Date().toISOString()
 
           };
@@ -3429,7 +5043,9 @@
 
             `👤 *Name:* ${customerName}%0A` +
 
-            `📱 *Mobile:* ${customerPhone}%0A` +
+            `📱 *Login Mobile:* ${loginPhone}%0A` +
+
+            `☎️ *Order Contact:* ${orderContactPhone}%0A` +
 
             `📍 *Address:* ${customerAddress}%0A%0A` +
 
@@ -3471,7 +5087,12 @@
             `https://wa.me/91${cleanNumber}?text=${whatsappText}`;
 
 
+          /* ==============================================
+             CLEAR CART
+          ============================================== */
+
           cart = [];
+
 
           renderCart();
 
@@ -3496,23 +5117,37 @@
           );
 
 
-          setTimeout(() => {
+          /* ==============================================
+             OPEN WHATSAPP
+          ============================================== */
 
-            window.open(
-              whatsappUrl,
-              "_blank"
-            );
+          setTimeout(
+            () => {
 
-          }, 500);
+              window.open(
+                whatsappUrl,
+                "_blank"
+              );
+
+            },
+            500
+          );
 
 
-          setTimeout(() => {
+          /* ==============================================
+             START TRACKING
+          ============================================== */
 
-            trackOrder(
-              orderId
-            );
+          setTimeout(
+            () => {
 
-          }, 700);
+              trackOrder(
+                orderId
+              );
+
+            },
+            700
+          );
 
 
         } catch (error) {
@@ -3532,6 +5167,7 @@
 
           placeOrderButton.disabled =
             false;
+
 
           placeOrderButton.textContent =
             "PLACE ORDER";
@@ -3562,6 +5198,7 @@
           );
 
           return;
+
         }
 
 
@@ -3576,6 +5213,19 @@
     function trackOrder(
       orderId
     ) {
+
+      if (!currentUser) {
+
+        showToast(
+          "Please login first."
+        );
+
+        showCustomerLogin();
+
+        return;
+
+      }
+
 
       trackingResult.innerHTML = `
 
@@ -3708,7 +5358,8 @@
       ];
 
 
-      let stepsHTML = "";
+      let stepsHTML =
+        "";
 
 
       statuses.forEach(
@@ -3721,7 +5372,9 @@
           stepsHTML += `
 
             <div class="step ${
-              active ? "active" : ""
+              active
+                ? "active"
+                : ""
             }">
 
               <div class="step-dot">
@@ -3747,7 +5400,9 @@
 
 
       const itemText =
-        Array.isArray(order.items)
+        Array.isArray(
+          order.items
+        )
           ? order.items
               .map(
                 item =>
@@ -3762,9 +5417,14 @@
         <div class="track-status">
 
           ${
-            currentStatus === "delivered"
+            currentStatus ===
+            "delivered"
+
               ? "🎉 Order Delivered!"
-              : statusText(currentStatus)
+
+              : statusText(
+                  currentStatus
+                )
           }
 
         </div>
@@ -3871,6 +5531,8 @@
 
     renderCart();
 
+    updateLoginPhoneDisplay();
+
 
     console.log(
       "🔥 THE QUEEN FAST FOOD HOME STARTED"
@@ -3880,4 +5542,3 @@
 
 </body>
 </html>
-```
