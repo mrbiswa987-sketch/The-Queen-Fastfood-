@@ -760,17 +760,10 @@ function showCheckout(){
 /* PLACE ORDER */
 function placeOrder(){
 
-  let name =
-    document.getElementById("customerName").value.trim();
-
-  let phone =
-    document.getElementById("customerPhone").value.trim();
-
-  let address =
-    document.getElementById("customerAddress").value.trim();
-
-  let payment =
-    document.getElementById("paymentMethod").value;
+  let name = document.getElementById("customerName").value.trim();
+  let phone = document.getElementById("customerPhone").value.trim();
+  let address = document.getElementById("customerAddress").value.trim();
+  let payment = document.getElementById("paymentMethod").value;
 
   if(name === ""){
     alert("Please enter your name.");
@@ -787,56 +780,52 @@ function placeOrder(){
     return;
   }
 
-  let orderText = "";
+  if(cart.length === 0){
+    alert("Your cart is empty.");
+    return;
+  }
+
+  let subtotal = 0;
+  let orderItems = "";
 
   cart.forEach(item => {
 
-    orderText +=
-      item.name +
-      " × " +
-      item.quantity +
-      " = ₹" +
-      (item.price * item.quantity) +
-      "\n";
+    let itemTotal = item.price * item.quantity;
 
+    subtotal += itemTotal;
+
+    orderItems +=
+      "• " + item.name +
+      " × " + item.quantity +
+      " = ₹" + itemTotal + "\n";
   });
 
-  let subtotal =
-    cart.reduce(
-      (total,item) =>
-      total + item.price * item.quantity,
-      0
-    );
+  let delivery = 0;
+  let grandTotal = subtotal + delivery;
 
-  let total = subtotal;
+  let message =
+    "👑 *THE QUEEN FAST FOOD*\n\n" +
+    "🛍️ *NEW ORDER*\n\n" +
+    "👤 Name: " + name + "\n" +
+    "📱 Phone: " + phone + "\n" +
+    "📍 Address: " + address + "\n\n" +
 
-  alert(
-    "Order Placed Successfully! 🎉\n\n" +
-    "Thank you, " + name + "!\n\n" +
-    "Your Order:\n" +
-    orderText +
-    "\nTotal: ₹" + total +
-    "\nPayment: " + payment +
-    "\n\nThe Queen Fast Food"
-  );
+    "🍽️ *ORDER ITEMS*\n" +
+    orderItems + "\n" +
 
-  cart = [];
+    "💰 Subtotal: ₹" + subtotal + "\n" +
+    "🚚 Delivery: ₹" + delivery + "\n" +
+    "💵 *TOTAL: ₹" + grandTotal + "*\n\n" +
 
-  updateCart();
+    "💳 Payment: " + payment;
 
-  document.getElementById("checkoutSection").style.display = "none";
+  let whatsappNumber = "9090220791";
 
-  document.getElementById("customerName").value = "";
-  document.getElementById("customerPhone").value = "";
-  document.getElementById("customerAddress").value = "";
+  let whatsappURL =
+    "https://wa.me/91" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(message);
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+  window.open(whatsappURL, "_blank");
 }
-
-</script>
-
-</body>
-</html>
