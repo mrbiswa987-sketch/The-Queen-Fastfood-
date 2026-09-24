@@ -786,10 +786,7 @@
 
   </div>
 
-  <div
-    class="menu-grid"
-    id="menuGrid">
-  </div>
+  <div class="menu-grid" id="menuGrid"></div>
 
 </section>
 
@@ -858,11 +855,9 @@
       to you with the Queen touch.
 
       <div class="contact-detail">
-
         📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha
         &nbsp; • &nbsp;
         📞 97768 56111
-
       </div>
 
     </div>
@@ -873,9 +868,7 @@
 
 <footer>
 
-  <strong>
-    The Queen Fast Food
-  </strong>
+  <strong>The Queen Fast Food</strong>
 
   <br>
 
@@ -886,6 +879,7 @@
   📞 97768 56111
 
 </footer>
+
 
 <!-- CART -->
 
@@ -928,6 +922,7 @@
 
 </div>
 
+
 <!-- CHECKOUT -->
 
 <div class="modal" id="checkoutModal">
@@ -965,6 +960,7 @@
         id="customerPhone"
         type="tel"
         maxlength="10"
+        inputmode="numeric"
         placeholder="10 digit mobile number">
 
     </div>
@@ -987,10 +983,7 @@
 
     </button>
 
-    <div
-      id="locationResult"
-      class="location-result">
-    </div>
+    <div id="locationResult" class="location-result"></div>
 
     <div class="form-group">
 
@@ -1061,6 +1054,7 @@
 
 </div>
 
+
 <!-- TRACKING -->
 
 <div class="modal" id="trackingModal">
@@ -1106,7 +1100,9 @@
 
 </div>
 
+
 <div class="toast" id="toast"></div>
+
 
 <script type="module">
 
@@ -1165,10 +1161,8 @@ const firebaseConfig = {
 const app =
   initializeApp(firebaseConfig);
 
-
 const auth =
   getAuth(app);
-
 
 const db =
   getDatabase(
@@ -1320,19 +1314,6 @@ let closedMessage =
 
 let currentUser = null;
 
-
-/* =========================================================
-   WHATSAPP ORDER NUMBER
-=========================================================
-
-   DEFAULT:
-   9090220791
-
-   If Admin Panel has saved another number
-   inside /settings/whatsappNumber,
-   that number will automatically replace this.
-========================================================= */
-
 let whatsappNumber =
   "9090220791";
 
@@ -1384,9 +1365,14 @@ function showToast(message){
 
 window.closeModal = function(id){
 
-  document
-    .getElementById(id)
-    .classList.remove("show");
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+
+    modal.classList.remove("show");
+
+  }
 
 };
 
@@ -1402,6 +1388,7 @@ async function startCustomerAuth(){
     console.log(
       "Starting anonymous customer authentication..."
     );
+
 
     let user =
       auth.currentUser;
@@ -1427,33 +1414,14 @@ async function startCustomerAuth(){
     }
 
 
-    if(user.uid === ADMIN_UID){
-
-      throw new Error(
-        "Admin account detected on customer page."
-      );
-
-    }
-
-
-    const token =
-      await getIdToken(
-        user,
-        true
-      );
-
-
-    if(!token){
-
-      throw new Error(
-        "Firebase ID token could not be created."
-      );
-
-    }
-
-
     currentUser =
       user;
+
+
+    await getIdToken(
+      currentUser,
+      true
+    );
 
 
     console.log(
@@ -1463,12 +1431,12 @@ async function startCustomerAuth(){
 
 
     console.log(
-      "Firebase ID token ready: YES"
+      "Firebase authentication: READY"
     );
 
 
     console.log(
-      "Realtime Database URL:",
+      "Firebase database:",
       firebaseConfig.databaseURL
     );
 
@@ -1486,13 +1454,13 @@ async function startCustomerAuth(){
 
 
     console.error(
-      "Firebase error code:",
+      "Error code:",
       error?.code
     );
 
 
     console.error(
-      "Firebase error message:",
+      "Error message:",
       error?.message
     );
 
@@ -1504,9 +1472,24 @@ async function startCustomerAuth(){
     authReadyResolve();
 
 
-    showToast(
-      "Customer connection failed. Please refresh and try again."
-    );
+    if(
+      error?.code ===
+      "auth/operation-not-allowed"
+    ){
+
+      showToast(
+        "Anonymous Login is disabled. Enable it in Firebase Authentication."
+      );
+
+    }
+
+    else{
+
+      showToast(
+        "Customer connection failed. Please refresh."
+      );
+
+    }
 
   }
 
@@ -1514,7 +1497,7 @@ async function startCustomerAuth(){
 
 
 /* =========================================================
-   SHOP TIME
+   INDIA TIME
 ========================================================= */
 
 function getIndiaTime(){
@@ -1538,13 +1521,18 @@ function getIndiaTime(){
   for(const part of parts){
 
     if(part.type === "hour"){
+
       hour =
         Number(part.value);
+
     }
 
+
     if(part.type === "minute"){
+
       minute =
         Number(part.value);
+
     }
 
   }
@@ -1566,6 +1554,7 @@ function getIndiaTime(){
 
 /* =========================================================
    SHOP STATUS
+   12:00 PM TO 11:00 PM
 ========================================================= */
 
 function updateShopStatus(){
@@ -1602,7 +1591,7 @@ function updateShopStatus(){
 
 
   const closingTime =
-    (21 * 60) + 30;
+    23 * 60;
 
 
   if(
@@ -1616,7 +1605,7 @@ function updateShopStatus(){
       "status preopen";
 
     statusBox.textContent =
-      "Your order will be booked after 12 o’clock.";
+      "The Queen Fast Food opens at 12:00 PM.";
 
   }
 
@@ -1631,7 +1620,7 @@ function updateShopStatus(){
       "status open";
 
     statusBox.textContent =
-      "🟢 The Queen Fast Food is OPEN • Orders accepted until 9:30 PM.";
+      "🟢 The Queen Fast Food is OPEN • Orders accepted until 11:00 PM.";
 
   }
 
@@ -1643,7 +1632,7 @@ function updateShopStatus(){
       "status closed";
 
     statusBox.textContent =
-      "The Queen Fast Food is closed. You can order between 12:00 PM and 9:30 PM.";
+      "The Queen Fast Food is closed. You can order between 12:00 PM and 11:00 PM.";
 
   }
 
@@ -1654,7 +1643,7 @@ function updateShopStatus(){
 
 
 /* =========================================================
-   LOAD SHOP SETTINGS
+   LOAD SETTINGS
 ========================================================= */
 
 async function loadShopSettings(){
@@ -1683,14 +1672,12 @@ async function loadShopSettings(){
       ){
 
         closedMessage =
-          String(settings.closedMessage).trim();
+          String(
+            settings.closedMessage
+          ).trim();
 
       }
 
-
-      /* =========================================
-         LOAD WHATSAPP NUMBER FROM ADMIN PANEL
-      ========================================= */
 
       if(
         settings.whatsappNumber &&
@@ -1714,7 +1701,6 @@ async function loadShopSettings(){
 
     }
 
-
   }
 
   catch(error){
@@ -1723,7 +1709,6 @@ async function loadShopSettings(){
       "Settings error:",
       error
     );
-
 
     manualClosed =
       false;
@@ -1806,7 +1791,7 @@ function renderMenu(){
 
 
 /* =========================================================
-   CART
+   ADD TO CART
 ========================================================= */
 
 window.addToCart =
@@ -1829,7 +1814,11 @@ function(id){
     );
 
 
-  if(!item) return;
+  if(!item){
+
+    return;
+
+  }
 
 
   const existing =
@@ -1867,6 +1856,10 @@ function(id){
 };
 
 
+/* =========================================================
+   QUANTITY
+========================================================= */
+
 window.changeQuantity =
 function(id,change){
 
@@ -1876,7 +1869,11 @@ function(id,change){
     );
 
 
-  if(!item) return;
+  if(!item){
+
+    return;
+
+  }
 
 
   item.quantity += change;
@@ -1897,6 +1894,10 @@ function(id,change){
 };
 
 
+/* =========================================================
+   SUBTOTAL
+========================================================= */
+
 function getSubtotal(){
 
   return cart.reduce(
@@ -1914,6 +1915,10 @@ function getSubtotal(){
 
 }
 
+
+/* =========================================================
+   UPDATE CART
+========================================================= */
 
 function updateCart(){
 
@@ -2013,7 +2018,7 @@ function updateCart(){
 
 
 /* =========================================================
-   BUTTON CONTROL
+   BUTTONS
 ========================================================= */
 
 function updateOrderButtons(){
@@ -2127,7 +2132,7 @@ async function(){
 
 
 /* =========================================================
-   LOCATION
+   CUSTOMER LOCATION
 ========================================================= */
 
 window.getCustomerLocation =
@@ -2206,7 +2211,7 @@ function(){
 
 
 /* =========================================================
-   DELIVERY CALCULATION
+   DELIVERY
 ========================================================= */
 
 async function calculateDelivery(){
@@ -2353,6 +2358,10 @@ async function calculateDelivery(){
 }
 
 
+/* =========================================================
+   DELIVERY PREVIEW
+========================================================= */
+
 function calculateDeliveryPreview(){
 
   if(selectedLat !== null){
@@ -2390,6 +2399,10 @@ function calculateDeliveryPreview(){
 
 }
 
+
+/* =========================================================
+   TOTAL
+========================================================= */
 
 function updateCheckoutTotal(){
 
@@ -2551,32 +2564,9 @@ async function(){
     }
 
 
-    if(
-      currentUser.uid === ADMIN_UID
-    ){
-
-      throw new Error(
-        "Admin account cannot place customer orders."
-      );
-
-    }
-
-
     await getIdToken(
       currentUser,
       true
-    );
-
-
-    console.log(
-      "FINAL AUTH UID:",
-      currentUser.uid
-    );
-
-
-    console.log(
-      "FINAL DATABASE URL:",
-      firebaseConfig.databaseURL
     );
 
 
@@ -2636,9 +2626,6 @@ async function(){
 
       customerName:
         customerName,
-
-      loginPhone:
-        "",
 
       orderContactPhone:
         customerPhone,
@@ -2721,6 +2708,11 @@ async function(){
     );
 
 
+    sendWhatsAppOrder(
+      orderData
+    );
+
+
     setTimeout(() => {
 
       openTrackingWithId(
@@ -2728,11 +2720,6 @@ async function(){
       );
 
     },700);
-
-
-    sendWhatsAppOrder(
-      orderData
-    );
 
 
   }
@@ -2763,29 +2750,29 @@ async function(){
     ){
 
       showToast(
-        "Firebase permission denied. Please refresh the page."
+        "Firebase permission denied. Check Anonymous Authentication."
       );
 
     }
 
     else if(
-      error?.message ===
-      "Customer authentication is not ready."
+      error?.code ===
+      "PERMISSION_DENIED: Permission denied"
     ){
 
       showToast(
-        "Customer connection failed. Please refresh and try again."
+        "Firebase permission denied. Check Database Rules."
       );
 
     }
 
     else if(
-      error?.message ===
-      "Admin account cannot place customer orders."
+      error?.code ===
+      "auth/operation-not-allowed"
     ){
 
       showToast(
-        "Please open the customer page in a normal browser session."
+        "Enable Anonymous Authentication in Firebase."
       );
 
     }
@@ -2817,19 +2804,10 @@ async function(){
 
 
 /* =========================================================
-   WHATSAPP ORDER
+   WHATSAPP
 ========================================================= */
 
 function sendWhatsAppOrder(order){
-
-  /*
-    Default number:
-    9090220791
-
-    Admin Panel ru Firebase re
-    number change kale eita automatically
-    nua number use kariba.
-  */
 
   let number =
     String(
@@ -2837,16 +2815,6 @@ function sendWhatsAppOrder(order){
     )
     .replace(/\D/g,"");
 
-
-  /*
-    Convert 10 digit Indian number
-    to WhatsApp international format.
-    
-    Example:
-    9090220791
-    →
-    919090220791
-  */
 
   if(number.length === 10){
 
@@ -2856,68 +2824,62 @@ function sendWhatsAppOrder(order){
   }
 
 
-  console.log(
-    "WhatsApp Order Number:",
-    number
-  );
-
-
   let message =
-    `*THE QUEEN FAST FOOD*%0A` +
-    `━━━━━━━━━━━━━━━━%0A` +
-    `*New Order*%0A%0A`;
+    `*THE QUEEN FAST FOOD*\n` +
+    `━━━━━━━━━━━━━━━━\n` +
+    `*New Order*\n\n`;
 
 
   message +=
-    `Order ID: ${order.orderId}%0A`;
+    `Order ID: ${order.orderId}\n`;
 
 
   message +=
-    `Customer: ${order.customerName}%0A`;
+    `Customer: ${order.customerName}\n`;
 
 
   message +=
-    `Phone: ${order.phone}%0A`;
+    `Phone: ${order.phone}\n`;
 
 
   message +=
-    `Address: ${order.address}%0A`;
+    `Address: ${order.address}\n`;
 
 
   message +=
-    `Payment: ${order.paymentMethod}%0A%0A`;
+    `Payment: ${order.paymentMethod}\n\n`;
 
 
   message +=
-    `*Items:*%0A`;
+    `*Items:*\n`;
 
 
   order.items.forEach(item => {
 
     message +=
-      `${item.name} × ${item.quantity} = ₹${item.total}%0A`;
+      `${item.name} × ${item.quantity} = ₹${item.total}\n`;
 
   });
 
 
   message +=
-    `%0AFood Total: ₹${order.subtotal}%0A`;
+    `\nFood Total: ₹${order.subtotal}\n`;
 
 
   message +=
-    `Delivery: ₹${order.deliveryCharge}%0A`;
+    `Delivery: ₹${order.deliveryCharge}\n`;
 
 
   message +=
-    `Distance: ${order.distanceKm} km%0A`;
+    `Distance: ${order.distanceKm} km\n`;
 
 
   message +=
-    `*TOTAL: ₹${order.total}*%0A`;
+    `*TOTAL: ₹${order.total}*`;
 
 
   const url =
-    `https://wa.me/${number}?text=${message}`;
+    `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 
 
   console.log(
@@ -3010,27 +2972,9 @@ async function(){
     }
 
 
-    if(
-      currentUser.uid ===
-      ADMIN_UID
-    ){
-
-      throw new Error(
-        "Admin account cannot track customer orders here."
-      );
-
-    }
-
-
     await getIdToken(
       currentUser,
       true
-    );
-
-
-    console.log(
-      "Tracking customer UID:",
-      currentUser.uid
     );
 
 
@@ -3101,38 +3045,31 @@ async function(){
 
 
     if(status === "received"){
-      statusText =
-        "Order Received";
+      statusText = "Order Received";
     }
 
     if(status === "confirmed"){
-      statusText =
-        "Order Confirmed";
+      statusText = "Order Confirmed";
     }
 
     if(status === "preparing"){
-      statusText =
-        "Preparing Your Food";
+      statusText = "Preparing Your Food";
     }
 
     if(status === "ready"){
-      statusText =
-        "Ready for Delivery";
+      statusText = "Ready for Delivery";
     }
 
     if(status === "out_for_delivery"){
-      statusText =
-        "Out for Delivery";
+      statusText = "Out for Delivery";
     }
 
     if(status === "delivered"){
-      statusText =
-        "Delivered";
+      statusText = "Delivered";
     }
 
     if(status === "cancelled"){
-      statusText =
-        "Cancelled";
+      statusText = "Cancelled";
     }
 
 
@@ -3179,7 +3116,6 @@ async function(){
 
     `;
 
-
   }
 
   catch(error){
@@ -3221,7 +3157,7 @@ async function(){
 
 
 /* =========================================================
-   SHOP STATUS AUTO REFRESH
+   AUTO SHOP STATUS
 ========================================================= */
 
 setInterval(
