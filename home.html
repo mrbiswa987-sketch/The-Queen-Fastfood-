@@ -1576,195 +1576,118 @@ function showCheckout(){
 
 /* ================= PLACE ORDER ================= */
 
-function placeOrder(){
+async function placeOrder() {
 
-  let name =
-    document
-      .getElementById("customerName")
-      .value
-      .trim();
-
-
-  let phone =
-    document
-      .getElementById("customerPhone")
-      .value
-      .trim();
-
-
-  let address =
-    document
-      .getElementById("customerAddress")
-      .value
-      .trim();
-
-
-  let payment =
-    document
-      .getElementById("paymentMethod")
-      .value;
-
-
-  /* Validation */
-
-  if(name === ""){
-
-    alert("Please enter your name.");
-
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
     return;
   }
 
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+  const payment = document.getElementById("paymentMethod").value;
 
-  if(!/^[0-9]{10}$/.test(phone)){
+  if (!name || !phone || !address) {
+    alert("Please fill all customer details.");
+    return;
+  }
 
-    alert(
-      "Please enter a valid 10 digit mobile number."
+  // The Queen Fast Food coordinates
+  const restaurantLat = 20.216780359694468;
+  const restaurantLng = 86.36464363454978;
+
+  try {
+
+    // Convert customer address into coordinates
+    const geoURL =
+      "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
+      encodeURIComponent(address + ", Odisha, India");
+
+    const geoResponse = await fetch(geoURL, {
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    const geoData = await geoResponse.json();
+
+    if (!geoData.length) {
+      alert("Delivery location not found. Please enter a complete address.");
+      return;
+    }
+
+    const customerLat = parseFloat(geoData[0].lat);
+    const customerLng = parseFloat(geoData[0].lon);
+
+    // Calculate actual road distance
+    const routeURL =
+      `https://router.project-osrm.org/route/v1/driving/` +
+      `${restaurantLng},${restaurantLat};${customerLng},${customerLat}` +
+      `?overview=false`;
+
+    const routeResponse = await fetch(routeURL);
+    const routeData = await routeResponse.json();
+
+    if (routeData.code !== "Ok" || !routeData.routes.length) {
+      alert("Unable to calculate delivery distance.");
+      return;
+    }
+
+    // Distance in KM
+    const distanceKm = routeData.routes[0].distance / 1000;
+
+    // ₹6 per KM
+    const deliveryCharge = Math.ceil(distanceKm) * 6;
+
+    const subtotal = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
     );
 
-    return;
-  }
+    const grandTotal = subtotal + deliveryCharge;
 
+    // Create order message
+    let message = `👑 THE QUEEN FAST FOOD%0A%0A`;
 
-  if(address === ""){
+    message += `🛒 ORDER DETAILS%0A`;
+
+    cart.forEach((item) => {
+      message += `${item.name} × ${item.quantity} = ₹${item.price * item.quantity}%0A`;
+    });
+
+    message += `%0A`;
+    message += `Subtotal: ₹${subtotal}%0A`;
+    message += `Delivery Distance: ${distanceKm.toFixed(1)} KM%0A`;
+    message += `Delivery Charge: ₹${deliveryCharge}%0A`;
+    message += `Grand Total: ₹${grandTotal}%0A%0A`;
+
+    message += `👤 CUSTOMER DETAILS%0A`;
+    message += `Name: ${name}%0A`;
+    message += `Mobile: ${phone}%0A`;
+    message += `Address: ${address}%0A`;
+    message += `Payment: ${payment}%0A%0A`;
+
+    message += `Thank you for ordering from The Queen Fast Food! 👑`;
+
+    const whatsappNumber = "9090220791";
+
+    const whatsappURL =
+      "https://wa.me/91" +
+      whatsappNumber +
+      "?text=" +
+      message;
+
+    document.getElementById("thankYou").style.display = "block";
+
+    window.location.href = whatsappURL;
+
+  } catch (error) {
+
+    console.error(error);
 
     alert(
-      "Please enter your delivery address."
+      "Unable to calculate delivery charge right now. Please try again."
     );
-
-    return;
   }
-
-
-  if(cart.length === 0){
-
-    alert(
-      "Your cart is empty."
-    );
-
-    return;
-  }
-
-
-  /* Calculate totals */
-
-  let subtotal = 0;
-
-  let orderItems = "";
-
-
-  cart.forEach(item=>{
-
-    let itemTotal =
-      item.price * item.quantity;
-
-
-    subtotal += itemTotal;
-
-
-    orderItems +=
-      "• " +
-      item.name +
-      " × " +
-      item.quantity +
-      " = ₹" +
-      itemTotal +
-      "\n";
-
-  });
-
-
-  let delivery = 0;
-
-  let grandTotal =
-    subtotal + delivery;
-
-
-  /* WhatsApp Message */
-
-  let message =
-
-    "👑 *THE QUEEN FAST FOOD*" +
-    "\n\n" +
-
-    "🛍️ *NEW ORDER*" +
-    "\n\n" +
-
-    "👤 Name: " +
-    name +
-    "\n" +
-
-    "📱 Phone: " +
-    phone +
-    "\n" +
-
-    "📍 Address: " +
-    address +
-    "\n\n" +
-
-    "🍽️ *ORDER ITEMS*" +
-    "\n" +
-
-    orderItems +
-    "\n" +
-
-    "💰 Subtotal: ₹" +
-    subtotal +
-    "\n" +
-
-    "🚚 Delivery: ₹" +
-    delivery +
-    "\n" +
-
-    "💵 *TOTAL: ₹" +
-    grandTotal +
-    "*\n\n" +
-
-    "💳 Payment: " +
-    payment;
-
-
-  /* Restaurant WhatsApp number */
-
-  let whatsappNumber =
-    "9090220791";
-
-
-  let whatsappURL =
-    "https://wa.me/91" +
-    whatsappNumber +
-    "?text=" +
-    encodeURIComponent(message);
-
-
-  /* Open WhatsApp */
-
-  window.open(
-    whatsappURL,
-    "_blank"
-  );
-
-
-  /* Show confirmation */
-
-  document.getElementById(
-    "thankYou"
-  ).style.display = "block";
-
-
-  document.getElementById(
-    "thankYou"
-  ).scrollIntoView({
-    behavior:"smooth"
-  });
-
 }
-
-
-/* ================= INITIAL CART ================= */
-
-updateCart();
-
-</script>
-
-</body>
-</html>
