@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>The Queen Fast Food</title>
+  <title>The Queen Fast Food | Ibrisingh</title>
 
   <style>
     * {
@@ -13,10 +14,17 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: #090909;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(212,175,55,0.10), transparent 30%),
+        #090909;
       color: #fff;
+      line-height: 1.5;
     }
 
     button,
@@ -30,22 +38,31 @@
       cursor: pointer;
     }
 
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f0d46b;
+      --black: #090909;
+      --card: #111;
+      --line: #292929;
+      --muted: #888;
+    }
+
     /* ================= HEADER ================= */
 
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(8,8,8,0.96);
-      backdrop-filter: blur(10px);
+      background: rgba(8,8,8,0.94);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid #252525;
     }
 
     .header-inner {
       max-width: 1200px;
       margin: auto;
-      min-height: 72px;
-      padding: 12px 18px;
+      min-height: 74px;
+      padding: 11px 18px;
 
       display: flex;
       align-items: center;
@@ -59,25 +76,50 @@
     }
 
     .brand h1 {
-      color: #d4af37;
-      font-size: 23px;
+      color: var(--gold);
+      font-size: 22px;
       letter-spacing: 2px;
     }
 
     .brand p {
-      color: #888;
+      color: #777;
+      font-size: 9px;
+      letter-spacing: 4px;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .phone-link {
+      color: #ddd;
+      text-decoration: none;
+      border: 1px solid #333;
+      border-radius: 9px;
+      padding: 9px 12px;
       font-size: 11px;
-      margin-top: 3px;
+    }
+
+    .phone-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
     .cart-button {
       position: relative;
-      background: #d4af37;
+      background: var(--gold);
       color: #000;
       border: none;
       border-radius: 10px;
       padding: 11px 15px;
       font-weight: bold;
+    }
+
+    .cart-button:hover {
+      background: var(--gold-light);
     }
 
     .cart-count {
@@ -93,48 +135,171 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #d4af37;
+      border: 2px solid var(--gold);
     }
 
     /* ================= HERO ================= */
 
     .hero {
+      position: relative;
+      overflow: hidden;
       max-width: 1200px;
       margin: auto;
-      padding: 55px 18px 35px;
+      padding: 72px 18px 55px;
       text-align: center;
     }
 
-    .hero .crown {
-      font-size: 42px;
-      margin-bottom: 10px;
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      left: 50%;
+      top: -170px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(
+          circle,
+          rgba(212,175,55,0.15),
+          transparent 68%
+        );
+      pointer-events: none;
+    }
+
+    .hero-crown {
+      position: relative;
+      color: var(--gold);
+      font-size: 48px;
+      margin-bottom: 13px;
+      text-shadow: 0 0 30px rgba(212,175,55,0.18);
+    }
+
+    .hero-eyebrow {
+      position: relative;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
     }
 
     .hero h2 {
-      color: #d4af37;
-      font-size: clamp(32px, 7vw, 62px);
-      line-height: 1.05;
-      margin-bottom: 15px;
+      position: relative;
+      color: #fff;
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    .hero h2 span {
+      color: var(--gold);
     }
 
     .hero h3 {
+      position: relative;
       font-size: 18px;
       font-weight: normal;
       color: #eee;
       margin-bottom: 10px;
     }
 
-    .hero p {
+    .hero-description {
+      position: relative;
       max-width: 620px;
       margin: auto;
       color: #999;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 27px;
+    }
+
+    .hero-order-btn,
+    .hero-call-btn {
+      display: inline-block;
+      padding: 13px 21px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .hero-order-btn {
+      border: none;
+      background: var(--gold);
+      color: #000;
+    }
+
+    .hero-order-btn:hover {
+      background: var(--gold-light);
+    }
+
+    .hero-call-btn {
+      border: 1px solid #444;
+      color: #fff;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .hero-call-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
     .location-text {
-      margin-top: 17px !important;
-      color: #d4af37 !important;
+      position: relative;
+      margin-top: 22px !important;
+      color: var(--gold) !important;
+      font-size: 12px !important;
+    }
+
+    /* ================= TRUST STRIP ================= */
+
+    .trust-strip {
+      max-width: 980px;
+      margin: 0 auto 40px;
+      padding: 0 18px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .trust-card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.045),
+          rgba(255,255,255,0.012)
+        );
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 18px 12px;
+      text-align: center;
+    }
+
+    .trust-icon {
+      font-size: 25px;
+      margin-bottom: 7px;
+    }
+
+    .trust-card strong {
+      display: block;
+      color: var(--gold);
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .trust-card span {
+      color: #777;
+      font-size: 10px;
     }
 
     /* ================= MENU ================= */
@@ -142,22 +307,34 @@
     .menu-section {
       max-width: 1200px;
       margin: auto;
-      padding: 20px 18px 70px;
+      padding: 25px 18px 75px;
     }
 
     .section-heading {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+    }
+
+    .section-kicker {
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-transform: uppercase;
     }
 
     .section-heading h2 {
-      color: #d4af37;
-      font-size: 28px;
-      margin-bottom: 7px;
+      color: #fff;
+      font-size: clamp(30px, 5vw, 42px);
+      margin: 7px 0;
+    }
+
+    .section-heading h2 span {
+      color: var(--gold);
     }
 
     .section-heading p {
-      color: #888;
+      color: #777;
       font-size: 13px;
     }
 
@@ -168,16 +345,23 @@
     }
 
     .food-card {
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 15px;
+      background:
+        linear-gradient(
+          145deg,
+          #151515,
+          #0e0e0e
+        );
+      border: 1px solid var(--line);
+      border-radius: 16px;
       overflow: hidden;
-      transition: 0.25s;
+      transition: 0.25s ease;
     }
 
     .food-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-5px);
       border-color: rgba(212,175,55,0.55);
+      box-shadow:
+        0 15px 35px rgba(0,0,0,0.35);
     }
 
     .food-image {
@@ -210,14 +394,14 @@
     }
 
     .food-price {
-      color: #d4af37;
+      color: var(--gold);
       font-size: 18px;
       font-weight: bold;
     }
 
     .add-btn {
       border: none;
-      background: #d4af37;
+      background: var(--gold);
       color: #000;
       border-radius: 8px;
       padding: 9px 12px;
@@ -226,7 +410,306 @@
     }
 
     .add-btn:hover {
-      background: #e7c75b;
+      background: var(--gold-light);
+    }
+
+    /* ================= WHY CHOOSE QUEEN ================= */
+
+    .why-section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 18px 75px;
+    }
+
+    .why-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .why-heading h2 {
+      color: #fff;
+      font-size: clamp(30px, 5vw, 43px);
+      margin: 8px 0;
+    }
+
+    .why-heading h2 span {
+      color: var(--gold);
+    }
+
+    .why-heading p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .why-card {
+      position: relative;
+      background:
+        linear-gradient(
+          145deg,
+          #151515,
+          #0e0e0e
+        );
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 25px;
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .why-card::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      right: -35px;
+      bottom: -35px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.05);
+    }
+
+    .why-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212,175,55,0.5);
+    }
+
+    .why-icon {
+      font-size: 30px;
+      margin-bottom: 13px;
+    }
+
+    .why-card h3 {
+      color: var(--gold);
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .why-card p {
+      color: #888;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* ================= VISIT QUEEN ================= */
+
+    .visit-section {
+      padding: 0 18px 75px;
+      text-align: center;
+    }
+
+    .visit-box {
+      position: relative;
+      overflow: hidden;
+      max-width: 850px;
+      margin: auto;
+      padding: 50px 24px;
+
+      border: 1px solid rgba(212,175,55,0.32);
+      border-radius: 22px;
+
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(212,175,55,0.11),
+          transparent 58%
+        ),
+        #111;
+    }
+
+    .visit-box::before {
+      content: "👑";
+      position: absolute;
+      right: 25px;
+      top: 18px;
+      opacity: 0.12;
+      font-size: 70px;
+    }
+
+    .visit-kicker {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 4px;
+      font-weight: bold;
+    }
+
+    .visit-box h2 {
+      color: #fff;
+      font-size: clamp(30px, 5vw, 44px);
+      margin: 8px 0 16px;
+    }
+
+    .visit-address {
+      color: #999;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .visit-phone {
+      display: block;
+      color: var(--gold);
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 17px 0;
+    }
+
+    .direction-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 12px;
+      padding: 12px 20px;
+      border-radius: 9px;
+    }
+
+    .direction-btn:hover {
+      background: var(--gold-light);
+    }
+
+    /* ================= TRACKING ================= */
+
+    .tracking-section {
+      max-width: 700px;
+      margin: 0 auto 75px;
+      padding: 0 18px;
+    }
+
+    .tracking-heading {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .tracking-heading .section-kicker {
+      display: block;
+    }
+
+    .tracking-heading h2 {
+      color: #fff;
+      font-size: 30px;
+      margin-top: 7px;
+    }
+
+    .tracking-box {
+      background:
+        linear-gradient(
+          145deg,
+          #151515,
+          #0f0f0f
+        );
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .tracking-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .tracking-row input {
+      flex: 1;
+      min-width: 0;
+      background: #181818;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .tracking-row button {
+      padding: 12px 15px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .tracking-row button:hover {
+      background: var(--gold-light);
+    }
+
+    .tracking-result {
+      margin-top: 18px;
+    }
+
+    .track-status {
+      text-align: center;
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 25px 5px 10px;
+    }
+
+    .progress::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: #333;
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      width: 20%;
+    }
+
+    .step-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #222;
+      border: 2px solid #444;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .step.active .step-dot {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+    }
+
+    .step-label {
+      color: #777;
+      font-size: 9px;
+      margin-top: 7px;
+    }
+
+    .step.active .step-label {
+      color: var(--gold);
+    }
+
+    .track-details {
+      background: #181818;
+      border-radius: 10px;
+      padding: 13px;
+      margin-top: 20px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     /* ================= CART DRAWER ================= */
@@ -270,7 +753,7 @@
     }
 
     .cart-header h2 {
-      color: #d4af37;
+      color: var(--gold);
       font-size: 20px;
     }
 
@@ -314,7 +797,7 @@
     }
 
     .cart-item-price {
-      color: #d4af37;
+      color: var(--gold);
       font-weight: bold;
     }
 
@@ -364,13 +847,14 @@
       color: #aaa;
       padding: 5px 0;
       font-size: 13px;
+      gap: 10px;
     }
 
     .summary-total {
       border-top: 1px solid #333;
       margin-top: 8px;
       padding-top: 10px;
-      color: #d4af37;
+      color: var(--gold);
       font-size: 18px;
       font-weight: bold;
     }
@@ -381,7 +865,7 @@
       padding: 13px;
       border: none;
       border-radius: 9px;
-      background: #d4af37;
+      background: var(--gold);
       color: #000;
       font-weight: bold;
     }
@@ -422,7 +906,7 @@
     }
 
     .modal-header h2 {
-      color: #d4af37;
+      color: var(--gold);
       font-size: 21px;
     }
 
@@ -465,7 +949,7 @@
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus {
-      border-color: #d4af37;
+      border-color: var(--gold);
     }
 
     .location-btn {
@@ -496,7 +980,7 @@
       padding: 14px;
       border-radius: 9px;
       border: none;
-      background: #d4af37;
+      background: var(--gold);
       color: #000;
       font-weight: bold;
       font-size: 15px;
@@ -507,127 +991,6 @@
       cursor: not-allowed;
     }
 
-    /* ================= TRACKING ================= */
-
-    .tracking-section {
-      max-width: 700px;
-      margin: 0 auto 70px;
-      padding: 0 18px;
-    }
-
-    .tracking-box {
-      background: #111;
-      border: 1px solid #292929;
-      border-radius: 15px;
-      padding: 20px;
-    }
-
-    .tracking-box h2 {
-      color: #d4af37;
-      margin-bottom: 14px;
-      text-align: center;
-    }
-
-    .tracking-row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .tracking-row input {
-      flex: 1;
-      min-width: 0;
-      background: #181818;
-      color: #fff;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 12px;
-    }
-
-    .tracking-row button {
-      padding: 12px 15px;
-      background: #d4af37;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .tracking-result {
-      margin-top: 18px;
-    }
-
-    .track-status {
-      text-align: center;
-      color: #d4af37;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 18px;
-    }
-
-    .progress {
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      margin: 25px 5px 10px;
-    }
-
-    .progress::before {
-      content: "";
-      position: absolute;
-      top: 15px;
-      left: 20px;
-      right: 20px;
-      height: 2px;
-      background: #333;
-      z-index: 0;
-    }
-
-    .step {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      width: 20%;
-    }
-
-    .step-dot {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #222;
-      border: 2px solid #444;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-    }
-
-    .step.active .step-dot {
-      background: #d4af37;
-      color: #000;
-      border-color: #d4af37;
-    }
-
-    .step-label {
-      color: #777;
-      font-size: 9px;
-      margin-top: 7px;
-    }
-
-    .step.active .step-label {
-      color: #d4af37;
-    }
-
-    .track-details {
-      background: #181818;
-      border-radius: 10px;
-      padding: 13px;
-      margin-top: 20px;
-      color: #aaa;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
     /* ================= TOAST ================= */
 
     .toast {
@@ -636,7 +999,7 @@
       left: 50%;
       bottom: 25px;
       transform: translateX(-50%) translateY(120px);
-      background: #d4af37;
+      background: var(--gold);
       color: #000;
       padding: 12px 18px;
       border-radius: 9px;
@@ -657,25 +1020,51 @@
 
     footer {
       border-top: 1px solid #222;
-      padding: 25px 18px;
+      padding: 35px 18px;
       text-align: center;
       color: #666;
       font-size: 12px;
+      background: #070707;
     }
 
     footer strong {
-      color: #d4af37;
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
     }
 
     /* ================= RESPONSIVE ================= */
 
     @media (max-width: 1000px) {
+
       .menu-grid {
         grid-template-columns: repeat(3, 1fr);
       }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
     }
 
     @media (max-width: 700px) {
+
+      .header-inner {
+        min-height: 67px;
+      }
+
+      .header-right {
+        gap: 5px;
+      }
+
+      .phone-link {
+        display: none;
+      }
+
       .menu-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -699,7 +1088,28 @@
       }
 
       .hero {
-        padding-top: 38px;
+        padding-top: 48px;
+      }
+
+      .hero h2 {
+        letter-spacing: -1px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-order-btn,
+      .hero-call-btn {
+        width: 100%;
+      }
+
+      .trust-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
       }
 
       .progress {
@@ -718,9 +1128,11 @@
       .tracking-row button {
         width: 100%;
       }
+
     }
 
     @media (max-width: 400px) {
+
       .menu-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -732,7 +1144,9 @@
       .cart-button {
         padding: 9px 11px;
       }
+
     }
+
   </style>
 </head>
 
@@ -754,20 +1168,31 @@
 
       </a>
 
-      <button
-        id="cartButton"
-        class="cart-button"
-      >
-        🛒 Cart
+      <div class="header-right">
 
-        <span
-          id="cartCount"
-          class="cart-count"
+        <a
+          href="tel:9776856111"
+          class="phone-link"
         >
-          0
-        </span>
+          📞 97768 56111
+        </a>
 
-      </button>
+        <button
+          id="cartButton"
+          class="cart-button"
+        >
+          🛒 Cart
+
+          <span
+            id="cartCount"
+            class="cart-count"
+          >
+            0
+          </span>
+
+        </button>
+
+      </div>
 
     </div>
 
@@ -780,26 +1205,102 @@
 
   <section class="hero">
 
-    <div class="crown">
-      👑
+    <div class="hero-crown">
+      ♕
+    </div>
+
+    <div class="hero-eyebrow">
+      WELCOME TO THE QUEEN
     </div>
 
     <h2>
-      Fresh Food.<br>
-      Bold Flavours.
+      A Royal Taste,<br>
+      <span>Made For You.</span>
     </h2>
 
     <h3>
-      Choose. Add. Enjoy.
+      Your Cravings. Our Kitchen.
     </h3>
 
-    <p>
-      Made fresh, served hot, and prepared just for you.
+    <p class="hero-description">
+      Freshly prepared food, bold flavours and a little royal
+      touch in every bite.
     </p>
 
+    <div class="hero-actions">
+
+      <a
+        href="#menu"
+        class="hero-order-btn"
+      >
+        👑 ORDER NOW
+      </a>
+
+      <a
+        href="tel:9776856111"
+        class="hero-call-btn"
+      >
+        📞 97768 56111
+      </a>
+
+    </div>
+
     <p class="location-text">
-      📍 Ibrisingh Bazar, Odisha
+      📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha – 754138
     </p>
+
+  </section>
+
+
+  <!-- ======================================================
+       TRUST STRIP
+  ======================================================= -->
+
+  <section class="trust-strip">
+
+    <div class="trust-card">
+
+      <div class="trust-icon">
+        🍽️
+      </div>
+
+      <strong>FRESHLY PREPARED</strong>
+
+      <span>
+        Fresh food for every order
+      </span>
+
+    </div>
+
+
+    <div class="trust-card">
+
+      <div class="trust-icon">
+        🔥
+      </div>
+
+      <strong>BOLD FLAVOURS</strong>
+
+      <span>
+        Taste that keeps you coming back
+      </span>
+
+    </div>
+
+
+    <div class="trust-card">
+
+      <div class="trust-icon">
+        🛵
+      </div>
+
+      <strong>FAST SERVICE</strong>
+
+      <span>
+        From our kitchen to you
+      </span>
+
+    </div>
 
   </section>
 
@@ -808,14 +1309,23 @@
        MENU
   ======================================================= -->
 
-  <section class="menu-section">
+  <section
+    id="menu"
+    class="menu-section"
+  >
 
     <div class="section-heading">
 
-      <h2>Our Menu</h2>
+      <div class="section-kicker">
+        EXPLORE OUR TASTE
+      </div>
+
+      <h2>
+        THE QUEEN'S <span>MENU</span>
+      </h2>
 
       <p>
-        Select your favourite food and add it to your cart.
+        Your favourites, freshly prepared and served with love.
       </p>
 
     </div>
@@ -841,16 +1351,207 @@
 
 
   <!-- ======================================================
+       WHY CHOOSE THE QUEEN
+  ======================================================= -->
+
+  <section class="why-section">
+
+    <div class="why-heading">
+
+      <div class="section-kicker">
+        THE QUEEN EXPERIENCE
+      </div>
+
+      <h2>
+        Why Choose <span>The Queen?</span> 👑
+      </h2>
+
+      <p>
+        Because great food should feel special.
+      </p>
+
+    </div>
+
+
+    <div class="why-grid">
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          🍽️
+        </div>
+
+        <h3>
+          Freshly Prepared
+        </h3>
+
+        <p>
+          Every order is prepared fresh, so you get
+          the taste and quality you deserve.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          ❤️
+        </div>
+
+        <h3>
+          Made With Care
+        </h3>
+
+        <p>
+          From the first ingredient to the final plate,
+          we put care into every order.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          ✨
+        </div>
+
+        <h3>
+          Royal Taste, Honest Price
+        </h3>
+
+        <p>
+          Delicious food with prices that keep
+          you coming back.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          🔥
+        </div>
+
+        <h3>
+          Your Cravings, Our Priority
+        </h3>
+
+        <p>
+          Whether it's a quick bite or a full meal,
+          we're here to satisfy your cravings.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          🛵
+        </div>
+
+        <h3>
+          Fresh From Our Kitchen
+        </h3>
+
+        <p>
+          Hot, fresh and ready to reach you
+          when you need it.
+        </p>
+
+      </div>
+
+
+      <div class="why-card">
+
+        <div class="why-icon">
+          👑
+        </div>
+
+        <h3>
+          Because You Deserve The Queen
+        </h3>
+
+        <p>
+          One taste, one experience, and you'll know
+          why it's called The Queen Fast Food.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       VISIT THE QUEEN
+  ======================================================= -->
+
+  <section class="visit-section">
+
+    <div class="visit-box">
+
+      <div class="visit-kicker">
+        COME VISIT US
+      </div>
+
+      <h2>
+        Visit The Queen 👑
+      </h2>
+
+      <p class="visit-address">
+
+        📍 Ibrisingh, Tirtol, Jagatsinghpur,<br>
+        Odisha – 754138
+
+      </p>
+
+
+      <a
+        href="tel:9776856111"
+        class="visit-phone"
+      >
+        📞 97768 56111
+      </a>
+
+
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Ibrisingh%2C%20Tirtol%2C%20Jagatsinghpur%2C%20Odisha"
+        target="_blank"
+        class="direction-btn"
+      >
+        📍 GET DIRECTIONS
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
        TRACKING
   ======================================================= -->
 
   <section class="tracking-section">
 
-    <div class="tracking-box">
+    <div class="tracking-heading">
+
+      <div class="section-kicker">
+        ORDER UPDATES
+      </div>
 
       <h2>
         📦 Track Your Order
       </h2>
+
+    </div>
+
+
+    <div class="tracking-box">
 
       <div class="tracking-row">
 
@@ -882,7 +1583,9 @@
 
   <footer>
 
-    <strong>👑 THE QUEEN FAST FOOD</strong>
+    <strong>
+      👑 THE QUEEN FAST FOOD
+    </strong>
 
     <br><br>
 
@@ -890,7 +1593,18 @@
 
     <br><br>
 
-    📍 Ibrisingh Bazar, Odisha
+    📍 Ibrisingh, Tirtol, Jagatsinghpur, Odisha – 754138
+
+    <br><br>
+
+    📞
+    <a href="tel:9776856111">
+      97768 56111
+    </a>
+
+    <br><br>
+
+    © The Queen Fast Food. All Rights Reserved.
 
   </footer>
 
@@ -950,6 +1664,7 @@
 
       </div>
 
+
       <div class="summary-line">
 
         <span>
@@ -961,6 +1676,7 @@
         </span>
 
       </div>
+
 
       <div class="summary-line summary-total">
 
@@ -1066,6 +1782,7 @@
         📍 Use My Current Location
       </button>
 
+
       <div
         id="locationStatus"
         class="location-status"
@@ -1074,7 +1791,10 @@
       </div>
 
 
-      <div class="form-group" style="margin-top:15px;">
+      <div
+        class="form-group"
+        style="margin-top:15px;"
+      >
 
         <label>
           Payment Method
@@ -1109,6 +1829,7 @@
 
         </div>
 
+
         <div class="summary-line">
 
           <span>
@@ -1121,6 +1842,7 @@
 
         </div>
 
+
         <div class="summary-line">
 
           <span>
@@ -1132,6 +1854,7 @@
           </span>
 
         </div>
+
 
         <div class="summary-line summary-total">
 
@@ -1254,8 +1977,6 @@
 
     /* ======================================================
        DEFAULT MENU
-       Images are kept here so admin only changes
-       price/name, not the food identity.
     ======================================================= */
 
     const defaultMenu = [
@@ -1369,7 +2090,7 @@
     let cart = [];
 
     let whatsappNumber =
-      "9090220791";
+      "9776856111";
 
     let currentUser =
       null;
@@ -1406,12 +2127,6 @@
       }
     );
 
-
-    /*
-      IMPORTANT:
-      If admin Firebase session is already stored in browser,
-      sign it out first and create a fresh anonymous customer.
-    */
 
     async function startCustomerAuth() {
 
@@ -1481,8 +2196,6 @@
           );
 
 
-          /* WhatsApp */
-
           if (
             settings.whatsappNumber
           ) {
@@ -1495,8 +2208,6 @@
 
           }
 
-
-          /* MENU */
 
           if (settings.menu) {
 
@@ -1548,8 +2259,6 @@
             error
           );
 
-          /* Keep default menu if settings
-             cannot be loaded. */
 
           menu =
             [...defaultMenu];
@@ -1698,6 +2407,7 @@
         `;
 
         return;
+
       }
 
 
@@ -2536,8 +3246,6 @@
 
         try {
 
-          /* Make sure customer has anonymous auth */
-
           if (!currentUser) {
 
             await startCustomerAuth();
@@ -2763,27 +3471,15 @@
             `https://wa.me/91${cleanNumber}?text=${whatsappText}`;
 
 
-          /* ==================================================
-             CLEAR CART
-          =================================================== */
-
           cart = [];
 
           renderCart();
 
 
-          /* ==================================================
-             CLOSE CHECKOUT
-          =================================================== */
-
           checkoutModal.classList.remove(
             "show"
           );
 
-
-          /* ==================================================
-             SAVE ORDER ID FOR TRACKING
-          =================================================== */
 
           localStorage.setItem(
             "lastQueenOrderId",
@@ -2800,10 +3496,6 @@
           );
 
 
-          /* ==================================================
-             OPEN WHATSAPP
-          =================================================== */
-
           setTimeout(() => {
 
             window.open(
@@ -2813,10 +3505,6 @@
 
           }, 500);
 
-
-          /* ==================================================
-             AUTO TRACK
-          =================================================== */
 
           setTimeout(() => {
 
@@ -3192,3 +3880,4 @@
 
 </body>
 </html>
+```
