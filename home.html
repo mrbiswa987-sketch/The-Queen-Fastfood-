@@ -1170,10 +1170,6 @@ const auth =
   getAuth(app);
 
 
-/*
-  IMPORTANT:
-  Explicit Firebase Realtime Database URL
-*/
 const db =
   getDatabase(
     app,
@@ -1324,6 +1320,23 @@ let closedMessage =
 
 let currentUser = null;
 
+
+/* =========================================================
+   WHATSAPP ORDER NUMBER
+=========================================================
+
+   DEFAULT:
+   9090220791
+
+   If Admin Panel has saved another number
+   inside /settings/whatsappNumber,
+   that number will automatically replace this.
+========================================================= */
+
+let whatsappNumber =
+  "9090220791";
+
+
 let authReadyResolve;
 
 const authReadyPromise =
@@ -1379,7 +1392,7 @@ window.closeModal = function(id){
 
 
 /* =========================================================
-   CUSTOMER AUTH - UPDATED
+   CUSTOMER AUTH
 ========================================================= */
 
 async function startCustomerAuth(){
@@ -1394,10 +1407,6 @@ async function startCustomerAuth(){
       auth.currentUser;
 
 
-    /*
-      If Firebase does not already have
-      a customer user, create anonymous user.
-    */
     if(!user){
 
       const credential =
@@ -1418,10 +1427,6 @@ async function startCustomerAuth(){
     }
 
 
-    /*
-      Never allow admin account
-      on customer page.
-    */
     if(user.uid === ADMIN_UID){
 
       throw new Error(
@@ -1431,10 +1436,6 @@ async function startCustomerAuth(){
     }
 
 
-    /*
-      IMPORTANT FIX:
-      Force Firebase ID token refresh.
-    */
     const token =
       await getIdToken(
         user,
@@ -1686,6 +1687,24 @@ async function loadShopSettings(){
 
       }
 
+
+      /* =========================================
+         LOAD WHATSAPP NUMBER FROM ADMIN PANEL
+      ========================================= */
+
+      if(
+        settings.whatsappNumber &&
+        String(settings.whatsappNumber).trim()
+      ){
+
+        whatsappNumber =
+          String(
+            settings.whatsappNumber
+          )
+          .replace(/\D/g,"");
+
+      }
+
     }
 
     else{
@@ -1710,6 +1729,12 @@ async function loadShopSettings(){
       false;
 
   }
+
+
+  console.log(
+    "WhatsApp Order Number:",
+    whatsappNumber
+  );
 
 
   updateShopStatus();
@@ -2384,7 +2409,7 @@ function updateCheckoutTotal(){
 
 
 /* =========================================================
-   PLACE ORDER - UPDATED AUTH
+   PLACE ORDER
 ========================================================= */
 
 window.placeOrder =
@@ -2514,10 +2539,6 @@ async function(){
 
   try{
 
-    /* -----------------------------------------
-       WAIT FOR CUSTOMER AUTH
-    ----------------------------------------- */
-
     await authReadyPromise;
 
 
@@ -2541,11 +2562,6 @@ async function(){
     }
 
 
-    /*
-      IMPORTANT FIX:
-      Force-refresh Firebase ID token
-      immediately before database write.
-    */
     await getIdToken(
       currentUser,
       true
@@ -2564,10 +2580,6 @@ async function(){
     );
 
 
-    /* -----------------------------------------
-       FINAL DELIVERY CALCULATION
-    ----------------------------------------- */
-
     await calculateDelivery();
 
 
@@ -2579,10 +2591,6 @@ async function(){
       subtotal +
       deliveryCharge;
 
-
-    /* -----------------------------------------
-       ORDER ITEMS
-    ----------------------------------------- */
 
     const orderItems =
       cart.map(item => ({
@@ -2602,10 +2610,6 @@ async function(){
       }));
 
 
-    /* -----------------------------------------
-       CREATE ORDER REFERENCE
-    ----------------------------------------- */
-
     const orderRef =
       push(
         ref(db,"orders")
@@ -2624,10 +2628,6 @@ async function(){
 
     }
 
-
-    /* -----------------------------------------
-       ORDER DATA
-    ----------------------------------------- */
 
     const orderData = {
 
@@ -2693,19 +2693,11 @@ async function(){
     );
 
 
-    /* -----------------------------------------
-       SAVE TO FIREBASE
-    ----------------------------------------- */
-
     await set(
       orderRef,
       orderData
     );
 
-
-    /* -----------------------------------------
-       SUCCESS
-    ----------------------------------------- */
 
     localStorage.setItem(
       "queenLastOrderId",
@@ -2825,13 +2817,49 @@ async function(){
 
 
 /* =========================================================
-   WHATSAPP
+   WHATSAPP ORDER
 ========================================================= */
 
 function sendWhatsAppOrder(order){
 
-  const whatsappNumber =
-    "919776856111";
+  /*
+    Default number:
+    9090220791
+
+    Admin Panel ru Firebase re
+    number change kale eita automatically
+    nua number use kariba.
+  */
+
+  let number =
+    String(
+      whatsappNumber || "9090220791"
+    )
+    .replace(/\D/g,"");
+
+
+  /*
+    Convert 10 digit Indian number
+    to WhatsApp international format.
+    
+    Example:
+    9090220791
+    →
+    919090220791
+  */
+
+  if(number.length === 10){
+
+    number =
+      "91" + number;
+
+  }
+
+
+  console.log(
+    "WhatsApp Order Number:",
+    number
+  );
 
 
   let message =
@@ -2889,7 +2917,13 @@ function sendWhatsAppOrder(order){
 
 
   const url =
-    `https://wa.me/${whatsappNumber}?text=${message}`;
+    `https://wa.me/${number}?text=${message}`;
+
+
+  console.log(
+    "Opening WhatsApp:",
+    url
+  );
 
 
   window.open(
@@ -2988,10 +3022,6 @@ async function(){
     }
 
 
-    /*
-      Make sure ID token is valid
-      before reading the order.
-    */
     await getIdToken(
       currentUser,
       true
