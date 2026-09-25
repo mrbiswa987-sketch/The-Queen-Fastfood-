@@ -197,6 +197,90 @@ button{cursor:pointer}
   margin-top:3px;
 }
 
+/* =========================
+   HEADER ACTIONS
+========================= */
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* =========================
+   ADMIN BELL
+========================= */
+
+.admin-bell{
+  position:relative;
+  width:42px;
+  height:38px;
+  border:1px solid #333;
+  border-radius:10px;
+  background:#151515;
+  color:#fff;
+  font-size:19px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+}
+
+.admin-bell:hover{
+  border-color:var(--gold);
+  background:#1b160d;
+}
+
+.admin-bell.has-new{
+  border-color:var(--gold);
+  box-shadow:0 0 16px rgba(255,159,0,.25);
+  animation:bellPulse 1s infinite alternate;
+}
+
+.admin-bell.shake{
+  animation:bellShake .5s ease-in-out;
+}
+
+.admin-bell-count{
+  position:absolute;
+  top:-7px;
+  right:-7px;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+  border-radius:20px;
+  background:var(--red);
+  color:#fff;
+  font-size:9px;
+  font-weight:900;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  border:2px solid var(--bg);
+}
+
+.admin-bell-count.show{
+  display:flex;
+}
+
+@keyframes bellPulse{
+  from{
+    box-shadow:0 0 4px rgba(255,159,0,.15);
+  }
+  to{
+    box-shadow:0 0 20px rgba(255,159,0,.45);
+  }
+}
+
+@keyframes bellShake{
+  0%{transform:rotate(0)}
+  20%{transform:rotate(-15deg)}
+  40%{transform:rotate(15deg)}
+  60%{transform:rotate(-10deg)}
+  80%{transform:rotate(10deg)}
+  100%{transform:rotate(0)}
+}
+
 .dashboard{
   max-width:1200px;
   margin:auto;
@@ -718,6 +802,7 @@ button{cursor:pointer}
 ========================= */
 
 @media(max-width:800px){
+
   .grid{
     grid-template-columns:1fr;
   }
@@ -725,9 +810,11 @@ button{cursor:pointer}
   .menu-list{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:600px){
+
   .dashboard{
     padding:10px;
   }
@@ -747,6 +834,21 @@ button{cursor:pointer}
   .brand{
     font-size:12px;
   }
+
+  .header-actions{
+    gap:5px;
+  }
+
+  .admin-bell{
+    width:38px;
+    height:36px;
+  }
+
+  .header-actions .btn-red{
+    padding:8px 10px;
+    font-size:9px;
+  }
+
 }
 </style>
 </head>
@@ -814,12 +916,34 @@ button{cursor:pointer}
       <small>ADMIN CONTROL PANEL</small>
     </div>
 
-    <button
-      class="btn btn-red"
-      onclick="adminLogout()"
-    >
-      Logout
-    </button>
+    <!-- TOP RIGHT BELL + LOGOUT -->
+    <div class="header-actions">
+
+      <button
+        id="adminBell"
+        class="admin-bell"
+        onclick="adminBellClick()"
+        title="New Orders"
+      >
+        🔔
+
+        <span
+          id="adminBellCount"
+          class="admin-bell-count"
+        >
+          0
+        </span>
+
+      </button>
+
+      <button
+        class="btn btn-red"
+        onclick="adminLogout()"
+      >
+        Logout
+      </button>
+
+    </div>
 
   </div>
 
@@ -1607,7 +1731,6 @@ function loadAll(){
   loadOrders();
   loadRatings();
 
-  /* Default folder = NEW */
   openOrderFolder("new");
 
 }
@@ -2490,10 +2613,6 @@ function normalizeStatus(status){
     return "processing";
   }
 
-  /*
-    BACKEND STATUS = making
-    CUSTOMER DISPLAY = 👨‍🍳 PREPARING
-  */
   if(
     s === "making" ||
     s === "preparing" ||
@@ -2549,6 +2668,7 @@ function detectNewOrders(orders){
     initialOrdersLoaded=true;
 
     return;
+
   }
 
   const newIds =
@@ -2571,7 +2691,28 @@ function detectNewOrders(orders){
   if(!received.length)
     return;
 
+  /* SOUND */
   playNewOrderSound();
+
+  /* BELL ANIMATION */
+  const bell =
+    document.getElementById(
+      "adminBell"
+    );
+
+  if(bell){
+
+    bell.classList.remove(
+      "shake"
+    );
+
+    void bell.offsetWidth;
+
+    bell.classList.add(
+      "shake"
+    );
+
+  }
 
   showToast(
     `🔔 ${received.length} NEW ORDER RECEIVED`
@@ -2703,6 +2844,16 @@ function renderAllOrderFolders(){
     `${groups.cancelled.length} orders`;
 
 
+  /*
+    TOP RIGHT BELL COUNT
+    = CURRENT NEW ORDERS
+  */
+
+  updateBellCount(
+    groups.received.length
+  );
+
+
   renderGroup(
     "newOrdersList",
     groups.received,
@@ -2733,6 +2884,96 @@ function renderAllOrderFolders(){
   );
 
 }
+
+
+/* =========================
+   BELL COUNT
+========================= */
+
+function updateBellCount(count){
+
+  const bell =
+    document.getElementById(
+      "adminBell"
+    );
+
+  const badge =
+    document.getElementById(
+      "adminBellCount"
+    );
+
+  if(!bell || !badge)
+    return;
+
+  badge.textContent =
+    count > 99
+    ? "99+"
+    : count;
+
+  if(count > 0){
+
+    badge.classList.add("show");
+
+    bell.classList.add(
+      "has-new"
+    );
+
+  }else{
+
+    badge.classList.remove(
+      "show"
+    );
+
+    bell.classList.remove(
+      "has-new"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   BELL CLICK
+========================= */
+
+window.adminBellClick =
+function(){
+
+  /*
+    Open NEW orders folder.
+  */
+
+  openOrderFolder("new");
+
+  /*
+    Resume browser audio.
+  */
+
+  try{
+
+    if(!audioContext){
+
+      audioContext =
+        new(
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+    if(
+      audioContext.state ===
+      "suspended"
+    ){
+
+      audioContext.resume();
+
+    }
+
+  }catch(error){}
+
+};
 
 
 /* =========================
@@ -2884,10 +3125,6 @@ function renderOrderCard(
     );
 
 
-  /* =========================
-     NEW STATUS DISPLAY
-  ========================= */
-
   const statusText =
     {
       received:"🟠 ORDER RECEIVED",
@@ -2938,10 +3175,6 @@ function renderOrderCard(
   let buttons = "";
 
 
-  /* =========================
-     RECEIVED
-  ========================= */
-
   if(status==="received"){
 
     buttons = `
@@ -2974,10 +3207,6 @@ function renderOrderCard(
 
   }
 
-
-  /* =========================
-     PROCESSING
-  ========================= */
 
   else if(status==="processing"){
 
@@ -3012,10 +3241,6 @@ function renderOrderCard(
   }
 
 
-  /* =========================
-     PREPARING
-  ========================= */
-
   else if(status==="making"){
 
     buttons = `
@@ -3049,10 +3274,6 @@ function renderOrderCard(
   }
 
 
-  /* =========================
-     OUT FOR DELIVERY
-  ========================= */
-
   else if(
     status==="out_for_delivery"
   ){
@@ -3076,10 +3297,6 @@ function renderOrderCard(
   }
 
 
-  /* =========================
-     DELIVERED
-  ========================= */
-
   else if(status==="delivered"){
 
     buttons = `
@@ -3098,10 +3315,6 @@ function renderOrderCard(
 
   }
 
-
-  /* =========================
-     CANCELLED
-  ========================= */
 
   else if(status==="cancelled"){
 
@@ -3367,19 +3580,6 @@ async function(
         now;
 
     }
-
-
-    /*
-      When customer clicks
-      ORDER DELIVERED on Home Page,
-      Home updates:
-
-      orders/{key}/status = delivered
-
-      This Admin listener automatically
-      detects it and moves the order
-      into DELIVERED folder.
-    */
 
 
     await update(
@@ -3675,6 +3875,7 @@ function renderRatings(){
             }
 
             <span style="color:#444">
+
               ${
                 "★".repeat(
                   Math.max(
@@ -3689,6 +3890,7 @@ function renderRatings(){
                   )
                 )
               }
+
             </span>
 
           </div>
@@ -3775,6 +3977,7 @@ function playNewOrderSound(){
         );
 
         oscillator.connect(gain);
+
         gain.connect(
           audioContext.destination
         );
