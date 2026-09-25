@@ -431,31 +431,6 @@ button{
   border-color:rgba(255,77,77,.55)
 }
 
-.image-row{
-  display:grid;
-  grid-template-columns:65px 1fr;
-  gap:7px;
-  margin-top:7px
-}
-
-.image-preview{
-  width:65px;
-  height:48px;
-  object-fit:cover;
-  background:#222;
-  border-radius:6px
-}
-
-.image-input{
-  width:100%;
-  padding:7px;
-  background:#171717;
-  border:1px solid #333;
-  color:#fff;
-  border-radius:6px;
-  font-size:9px
-}
-
 /* ORDERS */
 
 .order-filter{
@@ -492,9 +467,26 @@ button{
   padding:11px
 }
 
+/* NEW ORDER BLINK */
+
 .order.new{
   border-color:var(--gold);
-  box-shadow:0 0 15px rgba(212,175,55,.15)
+  box-shadow:0 0 15px rgba(212,175,55,.15);
+  animation:newOrderBlink 1s infinite
+}
+
+@keyframes newOrderBlink{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+    box-shadow:0 0 15px rgba(212,175,55,.15)
+  }
+
+  50%{
+    opacity:.55;
+    transform:scale(1.008);
+    box-shadow:0 0 28px rgba(212,175,55,.65)
+  }
 }
 
 .order.delivered{
@@ -650,6 +642,7 @@ button{
 }
 
 @media(max-width:850px){
+
   .grid{
     grid-template-columns:1fr
   }
@@ -661,9 +654,11 @@ button{
   .menu-list{
     grid-template-columns:1fr
   }
+
 }
 
 @media(max-width:550px){
+
   .dashboard{
     padding:12px 9px 40px
   }
@@ -683,6 +678,7 @@ button{
   .stat{
     padding:9px
   }
+
 }
 </style>
 </head>
@@ -853,9 +849,11 @@ button{
 
     <div>
       <b>Enable Schedule</b>
+
       <div style="color:#777;font-size:9px">
         Use opening and closing time
       </div>
+
     </div>
 
     <button
@@ -1007,14 +1005,17 @@ button{
   </h2>
 
   <div class="notice">
+    <b>Price:</b>
+    Changing price requires Admin password.
+    <br>
     <b>Available:</b>
     Customer can add item to cart.
     <br>
     <b>Out of Stock:</b>
     Customer sees OUT OF STOCK and cannot add it.
     <br>
-    <b>Important:</b>
-    Customer Home page does NOT show an AVAILABLE label.
+    <b>Images:</b>
+    Existing Firebase food images are kept unchanged.
   </div>
 
   <div
@@ -1137,7 +1138,9 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
+  reauthenticateWithCredential,
+  EmailAuthProvider
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -1147,8 +1150,7 @@ import {
   ref,
   onValue,
   set,
-  update,
-  get
+  update
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -1621,7 +1623,15 @@ $("password").addEventListener(
 $("logoutBtn").onclick =
 async function(){
 
-  await signOut(auth);
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(error);
+
+  }
 
 };
 
@@ -2269,6 +2279,7 @@ function loadMenu(){
           menu =
             source.map(
               (item,index) => ({
+
                 id:
                   item.id ||
                   String(index),
@@ -2279,6 +2290,7 @@ function loadMenu(){
                   normalizeAvailable(
                     item.available
                   )
+
               })
             );
 
@@ -2425,7 +2437,7 @@ function renderMenuAdmin(){
                   )
                 "
               >
-                SAVE
+                SAVE PRICE
               </button>
 
             </div>
@@ -2463,36 +2475,6 @@ function renderMenuAdmin(){
             </option>
 
           </select>
-
-
-          <div class="image-row">
-
-            <img
-              id="preview-${escapeAttribute(id)}"
-              class="image-preview"
-              src="${escapeAttribute(item.image || "")}"
-              onerror="this.style.opacity='.25'"
-            >
-
-            <input
-              id="image-${escapeAttribute(id)}"
-              class="image-input"
-              value="${escapeAttribute(item.image || "")}"
-              placeholder="Food image URL"
-            >
-
-            <button
-              class="btn btn-blue"
-              onclick="
-                saveImage(
-                  '${escapeAttribute(id)}'
-                )
-              "
-            >
-              IMAGE
-            </button>
-
-          </div>
 
         </div>
 
@@ -2536,7 +2518,86 @@ async function(id){
   }
 
 
+  const user =
+    auth.currentUser;
+
+
+  if(
+    !user ||
+    user.uid !== ADMIN_UID
+  ){
+
+    showToast(
+      "Admin login required."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    PRICE CHANGE ALWAYS NEEDS
+    ADMIN PASSWORD
+  */
+
+  const adminPassword =
+    window.prompt(
+      "🔐 Enter Admin Password to change price:"
+    );
+
+
+  if(
+    adminPassword === null
+  ){
+
+    showToast(
+      "Price change cancelled."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !adminPassword.trim()
+  ){
+
+    showToast(
+      "Password is required."
+    );
+
+    return;
+
+  }
+
+
   try{
+
+    const credential =
+      EmailAuthProvider.credential(
+        user.email,
+        adminPassword
+      );
+
+
+    /*
+      Re-authenticate current
+      logged-in Admin.
+    */
+
+    await reauthenticateWithCredential(
+      user,
+      credential
+    );
+
+
+    /*
+      IMPORTANT:
+      Only PRICE is changed.
+      Image URL remains untouched.
+    */
 
     await set(
       ref(
@@ -2548,18 +2609,40 @@ async function(id){
 
 
     showToast(
-      "Price updated."
+      "✅ Price updated successfully."
     );
 
   }catch(error){
 
     console.error(
+      "Price update error:",
       error
     );
 
-    showToast(
-      error.message
-    );
+
+    if(
+      error.code ===
+      "auth/wrong-password" ||
+
+      error.code ===
+      "auth/invalid-credential" ||
+
+      error.code ===
+      "auth/invalid-login-credentials"
+    ){
+
+      showToast(
+        "❌ Wrong Admin password."
+      );
+
+    }else{
+
+      showToast(
+        error.message ||
+        "Could not update price."
+      );
+
+    }
 
   }
 
@@ -2592,10 +2675,10 @@ async function(
   try{
 
     /*
-      IMPORTANT:
-      Firebase will store a REAL boolean:
-      true = Available
-      false = Out of Stock
+      NO PASSWORD REQUIRED.
+
+      true  = AVAILABLE
+      false = OUT OF STOCK
     */
 
     await set(
@@ -2654,60 +2737,17 @@ async function(
 };
 
 
-/* ================= IMAGE ================= */
+/*
+  IMPORTANT:
+  There is intentionally NO saveImage()
+  function here.
 
-window.saveImage =
-async function(id){
+  Existing image URLs in Firebase are
+  NOT deleted or modified.
 
-  const input =
-    document.getElementById(
-      `image-${id}`
-    );
-
-
-  const image =
-    input?.value.trim() ||
-    "";
-
-
-  try{
-
-    await set(
-      ref(
-        db,
-        `settings/menu/${id}/image`
-      ),
-      image
-    );
-
-
-    const preview =
-      document.getElementById(
-        `preview-${id}`
-      );
-
-
-    if(preview){
-
-      preview.src =
-        image;
-
-    }
-
-
-    showToast(
-      "Image updated."
-    );
-
-  }catch(error){
-
-    showToast(
-      error.message
-    );
-
-  }
-
-};
+  Home page can continue reading:
+  settings/menu/{itemId}/image
+*/
 
 
 /* ================= ORDERS ================= */
@@ -2774,16 +2814,6 @@ function updateStats(){
   const orders =
     Object.values(
       allOrders
-    );
-
-
-  const active =
-    orders.filter(
-      order =>
-        String(
-          order.status || ""
-        ).toLowerCase() !==
-        "delivered"
     );
 
 
@@ -2887,8 +2917,7 @@ function statusClass(
   const s =
     String(
       status || ""
-    )
-    .toLowerCase();
+    ).toLowerCase();
 
 
   if(
@@ -2944,8 +2973,7 @@ function normalizeStatus(
     String(
       status ||
       "received"
-    )
-    .toLowerCase();
+    ).toLowerCase();
 
 
   if(
@@ -3011,6 +3039,11 @@ function renderOrders(){
           );
 
 
+        /*
+          Delivered orders are never
+          shown outside Delivered box.
+        */
+
         if(
           status ===
           "Delivered"
@@ -3036,10 +3069,7 @@ function renderOrders(){
           "new"
         ){
 
-          return (
-            status !==
-            "Delivered"
-          );
+          return true;
 
         }
 
@@ -3106,8 +3136,10 @@ function renderOrders(){
 
 
   /*
-    NEW / ACTIVE orders always stay at TOP.
-    Latest order first.
+    RECEIVED / NEW orders always
+    stay at TOP.
+
+    Then latest orders.
   */
 
   list.sort(
@@ -3321,6 +3353,10 @@ function orderHtml(
     )
     .join("");
 
+
+  /*
+    Only Received orders blink.
+  */
 
   const isNew =
     status === "Received" &&
@@ -3677,9 +3713,8 @@ async function(
 
 
     /*
-      If Delivered:
-      copy order into deliveredOrders.
-      It will remain in Firebase Delivered folder.
+      DELIVERED:
+      Copy order to Delivered folder.
     */
 
     if(
@@ -3745,7 +3780,7 @@ $("whatsappNumber").value =
 
 
 /*
-  Keep shop status updated
+  Keep shop status updated.
 */
 
 setInterval(
