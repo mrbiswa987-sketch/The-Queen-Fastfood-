@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -21,6 +21,63 @@ body{
   background:#070707;
   color:#fff;
   font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
+/* =====================================================
+   QUEEN BACKGROUND WATERMARK + GIMBAL LIGHT
+===================================================== */
+
+body::before{
+  content:"♛";
+  position:fixed;
+  left:50%;
+  top:52%;
+  transform:translate(-50%,-50%);
+  z-index:-3;
+  font-family:"Times New Roman",serif;
+  font-size:min(62vw,700px);
+  line-height:1;
+  color:rgba(245,155,35,.16);
+  opacity:.40;
+  pointer-events:none;
+  filter:
+    drop-shadow(0 0 22px rgba(245,155,35,.28))
+    drop-shadow(0 0 65px rgba(245,155,35,.14));
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:650px;
+  height:650px;
+  left:50%;
+  top:45%;
+  transform:translate(-50%,-50%);
+  z-index:-2;
+  pointer-events:none;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(245,155,35,.13) 0%,
+      rgba(245,155,35,.07) 22%,
+      rgba(245,155,35,.025) 48%,
+      transparent 72%
+    );
+  filter:blur(12px);
+  animation:gimbalGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes gimbalGlow{
+  from{
+    transform:translate(-50%,-50%) scale(.88);
+    opacity:.65;
+  }
+  to{
+    transform:translate(-50%,-50%) scale(1.12);
+    opacity:1;
+  }
 }
 
 button,input,textarea,select{
@@ -57,6 +114,7 @@ header{
   font-family:"Cormorant Garamond",serif;
   font-size:30px;
   font-weight:700;
+  color:#f5f5f5;
 }
 
 .logo span{
@@ -80,16 +138,42 @@ header{
   margin:auto;
   padding:70px 20px 35px;
   text-align:center;
+  position:relative;
 }
 
 .hero h1{
-  font-family:"Cormorant Garamond",serif;
+  font-family:"Playfair Display","Cormorant Garamond",serif;
   font-size:clamp(48px,8vw,82px);
   line-height:.95;
+  font-weight:800;
+  letter-spacing:1px;
+  text-shadow:
+    0 0 18px rgba(245,155,35,.15);
 }
 
-.hero h1 span{
+.hero h1 .welcome{
+  display:block;
+  color:#fff;
+  font-family:"Cormorant Garamond",serif;
+  font-size:.46em;
+  font-weight:600;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  text-shadow:
+    0 0 12px rgba(255,255,255,.18),
+    0 0 25px rgba(245,155,35,.12);
+}
+
+.hero h1 .queen-title{
+  display:block;
   color:#f59b23;
+  font-family:"Playfair Display","Cormorant Garamond",serif;
+  font-weight:800;
+  letter-spacing:2px;
+  text-shadow:
+    0 0 15px rgba(245,155,35,.28),
+    0 0 35px rgba(245,155,35,.13);
 }
 
 .hero p{
@@ -121,6 +205,51 @@ header{
 
 .dot.closed{
   background:#ff453a;
+}
+
+.order-time{
+  margin-top:12px;
+  color:#f59b23;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.7px;
+  text-shadow:
+    0 0 8px rgba(245,155,35,.55),
+    0 0 18px rgba(245,155,35,.25);
+  animation:orderTimeGlow 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes orderTimeGlow{
+  from{
+    text-shadow:
+      0 0 6px rgba(245,155,35,.35),
+      0 0 12px rgba(245,155,35,.12);
+  }
+  to{
+    text-shadow:
+      0 0 10px rgba(245,155,35,.75),
+      0 0 24px rgba(245,155,35,.3);
+  }
+}
+
+.brand-message{
+  max-width:360px;
+  margin:22px auto 0;
+  line-height:1.45;
+}
+
+.brand-message strong{
+  display:block;
+  color:#fff;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
+.brand-message span{
+  display:block;
+  margin-top:5px;
+  color:#999;
+  font-size:12px;
 }
 
 .section{
@@ -569,7 +698,6 @@ footer a{
   }
 }
 
-
 /* =====================================================
    DELIVERY SUCCESS ANIMATION
 ===================================================== */
@@ -675,7 +803,6 @@ footer a{
 
 }
 
-
 @media(max-width:900px){
 
   .menu-grid{
@@ -688,6 +815,14 @@ footer a{
 
   .hero{
     padding-top:50px;
+  }
+
+  .hero h1 .welcome{
+    letter-spacing:3px;
+  }
+
+  .hero h1 .queen-title{
+    letter-spacing:1px;
   }
 
   .menu-grid{
@@ -715,6 +850,15 @@ footer a{
     max-height:88vh;
   }
 
+  body::before{
+    font-size:90vw;
+  }
+
+  body::after{
+    width:430px;
+    height:430px;
+  }
+
 }
 </style>
 </head>
@@ -725,10 +869,7 @@ footer a{
 
   <div class="website-mode-inner">
 
-    <div
-      id="websiteModeIcon"
-      class="website-mode-icon"
-    >
+    <div id="websiteModeIcon" class="website-mode-icon">
       🔧
     </div>
 
@@ -758,9 +899,7 @@ footer a{
       Thank You!
     </h1>
 
-    <p
-      style="color:#aaa;margin-top:10px"
-    >
+    <p style="color:#aaa;margin-top:10px">
       Your order has been placed successfully.
     </p>
 
@@ -768,8 +907,6 @@ footer a{
 
 </div>
 
-
-<!-- DELIVERY SUCCESS OVERLAY -->
 
 <div
   id="deliverySuccessOverlay"
@@ -805,7 +942,7 @@ footer a{
   <div class="nav">
 
     <div class="logo">
-      The Queen <span>Fast Food</span>
+      GOOD FOOD &amp; GOOD MOOD
     </div>
 
     <button
@@ -826,12 +963,35 @@ footer a{
 <section class="hero">
 
   <h1>
-    Choose. <span>Add.</span> Enjoy.
+
+    <span class="welcome">
+      WELCOME TO
+    </span>
+
+    <span class="queen-title">
+      THE QUEEN FAST FOOD
+    </span>
+
   </h1>
+
 
   <p>
     Fresh food • Fast service • Easy ordering
   </p>
+
+
+  <div class="brand-message">
+
+    <strong>
+      GOOD FOOD &amp; GOOD MOOD
+    </strong>
+
+    <span>
+      Delicious food, great taste — right here at Ibrisingh Bazar.
+    </span>
+
+  </div>
+
 
   <div class="status">
 
@@ -846,8 +1006,10 @@ footer a{
 
   </div>
 
+
   <div
-    style="margin-top:10px;color:#777;font-size:13px"
+    id="orderTimeBox"
+    class="order-time"
   >
     Order Time:
     <span id="orderTimeValue">
@@ -1726,6 +1888,10 @@ function isShopOpen(){
 }
 
 
+/* =====================================================
+   SHOP STATUS RENDER
+===================================================== */
+
 function renderShopStatus(){
 
   const open =
@@ -1755,8 +1921,8 @@ function renderShopStatus(){
 
   text.textContent =
     open
-      ? "The Queen Fast Food is Open"
-      : "The Queen Fast Food is Closed Today. Sorry for your order.";
+      ? "YOUR ORDER IS JUST A CLICK AWAY"
+      : "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW";
 
 
   const orderTime =
@@ -1765,10 +1931,18 @@ function renderShopStatus(){
     );
 
 
+  const openTime =
+    shopSettings.openTime ||
+    "12:00";
+
+
+  const closeTime =
+    shopSettings.closeTime ||
+    "23:00";
+
+
   orderTime.textContent =
-    open
-      ? `${shopSettings.openTime || "12:00"} - ${shopSettings.closeTime || "23:00"}`
-      : "Closed";
+    `${openTime} - ${closeTime}`;
 
 }
 
@@ -1953,7 +2127,7 @@ function addToCart(item){
   if(!isShopOpen()){
 
     alert(
-      "The Queen Fast Food is Closed Today. Sorry for your order."
+      "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW"
     );
 
     return;
@@ -2231,7 +2405,7 @@ function openCheckout(){
   if(!isShopOpen()){
 
     alert(
-      "The Queen Fast Food is Closed Today. Sorry for your order."
+      "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW"
     );
 
     return;
@@ -2778,7 +2952,7 @@ async function placeOrder(){
     if(!isShopOpen()){
 
       alert(
-        "The Queen Fast Food is Closed Today. Sorry for your order."
+        "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW"
       );
 
       return;
@@ -4008,12 +4182,6 @@ async function customerConfirmDelivered(
     );
 
 
-    /*
-      Firebase status update successful.
-      No alert here.
-      Live onValue() will update the order.
-    */
-
     showDeliverySuccess();
 
   }
@@ -4084,10 +4252,6 @@ function showDeliverySuccess(){
   );
 
 
-  /*
-    FIRST MESSAGE
-  */
-
   icon.textContent =
     "🎉";
 
@@ -4099,10 +4263,6 @@ function showDeliverySuccess(){
   message.textContent =
     "";
 
-
-  /*
-    FLOWERS
-  */
 
   flowerContainer.innerHTML =
     "";
@@ -4188,10 +4348,6 @@ function showDeliverySuccess(){
   }
 
 
-  /*
-    AFTER EXACTLY 1 SECOND
-  */
-
   setTimeout(
     ()=>{
 
@@ -4210,11 +4366,6 @@ function showDeliverySuccess(){
     1000
   );
 
-
-  /*
-    AFTER 3.5 SECONDS
-    CLOSE SUCCESS SCREEN
-  */
 
   setTimeout(
     ()=>{
@@ -4241,12 +4392,6 @@ function showDeliverySuccess(){
         ).value =
           lastOrderId;
 
-
-        /*
-          Live tracking already connected.
-          This refreshes the displayed
-          delivered order.
-        */
 
         trackOrder();
 
