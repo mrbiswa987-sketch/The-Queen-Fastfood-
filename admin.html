@@ -140,6 +140,109 @@ header{
   font-size:20px;
 }
 
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+.notification-wrap{
+  position:relative;
+}
+
+.notification-button{
+  width:38px;
+  height:38px;
+  padding:0;
+  border-radius:50%;
+  background:#292929;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  position:relative;
+}
+
+.notification-button:hover{
+  background:#383838;
+}
+
+.notification-badge{
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  min-width:18px;
+  height:18px;
+  padding:0 5px;
+  border-radius:20px;
+  background:#f59b23;
+  color:#000;
+  font-size:10px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #101010;
+}
+
+.notification-badge.hidden{
+  display:none!important;
+}
+
+.notification-panel{
+  position:absolute;
+  top:46px;
+  right:0;
+  width:290px;
+  background:#111;
+  border:1px solid #333;
+  border-radius:11px;
+  padding:10px;
+  box-shadow:0 15px 35px rgba(0,0,0,.5);
+  z-index:100;
+}
+
+.notification-panel h3{
+  color:#f59b23;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.notification-item{
+  padding:9px;
+  background:#171717;
+  border:1px solid #292929;
+  border-radius:8px;
+  margin-top:6px;
+  cursor:pointer;
+}
+
+.notification-item:hover{
+  border-color:#f59b23;
+}
+
+.notification-item b{
+  font-size:12px;
+}
+
+.notification-item small{
+  display:block;
+  color:#888;
+  margin-top:3px;
+  font-size:10px;
+}
+
+.no-notification{
+  color:#777;
+  font-size:11px;
+  padding:8px 2px;
+}
+
 /* =========================
    CONTAINER
 ========================= */
@@ -307,7 +410,7 @@ header{
 
 .orders{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:10px;
   align-items:start;
 }
@@ -399,6 +502,26 @@ header{
 }
 
 /* =========================
+   COMPLETE BOX
+========================= */
+
+.complete-column{
+  grid-column:1 / -1;
+  width:100%;
+}
+
+.complete-orders-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:3px;
+}
+
+.complete-orders-grid .order{
+  margin-top:8px;
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 
@@ -409,10 +532,30 @@ header{
   }
 
   .orders{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .complete-orders-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
   .shop-settings-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:800px){
+
+  .orders{
+    grid-template-columns:1fr;
+  }
+
+  .complete-column{
+    grid-column:auto;
+  }
+
+  .complete-orders-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -457,6 +600,10 @@ header{
     grid-template-columns:1fr;
   }
 
+  .complete-orders-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
   .shop-settings-grid{
     grid-template-columns:1fr 1fr;
   }
@@ -467,6 +614,13 @@ header{
 
   .website-control button{
     width:100%;
+  }
+
+  .notification-panel{
+    position:fixed;
+    top:58px;
+    right:10px;
+    width:min(290px,calc(100vw - 20px));
   }
 
 }
@@ -485,6 +639,10 @@ header{
     grid-template-columns:1fr;
   }
 
+  .complete-orders-grid{
+    grid-template-columns:1fr;
+  }
+
   .login-box{
     padding:18px;
   }
@@ -496,6 +654,12 @@ header{
   .nav .danger{
     padding:7px 9px;
     font-size:11px;
+  }
+
+  .notification-button{
+    width:34px;
+    height:34px;
+    font-size:18px;
   }
 
 }
@@ -550,12 +714,51 @@ header{
 
     <h1>Queen Fast Food Admin</h1>
 
-    <button
-      id="logoutButton"
-      class="danger"
-    >
-      Logout
-    </button>
+    <div class="nav-right">
+
+      <div class="notification-wrap">
+
+        <button
+          id="notificationButton"
+          class="notification-button"
+          title="New Orders"
+        >
+          🔔
+
+          <span
+            id="notificationBadge"
+            class="notification-badge hidden"
+          >
+            0
+          </span>
+
+        </button>
+
+
+        <div
+          id="notificationPanel"
+          class="notification-panel hidden"
+        >
+
+          <h3>
+            New Order Notifications
+          </h3>
+
+          <div id="notificationList"></div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="logoutButton"
+        class="danger"
+      >
+        Logout
+      </button>
+
+    </div>
 
   </div>
 
@@ -736,6 +939,8 @@ header{
 
   <div class="orders">
 
+    <!-- NEW -->
+
     <div class="order-column">
 
       <h3>
@@ -747,6 +952,8 @@ header{
 
     </div>
 
+
+    <!-- PENDING -->
 
     <div class="order-column">
 
@@ -760,6 +967,8 @@ header{
     </div>
 
 
+    <!-- DELIVERY -->
+
     <div class="order-column">
 
       <h3>
@@ -772,14 +981,19 @@ header{
     </div>
 
 
-    <div class="order-column">
+    <!-- COMPLETE -->
+
+    <div class="order-column complete-column">
 
       <h3>
         COMPLETE
         <span id="boxCompleteCount">(0)</span>
       </h3>
 
-      <div id="completeOrders"></div>
+      <div
+        id="completeOrders"
+        class="complete-orders-grid"
+      ></div>
 
     </div>
 
@@ -798,6 +1012,7 @@ header{
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+
 import {
   getDatabase,
   ref,
@@ -806,11 +1021,14 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -851,8 +1069,10 @@ const ADMIN_UID =
 const app =
   initializeApp(firebaseConfig);
 
+
 const db =
   getDatabase(app);
+
 
 const auth =
   getAuth(app);
@@ -861,6 +1081,12 @@ const auth =
 let settings = {};
 let orders = {};
 
+let authReady = false;
+
+
+/* =========================
+   MENU
+========================= */
 
 const MENU = [
 
@@ -916,7 +1142,41 @@ const MENU = [
 
 
 /* =========================
-   AUTH
+   AUTH PERSISTENCE
+========================= */
+
+async function prepareAuth(){
+
+  try{
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+    authReady = true;
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Auth persistence error:",
+      error
+    );
+
+    authReady = true;
+
+  }
+
+}
+
+
+await prepareAuth();
+
+
+/* =========================
+   LOGIN
 ========================= */
 
 document.getElementById(
@@ -928,17 +1188,21 @@ document.getElementById(
       "email"
     ).value.trim();
 
+
   const password =
     document.getElementById(
       "password"
     ).value;
+
 
   const msg =
     document.getElementById(
       "loginMessage"
     );
 
+
   msg.textContent = "";
+
 
   if(!email || !password){
 
@@ -948,6 +1212,19 @@ document.getElementById(
     return;
 
   }
+
+
+  const button =
+    document.getElementById(
+      "loginButton"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Logging in...";
+
 
   try{
 
@@ -965,6 +1242,11 @@ document.getElementById(
 
     msg.textContent =
       "Login failed. Check your admin credentials.";
+
+    button.disabled = false;
+
+    button.textContent =
+      "Login";
 
   }
 
@@ -986,11 +1268,29 @@ onAuthStateChanged(
         "hidden"
       );
 
+
       document.getElementById(
         "adminApp"
       ).classList.remove(
         "hidden"
       );
+
+
+      document.getElementById(
+        "loginMessage"
+      ).textContent = "";
+
+
+      document.getElementById(
+        "loginButton"
+      ).disabled = false;
+
+
+      document.getElementById(
+        "loginButton"
+      ).textContent =
+        "Login";
+
 
       loadData();
 
@@ -1004,11 +1304,13 @@ onAuthStateChanged(
         "hidden"
       );
 
+
       document.getElementById(
         "adminApp"
       ).classList.add(
         "hidden"
       );
+
 
       if(user){
 
@@ -1027,20 +1329,216 @@ onAuthStateChanged(
 );
 
 
+/* =========================
+   LOGOUT
+========================= */
+
 document.getElementById(
   "logoutButton"
-).onclick = ()=>{
+).onclick = async()=>{
 
-  signOut(auth);
+  try{
+
+    await signOut(auth);
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
 
 };
+
+
+/* =========================
+   NOTIFICATION BELL
+========================= */
+
+const notificationButton =
+  document.getElementById(
+    "notificationButton"
+  );
+
+
+const notificationPanel =
+  document.getElementById(
+    "notificationPanel"
+  );
+
+
+notificationButton.onclick =
+  event=>{
+
+    event.stopPropagation();
+
+    notificationPanel.classList.toggle(
+      "hidden"
+    );
+
+  };
+
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    if(
+      !event.target.closest(
+        ".notification-wrap"
+      )
+    ){
+
+      notificationPanel.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+function renderNotifications(
+  newOrders
+){
+
+  const badge =
+    document.getElementById(
+      "notificationBadge"
+    );
+
+
+  const list =
+    document.getElementById(
+      "notificationList"
+    );
+
+
+  const sorted =
+    [...newOrders].sort(
+      (a,b)=>
+        Number(
+          b.createdAt || 0
+        ) -
+        Number(
+          a.createdAt || 0
+        )
+    );
+
+
+  badge.textContent =
+    sorted.length;
+
+
+  badge.classList.toggle(
+    "hidden",
+    sorted.length === 0
+  );
+
+
+  list.innerHTML =
+    "";
+
+
+  if(
+    sorted.length === 0
+  ){
+
+    list.innerHTML = `
+      <div class="no-notification">
+        No new orders.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  sorted.slice(
+    0,
+    10
+  ).forEach(
+    order=>{
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "notification-item";
+
+
+      item.innerHTML = `
+
+        <b>
+          New Order:
+          ${escapeHtml(
+            order.orderId ||
+            order.__key
+          )}
+        </b>
+
+        <small>
+          ${escapeHtml(
+            order.customerName ||
+            "Customer"
+          )}
+          ·
+          ₹${Number(
+            order.total || 0
+          )}
+        </small>
+
+      `;
+
+
+      item.onclick = ()=>{
+
+        notificationPanel.classList.add(
+          "hidden"
+        );
+
+
+        document.getElementById(
+          "newOrders"
+        ).scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      };
+
+
+      list.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
 
 
 /* =========================
    LOAD DATA
 ========================= */
 
+let dataLoaded = false;
+
+
 function loadData(){
+
+  if(dataLoaded)
+    return;
+
+
+  dataLoaded = true;
+
 
   onValue(
 
@@ -1054,14 +1552,19 @@ function loadData(){
       settings =
         snapshot.val() || {};
 
+
       renderSettings();
+
       renderMenu();
 
     },
 
     error=>{
 
-      console.error(error);
+      console.error(
+        "Settings error:",
+        error
+      );
 
     }
 
@@ -1080,13 +1583,17 @@ function loadData(){
       orders =
         snapshot.val() || {};
 
+
       renderOrders();
 
     },
 
     error=>{
 
-      console.error(error);
+      console.error(
+        "Orders error:",
+        error
+      );
 
     }
 
@@ -1118,7 +1625,7 @@ function renderSettings(){
   document.getElementById(
     "deliveryRate"
   ).value =
-    settings.deliveryRate ||
+    settings.deliveryRate ??
     6;
 
 
@@ -1280,6 +1787,7 @@ document.getElementById(
 
     );
 
+
     alert(
       "Shop settings saved."
     );
@@ -1439,6 +1947,7 @@ document.getElementById(
 
     );
 
+
     alert(
       "Website settings saved."
     );
@@ -1470,7 +1979,8 @@ function renderMenu(){
     );
 
 
-  list.innerHTML = "";
+  list.innerHTML =
+    "";
 
 
   MENU.forEach(
@@ -1845,8 +2355,7 @@ function renderOrders(){
   );
 
 
-  renderBucket(
-    "completeOrders",
+  renderCompleteBucket(
     buckets.complete
   );
 
@@ -1898,8 +2407,17 @@ function renderOrders(){
   ).textContent =
     `(${buckets.complete.length})`;
 
+
+  renderNotifications(
+    buckets.new
+  );
+
 }
 
+
+/* =========================
+   NORMAL ORDER BUCKET
+========================= */
 
 function renderBucket(
   id,
@@ -1920,287 +2438,9 @@ function renderBucket(
     order=>{
 
       const div =
-        document.createElement(
-          "div"
+        createOrderCard(
+          order
         );
-
-
-      div.className =
-        "order " +
-        (
-          String(
-            order.status
-          ).toLowerCase() ===
-          "received"
-            ? "new"
-            : ""
-        );
-
-
-      let items =
-        "";
-
-
-      (
-        order.items ||
-        []
-      ).forEach(
-        item=>{
-
-          items += `
-
-            <div class="item-line">
-
-              <span>
-                ${escapeHtml(
-                  item.name
-                )}
-                × ${item.quantity}
-              </span>
-
-              <span>
-                ₹${
-                  item.price *
-                  item.quantity
-                }
-              </span>
-
-            </div>
-
-          `;
-
-        }
-      );
-
-
-      div.innerHTML = `
-
-        <div class="order-id">
-
-          ${escapeHtml(
-            order.orderId ||
-            order.__key
-          )}
-
-        </div>
-
-
-        <div class="badge">
-
-          ${escapeHtml(
-            formatStatus(
-              order.status
-            )
-          )}
-
-        </div>
-
-
-        <div style="margin-top:7px">
-
-          <b>
-            ${escapeHtml(
-              order.customerName ||
-              ""
-            )}
-          </b>
-
-        </div>
-
-
-        <small>
-
-          ${escapeHtml(
-            order.phone ||
-            ""
-          )}
-
-        </small>
-
-
-        <div class="order-address">
-
-          ${escapeHtml(
-            order.address ||
-            ""
-          )}
-
-        </div>
-
-
-        <div style="margin-top:8px">
-
-          ${items}
-
-        </div>
-
-
-        <hr
-          style="
-            border-color:#292929;
-            margin:8px 0
-          "
-        >
-
-
-        <div class="item-line">
-
-          <b>
-            Total
-          </b>
-
-          <b
-            style="color:#f59b23"
-          >
-            ₹${order.total || 0}
-          </b>
-
-        </div>
-
-
-        <div class="order-actions">
-
-          ${
-            String(
-              order.status
-            ).toLowerCase() ===
-            "received"
-
-            ? `
-
-              <button
-                class="green"
-                data-action="confirm"
-              >
-                Confirm Order
-              </button>
-
-              <button
-                class="danger"
-                data-action="cancel"
-              >
-                Cancel Order
-              </button>
-
-            `
-
-            : ""
-          }
-
-
-          ${
-            String(
-              order.status
-            ).toLowerCase() ===
-            "confirmed"
-
-            ? `
-
-              <button
-                class="primary"
-                data-action="prepare"
-              >
-                Start Preparing
-              </button>
-
-            `
-
-            : ""
-          }
-
-
-          ${
-            String(
-              order.status
-            ).toLowerCase() ===
-            "preparing"
-
-            ? `
-
-              <button
-                class="primary"
-                data-action="delivery"
-              >
-                Out for Delivery
-              </button>
-
-            `
-
-            : ""
-          }
-
-        </div>
-
-      `;
-
-
-      div.querySelectorAll(
-        "[data-action]"
-      ).forEach(
-        button=>{
-
-          button.onclick =
-            async()=>{
-
-              const type =
-                button.dataset.action;
-
-
-              if(
-                type ===
-                "confirm"
-              ){
-
-                await changeOrderStatus(
-                  order,
-                  "confirmed"
-                );
-
-              }
-
-
-              if(
-                type ===
-                "cancel"
-              ){
-
-                await changeOrderStatus(
-                  order,
-                  "cancelled"
-                );
-
-              }
-
-
-              if(
-                type ===
-                "prepare"
-              ){
-
-                await changeOrderStatus(
-                  order,
-                  "preparing"
-                );
-
-              }
-
-
-              if(
-                type ===
-                "delivery"
-              ){
-
-                await changeOrderStatus(
-                  order,
-                  "out_for_delivery"
-                );
-
-              }
-
-            };
-
-        }
-      );
 
 
       container.appendChild(
@@ -2212,6 +2452,366 @@ function renderBucket(
 
 }
 
+
+/* =========================
+   COMPLETE ORDER BUCKET
+========================= */
+
+function renderCompleteBucket(
+  list
+){
+
+  const container =
+    document.getElementById(
+      "completeOrders"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  list.forEach(
+    order=>{
+
+      const div =
+        createOrderCard(
+          order
+        );
+
+
+      container.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   ORDER CARD
+========================= */
+
+function createOrderCard(
+  order
+){
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    "order " +
+    (
+      String(
+        order.status
+      ).toLowerCase() ===
+      "received"
+        ? "new"
+        : ""
+    );
+
+
+  let items =
+    "";
+
+
+  (
+    order.items ||
+    []
+  ).forEach(
+    item=>{
+
+      const itemPrice =
+        Number(
+          item.price || 0
+        );
+
+
+      const quantity =
+        Number(
+          item.quantity || 0
+        );
+
+
+      items += `
+
+        <div class="item-line">
+
+          <span>
+            ${escapeHtml(
+              item.name
+            )}
+            × ${quantity}
+          </span>
+
+          <span>
+            ₹${
+              itemPrice *
+              quantity
+            }
+          </span>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  const status =
+    String(
+      order.status ||
+      ""
+    ).toLowerCase();
+
+
+  div.innerHTML = `
+
+    <div class="order-id">
+
+      ${escapeHtml(
+        order.orderId ||
+        order.__key
+      )}
+
+    </div>
+
+
+    <div class="badge">
+
+      ${escapeHtml(
+        formatStatus(
+          order.status
+        )
+      )}
+
+    </div>
+
+
+    <div style="margin-top:7px">
+
+      <b>
+        ${escapeHtml(
+          order.customerName ||
+          ""
+        )}
+      </b>
+
+    </div>
+
+
+    <small>
+
+      ${escapeHtml(
+        order.phone ||
+        ""
+      )}
+
+    </small>
+
+
+    <div class="order-address">
+
+      ${escapeHtml(
+        order.address ||
+        ""
+      )}
+
+    </div>
+
+
+    <div style="margin-top:8px">
+
+      ${items}
+
+    </div>
+
+
+    <hr
+      style="
+        border-color:#292929;
+        margin:8px 0
+      "
+    >
+
+
+    <div class="item-line">
+
+      <b>
+        Total
+      </b>
+
+      <b
+        style="color:#f59b23"
+      >
+        ₹${order.total || 0}
+      </b>
+
+    </div>
+
+
+    ${
+      status === "received"
+
+      ? `
+
+        <div class="order-actions">
+
+          <button
+            class="green"
+            data-action="confirm"
+          >
+            Confirm Order
+          </button>
+
+          <button
+            class="danger"
+            data-action="cancel"
+          >
+            Cancel Order
+          </button>
+
+        </div>
+
+      `
+
+      : ""
+    }
+
+
+    ${
+      status === "confirmed"
+
+      ? `
+
+        <div class="order-actions">
+
+          <button
+            class="primary"
+            data-action="prepare"
+          >
+            Start Preparing
+          </button>
+
+        </div>
+
+      `
+
+      : ""
+    }
+
+
+    ${
+      status === "preparing"
+
+      ? `
+
+        <div class="order-actions">
+
+          <button
+            class="primary"
+            data-action="delivery"
+          >
+            Out for Delivery
+          </button>
+
+        </div>
+
+      `
+
+      : ""
+    }
+
+  `;
+
+
+  div.querySelectorAll(
+    "[data-action]"
+  ).forEach(
+    button=>{
+
+      button.onclick =
+        async()=>{
+
+          const type =
+            button.dataset.action;
+
+
+          button.disabled =
+            true;
+
+
+          if(
+            type ===
+            "confirm"
+          ){
+
+            await changeOrderStatus(
+              order,
+              "confirmed"
+            );
+
+          }
+
+
+          if(
+            type ===
+            "cancel"
+          ){
+
+            await changeOrderStatus(
+              order,
+              "cancelled"
+            );
+
+          }
+
+
+          if(
+            type ===
+            "prepare"
+          ){
+
+            await changeOrderStatus(
+              order,
+              "preparing"
+            );
+
+          }
+
+
+          if(
+            type ===
+            "delivery"
+          ){
+
+            await changeOrderStatus(
+              order,
+              "out_for_delivery"
+            );
+
+          }
+
+        };
+
+    }
+  );
+
+
+  return div;
+
+}
+
+
+/* =========================
+   CHANGE ORDER STATUS
+========================= */
 
 async function changeOrderStatus(
   order,
