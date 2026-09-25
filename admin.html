@@ -34,7 +34,6 @@ button{cursor:pointer}
 
 .hidden{display:none!important}
 
-/* ORDER FOLDER CONTROL */
 .order-folder{
   transition:.2s;
 }
@@ -197,19 +196,11 @@ button{cursor:pointer}
   margin-top:3px;
 }
 
-/* =========================
-   HEADER ACTIONS
-========================= */
-
 .header-actions{
   display:flex;
   align-items:center;
   gap:8px;
 }
-
-/* =========================
-   ADMIN BELL
-========================= */
 
 .admin-bell{
   position:relative;
@@ -287,10 +278,6 @@ button{cursor:pointer}
   padding:18px;
 }
 
-/* =========================
-   FOUR ORDER BOXES
-========================= */
-
 .order-folders{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -344,10 +331,6 @@ button{cursor:pointer}
 .folder.cancelled .folder-number{
   color:#ff4d4d;
 }
-
-/* =========================
-   NEW ORDER NOTIFICATION
-========================= */
 
 .new-notification{
   display:none;
@@ -411,10 +394,6 @@ button{cursor:pointer}
   font-size:9px;
   margin-top:3px;
 }
-
-/* =========================
-   CARDS
-========================= */
 
 .card{
   background:var(--card);
@@ -534,10 +513,6 @@ button{cursor:pointer}
   font-size:9px;
 }
 
-/* =========================
-   PAYMENT METHOD CONTROL
-========================= */
-
 .payment-options{
   display:flex;
   flex-direction:column;
@@ -586,10 +561,6 @@ button{cursor:pointer}
   margin-top:2px;
   font-weight:400;
 }
-
-/* =========================
-   MENU
-========================= */
 
 .menu-list{
   display:grid;
@@ -640,10 +611,6 @@ button{cursor:pointer}
   border-radius:7px;
   font-size:9px;
 }
-
-/* =========================
-   ORDERS
-========================= */
 
 .order-section{
   margin-top:14px;
@@ -772,21 +739,48 @@ button{cursor:pointer}
 .order-item{
   display:flex;
   justify-content:space-between;
+  align-items:center;
+  gap:10px;
   color:#aaa;
   font-size:9px;
-  padding:2px 0;
+  padding:4px 0;
+}
+
+.order-item strong{
+  color:#ddd;
+  white-space:nowrap;
+}
+
+.order-summary{
+  margin-top:8px;
+  border-top:1px solid #222;
+  padding-top:7px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  color:#999;
+  font-size:9px;
+  padding:3px 0;
+}
+
+.summary-row.total-row{
+  margin-top:4px;
+  padding-top:7px;
+  border-top:1px solid #292929;
+  color:#fff;
+  font-weight:900;
+  font-size:11px;
+}
+
+.summary-row.total-row strong{
+  color:var(--gold);
+  font-size:13px;
 }
 
 .order-total{
-  display:flex;
-  justify-content:space-between;
-  border-top:1px solid #222;
-  margin-top:7px;
-  padding-top:8px;
-}
-
-.order-total strong{
-  color:var(--gold);
+  display:none;
 }
 
 .status-buttons{
@@ -800,10 +794,6 @@ button{cursor:pointer}
   font-size:8px;
   padding:7px 9px;
 }
-
-/* =========================
-   RATING
-========================= */
 
 .rating{
   background:#0b0b0b;
@@ -823,10 +813,6 @@ button{cursor:pointer}
   color:#999;
   font-size:9px;
 }
-
-/* =========================
-   TOAST
-========================= */
 
 .toast{
   position:fixed;
@@ -849,10 +835,6 @@ button{cursor:pointer}
   opacity:1;
   transform:translate(-50%,0);
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:800px){
 
@@ -922,43 +904,26 @@ button{cursor:pointer}
 
     <div class="field">
       <label>Email</label>
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Admin email"
-      >
+      <input id="loginEmail" type="email" placeholder="Admin email">
     </div>
 
     <div class="field">
       <label>Password</label>
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Password"
-      >
+      <input id="loginPassword" type="password" placeholder="Password">
     </div>
 
-    <button
-      class="login-btn"
-      onclick="adminLogin()"
-    >
+    <button class="login-btn" onclick="adminLogin()">
       LOGIN
     </button>
 
-    <div
-      id="loginError"
-      class="login-error"
-    ></div>
+    <div id="loginError" class="login-error"></div>
 
   </div>
 
 </div>
 
 
-<div
-  id="adminPanel"
-  style="display:none;"
->
+<div id="adminPanel" style="display:none;">
 
 <header class="admin-header">
 
@@ -979,19 +944,13 @@ button{cursor:pointer}
       >
         🔔
 
-        <span
-          id="adminBellCount"
-          class="admin-bell-count"
-        >
+        <span id="adminBellCount" class="admin-bell-count">
           0
         </span>
 
       </button>
 
-      <button
-        class="btn btn-red"
-        onclick="adminLogout()"
-      >
+      <button class="btn btn-red" onclick="adminLogout()">
         Logout
       </button>
 
@@ -1004,83 +963,58 @@ button{cursor:pointer}
 
 <div class="dashboard">
 
-
 <div class="order-folders">
 
-  <div
-    class="folder new"
-    id="newFolderButton"
-    onclick="openOrderFolder('new')"
-  >
+  <div class="folder new" id="newFolderButton"
+       onclick="openOrderFolder('new')">
 
     <div class="folder-label">
       🆕 NEW ORDERS
     </div>
 
-    <div
-      class="folder-number"
-      id="newCount"
-    >
+    <div class="folder-number" id="newCount">
       0
     </div>
 
   </div>
 
 
-  <div
-    class="folder pending"
-    id="pendingFolderButton"
-    onclick="openOrderFolder('pending')"
-  >
+  <div class="folder pending" id="pendingFolderButton"
+       onclick="openOrderFolder('pending')">
 
     <div class="folder-label">
       ⏳ PENDING ORDERS
     </div>
 
-    <div
-      class="folder-number"
-      id="pendingCount"
-    >
+    <div class="folder-number" id="pendingCount">
       0
     </div>
 
   </div>
 
 
-  <div
-    class="folder delivered"
-    id="deliveredFolderButton"
-    onclick="openOrderFolder('delivered')"
-  >
+  <div class="folder delivered" id="deliveredFolderButton"
+       onclick="openOrderFolder('delivered')">
 
     <div class="folder-label">
       🟢 DELIVERED
     </div>
 
-    <div
-      class="folder-number"
-      id="deliveredCount"
-    >
+    <div class="folder-number" id="deliveredCount">
       0
     </div>
 
   </div>
 
 
-  <div
-    class="folder cancelled"
-    id="cancelledFolderButton"
-    onclick="openOrderFolder('cancelled')"
-  >
+  <div class="folder cancelled" id="cancelledFolderButton"
+       onclick="openOrderFolder('cancelled')">
 
     <div class="folder-label">
       🔴 CANCELLED
     </div>
 
-    <div
-      class="folder-number"
-      id="cancelledCount"
-    >
+    <div class="folder-number" id="cancelledCount">
       0
     </div>
 
@@ -1089,10 +1023,7 @@ button{cursor:pointer}
 </div>
 
 
-<div
-  id="newNotification"
-  class="new-notification"
->
+<div id="newNotification" class="new-notification">
 
   <div class="notification-head">
 
@@ -1100,10 +1031,7 @@ button{cursor:pointer}
       🔔 NEW ORDER
     </div>
 
-    <div
-      id="notificationCount"
-      class="notification-count"
-    >
+    <div id="notificationCount" class="notification-count">
       0
     </div>
 
@@ -1123,15 +1051,9 @@ button{cursor:pointer}
 
   <div class="shop-status">
 
-    <span
-      id="shopLight"
-      class="shop-light"
-    ></span>
+    <span id="shopLight" class="shop-light"></span>
 
-    <span
-      id="shopStatusText"
-      class="shop-status-text"
-    >
+    <span id="shopStatusText" class="shop-status-text">
       CHECKING...
     </span>
 
@@ -1146,27 +1068,18 @@ button{cursor:pointer}
 
   <div class="override-buttons">
 
-    <button
-      id="overrideAuto"
-      class="override-btn"
-      onclick="setShopOverride('auto')"
-    >
+    <button id="overrideAuto" class="override-btn"
+            onclick="setShopOverride('auto')">
       🕐 AUTO
     </button>
 
-    <button
-      id="overrideOpen"
-      class="override-btn"
-      onclick="setShopOverride('open')"
-    >
+    <button id="overrideOpen" class="override-btn"
+            onclick="setShopOverride('open')">
       🟢 FORCE OPEN
     </button>
 
-    <button
-      id="overrideClosed"
-      class="override-btn"
-      onclick="setShopOverride('closed')"
-    >
+    <button id="overrideClosed" class="override-btn"
+            onclick="setShopOverride('closed')">
       🔴 FORCE CLOSED
     </button>
 
@@ -1176,34 +1089,21 @@ button{cursor:pointer}
 
   <div class="field">
     <label>Opening Time</label>
-    <input
-      id="openingTime"
-      type="time"
-      value="12:00"
-    >
+    <input id="openingTime" type="time" value="12:00">
   </div>
 
   <div class="field">
     <label>Closing Time</label>
-    <input
-      id="closingTime"
-      type="time"
-      value="23:00"
-    >
+    <input id="closingTime" type="time" value="23:00">
   </div>
 
   <div class="field">
     <label>Closed Message</label>
-    <textarea
-      id="closedMessage"
-      placeholder="Sorry, we are closed right now."
-    ></textarea>
+    <textarea id="closedMessage"
+              placeholder="Sorry, we are closed right now."></textarea>
   </div>
 
-  <button
-    class="btn btn-gold"
-    onclick="saveShopSettings()"
-  >
+  <button class="btn btn-gold" onclick="saveShopSettings()">
     Save Shop Settings
   </button>
 
@@ -1219,40 +1119,23 @@ button{cursor:pointer}
     <label>Website Mode</label>
 
     <select id="websiteMode">
-
-      <option value="normal">
-        Normal
-      </option>
-
-      <option value="updating">
-        Updating
-      </option>
-
-      <option value="maintenance">
-        Maintenance
-      </option>
-
+      <option value="normal">Normal</option>
+      <option value="updating">Updating</option>
+      <option value="maintenance">Maintenance</option>
     </select>
 
   </div>
 
   <div class="field">
 
-    <label>
-      Update / Maintenance Message
-    </label>
+    <label>Update / Maintenance Message</label>
 
-    <textarea
-      id="updateMessage"
-      placeholder="We are making some improvements..."
-    ></textarea>
+    <textarea id="updateMessage"
+              placeholder="We are making some improvements..."></textarea>
 
   </div>
 
-  <button
-    class="btn btn-gold"
-    onclick="saveWebsiteSettings()"
-  >
+  <button class="btn btn-gold" onclick="saveWebsiteSettings()">
     Update Website
   </button>
 
@@ -1271,12 +1154,10 @@ button{cursor:pointer}
 
     <label>WhatsApp Number</label>
 
-    <input
-      id="whatsappNumber"
-      type="tel"
-      maxlength="10"
-      placeholder="9090220791"
-    >
+    <input id="whatsappNumber"
+           type="tel"
+           maxlength="10"
+           placeholder="9090220791">
 
   </div>
 
@@ -1284,18 +1165,13 @@ button{cursor:pointer}
 
     <label>Admin Password</label>
 
-    <input
-      id="whatsappPassword"
-      type="password"
-      placeholder="Confirm password"
-    >
+    <input id="whatsappPassword"
+           type="password"
+           placeholder="Confirm password">
 
   </div>
 
-  <button
-    class="btn btn-gold"
-    onclick="saveWhatsApp()"
-  >
+  <button class="btn btn-gold" onclick="saveWhatsApp()">
     Save Number
   </button>
 
@@ -1325,10 +1201,7 @@ button{cursor:pointer}
 
   </div>
 
-  <button
-    class="btn btn-gold"
-    onclick="saveFontSize()"
-  >
+  <button class="btn btn-gold" onclick="saveFontSize()">
     Save Font Size
   </button>
 
@@ -1349,22 +1222,18 @@ button{cursor:pointer}
 
       <span>₹</span>
 
-      <input
-        id="deliveryRate"
-        type="number"
-        min="0"
-        step="1"
-        value="6"
-      >
+      <input id="deliveryRate"
+             type="number"
+             min="0"
+             step="1"
+             value="6">
 
       <span class="rate-unit">
         per KM
       </span>
 
-      <button
-        class="btn btn-gold"
-        onclick="saveDeliveryRate()"
-      >
+      <button class="btn btn-gold"
+              onclick="saveDeliveryRate()">
         Save
       </button>
 
@@ -1374,8 +1243,6 @@ button{cursor:pointer}
 
 </div>
 
-
-<!-- PAYMENT METHOD CONTROL -->
 
 <div class="card">
 
@@ -1390,10 +1257,7 @@ button{cursor:pointer}
 
     <label class="payment-option">
 
-      <input
-        id="paymentCOD"
-        type="checkbox"
-      >
+      <input id="paymentCOD" type="checkbox">
 
       <div>
 
@@ -1412,10 +1276,7 @@ button{cursor:pointer}
 
     <label class="payment-option">
 
-      <input
-        id="paymentOnline"
-        type="checkbox"
-      >
+      <input id="paymentOnline" type="checkbox">
 
       <div>
 
@@ -1435,10 +1296,8 @@ button{cursor:pointer}
 
   <br>
 
-  <button
-    class="btn btn-gold"
-    onclick="savePaymentMethods()"
-  >
+  <button class="btn btn-gold"
+          onclick="savePaymentMethods()">
     Save Payment Settings
   </button>
 
@@ -1449,140 +1308,86 @@ button{cursor:pointer}
 
 <div class="card">
 
-  <h2>
-    🍽️ Menu Price & Food Image Management
-  </h2>
+  <h2>🍽️ Menu Price & Food Image Management</h2>
 
   <div class="notice">
     Change food price, image and availability.
   </div>
 
-  <div
-    id="menuAdmin"
-    class="menu-list"
-  >
+  <div id="menuAdmin" class="menu-list">
     Loading menu...
   </div>
 
 </div>
 
 
-<!-- NEW ORDERS FOLDER -->
-
-<div
-  class="card order-folder"
-  id="newFolder"
->
+<div class="card order-folder" id="newFolder">
 
   <div class="section-title">
 
-    <strong>
-      🆕 New Orders
-    </strong>
+    <strong>🆕 New Orders</strong>
 
-    <span
-      id="newSectionCount"
-      class="section-count"
-    >
+    <span id="newSectionCount" class="section-count">
       0 orders
     </span>
 
   </div>
 
-  <div
-    id="newOrdersList"
-    class="orders"
-  ></div>
+  <div id="newOrdersList" class="orders"></div>
 
 </div>
 
 
-<!-- PENDING ORDERS FOLDER -->
-
-<div
-  class="card order-folder order-folder-hidden"
-  id="pendingFolder"
->
+<div class="card order-folder order-folder-hidden"
+     id="pendingFolder">
 
   <div class="section-title">
 
-    <strong>
-      ⏳ Pending Orders
-    </strong>
+    <strong>⏳ Pending Orders</strong>
 
-    <span
-      id="pendingSectionCount"
-      class="section-count"
-    >
+    <span id="pendingSectionCount" class="section-count">
       0 orders
     </span>
 
   </div>
 
-  <div
-    id="pendingOrdersList"
-    class="orders"
-  ></div>
+  <div id="pendingOrdersList" class="orders"></div>
 
 </div>
 
 
-<!-- DELIVERED FOLDER -->
-
-<div
-  class="card order-folder order-folder-hidden"
-  id="deliveredFolder"
->
+<div class="card order-folder order-folder-hidden"
+     id="deliveredFolder">
 
   <div class="section-title">
 
-    <strong>
-      🟢 Delivered Orders
-    </strong>
+    <strong>🟢 Delivered Orders</strong>
 
-    <span
-      id="deliveredSectionCount"
-      class="section-count"
-    >
+    <span id="deliveredSectionCount" class="section-count">
       0 orders
     </span>
 
   </div>
 
-  <div
-    id="deliveredOrdersList"
-    class="orders"
-  ></div>
+  <div id="deliveredOrdersList" class="orders"></div>
 
 </div>
 
 
-<!-- CANCELLED FOLDER -->
-
-<div
-  class="card order-folder order-folder-hidden"
-  id="cancelledFolder"
->
+<div class="card order-folder order-folder-hidden"
+     id="cancelledFolder">
 
   <div class="section-title">
 
-    <strong>
-      🔴 Cancelled Orders
-    </strong>
+    <strong>🔴 Cancelled Orders</strong>
 
-    <span
-      id="cancelledSectionCount"
-      class="section-count"
-    >
+    <span id="cancelledSectionCount" class="section-count">
       0 orders
     </span>
 
   </div>
 
-  <div
-    id="cancelledOrdersList"
-    class="orders"
-  ></div>
+  <div id="cancelledOrdersList" class="orders"></div>
 
 </div>
 
@@ -1591,10 +1396,7 @@ button{cursor:pointer}
 
   <h2>⭐ Customer Ratings</h2>
 
-  <div
-    id="ratingSummary"
-    class="notice"
-  >
+  <div id="ratingSummary" class="notice">
     Loading ratings...
   </div>
 
@@ -1609,10 +1411,7 @@ button{cursor:pointer}
 </div>
 
 
-<div
-  id="toast"
-  class="toast"
-></div>
+<div id="toast" class="toast"></div>
 
 
 <script type="module">
@@ -1694,20 +1493,15 @@ let allRatings = {};
 let initialOrdersLoaded = false;
 let knownOrderIds = new Set();
 let audioContext = null;
-
 let shopOverride = "auto";
 
 
 const DEFAULT_SETTINGS = {
 
   statusOverride:"auto",
-
   openTime:"12:00",
-
   closeTime:"23:00",
-
   openingTime:"12:00",
-
   closingTime:"23:00",
 
   closedMessage:
@@ -1935,8 +1729,6 @@ function loadSettings(){
         );
 
 
-      /* PAYMENT METHODS */
-
       const paymentMethods =
         settings.paymentMethods || {};
 
@@ -1978,7 +1770,6 @@ async function(){
       "paymentOnline"
     ).checked;
 
-
   if(!cod && !online){
 
     showToast(
@@ -1987,7 +1778,6 @@ async function(){
 
     return;
   }
-
 
   try{
 
@@ -2001,7 +1791,6 @@ async function(){
         online:online
       }
     );
-
 
     if(cod && online){
 
@@ -2564,13 +2353,11 @@ function renderMenu(menu){
               ${escapeHtml(item.name)}
             </div>
 
-            <div
-              style="
-                color:#777;
-                font-size:8px;
-                margin-top:3px;
-              "
-            >
+            <div style="
+              color:#777;
+              font-size:8px;
+              margin-top:3px;
+            ">
               ${item.available
                 ? "🟢 AVAILABLE"
                 : "🔴 OUT OF STOCK"
@@ -2619,14 +2406,12 @@ function renderMenu(menu){
 
         </div>
 
-        <div
-          style="
-            display:grid;
-            grid-template-columns:1fr auto;
-            gap:6px;
-            margin-top:6px;
-          "
-        >
+        <div style="
+          display:grid;
+          grid-template-columns:1fr auto;
+          gap:6px;
+          margin-top:6px;
+        ">
 
           <input
             id="image-${escapeAttribute(item.id)}"
@@ -2729,9 +2514,7 @@ async function(id){
     return;
   }
 
-  if(
-    !/^https?:\/\//i.test(image)
-  ){
+  if(!/^https?:\/\//i.test(image)){
 
     showToast(
       "Enter valid image URL."
@@ -3199,14 +2982,12 @@ function renderGroup(
   if(!entries.length){
 
     container.innerHTML = `
-      <div
-        style="
-          text-align:center;
-          color:#555;
-          padding:15px;
-          font-size:9px;
-        "
-      >
+      <div style="
+        text-align:center;
+        color:#555;
+        padding:15px;
+        font-size:9px;
+      ">
         ${emptyText}
       </div>
     `;
@@ -3277,18 +3058,17 @@ function renderNotification(entries){
 
             <div class="notification-id">
               🔔 ${escapeHtml(
-                order.orderId || key
+                getOrderId(order,key)
               )}
             </div>
 
             <div class="notification-info">
               ${escapeHtml(
-                order.customerName ||
-                "Customer"
+                getCustomerName(order)
               )}
               •
-              ₹${Number(
-                order.total || 0
+              ₹${formatMoney(
+                getOrderTotal(order)
               )}
             </div>
 
@@ -3315,9 +3095,470 @@ function renderNotification(entries){
 }
 
 
-/* =========================
+/* =====================================================
+   ORDER DATA HELPERS
+   ===================================================== */
+
+/*
+   These helpers allow the admin panel to understand
+   both old and new customer order formats.
+*/
+
+
+function getOrderId(order,key){
+
+  return (
+    order?.orderId ??
+    order?.id ??
+    order?.orderNumber ??
+    key ??
+    "-"
+  );
+
+}
+
+
+function getCustomerName(order){
+
+  return (
+    order?.customerName ??
+    order?.name ??
+    order?.customer?.name ??
+    "-"
+  );
+
+}
+
+
+function getPhone(order){
+
+  return (
+    order?.customerPhone ??
+    order?.phone ??
+    order?.mobile ??
+    order?.customerMobile ??
+    order?.customer?.phone ??
+    "-"
+  );
+
+}
+
+
+function getAddress(order){
+
+  return (
+    order?.address ??
+    order?.deliveryAddress ??
+    order?.customerAddress ??
+    order?.locationAddress ??
+    order?.customer?.address ??
+    "-"
+  );
+
+}
+
+
+function getPaymentMethod(order){
+
+  return (
+    order?.paymentMethod ??
+    order?.payment ??
+    order?.paymentType ??
+    "-"
+  );
+
+}
+
+
+/*
+   Safe number reader.
+   It handles numbers saved as:
+   100
+   "100"
+   "₹100"
+*/
+function toNumber(value){
+
+  if(
+    value === null ||
+    value === undefined ||
+    value === ""
+  ){
+    return 0;
+  }
+
+  if(typeof value === "number"){
+
+    return Number.isFinite(value)
+      ? value
+      : 0;
+
+  }
+
+  const cleaned =
+    String(value)
+      .replace(/₹/g,"")
+      .replace(/,/g,"")
+      .replace(/km/gi,"")
+      .trim();
+
+  const number =
+    Number(cleaned);
+
+  return Number.isFinite(number)
+    ? number
+    : 0;
+
+}
+
+
+/*
+   Read first valid numeric field.
+*/
+function firstNumber(...values){
+
+  for(const value of values){
+
+    if(
+      value !== undefined &&
+      value !== null &&
+      value !== "" &&
+      Number.isFinite(
+        toNumber(value)
+      )
+    ){
+
+      return toNumber(value);
+
+    }
+
+  }
+
+  return 0;
+
+}
+
+
+/*
+   Get quantity from all common formats.
+*/
+function getItemQuantity(item){
+
+  return firstNumber(
+
+    item?.quantity,
+
+    item?.qty,
+
+    item?.count,
+
+    item?.units,
+
+    item?.itemQuantity,
+
+    item?.itemQty
+
+  );
+
+}
+
+
+/*
+   Get item price from all common formats.
+*/
+function getItemPrice(item){
+
+  return firstNumber(
+
+    item?.price,
+
+    item?.rate,
+
+    item?.unitPrice,
+
+    item?.itemPrice,
+
+    item?.sellingPrice
+
+  );
+
+}
+
+
+/*
+   Get item total.
+
+   If customer saved subtotal/itemTotal/total,
+   use it.
+
+   Otherwise:
+   price × quantity
+*/
+function getItemTotal(item){
+
+  const savedTotal =
+    firstNumber(
+
+      item?.subtotal,
+
+      item?.itemTotal,
+
+      item?.lineTotal,
+
+      item?.amount,
+
+      item?.totalPrice
+
+    );
+
+  if(savedTotal > 0){
+
+    return savedTotal;
+
+  }
+
+  const price =
+    getItemPrice(item);
+
+  const quantity =
+    getItemQuantity(item);
+
+  return price * quantity;
+
+}
+
+
+/*
+   Get items from:
+   order.items
+   order.cart
+   order.cartItems
+   order.products
+*/
+function getOrderItems(order){
+
+  let raw =
+    order?.items ??
+    order?.cart ??
+    order?.cartItems ??
+    order?.products ??
+    [];
+
+  if(!raw){
+
+    return [];
+
+  }
+
+
+  if(Array.isArray(raw)){
+
+    return raw;
+
+  }
+
+
+  if(
+    typeof raw === "object"
+  ){
+
+    return Object.values(raw);
+
+  }
+
+
+  return [];
+
+}
+
+
+/*
+   Get subtotal.
+
+   First read saved subtotal.
+   If not found, calculate from items.
+*/
+function getOrderSubtotal(order){
+
+  const savedSubtotal =
+    firstNumber(
+
+      order?.subtotal,
+
+      order?.subTotal,
+
+      order?.itemsTotal,
+
+      order?.foodTotal,
+
+      order?.cartSubtotal,
+
+      order?.itemSubtotal
+
+    );
+
+  if(savedSubtotal > 0){
+
+    return savedSubtotal;
+
+  }
+
+
+  const items =
+    getOrderItems(order);
+
+  let calculated = 0;
+
+  items.forEach(
+    item => {
+
+      calculated +=
+        getItemTotal(item);
+
+    }
+  );
+
+  return calculated;
+
+}
+
+
+/*
+   Get delivery charge.
+*/
+function getOrderDeliveryCharge(order){
+
+  return firstNumber(
+
+    order?.deliveryCharge,
+
+    order?.deliveryFee,
+
+    order?.deliveryCost,
+
+    order?.shippingCharge,
+
+    order?.shippingFee,
+
+    order?.delivery?.charge
+
+  );
+
+}
+
+
+/*
+   Get distance.
+
+   Supports:
+   deliveryDistance
+   distanceKm
+   distance
+   deliveryKm
+   distanceInKm
+   delivery.distanceKm
+   location.distanceKm
+*/
+function getOrderDistance(order){
+
+  const value =
+    firstNumber(
+
+      order?.deliveryDistance,
+
+      order?.distanceKm,
+
+      order?.distance,
+
+      order?.deliveryKm,
+
+      order?.deliveryDistanceKm,
+
+      order?.distanceInKm,
+
+      order?.km,
+
+      order?.delivery?.distanceKm,
+
+      order?.delivery?.distance,
+
+      order?.location?.distanceKm,
+
+      order?.location?.distance,
+
+      order?.customerLocation?.distanceKm,
+
+      order?.customerLocation?.distance
+
+    );
+
+  return value;
+
+}
+
+
+/*
+   Get total.
+
+   If total is not saved, calculate:
+   subtotal + delivery charge
+*/
+function getOrderTotal(order){
+
+  const savedTotal =
+    firstNumber(
+
+      order?.total,
+
+      order?.grandTotal,
+
+      order?.orderTotal,
+
+      order?.finalTotal,
+
+      order?.payableAmount,
+
+      order?.amount
+
+    );
+
+  if(savedTotal > 0){
+
+    return savedTotal;
+
+  }
+
+
+  const subtotal =
+    getOrderSubtotal(order);
+
+  const delivery =
+    getOrderDeliveryCharge(order);
+
+  return subtotal + delivery;
+
+}
+
+
+function formatMoney(value){
+
+  const number =
+    toNumber(value);
+
+  return number
+    .toLocaleString(
+      "en-IN",
+      {
+        maximumFractionDigits:2
+      }
+    );
+
+}
+
+
+/* =====================================================
    ORDER CARD
-========================= */
+===================================================== */
 
 function renderOrderCard(
   key,
@@ -3326,7 +3567,7 @@ function renderOrderCard(
 
   const status =
     normalizeStatus(
-      order.status
+      order?.status
     );
 
 
@@ -3338,43 +3579,111 @@ function renderOrderCard(
       out_for_delivery:"🏍️🧑 OUT FOR DELIVERY",
       delivered:"🟢 DELIVERED",
       cancelled:"🔴 CANCELLED"
-    }[status];
+    }[status] ||
+    "ORDER";
 
 
+  /*
+     IMPORTANT:
+     Read actual customer item data.
+  */
   const items =
-    Array.isArray(order.items)
-    ? order.items
-    : Object.values(
-        order.items || {}
-      );
+    getOrderItems(order);
 
 
+  /*
+     Calculate each item.
+  */
   const itemHtml =
-    items.map(
-      item => `
+    items.length
 
-        <div class="order-item">
+    ? items.map(
+        item => {
 
-          <span>
-            ${escapeHtml(
-              item.name || "Food"
-            )}
-            ×
-            ${Number(
-              item.qty || 0
-            )}
-          </span>
+          const name =
+            item?.name ??
+            item?.itemName ??
+            item?.title ??
+            item?.foodName ??
+            item?.productName ??
+            "Food";
 
-          <strong>
-            ₹${Number(
-              item.subtotal || 0
-            )}
-          </strong>
+          const quantity =
+            getItemQuantity(item);
 
-        </div>
+          const price =
+            getItemPrice(item);
 
-      `
-    ).join("");
+          const itemTotal =
+            getItemTotal(item);
+
+
+          return `
+
+            <div class="order-item">
+
+              <span>
+
+                ${escapeHtml(name)}
+
+                ×
+
+                ${formatQuantity(quantity)}
+
+                ${
+                  price > 0
+                  ? `
+                    <span style="
+                      color:#555;
+                      font-size:8px;
+                      margin-left:4px;
+                    ">
+                      @ ₹${formatMoney(price)}
+                    </span>
+                  `
+                  : ""
+                }
+
+              </span>
+
+              <strong>
+                ₹${formatMoney(itemTotal)}
+              </strong>
+
+            </div>
+
+          `;
+
+        }
+      ).join("")
+
+    : `
+
+      <div style="
+        color:#555;
+        font-size:9px;
+        padding:5px 0;
+      ">
+        No item details found in this order.
+      </div>
+
+    `;
+
+
+  /*
+     Financial values.
+  */
+  const subtotal =
+    getOrderSubtotal(order);
+
+  const deliveryCharge =
+    getOrderDeliveryCharge(order);
+
+  const distance =
+    getOrderDistance(order);
+
+  const total =
+    getOrderTotal(order);
 
 
   let buttons = "";
@@ -3506,13 +3815,11 @@ function renderOrderCard(
 
     buttons = `
 
-      <div
-        style="
-          color:#25d366;
-          font-size:9px;
-          padding-top:7px;
-        "
-      >
+      <div style="
+        color:#25d366;
+        font-size:9px;
+        padding-top:7px;
+      ">
         ✓ Order completed
       </div>
 
@@ -3525,13 +3832,11 @@ function renderOrderCard(
 
     buttons = `
 
-      <div
-        style="
-          color:#ff4d4d;
-          font-size:9px;
-          padding-top:7px;
-        "
-      >
+      <div style="
+        color:#ff4d4d;
+        font-size:9px;
+        padding-top:7px;
+      ">
         ✕ Order cancelled
       </div>
 
@@ -3542,15 +3847,13 @@ function renderOrderCard(
 
   return `
 
-    <div
-      class="
-        order
-        ${status==="received"
-          ? "new-order"
-          : ""
-        }
-      "
-    >
+    <div class="
+      order
+      ${status==="received"
+        ? "new-order"
+        : ""
+      }
+    ">
 
       <div class="order-head">
 
@@ -3558,13 +3861,13 @@ function renderOrderCard(
 
           <div class="order-id">
             ${escapeHtml(
-              order.orderId || key
+              getOrderId(order,key)
             )}
           </div>
 
           <div class="order-date">
             ${formatDate(
-              order.createdAt
+              order?.createdAt
             )}
           </div>
 
@@ -3590,8 +3893,7 @@ function renderOrderCard(
           </small>
 
           ${escapeHtml(
-            order.customerName ||
-            "-"
+            getCustomerName(order)
           )}
 
         </div>
@@ -3604,9 +3906,7 @@ function renderOrderCard(
           </small>
 
           ${escapeHtml(
-            order.customerPhone ||
-            order.phone ||
-            "-"
+            getPhone(order)
           )}
 
         </div>
@@ -3619,8 +3919,7 @@ function renderOrderCard(
           </small>
 
           ${escapeHtml(
-            order.paymentMethod ||
-            "-"
+            getPaymentMethod(order)
           )}
 
         </div>
@@ -3633,9 +3932,7 @@ function renderOrderCard(
           </small>
 
           ${escapeHtml(
-            order.address ||
-            order.deliveryAddress ||
-            "-"
+            getAddress(order)
           )}
 
         </div>
@@ -3647,10 +3944,15 @@ function renderOrderCard(
             DISTANCE
           </small>
 
-          ${Number(
-            order.distanceKm || 0
-          ).toFixed(1)}
-          KM
+          <strong style="
+            color:${distance > 0 ? "#fff" : "#777"};
+          ">
+            ${
+              distance > 0
+              ? `${distance.toFixed(1)} KM`
+              : "Not available"
+            }
+          </strong>
 
         </div>
 
@@ -3661,9 +3963,11 @@ function renderOrderCard(
             DELIVERY
           </small>
 
-          ₹${Number(
-            order.deliveryCharge || 0
-          )}
+          <strong style="
+            color:${deliveryCharge > 0 ? "#fff" : "#777"};
+          ">
+            ₹${formatMoney(deliveryCharge)}
+          </strong>
 
         </div>
 
@@ -3672,22 +3976,59 @@ function renderOrderCard(
 
       <div class="order-items">
 
+        <div style="
+          color:#555;
+          font-size:8px;
+          margin-bottom:4px;
+          font-weight:800;
+        ">
+          ORDERED ITEMS
+        </div>
+
         ${itemHtml}
 
       </div>
 
 
-      <div class="order-total">
+      <div class="order-summary">
 
-        <span>
-          TOTAL
-        </span>
+        <div class="summary-row">
 
-        <strong>
-          ₹${Number(
-            order.total || 0
-          )}
-        </strong>
+          <span>
+            SUBTOTAL
+          </span>
+
+          <strong>
+            ₹${formatMoney(subtotal)}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            DELIVERY CHARGE
+          </span>
+
+          <strong>
+            ₹${formatMoney(deliveryCharge)}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row total-row">
+
+          <span>
+            TOTAL
+          </span>
+
+          <strong>
+            ₹${formatMoney(total)}
+          </strong>
+
+        </div>
 
       </div>
 
@@ -3701,6 +4042,28 @@ function renderOrderCard(
     </div>
 
   `;
+
+}
+
+
+/* =========================
+   QUANTITY FORMAT
+========================= */
+
+function formatQuantity(value){
+
+  const number =
+    toNumber(value);
+
+  if(
+    Number.isInteger(number)
+  ){
+
+    return String(number);
+
+  }
+
+  return number.toFixed(2);
 
 }
 
@@ -3839,11 +4202,8 @@ function(type){
   const folderMap = {
 
     new:"newFolder",
-
     pending:"pendingFolder",
-
     delivered:"deliveredFolder",
-
     cancelled:"cancelledFolder"
 
   };
@@ -3851,11 +4211,8 @@ function(type){
   const buttonMap = {
 
     new:"newFolderButton",
-
     pending:"pendingFolderButton",
-
     delivered:"deliveredFolderButton",
-
     cancelled:"cancelledFolderButton"
 
   };
@@ -4023,12 +4380,10 @@ function renderRatings(){
 
     <br>
 
-    <span
-      style="
-        color:#777;
-        font-size:9px;
-      "
-    >
+    <span style="
+      color:#777;
+      font-size:9px;
+    ">
       ${entries.length}
       customer rating(s)
     </span>
