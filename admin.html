@@ -254,10 +254,6 @@ textarea{
   margin-bottom:7px;
 }
 
-.field{
-  margin-bottom:10px;
-}
-
 .notice{
   background:#19170c;
   border:1px solid #55450e;
@@ -377,7 +373,7 @@ textarea{
 
 .menu-item{
   display:block;
-  padding:8px 0;
+  padding:10px 0;
   border-bottom:1px solid #222;
 }
 
@@ -409,6 +405,48 @@ textarea{
   width:68px!important;
   padding:6px!important;
   text-align:center;
+}
+
+.stock-control{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:8px;
+  padding:7px;
+  background:#171717;
+  border:1px solid #292929;
+  border-radius:7px;
+}
+
+.stock-control label{
+  color:#777;
+  font-size:9px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.stock-select{
+  flex:1;
+  padding:7px 8px;
+  border-radius:6px;
+  border:1px solid #333;
+  background:#111;
+  color:#fff;
+  outline:none;
+  font-size:10px;
+  font-weight:800;
+}
+
+.stock-select.available{
+  border-color:#1e6b39;
+  color:#69ed91;
+  background:#0e2115;
+}
+
+.stock-select.out{
+  border-color:#702525;
+  color:#ff8888;
+  background:#211010;
 }
 
 .image-area{
@@ -756,13 +794,15 @@ textarea{
   .image-save{
     grid-column:2;
   }
+
+  .stock-control{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
 
 <body>
-
-<!-- ================= LOGIN ================= -->
 
 <div class="login-screen" id="loginScreen">
 
@@ -803,8 +843,6 @@ textarea{
 </div>
 
 
-<!-- ================= ADMIN ================= -->
-
 <div class="admin" id="adminPanel">
 
   <div class="topbar">
@@ -825,8 +863,6 @@ textarea{
 
 
   <div class="dashboard">
-
-    <!-- STATS -->
 
     <div class="stats">
 
@@ -854,8 +890,6 @@ textarea{
 
 
     <div class="grid">
-
-      <!-- SHOP CONTROL -->
 
       <div class="card">
 
@@ -963,8 +997,6 @@ textarea{
       </div>
 
 
-      <!-- WEBSITE CONTROL -->
-
       <div class="card">
 
         <h2>🌐 Website Control</h2>
@@ -1001,8 +1033,6 @@ textarea{
 
       </div>
 
-
-      <!-- WHATSAPP -->
 
       <div class="card">
 
@@ -1047,8 +1077,6 @@ textarea{
       </div>
 
 
-      <!-- FONT -->
-
       <div class="card">
 
         <h2>🔤 Customer Font Control</h2>
@@ -1085,8 +1113,6 @@ textarea{
 
       </div>
 
-
-      <!-- DELIVERY -->
 
       <div class="card">
 
@@ -1138,10 +1164,14 @@ textarea{
 
     <div class="card" style="margin-bottom:12px;">
 
-      <h2>🍽️ Menu Price & Food Image Management</h2>
+      <h2>🍽️ Menu Price, Stock & Food Image Management</h2>
 
       <div class="notice">
-        Change food price and food image URL from here.
+        Change food price, food image and stock status from here.
+        <br>
+        <strong>🟢 Available</strong> = Customer can order.
+        <br>
+        <strong>🔴 Out of Stock</strong> = Customer cannot add this item to cart.
       </div>
 
       <div id="menuAdmin" class="menu-list">
@@ -1248,8 +1278,6 @@ textarea{
 
 <div id="toast" class="toast"></div>
 
-
-<!-- ================= JAVASCRIPT ================= -->
 
 <script type="module">
 
@@ -2640,6 +2668,14 @@ function renderMenuAdmin(data){
         const image =
           item.image || "";
 
+        /*
+          IMPORTANT:
+          Old items without "available"
+          are treated as AVAILABLE.
+        */
+        const available =
+          item.available !== false;
+
 
         return `
 
@@ -2686,6 +2722,43 @@ function renderMenuAdmin(data){
             </div>
 
 
+            <!-- STOCK CONTROL -->
+
+            <div class="stock-control">
+
+              <label>
+                STOCK STATUS
+              </label>
+
+              <select
+                id="stock-${id}"
+                class="stock-select ${
+                  available
+                    ? "available"
+                    : "out"
+                }"
+                onchange="setStockStatus('${escapeAttribute(id)}',this.value)"
+              >
+
+                <option
+                  value="available"
+                  ${available ? "selected" : ""}
+                >
+                  🟢 Available
+                </option>
+
+                <option
+                  value="out"
+                  ${!available ? "selected" : ""}
+                >
+                  🔴 Out of Stock
+                </option>
+
+              </select>
+
+            </div>
+
+
             <div class="image-area">
 
               <img
@@ -2695,6 +2768,7 @@ function renderMenuAdmin(data){
                 alt=""
                 onerror="this.src='https://via.placeholder.com/150x100/171717/777?text=Food'"
               >
+
 
               <div class="image-url">
 
@@ -2707,6 +2781,7 @@ function renderMenuAdmin(data){
                 >
 
               </div>
+
 
               <button
                 class="btn btn-blue image-save"
@@ -2726,6 +2801,10 @@ function renderMenuAdmin(data){
 
 }
 
+
+/* =========================================
+   SAVE PRICE
+========================================= */
 
 window.saveMenuItem =
 async function(id){
@@ -2755,6 +2834,11 @@ async function(id){
 
   try{
 
+    /*
+      ONLY PRICE IS UPDATED.
+      STOCK STATUS IS NOT DELETED.
+    */
+
     await set(
       ref(
         db,
@@ -2782,6 +2866,91 @@ async function(id){
 };
 
 
+/* =========================================
+   STOCK STATUS
+========================================= */
+
+window.setStockStatus =
+async function(id,value){
+
+  const available =
+    value === "available";
+
+
+  const select =
+    document.getElementById(
+      `stock-${id}`
+    );
+
+
+  try{
+
+    /*
+      SAVE ONLY:
+      settings/menu/{id}/available
+    */
+
+    await set(
+      ref(
+        db,
+        `settings/menu/${id}/available`
+      ),
+      available
+    );
+
+
+    if(select){
+
+      select.classList.remove(
+        "available",
+        "out"
+      );
+
+      select.classList.add(
+        available
+          ? "available"
+          : "out"
+      );
+
+    }
+
+
+    showToast(
+      available
+        ? "🟢 Item is now Available."
+        : "🔴 Item marked Out of Stock."
+    );
+
+  }catch(error){
+
+    console.error(
+      "Stock update error:",
+      error
+    );
+
+
+    /*
+      Reload current menu value
+      if save fails.
+    */
+
+    loadMenu();
+
+
+    showToast(
+      error.message ||
+      "Could not update stock status."
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   IMAGE PREVIEW
+========================================= */
+
 window.previewMenuImage =
 function(id){
 
@@ -2795,6 +2964,7 @@ function(id){
       `preview-${id}`
     );
 
+
   const url =
     input.value.trim();
 
@@ -2805,6 +2975,10 @@ function(id){
 
 };
 
+
+/* =========================================
+   SAVE IMAGE
+========================================= */
 
 window.saveMenuImage =
 async function(id){
@@ -3226,11 +3400,6 @@ function renderOrders(){
     );
 
 
-  /*
-    IMPORTANT:
-    NEW / RECEIVED ALWAYS TOP
-  */
-
   entries.sort(
     (a,b) => {
 
@@ -3269,11 +3438,6 @@ function renderOrders(){
     }
   );
 
-
-  /*
-    REMOVE DELIVERED
-    FROM ACTIVE BOX
-  */
 
   entries =
     entries.filter(
@@ -3358,12 +3522,6 @@ function renderOrders(){
         }
 
 
-        /*
-          ALL:
-          Cancelled visible.
-          Delivered hidden.
-        */
-
         return true;
 
       }
@@ -3415,10 +3573,6 @@ function renderDeliveredOrders(){
     );
 
 
-  /*
-    ONLY DELIVERED ORDERS
-  */
-
   let entries =
     Object.entries(
       allOrders
@@ -3429,10 +3583,6 @@ function renderDeliveredOrders(){
         "Delivered"
     );
 
-
-  /*
-    NEWEST DELIVERED FIRST
-  */
 
   entries.sort(
     (a,b) => {
@@ -3547,11 +3697,6 @@ function renderOrderCard(
   if(status === "Cancelled")
     statusClass = "cancelled";
 
-
-  /*
-    ONLY ACTIVE RECEIVED ORDER
-    GETS NEW STYLE
-  */
 
   const isNew =
     !deliveredFolder &&
@@ -3909,10 +4054,6 @@ async function(
       Date.now();
 
 
-    /*
-      UPDATE MAIN ORDER
-    */
-
     const updates = {
 
       [`orders/${key}/status`]:
@@ -3923,10 +4064,6 @@ async function(
 
     };
 
-
-    /*
-      CUSTOMER ORDER SYNC
-    */
 
     if(order.ownerUid){
 
@@ -3942,12 +4079,6 @@ async function(
 
     }
 
-
-    /*
-      DELIVERED
-      SAVE COPY INSIDE
-      deliveredOrders
-    */
 
     if(status === "Delivered"){
 
@@ -3977,19 +4108,11 @@ async function(
     }
 
 
-    /*
-      FIREBASE UPDATE
-    */
-
     await update(
       ref(db),
       updates
     );
 
-
-    /*
-      UPDATE LOCAL DATA IMMEDIATELY
-    */
 
     if(allOrders[key]){
 
@@ -4009,11 +4132,6 @@ async function(
 
     }
 
-
-    /*
-      IMPORTANT:
-      RE-RENDER BOTH BOXES
-    */
 
     updateStats();
 
@@ -4298,6 +4416,43 @@ function escapeHtml(value){
 function escapeAttribute(value){
 
   return escapeHtml(value);
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2500
+    );
 
 }
 
