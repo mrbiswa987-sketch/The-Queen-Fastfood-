@@ -2319,6 +2319,115 @@ closeTime:"23:00"
 
 
 /* =====================================================
+   STOCK NORMALIZER
+   IMPORTANT:
+   Firebase can contain boolean, string or number.
+===================================================== */
+
+function normalizeAvailable(value){
+
+/*
+  Missing value = AVAILABLE
+*/
+
+if(
+value===undefined ||
+value===null ||
+value===""
+){
+
+return true;
+
+}
+
+
+/*
+  Real boolean
+*/
+
+if(value===true){
+
+return true;
+
+}
+
+if(value===false){
+
+return false;
+
+}
+
+
+/*
+  Number
+  1 = available
+  0 = out of stock
+*/
+
+if(typeof value==="number"){
+
+return value!==0;
+
+}
+
+
+/*
+  String
+*/
+
+if(typeof value==="string"){
+
+const v=
+value
+.trim()
+.toLowerCase();
+
+
+if(
+v==="false" ||
+v==="0" ||
+v==="out" ||
+v==="out of stock" ||
+v==="out-of-stock" ||
+v==="unavailable" ||
+v==="no" ||
+v==="sold out" ||
+v==="soldout"
+){
+
+return false;
+
+}
+
+
+if(
+v==="true" ||
+v==="1" ||
+v==="available" ||
+v==="yes" ||
+v==="in stock" ||
+v==="instock"
+){
+
+return true;
+
+}
+
+}
+
+
+/*
+  Unknown value:
+  Keep available instead of
+  accidentally blocking the item.
+*/
+
+return true;
+
+}
+
+
+/* =====================================================
    IMAGES
 ===================================================== */
 
@@ -2396,14 +2505,6 @@ let settings={
 
 whatsappNumber:
 DEFAULT_WHATSAPP,
-
-/*
-  IMPORTANT
-
-  open   = admin force open
-  closed = admin force closed
-  auto   = schedule
-*/
 
 statusOverride:"auto",
 
@@ -2606,12 +2707,6 @@ settings={
 };
 
 
-/*
-  ==========================================
-  NEW ADMIN STATUS SYSTEM
-  ==========================================
-*/
-
 if(
 settings.statusOverride!=="open" &&
 settings.statusOverride!=="closed" &&
@@ -2634,10 +2729,6 @@ settings.statusOverride="auto";
 
 }
 
-
-/*
-  TIME FALLBACK
-*/
 
 if(!settings.openTime){
 
@@ -2802,13 +2893,14 @@ defaultItem?.image||
 FALLBACK_IMAGE,
 
 /*
-  IMPORTANT:
-  missing available = AVAILABLE
-  false = OUT OF STOCK
+  FIXED:
+  Always normalize Firebase stock value.
 */
 
 available:
-item.available!==false
+normalizeAvailable(
+item.available
+)
 
 };
 
@@ -2859,8 +2951,14 @@ image:
 firebaseItem.image||
 defaultItem.image,
 
+/*
+  FIXED STOCK
+*/
+
 available:
-firebaseItem.available!==false
+normalizeAvailable(
+firebaseItem.available
+)
 
 };
 
@@ -3011,10 +3109,6 @@ return true;
 }
 
 
-/*
-  INDIA STANDARD TIME
-*/
-
 const now=
 new Date();
 
@@ -3059,12 +3153,6 @@ const currentMinutes=
 hour*60+minute;
 
 
-/*
-  NORMAL
-
-  12:00 -> 23:00
-*/
-
 if(openMinutes<closeMinutes){
 
 return(
@@ -3075,12 +3163,6 @@ currentMinutes<closeMinutes
 }
 
 
-/*
-  OVERNIGHT
-
-  18:00 -> 02:00
-*/
-
 if(openMinutes>closeMinutes){
 
 return(
@@ -3090,10 +3172,6 @@ currentMinutes<closeMinutes
 
 }
 
-
-/*
-  Same time = 24 hours
-*/
 
 return true;
 
@@ -3106,21 +3184,11 @@ return true;
 
 function isShopOpen(){
 
-/*
-  ========================================
-  ADMIN OVERRIDE HAS HIGHEST PRIORITY
-  ========================================
-*/
-
 const override=
 String(
 settings.statusOverride||"auto"
 ).toLowerCase();
 
-
-/*
-  ADMIN -> OPEN
-*/
 
 if(override==="open"){
 
@@ -3129,20 +3197,12 @@ return true;
 }
 
 
-/*
-  ADMIN -> CLOSED
-*/
-
 if(override==="closed"){
 
 return false;
 
 }
 
-
-/*
-  ADMIN -> AUTO
-*/
 
 if(settings.scheduleEnabled===false){
 
@@ -3259,12 +3319,6 @@ const open=
 isShopOpen();
 
 
-/*
-  =====================================
-  OPEN
-  =====================================
-*/
-
 if(open){
 
 badge.textContent=
@@ -3300,12 +3354,6 @@ return;
 
 }
 
-
-/*
-  =====================================
-  CLOSED
-  =====================================
-*/
 
 let text;
 
@@ -3359,10 +3407,6 @@ renderProducts();
 }
 
 
-/*
-  Update every 15 seconds
-*/
-
 setInterval(
 ()=>{
 updateShopStatus();
@@ -3413,16 +3457,19 @@ const safeId=
 Number(item.id);
 
 
+/*
+  FIXED:
+  Firebase true/false/string all handled.
+*/
+
 const available=
-item.available!==false;
+normalizeAvailable(
+item.available
+);
 
 
 let addButton="";
 
-
-/*
-  OUT OF STOCK
-*/
 
 if(!available){
 
@@ -3440,13 +3487,6 @@ Out of Stock
 `;
 
 }else{
-
-/*
-  AVAILABLE
-
-  Shop closed hele bhi button visible.
-  Click kale addToCart() shop status check kariba.
-*/
 
 addButton=`
 
@@ -3675,10 +3715,6 @@ cartCount.classList.remove(
 
 function addToCart(id){
 
-/*
-  SHOP STATUS CHECK
-*/
-
 if(!isShopOpen()){
 
 updateShopStatus();
@@ -3712,10 +3748,6 @@ Number(product.id)===
 numericId
 );
 
-
-/*
-  FALLBACK
-*/
 
 if(!item){
 
@@ -3754,10 +3786,14 @@ return;
 
 
 /*
-  STOCK CHECK
+  FIXED STOCK CHECK
 */
 
-if(item.available===false){
+if(
+!normalizeAvailable(
+item.available
+)
+){
 
 showToast(
 item.name+
@@ -3876,9 +3912,15 @@ Number(cartItem.id)
 );
 
 
+/*
+  FIXED STOCK CHECK
+*/
+
 return(
 currentItem&&
-currentItem.available===false
+!normalizeAvailable(
+currentItem.available
+)
 );
 
 });
@@ -3918,9 +3960,15 @@ numericId
 );
 
 
+/*
+  FIXED STOCK CHECK
+*/
+
 if(
 currentMenuItem&&
-currentMenuItem.available===false
+!normalizeAvailable(
+currentMenuItem.available
+)
 ){
 
 showToast(
@@ -4075,9 +4123,15 @@ Number(item.id)
 );
 
 
+/*
+  FIXED STOCK CHECK
+*/
+
 const outOfStock=
 currentMenuItem&&
-currentMenuItem.available===false;
+!normalizeAvailable(
+currentMenuItem.available
+);
 
 
 return `
@@ -4100,9 +4154,7 @@ ${escapeHtml(item.name)}
 
 ${
 outOfStock
-
 ?
-
 `
 <div class="cart-stock-warning">
 
@@ -4110,11 +4162,8 @@ outOfStock
 
 </div>
 `
-
 :
-
 ""
-
 }
 
 </div>
@@ -4549,10 +4598,6 @@ data.routes[0].distance;
 deliveryDistance=
 meters/1000;
 
-
-/*
-  ADMIN DELIVERY RATE
-*/
 
 const rate=
 Number(
@@ -5380,9 +5425,7 @@ TOTAL
 
 ${
 cancelled
-
 ?
-
 `
 <div
 style="
@@ -5397,23 +5440,18 @@ background:rgba(255,77,77,.05);">
 
 </div>
 `
-
 :
-
 `
 <div class="status-track">
 ${steps}
 </div>
 `
-
 }
 
 
 ${
 order.status==="Delivered"
-
 ?
-
 `
 <button
 class="btn btn-gold"
@@ -5424,11 +5462,8 @@ onclick='openRating(${JSON.stringify(order)})'>
 
 </button>
 `
-
 :
-
 ""
-
 }
 
 `;
