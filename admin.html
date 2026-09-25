@@ -1,38 +1,31 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#070707">
 
 <title>The Queen Fast Food - Admin</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-html,body{
-  width:100%;
-  min-height:100%;
-}
-
 body{
   font-family:Inter,Arial,sans-serif;
   background:#070707;
   color:#fff;
+  min-height:100vh;
 }
 
-button,
-input{
+button,input,select{
   font-family:inherit;
 }
 
@@ -40,1512 +33,1019 @@ button{
   cursor:pointer;
 }
 
-.hidden{
-  display:none!important;
+:root{
+  --orange:#ff7a00;
+  --orange2:#ff941f;
+  --black:#070707;
+  --card:#111;
+  --card2:#151515;
+  --border:rgba(255,122,0,.20);
+  --muted:#9a9a9a;
+  --green:#25d366;
+  --red:#ff4d4d;
 }
 
-/* =========================
-   LOGIN
-========================= */
+.header{
+  height:68px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(7,7,7,.96);
+  backdrop-filter:blur(12px);
+}
 
-#loginPage{
+.brand{
+  font-family:"Cormorant Garamond",serif;
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.brand span{
+  color:var(--orange);
+}
+
+.admin-badge{
+  font-size:11px;
+  color:#aaa;
+  border:1px solid rgba(255,122,0,.25);
+  padding:7px 10px;
+  border-radius:20px;
+}
+
+.container{
+  width:min(1050px,94%);
+  margin:20px auto 40px;
+}
+
+.login-wrap{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:15px;
-  background:
-    radial-gradient(
-      circle at top,
-      #261507 0%,
-      #0b0b0b 38%,
-      #070707 75%
-    );
+  padding:20px;
 }
 
-.loginBox{
-  width:min(360px,100%);
+.login-box{
+  width:min(390px,100%);
   background:#101010;
-  border:1px solid rgba(255,122,0,.24);
-  border-radius:18px;
-  padding:24px 20px;
-  box-shadow:0 20px 70px rgba(0,0,0,.6);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 25px 70px rgba(0,0,0,.5);
 }
 
-.logo{
+.login-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:34px;
   text-align:center;
-  color:#ff7a00;
+  margin-bottom:4px;
+}
+
+.login-title span{
+  color:var(--orange);
+}
+
+.login-sub{
+  text-align:center;
+  color:#888;
+  font-size:12px;
+  margin-bottom:22px;
+}
+
+.field{
+  margin-bottom:12px;
+}
+
+.field label{
+  display:block;
+  font-size:11px;
+  color:#999;
+  margin-bottom:6px;
+}
+
+.field input,
+.settings-input,
+.price-input,
+.status-select{
+  width:100%;
+  height:42px;
+  border:1px solid rgba(255,255,255,.10);
+  background:#080808;
+  color:#fff;
+  outline:none;
+  border-radius:10px;
+  padding:0 12px;
+}
+
+.field input:focus,
+.settings-input:focus,
+.price-input:focus{
+  border-color:var(--orange);
+}
+
+.login-btn,
+.primary-btn{
+  width:100%;
+  height:43px;
+  border:0;
+  border-radius:10px;
+  background:var(--orange);
+  color:#000;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.login-btn:hover,
+.primary-btn:hover{
+  background:var(--orange2);
+}
+
+.error{
+  color:#ff6b6b;
+  font-size:12px;
+  min-height:18px;
+  margin-top:9px;
+  text-align:center;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* TOP */
+.top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.page-title{
   font-family:"Cormorant Garamond",serif;
   font-size:32px;
   font-weight:700;
 }
 
-.loginSub{
-  text-align:center;
-  color:#777;
-  font-size:10px;
-  margin:2px 0 20px;
+.page-title span{
+  color:var(--orange);
 }
 
-.inputGroup{
-  margin-bottom:12px;
-}
-
-.inputGroup label{
-  display:block;
-  color:#888;
-  font-size:9px;
-  margin-bottom:5px;
-}
-
-.inputGroup input{
-  width:100%;
-  height:42px;
-  background:#171717;
-  border:1px solid #282828;
+.logout-btn{
+  background:#151515;
+  border:1px solid rgba(255,255,255,.09);
+  color:#ddd;
   border-radius:9px;
-  padding:0 11px;
-  color:#fff;
-  outline:none;
-  font-size:12px;
-}
-
-.inputGroup input:focus{
-  border-color:#ff7a00;
-}
-
-.loginBtn{
-  width:100%;
-  height:43px;
-  border:0;
-  border-radius:9px;
-  background:#ff7a00;
-  color:#111;
-  font-weight:800;
+  padding:9px 13px;
   font-size:11px;
 }
 
-.loginError{
-  min-height:16px;
-  margin-top:8px;
-  color:#ff5757;
-  font-size:10px;
-  text-align:center;
-}
-
-
-/* =========================
-   TOPBAR
-========================= */
-
-#adminPage{
-  min-height:100vh;
-  background:#070707;
-}
-
-.topbar{
-  height:58px;
-  background:#0b0b0b;
-  border-bottom:1px solid #1e1e1e;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:0 15px;
-
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-
-.brand{
-  font-family:"Cormorant Garamond",serif;
-  font-size:24px;
-  font-weight:700;
-  color:#ff7a00;
-  letter-spacing:.5px;
-}
-
-.adminText{
-  color:#666;
-  font-size:8px;
-  margin-top:-2px;
-}
-
-.topActions{
-  display:flex;
-  gap:6px;
-}
-
-.smallBtn{
-  border:1px solid #292929;
-  background:#141414;
-  color:#ddd;
-  border-radius:7px;
-  padding:7px 9px;
-  font-size:9px;
-  font-weight:700;
-}
-
-.smallBtn:hover{
-  border-color:#ff7a00;
-  color:#ff7a00;
-}
-
-.logoutBtn{
-  color:#ff6868;
-  border-color:#482020;
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
-
-.container{
-  width:min(1050px,94%);
-  margin:auto;
-  padding:13px 0 30px;
-}
-
-.dashboardHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.dashboardTitle{
-  font-family:"Cormorant Garamond",serif;
-  font-size:27px;
-  font-weight:700;
-}
-
-.dashboardTitle span{
-  color:#ff7a00;
-}
-
-.shopStatus{
-  display:flex;
-  align-items:center;
-  gap:6px;
-
+/* SHOP STATUS */
+.shop-control{
   background:#111;
-  border:1px solid #252525;
-  border-radius:8px;
-
-  padding:6px 9px;
-
-  font-size:9px;
-  font-weight:800;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
 }
 
-.statusDot{
-  width:7px;
-  height:7px;
+.shop-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.shop-dot{
+  width:10px;
+  height:10px;
   border-radius:50%;
-  background:#777;
+  background:#555;
 }
 
-.statusDot.open{
-  background:#36d16b;
-  box-shadow:0 0 8px rgba(54,209,107,.7);
+.shop-dot.open{
+  background:#25d366;
+  box-shadow:0 0 12px rgba(37,211,102,.7);
 }
 
-.statusDot.closed{
-  background:#ff4c4c;
+.shop-dot.closed{
+  background:#ff4d4d;
+  box-shadow:0 0 12px rgba(255,77,77,.5);
 }
 
+.shop-name{
+  font-size:13px;
+  font-weight:700;
+}
 
-/* =========================
-   STATS
-========================= */
+.shop-state{
+  font-size:10px;
+  color:#999;
+  margin-top:2px;
+}
 
+.toggle{
+  width:58px;
+  height:30px;
+  border-radius:20px;
+  background:#292929;
+  border:1px solid #444;
+  position:relative;
+  transition:.2s;
+}
+
+.toggle::after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  top:3px;
+  left:3px;
+  background:#888;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.toggle.on{
+  background:rgba(37,211,102,.18);
+  border-color:#25d366;
+}
+
+.toggle.on::after{
+  left:31px;
+  background:#25d366;
+}
+
+/* STATS */
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-bottom:10px;
+  gap:10px;
+  margin-bottom:14px;
 }
 
 .stat{
   background:#101010;
-  border:1px solid #1f1f1f;
-  border-radius:10px;
-  padding:9px 10px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:13px;
+  padding:13px;
 }
 
-.statLabel{
-  color:#777;
-  font-size:8px;
+.stat-label{
+  color:#888;
+  font-size:10px;
   text-transform:uppercase;
-  letter-spacing:.4px;
+  letter-spacing:.7px;
 }
 
-.statValue{
-  margin-top:3px;
-  font-size:18px;
+.stat-value{
+  font-size:23px;
   font-weight:800;
+  margin-top:4px;
 }
 
-.statValue.orange{
-  color:#ff7a00;
+.stat-value.orange{
+  color:var(--orange);
 }
 
-
-/* =========================
-   SECTION
-========================= */
-
+/* SECTIONS */
 .section{
-  background:#0e0e0e;
-  border:1px solid #1e1e1e;
-  border-radius:11px;
-  margin-bottom:9px;
+  background:#101010;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:15px;
+  margin-bottom:14px;
   overflow:hidden;
 }
 
-.sectionHeader{
-  min-height:42px;
-
-  padding:8px 11px;
-
+.section-head{
+  min-height:50px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  border-bottom:1px solid #1d1d1d;
+  padding:11px 15px;
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-.sectionTitle{
+.section-title{
   font-family:"Cormorant Garamond",serif;
-  font-size:20px;
+  font-size:23px;
   font-weight:700;
 }
 
-.sectionTitle span{
-  color:#ff7a00;
+.section-title span{
+  color:var(--orange);
 }
 
-.badge{
-  min-width:19px;
-  height:19px;
-  padding:0 5px;
-
+.count{
+  min-width:24px;
+  height:22px;
+  padding:0 7px;
+  border-radius:20px;
+  background:rgba(255,122,0,.12);
+  color:var(--orange);
   display:flex;
   align-items:center;
   justify-content:center;
-
-  background:#ff7a00;
-  color:#111;
-
-  border-radius:20px;
-
-  font-size:8px;
-  font-weight:900;
-}
-
-.sectionBody{
-  padding:7px;
-}
-
-
-/* =========================
-   ORDER CARD
-========================= */
-
-.orderCard{
-  background:#131313;
-  border:1px solid #232323;
-  border-radius:9px;
-  padding:9px;
-  margin-bottom:6px;
-}
-
-.orderCard:last-child{
-  margin-bottom:0;
-}
-
-.orderTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:8px;
-}
-
-.orderId{
-  color:#ff7a00;
   font-size:10px;
   font-weight:800;
 }
 
-.orderDate{
-  color:#666;
-  font-size:8px;
-  margin-top:2px;
+.section-body{
+  padding:10px;
 }
 
-.orderCustomer{
-  font-size:11px;
+/* ORDER CARD */
+.order-card{
+  background:#0b0b0b;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:11px;
+  padding:12px;
+  margin-bottom:8px;
+}
+
+.order-card:last-child{
+  margin-bottom:0;
+}
+
+.order-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.order-id{
+  font-size:13px;
   font-weight:800;
-  margin-top:5px;
+  color:#fff;
 }
 
-.orderPhone{
+.order-date{
+  font-size:9px;
   color:#777;
-  font-size:8px;
-  margin-top:1px;
+  margin-top:3px;
 }
 
-.orderItems{
-  margin-top:6px;
-  padding-top:5px;
-  border-top:1px solid #202020;
+.status-pill{
+  font-size:9px;
+  font-weight:800;
+  border-radius:20px;
+  padding:5px 8px;
+  text-transform:uppercase;
 }
 
-.itemLine{
+.status-received{
+  background:rgba(255,122,0,.14);
+  color:#ff9b3d;
+}
+
+.status-processing{
+  background:rgba(255,190,60,.13);
+  color:#ffca55;
+}
+
+.status-delivery{
+  background:rgba(65,150,255,.13);
+  color:#66aaff;
+}
+
+.status-delivered{
+  background:rgba(37,211,102,.13);
+  color:#50e58a;
+}
+
+.status-cancelled{
+  background:rgba(255,77,77,.13);
+  color:#ff6d6d;
+}
+
+.customer-info{
+  margin-top:9px;
+  font-size:11px;
+  color:#aaa;
+  line-height:1.55;
+}
+
+.customer-info strong{
+  color:#eee;
+}
+
+.order-items{
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+.order-item{
   display:flex;
   justify-content:space-between;
-  gap:8px;
-
-  color:#aaa;
-
-  font-size:9px;
-
+  gap:10px;
+  color:#bbb;
+  font-size:10px;
   padding:2px 0;
 }
 
-.orderTotal{
+.order-total{
   display:flex;
   justify-content:space-between;
-
-  border-top:1px solid #202020;
-
-  margin-top:5px;
-  padding-top:5px;
-
-  font-size:10px;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.05);
+  font-size:13px;
   font-weight:800;
 }
 
-.orderTotal strong{
-  color:#ff7a00;
+.order-total span:last-child{
+  color:var(--orange);
 }
 
-.orderStatus{
-  padding:4px 6px;
-  border-radius:15px;
-
-  font-size:7px;
-  font-weight:800;
-
-  background:#222;
-  color:#aaa;
-
-  text-transform:uppercase;
-}
-
-.orderStatus.new{
-  background:rgba(255,122,0,.13);
-  color:#ff7a00;
-}
-
-.orderStatus.pending{
-  background:rgba(255,190,0,.12);
-  color:#ffc400;
-}
-
-.orderStatus.delivered,
-.orderStatus.completed{
-  background:rgba(45,205,100,.12);
-  color:#45dc76;
-}
-
-.orderStatus.cancelled{
-  background:rgba(255,60,60,.12);
-  color:#ff5c5c;
-}
-
-.orderButtons{
+.order-actions{
   display:flex;
-  gap:5px;
+  gap:6px;
   flex-wrap:wrap;
-  margin-top:7px;
+  margin-top:10px;
 }
 
-.actionBtn{
-  border:1px solid #292929;
-  background:#191919;
+.action-btn{
+  border:1px solid rgba(255,255,255,.10);
+  background:#171717;
   color:#ddd;
-
-  border-radius:6px;
-
-  padding:5px 7px;
-
-  font-size:8px;
-  font-weight:700;
+  border-radius:7px;
+  padding:7px 9px;
+  font-size:9px;
+  font-weight:800;
 }
 
-.actionBtn:hover{
-  border-color:#ff7a00;
-  color:#ff7a00;
+.action-btn:hover{
+  border-color:var(--orange);
+  color:var(--orange);
 }
 
-.actionBtn.primary{
-  background:#ff7a00;
-  border-color:#ff7a00;
-  color:#111;
+.action-btn.orange{
+  background:var(--orange);
+  color:#000;
+  border-color:var(--orange);
 }
 
-.actionBtn.danger{
-  color:#ff6868;
+.action-btn.green{
+  background:rgba(37,211,102,.12);
+  color:#45df80;
+  border-color:rgba(37,211,102,.25);
+}
+
+.action-btn.blue{
+  background:rgba(65,150,255,.12);
+  color:#66aaff;
+  border-color:rgba(65,150,255,.25);
+}
+
+.action-btn.red{
+  background:rgba(255,77,77,.10);
+  color:#ff6b6b;
+  border-color:rgba(255,77,77,.20);
 }
 
 .empty{
+  padding:22px 10px;
   text-align:center;
-  padding:13px 5px;
-  color:#555;
-  font-size:9px;
+  color:#666;
+  font-size:11px;
 }
 
-
-/* =====================================================
-   COMPACT FOOD ITEMS
-===================================================== */
-
-.menuSettingsBox{
-  width:100%;
-}
-
-.menuAdminItem{
-
-  width:100%;
-
-  min-height:38px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  gap:6px;
-
-  background:#111;
-  border:1px solid #202020;
-
-  border-radius:7px;
-
-  padding:5px 7px;
-
-  margin-bottom:4px;
-}
-
-.menuAdminItem:last-child{
-  margin-bottom:0;
-}
-
-
-/* LEFT ITEM NAME */
-
-.menuInfo{
-  min-width:0;
-  flex:1;
-}
-
-.menuName{
-  font-size:9px;
-  font-weight:800;
-  color:#eee;
-
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.menuId{
-  color:#4f4f4f;
-  font-size:6px;
-
-  margin-top:1px;
-
-  white-space:nowrap;
-}
-
-
-/* RIGHT CONTROLS */
-
-.menuControls{
-
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-
-  gap:4px;
-
-  flex-shrink:0;
-}
-
-
-/* PRICE */
-
-.menuPrice{
-
-  width:52px;
-  height:27px;
-
-  background:#090909;
-
-  border:1px solid #282828;
-
-  border-radius:5px;
-
-  color:#fff;
-
-  padding:0 5px;
-
-  font-size:8px;
-
-  outline:none;
-
-  text-align:center;
-}
-
-.menuPrice:focus{
-  border-color:#ff7a00;
-}
-
-
-/* AVAILABILITY */
-
-.availabilityBtn{
-
-  width:70px;
-  height:27px;
-
-  border:0;
-
-  border-radius:5px;
-
-  font-size:7px;
-
-  font-weight:800;
-
-  white-space:nowrap;
-}
-
-.availabilityBtn.available{
-  background:rgba(48,210,105,.11);
-  color:#3ddd75;
-}
-
-.availabilityBtn.out{
-  background:rgba(255,60,60,.11);
-  color:#ff6262;
-}
-
-
-/* SAVE */
-
-.menuSave{
-
-  width:42px;
-  height:27px;
-
-  border:0;
-
-  border-radius:5px;
-
-  background:#ff7a00;
-
-  color:#111;
-
-  font-size:7px;
-
-  font-weight:900;
-}
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-.settingsGrid{
+/* FOOD */
+.food-row{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-}
-
-.settingBox{
-  background:#111;
-  border:1px solid #202020;
-  border-radius:8px;
-  padding:9px;
-}
-
-.settingTitle{
-  font-size:9px;
-  font-weight:800;
-}
-
-.settingDesc{
-  color:#5f5f5f;
-  font-size:7px;
-  margin-top:2px;
+  grid-template-columns:minmax(150px,1fr) 90px 110px auto;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  background:#0b0b0b;
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:9px;
   margin-bottom:6px;
 }
 
-.settingInput{
-  width:100%;
-  height:30px;
-
-  background:#090909;
-  border:1px solid #272727;
-  border-radius:6px;
-
-  color:#fff;
-
-  padding:0 7px;
-
-  font-size:9px;
-  outline:none;
+.food-row:last-child{
+  margin-bottom:0;
 }
 
-.settingInput:focus{
-  border-color:#ff7a00;
+.food-name{
+  font-size:11px;
+  font-weight:700;
 }
 
-.saveBtn{
-  width:100%;
-  height:28px;
-
-  margin-top:5px;
-
-  background:#ff7a00;
-  color:#111;
-
-  border:0;
-  border-radius:6px;
-
-  font-size:7px;
-  font-weight:900;
+.price-input{
+  height:32px;
+  padding:0 8px;
+  font-size:11px;
 }
 
-
-/* SHOP SWITCH */
-
-.switchRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.switch{
-  width:39px;
-  height:21px;
-
-  background:#292929;
-
-  border-radius:20px;
-
-  position:relative;
-
-  cursor:pointer;
-}
-
-.switch::after{
-  content:"";
-
-  position:absolute;
-
-  width:15px;
-  height:15px;
-
-  top:3px;
-  left:3px;
-
-  border-radius:50%;
-
-  background:#777;
-
-  transition:.2s;
-}
-
-.switch.active{
-  background:#ff7a00;
-}
-
-.switch.active::after{
-  left:21px;
-  background:#111;
-}
-
-
-/* =========================
-   SALES
-========================= */
-
-.salesFolder{
-  background:#111;
-  border:1px solid #202020;
-  border-radius:8px;
-  overflow:hidden;
-  margin-bottom:5px;
-}
-
-.salesFolderHead{
-  min-height:42px;
-
-  padding:7px 9px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  cursor:pointer;
-}
-
-.folderLeft{
+.availability{
   display:flex;
   align-items:center;
   gap:6px;
+  font-size:9px;
+  color:#999;
 }
 
-.folderIcon{
-  font-size:15px;
+.mini-toggle{
+  width:42px;
+  height:23px;
+  border-radius:20px;
+  background:#2b2b2b;
+  position:relative;
+  border:1px solid #444;
+  cursor:pointer;
 }
 
-.folderDate{
+.mini-toggle::after{
+  content:"";
+  position:absolute;
+  width:17px;
+  height:17px;
+  left:2px;
+  top:2px;
+  border-radius:50%;
+  background:#777;
+  transition:.18s;
+}
+
+.mini-toggle.on{
+  background:rgba(37,211,102,.16);
+  border-color:#25d366;
+}
+
+.mini-toggle.on::after{
+  left:21px;
+  background:#25d366;
+}
+
+.save-food{
+  height:32px;
+  padding:0 10px;
+  border:0;
+  border-radius:7px;
+  background:var(--orange);
+  color:#000;
   font-size:9px;
   font-weight:800;
 }
 
-.folderSummary{
-  color:#555;
-  font-size:7px;
-  margin-top:2px;
-}
-
-.folderSales{
-  color:#ff7a00;
-  font-size:10px;
-  font-weight:900;
-}
-
-.salesDetails{
-  display:none;
-
-  border-top:1px solid #1e1e1e;
-
-  padding:7px;
-}
-
-.salesFolder.open .salesDetails{
-  display:block;
-}
-
-.salesStat{
+/* SETTINGS */
+.settings-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:5px;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
-.salesMini{
-  background:#090909;
-  border:1px solid #1d1d1d;
-  border-radius:6px;
-  padding:6px;
+.settings-box{
+  background:#0b0b0b;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;
+  padding:11px;
 }
 
-.salesMini small{
-  display:block;
-  color:#555;
-  font-size:6px;
+.settings-box.full{
+  grid-column:1/-1;
 }
 
-.salesMini strong{
-  display:block;
-  margin-top:2px;
-  font-size:9px;
+.settings-label{
+  font-size:10px;
+  color:#888;
+  margin-bottom:7px;
 }
 
-
-/* =========================
-   TRACK MODAL
-========================= */
-
-.modalOverlay{
-  position:fixed;
-  inset:0;
-
-  z-index:3000;
-
-  background:rgba(0,0,0,.78);
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:12px;
-
-  backdrop-filter:blur(4px);
-}
-
-.modalOverlay.show{
-  display:flex;
-}
-
-.modal{
-  width:min(390px,100%);
-
-  max-height:85vh;
-
-  overflow:auto;
-
-  background:#101010;
-
-  border:1px solid rgba(255,122,0,.25);
-
-  border-radius:15px;
-
-  padding:14px;
-
-  box-shadow:0 20px 70px rgba(0,0,0,.7);
-}
-
-.modalHead{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  margin-bottom:10px;
-}
-
-.modalTitle{
-  font-family:"Cormorant Garamond",serif;
-  font-size:22px;
-}
-
-.closeBtn{
-  width:27px;
-  height:27px;
-
-  border-radius:50%;
-
-  border:1px solid #292929;
-
-  background:#181818;
-
-  color:#fff;
-}
-
-.trackInput{
+.save-settings{
   width:100%;
-  height:36px;
-
-  background:#080808;
-
-  border:1px solid #292929;
-
-  color:#fff;
-
-  border-radius:7px;
-
-  padding:0 8px;
-
-  font-size:9px;
-
-  outline:none;
-}
-
-.trackBtn{
-  width:100%;
-  height:36px;
-
-  margin-top:5px;
-
+  height:38px;
   border:0;
+  border-radius:8px;
+  background:var(--orange);
+  color:#000;
+  font-weight:800;
+  font-size:10px;
+}
 
-  border-radius:7px;
+/* SALES */
+.sales-folder{
+  background:#0b0b0b;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;
+  margin-bottom:7px;
+  overflow:hidden;
+}
 
-  background:#ff7a00;
+.sales-folder-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:11px;
+}
 
-  color:#111;
+.sales-date{
+  font-size:11px;
+  font-weight:800;
+}
 
+.sales-info{
   font-size:9px;
-
-  font-weight:900;
+  color:#888;
+  margin-top:3px;
 }
 
-.trackResult{
-  margin-top:8px;
+.sales-total{
+  color:var(--orange);
+  font-size:13px;
+  font-weight:800;
 }
-
-
-/* =========================
-   TOAST
-========================= */
 
 .toast{
   position:fixed;
-
-  left:50%;
-  bottom:15px;
-
-  transform:translate(-50%,20px);
-
+  right:18px;
+  bottom:18px;
+  z-index:9999;
   background:#171717;
-
-  border:1px solid #333;
-
+  border:1px solid var(--orange);
   color:#fff;
-
-  border-radius:8px;
-
-  padding:8px 12px;
-
-  font-size:9px;
-
-  font-weight:700;
-
+  padding:11px 14px;
+  border-radius:10px;
+  font-size:11px;
+  transform:translateY(80px);
   opacity:0;
-
   pointer-events:none;
-
   transition:.25s;
-
-  z-index:5000;
 }
 
 .toast.show{
+  transform:translateY(0);
   opacity:1;
-  transform:translate(-50%,0);
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:700px){
-
+@media(max-width:750px){
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .settingsGrid{
+  .food-row{
+    grid-template-columns:1fr 80px;
+  }
+
+  .availability{
+    grid-column:1;
+  }
+
+  .save-food{
+    grid-column:2;
+    grid-row:2;
+  }
+
+  .settings-grid{
     grid-template-columns:1fr;
   }
 
+  .settings-box.full{
+    grid-column:auto;
+  }
 }
 
 @media(max-width:500px){
+  .header{
+    padding:0 13px;
+  }
 
   .brand{
+    font-size:21px;
+  }
+
+  .container{
+    width:94%;
+    margin-top:13px;
+  }
+
+  .top-row{
+    margin-bottom:12px;
+  }
+
+  .page-title{
+    font-size:28px;
+  }
+
+  .stats{
+    gap:7px;
+  }
+
+  .stat{
+    padding:10px;
+  }
+
+  .stat-value{
     font-size:20px;
   }
-
-  .adminText{
-    display:none;
-  }
-
-  .dashboardHeader{
-    align-items:flex-start;
-    gap:7px;
-    flex-direction:column;
-  }
-
-  .menuName{
-    max-width:115px;
-  }
-
-  .menuPrice{
-    width:48px;
-  }
-
-  .availabilityBtn{
-    width:66px;
-  }
-
-  .menuSave{
-    width:39px;
-  }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
+<!-- LOGIN -->
+<div id="loginScreen" class="login-wrap">
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
+  <div class="login-box">
 
-<div id="loginPage">
-
-  <div class="loginBox">
-
-    <div class="logo">
-      THE QUEEN
+    <div class="login-title">
+      THE <span>QUEEN</span>
     </div>
 
-    <div class="loginSub">
-      FAST FOOD · ADMIN PANEL
+    <div class="login-sub">
+      FAST FOOD ADMIN PANEL
     </div>
 
-    <div class="inputGroup">
-
+    <div class="field">
       <label>ADMIN EMAIL</label>
-
-      <input
-        id="email"
-        type="email"
-        autocomplete="username"
-        placeholder="Enter admin email">
-
+      <input id="email" type="email" placeholder="Admin email">
     </div>
 
-    <div class="inputGroup">
-
+    <div class="field">
       <label>PASSWORD</label>
-
-      <input
-        id="password"
-        type="password"
-        autocomplete="current-password"
-        placeholder="Enter password">
-
+      <input id="password" type="password" placeholder="Password">
     </div>
 
-    <button
-      class="loginBtn"
-      onclick="loginAdmin()">
-
+    <button class="login-btn" onclick="loginAdmin()">
       LOGIN
-
     </button>
 
-    <div
-      id="loginError"
-      class="loginError">
-    </div>
+    <div id="loginError" class="error"></div>
 
   </div>
 
 </div>
 
 
-<!-- =====================================================
-     ADMIN
-===================================================== -->
+<!-- ADMIN -->
+<div id="adminScreen" class="hidden">
 
-<div
-  id="adminPage"
-  class="hidden">
+  <header class="header">
 
-
-  <header class="topbar">
-
-    <div>
-
-      <div class="brand">
-        THE QUEEN FAST FOOD
-      </div>
-
-      <div class="adminText">
-        ADMIN CONTROL PANEL
-      </div>
-
+    <div class="brand">
+      THE <span>QUEEN</span> FAST FOOD
     </div>
 
-    <div class="topActions">
-
-      <button
-        class="smallBtn"
-        onclick="refreshAll()">
-
-        ↻ Refresh
-
-      </button>
-
-      <button
-        class="smallBtn logoutBtn"
-        onclick="logoutAdmin()">
-
-        Logout
-
-      </button>
-
+    <div class="admin-badge">
+      ADMIN PANEL
     </div>
 
   </header>
 
-
   <main class="container">
 
+    <div class="top-row">
 
-    <!-- DASHBOARD -->
-
-    <div class="dashboardHeader">
-
-      <div class="dashboardTitle">
+      <div class="page-title">
         Admin <span>Dashboard</span>
       </div>
 
-      <div class="shopStatus">
+      <button class="logout-btn" onclick="logoutAdmin()">
+        LOGOUT
+      </button>
 
-        <span
-          id="statusDot"
-          class="statusDot">
-        </span>
+    </div>
 
-        <span id="shopStatusText">
-          Checking...
-        </span>
+
+    <!-- SHOP -->
+    <div class="shop-control">
+
+      <div class="shop-left">
+
+        <div id="shopDot" class="shop-dot"></div>
+
+        <div>
+          <div class="shop-name">
+            Shop Status
+          </div>
+
+          <div id="shopState" class="shop-state">
+            Loading...
+          </div>
+        </div>
 
       </div>
+
+      <button
+        id="shopToggle"
+        class="toggle"
+        onclick="toggleShop()">
+      </button>
 
     </div>
 
 
     <!-- STATS -->
-
     <div class="stats">
 
       <div class="stat">
-
-        <div class="statLabel">
-          New Orders
-        </div>
-
-        <div
-          id="newCount"
-          class="statValue orange">
-          0
-        </div>
-
+        <div class="stat-label">New Orders</div>
+        <div id="newCount" class="stat-value orange">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div class="statLabel">
-          Pending
-        </div>
-
-        <div
-          id="pendingCount"
-          class="statValue">
-          0
-        </div>
-
+        <div class="stat-label">Processing</div>
+        <div id="processingCount" class="stat-value">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div class="statLabel">
-          Delivered
-        </div>
-
-        <div
-          id="deliveredCount"
-          class="statValue">
-          0
-        </div>
-
+        <div class="stat-label">Delivery</div>
+        <div id="deliveryCount" class="stat-value">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div class="statLabel">
-          Today's Sales
-        </div>
-
-        <div
-          id="todaySales"
-          class="statValue orange">
-          ₹0
-        </div>
-
+        <div class="stat-label">Sales</div>
+        <div id="salesTotal" class="stat-value orange">₹0</div>
       </div>
 
     </div>
 
 
     <!-- NEW ORDERS -->
-
     <section class="section">
 
-      <div class="sectionHeader">
+      <div class="section-head">
 
-        <div class="sectionTitle">
+        <div class="section-title">
           New <span>Orders</span>
         </div>
 
-        <div
-          id="newBadge"
-          class="badge">
-          0
-        </div>
+        <div id="newBadge" class="count">0</div>
 
       </div>
 
-      <div
-        id="newOrders"
-        class="sectionBody">
-      </div>
+      <div id="newOrders" class="section-body"></div>
 
     </section>
 
 
-    <!-- PENDING -->
-
+    <!-- PROCESSING -->
     <section class="section">
 
-      <div class="sectionHeader">
+      <div class="section-head">
 
-        <div class="sectionTitle">
+        <div class="section-title">
           Pending <span>Orders</span>
         </div>
 
-        <div
-          id="pendingBadge"
-          class="badge">
-          0
-        </div>
+        <div id="pendingBadge" class="count">0</div>
 
       </div>
 
-      <div
-        id="pendingOrders"
-        class="sectionBody">
-      </div>
+      <div id="pendingOrders" class="section-body"></div>
 
     </section>
 
 
     <!-- CLOSED -->
-
     <section class="section">
 
-      <div class="sectionHeader">
+      <div class="section-head">
 
-        <div class="sectionTitle">
+        <div class="section-title">
           Closed <span>Orders</span>
         </div>
 
+        <div id="closedBadge" class="count">0</div>
+
       </div>
 
-      <div
-        id="closedOrders"
-        class="sectionBody">
-      </div>
+      <div id="closedOrders" class="section-body"></div>
 
     </section>
 
 
-    <!-- SALES -->
-
+    <!-- FOOD ITEMS -->
     <section class="section">
 
-      <div class="sectionHeader">
+      <div class="section-head">
 
-        <div class="sectionTitle">
-          Date-wise <span>Online Sales</span>
+        <div class="section-title">
+          Food <span>Items</span>
         </div>
 
       </div>
 
-      <div
-        id="salesHistory"
-        class="sectionBody">
-      </div>
+      <div id="foodItems" class="section-body"></div>
 
     </section>
 
 
     <!-- SETTINGS -->
-
     <section class="section">
 
-      <div class="sectionHeader">
+      <div class="section-head">
 
-        <div class="sectionTitle">
+        <div class="section-title">
           Admin <span>Settings</span>
         </div>
 
       </div>
 
+      <div class="section-body">
 
-      <div class="sectionBody">
+        <div class="settings-grid">
 
+          <div class="settings-box full">
 
-        <!-- SHOP + WHATSAPP -->
-
-        <div class="settingsGrid">
-
-
-          <div class="settingBox">
-
-            <div class="settingTitle">
-              Shop Status
-            </div>
-
-            <div class="settingDesc">
-              Control customer ordering.
-            </div>
-
-            <div class="switchRow">
-
-              <span
-                id="shopSwitchText"
-                style="font-size:8px;color:#aaa">
-
-                Checking...
-
-              </span>
-
-              <div
-                id="shopSwitch"
-                class="switch"
-                onclick="toggleShop()">
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="settingBox">
-
-            <div class="settingTitle">
-              WhatsApp Number
-            </div>
-
-            <div class="settingDesc">
-              Customer orders will be sent here.
+            <div class="settings-label">
+              WHATSAPP ORDER NUMBER
             </div>
 
             <input
-              id="whatsappInput"
-              class="settingInput"
+              id="whatsappNumber"
+              class="settings-input"
               placeholder="9090220791">
 
+          </div>
+
+          <div class="settings-box full">
+
             <button
-              class="saveBtn"
-              onclick="saveWhatsapp()">
-
-              SAVE NUMBER
-
+              class="save-settings"
+              onclick="saveWhatsApp()">
+              SAVE WHATSAPP NUMBER
             </button>
 
           </div>
 
-
         </div>
-
-
-        <!-- FOOD ITEMS -->
-
-        <div
-          style="
-            margin-top:9px;
-            margin-bottom:5px;
-            font-size:9px;
-            font-weight:800;
-            color:#aaa;
-          ">
-
-          FOOD ITEMS
-
-        </div>
-
-
-        <div
-          id="menuSettings"
-          class="menuSettingsBox">
-        </div>
-
 
       </div>
 
     </section>
 
 
+    <!-- SALES HISTORY -->
+    <section class="section">
+
+      <div class="section-head">
+
+        <div class="section-title">
+          Online <span>Sales</span>
+        </div>
+
+      </div>
+
+      <div id="salesHistory" class="section-body"></div>
+
+    </section>
+
+
+    <!-- TRACK -->
+    <section class="section">
+
+      <div class="section-head">
+
+        <div class="section-title">
+          Track <span>Order</span>
+        </div>
+
+      </div>
+
+      <div class="section-body">
+
+        <div class="field">
+
+          <label>ORDER ID</label>
+
+          <input
+            id="adminTrackId"
+            class="settings-input"
+            placeholder="Example: QF123456">
+
+        </div>
+
+        <button
+          class="primary-btn"
+          onclick="trackAdminOrder()">
+          TRACK ORDER
+        </button>
+
+        <div id="adminTrackResult"></div>
+
+      </div>
+
+    </section>
+
   </main>
 
 </div>
 
+<div id="toast" class="toast"></div>
 
-<!-- =====================================================
-     TRACK MODAL
-===================================================== -->
-
-<div
-  id="trackModal"
-  class="modalOverlay">
-
-  <div class="modal">
-
-    <div class="modalHead">
-
-      <div class="modalTitle">
-        Track
-        <span style="color:#ff7a00">
-          Order
-        </span>
-      </div>
-
-      <button
-        class="closeBtn"
-        onclick="closeTrack()">
-
-        ×
-
-      </button>
-
-    </div>
-
-
-    <input
-      id="trackOrderInput"
-      class="trackInput"
-      placeholder="Enter Order ID">
-
-
-    <button
-      class="trackBtn"
-      onclick="trackOrder()">
-
-      TRACK ORDER
-
-    </button>
-
-
-    <div
-      id="trackResult"
-      class="trackResult">
-    </div>
-
-  </div>
-
-</div>
-
-
-<div
-  id="toast"
-  class="toast">
-</div>
-
-
-<!-- =====================================================
-     FIREBASE
-===================================================== -->
 
 <script type="module">
 
@@ -1555,77 +1055,49 @@ import {
 
 import {
   getAuth,
-  setPersistence,
-  browserLocalPersistence,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
   getDatabase,
   ref,
-  get,
-  set,
+  onValue,
   update,
-  onValue
+  set,
+  get
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* =====================================================
-   FIREBASE
-===================================================== */
+/* FIREBASE */
 
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-
-  authDomain:
-    "the-queen-fast-food.firebaseapp.com",
-
-  databaseURL:
-    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-
-  projectId:
-    "the-queen-fast-food",
-
-  storageBucket:
-    "the-queen-fast-food.firebasestorage.app",
-
-  messagingSenderId:
-    "435721389652",
-
-  appId:
-    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-
-  measurementId:
-    "G-Q1YCK636KJ"
-
+  apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+  authDomain:"the-queen-fast-food.firebaseapp.com",
+  databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
+  projectId:"the-queen-fast-food",
+  storageBucket:"the-queen-fast-food.firebasestorage.app",
+  messagingSenderId:"435721389652",
+  appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+  measurementId:"G-Q1YCK636KJ"
 };
 
+const app = initializeApp(firebaseConfig);
 
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getDatabase(app);
+const auth = getAuth(app);
+const db = getDatabase(app);
 
 
-/* =====================================================
-   ADMIN UID
-===================================================== */
+/* ADMIN UID */
 
 const ADMIN_UID =
-  "eWlMt1dG2pUOxsTo0NaXgY1avn33";
+"eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
-/* =====================================================
-   DEFAULT MENU
-===================================================== */
+/* MENU */
 
 const defaultMenu = [
 
@@ -1680,193 +1152,88 @@ const defaultMenu = [
 ];
 
 
-/* =====================================================
-   GLOBAL
-===================================================== */
+/* DATA */
 
-let orders = {};
-
+let shopOpen = true;
 let shopSettings = {};
+let allOrders = {};
+let menuSettings = {};
 
-let previousNewOrders = 0;
-
-let firstOrderLoad = true;
-
-let realtimeStarted = false;
-
-
-/* =====================================================
-   DOM
-===================================================== */
-
-const loginPage =
-  document.getElementById("loginPage");
-
-const adminPage =
-  document.getElementById("adminPage");
+let settingsLoaded = false;
+let ordersLoaded = false;
 
 
-/* =====================================================
-   TOAST
-===================================================== */
+/* LOGIN PERSISTENCE */
 
-function toast(message){
-
-  const box =
-    document.getElementById("toast");
-
-  box.textContent =
-    message;
-
-  box.classList.add("show");
-
-  setTimeout(
-    ()=>{
-      box.classList.remove("show");
-    },
-    2200
-  );
-
-}
-
-
-/* =====================================================
-   AUTH PERSISTENCE
-===================================================== */
-
-try{
-
-  await setPersistence(
-    auth,
-    browserLocalPersistence
-  );
-
-}catch(error){
-
-  console.warn(
-    "Auth persistence warning:",
-    error
-  );
-
-}
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
+await setPersistence(
   auth,
-  async user => {
-
-    if(!user){
-
-      showLogin();
-
-      return;
-
-    }
-
-
-    console.log(
-      "Logged in UID:",
-      user.uid
-    );
-
-
-    if(
-      user.uid !== ADMIN_UID
-    ){
-
-      document.getElementById(
-        "loginError"
-      ).textContent =
-        "This account is not authorized as admin.";
-
-      await signOut(auth);
-
-      showLogin();
-
-      return;
-
-    }
-
-
-    showAdmin();
-
-    await loadEverything();
-
-  }
+  browserLocalPersistence
 );
 
 
-/* =====================================================
-   LOGIN / ADMIN
-===================================================== */
+/* ELEMENTS */
 
-function showLogin(){
+const loginScreen =
+  document.getElementById("loginScreen");
 
-  loginPage.classList.remove(
-    "hidden"
-  );
-
-  adminPage.classList.add(
-    "hidden"
-  );
-
-}
+const adminScreen =
+  document.getElementById("adminScreen");
 
 
-function showAdmin(){
+/* LOGIN STATE */
 
-  loginPage.classList.add(
-    "hidden"
-  );
+onAuthStateChanged(auth, async user => {
 
-  adminPage.classList.remove(
-    "hidden"
-  );
+  if(!user){
 
-}
+    showLogin();
+
+    return;
+  }
+
+  console.log("Admin UID:",user.uid);
+
+  if(user.uid !== ADMIN_UID){
+
+    document.getElementById("loginError").textContent =
+      "This account is not authorized as admin.";
+
+    await signOut(auth);
+
+    showLogin();
+
+    return;
+  }
+
+  showAdmin();
+
+  loadEverything();
+
+});
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* LOGIN */
 
-window.loginAdmin =
-async function(){
+window.loginAdmin = async function(){
 
   const email =
-    document.getElementById(
-      "email"
-    ).value.trim();
+    document.getElementById("email").value.trim();
 
   const password =
-    document.getElementById(
-      "password"
-    ).value;
+    document.getElementById("password").value;
 
   const error =
-    document.getElementById(
-      "loginError"
-    );
+    document.getElementById("loginError");
 
   error.textContent = "";
 
-
-  if(
-    !email ||
-    !password
-  ){
+  if(!email || !password){
 
     error.textContent =
       "Enter admin email and password.";
 
     return;
-
   }
-
 
   try{
 
@@ -1878,10 +1245,7 @@ async function(){
 
   }catch(err){
 
-    console.error(
-      "Login error:",
-      err
-    );
+    console.error(err);
 
     error.textContent =
       "Invalid admin email or password.";
@@ -1891,989 +1255,401 @@ async function(){
 };
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+/* LOGOUT */
 
-window.logoutAdmin =
-async function(){
+window.logoutAdmin = async function(){
 
-  if(
-    !confirm(
-      "Logout from Admin Panel?"
-    )
-  ){
-
-    return;
-
-  }
-
-  try{
-
-    await signOut(auth);
-
-  }catch(error){
-
-    console.error(error);
-
-  }
+  await signOut(auth);
 
 };
 
 
-/* =====================================================
-   LOAD EVERYTHING
-===================================================== */
+/* SCREENS */
 
-async function loadEverything(){
+function showLogin(){
 
-  /*
-    IMPORTANT:
-    Settings and Orders are loaded separately.
-    If one Firebase path has a permission problem,
-    the other one will still load.
-  */
+  loginScreen.classList.remove("hidden");
 
-  try{
-
-    const settingsSnap =
-      await get(
-        ref(db,"settings")
-      );
-
-    shopSettings =
-      settingsSnap.exists()
-      ? settingsSnap.val()
-      : {};
-
-  }catch(error){
-
-    console.error(
-      "Settings Firebase error:",
-      error
-    );
-
-    shopSettings = {};
-
-    toast(
-      "Settings could not load."
-    );
-
-  }
-
-
-  try{
-
-    const ordersSnap =
-      await get(
-        ref(db,"orders")
-      );
-
-    orders =
-      ordersSnap.exists()
-      ? ordersSnap.val()
-      : {};
-
-  }catch(error){
-
-    console.error(
-      "Orders Firebase error:",
-      error
-    );
-
-    orders = {};
-
-    toast(
-      "Orders could not load."
-    );
-
-  }
-
-
-  renderShopStatus();
-
-  renderWhatsapp();
-
-  renderMenuSettings();
-
-  renderOrders();
-
-  renderSales();
-
-
-  startRealtime();
+  adminScreen.classList.add("hidden");
 
 }
 
 
-/* =====================================================
-   REALTIME
-===================================================== */
+function showAdmin(){
 
-function startRealtime(){
+  loginScreen.classList.add("hidden");
 
-  if(
-    realtimeStarted
-  ){
+  adminScreen.classList.remove("hidden");
 
-    return;
+}
 
-  }
 
-  realtimeStarted = true;
+/* LOAD */
 
+function loadEverything(){
+
+  loadSettings();
+
+  loadOrders();
+
+}
+
+
+/* SETTINGS REALTIME */
+
+function loadSettings(){
 
   onValue(
     ref(db,"settings"),
-
-    snap => {
+    snapshot => {
 
       shopSettings =
-        snap.exists()
-        ? snap.val()
-        : {};
+        snapshot.val() || {};
 
-      renderShopStatus();
+      menuSettings =
+        shopSettings.menu || {};
 
-      renderWhatsapp();
+      shopOpen =
+        shopSettings.shopOpen !== false;
 
-      renderMenuSettings();
+      renderShop();
+
+      renderFood();
+
+      document.getElementById("whatsappNumber").value =
+        shopSettings.whatsappNumber ||
+        "9090220791";
+
+      settingsLoaded = true;
+
+      updateDashboard();
 
     },
-
     error => {
 
       console.error(
-        "Settings realtime error:",
+        "Settings error:",
         error
       );
 
-    }
+      showToast(
+        "Settings loading error"
+      );
 
+    }
   );
 
+}
+
+
+/* ORDERS REALTIME */
+
+function loadOrders(){
 
   onValue(
     ref(db,"orders"),
+    snapshot => {
 
-    snap => {
+      allOrders =
+        snapshot.val() || {};
 
-      orders =
-        snap.exists()
-        ? snap.val()
-        : {};
+      ordersLoaded = true;
 
       renderOrders();
+
+      updateDashboard();
 
       renderSales();
 
     },
-
     error => {
 
       console.error(
-        "Orders realtime error:",
+        "Orders error:",
         error
       );
 
-    }
+      showToast(
+        "Orders loading error"
+      );
 
+    }
   );
 
 }
 
 
-/* =====================================================
-   SHOP STATUS
-===================================================== */
+/* SHOP */
 
-function getShopOpen(){
-
-  if(
-    shopSettings.shopOpen !== undefined
-  ){
-
-    return (
-      shopSettings.shopOpen === true
-    );
-
-  }
-
-
-  if(
-    shopSettings.shop &&
-    shopSettings.shop.open !== undefined
-  ){
-
-    return (
-      shopSettings.shop.open === true
-    );
-
-  }
-
-
-  return true;
-
-}
-
-
-function renderShopStatus(){
-
-  const open =
-    getShopOpen();
-
+function renderShop(){
 
   const dot =
-    document.getElementById(
-      "statusDot"
-    );
+    document.getElementById("shopDot");
 
-  const text =
-    document.getElementById(
-      "shopStatusText"
-    );
+  const state =
+    document.getElementById("shopState");
 
-  const sw =
-    document.getElementById(
-      "shopSwitch"
-    );
-
-  const swText =
-    document.getElementById(
-      "shopSwitchText"
-    );
+  const toggle =
+    document.getElementById("shopToggle");
 
 
-  if(open){
+  if(shopOpen){
 
     dot.className =
-      "statusDot open";
+      "shop-dot open";
 
-    text.textContent =
+    state.textContent =
       "SHOP OPEN";
 
-    sw.classList.add(
-      "active"
-    );
-
-    swText.textContent =
-      "Shop is OPEN";
+    toggle.classList.add("on");
 
   }else{
 
     dot.className =
-      "statusDot closed";
+      "shop-dot closed";
 
-    text.textContent =
+    state.textContent =
       "SHOP CLOSED";
 
-    sw.classList.remove(
-      "active"
-    );
-
-    swText.textContent =
-      "Shop is CLOSED";
+    toggle.classList.remove("on");
 
   }
 
 }
 
 
-/* =====================================================
-   TOGGLE SHOP
-===================================================== */
+/* TOGGLE SHOP */
 
-window.toggleShop =
-async function(){
+window.toggleShop = async function(){
 
-  const newValue =
-    !getShopOpen();
+  shopOpen = !shopOpen;
 
-
-  try{
-
-    await set(
-      ref(
-        db,
-        "settings/shopOpen"
-      ),
-      newValue
-    );
-
-
-    toast(
-      newValue
-      ? "Shop opened."
-      : "Shop closed."
-    );
-
-  }catch(error){
-
-    console.error(
-      "Shop status error:",
-      error
-    );
-
-    toast(
-      "Could not change shop status."
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-function getWhatsappNumber(){
-
-  return (
-    shopSettings.whatsappNumber ||
-    shopSettings.whatsapp ||
-    "9090220791"
+  await set(
+    ref(db,"settings/shopOpen"),
+    shopOpen
   );
 
-}
-
-
-function renderWhatsapp(){
-
-  document.getElementById(
-    "whatsappInput"
-  ).value =
-    getWhatsappNumber();
-
-}
-
-
-window.saveWhatsapp =
-async function(){
-
-  let number =
-    document.getElementById(
-      "whatsappInput"
-    ).value.trim();
-
-
-  number =
-    number.replace(
-      /\D/g,
-      ""
-    );
-
-
-  if(
-    number.length < 10
-  ){
-
-    toast(
-      "Enter valid WhatsApp number."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await set(
-      ref(
-        db,
-        "settings/whatsappNumber"
-      ),
-      number
-    );
-
-
-    toast(
-      "WhatsApp number saved."
-    );
-
-  }catch(error){
-
-    console.error(
-      "WhatsApp save error:",
-      error
-    );
-
-    toast(
-      "Could not save number."
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   MENU
-===================================================== */
-
-function getMenuSettings(){
-
-  return (
-    shopSettings.menu ||
-    {}
+  showToast(
+    shopOpen
+      ? "Shop Open"
+      : "Shop Closed"
   );
 
-}
-
-
-function renderMenuSettings(){
-
-  const box =
-    document.getElementById(
-      "menuSettings"
-    );
-
-
-  const saved =
-    getMenuSettings();
-
-
-  box.innerHTML =
-    defaultMenu.map(
-      item => {
-
-        const data =
-          saved[item.id] ||
-          {};
-
-
-        const price =
-          Number(
-            data.price ??
-            item.price
-          );
-
-
-        const available =
-          data.available !== false;
-
-
-        return `
-
-          <div class="menuAdminItem">
-
-            <div class="menuInfo">
-
-              <div class="menuName">
-                ${escapeHtml(
-                  item.name
-                )}
-              </div>
-
-              <div class="menuId">
-                ${item.id}
-              </div>
-
-            </div>
-
-
-            <div class="menuControls">
-
-              <input
-                id="price_${item.id}"
-                class="menuPrice"
-                type="number"
-                min="0"
-                value="${price}">
-
-
-              <button
-                class="availabilityBtn ${
-                  available
-                  ? "available"
-                  : "out"
-                }"
-                onclick="toggleAvailability('${item.id}')">
-
-                ${
-                  available
-                  ? "AVAILABLE"
-                  : "OUT OF STOCK"
-                }
-
-              </button>
-
-
-              <button
-                class="menuSave"
-                onclick="saveMenuItem('${item.id}')">
-
-                SAVE
-
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
-
-}
-
-
-/* =====================================================
-   SAVE MENU
-===================================================== */
-
-window.saveMenuItem =
-async function(id){
-
-  const input =
-    document.getElementById(
-      "price_"+id
-    );
-
-
-  const price =
-    Number(
-      input.value
-    );
-
-
-  if(
-    !Number.isFinite(price) ||
-    price < 0
-  ){
-
-    toast(
-      "Enter valid price."
-    );
-
-    return;
-
-  }
-
-
-  const existing =
-    getMenuSettings()[id] ||
-    {};
-
-
-  try{
-
-    await update(
-      ref(
-        db,
-        "settings/menu/"+id
-      ),
-      {
-        price:price,
-
-        available:
-          existing.available !== false
-      }
-    );
-
-
-    toast(
-      "Price saved."
-    );
-
-  }catch(error){
-
-    console.error(
-      "Menu save error:",
-      error
-    );
-
-    toast(
-      "Could not save price."
-    );
-
-  }
-
 };
 
 
-/* =====================================================
-   AVAILABILITY
-===================================================== */
-
-window.toggleAvailability =
-async function(id){
-
-  const existing =
-    getMenuSettings()[id] ||
-    {};
-
-
-  const current =
-    existing.available !== false;
-
-
-  try{
-
-    await set(
-      ref(
-        db,
-        "settings/menu/"+id+"/available"
-      ),
-      !current
-    );
-
-
-    toast(
-      !current
-      ? "Item available."
-      : "Item out of stock."
-    );
-
-  }catch(error){
-
-    console.error(
-      "Availability error:",
-      error
-    );
-
-    toast(
-      "Could not update item."
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   ORDERS
-===================================================== */
-
-function orderArray(){
-
-  return Object.entries(
-    orders || {}
-  )
-  .map(
-    ([id,data]) => ({
-      id,
-      ...(data || {})
-    })
-  )
-  .sort(
-    (a,b) =>
-      getOrderTime(b) -
-      getOrderTime(a)
-  );
-
-}
-
-
-function getOrderTime(order){
-
-  const value =
-    order.createdAt ||
-    order.timestamp ||
-    order.date ||
-    order.time ||
-    0;
-
-
-  if(
-    typeof value === "number"
-  ){
-
-    return value;
-
-  }
-
-
-  const parsed =
-    new Date(
-      value
-    ).getTime();
-
-
-  return Number.isFinite(
-    parsed
-  )
-  ? parsed
-  : 0;
-
-}
-
+/* NORMALIZE STATUS */
 
 function normalizeStatus(order){
 
-  return String(
-    order.status ||
-    "new"
-  ).toLowerCase();
+  let status =
+    String(order.status || "received")
+      .toLowerCase();
+
+  if(status === "new" ||
+     status === "placed" ||
+     status === "pending" ||
+     status === "received"){
+
+    return "received";
+  }
+
+  if(status === "processing" ||
+     status === "confirmed" ||
+     status === "preparing" ||
+     status === "ready"){
+
+    return "processing";
+  }
+
+  if(status === "out_for_delivery" ||
+     status === "out-for-delivery" ||
+     status === "delivery"){
+
+    return "out_for_delivery";
+  }
+
+  if(status === "delivered" ||
+     status === "completed" ||
+     status === "closed"){
+
+    return "delivered";
+  }
+
+  if(status === "cancelled" ||
+     status === "canceled"){
+
+    return "cancelled";
+  }
+
+  return "received";
 
 }
 
 
-function isNew(order){
+/* ORDER ARRAY */
 
-  const s =
-    normalizeStatus(order);
+function getOrderArray(){
 
-  return (
-    s === "new" ||
-    s === "placed" ||
-    s === "received"
-  );
-
-}
-
-
-function isPending(order){
-
-  const s =
-    normalizeStatus(order);
-
-  return (
-    s === "pending" ||
-    s === "confirmed" ||
-    s === "preparing" ||
-    s === "ready" ||
-    s === "out_for_delivery" ||
-    s === "out for delivery"
-  );
+  return Object.entries(allOrders)
+    .map(([id,order]) => ({
+      id,
+      ...(order || {})
+    }))
+    .sort(
+      (a,b) =>
+        Number(b.createdAt || 0) -
+        Number(a.createdAt || 0)
+    );
 
 }
 
 
-function isClosed(order){
-
-  const s =
-    normalizeStatus(order);
-
-  return (
-    s === "closed" ||
-    s === "delivered" ||
-    s === "completed" ||
-    s === "cancelled" ||
-    s === "canceled"
-  );
-
-}
-
-
-/* =====================================================
-   RENDER ORDERS
-===================================================== */
+/* RENDER ORDERS */
 
 function renderOrders(){
 
-  const list =
-    orderArray();
-
+  const orders =
+    getOrderArray();
 
   const newOrders =
-    list.filter(
-      isNew
+    orders.filter(
+      o => normalizeStatus(o) === "received"
     );
-
 
   const pendingOrders =
-    list.filter(
-      isPending
+    orders.filter(
+      o =>
+        normalizeStatus(o) === "processing" ||
+        normalizeStatus(o) === "out_for_delivery"
     );
-
 
   const closedOrders =
-    list.filter(
-      isClosed
+    orders.filter(
+      o =>
+        normalizeStatus(o) === "delivered" ||
+        normalizeStatus(o) === "cancelled"
     );
-
-
-  document.getElementById(
-    "newCount"
-  ).textContent =
-    newOrders.length;
-
-
-  document.getElementById(
-    "pendingCount"
-  ).textContent =
-    pendingOrders.length;
-
-
-  document.getElementById(
-    "deliveredCount"
-  ).textContent =
-    list.filter(
-      o => {
-
-        const s =
-          normalizeStatus(o);
-
-        return (
-          s === "delivered" ||
-          s === "completed"
-        );
-
-      }
-    ).length;
-
-
-  document.getElementById(
-    "newBadge"
-  ).textContent =
-    newOrders.length;
-
-
-  document.getElementById(
-    "pendingBadge"
-  ).textContent =
-    pendingOrders.length;
 
 
   renderOrderBox(
     "newOrders",
-    newOrders,
-    "No new orders."
+    newOrders
   );
-
 
   renderOrderBox(
     "pendingOrders",
-    pendingOrders,
-    "No pending orders."
+    pendingOrders
   );
-
 
   renderOrderBox(
     "closedOrders",
-    closedOrders,
-    "No closed orders."
+    closedOrders
   );
 
 
-  const today =
-    getDateKey(
-      new Date()
-    );
-
-
-  const todaySales =
-    list
-    .filter(
-      o => {
-
-        const s =
-          normalizeStatus(o);
-
-        return (
-          getDateKey(
-            new Date(
-              getOrderTime(o)
-            )
-          ) === today &&
-          (
-            s === "delivered" ||
-            s === "completed"
-          )
-        );
-
-      }
-    )
-    .reduce(
-      (sum,o) =>
-        sum +
-        getOrderTotal(o),
-      0
-    );
-
-
-  document.getElementById(
-    "todaySales"
-  ).textContent =
-    "₹"+
-    formatMoney(
-      todaySales
-    );
-
-
-  const currentNew =
+  document.getElementById("newBadge").textContent =
     newOrders.length;
 
+  document.getElementById("pendingBadge").textContent =
+    pendingOrders.length;
 
-  if(
-    !firstOrderLoad &&
-    currentNew >
-    previousNewOrders
-  ){
-
-    notifyNewOrder();
-
-  }
-
-
-  previousNewOrders =
-    currentNew;
-
-  firstOrderLoad =
-    false;
+  document.getElementById("closedBadge").textContent =
+    closedOrders.length;
 
 }
 
 
-/* =====================================================
-   ORDER BOX
-===================================================== */
+/* ORDER BOX */
 
-function renderOrderBox(
-  id,
-  list,
-  emptyText
-){
+function renderOrderBox(elementId,orders){
 
   const box =
-    document.getElementById(
-      id
-    );
+    document.getElementById(elementId);
 
-
-  if(!list.length){
+  if(!orders.length){
 
     box.innerHTML =
-      `
-      <div class="empty">
-        ${emptyText}
-      </div>
-      `;
+      `<div class="empty">
+        No orders here
+      </div>`;
 
     return;
-
   }
 
-
   box.innerHTML =
-    list.map(
-      orderCardHtml
-    ).join("");
+    orders
+      .map(renderOrderCard)
+      .join("");
 
 }
 
 
-/* =====================================================
-   ORDER CARD
-===================================================== */
+/* ORDER CARD */
 
-function orderCardHtml(order){
+function renderOrderCard(order){
 
   const status =
     normalizeStatus(order);
 
+  let statusText =
+    "ORDER RECEIVED";
 
-  const items =
-    getOrderItems(order);
+  let statusClass =
+    "status-received";
+
+  if(status === "processing"){
+
+    statusText =
+      "PROCESSING";
+
+    statusClass =
+      "status-processing";
+
+  }
+
+  if(status === "out_for_delivery"){
+
+    statusText =
+      "OUT FOR DELIVERY";
+
+    statusClass =
+      "status-delivery";
+
+  }
+
+  if(status === "delivered"){
+
+    statusText =
+      "DELIVERED";
+
+    statusClass =
+      "status-delivered";
+
+  }
+
+  if(status === "cancelled"){
+
+    statusText =
+      "CANCELLED";
+
+    statusClass =
+      "status-cancelled";
+
+  }
+
+
+  const date =
+    order.createdAt
+      ? new Date(order.createdAt).toLocaleString(
+          "en-IN"
+        )
+      : "-";
 
 
   const customer =
     order.customerName ||
     order.name ||
-    order.customer ||
     "Customer";
 
 
@@ -2883,320 +1659,24 @@ function orderCardHtml(order){
     "";
 
 
-  const total =
-    getOrderTotal(order);
+  const address =
+    order.address ||
+    order.deliveryAddress ||
+    "Address not available";
 
 
-  return `
+  const items =
+    Array.isArray(order.items)
+      ? order.items
+      : Object.values(order.items || {});
 
-    <div class="orderCard">
 
-      <div class="orderTop">
+  const itemHTML =
+    items.map(item => {
 
-        <div>
-
-          <div class="orderId">
-            #${escapeHtml(
-              String(order.id)
-            )}
-          </div>
-
-          <div class="orderDate">
-            ${formatDateTime(
-              getOrderTime(order)
-            )}
-          </div>
-
-        </div>
-
-        <div
-          class="orderStatus ${
-            status.replace(
-              /\s+/g,
-              "_"
-            )
-          }">
-
-          ${escapeHtml(
-            status.replace(
-              /_/g,
-              " "
-            )
-          )}
-
-        </div>
-
-      </div>
-
-
-      <div class="orderCustomer">
-        ${escapeHtml(
-          String(customer)
-        )}
-      </div>
-
-
-      ${
-        phone
-        ?
-        `
-        <div class="orderPhone">
-          ${escapeHtml(
-            String(phone)
-          )}
-        </div>
-        `
-        :
-        ""
-      }
-
-
-      <div class="orderItems">
-
-        ${
-          items.length
-          ?
-          items.map(
-            item => {
-
-              const qty =
-                Number(
-                  item.quantity ||
-                  item.qty ||
-                  1
-                );
-
-              const price =
-                Number(
-                  item.price ||
-                  0
-                );
-
-              return `
-
-                <div class="itemLine">
-
-                  <span>
-                    ${escapeHtml(
-                      String(
-                        item.name ||
-                        item.title ||
-                        "Item"
-                      )
-                    )}
-                    ×${qty}
-                  </span>
-
-                  <span>
-                    ₹${formatMoney(
-                      price * qty
-                    )}
-                  </span>
-
-                </div>
-
-              `;
-
-            }
-          ).join("")
-          :
-          `
-          <div class="itemLine">
-            <span>
-              Order
-            </span>
-
-            <span>
-              ₹${formatMoney(
-                total
-              )}
-            </span>
-          </div>
-          `
-        }
-
-      </div>
-
-
-      <div class="orderTotal">
-
-        <span>
-          TOTAL
-        </span>
-
-        <strong>
-          ₹${formatMoney(
-            total
-          )}
-        </strong>
-
-      </div>
-
-
-      <div class="orderButtons">
-
-        <button
-          class="actionBtn"
-          onclick="openTrack('${escapeJs(
-            String(order.id)
-          )}')">
-
-          Track
-
-        </button>
-
-
-        ${
-          isNew(order)
-          ?
-          `
-          <button
-            class="actionBtn primary"
-            onclick="changeStatus('${escapeJs(
-              String(order.id)
-            )}','pending')">
-
-            Accept
-
-          </button>
-
-          <button
-            class="actionBtn danger"
-            onclick="changeStatus('${escapeJs(
-              String(order.id)
-            )}','cancelled')">
-
-            Cancel
-
-          </button>
-          `
-          :
-          ""
-        }
-
-
-        ${
-          isPending(order)
-          ?
-          `
-          <button
-            class="actionBtn primary"
-            onclick="changeStatus('${escapeJs(
-              String(order.id)
-            )}','delivered')">
-
-            Delivered
-
-          </button>
-
-          <button
-            class="actionBtn danger"
-            onclick="changeStatus('${escapeJs(
-              String(order.id)
-            )}','cancelled')">
-
-            Cancel
-
-          </button>
-          `
-          :
-          ""
-        }
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================================
-   ORDER ITEMS
-===================================================== */
-
-function getOrderItems(order){
-
-  let items =
-    order.items ||
-    order.cart ||
-    order.products ||
-    [];
-
-
-  if(
-    !Array.isArray(items) &&
-    items &&
-    typeof items === "object"
-  ){
-
-    items =
-      Object.values(
-        items
-      );
-
-  }
-
-
-  return Array.isArray(items)
-    ? items
-    : [];
-
-}
-
-
-/* =====================================================
-   ORDER TOTAL
-===================================================== */
-
-function getOrderTotal(order){
-
-  const values = [
-
-    order.total,
-
-    order.grandTotal,
-
-    order.finalTotal,
-
-    order.amount,
-
-    order.orderTotal
-
-  ];
-
-
-  for(
-    const value of values
-  ){
-
-    const n =
-      Number(value);
-
-
-    if(
-      Number.isFinite(n) &&
-      n >= 0
-    ){
-
-      return n;
-
-    }
-
-  }
-
-
-  return getOrderItems(
-    order
-  ).reduce(
-    (sum,item) => {
-
-      const price =
-        Number(
-          item.price ||
-          0
-        );
+      const name =
+        item.name ||
+        "Food Item";
 
       const qty =
         Number(
@@ -3205,56 +1685,207 @@ function getOrderTotal(order){
           1
         );
 
-      return (
-        sum +
-        price * qty
-      );
+      const price =
+        Number(
+          item.price ||
+          0
+        );
 
-    },
-    0
-  );
+      return `
+        <div class="order-item">
+          <span>${escapeHTML(name)} × ${qty}</span>
+          <span>₹${price * qty}</span>
+        </div>
+      `;
+
+    }).join("");
+
+
+  const total =
+    Number(
+      order.total ||
+      order.grandTotal ||
+      order.amount ||
+      0
+    );
+
+
+  return `
+    <div class="order-card">
+
+      <div class="order-top">
+
+        <div>
+          <div class="order-id">
+            #${escapeHTML(order.id)}
+          </div>
+
+          <div class="order-date">
+            ${escapeHTML(date)}
+          </div>
+        </div>
+
+        <div class="status-pill ${statusClass}">
+          ${statusText}
+        </div>
+
+      </div>
+
+
+      <div class="customer-info">
+
+        <strong>${escapeHTML(customer)}</strong>
+
+        ${phone
+          ? `<br>📞 ${escapeHTML(phone)}`
+          : ""}
+
+        <br>📍 ${escapeHTML(address)}
+
+      </div>
+
+
+      <div class="order-items">
+
+        ${itemHTML || `
+          <div class="order-item">
+            <span>Order items</span>
+            <span>-</span>
+          </div>
+        `}
+
+      </div>
+
+
+      <div class="order-total">
+
+        <span>TOTAL</span>
+
+        <span>₹${total}</span>
+
+      </div>
+
+
+      ${renderActionButtons(order.id,status)}
+
+    </div>
+  `;
 
 }
 
 
-/* =====================================================
-   CHANGE STATUS
-===================================================== */
+/* ACTION BUTTONS */
 
-window.changeStatus =
-async function(
-  id,
-  status
+function renderActionButtons(orderId,status){
+
+  let html = `
+    <div class="order-actions">
+  `;
+
+
+  if(status === "received"){
+
+    html += `
+      <button
+        class="action-btn orange"
+        onclick="changeStatus('${orderId}','processing')">
+        PROCESSING
+      </button>
+    `;
+
+    html += `
+      <button
+        class="action-btn red"
+        onclick="changeStatus('${orderId}','cancelled')">
+        CANCEL
+      </button>
+    `;
+
+  }
+
+
+  else if(status === "processing"){
+
+    html += `
+      <button
+        class="action-btn blue"
+        onclick="changeStatus('${orderId}','out_for_delivery')">
+        OUT FOR DELIVERY
+      </button>
+    `;
+
+    html += `
+      <button
+        class="action-btn red"
+        onclick="changeStatus('${orderId}','cancelled')">
+        CANCEL
+      </button>
+    `;
+
+  }
+
+
+  else if(status === "out_for_delivery"){
+
+    html += `
+      <button
+        class="action-btn green"
+        onclick="changeStatus('${orderId}','delivered')">
+        DELIVERED
+      </button>
+    `;
+
+  }
+
+
+  html += `
+      <button
+        class="action-btn"
+        onclick="trackOrderFromCard('${orderId}')">
+        TRACK
+      </button>
+    </div>
+  `;
+
+
+  return html;
+
+}
+
+
+/* CHANGE ORDER STATUS */
+
+window.changeStatus = async function(
+  orderId,
+  newStatus
 ){
 
   try{
 
     await update(
-      ref(
-        db,
-        "orders/"+id
-      ),
+      ref(db,"orders/"+orderId),
       {
-        status:status,
-        updatedAt:
-          Date.now()
+        status:newStatus,
+        updatedAt:Date.now()
       }
     );
 
-
-    toast(
-      "Order updated."
+    showToast(
+      newStatus === "processing"
+        ? "Order → Processing"
+        : newStatus === "out_for_delivery"
+        ? "Order → Out For Delivery"
+        : newStatus === "delivered"
+        ? "Order → Delivered"
+        : "Order → Cancelled"
     );
 
-  }catch(error){
+  }catch(err){
 
-    console.error(
-      "Status update error:",
-      error
-    );
+    console.error(err);
 
-    toast(
-      "Could not update order."
+    showToast(
+      "Could not update order"
     );
 
   }
@@ -3262,266 +1893,307 @@ async function(
 };
 
 
-/* =====================================================
-   TRACK
-===================================================== */
+/* FOOD ITEMS */
 
-window.openTrack =
-function(id){
+function renderFood(){
 
-  document.getElementById(
-    "trackOrderInput"
-  ).value =
-    id;
+  const box =
+    document.getElementById("foodItems");
 
-  document.getElementById(
-    "trackResult"
-  ).innerHTML =
-    "";
+  box.innerHTML =
+    defaultMenu.map(item => {
 
-  document.getElementById(
-    "trackModal"
-  ).classList.add(
-    "show"
-  );
+      const saved =
+        menuSettings[item.id] || {};
 
-  trackOrder();
+      const price =
+        Number(
+          saved.price ??
+          item.price
+        );
 
-};
+      const available =
+        saved.available !== false;
 
 
-window.closeTrack =
-function(){
+      return `
+        <div class="food-row">
 
-  document.getElementById(
-    "trackModal"
-  ).classList.remove(
-    "show"
-  );
-
-};
-
-
-window.trackOrder =
-function(){
-
-  const id =
-    document.getElementById(
-      "trackOrderInput"
-    ).value.trim();
-
-
-  const result =
-    document.getElementById(
-      "trackResult"
-    );
-
-
-  if(!id){
-
-    result.innerHTML =
-      `
-      <div class="empty">
-        Enter Order ID.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  const order =
-    orders[id];
-
-
-  if(!order){
-
-    result.innerHTML =
-      `
-      <div class="empty">
-        Order not found.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  const status =
-    normalizeStatus(
-      order
-    );
-
-
-  result.innerHTML = `
-
-    <div class="orderCard">
-
-      <div class="orderTop">
-
-        <div>
-
-          <div class="orderId">
-            #${escapeHtml(id)}
+          <div class="food-name">
+            ${escapeHTML(item.name)}
           </div>
 
-          <div class="orderDate">
-            ${formatDateTime(
-              getOrderTime(order)
-            )}
+          <input
+            id="price_${item.id}"
+            class="price-input"
+            type="number"
+            value="${price}"
+            min="0">
+
+          <div class="availability">
+
+            <button
+              id="toggle_${item.id}"
+              class="mini-toggle ${available ? "on" : ""}"
+              onclick="toggleFood('${item.id}')">
+            </button>
+
+            <span id="availability_${item.id}">
+              ${available ? "Available" : "Out of Stock"}
+            </span>
+
           </div>
 
+          <button
+            class="save-food"
+            onclick="saveFood('${item.id}')">
+            SAVE
+          </button>
+
         </div>
+      `;
 
-        <div class="orderStatus ${status}">
-          ${escapeHtml(
-            status.replace(
-              /_/g,
-              " "
-            )
-          )}
-        </div>
+    }).join("");
 
-      </div>
+}
 
 
-      <div class="orderCustomer">
+/* FOOD TOGGLE LOCAL */
 
-        ${escapeHtml(
-          String(
-            order.customerName ||
-            order.name ||
-            order.customer ||
-            "Customer"
-          )
-        )}
+window.toggleFood = function(id){
 
-      </div>
+  const current =
+    menuSettings[id]?.available !== false;
+
+  if(!menuSettings[id]){
+    menuSettings[id] = {};
+  }
+
+  menuSettings[id].available =
+    !current;
 
 
-      <div class="orderTotal">
+  const btn =
+    document.getElementById(
+      "toggle_"+id
+    );
 
-        <span>
-          TOTAL
-        </span>
+  const label =
+    document.getElementById(
+      "availability_"+id
+    );
 
-        <strong>
-          ₹${formatMoney(
-            getOrderTotal(order)
-          )}
-        </strong>
 
-      </div>
+  if(menuSettings[id].available){
 
-    </div>
+    btn.classList.add("on");
 
-  `;
+    label.textContent =
+      "Available";
+
+  }else{
+
+    btn.classList.remove("on");
+
+    label.textContent =
+      "Out of Stock";
+
+  }
 
 };
 
 
-/* =====================================================
-   SALES
-===================================================== */
+/* SAVE FOOD */
+
+window.saveFood = async function(id){
+
+  const priceInput =
+    document.getElementById(
+      "price_"+id
+    );
+
+  const price =
+    Number(priceInput.value);
+
+
+  if(price < 0 || Number.isNaN(price)){
+
+    showToast(
+      "Enter valid price"
+    );
+
+    return;
+  }
+
+
+  if(!menuSettings[id]){
+    menuSettings[id] = {};
+  }
+
+
+  const available =
+    menuSettings[id].available !== false;
+
+
+  await update(
+    ref(db,"settings/menu/"+id),
+    {
+      price:price,
+      available:available
+    }
+  );
+
+
+  showToast(
+    "Food item saved"
+  );
+
+};
+
+
+/* WHATSAPP */
+
+window.saveWhatsApp = async function(){
+
+  const number =
+    document.getElementById(
+      "whatsappNumber"
+    ).value
+      .replace(/\D/g,"");
+
+
+  if(number.length < 10){
+
+    showToast(
+      "Enter valid WhatsApp number"
+    );
+
+    return;
+  }
+
+
+  await set(
+    ref(db,"settings/whatsappNumber"),
+    number
+  );
+
+
+  showToast(
+    "WhatsApp number saved"
+  );
+
+};
+
+
+/* SALES */
 
 function renderSales(){
 
-  const list =
-    orderArray();
+  const orders =
+    getOrderArray();
+
+  const delivered =
+    orders.filter(
+      o =>
+        normalizeStatus(o) === "delivered"
+    );
 
 
-  const groups = {};
+  const folders = {};
 
 
-  list.forEach(
-    order => {
+  delivered.forEach(order => {
 
-      const status =
-        normalizeStatus(
-          order
-        );
+    const date =
+      order.createdAt
+        ? new Date(
+            order.createdAt
+          ).toLocaleDateString(
+            "en-IN",
+            {
+              day:"2-digit",
+              month:"long",
+              year:"numeric"
+            }
+          )
+        : "Unknown Date";
 
+
+    if(!folders[date]){
+
+      folders[date] = {
+        orders:0,
+        sales:0,
+        delivered:0,
+        cancelled:0
+      };
+
+    }
+
+
+    folders[date].orders++;
+
+    folders[date].delivered++;
+
+    folders[date].sales +=
+      Number(
+        order.total ||
+        order.grandTotal ||
+        order.amount ||
+        0
+      );
+
+  });
+
+
+  orders
+    .filter(
+      o =>
+        normalizeStatus(o) === "cancelled"
+    )
+    .forEach(order => {
 
       const date =
-        new Date(
-          getOrderTime(
-            order
-          )
-        );
+        order.createdAt
+          ? new Date(
+              order.createdAt
+            ).toLocaleDateString(
+              "en-IN",
+              {
+                day:"2-digit",
+                month:"long",
+                year:"numeric"
+              }
+            )
+          : "Unknown Date";
 
 
-      const key =
-        getDateKey(
-          date
-        );
+      if(!folders[date]){
 
-
-      if(
-        !groups[key]
-      ){
-
-        groups[key] = {
-
-          date:date,
-
+        folders[date] = {
           orders:0,
-
           sales:0,
-
           delivered:0,
-
           cancelled:0
-
         };
 
       }
 
 
-      if(
-        status === "delivered" ||
-        status === "completed"
-      ){
+      folders[date].cancelled++;
 
-        groups[key].orders++;
-
-        groups[key].sales +=
-          getOrderTotal(
-            order
-          );
-
-        groups[key].delivered++;
-
-      }
+    });
 
 
-      if(
-        status === "cancelled" ||
-        status === "canceled"
-      ){
+  const dates =
+    Object.keys(folders);
 
-        groups[key].cancelled++;
 
-      }
-
-    }
+  dates.sort(
+    (a,b) =>
+      new Date(b) -
+      new Date(a)
   );
-
-
-  const entries =
-    Object.values(
-      groups
-    )
-    .filter(
-      g =>
-        g.orders > 0 ||
-        g.cancelled > 0
-    )
-    .sort(
-      (a,b) =>
-        b.date-a.date
-    );
 
 
   const box =
@@ -3530,405 +2202,269 @@ function renderSales(){
     );
 
 
-  if(
-    !entries.length
-  ){
+  if(!dates.length){
 
     box.innerHTML =
-      `
-      <div class="empty">
-        No sales history yet.
-      </div>
-      `;
+      `<div class="empty">
+        No sales history yet
+      </div>`;
 
     return;
-
   }
 
 
   box.innerHTML =
-    entries.map(
-      (group,index) =>
-        salesFolderHtml(
-          group,
-          index === 0
-        )
-    ).join("");
+    dates.map(date => {
 
-}
+      const d =
+        folders[date];
 
 
-function salesFolderHtml(
-  group,
-  open
-){
+      return `
+        <div class="sales-folder">
 
-  const dateText =
-    group.date.toLocaleDateString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"long",
-        year:"numeric"
-      }
-    );
+          <div class="sales-folder-head">
 
+            <div>
 
-  return `
+              <div class="sales-date">
+                📁 ${escapeHTML(date)}
+              </div>
 
-    <div
-      class="salesFolder ${
-        open
-        ? "open"
-        : ""
-      }">
+              <div class="sales-info">
+                Orders: ${d.orders}
+                &nbsp; • &nbsp;
+                Delivered: ${d.delivered}
+                &nbsp; • &nbsp;
+                Cancelled: ${d.cancelled}
+              </div>
 
-      <div
-        class="salesFolderHead"
-        onclick="toggleSalesFolder(this)">
-
-        <div class="folderLeft">
-
-          <div class="folderIcon">
-            📁
-          </div>
-
-          <div>
-
-            <div class="folderDate">
-              ${dateText}
             </div>
 
-            <div class="folderSummary">
-
-              Orders:
-              ${group.orders}
-
-              · Delivered:
-              ${group.delivered}
-
-              · Cancelled:
-              ${group.cancelled}
-
+            <div class="sales-total">
+              ₹${d.sales}
             </div>
 
           </div>
 
         </div>
+      `;
 
+    }).join("");
 
-        <div class="folderSales">
-          ₹${formatMoney(
-            group.sales
-          )}
-        </div>
-
-      </div>
-
-
-      <div class="salesDetails">
-
-        <div class="salesStat">
-
-          <div class="salesMini">
-
-            <small>
-              ORDERS
-            </small>
-
-            <strong>
-              ${group.orders}
-            </strong>
-
-          </div>
-
-
-          <div class="salesMini">
-
-            <small>
-              ONLINE SALES
-            </small>
-
-            <strong
-              style="color:#ff7a00">
-
-              ₹${formatMoney(
-                group.sales
-              )}
-
-            </strong>
-
-          </div>
-
-
-          <div class="salesMini">
-
-            <small>
-              DELIVERED
-            </small>
-
-            <strong>
-              ${group.delivered}
-            </strong>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
 
 }
 
 
-window.toggleSalesFolder =
-function(el){
+/* DASHBOARD */
 
-  el.parentElement
-    .classList
-    .toggle(
-      "open"
+function updateDashboard(){
+
+  const orders =
+    getOrderArray();
+
+
+  const received =
+    orders.filter(
+      o =>
+        normalizeStatus(o) === "received"
+    ).length;
+
+
+  const processing =
+    orders.filter(
+      o =>
+        normalizeStatus(o) === "processing"
+    ).length;
+
+
+  const delivery =
+    orders.filter(
+      o =>
+        normalizeStatus(o) === "out_for_delivery"
+    ).length;
+
+
+  const sales =
+    orders
+      .filter(
+        o =>
+          normalizeStatus(o) === "delivered"
+      )
+      .reduce(
+        (sum,o) =>
+          sum +
+          Number(
+            o.total ||
+            o.grandTotal ||
+            o.amount ||
+            0
+          ),
+        0
+      );
+
+
+  document.getElementById("newCount")
+    .textContent =
+    received;
+
+
+  document.getElementById("processingCount")
+    .textContent =
+    processing;
+
+
+  document.getElementById("deliveryCount")
+    .textContent =
+    delivery;
+
+
+  document.getElementById("salesTotal")
+    .textContent =
+    "₹"+sales;
+
+}
+
+
+/* TRACK ADMIN */
+
+window.trackAdminOrder = async function(){
+
+  const id =
+    document.getElementById(
+      "adminTrackId"
+    ).value.trim();
+
+
+  if(!id){
+
+    showToast(
+      "Enter Order ID"
     );
+
+    return;
+  }
+
+
+  const snapshot =
+    await get(
+      ref(db,"orders/"+id)
+    );
+
+
+  const box =
+    document.getElementById(
+      "adminTrackResult"
+    );
+
+
+  if(!snapshot.exists()){
+
+    box.innerHTML =
+      `<div class="empty">
+        Order not found
+      </div>`;
+
+    return;
+  }
+
+
+  const order =
+    snapshot.val();
+
+
+  const status =
+    normalizeStatus(order);
+
+
+  box.innerHTML =
+    `
+      <div style="
+        margin-top:12px;
+        background:#0b0b0b;
+        border:1px solid rgba(255,255,255,.06);
+        border-radius:10px;
+        padding:12px;
+        font-size:11px;
+      ">
+
+        <strong>
+          #${escapeHTML(id)}
+        </strong>
+
+        <br><br>
+
+        Current Status:
+        <strong style="color:var(--orange)">
+          ${status.replaceAll("_"," ").toUpperCase()}
+        </strong>
+
+      </div>
+    `;
 
 };
 
 
-/* =====================================================
-   NOTIFICATION
-===================================================== */
+/* TRACK FROM CARD */
 
-function notifyNewOrder(){
+window.trackOrderFromCard = function(id){
 
-  toast(
-    "🔔 New order received!"
+  document.getElementById(
+    "adminTrackId"
+  ).value = id;
+
+  document.getElementById(
+    "adminTrackId"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+  setTimeout(
+    () => trackAdminOrder(),
+    300
   );
-
-}
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
-
-window.refreshAll =
-async function(){
-
-  toast(
-    "Refreshing..."
-  );
-
-  await loadEverything();
 
 };
 
 
-/* =====================================================
-   FORMAT
-===================================================== */
+/* ESCAPE */
 
-function formatMoney(value){
+function escapeHTML(value){
 
-  return Number(
-    value || 0
-  ).toLocaleString(
-    "en-IN",
-    {
-      maximumFractionDigits:0
-    }
-  );
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-function formatDateTime(
-  timestamp
-){
+/* TOAST */
 
-  if(!timestamp){
+function showToast(message){
 
-    return "Date unavailable";
-
-  }
-
-
-  const date =
-    new Date(
-      timestamp
+  const toast =
+    document.getElementById(
+      "toast"
     );
 
+  toast.textContent =
+    message;
 
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
+  toast.classList.add("show");
 
-    return "Date unavailable";
-
-  }
-
-
-  return date.toLocaleString(
-    "en-IN",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
+  setTimeout(
+    () =>
+      toast.classList.remove("show"),
+    2200
   );
 
 }
-
-
-function getDateKey(
-  date
-){
-
-  if(
-    !date ||
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
-
-    return "unknown";
-
-  }
-
-
-  return [
-
-    date.getFullYear(),
-
-    String(
-      date.getMonth()+1
-    ).padStart(2,"0"),
-
-    String(
-      date.getDate()
-    ).padStart(2,"0")
-
-  ].join("-");
-
-}
-
-
-/* =====================================================
-   ESCAPE
-===================================================== */
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-
-}
-
-
-function escapeJs(
-  value
-){
-
-  return String(
-    value
-  )
-  .replace(
-    /\\/g,
-    "\\\\"
-  )
-  .replace(
-    /'/g,
-    "\\'"
-  )
-  .replace(
-    /"/g,
-    '\\"'
-  )
-  .replace(
-    /\n/g,
-    "\\n"
-  )
-  .replace(
-    /\r/g,
-    "\\r"
-  );
-
-}
-
-
-/* =====================================================
-   ENTER LOGIN
-===================================================== */
-
-document
-  .getElementById(
-    "password"
-  )
-  .addEventListener(
-    "keydown",
-    event => {
-
-      if(
-        event.key === "Enter"
-      ){
-
-        loginAdmin();
-
-      }
-
-    }
-  );
-
-
-/* =====================================================
-   ESC TRACK
-===================================================== */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key === "Escape"
-    ){
-
-      closeTrack();
-
-    }
-
-  }
-);
 
 </script>
 
 </body>
 </html>
-```
