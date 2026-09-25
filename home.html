@@ -739,8 +739,6 @@ footer a{
 
 </footer>
 
-<!-- CART -->
-
 <div
   id="cartOverlay"
   class="overlay hidden"
@@ -791,8 +789,6 @@ footer a{
   </div>
 
 </div>
-
-<!-- CHECKOUT -->
 
 <div
   id="checkoutOverlay"
@@ -958,7 +954,9 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import {
   getAuth,
   signInAnonymously,
-  onAuthStateChanged
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -1106,17 +1104,6 @@ let selectedPaymentMethod =
   "COD";
 
 
-/* =====================================================
-   REALTIME TRACKING LISTENER
-===================================================== */
-
-/*
-  Important:
-  Eita old listener ku remove kariba.
-  Track button multiple times click kale duplicate
-  Firebase listeners create heba nahi.
-*/
-
 let trackingUnsubscribe = null;
 
 let trackingOrderId = "";
@@ -1127,6 +1114,7 @@ let trackingOrderId = "";
 ===================================================== */
 
 let authReadyPromise = null;
+
 
 function waitForAuthState(){
 
@@ -1176,31 +1164,60 @@ function waitForAuthState(){
 }
 
 
+/* =====================================================
+   START CUSTOMER AUTH
+   IMPORTANT FIX:
+   Browser local persistence
+===================================================== */
+
 async function startCustomerAuth(){
 
   try{
+
+    /*
+      Firebase Anonymous Auth UID ku
+      browser re permanently-ish persist kariba.
+
+      Browser close/reopen pare madhya
+      same anonymous UID use haba.
+    */
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
 
     if(auth.currentUser){
 
       currentUser =
         auth.currentUser;
 
+      console.log(
+        "Existing customer UID:",
+        currentUser.uid
+      );
+
       return currentUser;
 
     }
+
 
     const result =
       await signInAnonymously(
         auth
       );
 
+
     currentUser =
       result.user;
 
+
     console.log(
-      "Customer authenticated:",
+      "New customer UID:",
       currentUser.uid
     );
+
 
     return currentUser;
 
@@ -1221,14 +1238,19 @@ async function startCustomerAuth(){
 
       "Code: " +
 
-      (error.code || "unknown") +
+      (
+        error.code ||
+        "unknown"
+      ) +
 
       "\n\n" +
 
       "Message: " +
 
-      (error.message ||
-        "Authentication failed.")
+      (
+        error.message ||
+        "Authentication failed."
+      )
 
     );
 
@@ -1238,6 +1260,10 @@ async function startCustomerAuth(){
 
 }
 
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
 onAuthStateChanged(
   auth,
@@ -1361,6 +1387,7 @@ function renderWebsiteMode(){
       "websiteModeMessage"
     );
 
+
   if(mode === "maintenance"){
 
     icon.textContent =
@@ -1404,6 +1431,7 @@ function isShopOpen(){
       "auto"
     ).toLowerCase();
 
+
   if(
     override === "open"
   ){
@@ -1411,6 +1439,7 @@ function isShopOpen(){
     return true;
 
   }
+
 
   if(
     override === "closed"
@@ -1420,36 +1449,45 @@ function isShopOpen(){
 
   }
 
+
   const now =
     new Date();
+
 
   const openTime =
     shopSettings.openTime ||
     "12:00";
 
+
   const closeTime =
     shopSettings.closeTime ||
     "23:00";
+
 
   const [oh,om] =
     openTime
       .split(":")
       .map(Number);
 
+
   const [ch,cm] =
     closeTime
       .split(":")
       .map(Number);
 
+
   const current =
     now.getHours()*60 +
     now.getMinutes();
 
+
   const open =
     oh*60 + om;
 
+
   const close =
     ch*60 + cm;
+
 
   if(close > open){
 
@@ -1459,6 +1497,7 @@ function isShopOpen(){
     );
 
   }
+
 
   return (
     current >= open ||
@@ -1473,15 +1512,18 @@ function renderShopStatus(){
   const open =
     isShopOpen();
 
+
   const dot =
     document.getElementById(
       "shopDot"
     );
 
+
   const text =
     document.getElementById(
       "shopStatusText"
     );
+
 
   dot.className =
     "dot " +
@@ -1491,15 +1533,18 @@ function renderShopStatus(){
         : "closed"
     );
 
+
   text.textContent =
     open
       ? "The Queen Fast Food is Open"
       : "The Queen Fast Food is Closed Today. Sorry for your order.";
 
+
   const orderTime =
     document.getElementById(
       "orderTimeValue"
     );
+
 
   orderTime.textContent =
     open
@@ -1527,6 +1572,7 @@ function getMenu(){
               defaultItem.id
             ]
           : {};
+
 
       return {
 
@@ -1561,7 +1607,9 @@ function renderMenu(){
       "menuGrid"
     );
 
+
   grid.innerHTML = "";
+
 
   getMenu().forEach(
     item=>{
@@ -1571,8 +1619,10 @@ function renderMenu(){
           "div"
         );
 
+
       card.className =
         "card";
+
 
       const image =
         item.image
@@ -1581,18 +1631,23 @@ function renderMenu(){
 
           : `<div style="font-size:55px">🍽️</div>`;
 
+
       const unavailable =
         !item.available;
 
+
       const closed =
         !isShopOpen();
+
 
       const disabled =
         unavailable ||
         closed;
 
+
       let buttonText =
         "Add to Cart";
+
 
       if(unavailable){
 
@@ -1607,6 +1662,7 @@ function renderMenu(){
           "SHOP CLOSED";
 
       }
+
 
       card.innerHTML = `
 
@@ -1640,10 +1696,12 @@ function renderMenu(){
 
       `;
 
+
       const btn =
         card.querySelector(
           "button"
         );
+
 
       if(!disabled){
 
@@ -1657,6 +1715,7 @@ function renderMenu(){
         );
 
       }
+
 
       grid.appendChild(card);
 
@@ -1682,10 +1741,12 @@ function addToCart(item){
 
   }
 
+
   const existing =
     cart.find(
       x=>x.id === item.id
     );
+
 
   if(existing){
 
@@ -1709,12 +1770,15 @@ function addToCart(item){
 
   }
 
+
   renderCart();
+
 
   const top =
     document.getElementById(
       "topCart"
     );
+
 
   top.animate(
 
@@ -1754,6 +1818,7 @@ function renderCart(){
       "cartBody"
     );
 
+
   const count =
     cart.reduce(
       (sum,item)=>
@@ -1761,10 +1826,12 @@ function renderCart(){
       0
     );
 
+
   document.getElementById(
     "cartCount"
   ).textContent =
     count;
+
 
   if(cart.length === 0){
 
@@ -1774,18 +1841,23 @@ function renderCart(){
         Your cart is empty.
       </p>`;
 
+
     document.getElementById(
       "cartTotal"
     ).textContent =
       "0";
 
+
     return;
 
   }
 
+
   let subtotal = 0;
 
+
   body.innerHTML = "";
+
 
   cart.forEach(
     item=>{
@@ -1794,15 +1866,19 @@ function renderCart(){
         item.price *
         item.quantity;
 
+
       subtotal += line;
+
 
       const div =
         document.createElement(
           "div"
         );
 
+
       div.className =
         "cart-item";
+
 
       div.innerHTML = `
 
@@ -1844,12 +1920,14 @@ function renderCart(){
 
       `;
 
+
       div.querySelector(
         "[data-action=minus]"
       ).onclick =
         ()=>{
 
           item.quantity--;
+
 
           if(item.quantity <= 0){
 
@@ -1860,9 +1938,11 @@ function renderCart(){
 
           }
 
+
           renderCart();
 
         };
+
 
       div.querySelector(
         "[data-action=plus]"
@@ -1875,10 +1955,12 @@ function renderCart(){
 
         };
 
+
       body.appendChild(div);
 
     }
   );
+
 
   document.getElementById(
     "cartTotal"
@@ -1926,6 +2008,7 @@ function openCheckout(){
 
   }
 
+
   if(!isShopOpen()){
 
     alert(
@@ -1936,13 +2019,16 @@ function openCheckout(){
 
   }
 
+
   closeCart();
+
 
   document.getElementById(
     "checkoutOverlay"
   ).classList.remove(
     "hidden"
   );
+
 
   renderOrderSummary();
 
@@ -1966,6 +2052,7 @@ function renderOrderSummary(){
 
   let html = "";
 
+
   cart.forEach(
     item=>{
 
@@ -1973,7 +2060,9 @@ function renderOrderSummary(){
         item.price *
         item.quantity;
 
+
       subtotal += total;
+
 
       html += `
 
@@ -1995,13 +2084,16 @@ function renderOrderSummary(){
     }
   );
 
+
   const rate =
     Number(
       shopSettings.deliveryRate ||
       DEFAULT_DELIVERY_RATE
     );
 
+
   let delivery = 0;
+
 
   if(
     deliveryDistance !== null
@@ -2015,9 +2107,11 @@ function renderOrderSummary(){
 
   }
 
+
   const grand =
     subtotal +
     delivery;
+
 
   html += `
 
@@ -2071,10 +2165,12 @@ function renderOrderSummary(){
 
   `;
 
+
   document.getElementById(
     "orderSummary"
   ).innerHTML =
     html;
+
 
   validateCheckout();
 
@@ -2101,13 +2197,16 @@ document.getElementById(
 
     }
 
+
     const button =
       document.getElementById(
         "locationButton"
       );
 
+
     button.textContent =
       "Getting...";
+
 
     navigator.geolocation.getCurrentPosition(
 
@@ -2116,8 +2215,10 @@ document.getElementById(
         customerLat =
           position.coords.latitude;
 
+
         customerLng =
           position.coords.longitude;
+
 
         const distance =
           haversine(
@@ -2130,21 +2231,25 @@ document.getElementById(
 
           );
 
+
         deliveryDistance =
           Number(
             distance.toFixed(2)
           );
+
 
         document.getElementById(
           "locationDisplay"
         ).value =
           `${deliveryDistance.toFixed(2)} km away`;
 
+
         const rate =
           Number(
             shopSettings.deliveryRate ||
             DEFAULT_DELIVERY_RATE
           );
+
 
         document.getElementById(
           "deliveryInfo"
@@ -2153,12 +2258,15 @@ document.getElementById(
             deliveryDistance * rate
           )}`;
 
+
         button.textContent =
           "Location Ready ✓";
+
 
         renderOrderSummary();
 
       },
+
 
       error=>{
 
@@ -2167,14 +2275,17 @@ document.getElementById(
           error
         );
 
+
         button.textContent =
           "Use Location";
+
 
         alert(
           "Please allow location access to calculate delivery charge."
         );
 
       },
+
 
       {
         enableHighAccuracy:true,
@@ -2198,15 +2309,18 @@ function haversine(
   const R =
     6371;
 
+
   const dLat =
     (lat2-lat1) *
     Math.PI /
     180;
 
+
   const dLon =
     (lon2-lon1) *
     Math.PI /
     180;
+
 
   const a =
     Math.sin(dLat/2)**2 +
@@ -2222,6 +2336,7 @@ function haversine(
     Math.sin(
       dLon/2
     )**2;
+
 
   return R * 2 *
     Math.atan2(
@@ -2245,11 +2360,13 @@ document.getElementById(
     selectedPaymentMethod =
       "COD";
 
+
     document.getElementById(
       "codButton"
     ).classList.add(
       "active"
     );
+
 
     document.getElementById(
       "onlineButton"
@@ -2257,11 +2374,13 @@ document.getElementById(
       "active"
     );
 
+
     document.getElementById(
       "paymentWarning"
     ).classList.add(
       "hidden"
     );
+
 
     validateCheckout();
 
@@ -2278,11 +2397,13 @@ document.getElementById(
     selectedPaymentMethod =
       "ONLINE";
 
+
     document.getElementById(
       "onlineButton"
     ).classList.add(
       "active"
     );
+
 
     document.getElementById(
       "codButton"
@@ -2290,11 +2411,13 @@ document.getElementById(
       "active"
     );
 
+
     document.getElementById(
       "paymentWarning"
     ).classList.remove(
       "hidden"
     );
+
 
     validateCheckout();
 
@@ -2313,20 +2436,24 @@ function validateCheckout(){
       "customerName"
     ).value.trim();
 
+
   const phone =
     document.getElementById(
       "customerPhone"
     ).value.trim();
+
 
   const address =
     document.getElementById(
       "customerAddress"
     ).value.trim();
 
+
   const validPhone =
     /^[6-9]\d{9}$/.test(
       phone
     );
+
 
   const valid =
     name.length >= 2 &&
@@ -2340,6 +2467,7 @@ function validateCheckout(){
     cart.length > 0 &&
 
     !!currentUser;
+
 
   document.getElementById(
     "placeOrderButton"
@@ -2386,10 +2514,12 @@ async function placeOrder(){
       "placeOrderButton"
     );
 
+
   try{
 
     let user =
       auth.currentUser;
+
 
     if(!user){
 
@@ -2399,10 +2529,12 @@ async function placeOrder(){
       button.textContent =
         "Connecting...";
 
+
       user =
         await startCustomerAuth();
 
     }
+
 
     if(!user){
 
@@ -2412,13 +2544,16 @@ async function placeOrder(){
 
     }
 
+
     currentUser =
       user;
+
 
     console.log(
       "ORDER USER UID:",
       currentUser.uid
     );
+
 
     if(!isShopOpen()){
 
@@ -2430,25 +2565,30 @@ async function placeOrder(){
 
     }
 
+
     const name =
       document.getElementById(
         "customerName"
       ).value.trim();
+
 
     const phone =
       document.getElementById(
         "customerPhone"
       ).value.trim();
 
+
     const address =
       document.getElementById(
         "customerAddress"
       ).value.trim();
 
+
     const validPhone =
       /^[6-9]\d{9}$/.test(
         phone
       );
+
 
     if(
 
@@ -2472,11 +2612,14 @@ async function placeOrder(){
 
     }
 
+
     button.disabled =
       true;
 
+
     button.textContent =
       "Placing Order...";
+
 
     const orderRef =
       push(
@@ -2486,8 +2629,10 @@ async function placeOrder(){
         )
       );
 
+
     const firebaseKey =
       orderRef.key;
+
 
     if(!firebaseKey){
 
@@ -2497,12 +2642,15 @@ async function placeOrder(){
 
     }
 
+
     const orderId =
       createOrderId(
         firebaseKey
       );
 
+
     let subtotal = 0;
+
 
     cart.forEach(
       item=>{
@@ -2514,11 +2662,13 @@ async function placeOrder(){
       }
     );
 
+
     const rate =
       Number(
         shopSettings.deliveryRate ||
         DEFAULT_DELIVERY_RATE
       );
+
 
     const deliveryCharge =
       Math.ceil(
@@ -2526,15 +2676,19 @@ async function placeOrder(){
         rate
       );
 
+
     const grandTotal =
       subtotal +
       deliveryCharge;
 
+
     const now =
       Date.now();
 
+
     const locationUrl =
       `https://www.google.com/maps?q=${customerLat},${customerLng}`;
+
 
     const orderData = {
 
@@ -2618,30 +2772,36 @@ async function placeOrder(){
 
     };
 
+
     console.log(
       "ORDER DATA:",
       orderData
     );
+
 
     await set(
       orderRef,
       orderData
     );
 
+
     console.log(
       "ORDER SAVED SUCCESSFULLY:",
       firebaseKey
     );
+
 
     localStorage.setItem(
       "lastOrderId",
       orderId
     );
 
+
     localStorage.setItem(
       "lastOrderFirebaseKey",
       firebaseKey
     );
+
 
     const whatsapp =
       normalizeWhatsApp(
@@ -2651,30 +2811,38 @@ async function placeOrder(){
 
       );
 
+
     const message =
       buildWhatsAppMessage(
         orderData
       );
 
+
     const whatsappUrl =
       `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+
 
     window.open(
       whatsappUrl,
       "_blank"
     );
 
+
     cart = [];
+
 
     renderCart();
 
+
     closeCheckout();
+
 
     document.getElementById(
       "thankYouOverlay"
     ).classList.remove(
       "hidden"
     );
+
 
     setTimeout(
       ()=>{
@@ -2685,12 +2853,15 @@ async function placeOrder(){
           "hidden"
         );
 
+
         document.getElementById(
           "trackInput"
         ).value =
           orderId;
 
+
         trackOrder();
+
 
         window.scrollTo({
 
@@ -2708,6 +2879,7 @@ async function placeOrder(){
 
   }
 
+
   catch(error){
 
     console.error(
@@ -2715,17 +2887,20 @@ async function placeOrder(){
       error
     );
 
+
     const code =
       error &&
       error.code
         ? error.code
         : "unknown";
 
+
     const message =
       error &&
       error.message
         ? error.message
         : String(error);
+
 
     alert(
 
@@ -2742,6 +2917,7 @@ async function placeOrder(){
     );
 
   }
+
 
   finally{
 
@@ -2774,6 +2950,7 @@ function createOrderId(
     )
     .toUpperCase();
 
+
   return (
     "TQF2026-" +
     clean.slice(-8)
@@ -2797,12 +2974,14 @@ function normalizeWhatsApp(
         ""
       );
 
+
   if(n.length === 10){
 
     n =
       "91" + n;
 
   }
+
 
   return n;
 
@@ -2839,6 +3018,7 @@ function buildWhatsAppMessage(
 
 `;
 
+
   order.items.forEach(
     (item,index)=>{
 
@@ -2852,6 +3032,7 @@ function buildWhatsAppMessage(
 
     }
   );
+
 
   text +=
 
@@ -2885,13 +3066,14 @@ ${order.customerLocation}
 
 🍴 *Fresh Food • Fast Service • Easy Ordering*`;
 
+
   return text;
 
 }
 
 
 /* =====================================================
-   TRACK ORDER - REALTIME
+   TRACK ORDER
 ===================================================== */
 
 document.getElementById(
@@ -2911,10 +3093,12 @@ async function trackOrder(){
       .trim()
       .toUpperCase();
 
+
   const result =
     document.getElementById(
       "trackResult"
     );
+
 
   if(!input){
 
@@ -2927,13 +3111,16 @@ async function trackOrder(){
 
     }
 
+
     trackingOrderId =
       "";
+
 
     result.innerHTML =
       `<p style="color:#888">
         Enter an Order ID.
       </p>`;
+
 
     return;
 
@@ -2942,19 +3129,17 @@ async function trackOrder(){
 
   try{
 
-    if(!auth.currentUser){
+    /*
+      Always make sure the SAME
+      persistent anonymous user is ready.
+    */
 
-      result.innerHTML =
-        `<p style="color:#aaa">
-          🔐 Connecting securely...
-        </p>`;
+    await startCustomerAuth();
 
-      await startCustomerAuth();
-
-    }
 
     currentUser =
       auth.currentUser;
+
 
     if(!currentUser){
 
@@ -2965,11 +3150,11 @@ async function trackOrder(){
     }
 
 
-    /*
-      IMPORTANT:
-      If customer tracks another order,
-      remove previous realtime listener first.
-    */
+    console.log(
+      "TRACKING UID:",
+      currentUser.uid
+    );
+
 
     if(trackingUnsubscribe){
 
@@ -3003,21 +3188,6 @@ async function trackOrder(){
 
       );
 
-
-    /*
-      REALTIME LISTENER
-
-      No onlyOnce:true here.
-
-      So whenever admin changes:
-      received
-      confirmed
-      preparing
-      out_for_delivery
-      delivered
-
-      customer page will update automatically.
-    */
 
     trackingUnsubscribe =
       onValue(
@@ -3093,17 +3263,12 @@ async function trackOrder(){
           }
 
 
-          /*
-            Every Firebase update comes here.
-            renderTrackedOrder() automatically
-            refreshes the customer tracking UI.
-          */
-
           renderTrackedOrder(
             found
           );
 
         },
+
 
         error=>{
 
@@ -3111,6 +3276,7 @@ async function trackOrder(){
             "TRACK ERROR:",
             error
           );
+
 
           result.innerHTML =
 
@@ -3127,12 +3293,14 @@ async function trackOrder(){
 
   }
 
+
   catch(error){
 
     console.error(
       "TRACK ERROR:",
       error
     );
+
 
     result.innerHTML =
 
@@ -3160,11 +3328,13 @@ function renderTrackedOrder(
       "trackResult"
     );
 
+
   const status =
     String(
       order.status ||
       "received"
     ).toLowerCase();
+
 
   const steps = [
 
@@ -3200,19 +3370,23 @@ function renderTrackedOrder(
 
   ];
 
+
   const currentIndex =
     steps.findIndex(
       x=>x[0] === status
     );
 
+
   let timeline =
     "";
+
 
   steps.forEach(
     (step,index)=>{
 
       const active =
         currentIndex >= index;
+
 
       timeline += `
 
@@ -3244,6 +3418,7 @@ function renderTrackedOrder(
 
   let items =
     "";
+
 
   (
     order.items ||
@@ -3497,6 +3672,7 @@ function renderTrackedOrder(
         "deliveredButton"
       );
 
+
     if(deliveredButton){
 
       deliveredButton.onclick =
@@ -3545,6 +3721,7 @@ function getStatusEmoji(
 
   };
 
+
   return (
     map[status] ||
     "📌"
@@ -3571,8 +3748,10 @@ async function customerConfirmDelivered(
 
   }
 
+
   currentUser =
     auth.currentUser;
+
 
   if(
     order.ownerUid !==
@@ -3587,6 +3766,7 @@ async function customerConfirmDelivered(
 
   }
 
+
   if(
     String(
       order.status
@@ -3597,6 +3777,7 @@ async function customerConfirmDelivered(
     return;
 
   }
+
 
   try{
 
@@ -3611,19 +3792,13 @@ async function customerConfirmDelivered(
 
     );
 
+
     alert(
       "🎉 Order marked as delivered."
     );
 
-    /*
-      No need to call trackOrder() here.
-
-      Realtime listener will automatically
-      receive the new "delivered" status
-      and refresh the UI.
-    */
-
   }
+
 
   catch(error){
 
@@ -3631,6 +3806,7 @@ async function customerConfirmDelivered(
       "DELIVERY CONFIRM ERROR:",
       error
     );
+
 
     alert(
 
@@ -3677,6 +3853,7 @@ function formatStatus(
       "Cancelled"
 
   };
+
 
   return (
     map[status] ||
@@ -3758,7 +3935,13 @@ document.getElementById(
 
   try{
 
+    /*
+      IMPORTANT:
+      First establish persistent anonymous auth.
+    */
+
     await startCustomerAuth();
+
 
     console.log(
       "CUSTOMER READY:",
@@ -3767,19 +3950,24 @@ document.getElementById(
         : "NO USER"
     );
 
+
     loadSettings();
 
+
     renderCart();
+
 
     setInterval(
       renderShopStatus,
       30000
     );
 
+
     const lastOrderId =
       localStorage.getItem(
         "lastOrderId"
       );
+
 
     if(lastOrderId){
 
@@ -3791,6 +3979,7 @@ document.getElementById(
     }
 
   }
+
 
   catch(error){
 
