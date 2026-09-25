@@ -63,12 +63,9 @@ button{
     #070707;
 
   display:none;
-
   align-items:center;
   justify-content:center;
-
   text-align:center;
-
   padding:25px;
 }
 
@@ -842,120 +839,66 @@ header{
 ========================================= */
 
 .payment-section{
-  background:#0b0b0b;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:9px;
-  padding:11px;
-  margin-bottom:10px;
+  margin:12px 0 10px;
 }
 
 .payment-title{
-  color:#aaa;
+  color:#888;
   font-size:9px;
-  font-weight:800;
-  margin-bottom:8px;
-  letter-spacing:.4px;
+  margin-bottom:7px;
 }
 
 .payment-options{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
 }
 
 .payment-option{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:9px;
-  border:1px solid #292929;
-  background:#111;
-  border-radius:8px;
+  position:relative;
   cursor:pointer;
-  transition:.2s;
-}
-
-.payment-option:hover{
-  border-color:rgba(255,122,0,.35);
 }
 
 .payment-option input{
-  width:15px;
-  height:15px;
-  accent-color:var(--orange);
-  cursor:pointer;
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
 }
 
-.payment-option span{
-  color:#ddd;
+.payment-card{
+  width:100%;
+  min-height:48px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:9px;
+  background:#080808;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  color:#aaa;
   font-size:10px;
-  font-weight:700;
+  font-weight:800;
+  transition:.2s;
 }
 
-.payment-empty{
+.payment-option input:checked + .payment-card{
+  border-color:var(--orange);
+  background:rgba(255,122,0,.10);
+  color:#fff;
+  box-shadow:0 0 15px rgba(255,122,0,.08);
+}
+
+.payment-warning{
+  display:none;
   color:#ff5c5c;
-  font-size:10px;
+  font-size:9px;
+  margin-top:7px;
   line-height:1.5;
 }
 
-
-/* =========================================
-   COMPLETE ORDER TOTAL BOX
-========================================= */
-
-.order-summary{
-  background:#0b0b0b;
-  border:1px solid rgba(255,122,0,.16);
-  border-radius:10px;
-  padding:11px;
-  margin-bottom:10px;
+.payment-warning.show{
+  display:block;
 }
-
-.order-summary-title{
-  color:#aaa;
-  font-size:9px;
-  font-weight:800;
-  margin-bottom:8px;
-  letter-spacing:.5px;
-}
-
-.summary-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  color:#999;
-  font-size:10px;
-  margin-bottom:6px;
-}
-
-.summary-row strong{
-  color:#fff;
-}
-
-.summary-row.delivery-row strong{
-  color:#fff;
-}
-
-.summary-total{
-  border-top:1px solid #292929;
-  margin-top:8px;
-  padding-top:9px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-size:14px;
-  font-weight:800;
-}
-
-.summary-total span:last-child{
-  color:var(--orange);
-  font-size:17px;
-}
-
-
-/* =========================================
-   CHECKOUT ACTIONS
-========================================= */
 
 .checkout-actions{
   display:flex;
@@ -980,12 +923,17 @@ header{
   background:var(--green);
   color:#000;
   border:0;
+  transition:.2s;
 }
 
-.place-order:disabled{
-  background:#333;
-  color:#777;
+.place-order.payment-disabled{
+  opacity:.5;
+  filter:blur(.3px);
   cursor:not-allowed;
+}
+
+.place-order.payment-disabled:active{
+  transform:none;
 }
 
 
@@ -1102,30 +1050,29 @@ footer{
 <body>
 
 
-<!-- =========================================
-     WEBSITE MODE SCREEN
-========================================= -->
-
 <div id="websiteModeScreen">
 
   <div class="website-mode-box">
 
     <div
       id="websiteModeIcon"
-      class="website-mode-icon">
+      class="website-mode-icon"
+    >
       🔧
     </div>
 
     <div
       id="websiteModeTitle"
-      class="website-mode-title">
+      class="website-mode-title"
+    >
       We’re Improving
       <span>Your Experience</span>
     </div>
 
     <div
       id="websiteModeMessage"
-      class="website-mode-message">
+      class="website-mode-message"
+    >
       We’re making a few improvements
       to make your experience better.
       Please check back shortly.
@@ -1140,14 +1087,8 @@ footer{
 </div>
 
 
-<!-- =========================================
-     MAIN WEBSITE
-========================================= -->
-
 <div id="mainWebsite">
 
-
-<!-- HEADER -->
 
 <header>
 
@@ -1166,8 +1107,6 @@ footer{
 
 </header>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -1191,14 +1130,12 @@ footer{
 </section>
 
 
-<!-- SHOP STATUS -->
-
 <div class="shop-status">
 
   <div
     id="shopDot"
-    class="shop-dot open">
-  </div>
+    class="shop-dot open"
+  ></div>
 
   <span id="shopStatusText">
     SHOP OPEN
@@ -1207,22 +1144,16 @@ footer{
 </div>
 
 
-<!-- ORDER TIME -->
-
 <div
   id="orderTimeText"
-  class="order-time">
-
+  class="order-time"
+>
   ORDER BETWEEN
-
   <span id="orderTimeValue">
     12:00 PM – 9:30 PM
   </span>
-
 </div>
 
-
-<!-- MENU -->
 
 <main class="menu-wrap">
 
@@ -1237,8 +1168,6 @@ footer{
 
 </main>
 
-
-<!-- TRACK ORDER -->
 
 <section class="track-section">
 
@@ -1273,16 +1202,12 @@ footer{
 </section>
 
 
-<!-- CART OVERLAY -->
-
 <div
   id="cartOverlay"
   class="cart-overlay"
   onclick="closeCart()">
 </div>
 
-
-<!-- CART -->
 
 <div
   id="cartDrawer"
@@ -1333,10 +1258,6 @@ footer{
 
 </div>
 
-
-<!-- =========================================
-     CHECKOUT
-========================================= -->
 
 <div
   id="checkoutOverlay"
@@ -1409,70 +1330,50 @@ footer{
 
     <!-- PAYMENT METHOD -->
 
-    <div
-      id="paymentSection"
-      class="payment-section">
+    <div class="payment-section">
 
       <div class="payment-title">
-        💳 SELECT PAYMENT METHOD
+        SELECT PAYMENT METHOD
+      </div>
+
+      <div class="payment-options">
+
+        <label class="payment-option">
+
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="COD"
+            onchange="selectPaymentMethod('COD')">
+
+          <div class="payment-card">
+            💵 CASH ON DELIVERY
+          </div>
+
+        </label>
+
+
+        <label class="payment-option">
+
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="ONLINE"
+            onchange="selectPaymentMethod('ONLINE')">
+
+          <div class="payment-card">
+            💳 ONLINE PAYMENT
+          </div>
+
+        </label>
+
       </div>
 
       <div
-        id="paymentOptions"
-        class="payment-options">
+        id="paymentWarning"
+        class="payment-warning">
 
-        <div class="payment-empty">
-          Loading payment methods...
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- COMPLETE ORDER TOTAL -->
-
-    <div
-      id="orderSummary"
-      class="order-summary">
-
-      <div class="order-summary-title">
-        🧾 ORDER SUMMARY
-      </div>
-
-      <div class="summary-row">
-
-        <span>
-          Subtotal
-        </span>
-
-        <strong id="checkoutSubtotal">
-          ₹0
-        </strong>
-
-      </div>
-
-      <div class="summary-row delivery-row">
-
-        <span>
-          Delivery Charge
-        </span>
-
-        <strong id="checkoutDelivery">
-          ₹0
-        </strong>
-
-      </div>
-
-      <div class="summary-total">
-
-        <span>
-          TOTAL AMOUNT
-        </span>
-
-        <span id="checkoutGrandTotal">
-          ₹0
-        </span>
+        ⚠️ Please choose the payment method first.
 
       </div>
 
@@ -1491,7 +1392,7 @@ footer{
 
       <button
         id="placeOrderButton"
-        class="place-order"
+        class="place-order payment-disabled"
         onclick="placeOrder()">
 
         ORDER ON WHATSAPP
@@ -1504,8 +1405,6 @@ footer{
 
 </div>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -1679,13 +1578,8 @@ let trackingUnsubscribe = null;
 
 
 /* =========================================
-   PAYMENT SETTINGS
+   PAYMENT METHOD
 ========================================= */
-
-let paymentMethods = {
-  cod:true,
-  online:true
-};
 
 let selectedPaymentMethod = "";
 
@@ -1900,26 +1794,6 @@ onValue(
     shopSettings =
       snapshot.val() || {};
 
-
-    /* =====================================
-       PAYMENT METHODS FROM ADMIN
-    ===================================== */
-
-    const savedPaymentMethods =
-      shopSettings.paymentMethods || {};
-
-
-    paymentMethods = {
-
-      cod:
-        savedPaymentMethods.cod !== false,
-
-      online:
-        savedPaymentMethods.online !== false
-
-    };
-
-
     renderWebsiteMode(
       shopSettings
     );
@@ -1930,10 +1804,6 @@ onValue(
 
     loadMenu();
 
-    renderPaymentMethods();
-
-    updateCheckoutSummary();
-
   },
   error => {
 
@@ -1942,50 +1812,23 @@ onValue(
       error
     );
 
-
     renderWebsiteMode({
       websiteMode:"normal"
     });
 
-
     shopSettings = {
-
       openingTime:"12:00",
-
       closingTime:"21:30",
-
       openTime:"12:00",
-
       closeTime:"21:30",
-
-      statusOverride:"auto",
-
-      paymentMethods:{
-        cod:true,
-        online:true
-      }
-
+      statusOverride:"auto"
     };
-
-
-    paymentMethods = {
-
-      cod:true,
-
-      online:true
-
-    };
-
 
     renderOrderTime();
 
     renderShopStatus();
 
     loadMenu();
-
-    renderPaymentMethods();
-
-    updateCheckoutSummary();
 
   }
 );
@@ -2278,10 +2121,6 @@ function renderMenu(){
       "menuGrid"
     );
 
-  if(!grid){
-    return;
-  }
-
   grid.innerHTML =
     menu.map(
       item => {
@@ -2526,274 +2365,6 @@ function updateCart(){
   ).textContent =
     count;
 
-  updateCheckoutSummary();
-
-}
-
-
-/* =========================================
-   CALCULATE SUBTOTAL
-========================================= */
-
-function getCartSubtotal(){
-
-  let subtotal = 0;
-
-  cart.forEach(
-    item => {
-
-      subtotal +=
-        Number(item.price || 0) *
-        Number(item.quantity || 0);
-
-    }
-  );
-
-  return subtotal;
-
-}
-
-
-/* =========================================
-   CHECKOUT TOTAL
-========================================= */
-
-function updateCheckoutSummary(){
-
-  const subtotal =
-    getCartSubtotal();
-
-  const grandTotal =
-    subtotal +
-    Number(deliveryCharge || 0);
-
-
-  const subtotalElement =
-    document.getElementById(
-      "checkoutSubtotal"
-    );
-
-  const deliveryElement =
-    document.getElementById(
-      "checkoutDelivery"
-    );
-
-  const totalElement =
-    document.getElementById(
-      "checkoutGrandTotal"
-    );
-
-
-  if(subtotalElement){
-
-    subtotalElement.textContent =
-      "₹"+subtotal;
-
-  }
-
-
-  if(deliveryElement){
-
-    deliveryElement.textContent =
-      "₹"+Number(
-        deliveryCharge || 0
-      );
-
-  }
-
-
-  if(totalElement){
-
-    totalElement.textContent =
-      "₹"+grandTotal;
-
-  }
-
-}
-
-
-/* =========================================
-   PAYMENT METHODS
-========================================= */
-
-function renderPaymentMethods(){
-
-  const container =
-    document.getElementById(
-      "paymentOptions"
-    );
-
-  if(!container){
-    return;
-  }
-
-
-  const options = [];
-
-
-  if(paymentMethods.cod){
-
-    options.push({
-
-      id:"cod",
-
-      label:"💵 Cash on Delivery"
-
-    });
-
-  }
-
-
-  if(paymentMethods.online){
-
-    options.push({
-
-      id:"online",
-
-      label:"💳 Online Payment"
-
-    });
-
-  }
-
-
-  if(!options.length){
-
-    selectedPaymentMethod = "";
-
-    container.innerHTML = `
-
-      <div class="payment-empty">
-
-        No payment method is currently available.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  /*
-    If previous selected method is
-    not available anymore, select
-    the first available method.
-  */
-
-  const stillAvailable =
-    options.some(
-      option =>
-        option.id ===
-        selectedPaymentMethod
-    );
-
-
-  if(!stillAvailable){
-
-    selectedPaymentMethod =
-      options[0].id;
-
-  }
-
-
-  container.innerHTML =
-    options.map(
-      option => `
-
-        <label class="payment-option">
-
-          <input
-            type="radio"
-            name="paymentMethod"
-            value="${option.id}"
-            ${selectedPaymentMethod === option.id ? "checked" : ""}
-            onchange="selectPaymentMethod(this.value)">
-
-          <span>
-            ${option.label}
-          </span>
-
-        </label>
-
-      `
-    ).join("");
-
-}
-
-
-/* =========================================
-   SELECT PAYMENT METHOD
-========================================= */
-
-window.selectPaymentMethod =
-function(method){
-
-  if(
-    method !== "cod" &&
-    method !== "online"
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    method === "cod" &&
-    !paymentMethods.cod
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    method === "online" &&
-    !paymentMethods.online
-  ){
-
-    return;
-
-  }
-
-
-  selectedPaymentMethod =
-    method;
-
-};
-
-
-/* =========================================
-   PAYMENT METHOD TEXT
-========================================= */
-
-function getPaymentMethodText(){
-
-  if(
-    selectedPaymentMethod ===
-    "cod"
-  ){
-
-    return "Cash on Delivery";
-
-  }
-
-
-  if(
-    selectedPaymentMethod ===
-    "online"
-  ){
-
-    return "Online Payment";
-
-  }
-
-
-  return "";
-
 }
 
 
@@ -2879,11 +2450,23 @@ function(){
     return;
   }
 
+  selectedPaymentMethod = "";
 
-  renderPaymentMethods();
+  document
+    .querySelectorAll(
+      'input[name="paymentMethod"]'
+    )
+    .forEach(
+      radio => {
+        radio.checked = false;
+      }
+    );
 
-  updateCheckoutSummary();
+  updatePaymentButton();
 
+  document.getElementById(
+    "paymentWarning"
+  ).classList.remove("show");
 
   document.getElementById(
     "checkoutOverlay"
@@ -2891,6 +2474,10 @@ function(){
 
 };
 
+
+/* =========================================
+   CLOSE CHECKOUT
+========================================= */
 
 window.closeCheckout =
 function(){
@@ -2900,6 +2487,61 @@ function(){
   ).classList.remove("show");
 
 };
+
+
+/* =========================================
+   SELECT PAYMENT METHOD
+========================================= */
+
+window.selectPaymentMethod =
+function(method){
+
+  selectedPaymentMethod =
+    String(method || "")
+      .toUpperCase();
+
+  document.getElementById(
+    "paymentWarning"
+  ).classList.remove("show");
+
+  updatePaymentButton();
+
+};
+
+
+/* =========================================
+   PAYMENT BUTTON STATE
+========================================= */
+
+function updatePaymentButton(){
+
+  const button =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+  if(!button){
+    return;
+  }
+
+  if(
+    selectedPaymentMethod === "COD" ||
+    selectedPaymentMethod === "ONLINE"
+  ){
+
+    button.classList.remove(
+      "payment-disabled"
+    );
+
+  }else{
+
+    button.classList.add(
+      "payment-disabled"
+    );
+
+  }
+
+}
 
 
 /* =========================================
@@ -3012,9 +2654,6 @@ function(){
 
       `;
 
-
-      updateCheckoutSummary();
-
     },
 
     error => {
@@ -3023,8 +2662,6 @@ function(){
 
       info.innerHTML =
         "Location permission denied. Please enter your address.";
-
-      updateCheckoutSummary();
 
     },
 
@@ -3094,6 +2731,32 @@ function haversineDistance(
 window.placeOrder =
 async function(){
 
+  /* =====================================
+     PAYMENT METHOD CHECK
+  ===================================== */
+
+  if(
+    selectedPaymentMethod !== "COD" &&
+    selectedPaymentMethod !== "ONLINE"
+  ){
+
+    const warning =
+      document.getElementById(
+        "paymentWarning"
+      );
+
+    warning.classList.add("show");
+
+    alert(
+      "Please choose the payment method first."
+    );
+
+    updatePaymentButton();
+
+    return;
+  }
+
+
   if(!cart.length){
 
     alert(
@@ -3119,10 +2782,12 @@ async function(){
       "customerName"
     ).value.trim();
 
+
   const phone =
     document.getElementById(
       "customerPhone"
     ).value.trim();
+
 
   const address =
     document.getElementById(
@@ -3160,48 +2825,8 @@ async function(){
   }
 
 
-  /* =====================================
-     CHECK PAYMENT METHOD
-  ===================================== */
-
-  if(
-    !paymentMethods.cod &&
-    !paymentMethods.online
-  ){
-
-    alert(
-      "No payment method is currently available."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !selectedPaymentMethod ||
-    (
-      selectedPaymentMethod === "cod" &&
-      !paymentMethods.cod
-    ) ||
-    (
-      selectedPaymentMethod === "online" &&
-      !paymentMethods.online
-    )
-  ){
-
-    renderPaymentMethods();
-
-    alert(
-      "Please select a payment method."
-    );
-
-    return;
-
-  }
-
-
   let subtotal = 0;
+
 
   cart.forEach(
     item => {
@@ -3217,10 +2842,6 @@ async function(){
   const grandTotal =
     subtotal +
     deliveryCharge;
-
-
-  const paymentMethod =
-    getPaymentMethodText();
 
 
   /* =====================================
@@ -3264,7 +2885,7 @@ async function(){
       address:address,
 
       paymentMethod:
-        paymentMethod,
+        selectedPaymentMethod,
 
       items:
         cart.map(
@@ -3330,6 +2951,7 @@ async function(){
       shopSettings.whatsappNumber ||
       "9090220791";
 
+
     const whatsappNumber =
       String(savedNumber)
         .replace(/\D/g,"");
@@ -3356,7 +2978,7 @@ async function(){
 
 
     message +=
-      `*💳 Payment:* ${paymentMethod}\n\n`;
+      `*💳 Payment:* ${selectedPaymentMethod}\n\n`;
 
 
     message +=
@@ -3419,9 +3041,12 @@ async function(){
 
     cart = [];
 
+
     updateCart();
 
+
     closeCheckout();
+
 
     closeCart();
 
@@ -3443,9 +3068,12 @@ async function(){
 
     deliveryDistance = 0;
 
+
     deliveryCharge = 0;
 
+
     customerLat = null;
+
 
     customerLng = null;
 
@@ -3453,22 +3081,18 @@ async function(){
     selectedPaymentMethod = "";
 
 
-    const deliveryInfo =
-      document.getElementById(
-        "deliveryInfo"
+    document
+      .querySelectorAll(
+        'input[name="paymentMethod"]'
+      )
+      .forEach(
+        radio => {
+          radio.checked = false;
+        }
       );
 
-    if(deliveryInfo){
 
-      deliveryInfo.innerHTML =
-        "Delivery charge will be calculated automatically.";
-
-    }
-
-
-    updateCheckoutSummary();
-
-    renderPaymentMethods();
+    updatePaymentButton();
 
 
     /* =====================================
@@ -3490,6 +3114,7 @@ async function(){
     ).value =
       orderId;
 
+
     startTracking();
 
 
@@ -3499,6 +3124,7 @@ async function(){
       "Order creation error:",
       error
     );
+
 
     alert(
       "Order could not be placed. Please try again."
@@ -3521,15 +3147,18 @@ function(){
       "trackInput"
     );
 
+
   const orderId =
     input.value
       .trim()
       .replace(/\s/g,"");
 
+
   const result =
     document.getElementById(
       "trackResult"
     );
+
 
   if(!orderId){
 
@@ -3539,12 +3168,9 @@ function(){
       </div>`;
 
     return;
+
   }
 
-
-  /* =====================================
-     STOP OLD LISTENER
-  ===================================== */
 
   if(trackingUnsubscribe){
 
@@ -3577,6 +3203,7 @@ function(){
         const orders =
           snapshot.val() || {};
 
+
         let foundKey = null;
 
         let foundOrder = null;
@@ -3588,6 +3215,7 @@ function(){
 
               const order =
                 orders[key] || {};
+
 
               if(
                 String(
@@ -3662,19 +3290,17 @@ function renderTrackOrder(
       "trackResult"
     );
 
+
   const status =
     normalizeStatus(
       order.status
     );
 
+
   const name =
     order.customerName ||
     "Customer";
 
-
-  /* =====================================
-     CANCELLED
-  ===================================== */
 
   if(status === "cancelled"){
 
@@ -3707,10 +3333,6 @@ function renderTrackOrder(
   }
 
 
-  /* =====================================
-     STATUS TEXT
-  ===================================== */
-
   const statusMap = {
 
     received:
@@ -3735,10 +3357,6 @@ function renderTrackOrder(
     statusMap[status] ||
     "🟠 ORDER RECEIVED";
 
-
-  /* =====================================
-     UNIQUE TIMELINE
-  ===================================== */
 
   const steps = [
 
@@ -3813,10 +3431,6 @@ function renderTrackOrder(
       }
     ).join("");
 
-
-  /* =====================================
-     CUSTOMER DELIVERED BUTTON
-  ===================================== */
 
   let deliveredButton = "";
 
@@ -3920,6 +3534,7 @@ async function(orderId){
     const orders =
       ordersSnapshot.val() || {};
 
+
     let firebaseKey = null;
 
 
@@ -3929,6 +3544,7 @@ async function(orderId){
 
           const order =
             orders[key] || {};
+
 
           if(
             String(
@@ -4126,6 +3742,13 @@ function escapeHTML(value){
 ========================================= */
 
 updateCart();
+
+
+/* =========================================
+   INITIAL PAYMENT BUTTON
+========================================= */
+
+updatePaymentButton();
 
 
 /* =========================================
