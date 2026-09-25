@@ -235,7 +235,7 @@ header{
 
 .shop-status{
   width:min(1000px,90%);
-  margin:0 auto 30px;
+  margin:0 auto 8px;
   padding:12px 15px;
   background:#101010;
   border:1px solid rgba(255,255,255,.07);
@@ -261,6 +261,25 @@ header{
 .shop-dot.closed{
   background:#ff4d4d;
   box-shadow:0 0 10px rgba(255,77,77,.6);
+}
+
+
+/* =========================================
+   ORDER TIME
+========================================= */
+
+.order-time{
+  text-align:center;
+  margin:0 auto 30px;
+  color:#777;
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.order-time span{
+  color:var(--orange);
+  font-weight:800;
 }
 
 
@@ -1019,6 +1038,19 @@ footer{
 </div>
 
 
+<!-- ORDER TIME -->
+
+<div
+  id="orderTimeText"
+  class="order-time"
+>
+  ORDER BETWEEN
+  <span id="orderTimeValue">
+    12:00 PM – 9:30 PM
+  </span>
+</div>
+
+
 <!-- MENU -->
 
 <main class="menu-wrap">
@@ -1567,6 +1599,14 @@ onValue(
 
 
     /*
+      ORDER TIME
+      ADMIN CONTROLLED
+    */
+
+    renderOrderTime();
+
+
+    /*
       MENU
     */
 
@@ -1591,10 +1631,96 @@ onValue(
     });
 
 
+    /*
+      Default order time
+      if settings cannot be read.
+    */
+
+    shopSettings = {
+      openTime:"12:00",
+      closeTime:"21:30"
+    };
+
+
+    renderOrderTime();
+
+
     loadMenu();
 
   }
 );
+
+
+/* =========================================
+   ORDER TIME
+   ADMIN CONTROLLED
+========================================= */
+
+function renderOrderTime(){
+
+  const timeValue =
+    document.getElementById(
+      "orderTimeValue"
+    );
+
+
+  if(!timeValue){
+    return;
+  }
+
+
+  const openTime =
+    shopSettings.openTime ||
+    "12:00";
+
+
+  const closeTime =
+    shopSettings.closeTime ||
+    "21:30";
+
+
+  timeValue.textContent =
+    `${formatTime(openTime)} – ${formatTime(closeTime)}`;
+
+}
+
+
+/* =========================================
+   FORMAT TIME
+========================================= */
+
+function formatTime(time){
+
+  if(!time){
+    return "";
+  }
+
+
+  const parts =
+    String(time).split(":");
+
+
+  let hour =
+    Number(parts[0]);
+
+
+  const minute =
+    parts[1] || "00";
+
+
+  const ampm =
+    hour >= 12
+      ? "PM"
+      : "AM";
+
+
+  hour =
+    hour % 12 || 12;
+
+
+  return `${hour}:${minute} ${ampm}`;
+
+}
 
 
 /* =========================================
