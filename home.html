@@ -835,6 +835,85 @@ header{
 
 
 /* =========================================
+   ORDER SUMMARY - ADDED
+========================================= */
+
+.order-summary{
+  background:#0b0b0b;
+  border:1px solid rgba(255,122,0,.16);
+  border-radius:10px;
+  padding:11px;
+  margin:10px 0 12px;
+}
+
+.order-summary-title{
+  color:#888;
+  font-size:9px;
+  font-weight:800;
+  margin-bottom:8px;
+  letter-spacing:.5px;
+}
+
+.summary-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  font-size:10px;
+}
+
+.summary-item:last-child{
+  border-bottom:0;
+}
+
+.summary-item-name{
+  flex:1;
+  color:#ddd;
+  font-weight:600;
+}
+
+.summary-item-price{
+  color:var(--orange);
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.summary-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:8px;
+  font-size:10px;
+}
+
+.summary-line.delivery{
+  color:#aaa;
+}
+
+.summary-line.delivery strong{
+  color:#fff;
+}
+
+.summary-total{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:10px;
+  padding-top:9px;
+  border-top:1px solid rgba(255,255,255,.10);
+  font-size:13px;
+  font-weight:800;
+}
+
+.summary-total span:last-child{
+  color:var(--orange);
+  font-size:15px;
+}
+
+
+/* =========================================
    PAYMENT METHOD
 ========================================= */
 
@@ -1324,6 +1403,17 @@ footer{
       class="delivery-info">
 
       Delivery charge will be calculated automatically.
+
+    </div>
+
+
+    <!-- =====================================
+         ORDER SUMMARY - ADDED
+    ====================================== -->
+
+    <div
+      id="orderSummary"
+      class="order-summary">
 
     </div>
 
@@ -2435,6 +2525,110 @@ function(){
 
 
 /* =========================================
+   RENDER CHECKOUT ORDER SUMMARY
+   ADDED
+========================================= */
+
+function renderCheckoutSummary(){
+
+  const summary =
+    document.getElementById(
+      "orderSummary"
+    );
+
+  if(!summary){
+    return;
+  }
+
+  let subtotal = 0;
+
+  if(!cart.length){
+
+    summary.innerHTML =
+      `<div class="empty">
+        Your cart is empty.
+      </div>`;
+
+    return;
+
+  }
+
+
+  const itemsHTML =
+    cart.map(
+      item => {
+
+        const itemTotal =
+          item.price *
+          item.quantity;
+
+        subtotal +=
+          itemTotal;
+
+        return `
+
+          <div class="summary-item">
+
+            <div class="summary-item-name">
+              ${escapeHTML(item.name)}
+              × ${item.quantity}
+            </div>
+
+            <div class="summary-item-price">
+              ₹${itemTotal}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+
+  const grandTotal =
+    subtotal +
+    deliveryCharge;
+
+
+  summary.innerHTML = `
+
+    <div class="order-summary-title">
+      ORDER ITEMS
+    </div>
+
+    ${itemsHTML}
+
+    <div class="summary-line delivery">
+
+      <span>
+        Delivery Charge
+      </span>
+
+      <strong>
+        ₹${deliveryCharge}
+      </strong>
+
+    </div>
+
+    <div class="summary-total">
+
+      <span>
+        TOTAL AMOUNT
+      </span>
+
+      <span>
+        ₹${grandTotal}
+      </span>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================
    CHECKOUT
 ========================================= */
 
@@ -2467,6 +2661,14 @@ function(){
   document.getElementById(
     "paymentWarning"
   ).classList.remove("show");
+
+
+  /* =====================================
+     SHOW SELECTED ITEMS + DELIVERY + TOTAL
+  ====================================== */
+
+  renderCheckoutSummary();
+
 
   document.getElementById(
     "checkoutOverlay"
@@ -2654,6 +2856,13 @@ function(){
 
       `;
 
+
+      /* =====================================
+         UPDATE TOTAL AFTER LOCATION
+      ====================================== */
+
+      renderCheckoutSummary();
+
     },
 
     error => {
@@ -2662,6 +2871,8 @@ function(){
 
       info.innerHTML =
         "Location permission denied. Please enter your address.";
+
+      renderCheckoutSummary();
 
     },
 
@@ -3093,6 +3304,9 @@ async function(){
 
 
     updatePaymentButton();
+
+
+    renderCheckoutSummary();
 
 
     /* =====================================
