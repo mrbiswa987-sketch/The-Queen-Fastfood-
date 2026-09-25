@@ -34,6 +34,24 @@ button{cursor:pointer}
 
 .hidden{display:none!important}
 
+/* ORDER FOLDER CONTROL */
+.order-folder{
+  transition:.2s;
+}
+
+.order-folder-hidden{
+  display:none!important;
+}
+
+.folder{
+  cursor:pointer;
+}
+
+.folder.selected{
+  border-color:var(--gold)!important;
+  box-shadow:0 0 16px rgba(255,159,0,.12);
+}
+
 .login-screen{
   min-height:100vh;
   display:flex;
@@ -735,10 +753,6 @@ button{cursor:pointer}
 
 <body>
 
-<!-- =========================
-     LOGIN
-========================= -->
-
 <div id="loginScreen" class="login-screen">
 
   <div class="login-box">
@@ -786,10 +800,6 @@ button{cursor:pointer}
 </div>
 
 
-<!-- =========================
-     ADMIN PANEL
-========================= -->
-
 <div
   id="adminPanel"
   style="display:none;"
@@ -819,13 +829,13 @@ button{cursor:pointer}
 <div class="dashboard">
 
 
-<!-- =========================
-     FOUR ORDER FOLDERS
-========================= -->
-
 <div class="order-folders">
 
-  <div class="folder new">
+  <div
+    class="folder new"
+    id="newFolderButton"
+    onclick="openOrderFolder('new')"
+  >
 
     <div class="folder-label">
       🆕 NEW ORDERS
@@ -841,7 +851,11 @@ button{cursor:pointer}
   </div>
 
 
-  <div class="folder pending">
+  <div
+    class="folder pending"
+    id="pendingFolderButton"
+    onclick="openOrderFolder('pending')"
+  >
 
     <div class="folder-label">
       ⏳ PENDING ORDERS
@@ -857,7 +871,11 @@ button{cursor:pointer}
   </div>
 
 
-  <div class="folder delivered">
+  <div
+    class="folder delivered"
+    id="deliveredFolderButton"
+    onclick="openOrderFolder('delivered')"
+  >
 
     <div class="folder-label">
       ✅ DELIVERED
@@ -873,7 +891,11 @@ button{cursor:pointer}
   </div>
 
 
-  <div class="folder cancelled">
+  <div
+    class="folder cancelled"
+    id="cancelledFolderButton"
+    onclick="openOrderFolder('cancelled')"
+  >
 
     <div class="folder-label">
       ❌ CANCELLED
@@ -890,10 +912,6 @@ button{cursor:pointer}
 
 </div>
 
-
-<!-- =========================
-     NEW ORDER NOTIFICATION
-========================= -->
 
 <div
   id="newNotification"
@@ -920,14 +938,8 @@ button{cursor:pointer}
 </div>
 
 
-<!-- =========================
-     SETTINGS
-========================= -->
-
 <div class="grid">
 
-
-<!-- SHOP -->
 
 <div class="card">
 
@@ -1022,8 +1034,6 @@ button{cursor:pointer}
 </div>
 
 
-<!-- WEBSITE -->
-
 <div class="card">
 
   <h2>🌐 Website Control</h2>
@@ -1073,8 +1083,6 @@ button{cursor:pointer}
 </div>
 
 
-<!-- WHATSAPP -->
-
 <div class="card">
 
   <h2>📱 WhatsApp Number</h2>
@@ -1118,8 +1126,6 @@ button{cursor:pointer}
 </div>
 
 
-<!-- FONT -->
-
 <div class="card">
 
   <h2>🔤 Customer Font Control</h2>
@@ -1152,8 +1158,6 @@ button{cursor:pointer}
 
 </div>
 
-
-<!-- DELIVERY -->
 
 <div class="card">
 
@@ -1197,10 +1201,6 @@ button{cursor:pointer}
 </div>
 
 
-<!-- =========================
-     MENU
-========================= -->
-
 <div class="card">
 
   <h2>
@@ -1221,11 +1221,12 @@ button{cursor:pointer}
 </div>
 
 
-<!-- =========================
-     NEW ORDERS
-========================= -->
+<!-- NEW ORDERS FOLDER -->
 
-<div class="card">
+<div
+  class="card order-folder"
+  id="newFolder"
+>
 
   <div class="section-title">
 
@@ -1250,11 +1251,12 @@ button{cursor:pointer}
 </div>
 
 
-<!-- =========================
-     PENDING ORDERS
-========================= -->
+<!-- PENDING ORDERS FOLDER -->
 
-<div class="card">
+<div
+  class="card order-folder order-folder-hidden"
+  id="pendingFolder"
+>
 
   <div class="section-title">
 
@@ -1279,11 +1281,12 @@ button{cursor:pointer}
 </div>
 
 
-<!-- =========================
-     DELIVERED
-========================= -->
+<!-- DELIVERED FOLDER -->
 
-<div class="card">
+<div
+  class="card order-folder order-folder-hidden"
+  id="deliveredFolder"
+>
 
   <div class="section-title">
 
@@ -1308,11 +1311,12 @@ button{cursor:pointer}
 </div>
 
 
-<!-- =========================
-     CANCELLED
-========================= -->
+<!-- CANCELLED FOLDER -->
 
-<div class="card">
+<div
+  class="card order-folder order-folder-hidden"
+  id="cancelledFolder"
+>
 
   <div class="section-title">
 
@@ -1336,10 +1340,6 @@ button{cursor:pointer}
 
 </div>
 
-
-<!-- =========================
-     RATINGS
-========================= -->
 
 <div class="card">
 
@@ -1450,6 +1450,7 @@ let knownOrderIds = new Set();
 let audioContext = null;
 
 let shopOverride = "auto";
+
 
 const DEFAULT_SETTINGS = {
 
@@ -1605,6 +1606,9 @@ function loadAll(){
   loadMenu();
   loadOrders();
   loadRatings();
+
+  /* Default folder = NEW */
+  openOrderFolder("new");
 
 }
 
@@ -3340,6 +3344,124 @@ async function(
     showToast(
       error.message ||
       "Could not update order."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   ORDER FOLDER CONTROL
+========================= */
+
+window.openOrderFolder =
+function(type){
+
+  const folderMap = {
+
+    new:"newFolder",
+
+    pending:"pendingFolder",
+
+    delivered:"deliveredFolder",
+
+    cancelled:"cancelledFolder"
+
+  };
+
+  const buttonMap = {
+
+    new:"newFolderButton",
+
+    pending:"pendingFolderButton",
+
+    delivered:"deliveredFolderButton",
+
+    cancelled:"cancelledFolderButton"
+
+  };
+
+
+  const targetId =
+    folderMap[type] ||
+    "newFolder";
+
+
+  document
+    .querySelectorAll(
+      ".order-folder"
+    )
+    .forEach(
+      folder => {
+
+        if(
+          folder.id ===
+          targetId
+        ){
+
+          folder.classList.remove(
+            "order-folder-hidden"
+          );
+
+        }else{
+
+          folder.classList.add(
+            "order-folder-hidden"
+          );
+
+        }
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      ".folder"
+    )
+    .forEach(
+      folder =>
+        folder.classList.remove(
+          "selected"
+        )
+    );
+
+
+  const selectedButton =
+    document.getElementById(
+      buttonMap[type] ||
+      "newFolderButton"
+    );
+
+
+  if(selectedButton){
+
+    selectedButton.classList.add(
+      "selected"
+    );
+
+  }
+
+
+  const target =
+    document.getElementById(
+      targetId
+    );
+
+
+  if(target){
+
+    setTimeout(
+      () => {
+
+        target.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      },
+      50
     );
 
   }
