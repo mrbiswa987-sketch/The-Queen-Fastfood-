@@ -500,6 +500,56 @@ font-size:11px;
 font-weight:800
 }
 
+/* ================================
+   STOCK STATUS
+================================ */
+
+.stock-badge{
+position:absolute;
+top:10px;
+right:10px;
+padding:7px 10px;
+border-radius:30px;
+font-size:10px;
+font-weight:900;
+letter-spacing:.5px;
+backdrop-filter:blur(5px);
+z-index:3;
+}
+
+.stock-badge.available{
+background:rgba(37,211,102,.12);
+border:1px solid rgba(37,211,102,.4);
+color:#58dd8d
+}
+
+.stock-badge.out{
+background:rgba(255,48,48,.14);
+border:1px solid rgba(255,48,48,.55);
+color:#ff7777
+}
+
+.add-btn.out-of-stock{
+opacity:.55;
+cursor:not-allowed;
+border-color:rgba(255,48,48,.4);
+color:#ff7777;
+background:#140909
+}
+
+.add-btn.out-of-stock:hover{
+background:#140909;
+color:#ff7777
+}
+
+.product-card.item-out{
+border-color:rgba(255,48,48,.22)
+}
+
+.product-card.item-out .product-image{
+filter:brightness(.62) saturate(.55)
+}
+
 .product-body{padding:16px}
 
 .product-name{
@@ -955,6 +1005,11 @@ background:#181818;
 color:#ddd
 }
 
+.qty-btn:disabled{
+opacity:.35;
+cursor:not-allowed
+}
+
 .qty-value{
 min-width:20px;
 text-align:center;
@@ -966,6 +1021,13 @@ color:#ff7777;
 background:none;
 border:none;
 font-size:11px
+}
+
+.cart-stock-warning{
+margin-top:7px;
+font-size:10px;
+color:#ff7777;
+font-weight:700
 }
 
 .cart-total{
@@ -1223,6 +1285,10 @@ height:370px
 .add-btn{font-size:10px}
 .cart-item{grid-template-columns:1fr auto}
 .cart-item>.remove-btn{grid-column:2}
+.stock-badge{
+font-size:8px;
+padding:6px 8px
+}
 }
 </style>
 </head>
@@ -1957,89 +2023,99 @@ return [
 id:1,
 name:"Veg Chowmin",
 price:50,
-image:DEFAULT_IMAGES[1]
+image:DEFAULT_IMAGES[1],
+available:true
 },
 
 {
 id:2,
 name:"Veg Roll",
 price:50,
-image:DEFAULT_IMAGES[2]
+image:DEFAULT_IMAGES[2],
+available:true
 },
 
 {
 id:3,
 name:"Manchurian",
 price:50,
-image:DEFAULT_IMAGES[3]
+image:DEFAULT_IMAGES[3],
+available:true
 },
 
 {
 id:4,
 name:"Paneer Tikka",
 price:60,
-image:DEFAULT_IMAGES[4]
+image:DEFAULT_IMAGES[4],
+available:true
 },
 
 {
 id:5,
 name:"Paneer Butter Masala",
 price:130,
-image:DEFAULT_IMAGES[5]
+image:DEFAULT_IMAGES[5],
+available:true
 },
 
 {
 id:6,
 name:"Egg Chicken Chowmin",
 price:65,
-image:DEFAULT_IMAGES[6]
+image:DEFAULT_IMAGES[6],
+available:true
 },
 
 {
 id:7,
 name:"Egg Chicken Roll",
 price:60,
-image:DEFAULT_IMAGES[7]
+image:DEFAULT_IMAGES[7],
+available:true
 },
 
 {
 id:8,
 name:"Pakoda",
 price:60,
-image:DEFAULT_IMAGES[8]
+image:DEFAULT_IMAGES[8],
+available:true
 },
 
 {
 id:9,
 name:"Chilli Chicken",
 price:120,
-image:DEFAULT_IMAGES[9]
+image:DEFAULT_IMAGES[9],
+available:true
 },
 
 {
 id:10,
 name:"Chicken Garlic",
 price:80,
-image:DEFAULT_IMAGES[10]
+image:DEFAULT_IMAGES[10],
+available:true
 },
 
 {
 id:11,
 name:"Chicken Biriyani",
 price:120,
-image:DEFAULT_IMAGES[11]
+image:DEFAULT_IMAGES[11],
+available:true
 },
 
 {
 id:12,
 name:"Veg Biriyani",
 price:100,
-image:DEFAULT_IMAGES[12]
+image:DEFAULT_IMAGES[12],
+available:true
 }
 
 ];
-
-}
 
 
 /* =====================================================
@@ -2136,16 +2212,15 @@ showToast("Unable to load website settings.");
 function loadMenu(){
 
 /*
-IMPORTANT FIX:
-
 Default menu is loaded immediately.
-So Add To Cart will NOT say
-Food item not found while Firebase is loading.
 */
 
 if(!menu.length){
+
 menu=getDefaultMenu();
+
 renderProducts();
+
 }
 
 
@@ -2173,6 +2248,7 @@ menu=getDefaultMenu();
 }else{
 
 const firebaseMenu=Object.entries(data)
+
 .map(([key,item])=>{
 
 const numericId=Number(item.id||key);
@@ -2188,11 +2264,23 @@ price:Number(item.price??0),
 image:
 item.image ||
 DEFAULT_IMAGES[numericId] ||
-FALLBACK_IMAGE
+FALLBACK_IMAGE,
+
+/*
+IMPORTANT STOCK FIX
+
+Only explicit false means OUT OF STOCK.
+
+If old Firebase item has no
+available field, it remains AVAILABLE.
+*/
+
+available:item.available!==false
 
 };
 
 })
+
 .filter(item=>item.id);
 
 if(firebaseMenu.length){
@@ -2211,6 +2299,14 @@ menu=getDefaultMenu();
 
 renderProducts();
 
+/*
+Important:
+If admin changes stock while customer
+has cart open, refresh cart display too.
+*/
+
+renderCart();
+
 },
 
 error=>{
@@ -2218,15 +2314,15 @@ error=>{
 console.error("Menu error:",error);
 
 /*
-IMPORTANT:
 Do NOT empty menu on Firebase error.
-Keep default/current menu.
 */
 
 if(!menu.length)
 menu=getDefaultMenu();
 
 renderProducts();
+
+renderCart();
 
 }
 
@@ -2462,9 +2558,6 @@ closedMessage.classList.add("show");
 
 /*
 Update buttons.
-
-This is safe because renderProducts()
-does NOT call updateShopStatus().
 */
 
 renderProducts();
@@ -2497,9 +2590,7 @@ return;
 
 
 /*
-IMPORTANT FIX:
-Never show Food item not found because
-menu is temporarily empty.
+Never show Food item not found.
 */
 
 if(!Array.isArray(menu)||!menu.length){
@@ -2521,23 +2612,22 @@ grid.innerHTML=menu.map(item=>{
 
 const safeId=Number(item.id);
 
+/*
+IMPORTANT STOCK STATUS
+
+If available is missing:
+AVAILABLE
+
+Only false:
+OUT OF STOCK
+*/
+
+const available=item.available!==false;
+
 let addButton="";
 
 
-if(shopOpen){
-
-addButton=`
-
-<button
-class="add-btn"
-id="addBtn-${safeId}"
-onclick="addToCart(${safeId})">
-+ Add
-</button>
-
-`;
-
-}else{
+if(!shopOpen){
 
 addButton=`
 
@@ -2550,12 +2640,38 @@ Closed
 
 `;
 
+}else if(!available){
+
+addButton=`
+
+<button
+class="add-btn out-of-stock"
+id="addBtn-${safeId}"
+disabled>
+Out of Stock
+</button>
+
+`;
+
+}else{
+
+addButton=`
+
+<button
+class="add-btn"
+id="addBtn-${safeId}"
+onclick="addToCart(${safeId})">
++ Add
+</button>
+
+`;
+
 }
 
 
 return `
 
-<div class="product-card">
+<div class="product-card ${available?"":"item-out"}">
 
 <div class="product-image-wrap">
 
@@ -2573,6 +2689,22 @@ onerror="this.src='${FALLBACK_IMAGE}'">
 <div class="food-number">
 #${safeId}
 </div>
+
+${
+available
+?
+`
+<div class="stock-badge available">
+● AVAILABLE
+</div>
+`
+:
+`
+<div class="stock-badge out">
+● OUT OF STOCK
+</div>
+`
+}
 
 </div>
 
@@ -2738,10 +2870,7 @@ return;
 
 
 /*
-IMPORTANT FIX:
-
-Convert id to Number.
-Firebase IDs and HTML IDs can be strings.
+Convert ID to Number.
 */
 
 const numericId=Number(id);
@@ -2757,8 +2886,7 @@ product=>Number(product.id)===numericId
 
 
 /*
-If Firebase menu is still loading,
-try default menu.
+Fallback default menu.
 */
 
 if(!item){
@@ -2772,15 +2900,8 @@ if(defaultItem){
 
 item=defaultItem;
 
-/*
-Put it into current menu only
-if current menu is empty.
-*/
-
 if(!menu.length){
-
 menu=getDefaultMenu();
-
 }
 
 }
@@ -2803,6 +2924,23 @@ menu
 
 showToast(
 "Food item is currently unavailable."
+);
+
+return;
+
+}
+
+
+/*
+=====================================================
+IMPORTANT STOCK CHECK
+=====================================================
+*/
+
+if(item.available===false){
+
+showToast(
+item.name+" is currently OUT OF STOCK."
 );
 
 return;
@@ -2902,6 +3040,27 @@ item.name+
 
 
 /* =====================================================
+   CHECK IF CART HAS OUT OF STOCK
+===================================================== */
+
+function getOutOfStockCartItems(){
+
+return cart.filter(cartItem=>{
+
+const currentItem=menu.find(
+product=>
+Number(product.id)===Number(cartItem.id)
+);
+
+return currentItem &&
+currentItem.available===false;
+
+});
+
+}
+
+
+/* =====================================================
    QUANTITY
 ===================================================== */
 
@@ -2915,6 +3074,38 @@ product=>Number(product.id)===numericId
 
 if(!item)
 return;
+
+
+/*
+If increasing quantity, check current
+Firebase stock status.
+*/
+
+if(Number(change)>0){
+
+const currentMenuItem=menu.find(
+product=>
+Number(product.id)===numericId
+);
+
+if(
+currentMenuItem &&
+currentMenuItem.available===false
+){
+
+showToast(
+currentMenuItem.name+
+" is OUT OF STOCK."
+);
+
+renderCart();
+
+return;
+
+}
+
+}
+
 
 item.qty=Number(item.qty)+Number(change);
 
@@ -3012,6 +3203,21 @@ const subtotal=
 Number(item.price)*
 Number(item.qty);
 
+
+/*
+Check current live stock status.
+*/
+
+const currentMenuItem=menu.find(
+product=>
+Number(product.id)===Number(item.id)
+);
+
+const outOfStock=
+currentMenuItem &&
+currentMenuItem.available===false;
+
+
 return `
 
 <div class="cart-item">
@@ -3026,6 +3232,18 @@ ${escapeHtml(item.name)}
 ₹${item.price} × ${item.qty}
 = ₹${subtotal}
 </div>
+
+${
+outOfStock
+?
+`
+<div class="cart-stock-warning">
+⚠ This item is currently OUT OF STOCK
+</div>
+`
+:
+""
+}
 
 </div>
 
@@ -3043,6 +3261,7 @@ ${item.qty}
 
 <button
 class="qty-btn"
+${outOfStock?"disabled":""}
 onclick="changeQty(${Number(item.id)},1)">
 +
 </button>
@@ -3088,6 +3307,27 @@ function openCheckout(){
 if(!cart.length){
 
 showToast("Your cart is empty.");
+
+return;
+
+}
+
+
+/*
+IMPORTANT:
+Check if any cart item is now OUT OF STOCK.
+*/
+
+const outOfStockItems=
+getOutOfStockCartItems();
+
+if(outOfStockItems.length){
+
+renderCart();
+
+showToast(
+"Please remove OUT OF STOCK item(s) before checkout."
+);
 
 return;
 
@@ -3387,6 +3627,30 @@ return;
 }
 
 
+/*
+FINAL STOCK CHECK
+*/
+
+const outOfStockItems=
+getOutOfStockCartItems();
+
+if(outOfStockItems.length){
+
+renderCart();
+
+closeModal("checkoutModal");
+
+openModal("cartModal");
+
+showToast(
+"Order blocked: one or more items are OUT OF STOCK."
+);
+
+return;
+
+}
+
+
 if(!isShopOpen()){
 
 updateShopStatus();
@@ -3487,6 +3751,23 @@ if(!isShopOpen()){
 
 throw new Error(
 "SHOP IS CLOSED."
+);
+
+}
+
+
+/*
+Final stock check again before writing
+order to Firebase.
+*/
+
+const finalOutOfStock=
+getOutOfStockCartItems();
+
+if(finalOutOfStock.length){
+
+throw new Error(
+"One or more food items are OUT OF STOCK."
 );
 
 }
@@ -4456,11 +4737,7 @@ loadCart();
 
 
 /*
-IMPORTANT:
 Load default menu immediately.
-
-This prevents:
-Food item not found
 */
 
 menu=getDefaultMenu();
