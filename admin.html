@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,16 +20,19 @@
   padding:0;
 }
 
+html,body{
+  width:100%;
+  min-height:100%;
+}
+
 body{
   font-family:Inter,Arial,sans-serif;
   background:#070707;
   color:#fff;
-  min-height:100vh;
 }
 
 button,
-input,
-select{
+input{
   font-family:inherit;
 }
 
@@ -49,56 +53,61 @@ button{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:20px;
+  padding:15px;
   background:
-    radial-gradient(circle at top,#241307 0%,#0b0b0b 35%,#070707 70%);
+    radial-gradient(
+      circle at top,
+      #261507 0%,
+      #0b0b0b 38%,
+      #070707 75%
+    );
 }
 
 .loginBox{
-  width:min(390px,100%);
+  width:min(360px,100%);
   background:#101010;
-  border:1px solid rgba(255,122,0,.25);
-  border-radius:22px;
-  padding:30px 24px;
-  box-shadow:0 25px 80px rgba(0,0,0,.55);
+  border:1px solid rgba(255,122,0,.24);
+  border-radius:18px;
+  padding:24px 20px;
+  box-shadow:0 20px 70px rgba(0,0,0,.6);
 }
 
 .logo{
   text-align:center;
   color:#ff7a00;
   font-family:"Cormorant Garamond",serif;
-  font-size:34px;
+  font-size:32px;
   font-weight:700;
-  letter-spacing:1px;
 }
 
 .loginSub{
   text-align:center;
-  color:#999;
-  font-size:12px;
-  margin:3px 0 25px;
+  color:#777;
+  font-size:10px;
+  margin:2px 0 20px;
 }
 
 .inputGroup{
-  margin-bottom:15px;
+  margin-bottom:12px;
 }
 
 .inputGroup label{
   display:block;
-  font-size:11px;
-  color:#aaa;
-  margin-bottom:7px;
+  color:#888;
+  font-size:9px;
+  margin-bottom:5px;
 }
 
 .inputGroup input{
   width:100%;
-  height:45px;
+  height:42px;
   background:#171717;
-  border:1px solid #292929;
-  border-radius:11px;
-  padding:0 13px;
+  border:1px solid #282828;
+  border-radius:9px;
+  padding:0 11px;
   color:#fff;
   outline:none;
+  font-size:12px;
 }
 
 .inputGroup input:focus{
@@ -107,28 +116,26 @@ button{
 
 .loginBtn{
   width:100%;
-  height:46px;
+  height:43px;
   border:0;
-  border-radius:11px;
+  border-radius:9px;
   background:#ff7a00;
   color:#111;
   font-weight:800;
-}
-
-.loginBtn:hover{
-  background:#ff8c26;
+  font-size:11px;
 }
 
 .loginError{
-  min-height:18px;
-  margin-top:10px;
+  min-height:16px;
+  margin-top:8px;
   color:#ff5757;
-  font-size:12px;
+  font-size:10px;
   text-align:center;
 }
 
+
 /* =========================
-   ADMIN
+   TOPBAR
 ========================= */
 
 #adminPage{
@@ -137,13 +144,16 @@ button{
 }
 
 .topbar{
-  height:64px;
-  border-bottom:1px solid #202020;
+  height:58px;
   background:#0b0b0b;
+  border-bottom:1px solid #1e1e1e;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 18px;
+
+  padding:0 15px;
+
   position:sticky;
   top:0;
   z-index:1000;
@@ -151,29 +161,30 @@ button{
 
 .brand{
   font-family:"Cormorant Garamond",serif;
-  font-size:27px;
+  font-size:24px;
   font-weight:700;
   color:#ff7a00;
-  letter-spacing:.7px;
+  letter-spacing:.5px;
 }
 
 .adminText{
-  color:#aaa;
-  font-size:11px;
+  color:#666;
+  font-size:8px;
+  margin-top:-2px;
 }
 
 .topActions{
   display:flex;
-  gap:7px;
+  gap:6px;
 }
 
 .smallBtn{
-  border:1px solid #2b2b2b;
+  border:1px solid #292929;
   background:#141414;
-  color:#fff;
-  border-radius:9px;
-  padding:8px 11px;
-  font-size:11px;
+  color:#ddd;
+  border-radius:7px;
+  padding:7px 9px;
+  font-size:9px;
   font-weight:700;
 }
 
@@ -183,31 +194,32 @@ button{
 }
 
 .logoutBtn{
-  border-color:#572020;
-  color:#ff7373;
+  color:#ff6868;
+  border-color:#482020;
 }
 
+
 /* =========================
-   MAIN
+   CONTAINER
 ========================= */
 
 .container{
-  width:min(1150px,94%);
+  width:min(1050px,94%);
   margin:auto;
-  padding:18px 0 40px;
+  padding:13px 0 30px;
 }
 
 .dashboardHeader{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 
 .dashboardTitle{
   font-family:"Cormorant Garamond",serif;
-  font-size:30px;
+  font-size:27px;
+  font-weight:700;
 }
 
 .dashboardTitle span{
@@ -217,31 +229,34 @@ button{
 .shopStatus{
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:8px 12px;
+  gap:6px;
+
   background:#111;
-  border:1px solid #272727;
-  border-radius:10px;
-  font-size:11px;
-  font-weight:700;
+  border:1px solid #252525;
+  border-radius:8px;
+
+  padding:6px 9px;
+
+  font-size:9px;
+  font-weight:800;
 }
 
 .statusDot{
-  width:8px;
-  height:8px;
+  width:7px;
+  height:7px;
   border-radius:50%;
   background:#777;
 }
 
 .statusDot.open{
   background:#36d16b;
-  box-shadow:0 0 10px rgba(54,209,107,.7);
+  box-shadow:0 0 8px rgba(54,209,107,.7);
 }
 
 .statusDot.closed{
   background:#ff4c4c;
-  box-shadow:0 0 10px rgba(255,76,76,.5);
 }
+
 
 /* =========================
    STATS
@@ -250,58 +265,62 @@ button{
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:18px;
+  gap:7px;
+  margin-bottom:10px;
 }
 
 .stat{
   background:#101010;
-  border:1px solid #202020;
-  border-radius:13px;
-  padding:14px;
+  border:1px solid #1f1f1f;
+  border-radius:10px;
+  padding:9px 10px;
 }
 
 .statLabel{
-  color:#8e8e8e;
-  font-size:10px;
+  color:#777;
+  font-size:8px;
   text-transform:uppercase;
-  letter-spacing:.7px;
+  letter-spacing:.4px;
 }
 
 .statValue{
-  margin-top:5px;
-  font-size:23px;
+  margin-top:3px;
+  font-size:18px;
   font-weight:800;
-  color:#fff;
 }
 
 .statValue.orange{
   color:#ff7a00;
 }
 
+
 /* =========================
-   SECTIONS
+   SECTION
 ========================= */
 
 .section{
   background:#0e0e0e;
-  border:1px solid #202020;
-  border-radius:15px;
-  margin-bottom:15px;
+  border:1px solid #1e1e1e;
+  border-radius:11px;
+  margin-bottom:9px;
   overflow:hidden;
 }
 
 .sectionHeader{
-  padding:13px 15px;
-  border-bottom:1px solid #202020;
+  min-height:42px;
+
+  padding:8px 11px;
+
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+
+  border-bottom:1px solid #1d1d1d;
 }
 
 .sectionTitle{
   font-family:"Cormorant Garamond",serif;
-  font-size:23px;
+  font-size:20px;
   font-weight:700;
 }
 
@@ -310,33 +329,38 @@ button{
 }
 
 .badge{
-  min-width:22px;
-  height:22px;
-  padding:0 7px;
-  display:inline-flex;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+
+  display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:20px;
+
   background:#ff7a00;
   color:#111;
-  font-size:10px;
+
+  border-radius:20px;
+
+  font-size:8px;
   font-weight:900;
 }
 
 .sectionBody{
-  padding:12px;
+  padding:7px;
 }
 
+
 /* =========================
-   ORDERS
+   ORDER CARD
 ========================= */
 
 .orderCard{
   background:#131313;
-  border:1px solid #252525;
-  border-radius:13px;
-  padding:13px;
-  margin-bottom:9px;
+  border:1px solid #232323;
+  border-radius:9px;
+  padding:9px;
+  margin-bottom:6px;
 }
 
 .orderCard:last-child{
@@ -347,56 +371,62 @@ button{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:10px;
+  gap:8px;
 }
 
 .orderId{
   color:#ff7a00;
-  font-size:12px;
+  font-size:10px;
   font-weight:800;
 }
 
 .orderDate{
-  color:#777;
-  font-size:9px;
-  margin-top:3px;
-}
-
-.orderCustomer{
-  font-size:14px;
-  font-weight:800;
-  margin-top:8px;
-}
-
-.orderPhone{
-  color:#999;
-  font-size:10px;
+  color:#666;
+  font-size:8px;
   margin-top:2px;
 }
 
+.orderCustomer{
+  font-size:11px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.orderPhone{
+  color:#777;
+  font-size:8px;
+  margin-top:1px;
+}
+
 .orderItems{
-  margin-top:10px;
-  border-top:1px solid #222;
-  padding-top:9px;
+  margin-top:6px;
+  padding-top:5px;
+  border-top:1px solid #202020;
 }
 
 .itemLine{
   display:flex;
   justify-content:space-between;
-  gap:10px;
-  color:#bbb;
-  font-size:11px;
-  padding:3px 0;
+  gap:8px;
+
+  color:#aaa;
+
+  font-size:9px;
+
+  padding:2px 0;
 }
 
 .orderTotal{
-  margin-top:9px;
-  padding-top:9px;
-  border-top:1px solid #222;
   display:flex;
   justify-content:space-between;
+
+  border-top:1px solid #202020;
+
+  margin-top:5px;
+  padding-top:5px;
+
+  font-size:10px;
   font-weight:800;
-  font-size:13px;
 }
 
 .orderTotal strong{
@@ -404,55 +434,56 @@ button{
 }
 
 .orderStatus{
-  font-size:9px;
+  padding:4px 6px;
+  border-radius:15px;
+
+  font-size:7px;
   font-weight:800;
-  padding:5px 8px;
-  border-radius:20px;
+
   background:#222;
-  color:#ddd;
+  color:#aaa;
+
   text-transform:uppercase;
 }
 
 .orderStatus.new{
-  background:rgba(255,122,0,.15);
+  background:rgba(255,122,0,.13);
   color:#ff7a00;
 }
 
 .orderStatus.pending{
-  background:rgba(255,190,0,.13);
+  background:rgba(255,190,0,.12);
   color:#ffc400;
 }
 
 .orderStatus.delivered,
 .orderStatus.completed{
-  background:rgba(45,205,100,.13);
+  background:rgba(45,205,100,.12);
   color:#45dc76;
 }
 
 .orderStatus.cancelled{
-  background:rgba(255,60,60,.13);
+  background:rgba(255,60,60,.12);
   color:#ff5c5c;
-}
-
-.orderStatus.closed{
-  background:#222;
-  color:#aaa;
 }
 
 .orderButtons{
   display:flex;
-  gap:7px;
+  gap:5px;
   flex-wrap:wrap;
-  margin-top:11px;
+  margin-top:7px;
 }
 
 .actionBtn{
-  border:1px solid #303030;
+  border:1px solid #292929;
   background:#191919;
-  color:#fff;
-  border-radius:8px;
-  padding:7px 10px;
-  font-size:10px;
+  color:#ddd;
+
+  border-radius:6px;
+
+  padding:5px 7px;
+
+  font-size:8px;
   font-weight:700;
 }
 
@@ -463,20 +494,176 @@ button{
 
 .actionBtn.primary{
   background:#ff7a00;
-  color:#111;
   border-color:#ff7a00;
+  color:#111;
 }
 
 .actionBtn.danger{
-  color:#ff6969;
+  color:#ff6868;
 }
 
 .empty{
   text-align:center;
-  padding:25px 10px;
-  color:#666;
-  font-size:11px;
+  padding:13px 5px;
+  color:#555;
+  font-size:9px;
 }
+
+
+/* =====================================================
+   COMPACT FOOD ITEMS
+===================================================== */
+
+.menuSettingsBox{
+  width:100%;
+}
+
+.menuAdminItem{
+
+  width:100%;
+
+  min-height:38px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:6px;
+
+  background:#111;
+  border:1px solid #202020;
+
+  border-radius:7px;
+
+  padding:5px 7px;
+
+  margin-bottom:4px;
+}
+
+.menuAdminItem:last-child{
+  margin-bottom:0;
+}
+
+
+/* LEFT ITEM NAME */
+
+.menuInfo{
+  min-width:0;
+  flex:1;
+}
+
+.menuName{
+  font-size:9px;
+  font-weight:800;
+  color:#eee;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.menuId{
+  color:#4f4f4f;
+  font-size:6px;
+
+  margin-top:1px;
+
+  white-space:nowrap;
+}
+
+
+/* RIGHT CONTROLS */
+
+.menuControls{
+
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+
+  gap:4px;
+
+  flex-shrink:0;
+}
+
+
+/* PRICE */
+
+.menuPrice{
+
+  width:52px;
+  height:27px;
+
+  background:#090909;
+
+  border:1px solid #282828;
+
+  border-radius:5px;
+
+  color:#fff;
+
+  padding:0 5px;
+
+  font-size:8px;
+
+  outline:none;
+
+  text-align:center;
+}
+
+.menuPrice:focus{
+  border-color:#ff7a00;
+}
+
+
+/* AVAILABILITY */
+
+.availabilityBtn{
+
+  width:70px;
+  height:27px;
+
+  border:0;
+
+  border-radius:5px;
+
+  font-size:7px;
+
+  font-weight:800;
+
+  white-space:nowrap;
+}
+
+.availabilityBtn.available{
+  background:rgba(48,210,105,.11);
+  color:#3ddd75;
+}
+
+.availabilityBtn.out{
+  background:rgba(255,60,60,.11);
+  color:#ff6262;
+}
+
+
+/* SAVE */
+
+.menuSave{
+
+  width:42px;
+  height:27px;
+
+  border:0;
+
+  border-radius:5px;
+
+  background:#ff7a00;
+
+  color:#111;
+
+  font-size:7px;
+
+  font-weight:900;
+}
+
 
 /* =========================
    SETTINGS
@@ -484,37 +671,42 @@ button{
 
 .settingsGrid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
 }
 
 .settingBox{
-  background:#131313;
-  border:1px solid #242424;
-  border-radius:12px;
-  padding:13px;
+  background:#111;
+  border:1px solid #202020;
+  border-radius:8px;
+  padding:9px;
 }
 
 .settingTitle{
-  font-size:12px;
+  font-size:9px;
   font-weight:800;
-  margin-bottom:4px;
 }
 
 .settingDesc{
-  color:#777;
-  font-size:9px;
-  margin-bottom:10px;
+  color:#5f5f5f;
+  font-size:7px;
+  margin-top:2px;
+  margin-bottom:6px;
 }
 
 .settingInput{
   width:100%;
-  height:40px;
-  background:#0b0b0b;
+  height:30px;
+
+  background:#090909;
+  border:1px solid #272727;
+  border-radius:6px;
+
   color:#fff;
-  border:1px solid #292929;
-  border-radius:9px;
-  padding:0 10px;
+
+  padding:0 7px;
+
+  font-size:9px;
   outline:none;
 }
 
@@ -523,16 +715,21 @@ button{
 }
 
 .saveBtn{
-  margin-top:8px;
   width:100%;
-  height:38px;
+  height:28px;
+
+  margin-top:5px;
+
   background:#ff7a00;
   color:#111;
+
   border:0;
-  border-radius:8px;
-  font-size:10px;
+  border-radius:6px;
+
+  font-size:7px;
   font-weight:900;
 }
+
 
 /* SHOP SWITCH */
 
@@ -540,28 +737,36 @@ button{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
 }
 
 .switch{
-  width:47px;
-  height:25px;
+  width:39px;
+  height:21px;
+
   background:#292929;
-  border-radius:30px;
+
+  border-radius:20px;
+
   position:relative;
+
   cursor:pointer;
-  flex-shrink:0;
 }
 
 .switch::after{
   content:"";
+
   position:absolute;
-  width:19px;
-  height:19px;
+
+  width:15px;
+  height:15px;
+
   top:3px;
   left:3px;
+
   border-radius:50%;
+
   background:#777;
+
   transition:.2s;
 }
 
@@ -570,125 +775,68 @@ button{
 }
 
 .switch.active::after{
-  left:25px;
+  left:21px;
   background:#111;
 }
 
-/* MENU SETTINGS */
-
-.menuAdminItem{
-  display:grid;
-  grid-template-columns:1fr 90px 90px 80px;
-  align-items:center;
-  gap:8px;
-  background:#131313;
-  border:1px solid #242424;
-  border-radius:11px;
-  padding:9px;
-  margin-bottom:7px;
-}
-
-.menuName{
-  font-size:11px;
-  font-weight:800;
-}
-
-.menuId{
-  color:#666;
-  font-size:8px;
-  margin-top:2px;
-}
-
-.menuPrice{
-  width:100%;
-  height:34px;
-  background:#0b0b0b;
-  color:#fff;
-  border:1px solid #292929;
-  border-radius:7px;
-  padding:0 7px;
-  font-size:10px;
-}
-
-.availabilityBtn{
-  height:34px;
-  border:0;
-  border-radius:7px;
-  font-size:9px;
-  font-weight:800;
-}
-
-.availabilityBtn.available{
-  background:rgba(48,210,105,.13);
-  color:#3ddd75;
-}
-
-.availabilityBtn.out{
-  background:rgba(255,60,60,.13);
-  color:#ff6262;
-}
-
-.menuSave{
-  height:34px;
-  border:0;
-  border-radius:7px;
-  background:#ff7a00;
-  color:#111;
-  font-size:9px;
-  font-weight:900;
-}
 
 /* =========================
    SALES
 ========================= */
 
 .salesFolder{
-  border:1px solid #242424;
-  border-radius:12px;
-  background:#131313;
-  margin-bottom:8px;
+  background:#111;
+  border:1px solid #202020;
+  border-radius:8px;
   overflow:hidden;
+  margin-bottom:5px;
 }
 
 .salesFolderHead{
-  padding:12px;
+  min-height:42px;
+
+  padding:7px 9px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   cursor:pointer;
 }
 
 .folderLeft{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:6px;
 }
 
 .folderIcon{
-  font-size:18px;
+  font-size:15px;
 }
 
 .folderDate{
-  font-size:12px;
+  font-size:9px;
   font-weight:800;
 }
 
 .folderSummary{
-  color:#999;
-  font-size:9px;
-  margin-top:3px;
+  color:#555;
+  font-size:7px;
+  margin-top:2px;
 }
 
 .folderSales{
   color:#ff7a00;
+  font-size:10px;
   font-weight:900;
-  font-size:12px;
 }
 
 .salesDetails{
   display:none;
-  border-top:1px solid #222;
-  padding:10px;
+
+  border-top:1px solid #1e1e1e;
+
+  padding:7px;
 }
 
 .salesFolder.open .salesDetails{
@@ -698,27 +846,28 @@ button{
 .salesStat{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:7px;
+  gap:5px;
 }
 
 .salesMini{
-  background:#0b0b0b;
-  border:1px solid #202020;
-  border-radius:8px;
-  padding:8px;
+  background:#090909;
+  border:1px solid #1d1d1d;
+  border-radius:6px;
+  padding:6px;
 }
 
 .salesMini small{
   display:block;
-  color:#666;
-  font-size:8px;
+  color:#555;
+  font-size:6px;
 }
 
 .salesMini strong{
   display:block;
-  margin-top:3px;
-  font-size:12px;
+  margin-top:2px;
+  font-size:9px;
 }
+
 
 /* =========================
    TRACK MODAL
@@ -727,12 +876,18 @@ button{
 .modalOverlay{
   position:fixed;
   inset:0;
+
   z-index:3000;
-  background:rgba(0,0,0,.76);
+
+  background:rgba(0,0,0,.78);
+
   display:none;
+
   align-items:center;
   justify-content:center;
-  padding:15px;
+
+  padding:12px;
+
   backdrop-filter:blur(4px);
 }
 
@@ -741,62 +896,91 @@ button{
 }
 
 .modal{
-  width:min(420px,100%);
-  max-height:88vh;
+  width:min(390px,100%);
+
+  max-height:85vh;
+
   overflow:auto;
+
   background:#101010;
+
   border:1px solid rgba(255,122,0,.25);
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 25px 90px rgba(0,0,0,.7);
+
+  border-radius:15px;
+
+  padding:14px;
+
+  box-shadow:0 20px 70px rgba(0,0,0,.7);
 }
 
 .modalHead{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:15px;
+
+  margin-bottom:10px;
 }
 
 .modalTitle{
   font-family:"Cormorant Garamond",serif;
-  font-size:25px;
+  font-size:22px;
 }
 
 .closeBtn{
-  width:30px;
-  height:30px;
+  width:27px;
+  height:27px;
+
   border-radius:50%;
-  border:1px solid #303030;
+
+  border:1px solid #292929;
+
   background:#181818;
+
   color:#fff;
 }
 
 .trackInput{
   width:100%;
-  height:42px;
+  height:36px;
+
   background:#080808;
+
   border:1px solid #292929;
+
   color:#fff;
-  border-radius:9px;
-  padding:0 10px;
+
+  border-radius:7px;
+
+  padding:0 8px;
+
+  font-size:9px;
+
   outline:none;
 }
 
 .trackBtn{
   width:100%;
-  height:40px;
-  margin-top:8px;
+  height:36px;
+
+  margin-top:5px;
+
   border:0;
-  border-radius:9px;
+
+  border-radius:7px;
+
   background:#ff7a00;
+
   color:#111;
+
+  font-size:9px;
+
   font-weight:900;
 }
 
 .trackResult{
-  margin-top:14px;
+  margin-top:8px;
 }
+
 
 /* =========================
    TOAST
@@ -804,19 +988,32 @@ button{
 
 .toast{
   position:fixed;
+
   left:50%;
-  bottom:20px;
+  bottom:15px;
+
   transform:translate(-50%,20px);
+
   background:#171717;
+
   border:1px solid #333;
+
   color:#fff;
-  border-radius:10px;
-  padding:10px 14px;
-  font-size:11px;
+
+  border-radius:8px;
+
+  padding:8px 12px;
+
+  font-size:9px;
+
   font-weight:700;
+
   opacity:0;
+
   pointer-events:none;
+
   transition:.25s;
+
   z-index:5000;
 }
 
@@ -825,11 +1022,12 @@ button{
   transform:translate(-50%,0);
 }
 
+
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media(max-width:800px){
+@media(max-width:700px){
 
   .stats{
     grid-template-columns:repeat(2,1fr);
@@ -839,27 +1037,12 @@ button{
     grid-template-columns:1fr;
   }
 
-  .menuAdminItem{
-    grid-template-columns:1fr 75px 85px;
-  }
-
-  .menuSave{
-    grid-column:3;
-  }
-
 }
 
-@media(max-width:560px){
-
-  .topbar{
-    height:auto;
-    min-height:60px;
-    padding:10px 12px;
-    gap:8px;
-  }
+@media(max-width:500px){
 
   .brand{
-    font-size:21px;
+    font-size:20px;
   }
 
   .adminText{
@@ -868,35 +1051,24 @@ button{
 
   .dashboardHeader{
     align-items:flex-start;
+    gap:7px;
     flex-direction:column;
   }
 
-  .stats{
-    gap:7px;
+  .menuName{
+    max-width:115px;
   }
 
-  .stat{
-    padding:11px;
-  }
-
-  .statValue{
-    font-size:19px;
-  }
-
-  .sectionTitle{
-    font-size:20px;
-  }
-
-  .menuAdminItem{
-    grid-template-columns:1fr 75px;
+  .menuPrice{
+    width:48px;
   }
 
   .availabilityBtn{
-    grid-column:2;
+    width:66px;
   }
 
   .menuSave{
-    grid-column:2;
+    width:39px;
   }
 
 }
@@ -904,7 +1076,9 @@ button{
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      LOGIN
@@ -923,27 +1097,35 @@ button{
     </div>
 
     <div class="inputGroup">
+
       <label>ADMIN EMAIL</label>
+
       <input
         id="email"
         type="email"
         autocomplete="username"
         placeholder="Enter admin email">
+
     </div>
 
     <div class="inputGroup">
+
       <label>PASSWORD</label>
+
       <input
         id="password"
         type="password"
         autocomplete="current-password"
         placeholder="Enter password">
+
     </div>
 
     <button
       class="loginBtn"
       onclick="loginAdmin()">
+
       LOGIN
+
     </button>
 
     <div
@@ -957,14 +1139,18 @@ button{
 
 
 <!-- =====================================================
-     ADMIN PAGE
+     ADMIN
 ===================================================== -->
 
-<div id="adminPage" class="hidden">
+<div
+  id="adminPage"
+  class="hidden">
+
 
   <header class="topbar">
 
     <div>
+
       <div class="brand">
         THE QUEEN FAST FOOD
       </div>
@@ -972,6 +1158,7 @@ button{
       <div class="adminText">
         ADMIN CONTROL PANEL
       </div>
+
     </div>
 
     <div class="topActions">
@@ -979,13 +1166,17 @@ button{
       <button
         class="smallBtn"
         onclick="refreshAll()">
+
         ↻ Refresh
+
       </button>
 
       <button
         class="smallBtn logoutBtn"
         onclick="logoutAdmin()">
+
         Logout
+
       </button>
 
     </div>
@@ -994,6 +1185,9 @@ button{
 
 
   <main class="container">
+
+
+    <!-- DASHBOARD -->
 
     <div class="dashboardHeader">
 
@@ -1022,47 +1216,62 @@ button{
     <div class="stats">
 
       <div class="stat">
+
         <div class="statLabel">
           New Orders
         </div>
+
         <div
           id="newCount"
           class="statValue orange">
           0
         </div>
+
       </div>
 
+
       <div class="stat">
+
         <div class="statLabel">
           Pending
         </div>
+
         <div
           id="pendingCount"
           class="statValue">
           0
         </div>
+
       </div>
 
+
       <div class="stat">
+
         <div class="statLabel">
           Delivered
         </div>
+
         <div
           id="deliveredCount"
           class="statValue">
           0
         </div>
+
       </div>
 
+
       <div class="stat">
+
         <div class="statLabel">
           Today's Sales
         </div>
+
         <div
           id="todaySales"
           class="statValue orange">
           ₹0
         </div>
+
       </div>
 
     </div>
@@ -1172,12 +1381,14 @@ button{
 
       </div>
 
+
       <div class="sectionBody">
+
+
+        <!-- SHOP + WHATSAPP -->
 
         <div class="settingsGrid">
 
-
-          <!-- SHOP -->
 
           <div class="settingBox">
 
@@ -1186,13 +1397,17 @@ button{
             </div>
 
             <div class="settingDesc">
-              Control whether customers can place orders.
+              Control customer ordering.
             </div>
 
             <div class="switchRow">
 
-              <span id="shopSwitchText">
+              <span
+                id="shopSwitchText"
+                style="font-size:8px;color:#aaa">
+
                 Checking...
+
               </span>
 
               <div
@@ -1206,16 +1421,14 @@ button{
           </div>
 
 
-          <!-- WHATSAPP -->
-
           <div class="settingBox">
 
             <div class="settingTitle">
-              WhatsApp Order Number
+              WhatsApp Number
             </div>
 
             <div class="settingDesc">
-              Customer order messages will be sent here.
+              Customer orders will be sent here.
             </div>
 
             <input
@@ -1226,33 +1439,43 @@ button{
             <button
               class="saveBtn"
               onclick="saveWhatsapp()">
+
               SAVE NUMBER
+
             </button>
 
           </div>
 
+
+        </div>
+
+
+        <!-- FOOD ITEMS -->
+
+        <div
+          style="
+            margin-top:9px;
+            margin-bottom:5px;
+            font-size:9px;
+            font-weight:800;
+            color:#aaa;
+          ">
+
+          FOOD ITEMS
+
         </div>
 
 
-        <!-- MENU -->
-
-        <div style="margin-top:12px">
-
-          <div
-            class="settingTitle"
-            style="margin-bottom:9px">
-            Food Items
-          </div>
-
-          <div
-            id="menuSettings">
-          </div>
-
+        <div
+          id="menuSettings"
+          class="menuSettingsBox">
         </div>
+
 
       </div>
 
     </section>
+
 
   </main>
 
@@ -1272,7 +1495,8 @@ button{
     <div class="modalHead">
 
       <div class="modalTitle">
-        Track <span style="color:#ff7a00">
+        Track
+        <span style="color:#ff7a00">
           Order
         </span>
       </div>
@@ -1280,21 +1504,28 @@ button{
       <button
         class="closeBtn"
         onclick="closeTrack()">
+
         ×
+
       </button>
 
     </div>
+
 
     <input
       id="trackOrderInput"
       class="trackInput"
       placeholder="Enter Order ID">
 
+
     <button
       class="trackBtn"
       onclick="trackOrder()">
+
       TRACK ORDER
+
     </button>
+
 
     <div
       id="trackResult"
@@ -1342,30 +1573,46 @@ import {
 
 
 /* =====================================================
-   FIREBASE CONFIG
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
-  apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain:"the-queen-fast-food.firebaseapp.com",
-  databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId:"the-queen-fast-food",
-  storageBucket:"the-queen-fast-food.firebasestorage.app",
-  messagingSenderId:"435721389652",
-  appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId:"G-Q1YCK636KJ"
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
 };
 
 
-/* =====================================================
-   INIT
-===================================================== */
+const app =
+  initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
+const auth =
+  getAuth(app);
 
-const auth = getAuth(app);
-
-const db = getDatabase(app);
+const db =
+  getDatabase(app);
 
 
 /* =====================================================
@@ -1434,7 +1681,7 @@ const defaultMenu = [
 
 
 /* =====================================================
-   GLOBAL DATA
+   GLOBAL
 ===================================================== */
 
 let orders = {};
@@ -1444,6 +1691,8 @@ let shopSettings = {};
 let previousNewOrders = 0;
 
 let firstOrderLoad = true;
+
+let realtimeStarted = false;
 
 
 /* =====================================================
@@ -1466,87 +1715,117 @@ function toast(message){
   const box =
     document.getElementById("toast");
 
-  box.textContent = message;
+  box.textContent =
+    message;
 
   box.classList.add("show");
 
-  setTimeout(()=>{
-    box.classList.remove("show");
-  },2500);
+  setTimeout(
+    ()=>{
+      box.classList.remove("show");
+    },
+    2200
+  );
+
 }
 
 
 /* =====================================================
-   LOGIN PERSISTENCE
+   AUTH PERSISTENCE
 ===================================================== */
 
-await setPersistence(
-  auth,
-  browserLocalPersistence
-);
+try{
+
+  await setPersistence(
+    auth,
+    browserLocalPersistence
+  );
+
+}catch(error){
+
+  console.warn(
+    "Auth persistence warning:",
+    error
+  );
+
+}
 
 
 /* =====================================================
    AUTH STATE
 ===================================================== */
 
-onAuthStateChanged(auth, async user => {
+onAuthStateChanged(
+  auth,
+  async user => {
 
-  if(!user){
+    if(!user){
 
-    showLogin();
+      showLogin();
 
-    return;
+      return;
+
+    }
+
+
+    console.log(
+      "Logged in UID:",
+      user.uid
+    );
+
+
+    if(
+      user.uid !== ADMIN_UID
+    ){
+
+      document.getElementById(
+        "loginError"
+      ).textContent =
+        "This account is not authorized as admin.";
+
+      await signOut(auth);
+
+      showLogin();
+
+      return;
+
+    }
+
+
+    showAdmin();
+
+    await loadEverything();
+
   }
-
-
-  /*
-    IMPORTANT:
-    UID must match Firebase Authentication UID.
-  */
-
-  if(user.uid !== ADMIN_UID){
-
-    document.getElementById("loginError").textContent =
-      "This account is not authorized as admin.";
-
-    await signOut(auth);
-
-    showLogin();
-
-    return;
-  }
-
-
-  showAdmin();
-
-  await loadEverything();
-
-});
+);
 
 
 /* =====================================================
-   SHOW LOGIN
+   LOGIN / ADMIN
 ===================================================== */
 
 function showLogin(){
 
-  loginPage.classList.remove("hidden");
+  loginPage.classList.remove(
+    "hidden"
+  );
 
-  adminPage.classList.add("hidden");
+  adminPage.classList.add(
+    "hidden"
+  );
 
 }
 
 
-/* =====================================================
-   SHOW ADMIN
-===================================================== */
-
 function showAdmin(){
 
-  loginPage.classList.add("hidden");
+  loginPage.classList.add(
+    "hidden"
+  );
 
-  adminPage.classList.remove("hidden");
+  adminPage.classList.remove(
+    "hidden"
+  );
 
 }
 
@@ -1555,26 +1834,37 @@ function showAdmin(){
    LOGIN
 ===================================================== */
 
-window.loginAdmin = async function(){
+window.loginAdmin =
+async function(){
 
   const email =
-    document.getElementById("email").value.trim();
+    document.getElementById(
+      "email"
+    ).value.trim();
 
   const password =
-    document.getElementById("password").value;
+    document.getElementById(
+      "password"
+    ).value;
 
   const error =
-    document.getElementById("loginError");
+    document.getElementById(
+      "loginError"
+    );
 
   error.textContent = "";
 
 
-  if(!email || !password){
+  if(
+    !email ||
+    !password
+  ){
 
     error.textContent =
-      "Enter email and password.";
+      "Enter admin email and password.";
 
     return;
+
   }
 
 
@@ -1588,7 +1878,10 @@ window.loginAdmin = async function(){
 
   }catch(err){
 
-    console.error(err);
+    console.error(
+      "Login error:",
+      err
+    );
 
     error.textContent =
       "Invalid admin email or password.";
@@ -1602,14 +1895,28 @@ window.loginAdmin = async function(){
    LOGOUT
 ===================================================== */
 
-window.logoutAdmin = async function(){
+window.logoutAdmin =
+async function(){
 
-  const yes =
-    confirm("Logout from Admin Panel?");
+  if(
+    !confirm(
+      "Logout from Admin Panel?"
+    )
+  ){
 
-  if(!yes) return;
+    return;
 
-  await signOut(auth);
+  }
+
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(error);
+
+  }
 
 };
 
@@ -1620,54 +1927,81 @@ window.logoutAdmin = async function(){
 
 async function loadEverything(){
 
+  /*
+    IMPORTANT:
+    Settings and Orders are loaded separately.
+    If one Firebase path has a permission problem,
+    the other one will still load.
+  */
+
   try{
 
-    const [
-      settingsSnap,
-      ordersSnap
-    ] = await Promise.all([
-
-      get(ref(db,"settings")),
-
-      get(ref(db,"orders"))
-
-    ]);
-
+    const settingsSnap =
+      await get(
+        ref(db,"settings")
+      );
 
     shopSettings =
       settingsSnap.exists()
       ? settingsSnap.val()
       : {};
 
+  }catch(error){
+
+    console.error(
+      "Settings Firebase error:",
+      error
+    );
+
+    shopSettings = {};
+
+    toast(
+      "Settings could not load."
+    );
+
+  }
+
+
+  try{
+
+    const ordersSnap =
+      await get(
+        ref(db,"orders")
+      );
+
     orders =
       ordersSnap.exists()
       ? ordersSnap.val()
       : {};
 
+  }catch(error){
 
-    renderShopStatus();
+    console.error(
+      "Orders Firebase error:",
+      error
+    );
 
-    renderWhatsapp();
-
-    renderMenuSettings();
-
-    renderOrders();
-
-    renderSales();
-
-
-    listenRealtime();
-
-
-  }catch(err){
-
-    console.error(err);
+    orders = {};
 
     toast(
-      "Firebase loading error."
+      "Orders could not load."
     );
 
   }
+
+
+  renderShopStatus();
+
+  renderWhatsapp();
+
+  renderMenuSettings();
+
+  renderOrders();
+
+  renderSales();
+
+
+  startRealtime();
 
 }
 
@@ -1676,10 +2010,22 @@ async function loadEverything(){
    REALTIME
 ===================================================== */
 
-function listenRealtime(){
+function startRealtime(){
+
+  if(
+    realtimeStarted
+  ){
+
+    return;
+
+  }
+
+  realtimeStarted = true;
+
 
   onValue(
     ref(db,"settings"),
+
     snap => {
 
       shopSettings =
@@ -1693,12 +2039,23 @@ function listenRealtime(){
 
       renderMenuSettings();
 
+    },
+
+    error => {
+
+      console.error(
+        "Settings realtime error:",
+        error
+      );
+
     }
+
   );
 
 
   onValue(
     ref(db,"orders"),
+
     snap => {
 
       orders =
@@ -1710,7 +2067,17 @@ function listenRealtime(){
 
       renderSales();
 
+    },
+
+    error => {
+
+      console.error(
+        "Orders realtime error:",
+        error
+      );
+
     }
+
   );
 
 }
@@ -1722,17 +2089,13 @@ function listenRealtime(){
 
 function getShopOpen(){
 
-  /*
-    Supports:
-      settings.shopOpen
-      settings.shop.open
-  */
-
   if(
     shopSettings.shopOpen !== undefined
   ){
 
-    return shopSettings.shopOpen === true;
+    return (
+      shopSettings.shopOpen === true
+    );
 
   }
 
@@ -1742,7 +2105,9 @@ function getShopOpen(){
     shopSettings.shop.open !== undefined
   ){
 
-    return shopSettings.shop.open === true;
+    return (
+      shopSettings.shop.open === true
+    );
 
   }
 
@@ -1752,10 +2117,6 @@ function getShopOpen(){
 }
 
 
-/* =====================================================
-   RENDER SHOP
-===================================================== */
-
 function renderShopStatus(){
 
   const open =
@@ -1763,16 +2124,24 @@ function renderShopStatus(){
 
 
   const dot =
-    document.getElementById("statusDot");
+    document.getElementById(
+      "statusDot"
+    );
 
   const text =
-    document.getElementById("shopStatusText");
+    document.getElementById(
+      "shopStatusText"
+    );
 
-  const switchEl =
-    document.getElementById("shopSwitch");
+  const sw =
+    document.getElementById(
+      "shopSwitch"
+    );
 
-  const switchText =
-    document.getElementById("shopSwitchText");
+  const swText =
+    document.getElementById(
+      "shopSwitchText"
+    );
 
 
   if(open){
@@ -1783,9 +2152,11 @@ function renderShopStatus(){
     text.textContent =
       "SHOP OPEN";
 
-    switchEl.classList.add("active");
+    sw.classList.add(
+      "active"
+    );
 
-    switchText.textContent =
+    swText.textContent =
       "Shop is OPEN";
 
   }else{
@@ -1796,9 +2167,11 @@ function renderShopStatus(){
     text.textContent =
       "SHOP CLOSED";
 
-    switchEl.classList.remove("active");
+    sw.classList.remove(
+      "active"
+    );
 
-    switchText.textContent =
+    swText.textContent =
       "Shop is CLOSED";
 
   }
@@ -1810,19 +2183,20 @@ function renderShopStatus(){
    TOGGLE SHOP
 ===================================================== */
 
-window.toggleShop = async function(){
-
-  const current =
-    getShopOpen();
+window.toggleShop =
+async function(){
 
   const newValue =
-    !current;
+    !getShopOpen();
 
 
   try{
 
     await set(
-      ref(db,"settings/shopOpen"),
+      ref(
+        db,
+        "settings/shopOpen"
+      ),
       newValue
     );
 
@@ -1833,13 +2207,15 @@ window.toggleShop = async function(){
       : "Shop closed."
     );
 
+  }catch(error){
 
-  }catch(err){
-
-    console.error(err);
+    console.error(
+      "Shop status error:",
+      error
+    );
 
     toast(
-      "Unable to change shop status."
+      "Could not change shop status."
     );
 
   }
@@ -1872,22 +2248,25 @@ function renderWhatsapp(){
 }
 
 
-window.saveWhatsapp = async function(){
-
-  const input =
-    document.getElementById(
-      "whatsappInput"
-    );
+window.saveWhatsapp =
+async function(){
 
   let number =
-    input.value.trim();
+    document.getElementById(
+      "whatsappInput"
+    ).value.trim();
 
 
   number =
-    number.replace(/\D/g,"");
+    number.replace(
+      /\D/g,
+      ""
+    );
 
 
-  if(number.length < 10){
+  if(
+    number.length < 10
+  ){
 
     toast(
       "Enter valid WhatsApp number."
@@ -1901,7 +2280,10 @@ window.saveWhatsapp = async function(){
   try{
 
     await set(
-      ref(db,"settings/whatsappNumber"),
+      ref(
+        db,
+        "settings/whatsappNumber"
+      ),
       number
     );
 
@@ -1910,10 +2292,12 @@ window.saveWhatsapp = async function(){
       "WhatsApp number saved."
     );
 
+  }catch(error){
 
-  }catch(err){
-
-    console.error(err);
+    console.error(
+      "WhatsApp save error:",
+      error
+    );
 
     toast(
       "Could not save number."
@@ -1925,7 +2309,7 @@ window.saveWhatsapp = async function(){
 
 
 /* =====================================================
-   MENU SETTINGS
+   MENU
 ===================================================== */
 
 function getMenuSettings(){
@@ -1951,78 +2335,97 @@ function renderMenuSettings(){
 
 
   box.innerHTML =
-    defaultMenu.map(item => {
+    defaultMenu.map(
+      item => {
 
-      const data =
-        saved[item.id] || {};
-
-
-      const price =
-        Number(
-          data.price ??
-          item.price
-        );
+        const data =
+          saved[item.id] ||
+          {};
 
 
-      const available =
-        data.available !== false;
+        const price =
+          Number(
+            data.price ??
+            item.price
+          );
 
 
-      return `
+        const available =
+          data.available !== false;
 
-        <div class="menuAdminItem">
 
-          <div>
+        return `
 
-            <div class="menuName">
-              ${escapeHtml(item.name)}
+          <div class="menuAdminItem">
+
+            <div class="menuInfo">
+
+              <div class="menuName">
+                ${escapeHtml(
+                  item.name
+                )}
+              </div>
+
+              <div class="menuId">
+                ${item.id}
+              </div>
+
             </div>
 
-            <div class="menuId">
-              ${item.id}
+
+            <div class="menuControls">
+
+              <input
+                id="price_${item.id}"
+                class="menuPrice"
+                type="number"
+                min="0"
+                value="${price}">
+
+
+              <button
+                class="availabilityBtn ${
+                  available
+                  ? "available"
+                  : "out"
+                }"
+                onclick="toggleAvailability('${item.id}')">
+
+                ${
+                  available
+                  ? "AVAILABLE"
+                  : "OUT OF STOCK"
+                }
+
+              </button>
+
+
+              <button
+                class="menuSave"
+                onclick="saveMenuItem('${item.id}')">
+
+                SAVE
+
+              </button>
+
             </div>
 
           </div>
 
-          <input
-            id="price_${item.id}"
-            class="menuPrice"
-            type="number"
-            min="0"
-            value="${price}">
+        `;
 
-          <button
-            class="availabilityBtn ${available ? "available" : "out"}"
-            onclick="toggleAvailability('${item.id}')">
-
-            ${available
-              ? "AVAILABLE"
-              : "OUT OF STOCK"}
-
-          </button>
-
-          <button
-            class="menuSave"
-            onclick="saveMenuItem('${item.id}')">
-
-            SAVE
-
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("");
+      }
+    ).join("");
 
 }
 
 
 /* =====================================================
-   SAVE MENU ITEM
+   SAVE MENU
 ===================================================== */
 
-window.saveMenuItem = async function(id){
+window.saveMenuItem =
+async function(id){
 
   const input =
     document.getElementById(
@@ -2031,7 +2434,9 @@ window.saveMenuItem = async function(id){
 
 
   const price =
-    Number(input.value);
+    Number(
+      input.value
+    );
 
 
   if(
@@ -2049,15 +2454,20 @@ window.saveMenuItem = async function(id){
 
 
   const existing =
-    getMenuSettings()[id] || {};
+    getMenuSettings()[id] ||
+    {};
 
 
   try{
 
     await update(
-      ref(db,"settings/menu/"+id),
+      ref(
+        db,
+        "settings/menu/"+id
+      ),
       {
         price:price,
+
         available:
           existing.available !== false
       }
@@ -2068,13 +2478,15 @@ window.saveMenuItem = async function(id){
       "Price saved."
     );
 
+  }catch(error){
 
-  }catch(err){
-
-    console.error(err);
+    console.error(
+      "Menu save error:",
+      error
+    );
 
     toast(
-      "Unable to save price."
+      "Could not save price."
     );
 
   }
@@ -2083,13 +2495,15 @@ window.saveMenuItem = async function(id){
 
 
 /* =====================================================
-   TOGGLE AVAILABILITY
+   AVAILABILITY
 ===================================================== */
 
-window.toggleAvailability = async function(id){
+window.toggleAvailability =
+async function(id){
 
   const existing =
-    getMenuSettings()[id] || {};
+    getMenuSettings()[id] ||
+    {};
 
 
   const current =
@@ -2099,7 +2513,10 @@ window.toggleAvailability = async function(id){
   try{
 
     await set(
-      ref(db,"settings/menu/"+id+"/available"),
+      ref(
+        db,
+        "settings/menu/"+id+"/available"
+      ),
       !current
     );
 
@@ -2107,13 +2524,15 @@ window.toggleAvailability = async function(id){
     toast(
       !current
       ? "Item available."
-      : "Item marked out of stock."
+      : "Item out of stock."
     );
 
+  }catch(error){
 
-  }catch(err){
-
-    console.error(err);
+    console.error(
+      "Availability error:",
+      error
+    );
 
     toast(
       "Could not update item."
@@ -2125,21 +2544,25 @@ window.toggleAvailability = async function(id){
 
 
 /* =====================================================
-   ORDERS HELPERS
+   ORDERS
 ===================================================== */
 
 function orderArray(){
 
-  return Object.entries(orders || {})
-    .map(([id,data]) => ({
+  return Object.entries(
+    orders || {}
+  )
+  .map(
+    ([id,data]) => ({
       id,
       ...(data || {})
-    }))
-    .sort(
-      (a,b) =>
-        getOrderTime(b) -
-        getOrderTime(a)
-    );
+    })
+  )
+  .sort(
+    (a,b) =>
+      getOrderTime(b) -
+      getOrderTime(a)
+  );
 
 }
 
@@ -2164,19 +2587,19 @@ function getOrderTime(order){
 
 
   const parsed =
-    new Date(value).getTime();
+    new Date(
+      value
+    ).getTime();
 
 
-  return Number.isFinite(parsed)
-    ? parsed
-    : 0;
+  return Number.isFinite(
+    parsed
+  )
+  ? parsed
+  : 0;
 
 }
 
-
-/* =====================================================
-   NORMALIZE STATUS
-===================================================== */
 
 function normalizeStatus(order){
 
@@ -2246,15 +2669,21 @@ function renderOrders(){
 
 
   const newOrders =
-    list.filter(isNew);
+    list.filter(
+      isNew
+    );
 
 
   const pendingOrders =
-    list.filter(isPending);
+    list.filter(
+      isPending
+    );
 
 
   const closedOrders =
-    list.filter(isClosed);
+    list.filter(
+      isClosed
+    );
 
 
   document.getElementById(
@@ -2272,17 +2701,19 @@ function renderOrders(){
   document.getElementById(
     "deliveredCount"
   ).textContent =
-    list.filter(o => {
+    list.filter(
+      o => {
 
-      const s =
-        normalizeStatus(o);
+        const s =
+          normalizeStatus(o);
 
-      return (
-        s === "delivered" ||
-        s === "completed"
-      );
+        return (
+          s === "delivered" ||
+          s === "completed"
+        );
 
-    }).length;
+      }
+    ).length;
 
 
   document.getElementById(
@@ -2326,7 +2757,8 @@ function renderOrders(){
 
   const todaySales =
     list
-      .filter(o => {
+    .filter(
+      o => {
 
         const s =
           normalizeStatus(o);
@@ -2343,18 +2775,23 @@ function renderOrders(){
           )
         );
 
-      })
-      .reduce(
-        (sum,o) =>
-          sum + getOrderTotal(o),
-        0
-      );
+      }
+    )
+    .reduce(
+      (sum,o) =>
+        sum +
+        getOrderTotal(o),
+      0
+    );
 
 
   document.getElementById(
     "todaySales"
   ).textContent =
-    "₹"+formatMoney(todaySales);
+    "₹"+
+    formatMoney(
+      todaySales
+    );
 
 
   const currentNew =
@@ -2363,7 +2800,8 @@ function renderOrders(){
 
   if(
     !firstOrderLoad &&
-    currentNew > previousNewOrders
+    currentNew >
+    previousNewOrders
   ){
 
     notifyNewOrder();
@@ -2374,7 +2812,8 @@ function renderOrders(){
   previousNewOrders =
     currentNew;
 
-  firstOrderLoad = false;
+  firstOrderLoad =
+    false;
 
 }
 
@@ -2384,23 +2823,25 @@ function renderOrders(){
 ===================================================== */
 
 function renderOrderBox(
-  elementId,
+  id,
   list,
   emptyText
 ){
 
   const box =
     document.getElementById(
-      elementId
+      id
     );
 
 
   if(!list.length){
 
     box.innerHTML =
-      `<div class="empty">
+      `
+      <div class="empty">
         ${emptyText}
-      </div>`;
+      </div>
+      `;
 
     return;
 
@@ -2446,17 +2887,6 @@ function orderCardHtml(order){
     getOrderTotal(order);
 
 
-  const date =
-    formatDateTime(
-      getOrderTime(order)
-    );
-
-
-  const statusClass =
-    status
-      .replace(/\s+/g,"_");
-
-
   return `
 
     <div class="orderCard">
@@ -2472,15 +2902,28 @@ function orderCardHtml(order){
           </div>
 
           <div class="orderDate">
-            ${date}
+            ${formatDateTime(
+              getOrderTime(order)
+            )}
           </div>
 
         </div>
 
-        <div class="orderStatus ${statusClass}">
+        <div
+          class="orderStatus ${
+            status.replace(
+              /\s+/g,
+              "_"
+            )
+          }">
+
           ${escapeHtml(
-            status.replace(/_/g," ")
+            status.replace(
+              /_/g,
+              " "
+            )
           )}
+
         </div>
 
       </div>
@@ -2492,16 +2935,19 @@ function orderCardHtml(order){
         )}
       </div>
 
+
       ${
         phone
-        ? `
-          <div class="orderPhone">
-            ${escapeHtml(
-              String(phone)
-            )}
-          </div>
+        ?
         `
-        : ""
+        <div class="orderPhone">
+          ${escapeHtml(
+            String(phone)
+          )}
+        </div>
+        `
+        :
+        ""
       }
 
 
@@ -2509,48 +2955,63 @@ function orderCardHtml(order){
 
         ${
           items.length
-          ? items.map(item => `
+          ?
+          items.map(
+            item => {
 
-              <div class="itemLine">
+              const qty =
+                Number(
+                  item.quantity ||
+                  item.qty ||
+                  1
+                );
 
-                <span>
-                  ${escapeHtml(
-                    String(
-                      item.name ||
-                      item.title ||
-                      "Item"
-                    )
-                  )}
-                  ×
-                  ${Number(
-                    item.quantity ||
-                    item.qty ||
-                    1
-                  )}
-                </span>
+              const price =
+                Number(
+                  item.price ||
+                  0
+                );
 
-                <span>
-                  ₹${formatMoney(
-                    Number(
-                      item.price ||
-                      0
-                    ) *
-                    Number(
-                      item.quantity ||
-                      item.qty ||
-                      1
-                    )
-                  )}
-                </span>
+              return `
 
-              </div>
+                <div class="itemLine">
 
-            `).join("")
-          : `
-            <div class="itemLine">
-              <span>Order items</span>
-              <span>₹${formatMoney(total)}</span>
-            </div>
+                  <span>
+                    ${escapeHtml(
+                      String(
+                        item.name ||
+                        item.title ||
+                        "Item"
+                      )
+                    )}
+                    ×${qty}
+                  </span>
+
+                  <span>
+                    ₹${formatMoney(
+                      price * qty
+                    )}
+                  </span>
+
+                </div>
+
+              `;
+
+            }
+          ).join("")
+          :
+          `
+          <div class="itemLine">
+            <span>
+              Order
+            </span>
+
+            <span>
+              ₹${formatMoney(
+                total
+              )}
+            </span>
+          </div>
           `
         }
 
@@ -2564,7 +3025,9 @@ function orderCardHtml(order){
         </span>
 
         <strong>
-          ₹${formatMoney(total)}
+          ₹${formatMoney(
+            total
+          )}
         </strong>
 
       </div>
@@ -2578,62 +3041,66 @@ function orderCardHtml(order){
             String(order.id)
           )}')">
 
-          Track Order
+          Track
 
         </button>
 
 
         ${
           isNew(order)
-          ? `
-            <button
-              class="actionBtn primary"
-              onclick="changeStatus('${escapeJs(
-                String(order.id)
-              )}','pending')">
-
-              Accept
-
-            </button>
-
-            <button
-              class="actionBtn danger"
-              onclick="changeStatus('${escapeJs(
-                String(order.id)
-              )}','cancelled')">
-
-              Cancel
-
-            </button>
+          ?
           `
-          : ""
+          <button
+            class="actionBtn primary"
+            onclick="changeStatus('${escapeJs(
+              String(order.id)
+            )}','pending')">
+
+            Accept
+
+          </button>
+
+          <button
+            class="actionBtn danger"
+            onclick="changeStatus('${escapeJs(
+              String(order.id)
+            )}','cancelled')">
+
+            Cancel
+
+          </button>
+          `
+          :
+          ""
         }
 
 
         ${
           isPending(order)
-          ? `
-            <button
-              class="actionBtn primary"
-              onclick="changeStatus('${escapeJs(
-                String(order.id)
-              )}','delivered')">
-
-              Mark Delivered
-
-            </button>
-
-            <button
-              class="actionBtn danger"
-              onclick="changeStatus('${escapeJs(
-                String(order.id)
-              )}','cancelled')">
-
-              Cancel
-
-            </button>
+          ?
           `
-          : ""
+          <button
+            class="actionBtn primary"
+            onclick="changeStatus('${escapeJs(
+              String(order.id)
+            )}','delivered')">
+
+            Delivered
+
+          </button>
+
+          <button
+            class="actionBtn danger"
+            onclick="changeStatus('${escapeJs(
+              String(order.id)
+            )}','cancelled')">
+
+            Cancel
+
+          </button>
+          `
+          :
+          ""
         }
 
       </div>
@@ -2646,7 +3113,7 @@ function orderCardHtml(order){
 
 
 /* =====================================================
-   ITEMS
+   ORDER ITEMS
 ===================================================== */
 
 function getOrderItems(order){
@@ -2665,30 +3132,27 @@ function getOrderItems(order){
   ){
 
     items =
-      Object.values(items);
+      Object.values(
+        items
+      );
 
   }
 
 
-  if(!Array.isArray(items)){
-
-    return [];
-
-  }
-
-
-  return items;
+  return Array.isArray(items)
+    ? items
+    : [];
 
 }
 
 
 /* =====================================================
-   TOTAL
+   ORDER TOTAL
 ===================================================== */
 
 function getOrderTotal(order){
 
-  const possible = [
+  const values = [
 
     order.total,
 
@@ -2704,7 +3168,7 @@ function getOrderTotal(order){
 
 
   for(
-    const value of possible
+    const value of values
   ){
 
     const n =
@@ -2723,16 +3187,15 @@ function getOrderTotal(order){
   }
 
 
-  const items =
-    getOrderItems(order);
-
-
-  return items.reduce(
+  return getOrderItems(
+    order
+  ).reduce(
     (sum,item) => {
 
       const price =
         Number(
-          item.price || 0
+          item.price ||
+          0
         );
 
       const qty =
@@ -2742,8 +3205,10 @@ function getOrderTotal(order){
           1
         );
 
-      return sum +
-        price * qty;
+      return (
+        sum +
+        price * qty
+      );
 
     },
     0
@@ -2757,19 +3222,18 @@ function getOrderTotal(order){
 ===================================================== */
 
 window.changeStatus =
-async function(id,status){
-
-  const orderRef =
-    ref(
-      db,
-      "orders/"+id
-    );
-
+async function(
+  id,
+  status
+){
 
   try{
 
     await update(
-      orderRef,
+      ref(
+        db,
+        "orders/"+id
+      ),
       {
         status:status,
         updatedAt:
@@ -2782,10 +3246,12 @@ async function(id,status){
       "Order updated."
     );
 
+  }catch(error){
 
-  }catch(err){
-
-    console.error(err);
+    console.error(
+      "Status update error:",
+      error
+    );
 
     toast(
       "Could not update order."
@@ -2800,38 +3266,44 @@ async function(id,status){
    TRACK
 ===================================================== */
 
-window.openTrack = function(id){
+window.openTrack =
+function(id){
 
   document.getElementById(
     "trackOrderInput"
-  ).value = id;
-
+  ).value =
+    id;
 
   document.getElementById(
     "trackResult"
-  ).innerHTML = "";
-
+  ).innerHTML =
+    "";
 
   document.getElementById(
     "trackModal"
-  ).classList.add("show");
-
+  ).classList.add(
+    "show"
+  );
 
   trackOrder();
 
 };
 
 
-window.closeTrack = function(){
+window.closeTrack =
+function(){
 
   document.getElementById(
     "trackModal"
-  ).classList.remove("show");
+  ).classList.remove(
+    "show"
+  );
 
 };
 
 
-window.trackOrder = function(){
+window.trackOrder =
+function(){
 
   const id =
     document.getElementById(
@@ -2848,9 +3320,11 @@ window.trackOrder = function(){
   if(!id){
 
     result.innerHTML =
-      `<div class="empty">
+      `
+      <div class="empty">
         Enter Order ID.
-      </div>`;
+      </div>
+      `;
 
     return;
 
@@ -2864,9 +3338,11 @@ window.trackOrder = function(){
   if(!order){
 
     result.innerHTML =
-      `<div class="empty">
+      `
+      <div class="empty">
         Order not found.
-      </div>`;
+      </div>
+      `;
 
     return;
 
@@ -2874,14 +3350,9 @@ window.trackOrder = function(){
 
 
   const status =
-    normalizeStatus(order);
-
-
-  const customer =
-    order.customerName ||
-    order.name ||
-    order.customer ||
-    "Customer";
+    normalizeStatus(
+      order
+    );
 
 
   result.innerHTML = `
@@ -2906,17 +3377,29 @@ window.trackOrder = function(){
 
         <div class="orderStatus ${status}">
           ${escapeHtml(
-            status.replace(/_/g," ")
+            status.replace(
+              /_/g,
+              " "
+            )
           )}
         </div>
 
       </div>
 
+
       <div class="orderCustomer">
+
         ${escapeHtml(
-          String(customer)
+          String(
+            order.customerName ||
+            order.name ||
+            order.customer ||
+            "Customer"
+          )
         )}
+
       </div>
+
 
       <div class="orderTotal">
 
@@ -2940,7 +3423,7 @@ window.trackOrder = function(){
 
 
 /* =====================================================
-   SALES HISTORY
+   SALES
 ===================================================== */
 
 function renderSales(){
@@ -2949,98 +3432,35 @@ function renderSales(){
     orderArray();
 
 
-  /*
-    Only delivered/completed orders
-    count as actual online sales.
-  */
-
-  const delivered =
-    list.filter(order => {
-
-      const status =
-        normalizeStatus(order);
-
-      return (
-        status === "delivered" ||
-        status === "completed"
-      );
-
-    });
-
-
   const groups = {};
 
 
-  delivered.forEach(order => {
-
-    const date =
-      new Date(
-        getOrderTime(order)
-      );
-
-
-    const key =
-      getDateKey(date);
-
-
-    if(!groups[key]){
-
-      groups[key] = {
-
-        date:date,
-
-        orders:0,
-
-        sales:0,
-
-        delivered:0,
-
-        cancelled:0
-
-      };
-
-    }
-
-
-    groups[key].orders++;
-
-    groups[key].sales +=
-      getOrderTotal(order);
-
-    groups[key].delivered++;
-
-  });
-
-
-  /*
-    Count cancelled separately.
-  */
-
-  list
-    .filter(order => {
+  list.forEach(
+    order => {
 
       const status =
-        normalizeStatus(order);
+        normalizeStatus(
+          order
+        );
 
-      return (
-        status === "cancelled" ||
-        status === "canceled"
-      );
-
-    })
-    .forEach(order => {
 
       const date =
         new Date(
-          getOrderTime(order)
+          getOrderTime(
+            order
+          )
         );
 
 
       const key =
-        getDateKey(date);
+        getDateKey(
+          date
+        );
 
 
-      if(!groups[key]){
+      if(
+        !groups[key]
+      ){
 
         groups[key] = {
 
@@ -3059,17 +3479,49 @@ function renderSales(){
       }
 
 
-      groups[key].cancelled++;
+      if(
+        status === "delivered" ||
+        status === "completed"
+      ){
 
-    });
+        groups[key].orders++;
+
+        groups[key].sales +=
+          getOrderTotal(
+            order
+          );
+
+        groups[key].delivered++;
+
+      }
+
+
+      if(
+        status === "cancelled" ||
+        status === "canceled"
+      ){
+
+        groups[key].cancelled++;
+
+      }
+
+    }
+  );
 
 
   const entries =
-    Object.values(groups)
-      .sort(
-        (a,b)=>
-          b.date-a.date
-      );
+    Object.values(
+      groups
+    )
+    .filter(
+      g =>
+        g.orders > 0 ||
+        g.cancelled > 0
+    )
+    .sort(
+      (a,b) =>
+        b.date-a.date
+    );
 
 
   const box =
@@ -3078,12 +3530,16 @@ function renderSales(){
     );
 
 
-  if(!entries.length){
+  if(
+    !entries.length
+  ){
 
     box.innerHTML =
-      `<div class="empty">
+      `
+      <div class="empty">
         No sales history yet.
-      </div>`;
+      </div>
+      `;
 
     return;
 
@@ -3092,19 +3548,15 @@ function renderSales(){
 
   box.innerHTML =
     entries.map(
-      (group,index)=>
-      salesFolderHtml(
-        group,
-        index === 0
-      )
+      (group,index) =>
+        salesFolderHtml(
+          group,
+          index === 0
+        )
     ).join("");
 
 }
 
-
-/* =====================================================
-   SALES FOLDER
-===================================================== */
 
 function salesFolderHtml(
   group,
@@ -3125,7 +3577,11 @@ function salesFolderHtml(
   return `
 
     <div
-      class="salesFolder ${open ? "open" : ""}">
+      class="salesFolder ${
+        open
+        ? "open"
+        : ""
+      }">
 
       <div
         class="salesFolderHead"
@@ -3148,14 +3604,10 @@ function salesFolderHtml(
               Orders:
               ${group.orders}
 
-              ·
-
-              Delivered:
+              · Delivered:
               ${group.delivered}
 
-              ·
-
-              Cancelled:
+              · Cancelled:
               ${group.cancelled}
 
             </div>
@@ -3164,12 +3616,11 @@ function salesFolderHtml(
 
         </div>
 
-        <div class="folderSales">
 
+        <div class="folderSales">
           ₹${formatMoney(
             group.sales
           )}
-
         </div>
 
       </div>
@@ -3191,19 +3642,24 @@ function salesFolderHtml(
 
           </div>
 
+
           <div class="salesMini">
 
             <small>
               ONLINE SALES
             </small>
 
-            <strong style="color:#ff7a00">
+            <strong
+              style="color:#ff7a00">
+
               ₹${formatMoney(
                 group.sales
               )}
+
             </strong>
 
           </div>
+
 
           <div class="salesMini">
 
@@ -3231,18 +3687,17 @@ function salesFolderHtml(
 window.toggleSalesFolder =
 function(el){
 
-  const folder =
-    el.parentElement;
-
-  folder.classList.toggle(
-    "open"
-  );
+  el.parentElement
+    .classList
+    .toggle(
+      "open"
+    );
 
 };
 
 
 /* =====================================================
-   NEW ORDER NOTIFICATION
+   NOTIFICATION
 ===================================================== */
 
 function notifyNewOrder(){
@@ -3250,20 +3705,6 @@ function notifyNewOrder(){
   toast(
     "🔔 New order received!"
   );
-
-
-  try{
-
-    const audio =
-      new Audio(
-        "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="
-      );
-
-    audio.play().catch(
-      ()=>{}
-    );
-
-  }catch(e){}
 
 }
 
@@ -3275,11 +3716,11 @@ function notifyNewOrder(){
 window.refreshAll =
 async function(){
 
-  await loadEverything();
-
   toast(
-    "Dashboard refreshed."
+    "Refreshing..."
   );
+
+  await loadEverything();
 
 };
 
@@ -3302,7 +3743,9 @@ function formatMoney(value){
 }
 
 
-function formatDateTime(timestamp){
+function formatDateTime(
+  timestamp
+){
 
   if(!timestamp){
 
@@ -3312,7 +3755,9 @@ function formatDateTime(timestamp){
 
 
   const date =
-    new Date(timestamp);
+    new Date(
+      timestamp
+    );
 
 
   if(
@@ -3340,7 +3785,9 @@ function formatDateTime(timestamp){
 }
 
 
-function getDateKey(date){
+function getDateKey(
+  date
+){
 
   if(
     !date ||
@@ -3355,13 +3802,17 @@ function getDateKey(date){
 
 
   return [
+
     date.getFullYear(),
+
     String(
       date.getMonth()+1
     ).padStart(2,"0"),
+
     String(
       date.getDate()
     ).padStart(2,"0")
+
   ].join("-");
 
 }
@@ -3371,42 +3822,82 @@ function getDateKey(date){
    ESCAPE
 ===================================================== */
 
-function escapeHtml(value){
+function escapeHtml(
+  value
+){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-function escapeJs(value){
+function escapeJs(
+  value
+){
 
-  return String(value)
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'")
-    .replace(/"/g,'\\"')
-    .replace(/\n/g,"\\n")
-    .replace(/\r/g,"\\r");
+  return String(
+    value
+  )
+  .replace(
+    /\\/g,
+    "\\\\"
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  )
+  .replace(
+    /"/g,
+    '\\"'
+  )
+  .replace(
+    /\n/g,
+    "\\n"
+  )
+  .replace(
+    /\r/g,
+    "\\r"
+  );
 
 }
 
 
 /* =====================================================
-   ENTER KEY LOGIN
+   ENTER LOGIN
 ===================================================== */
 
 document
-  .getElementById("password")
+  .getElementById(
+    "password"
+  )
   .addEventListener(
     "keydown",
-    e => {
+    event => {
 
       if(
-        e.key === "Enter"
+        event.key === "Enter"
       ){
 
         loginAdmin();
@@ -3418,15 +3909,15 @@ document
 
 
 /* =====================================================
-   ESCAPE MODAL
+   ESC TRACK
 ===================================================== */
 
 document.addEventListener(
   "keydown",
-  e => {
+  event => {
 
     if(
-      e.key === "Escape"
+      event.key === "Escape"
     ){
 
       closeTrack();
@@ -3440,3 +3931,4 @@ document.addEventListener(
 
 </body>
 </html>
+```
