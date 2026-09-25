@@ -680,7 +680,6 @@ footer a{
 
     </div>
 
-
     <div class="form-group">
 
       <label>Name</label>
@@ -691,7 +690,6 @@ footer a{
       >
 
     </div>
-
 
     <div class="form-group">
 
@@ -705,7 +703,6 @@ footer a{
 
     </div>
 
-
     <div class="form-group">
 
       <label>Delivery Address</label>
@@ -716,7 +713,6 @@ footer a{
       ></textarea>
 
     </div>
-
 
     <div class="form-group">
 
@@ -745,9 +741,7 @@ footer a{
 
     </div>
 
-
     <div id="orderSummary" class="summary"></div>
-
 
     <div class="form-group">
 
@@ -779,7 +773,6 @@ footer a{
       </div>
 
     </div>
-
 
     <button
       id="placeOrderButton"
@@ -961,8 +954,6 @@ let selectedPaymentMethod = "COD";
 
 /* =====================================================
    AUTH
-   IMPORTANT FIX:
-   Wait until anonymous authentication is actually ready.
 ===================================================== */
 
 let authReadyPromise = null;
@@ -1564,8 +1555,10 @@ function addToCart(item){
 
   );
 
-
-  openCart();
+  /* IMPORTANT:
+     Cart will NOT open automatically here.
+     Customer can open it by clicking the Cart button.
+  */
 
 }
 
@@ -2235,7 +2228,6 @@ function validateCheckout(){
 
 /* =====================================================
    PLACE ORDER
-   FIXED AUTH + BETTER ERROR
 ===================================================== */
 
 document.getElementById(
@@ -2255,10 +2247,6 @@ async function placeOrder(){
 
 
   try{
-
-    /* -----------------------------------------
-       Make absolutely sure customer is logged in
-    ----------------------------------------- */
 
     let user =
       auth.currentUser;
@@ -2287,8 +2275,6 @@ async function placeOrder(){
     }
 
 
-    /* Always use the current authenticated user */
-
     currentUser =
       user;
 
@@ -2298,10 +2284,6 @@ async function placeOrder(){
       currentUser.uid
     );
 
-
-    /* -----------------------------------------
-       Shop check
-    ----------------------------------------- */
 
     if(!isShopOpen()){
 
@@ -2314,25 +2296,7 @@ async function placeOrder(){
     }
 
 
-    /* -----------------------------------------
-       Validation
-    ----------------------------------------- */
-
     validateCheckout();
-
-
-    if(
-      button.disabled &&
-      !currentUser
-    ){
-
-      alert(
-        "Please complete all required details."
-      );
-
-      return;
-
-    }
 
 
     const name =
@@ -2388,10 +2352,6 @@ async function placeOrder(){
       "Placing Order...";
 
 
-    /* -----------------------------------------
-       Create Firebase order key
-    ----------------------------------------- */
-
     const orderRef =
       push(
         ref(db,"orders")
@@ -2416,10 +2376,6 @@ async function placeOrder(){
         firebaseKey
       );
 
-
-    /* -----------------------------------------
-       Calculate totals
-    ----------------------------------------- */
 
     let subtotal = 0;
 
@@ -2455,11 +2411,6 @@ async function placeOrder(){
     const now =
       Date.now();
 
-
-    /* -----------------------------------------
-       IMPORTANT:
-       ownerUid = authenticated anonymous UID
-    ----------------------------------------- */
 
     const orderData = {
 
@@ -2544,10 +2495,6 @@ async function placeOrder(){
     );
 
 
-    /* -----------------------------------------
-       FIREBASE WRITE
-    ----------------------------------------- */
-
     await set(
       orderRef,
       orderData
@@ -2560,10 +2507,6 @@ async function placeOrder(){
     );
 
 
-    /* -----------------------------------------
-       Save locally
-    ----------------------------------------- */
-
     localStorage.setItem(
       "lastOrderId",
       orderId
@@ -2575,10 +2518,6 @@ async function placeOrder(){
       firebaseKey
     );
 
-
-    /* -----------------------------------------
-       WhatsApp
-    ----------------------------------------- */
 
     const whatsapp =
       normalizeWhatsApp(
@@ -2603,10 +2542,6 @@ async function placeOrder(){
 
     );
 
-
-    /* -----------------------------------------
-       Clear cart
-    ----------------------------------------- */
 
     cart = [];
 
@@ -2662,11 +2597,6 @@ async function placeOrder(){
       error
     );
 
-
-    /*
-      IMPORTANT:
-      Now exact Firebase error will be visible.
-    */
 
     const code =
       error &&
@@ -3421,12 +3351,6 @@ document.getElementById(
 (async function(){
 
   try{
-
-    /*
-      IMPORTANT:
-      Authentication must finish before
-      customer can place an order.
-    */
 
     await startCustomerAuth();
 
