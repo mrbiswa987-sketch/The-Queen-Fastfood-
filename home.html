@@ -683,18 +683,12 @@ header{
    CART DRAWER
 ========================= */
 
-.cart-overlay{
+..cart-drawer{
   position:fixed;
-  inset:0;
-
-  background:rgba(0,0,0,.68);
-
-  opacity:0;
-  pointer-events:none;
-
-  transition:.25s;
-
-  z-index:1900;
+  top:0;
+  left:50%;
+  right:auto;
+  transform:translateX(-50%) scale(.96);
 }
 
 .cart-overlay.show{
@@ -723,8 +717,9 @@ header{
   transition:.3s ease;
 }
 
-.cart-drawer.show{
-  right:0;
+.cart-drawer.open{
+  transform:translateX(-50%) scale(1);
+}
 }
 
 .cart-header{
