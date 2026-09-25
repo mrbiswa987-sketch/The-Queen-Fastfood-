@@ -12,14 +12,24 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
   background:#070707;
   color:#fff;
   font-family:Inter,sans-serif;
 }
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
 
 header{
   position:sticky;
@@ -29,6 +39,7 @@ header{
   border-bottom:1px solid #292929;
   backdrop-filter:blur(12px);
 }
+
 .nav{
   max-width:1200px;
   margin:auto;
@@ -37,12 +48,17 @@ header{
   align-items:center;
   justify-content:space-between;
 }
+
 .logo{
   font-family:"Cormorant Garamond",serif;
   font-size:30px;
   font-weight:700;
 }
-.logo span{color:#f59b23}
+
+.logo span{
+  color:#f59b23;
+}
+
 .cart-top{
   border:1px solid #f59b23;
   background:#111;
@@ -50,7 +66,10 @@ header{
   border-radius:12px;
   padding:10px 15px;
 }
-.cart-top b{color:#f59b23}
+
+.cart-top b{
+  color:#f59b23;
+}
 
 .hero{
   max-width:1200px;
@@ -58,16 +77,22 @@ header{
   padding:70px 20px 35px;
   text-align:center;
 }
+
 .hero h1{
   font-family:"Cormorant Garamond",serif;
   font-size:clamp(48px,8vw,82px);
   line-height:.95;
 }
-.hero h1 span{color:#f59b23}
+
+.hero h1 span{
+  color:#f59b23;
+}
+
 .hero p{
   color:#aaa;
   margin-top:18px;
 }
+
 .status{
   display:inline-flex;
   align-items:center;
@@ -78,30 +103,40 @@ header{
   border-radius:30px;
   background:#101010;
 }
+
 .dot{
   width:10px;
   height:10px;
   border-radius:50%;
   background:#777;
 }
-.dot.open{background:#30d158}
-.dot.closed{background:#ff453a}
+
+.dot.open{
+  background:#30d158;
+}
+
+.dot.closed{
+  background:#ff453a;
+}
 
 .section{
   max-width:1200px;
   margin:auto;
   padding:25px 20px 60px;
 }
+
 .section-title{
   font-family:"Cormorant Garamond",serif;
   font-size:42px;
   margin-bottom:25px;
 }
+
 .menu-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:18px;
 }
+
 .card{
   background:#101010;
   border:1px solid #292929;
@@ -109,10 +144,12 @@ header{
   overflow:hidden;
   transition:.25s;
 }
+
 .card:hover{
   transform:translateY(-3px);
   border-color:#f59b23;
 }
+
 .card-img{
   height:210px;
   background:#191919;
@@ -121,21 +158,28 @@ header{
   justify-content:center;
   overflow:hidden;
 }
+
 .card-img img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
-.card-content{padding:17px}
+
+.card-content{
+  padding:17px;
+}
+
 .card h3{
   font-size:18px;
   margin-bottom:8px;
 }
+
 .price{
   color:#f59b23;
   font-size:20px;
   font-weight:800;
 }
+
 .card button{
   width:100%;
   margin-top:14px;
@@ -146,11 +190,13 @@ header{
   color:#000;
   font-weight:800;
 }
+
 .card button:disabled{
   background:#383838;
   color:#888;
   cursor:not-allowed;
 }
+
 .stock{
   font-size:12px;
   color:#ff625b;
@@ -166,10 +212,12 @@ header{
   padding:22px;
   border-radius:18px;
 }
+
 .track-row{
   display:flex;
   gap:10px;
 }
+
 .track-row input{
   flex:1;
   background:#080808;
@@ -178,6 +226,7 @@ header{
   padding:13px;
   border-radius:10px;
 }
+
 .track-row button{
   background:#f59b23;
   border:0;
@@ -185,25 +234,30 @@ header{
   border-radius:10px;
   font-weight:800;
 }
+
 .track-result{
   margin-top:18px;
 }
+
 .order-card{
   background:#151515;
   border:1px solid #292929;
   border-radius:15px;
   padding:18px;
 }
+
 .order-head{
   display:flex;
   justify-content:space-between;
   gap:10px;
   flex-wrap:wrap;
 }
+
 .order-id{
   color:#f59b23;
   font-weight:800;
 }
+
 .order-status{
   padding:6px 10px;
   border-radius:20px;
@@ -211,25 +265,35 @@ header{
   font-size:12px;
   font-weight:800;
 }
+
 .timeline{
   display:flex;
   justify-content:space-between;
   margin-top:25px;
   gap:4px;
 }
+
 .step{
   flex:1;
   text-align:center;
   font-size:10px;
   color:#666;
 }
+
 .step-line{
   height:4px;
   background:#292929;
   margin-bottom:7px;
+  border-radius:5px;
 }
-.step.active{color:#f59b23}
-.step.active .step-line{background:#f59b23}
+
+.step.active{
+  color:#f59b23;
+}
+
+.step.active .step-line{
+  background:#f59b23;
+}
 
 footer{
   border-top:1px solid #222;
@@ -237,6 +301,7 @@ footer{
   text-align:center;
   color:#777;
 }
+
 footer a{
   color:#f59b23;
   text-decoration:none;
@@ -249,9 +314,7 @@ footer a{
   z-index:500;
 }
 
-/* =====================================================
-   CENTER CART
-===================================================== */
+/* CENTER CART */
 
 .drawer{
   position:absolute;
@@ -274,6 +337,7 @@ footer a{
   align-items:center;
   margin-bottom:20px;
 }
+
 .close{
   background:#222;
   color:#fff;
@@ -282,6 +346,7 @@ footer a{
   height:38px;
   border-radius:50%;
 }
+
 .cart-item{
   display:flex;
   justify-content:space-between;
@@ -289,17 +354,20 @@ footer a{
   border-bottom:1px solid #292929;
   padding:15px 0;
 }
+
 .cart-item small{
   color:#aaa;
   display:block;
   margin-top:5px;
 }
+
 .qty{
   display:flex;
   align-items:center;
   gap:8px;
   margin-top:7px;
 }
+
 .qty button{
   width:30px;
   height:30px;
@@ -308,21 +376,25 @@ footer a{
   color:#fff;
   border-radius:7px;
 }
+
 .cart-bottom{
   margin-top:20px;
   border-top:1px solid #292929;
   padding-top:20px;
 }
+
 .total-row{
   display:flex;
   justify-content:space-between;
   margin:8px 0;
 }
+
 .total-row.total{
   font-size:22px;
   font-weight:800;
   color:#f59b23;
 }
+
 .primary{
   width:100%;
   padding:14px;
@@ -333,6 +405,7 @@ footer a{
   font-weight:800;
   margin-top:15px;
 }
+
 .primary:disabled{
   background:#444;
   color:#888;
@@ -352,13 +425,18 @@ footer a{
   border-radius:20px;
   padding:24px;
 }
-.form-group{margin-bottom:14px}
+
+.form-group{
+  margin-bottom:14px;
+}
+
 .form-group label{
   display:block;
   color:#aaa;
   font-size:13px;
   margin-bottom:6px;
 }
+
 .form-group input,
 .form-group textarea,
 .form-group select{
@@ -369,14 +447,17 @@ footer a{
   border-radius:10px;
   padding:13px;
 }
+
 .form-group textarea{
   min-height:90px;
   resize:vertical;
 }
+
 .location-row{
   display:flex;
   gap:8px;
 }
+
 .location-row button{
   white-space:nowrap;
   background:#222;
@@ -385,6 +466,7 @@ footer a{
   border-radius:10px;
   padding:0 12px;
 }
+
 .summary{
   background:#080808;
   border:1px solid #292929;
@@ -392,17 +474,20 @@ footer a{
   border-radius:12px;
   margin:18px 0;
 }
+
 .summary-row{
   display:flex;
   justify-content:space-between;
   gap:15px;
   margin:7px 0;
 }
+
 .payment-options{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
+
 .payment-option{
   border:1px solid #333;
   background:#151515;
@@ -411,10 +496,12 @@ footer a{
   padding:14px;
   text-align:center;
 }
+
 .payment-option.active{
   border-color:#f59b23;
   color:#f59b23;
 }
+
 .warning{
   margin-top:12px;
   padding:12px;
@@ -435,13 +522,21 @@ footer a{
   text-align:center;
   padding:25px;
 }
-.website-mode-inner{max-width:550px}
-.website-mode-icon{font-size:60px}
+
+.website-mode-inner{
+  max-width:550px;
+}
+
+.website-mode-icon{
+  font-size:60px;
+}
+
 .website-mode h1{
   font-family:"Cormorant Garamond",serif;
   font-size:50px;
   margin:15px 0;
 }
+
 .website-mode p{
   color:#aaa;
   line-height:1.7;
@@ -457,22 +552,32 @@ footer a{
   justify-content:center;
   text-align:center;
 }
+
 .flower{
   font-size:80px;
   animation:flower 1s infinite alternate;
 }
-@keyframes flower{
-  from{transform:scale(.9) rotate(-5deg)}
-  to{transform:scale(1.1) rotate(5deg)}
-}
 
-@media(max-width:900px){
-  .menu-grid{
-    grid-template-columns:repeat(2,1fr);
+@keyframes flower{
+  from{
+    transform:scale(.9) rotate(-5deg);
+  }
+
+  to{
+    transform:scale(1.1) rotate(5deg);
   }
 }
 
+@media(max-width:900px){
+
+  .menu-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
 @media(max-width:600px){
+
   .hero{
     padding-top:50px;
   }
@@ -501,6 +606,7 @@ footer a{
     width:94%;
     max-height:88vh;
   }
+
 }
 </style>
 </head>
@@ -508,36 +614,67 @@ footer a{
 <body>
 
 <div id="websiteModeScreen" class="website-mode hidden">
+
   <div class="website-mode-inner">
-    <div id="websiteModeIcon" class="website-mode-icon">🔧</div>
-    <h1 id="websiteModeTitle">Updating</h1>
+
+    <div id="websiteModeIcon" class="website-mode-icon">
+      🔧
+    </div>
+
+    <h1 id="websiteModeTitle">
+      Updating
+    </h1>
+
     <p id="websiteModeMessage">
-      The website is currently being updated. Please try again later.
+      The website is currently being updated.
+      Please try again later.
     </p>
+
   </div>
+
 </div>
 
+
 <div id="thankYouOverlay" class="thankyou hidden">
+
   <div>
-    <div class="flower">🌸</div>
-    <h1>Thank You!</h1>
+
+    <div class="flower">
+      🌸
+    </div>
+
+    <h1>
+      Thank You!
+    </h1>
+
     <p style="color:#aaa;margin-top:10px">
       Your order has been placed successfully.
     </p>
+
   </div>
+
 </div>
 
+
 <header>
+
   <div class="nav">
+
     <div class="logo">
       The Queen <span>Fast Food</span>
     </div>
 
-    <button id="topCart" class="cart-top">
+    <button
+      id="topCart"
+      class="cart-top"
+    >
       🛒 Cart <b id="cartCount">0</b>
     </button>
+
   </div>
+
 </header>
+
 
 <main id="mainWebsite">
 
@@ -552,18 +689,29 @@ footer a{
   </p>
 
   <div class="status">
-    <span id="shopDot" class="dot"></span>
+
+    <span
+      id="shopDot"
+      class="dot"
+    ></span>
+
     <span id="shopStatusText">
       Checking shop status...
     </span>
+
   </div>
 
-  <div style="margin-top:10px;color:#777;font-size:13px">
+  <div
+    style="margin-top:10px;color:#777;font-size:13px"
+  >
     Order Time:
-    <span id="orderTimeValue">--</span>
+    <span id="orderTimeValue">
+      --
+    </span>
   </div>
 
 </section>
+
 
 <section class="section">
 
@@ -571,9 +719,13 @@ footer a{
     Our Menu
   </h2>
 
-  <div id="menuGrid" class="menu-grid"></div>
+  <div
+    id="menuGrid"
+    class="menu-grid"
+  ></div>
 
 </section>
+
 
 <section class="section">
 
@@ -596,13 +748,17 @@ footer a{
 
     </div>
 
-    <div id="trackResult" class="track-result"></div>
+    <div
+      id="trackResult"
+      class="track-result"
+    ></div>
 
   </div>
 
 </section>
 
 </main>
+
 
 <footer>
 
@@ -630,13 +786,18 @@ footer a{
 
 <!-- CART -->
 
-<div id="cartOverlay" class="overlay hidden">
+<div
+  id="cartOverlay"
+  class="overlay hidden"
+>
 
   <div class="drawer">
 
     <div class="drawer-head">
 
-      <h2>Your Cart</h2>
+      <h2>
+        Your Cart
+      </h2>
 
       <button
         id="closeCart"
@@ -653,7 +814,9 @@ footer a{
 
       <div class="total-row total">
 
-        <span>Total</span>
+        <span>
+          Total
+        </span>
 
         <span>
           ₹<span id="cartTotal">0</span>
@@ -677,13 +840,18 @@ footer a{
 
 <!-- CHECKOUT -->
 
-<div id="checkoutOverlay" class="overlay hidden">
+<div
+  id="checkoutOverlay"
+  class="overlay hidden"
+>
 
   <div class="modal">
 
     <div class="drawer-head">
 
-      <h2>Checkout</h2>
+      <h2>
+        Checkout
+      </h2>
 
       <button
         id="closeCheckout"
@@ -694,9 +862,12 @@ footer a{
 
     </div>
 
+
     <div class="form-group">
 
-      <label>Name</label>
+      <label>
+        Name
+      </label>
 
       <input
         id="customerName"
@@ -705,21 +876,28 @@ footer a{
 
     </div>
 
+
     <div class="form-group">
 
-      <label>Phone</label>
+      <label>
+        Phone
+      </label>
 
       <input
         id="customerPhone"
         type="tel"
+        maxlength="10"
         placeholder="10 digit mobile number"
       >
 
     </div>
 
+
     <div class="form-group">
 
-      <label>Delivery Address</label>
+      <label>
+        Delivery Address
+      </label>
 
       <textarea
         id="customerAddress"
@@ -728,9 +906,12 @@ footer a{
 
     </div>
 
+
     <div class="form-group">
 
-      <label>Your Location</label>
+      <label>
+        Your Location
+      </label>
 
       <div class="location-row">
 
@@ -755,11 +936,18 @@ footer a{
 
     </div>
 
-    <div id="orderSummary" class="summary"></div>
+
+    <div
+      id="orderSummary"
+      class="summary"
+    ></div>
+
 
     <div class="form-group">
 
-      <label>Payment Method</label>
+      <label>
+        Payment Method
+      </label>
 
       <div class="payment-options">
 
@@ -767,14 +955,14 @@ footer a{
           id="codButton"
           class="payment-option active"
         >
-          Cash on Delivery
+          💵 Cash on Delivery
         </button>
 
         <button
           id="onlineButton"
           class="payment-option"
         >
-          Online Payment
+          💳 Online Payment
         </button>
 
       </div>
@@ -787,6 +975,7 @@ footer a{
       </div>
 
     </div>
+
 
     <button
       id="placeOrderButton"
@@ -803,8 +992,11 @@ footer a{
 
 <script type="module">
 
-import { initializeApp }
+import {
+  initializeApp
+}
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
   getDatabase,
@@ -818,6 +1010,7 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+
 import {
   getAuth,
   signInAnonymously,
@@ -827,7 +1020,7 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 /* =====================================================
-   FIREBASE CONFIG
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -859,11 +1052,16 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(
+    firebaseConfig
+  );
 
-const db = getDatabase(app);
+const db =
+  getDatabase(app);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
 
 /* =====================================================
@@ -945,7 +1143,8 @@ const RESTAURANT_LAT =
 const RESTAURANT_LNG =
   86.36464363454978;
 
-const DEFAULT_DELIVERY_RATE = 6;
+const DEFAULT_DELIVERY_RATE =
+  6;
 
 const WHATSAPP_DEFAULT =
   "9090220791";
@@ -963,7 +1162,8 @@ let customerLat = null;
 
 let customerLng = null;
 
-let selectedPaymentMethod = "COD";
+let selectedPaymentMethod =
+  "COD";
 
 
 /* =====================================================
@@ -977,9 +1177,12 @@ function waitForAuthState(){
 
   if(auth.currentUser){
 
-    currentUser = auth.currentUser;
+    currentUser =
+      auth.currentUser;
 
-    return Promise.resolve(currentUser);
+    return Promise.resolve(
+      currentUser
+    );
 
   }
 
@@ -1001,7 +1204,8 @@ function waitForAuthState(){
 
             if(user){
 
-              currentUser = user;
+              currentUser =
+                user;
 
               unsubscribe();
 
@@ -1035,7 +1239,9 @@ async function startCustomerAuth(){
 
 
     const result =
-      await signInAnonymously(auth);
+      await signInAnonymously(
+        auth
+      );
 
 
     currentUser =
@@ -1050,8 +1256,9 @@ async function startCustomerAuth(){
 
     return currentUser;
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(
       "AUTH ERROR:",
@@ -1063,12 +1270,20 @@ async function startCustomerAuth(){
 
 
     alert(
+
       "Secure connection failed.\n\n" +
+
       "Code: " +
+
       (error.code || "unknown") +
+
       "\n\n" +
+
       "Message: " +
-      (error.message || "Authentication failed.")
+
+      (error.message ||
+        "Authentication failed.")
+
     );
 
 
@@ -1085,12 +1300,15 @@ onAuthStateChanged(
 
     if(user){
 
-      currentUser = user;
+      currentUser =
+        user;
 
       console.log(
         "Auth state ready:",
         user.uid
       );
+
+      validateCheckout();
 
     }
 
@@ -1106,7 +1324,10 @@ function loadSettings(){
 
   onValue(
 
-    ref(db,"settings"),
+    ref(
+      db,
+      "settings"
+    ),
 
     snapshot=>{
 
@@ -1118,6 +1339,20 @@ function loadSettings(){
       renderShopStatus();
 
       renderMenu();
+
+      if(
+        !document
+          .getElementById(
+            "checkoutOverlay"
+          )
+          .classList.contains(
+            "hidden"
+          )
+      ){
+
+        renderOrderSummary();
+
+      }
 
     },
 
@@ -1156,14 +1391,18 @@ function renderWebsiteMode(){
 
   if(mode === "normal"){
 
-    screen.classList.add("hidden");
+    screen.classList.add(
+      "hidden"
+    );
 
     return;
 
   }
 
 
-  screen.classList.remove("hidden");
+  screen.classList.remove(
+    "hidden"
+  );
 
 
   const icon =
@@ -1184,7 +1423,8 @@ function renderWebsiteMode(){
 
   if(mode === "maintenance"){
 
-    icon.textContent = "🛠️";
+    icon.textContent =
+      "🛠️";
 
     title.textContent =
       "Website Closed";
@@ -1197,7 +1437,8 @@ function renderWebsiteMode(){
 
   else{
 
-    icon.textContent = "🔧";
+    icon.textContent =
+      "🔧";
 
     title.textContent =
       "Updating";
@@ -1224,12 +1465,22 @@ function isShopOpen(){
     ).toLowerCase();
 
 
-  if(override === "open")
+  if(
+    override === "open"
+  ){
+
     return true;
 
+  }
 
-  if(override === "closed")
+
+  if(
+    override === "closed"
+  ){
+
     return false;
+
+  }
 
 
   const now =
@@ -1309,7 +1560,11 @@ function renderShopStatus(){
 
   dot.className =
     "dot " +
-    (open ? "open" : "closed");
+    (
+      open
+        ? "open"
+        : "closed"
+    );
 
 
   text.textContent =
@@ -1389,113 +1644,116 @@ function renderMenu(){
   grid.innerHTML = "";
 
 
-  getMenu().forEach(item=>{
+  getMenu().forEach(
+    item=>{
 
-    const card =
-      document.createElement(
-        "div"
-      );
-
-
-    card.className = "card";
+      const card =
+        document.createElement(
+          "div"
+        );
 
 
-    const image =
-      item.image
-
-        ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">`
-
-        : `<div style="font-size:55px">🍽️</div>`;
+      card.className =
+        "card";
 
 
-    const unavailable =
-      !item.available;
+      const image =
+        item.image
+
+          ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">`
+
+          : `<div style="font-size:55px">🍽️</div>`;
 
 
-    const closed =
-      !isShopOpen();
+      const unavailable =
+        !item.available;
 
 
-    const disabled =
-      unavailable || closed;
+      const closed =
+        !isShopOpen();
 
 
-    let buttonText =
-      "Add to Cart";
+      const disabled =
+        unavailable ||
+        closed;
 
 
-    if(unavailable){
-
-      buttonText =
-        "OUT OF STOCK";
-
-    }
-
-    else if(closed){
-
-      buttonText =
-        "SHOP CLOSED";
-
-    }
+      let buttonText =
+        "Add to Cart";
 
 
-    card.innerHTML = `
+      if(unavailable){
 
-      <div class="card-img">
-        ${image}
-      </div>
+        buttonText =
+          "OUT OF STOCK";
 
-      <div class="card-content">
+      }
 
-        <h3>
-          ${escapeHtml(item.name)}
-        </h3>
+      else if(closed){
 
-        <div class="price">
-          ₹${item.price}
+        buttonText =
+          "SHOP CLOSED";
+
+      }
+
+
+      card.innerHTML = `
+
+        <div class="card-img">
+          ${image}
         </div>
 
-        ${
-          unavailable
-            ? `<div class="stock">OUT OF STOCK</div>`
-            : ""
-        }
+        <div class="card-content">
 
-        <button
-          ${disabled ? "disabled" : ""}
-          data-id="${escapeHtml(item.id)}"
-        >
-          ${buttonText}
-        </button>
+          <h3>
+            ${escapeHtml(item.name)}
+          </h3>
 
-      </div>
+          <div class="price">
+            ₹${item.price}
+          </div>
 
-    `;
+          ${
+            unavailable
+              ? `<div class="stock">OUT OF STOCK</div>`
+              : ""
+          }
+
+          <button
+            ${disabled ? "disabled" : ""}
+          >
+            ${buttonText}
+          </button>
+
+        </div>
+
+      `;
 
 
-    const btn =
-      card.querySelector(
-        "button"
-      );
+      const btn =
+        card.querySelector(
+          "button"
+        );
 
 
-    if(!disabled){
+      if(!disabled){
 
-      btn.addEventListener(
-        "click",
-        ()=>{
+        btn.addEventListener(
+          "click",
+          ()=>{
 
-          addToCart(item);
+            addToCart(item);
 
-        }
-      );
+          }
+        );
+
+      }
+
+
+      grid.appendChild(card);
 
     }
-
-
-    grid.appendChild(card);
-
-  });
+  );
 
 }
 
@@ -1558,9 +1816,18 @@ function addToCart(item){
   top.animate(
 
     [
-      {transform:"scale(1)"},
-      {transform:"scale(1.12)"},
-      {transform:"scale(1)"}
+      {
+        transform:"scale(1)"
+      },
+
+      {
+        transform:"scale(1.12)"
+      },
+
+      {
+        transform:"scale(1)"
+      }
+
     ],
 
     {
@@ -1594,22 +1861,23 @@ function renderCart(){
 
   document.getElementById(
     "cartCount"
-  ).textContent = count;
+  ).textContent =
+    count;
 
 
   if(cart.length === 0){
 
     body.innerHTML =
-      `
-        <p style="color:#777;text-align:center;padding:30px 0">
-          Your cart is empty.
-        </p>
-      `;
+
+      `<p style="color:#777;text-align:center;padding:30px 0">
+        Your cart is empty.
+      </p>`;
 
 
     document.getElementById(
       "cartTotal"
-    ).textContent = "0";
+    ).textContent =
+      "0";
 
 
     return;
@@ -1623,103 +1891,107 @@ function renderCart(){
   body.innerHTML = "";
 
 
-  cart.forEach(item=>{
+  cart.forEach(
+    item=>{
 
-    const line =
-      item.price *
-      item.quantity;
-
-
-    subtotal += line;
+      const line =
+        item.price *
+        item.quantity;
 
 
-    const div =
-      document.createElement(
-        "div"
-      );
+      subtotal += line;
 
 
-    div.className =
-      "cart-item";
+      const div =
+        document.createElement(
+          "div"
+        );
 
 
-    div.innerHTML = `
+      div.className =
+        "cart-item";
 
-      <div>
 
-        <b>
-          ${escapeHtml(item.name)}
-        </b>
+      div.innerHTML = `
 
-        <small>
-          ₹${item.price} × ${item.quantity}
-        </small>
+        <div>
 
-      </div>
+          <b>
+            ${escapeHtml(item.name)}
+          </b>
 
-      <div style="text-align:right">
-
-        <b>
-          ₹${line}
-        </b>
-
-        <div class="qty">
-
-          <button data-action="minus">
-            −
-          </button>
-
-          <span>
-            ${item.quantity}
-          </span>
-
-          <button data-action="plus">
-            +
-          </button>
+          <small>
+            ₹${item.price} × ${item.quantity}
+          </small>
 
         </div>
 
-      </div>
+        <div style="text-align:right">
 
-    `;
+          <b>
+            ₹${line}
+          </b>
 
+          <div class="qty">
 
-    div.querySelector(
-      "[data-action=minus]"
-    ).onclick = ()=>{
+            <button data-action="minus">
+              −
+            </button>
 
-      item.quantity--;
+            <span>
+              ${item.quantity}
+            </span>
 
+            <button data-action="plus">
+              +
+            </button>
 
-      if(item.quantity <= 0){
+          </div>
 
-        cart =
-          cart.filter(
-            x=>x.id !== item.id
-          );
+        </div>
 
-      }
-
-
-      renderCart();
-
-    };
-
-
-    div.querySelector(
-      "[data-action=plus]"
-    ).onclick = ()=>{
-
-      item.quantity++;
-
-      renderCart();
-
-    };
+      `;
 
 
-    body.appendChild(div);
+      div.querySelector(
+        "[data-action=minus]"
+      ).onclick =
+        ()=>{
 
-  });
+          item.quantity--;
+
+
+          if(item.quantity <= 0){
+
+            cart =
+              cart.filter(
+                x=>x.id !== item.id
+              );
+
+          }
+
+
+          renderCart();
+
+        };
+
+
+      div.querySelector(
+        "[data-action=plus]"
+      ).onclick =
+        ()=>{
+
+          item.quantity++;
+
+          renderCart();
+
+        };
+
+
+      body.appendChild(div);
+
+    }
+  );
 
 
   document.getElementById(
@@ -1813,34 +2085,36 @@ function renderOrderSummary(){
   let html = "";
 
 
-  cart.forEach(item=>{
+  cart.forEach(
+    item=>{
 
-    const total =
-      item.price *
-      item.quantity;
-
-
-    subtotal += total;
+      const total =
+        item.price *
+        item.quantity;
 
 
-    html += `
+      subtotal += total;
 
-      <div class="summary-row">
 
-        <span>
-          ${escapeHtml(item.name)}
-          × ${item.quantity}
-        </span>
+      html += `
 
-        <span>
-          ₹${total}
-        </span>
+        <div class="summary-row">
 
-      </div>
+          <span>
+            ${escapeHtml(item.name)}
+            × ${item.quantity}
+          </span>
 
-    `;
+          <span>
+            ₹${total}
+          </span>
 
-  });
+        </div>
+
+      `;
+
+    }
+  );
 
 
   const rate =
@@ -1853,7 +2127,9 @@ function renderOrderSummary(){
   let delivery = 0;
 
 
-  if(deliveryDistance !== null){
+  if(
+    deliveryDistance !== null
+  ){
 
     delivery =
       Math.ceil(
@@ -1871,7 +2147,9 @@ function renderOrderSummary(){
 
   html += `
 
-    <hr style="border-color:#292929;margin:12px 0">
+    <hr
+      style="border-color:#292929;margin:12px 0"
+    >
 
     <div class="summary-row">
 
@@ -1924,7 +2202,8 @@ function renderOrderSummary(){
 
   document.getElementById(
     "orderSummary"
-  ).innerHTML = html;
+  ).innerHTML =
+    html;
 
 
   validateCheckout();
@@ -2009,13 +2288,13 @@ document.getElementById(
         document.getElementById(
           "deliveryInfo"
         ).textContent =
-          `Delivery charge: ₹${Math.ceil(
+          `📍 Delivery charge: ₹${Math.ceil(
             deliveryDistance * rate
           )}`;
 
 
         button.textContent =
-          "Location Ready";
+          "Location Ready ✓";
 
 
         renderOrderSummary();
@@ -2061,17 +2340,20 @@ function haversine(
   lon2
 ){
 
-  const R = 6371;
+  const R =
+    6371;
 
 
   const dLat =
     (lat2-lat1) *
-    Math.PI / 180;
+    Math.PI /
+    180;
 
 
   const dLon =
     (lon2-lon1) *
-    Math.PI / 180;
+    Math.PI /
+    180;
 
 
   const a =
@@ -2133,6 +2415,9 @@ document.getElementById(
       "hidden"
     );
 
+
+    validateCheckout();
+
   }
 );
 
@@ -2166,6 +2451,9 @@ document.getElementById(
     ).classList.remove(
       "hidden"
     );
+
+
+    validateCheckout();
 
   }
 );
@@ -2227,16 +2515,18 @@ function validateCheckout(){
   "customerName",
   "customerPhone",
   "customerAddress"
-].forEach(id=>{
+].forEach(
+  id=>{
 
-  document.getElementById(
-    id
-  ).addEventListener(
-    "input",
-    validateCheckout
-  );
+    document.getElementById(
+      id
+    ).addEventListener(
+      "input",
+      validateCheckout
+    );
 
-});
+  }
+);
 
 
 /* =====================================================
@@ -2267,7 +2557,8 @@ async function placeOrder(){
 
     if(!user){
 
-      button.disabled = true;
+      button.disabled =
+        true;
 
       button.textContent =
         "Connecting...";
@@ -2307,9 +2598,6 @@ async function placeOrder(){
       return;
 
     }
-
-
-    validateCheckout();
 
 
     const name =
@@ -2359,7 +2647,9 @@ async function placeOrder(){
     }
 
 
-    button.disabled = true;
+    button.disabled =
+      true;
+
 
     button.textContent =
       "Placing Order...";
@@ -2367,7 +2657,10 @@ async function placeOrder(){
 
     const orderRef =
       push(
-        ref(db,"orders")
+        ref(
+          db,
+          "orders"
+        )
       );
 
 
@@ -2393,13 +2686,15 @@ async function placeOrder(){
     let subtotal = 0;
 
 
-    cart.forEach(item=>{
+    cart.forEach(
+      item=>{
 
-      subtotal +=
-        Number(item.price) *
-        Number(item.quantity);
+        subtotal +=
+          Number(item.price) *
+          Number(item.quantity);
 
-    });
+      }
+    );
 
 
     const rate =
@@ -2423,6 +2718,15 @@ async function placeOrder(){
 
     const now =
       Date.now();
+
+
+    /*
+      CUSTOMER CURRENT LOCATION
+      Google Maps link
+    */
+
+    const locationUrl =
+      `https://www.google.com/maps?q=${customerLat},${customerLng}`;
 
 
     const orderData = {
@@ -2449,29 +2753,32 @@ async function placeOrder(){
         selectedPaymentMethod,
 
       items:
-        cart.map(item=>({
+        cart.map(
+          item=>({
 
-          id:
-            item.id,
+            id:
+              item.id,
 
-          name:
-            item.name,
+            name:
+              item.name,
 
-          price:
-            Number(item.price),
+            price:
+              Number(item.price),
 
-          quantity:
-            Number(item.quantity)
+            quantity:
+              Number(item.quantity)
 
-        })),
+          })
+        ),
 
       subtotal:
         Number(subtotal),
 
       deliveryDistance:
         Number(
-          Number(deliveryDistance)
-            .toFixed(2)
+          Number(
+            deliveryDistance
+          ).toFixed(2)
         ),
 
       deliveryCharge:
@@ -2489,6 +2796,9 @@ async function placeOrder(){
 
       customerLng:
         Number(customerLng),
+
+      customerLocation:
+        locationUrl,
 
       status:
         "received",
@@ -2532,6 +2842,10 @@ async function placeOrder(){
     );
 
 
+    /*
+      WHATSAPP
+    */
+
     const whatsapp =
       normalizeWhatsApp(
 
@@ -2547,12 +2861,13 @@ async function placeOrder(){
       );
 
 
+    const whatsappUrl =
+      `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+
+
     window.open(
-
-      `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`,
-
+      whatsappUrl,
       "_blank"
-
     );
 
 
@@ -2572,38 +2887,43 @@ async function placeOrder(){
     );
 
 
-    setTimeout(()=>{
+    setTimeout(
+      ()=>{
 
-      document.getElementById(
-        "thankYouOverlay"
-      ).classList.add(
-        "hidden"
-      );
-
-
-      document.getElementById(
-        "trackInput"
-      ).value =
-        orderId;
+        document.getElementById(
+          "thankYouOverlay"
+        ).classList.add(
+          "hidden"
+        );
 
 
-      trackOrder();
+        document.getElementById(
+          "trackInput"
+        ).value =
+          orderId;
 
 
-      window.scrollTo({
-
-        top:
-          document.body.scrollHeight,
-
-        behavior:
-          "smooth"
-
-      });
-
-    },1800);
+        trackOrder();
 
 
-  }catch(error){
+        window.scrollTo({
+
+          top:
+            document.body.scrollHeight,
+
+          behavior:
+            "smooth"
+
+        });
+
+      },
+      1800
+    );
+
+
+  }
+
+  catch(error){
 
     console.error(
       "ORDER ERROR:",
@@ -2639,12 +2959,12 @@ async function placeOrder(){
 
     );
 
+  }
 
-  }finally{
+  finally{
 
     button.disabled =
       false;
-
 
     button.textContent =
       "Place Order";
@@ -2658,15 +2978,19 @@ async function placeOrder(){
    ORDER ID
 ===================================================== */
 
-function createOrderId(key){
+function createOrderId(
+  key
+){
 
   const clean =
-    String(key || "")
-      .replace(
-        /[^A-Za-z0-9]/g,
-        ""
-      )
-      .toUpperCase();
+    String(
+      key || ""
+    )
+    .replace(
+      /[^A-Za-z0-9]/g,
+      ""
+    )
+    .toUpperCase();
 
 
   return (
@@ -2678,7 +3002,7 @@ function createOrderId(key){
 
 
 /* =====================================================
-   WHATSAPP
+   WHATSAPP NUMBER
 ===================================================== */
 
 function normalizeWhatsApp(
@@ -2706,36 +3030,89 @@ function normalizeWhatsApp(
 }
 
 
+/* =====================================================
+   WHATSAPP MESSAGE
+===================================================== */
+
 function buildWhatsAppMessage(
   order
 ){
 
+  /*
+    WhatsApp *text* = bold
+    Emoji = normal Unicode emoji
+  */
+
+
   let text =
-`*The Queen Fast Food - New Order*
 
-Order ID: ${order.orderId}
+`🍽️ *THE QUEEN FAST FOOD*
 
-Customer: ${order.customerName}
-Phone: ${order.phone}
-Address: ${order.address}
+━━━━━━━━━━━━━━━━━━
 
-Items:`;
+🧾 *NEW ORDER RECEIVED*
+
+🔖 *Order ID:* ${order.orderId}
+
+👤 *Customer:* ${order.customerName}
+
+📞 *Phone:* ${order.phone}
+
+🏠 *Address:* ${order.address}
+
+━━━━━━━━━━━━━━━━━━
+
+🍴 *ORDER ITEMS*
+
+`;
 
 
-  order.items.forEach(item=>{
+  order.items.forEach(
+    (item,index)=>{
 
-    text +=
-`\n${item.name} × ${item.quantity} = ₹${item.price * item.quantity}`;
+      text +=
 
-  });
+`${index + 1}. 🍽️ *${item.name}*
+   Qty: *${item.quantity}*
+   Price: *₹${item.price * item.quantity}*
+
+`;
+
+    }
+  );
 
 
   text +=
-`\n\nItem Total: ₹${order.subtotal}
-Delivery: ₹${order.deliveryCharge}
-Total: ₹${order.total}
 
-Payment: ${order.paymentMethod}`;
+`━━━━━━━━━━━━━━━━━━
+
+🧮 *BILL SUMMARY*
+
+🛒 *Item Total:* ₹${order.subtotal}
+
+📍 *Distance:* ${order.deliveryDistance} km
+
+🚚 *Delivery Charge:* ₹${order.deliveryCharge}
+
+💰 *GRAND TOTAL:* ₹${order.total}
+
+💳 *Payment:* ${order.paymentMethod === "COD" ? "💵 Cash on Delivery" : "💳 Online Payment"}
+
+━━━━━━━━━━━━━━━━━━
+
+📍 *CUSTOMER CURRENT LOCATION*
+
+${order.customerLocation}
+
+━━━━━━━━━━━━━━━━━━
+
+🕐 *Order Time:* ${new Date(
+    order.createdAt
+  ).toLocaleString("en-IN")}
+
+🙏 *Thank you for ordering from The Queen Fast Food!* ❤️
+
+🍴 *Fresh Food • Fast Service • Easy Ordering*`;
 
 
   return text;
@@ -2760,7 +3137,9 @@ async function trackOrder(){
   const input =
     document.getElementById(
       "trackInput"
-    ).value.trim().toUpperCase();
+    ).value
+      .trim()
+      .toUpperCase();
 
 
   const result =
@@ -2772,7 +3151,9 @@ async function trackOrder(){
   if(!input){
 
     result.innerHTML =
-      `<p style="color:#888">Enter an Order ID.</p>`;
+      `<p style="color:#888">
+        Enter an Order ID.
+      </p>`;
 
     return;
 
@@ -2784,7 +3165,10 @@ async function trackOrder(){
     if(!auth.currentUser){
 
       result.innerHTML =
-        `<p style="color:#aaa">Connecting securely...</p>`;
+        `<p style="color:#aaa">
+          🔐 Connecting securely...
+        </p>`;
+
 
       await startCustomerAuth();
 
@@ -2807,7 +3191,10 @@ async function trackOrder(){
     const ordersQuery =
       query(
 
-        ref(db,"orders"),
+        ref(
+          db,
+          "orders"
+        ),
 
         orderByChild(
           "ownerUid"
@@ -2826,7 +3213,8 @@ async function trackOrder(){
 
       snapshot=>{
 
-        let found = null;
+        let found =
+          null;
 
 
         snapshot.forEach(
@@ -2839,7 +3227,8 @@ async function trackOrder(){
             if(
 
               String(
-                order.orderId || ""
+                order.orderId ||
+                ""
               ).toUpperCase() ===
               input
 
@@ -2863,10 +3252,27 @@ async function trackOrder(){
         if(!found){
 
           result.innerHTML =
+
             `
-              <p style="color:#888">
-                Order not found in your orders.
-              </p>
+              <div
+                style="
+                  text-align:center;
+                  padding:20px;
+                  color:#888
+                "
+              >
+
+                🔎
+
+                <p style="margin-top:8px">
+                  Order not found in your orders.
+                </p>
+
+                <small>
+                  Please check your Order ID.
+                </small>
+
+              </div>
             `;
 
           return;
@@ -2880,7 +3286,6 @@ async function trackOrder(){
 
       },
 
-
       error=>{
 
         console.error(
@@ -2890,15 +3295,15 @@ async function trackOrder(){
 
 
         result.innerHTML =
+
           `
             <p style="color:#ff625b">
-              Unable to track order.
+              ❌ Unable to track order.
               Please try again.
             </p>
           `;
 
       },
-
 
       {
         onlyOnce:true
@@ -2906,8 +3311,9 @@ async function trackOrder(){
 
     );
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(
       "TRACK ERROR:",
@@ -2916,9 +3322,10 @@ async function trackOrder(){
 
 
     result.innerHTML =
+
       `
         <p style="color:#ff625b">
-          Unable to track order.
+          ❌ Unable to track order.
         </p>
       `;
 
@@ -2950,15 +3357,35 @@ function renderTrackedOrder(
 
   const steps = [
 
-    ["received","Received"],
+    [
+      "received",
+      "📥",
+      "Received"
+    ],
 
-    ["confirmed","Confirmed"],
+    [
+      "confirmed",
+      "✅",
+      "Confirmed"
+    ],
 
-    ["preparing","Preparing"],
+    [
+      "preparing",
+      "👨‍🍳",
+      "Preparing"
+    ],
 
-    ["out_for_delivery","Out for Delivery"],
+    [
+      "out_for_delivery",
+      "🛵",
+      "Out for Delivery"
+    ],
 
-    ["delivered","Delivered"]
+    [
+      "delivered",
+      "🎉",
+      "Delivered"
+    ]
 
   ];
 
@@ -2969,7 +3396,8 @@ function renderTrackedOrder(
     );
 
 
-  let timeline = "";
+  let timeline =
+    "";
 
 
   steps.forEach(
@@ -2981,11 +3409,23 @@ function renderTrackedOrder(
 
       timeline += `
 
-        <div class="step ${active ? "active" : ""}">
+        <div
+          class="step ${
+            active
+              ? "active"
+              : ""
+          }"
+        >
 
           <div class="step-line"></div>
 
-          ${step[1]}
+          <div>
+            ${step[1]}
+          </div>
+
+          <div>
+            ${step[2]}
+          </div>
 
         </div>
 
@@ -2995,30 +3435,45 @@ function renderTrackedOrder(
   );
 
 
-  let items = "";
+  let items =
+    "";
 
 
-  (order.items || [])
-    .forEach(item=>{
+  (
+    order.items ||
+    []
+  ).forEach(
+    item=>{
 
       items += `
 
         <div class="summary-row">
 
           <span>
-            ${escapeHtml(item.name)}
+
+            ${escapeHtml(
+              item.name
+            )}
+
             × ${item.quantity}
+
           </span>
 
           <span>
-            ₹${item.price * item.quantity}
+
+            ₹${
+              item.price *
+              item.quantity
+            }
+
           </span>
 
         </div>
 
       `;
 
-    });
+    }
+  );
 
 
   const canConfirm =
@@ -3036,18 +3491,26 @@ function renderTrackedOrder(
 
           <div class="order-id">
 
-            ${escapeHtml(
-              order.orderId
-            )}
+            🔖 ${
+              escapeHtml(
+                order.orderId
+              )
+            }
 
           </div>
 
-          <small style="color:#777">
+          <small
+            style="color:#777"
+          >
 
-            ${new Date(
-              order.createdAt ||
-              Date.now()
-            ).toLocaleString()}
+            🕐 ${
+              new Date(
+                order.createdAt ||
+                Date.now()
+              ).toLocaleString(
+                "en-IN"
+              )
+            }
 
           </small>
 
@@ -3056,9 +3519,19 @@ function renderTrackedOrder(
 
         <div class="order-status">
 
-          ${escapeHtml(
-            formatStatus(status)
-          )}
+          ${
+            getStatusEmoji(
+              status
+            )
+          }
+
+          ${
+            escapeHtml(
+              formatStatus(
+                status
+              )
+            )
+          }
 
         </div>
 
@@ -3072,7 +3545,18 @@ function renderTrackedOrder(
       </div>
 
 
-      <div style="margin-top:20px">
+      <div
+        style="margin-top:20px"
+      >
+
+        <h3
+          style="
+            margin-bottom:12px;
+            color:#f59b23
+          "
+        >
+          🍴 Your Items
+        </h3>
 
         ${items}
 
@@ -3080,14 +3564,17 @@ function renderTrackedOrder(
 
 
       <hr
-        style="border-color:#292929;margin:15px 0"
+        style="
+          border-color:#292929;
+          margin:15px 0
+        "
       >
 
 
       <div class="summary-row">
 
         <span>
-          Item Total
+          🛒 Item Total
         </span>
 
         <b>
@@ -3100,7 +3587,7 @@ function renderTrackedOrder(
       <div class="summary-row">
 
         <span>
-          Delivery
+          🚚 Delivery
         </span>
 
         <b>
@@ -3110,10 +3597,12 @@ function renderTrackedOrder(
       </div>
 
 
-      <div class="summary-row total">
+      <div
+        class="summary-row total"
+      >
 
         <span>
-          Total
+          💰 Total
         </span>
 
         <span>
@@ -3132,8 +3621,58 @@ function renderTrackedOrder(
               id="deliveredButton"
               class="primary"
             >
-              Confirm Delivered
+              🎉 Confirm Delivered
             </button>
+
+          `
+
+          : ""
+      }
+
+
+      ${
+        status === "delivered"
+
+          ? `
+
+            <div
+              style="
+                margin-top:15px;
+                padding:13px;
+                border-radius:10px;
+                background:#102615;
+                color:#30d158;
+                text-align:center;
+                font-weight:700
+              "
+            >
+              🎉 Order Delivered Successfully!
+            </div>
+
+          `
+
+          : ""
+      }
+
+
+      ${
+        status === "cancelled"
+
+          ? `
+
+            <div
+              style="
+                margin-top:15px;
+                padding:13px;
+                border-radius:10px;
+                background:#301010;
+                color:#ff625b;
+                text-align:center;
+                font-weight:700
+              "
+            >
+              ❌ This order has been cancelled.
+            </div>
 
           `
 
@@ -3159,6 +3698,45 @@ function renderTrackedOrder(
       };
 
   }
+
+}
+
+
+/* =====================================================
+   STATUS EMOJI
+===================================================== */
+
+function getStatusEmoji(
+  status
+){
+
+  const map = {
+
+    received:
+      "📥",
+
+    confirmed:
+      "✅",
+
+    preparing:
+      "👨‍🍳",
+
+    out_for_delivery:
+      "🛵",
+
+    delivered:
+      "🎉",
+
+    cancelled:
+      "❌"
+
+  };
+
+
+  return (
+    map[status] ||
+    "📌"
+  );
 
 }
 
@@ -3201,7 +3779,9 @@ async function customerConfirmDelivered(
 
 
   if(
-    String(order.status).toLowerCase() !==
+    String(
+      order.status
+    ).toLowerCase() !==
     "out_for_delivery"
   ){
 
@@ -3225,14 +3805,15 @@ async function customerConfirmDelivered(
 
 
     alert(
-      "Order marked as delivered."
+      "🎉 Order marked as delivered."
     );
 
 
     trackOrder();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(
       "DELIVERY CONFIRM ERROR:",
@@ -3244,8 +3825,10 @@ async function customerConfirmDelivered(
 
       "Could not confirm delivery.\n\n" +
 
-      (error.message ||
-        error)
+      (
+        error.message ||
+        error
+      )
 
     );
 
@@ -3388,7 +3971,30 @@ document.getElementById(
     );
 
 
-  }catch(error){
+    /*
+      If customer comes back after placing
+      an order, automatically restore last
+      Order ID into tracking box.
+    */
+
+    const lastOrderId =
+      localStorage.getItem(
+        "lastOrderId"
+      );
+
+
+    if(lastOrderId){
+
+      document.getElementById(
+        "trackInput"
+      ).value =
+        lastOrderId;
+
+    }
+
+  }
+
+  catch(error){
 
     console.error(
       "STARTUP ERROR:",
