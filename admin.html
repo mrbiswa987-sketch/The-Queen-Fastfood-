@@ -48,9 +48,45 @@ button{
   padding:22px;
 }
 
-.login-box h1{
-  font-size:24px;
-  margin-bottom:6px;
+/* LOGIN ADMIN TITLE */
+
+.admin-login-title{
+  text-align:center;
+  color:#f59b23;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  line-height:1.2;
+  margin-bottom:14px;
+  text-transform:uppercase;
+  text-shadow:0 0 12px rgba(245,155,35,.18);
+}
+
+/* ADMIN WARNING */
+
+.admin-warning{
+  background:#241a08;
+  border:1px solid #f59b23;
+  border-radius:9px;
+  padding:11px 12px;
+  margin-bottom:16px;
+  text-align:center;
+  color:#d6d6d6;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.admin-warning strong{
+  display:block;
+  color:#f59b23;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.6px;
+  margin-bottom:5px;
+}
+
+.admin-warning b{
+  color:#fff;
 }
 
 .login-box p{
@@ -721,6 +757,15 @@ header{
     padding:18px;
   }
 
+  .admin-login-title{
+    font-size:21px;
+    letter-spacing:1px;
+  }
+
+  .admin-warning{
+    font-size:10px;
+  }
+
   .nav h1{
     font-size:15px;
   }
@@ -754,7 +799,23 @@ header{
 
   <div class="login-box">
 
-    <h1>The Queen Fast Food</h1>
+    <h1 class="admin-login-title">
+      THE QUEEN FAST FOOD ADMIN
+    </h1>
+
+    <div class="admin-warning">
+
+      <strong>
+        ⚠️ AUTHORIZED ACCESS ONLY
+      </strong>
+
+      <span>
+        This Admin ID is strictly reserved for the
+        <b>Owner and Authorized Web Developer.</b>
+        No one else is permitted to use this ID.
+      </span>
+
+    </div>
 
     <p>Admin Panel</p>
 
