@@ -32,10 +32,6 @@ button{
   display:none!important;
 }
 
-/* =========================
-   LOGIN
-========================= */
-
 .login{
   min-height:100vh;
   display:flex;
@@ -62,10 +58,6 @@ button{
   margin-bottom:18px;
   font-size:13px;
 }
-
-/* =========================
-   COMMON
-========================= */
 
 input,
 select{
@@ -113,9 +105,7 @@ button{
   font-size:13px;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header{
   background:#101010;
@@ -146,9 +136,7 @@ header{
   gap:9px;
 }
 
-/* =========================
-   NOTIFICATION
-========================= */
+/* NOTIFICATION */
 
 .notification-wrap{
   position:relative;
@@ -243,9 +231,7 @@ header{
   padding:8px 2px;
 }
 
-/* =========================
-   CONTAINER
-========================= */
+/* CONTAINER */
 
 .container{
   max-width:1250px;
@@ -253,9 +239,7 @@ header{
   padding:15px;
 }
 
-/* =========================
-   DASHBOARD
-========================= */
+/* DASHBOARD */
 
 .grid{
   display:grid;
@@ -290,9 +274,7 @@ header{
   margin-bottom:10px;
 }
 
-/* =========================
-   SHOP CONTROL
-========================= */
+/* SHOP */
 
 .status-buttons{
   display:grid;
@@ -336,9 +318,7 @@ header{
   margin-top:3px;
 }
 
-/* =========================
-   WEBSITE CONTROL
-========================= */
+/* WEBSITE */
 
 .website-control{
   display:grid;
@@ -352,9 +332,7 @@ header{
   margin-bottom:0;
 }
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu-list{
   display:grid;
@@ -404,9 +382,7 @@ header{
   font-size:12px;
 }
 
-/* =========================
-   ORDERS
-========================= */
+/* ORDERS */
 
 .orders{
   display:grid;
@@ -479,6 +455,10 @@ header{
   margin-top:9px;
 }
 
+.order-actions.two{
+  grid-template-columns:1fr 1fr;
+}
+
 .order-actions button{
   padding:7px;
   font-size:11px;
@@ -501,29 +481,127 @@ header{
   word-break:break-word;
 }
 
-/* =========================
-   COMPLETE BOX
-========================= */
+/* COMPLETE FOLDER */
 
-.complete-column{
-  grid-column:1 / -1;
-  width:100%;
+.complete-folder{
+  margin-top:10px;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:11px;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.complete-folder-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.complete-folder-icon{
+  width:40px;
+  height:40px;
+  border-radius:9px;
+  background:#292929;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+}
+
+.complete-folder-title{
+  font-weight:800;
+  font-size:13px;
+}
+
+.complete-folder-sub{
+  color:#777;
+  font-size:10px;
+  margin-top:3px;
+}
+
+.complete-folder-button{
+  background:#292929;
+  color:#fff;
+  padding:8px 11px;
+  font-size:11px;
+}
+
+.complete-folder-button:hover{
+  background:#f59b23;
+  color:#000;
+}
+
+/* COMPLETE MODAL */
+
+.complete-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.complete-modal-box{
+  width:min(1000px,100%);
+  max-height:85vh;
+  overflow:auto;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:14px;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+}
+
+.complete-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+  position:sticky;
+  top:0;
+  background:#101010;
+  padding-bottom:8px;
+  z-index:2;
+}
+
+.complete-modal-head h2{
+  color:#f59b23;
+  font-size:17px;
+}
+
+.close-complete{
+  width:34px;
+  height:34px;
+  padding:0;
+  border-radius:50%;
+  background:#292929;
+  color:#fff;
+  font-size:17px;
 }
 
 .complete-orders-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
-  margin-top:3px;
 }
 
-.complete-orders-grid .order{
-  margin-top:8px;
+.empty-complete{
+  grid-column:1 / -1;
+  text-align:center;
+  color:#777;
+  padding:35px 10px;
+  font-size:12px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media(max-width:1100px){
 
@@ -549,10 +627,6 @@ header{
 
   .orders{
     grid-template-columns:1fr;
-  }
-
-  .complete-column{
-    grid-column:auto;
   }
 
   .complete-orders-grid{
@@ -662,6 +736,14 @@ header{
     font-size:18px;
   }
 
+  .complete-folder{
+    align-items:flex-start;
+  }
+
+  .complete-folder-button{
+    white-space:nowrap;
+  }
+
 }
 </style>
 </head>
@@ -734,7 +816,6 @@ header{
 
         </button>
 
-
         <div
           id="notificationPanel"
           class="notification-panel hidden"
@@ -749,7 +830,6 @@ header{
         </div>
 
       </div>
-
 
       <button
         id="logoutButton"
@@ -766,7 +846,6 @@ header{
 
 
 <div class="container">
-
 
 <!-- DASHBOARD -->
 
@@ -980,22 +1059,42 @@ header{
 
     </div>
 
+  </div>
 
-    <!-- COMPLETE -->
 
-    <div class="order-column complete-column">
+  <!-- COMPLETE FOLDER -->
 
-      <h3>
-        COMPLETE
-        <span id="boxCompleteCount">(0)</span>
-      </h3>
+  <div class="complete-folder">
 
-      <div
-        id="completeOrders"
-        class="complete-orders-grid"
-      ></div>
+    <div class="complete-folder-left">
+
+      <div class="complete-folder-icon">
+        📁
+      </div>
+
+      <div>
+
+        <div class="complete-folder-title">
+          Complete Orders
+          <span id="folderCompleteCount">
+            (0)
+          </span>
+        </div>
+
+        <div class="complete-folder-sub">
+          Completed and cancelled orders
+        </div>
+
+      </div>
 
     </div>
+
+    <button
+      id="openCompleteButton"
+      class="complete-folder-button"
+    >
+      Open Folder
+    </button>
 
   </div>
 
@@ -1003,6 +1102,43 @@ header{
 
 
 </div>
+
+</div>
+
+
+<!-- COMPLETE MODAL -->
+
+<div
+  id="completeModal"
+  class="complete-modal hidden"
+>
+
+  <div class="complete-modal-box">
+
+    <div class="complete-modal-head">
+
+      <h2>
+        📁 Complete Orders
+        <span id="modalCompleteCount">
+          (0)
+        </span>
+      </h2>
+
+      <button
+        id="closeCompleteButton"
+        class="close-complete"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="completeOrders"
+      class="complete-orders-grid"
+    ></div>
+
+  </div>
 
 </div>
 
@@ -1017,7 +1153,8 @@ import {
   getDatabase,
   ref,
   onValue,
-  update
+  update,
+  remove
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -1084,9 +1221,7 @@ let orders = {};
 let authReady = false;
 
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 const MENU = [
 
@@ -1141,9 +1276,7 @@ const MENU = [
 ];
 
 
-/* =========================
-   AUTH PERSISTENCE
-========================= */
+/* AUTH PERSISTENCE */
 
 async function prepareAuth(){
 
@@ -1175,9 +1308,7 @@ async function prepareAuth(){
 await prepareAuth();
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 document.getElementById(
   "loginButton"
@@ -1329,9 +1460,7 @@ onAuthStateChanged(
 );
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* LOGOUT */
 
 document.getElementById(
   "logoutButton"
@@ -1352,9 +1481,7 @@ document.getElementById(
 };
 
 
-/* =========================
-   NOTIFICATION BELL
-========================= */
+/* NOTIFICATION */
 
 const notificationButton =
   document.getElementById(
@@ -1524,9 +1651,7 @@ function renderNotifications(
 }
 
 
-/* =========================
-   LOAD DATA
-========================= */
+/* LOAD DATA */
 
 let dataLoaded = false;
 
@@ -1602,9 +1727,7 @@ function loadData(){
 }
 
 
-/* =========================
-   SETTINGS UI
-========================= */
+/* SETTINGS */
 
 function renderSettings(){
 
@@ -1686,9 +1809,7 @@ function renderSettings(){
 }
 
 
-/* =========================
-   SHOP OVERRIDE
-========================= */
+/* SHOP */
 
 document.getElementById(
   "autoButton"
@@ -1914,9 +2035,7 @@ function isOpenByTime(){
 }
 
 
-/* =========================
-   WEBSITE
-========================= */
+/* WEBSITE */
 
 document.getElementById(
   "saveWebsiteButton"
@@ -1967,9 +2086,7 @@ document.getElementById(
 };
 
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 function renderMenu(){
 
@@ -2224,9 +2341,7 @@ function renderMenu(){
 }
 
 
-/* =========================
-   ORDERS
-========================= */
+/* ORDERS */
 
 function renderOrders(){
 
@@ -2403,7 +2518,13 @@ function renderOrders(){
 
 
   document.getElementById(
-    "boxCompleteCount"
+    "folderCompleteCount"
+  ).textContent =
+    `(${buckets.complete.length})`;
+
+
+  document.getElementById(
+    "modalCompleteCount"
   ).textContent =
     `(${buckets.complete.length})`;
 
@@ -2415,9 +2536,7 @@ function renderOrders(){
 }
 
 
-/* =========================
-   NORMAL ORDER BUCKET
-========================= */
+/* NORMAL ORDER BUCKET */
 
 function renderBucket(
   id,
@@ -2453,9 +2572,7 @@ function renderBucket(
 }
 
 
-/* =========================
-   COMPLETE ORDER BUCKET
-========================= */
+/* COMPLETE ORDER BUCKET */
 
 function renderCompleteBucket(
   list
@@ -2469,6 +2586,19 @@ function renderCompleteBucket(
 
   container.innerHTML =
     "";
+
+
+  if(list.length === 0){
+
+    container.innerHTML = `
+      <div class="empty-complete">
+        No complete orders yet.
+      </div>
+    `;
+
+    return;
+
+  }
 
 
   list.forEach(
@@ -2490,9 +2620,7 @@ function renderCompleteBucket(
 }
 
 
-/* =========================
-   ORDER CARD
-========================= */
+/* ORDER CARD */
 
 function createOrderCard(
   order
@@ -2728,6 +2856,58 @@ function createOrderCard(
       : ""
     }
 
+
+    ${
+      status === "out_for_delivery"
+
+      ? `
+
+        <div class="order-actions two">
+
+          <button
+            class="green"
+            data-action="complete"
+          >
+            Move to Complete
+          </button>
+
+          <button
+            class="danger"
+            data-action="remove"
+          >
+            Remove
+          </button>
+
+        </div>
+
+      `
+
+      : ""
+    }
+
+
+    ${
+      status === "delivered" ||
+      status === "cancelled"
+
+      ? `
+
+        <div class="order-actions">
+
+          <button
+            class="danger"
+            data-action="remove"
+          >
+            Remove Order
+          </button>
+
+        </div>
+
+      `
+
+      : ""
+    }
+
   `;
 
 
@@ -2798,6 +2978,30 @@ function createOrderCard(
 
           }
 
+
+          if(
+            type ===
+            "complete"
+          ){
+
+            await moveOrderToComplete(
+              order
+            );
+
+          }
+
+
+          if(
+            type ===
+            "remove"
+          ){
+
+            await removeOrder(
+              order
+            );
+
+          }
+
         };
 
     }
@@ -2809,9 +3013,7 @@ function createOrderCard(
 }
 
 
-/* =========================
-   CHANGE ORDER STATUS
-========================= */
+/* CHANGE ORDER STATUS */
 
 async function changeOrderStatus(
   order,
@@ -2858,9 +3060,188 @@ async function changeOrderStatus(
 }
 
 
-/* =========================
-   HELPERS
-========================= */
+/* MOVE DELIVERY -> COMPLETE */
+
+async function moveOrderToComplete(
+  order
+){
+
+  if(!order.__key)
+    return;
+
+
+  const orderId =
+    order.orderId ||
+    order.__key;
+
+
+  const ok =
+    confirm(
+      `Move order ${orderId} to Complete?`
+    );
+
+
+  if(!ok)
+    return;
+
+
+  try{
+
+    await update(
+
+      ref(
+        db,
+        `orders/${order.__key}`
+      ),
+
+      {
+
+        status:
+          "delivered",
+
+        updatedAt:
+          Date.now()
+
+      }
+
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Could not move order to Complete."
+    );
+
+  }
+
+}
+
+
+/* REMOVE ORDER */
+
+async function removeOrder(
+  order
+){
+
+  if(!order.__key)
+    return;
+
+
+  const orderId =
+    order.orderId ||
+    order.__key;
+
+
+  const ok =
+    confirm(
+      `Are you sure you want to permanently remove order ${orderId}?`
+    );
+
+
+  if(!ok)
+    return;
+
+
+  try{
+
+    await remove(
+
+      ref(
+        db,
+        `orders/${order.__key}`
+      )
+
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Could not remove order."
+    );
+
+  }
+
+}
+
+
+/* COMPLETE FOLDER */
+
+const completeModal =
+  document.getElementById(
+    "completeModal"
+  );
+
+
+document.getElementById(
+  "openCompleteButton"
+).onclick =
+  ()=>{
+
+    completeModal.classList.remove(
+      "hidden"
+    );
+
+  };
+
+
+document.getElementById(
+  "closeCompleteButton"
+).onclick =
+  ()=>{
+
+    completeModal.classList.add(
+      "hidden"
+    );
+
+  };
+
+
+completeModal.addEventListener(
+  "click",
+  event=>{
+
+    if(
+      event.target ===
+      completeModal
+    ){
+
+      completeModal.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key === "Escape"
+    ){
+
+      completeModal.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+/* HELPERS */
 
 function formatStatus(
   status
