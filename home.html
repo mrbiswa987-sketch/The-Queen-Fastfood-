@@ -3,860 +3,1683 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>The Queen Fast Food | Ibrisingh</title>
-<meta name="theme-color" content="#050505">
+
+<title>The Queen Fast Food | Good Food. Good Mood.</title>
+
+<meta name="theme-color" content="#080808">
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
-  padding:0
+  padding:0;
 }
 
 :root{
-  --gold:#d8b15a;
-  --gold2:#f4d98b;
-  --bg:#050505;
-  --card:#101010;
-  --line:rgba(216,177,90,.18);
-  --muted:#aaa
+  --orange:#ff6a00;
+  --orange2:#ff8a2a;
+  --orange-soft:#ffb36b;
+  --black:#070707;
+  --black2:#0d0d0d;
+  --card:#111111;
+  --card2:#151515;
+  --white:#fff;
+  --muted:#999;
+  --line:rgba(255,106,0,.18);
+  --green:#28d17c;
+  --red:#ff4545;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
+  font-family:
+  Inter,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Arial,
+  sans-serif;
+
+  background:
+  radial-gradient(
+    circle at 80% 10%,
+    rgba(255,106,0,.08),
+    transparent 28%
+  ),
+  radial-gradient(
+    circle at 10% 35%,
+    rgba(255,106,0,.045),
+    transparent 25%
+  ),
+  #070707;
+
   color:#fff;
-  line-height:1.5
+  line-height:1.5;
+  overflow-x:hidden;
 }
 
-button,input,textarea,select{
-  font:inherit
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+  linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,106,0,.025) 45%,
+    transparent 65%
+  );
+  z-index:-1;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
 }
 
 button{
-  cursor:pointer
+  cursor:pointer;
 }
 
 a{
   color:inherit;
-  text-decoration:none
+  text-decoration:none;
 }
 
 .container{
-  width:min(1120px,92%);
-  margin:auto
+  width:min(1180px,92%);
+  margin:auto;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
+
 header{
   position:sticky;
   top:0;
-  z-index:30;
-  background:rgba(5,5,5,.95);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line)
+  z-index:100;
+  background:rgba(7,7,7,.82);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .nav{
-  min-height:70px;
+  min-height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px
+  gap:20px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
-  font-weight:800
+  gap:12px;
 }
 
-.crown{
-  color:var(--gold);
-  font-size:25px
-}
-
-.brand small{
-  display:block;
-  color:var(--gold);
-  font-size:9px;
-  letter-spacing:2px
-}
-
-.nav-right{
+.brand-crown{
+  width:42px;
+  height:42px;
   display:flex;
   align-items:center;
-  gap:10px
+  justify-content:center;
+  border:1px solid rgba(255,106,0,.45);
+  border-radius:13px;
+  color:var(--orange);
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,106,0,.14),
+    rgba(255,106,0,.03)
+  );
+  box-shadow:
+  0 0 30px rgba(255,106,0,.10);
+  font-size:23px;
 }
 
-.phone-top{
+.brand-name{
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+.brand-sub{
+  display:block;
+  color:var(--orange2);
+  font-size:9px;
+  letter-spacing:3px;
+  margin-top:1px;
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.nav-phone{
+  color:#bbb;
   font-size:13px;
-  color:#ddd
 }
 
-.cart-btn,
-.gold-btn{
-  border:1px solid var(--gold);
-  background:linear-gradient(135deg,#e0bb65,#a87920);
-  color:#080808;
+.cart-top{
+  border:1px solid rgba(255,106,0,.65);
+  background:rgba(255,106,0,.08);
+  color:#fff;
+  border-radius:12px;
+  padding:10px 14px;
   font-weight:800;
-  border-radius:10px;
-  padding:10px 14px
+  transition:.25s;
 }
 
-.cart-btn{
-  position:relative
+.cart-top:hover{
+  background:var(--orange);
+  color:#080808;
+  box-shadow:0 0 25px rgba(255,106,0,.25);
 }
 
 .cart-count{
-  background:#111;
-  color:var(--gold2);
-  border:1px solid var(--gold);
-  border-radius:50%;
-  padding:1px 6px;
-  font-size:11px;
-  margin-left:4px
-}
-
-/* HERO */
-.hero{
-  padding:78px 0 60px;
-  text-align:center;
-  background:radial-gradient(
-    circle at 50% 20%,
-    rgba(216,177,90,.12),
-    transparent 42%
-  )
-}
-
-.hero-kicker{
-  color:var(--gold2);
-  font-size:12px;
-  letter-spacing:4px;
-  font-weight:700
-}
-
-.hero h1{
-  font-size:clamp(38px,7vw,72px);
-  line-height:1;
-  margin:15px 0
-}
-
-.hero h1 span{
-  color:var(--gold)
-}
-
-.hero p{
-  max-width:650px;
-  margin:0 auto 24px;
-  color:#bbb
-}
-
-.hero-actions{
-  display:flex;
+  display:inline-flex;
+  min-width:22px;
+  height:22px;
+  align-items:center;
   justify-content:center;
-  gap:12px;
-  flex-wrap:wrap
+  border-radius:50%;
+  background:var(--orange);
+  color:#080808;
+  font-size:11px;
+  margin-left:5px;
 }
 
-.outline-btn{
-  padding:11px 17px;
-  border:1px solid var(--gold);
-  border-radius:10px;
-  background:transparent;
-  color:#fff;
-  font-weight:700
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  min-height:690px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
 }
 
-/* SHOP STATUS */
-.shop-status-home{
+.hero::before{
+  content:"";
+  position:absolute;
+  width:620px;
+  height:620px;
+  right:-250px;
+  top:-180px;
+  background:radial-gradient(
+    circle,
+    rgba(255,106,0,.20),
+    rgba(255,106,0,.06) 38%,
+    transparent 70%
+  );
+  filter:blur(10px);
+  pointer-events:none;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  left:-250px;
+  bottom:-220px;
+  background:radial-gradient(
+    circle,
+    rgba(255,106,0,.11),
+    transparent 68%
+  );
+  pointer-events:none;
+}
+
+.hero-grid{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:50px;
+  padding:85px 0;
+}
+
+.hero-content{
+  max-width:650px;
+}
+
+.hero-tag{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  margin:14px 0;
-  padding:8px 12px;
-  border:1px solid #333;
+  padding:8px 13px;
+  border:1px solid rgba(255,106,0,.28);
+  background:rgba(255,106,0,.055);
+  color:var(--orange-soft);
   border-radius:999px;
-  background:#111;
-  color:#ddd;
-  font-size:11px;
-  font-weight:800
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2.5px;
+  margin-bottom:22px;
 }
 
-.shop-dot-home{
-  width:8px;
-  height:8px;
+.hero-tag span{
+  width:6px;
+  height:6px;
+  background:var(--orange);
   border-radius:50%;
-  background:#25d366;
-  box-shadow:0 0 10px rgba(37,211,102,.55)
+  box-shadow:0 0 12px var(--orange);
 }
 
-.shop-dot-home.closed{
-  background:#ff4545;
-  box-shadow:0 0 10px rgba(255,69,69,.45)
+.hero h1{
+  font-size:clamp(48px,7vw,88px);
+  line-height:.94;
+  letter-spacing:-4px;
+  margin-bottom:22px;
 }
 
-.shop-status-home.closed{
-  border-color:rgba(255,69,69,.35);
-  color:#ff7777
+.hero h1 .orange{
+  color:var(--orange);
 }
 
-/* TRUST */
+.hero-line{
+  width:85px;
+  height:3px;
+  border-radius:10px;
+  background:linear-gradient(
+    90deg,
+    var(--orange),
+    transparent
+  );
+  margin-bottom:20px;
+}
+
+.hero-description{
+  max-width:580px;
+  color:#aaa;
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+
+.hero-buttons{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.primary-btn{
+  border:0;
+  padding:14px 21px;
+  border-radius:12px;
+  background:linear-gradient(
+    135deg,
+    #ff7a18,
+    #e84e00
+  );
+  color:#090909;
+  font-weight:900;
+  box-shadow:
+    0 10px 35px rgba(255,106,0,.16);
+  transition:.25s;
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 15px 40px rgba(255,106,0,.28);
+}
+
+.secondary-btn{
+  border:1px solid rgba(255,255,255,.13);
+  padding:13px 20px;
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+  color:#fff;
+  font-weight:800;
+  transition:.25s;
+}
+
+.secondary-btn:hover{
+  border-color:rgba(255,106,0,.5);
+  color:var(--orange2);
+}
+
+.hero-status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:25px;
+  padding:9px 13px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#0d0d0d;
+  border-radius:999px;
+  color:#aaa;
+  font-size:11px;
+  font-weight:800;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px rgba(40,209,124,.6);
+}
+
+.status-dot.closed{
+  background:var(--red);
+  box-shadow:0 0 12px rgba(255,69,69,.55);
+}
+
+.hero-visual{
+  position:relative;
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-glow{
+  position:absolute;
+  width:430px;
+  height:430px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(255,106,0,.18),
+    rgba(255,106,0,.04) 45%,
+    transparent 70%
+  );
+  filter:blur(8px);
+}
+
+.hero-card{
+  position:relative;
+  width:min(460px,100%);
+  min-height:470px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:32px;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,.025)
+    );
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.5),
+    0 0 70px rgba(255,106,0,.08);
+  transform:rotate(1.5deg);
+}
+
+.hero-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,.08),
+      transparent 30%
+    );
+  pointer-events:none;
+  z-index:2;
+}
+
+.hero-food-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:130px;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255,106,0,.22),
+      transparent 45%
+    );
+}
+
+.hero-card-bottom{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:20px;
+  z-index:3;
+  padding:17px;
+  border-radius:18px;
+  background:rgba(5,5,5,.72);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.hero-card-bottom small{
+  color:var(--orange2);
+  letter-spacing:2px;
+  font-size:9px;
+  font-weight:900;
+}
+
+.hero-card-bottom h3{
+  margin-top:4px;
+  font-size:22px;
+}
+
+/* =========================
+   TRUST
+========================= */
+
 .trust{
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:16px 0
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  background:#090909;
 }
 
 .trust-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  text-align:center
 }
 
-.trust-grid div{
-  color:#ccc;
-  font-size:13px
+.trust-item{
+  padding:23px 15px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,.05);
 }
 
-.trust-grid b{
+.trust-item:last-child{
+  border-right:0;
+}
+
+.trust-icon{
+  color:var(--orange);
+  font-size:21px;
+}
+
+.trust-item strong{
   display:block;
-  color:var(--gold2);
-  font-size:15px
+  margin-top:5px;
+  font-size:13px;
 }
 
-/* SECTIONS */
+.trust-item span{
+  display:block;
+  margin-top:2px;
+  color:#777;
+  font-size:11px;
+}
+
+/* =========================
+   SECTION
+========================= */
+
 section{
-  padding:55px 0
+  padding:95px 0;
 }
 
 .section-head{
   text-align:center;
-  margin-bottom:28px
+  max-width:700px;
+  margin:0 auto 45px;
 }
 
-.eyebrow{
-  color:var(--gold);
+.section-label{
+  color:var(--orange2);
+  font-size:10px;
   letter-spacing:3px;
-  font-size:11px;
-  font-weight:800
+  font-weight:900;
 }
 
 .section-head h2{
-  font-size:32px;
-  margin-top:6px
+  font-size:clamp(30px,4vw,48px);
+  letter-spacing:-1.5px;
+  margin-top:8px;
 }
 
 .section-head p{
-  color:#aaa;
-  margin-top:7px
+  color:#777;
+  margin-top:10px;
+  font-size:14px;
 }
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
+
 .menu-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:18px
+  gap:20px;
 }
 
-.product{
+.food-card{
   position:relative;
-  background:linear-gradient(180deg,#131313,#0b0b0b);
-  border:1px solid var(--line);
-  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 10px 35px rgba(0,0,0,.25)
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.075);
+  background:
+    linear-gradient(
+      160deg,
+      #151515,
+      #0c0c0c
+    );
+  transition:.3s;
 }
 
-.product.item-out{
-  opacity:.9
+.food-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(255,106,0,.35);
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.42),
+    0 0 35px rgba(255,106,0,.06);
 }
 
-/* FIREBASE IMAGE */
-.product-img{
-  height:190px;
-  background:#171717;
+.food-image{
+  position:relative;
+  height:220px;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,106,0,.11),
+      transparent 60%
+    ),
+    #141414;
+}
+
+.food-image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transition:.45s;
+}
+
+.food-card:hover .food-image img{
+  transform:scale(1.055);
+}
+
+.food-placeholder{
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
-  position:relative
+  font-size:55px;
+  opacity:.3;
 }
 
-.product-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block
-}
-
-.product.item-out .product-img img{
-  filter:brightness(.58) saturate(.5)
-}
-
-.stock-badge-home{
+.out-badge{
   position:absolute;
-  top:10px;
-  right:10px;
+  top:12px;
+  right:12px;
+  z-index:4;
   padding:6px 9px;
   border-radius:999px;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:.4px;
-  background:rgba(255,48,48,.14);
-  border:1px solid rgba(255,48,48,.55);
+  background:rgba(255,40,40,.12);
+  border:1px solid rgba(255,70,70,.45);
   color:#ff7777;
-  z-index:3
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1px;
 }
 
-.product-body{
-  padding:15px
+.food-body{
+  padding:17px;
 }
 
-.product-body h3{
+.food-name{
   font-size:17px;
-  margin-bottom:4px
+  font-weight:850;
 }
 
-.price{
-  color:var(--gold2);
-  font-weight:800;
-  font-size:18px
+.food-desc{
+  color:#777;
+  font-size:11px;
+  margin-top:4px;
 }
 
-.product-body p{
-  font-size:12px;
-  color:#999;
-  margin:5px 0 13px
+.food-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:17px;
+}
+
+.food-price{
+  color:var(--orange2);
+  font-size:19px;
+  font-weight:900;
 }
 
 .add-btn{
-  width:100%;
-  padding:10px;
-  border:1px solid var(--gold);
-  background:transparent;
+  border:1px solid rgba(255,106,0,.55);
+  background:rgba(255,106,0,.07);
   color:#fff;
-  border-radius:9px;
-  font-weight:800;
-  transition:.2s
+  border-radius:10px;
+  padding:9px 12px;
+  font-size:11px;
+  font-weight:900;
+  transition:.22s;
 }
 
 .add-btn:hover{
-  background:var(--gold);
-  color:#090909
+  background:var(--orange);
+  color:#080808;
+  box-shadow:0 0 22px rgba(255,106,0,.2);
 }
 
-.add-btn.out-of-stock{
-  opacity:.55;
+.add-btn.out{
+  border-color:rgba(255,60,60,.3);
+  color:#ff7777;
+  background:rgba(255,50,50,.04);
   cursor:not-allowed;
-  border-color:rgba(255,48,48,.4)!important;
-  color:#ff7777!important;
-  background:#140909!important
 }
 
-/* ADD TO CART BLINK */
-@keyframes addToCartBlink{
+@keyframes cartBlink{
   0%{
-    opacity:1;
     transform:scale(1);
-    box-shadow:0 0 0 rgba(216,177,90,0)
+    box-shadow:0 0 0 rgba(255,106,0,0);
   }
-
-  20%{
-    opacity:.25;
-    transform:scale(.93);
-    box-shadow:0 0 18px rgba(216,177,90,.8)
+  35%{
+    transform:scale(.92);
+    background:#ff6a00;
+    color:#080808;
+    box-shadow:0 0 30px rgba(255,106,0,.7);
   }
-
-  40%{
-    opacity:1;
-    transform:scale(1.06);
-    box-shadow:0 0 28px rgba(216,177,90,.95);
-    background:var(--gold);
-    color:#090909
+  65%{
+    transform:scale(1.08);
+    background:#ff8a2a;
+    color:#080808;
+    box-shadow:0 0 40px rgba(255,106,0,.85);
   }
-
-  60%{
-    opacity:.25;
-    transform:scale(.93);
-    box-shadow:0 0 18px rgba(216,177,90,.8)
-  }
-
-  80%{
-    opacity:1;
-    transform:scale(1.04);
-    box-shadow:0 0 22px rgba(216,177,90,.7);
-    background:var(--gold);
-    color:#090909
-  }
-
   100%{
-    opacity:1;
     transform:scale(1);
-    box-shadow:0 0 0 rgba(216,177,90,0);
-    background:transparent;
-    color:#fff
   }
 }
 
-.add-btn.add-to-cart-blink{
-  animation:addToCartBlink .75s ease
+.add-btn.blink{
+  animation:cartBlink .55s ease;
 }
 
-/* INFO */
-.why-grid,
-.visit-grid{
+/* =========================
+   DELIVERY
+========================= */
+
+.delivery-section{
+  position:relative;
+}
+
+.delivery-box{
+  position:relative;
+  overflow:hidden;
+  padding:45px;
+  border-radius:28px;
+  border:1px solid rgba(255,106,0,.18);
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(255,106,0,.12),
+      transparent 40%
+    ),
+    #0d0d0d;
+}
+
+.delivery-box::after{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  right:-100px;
+  bottom:-130px;
+  border-radius:50%;
+  background:rgba(255,106,0,.08);
+  filter:blur(30px);
+}
+
+.delivery-grid{
+  position:relative;
+  z-index:2;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+  align-items:center;
 }
 
-.info-card{
+.delivery-copy h2{
+  font-size:clamp(30px,4vw,45px);
+  letter-spacing:-1px;
+}
+
+.delivery-copy h2 span{
+  color:var(--orange);
+}
+
+.delivery-copy p{
+  color:#888;
+  margin-top:13px;
+  max-width:520px;
+}
+
+.delivery-rate{
+  display:inline-flex;
+  margin-top:20px;
+  padding:12px 15px;
+  border-radius:12px;
+  border:1px solid rgba(255,106,0,.25);
+  background:rgba(255,106,0,.06);
+  color:var(--orange2);
+  font-weight:900;
+}
+
+.location-panel{
   padding:22px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:#0d0d0d
+  border-radius:20px;
+  background:#090909;
+  border:1px solid rgba(255,255,255,.07);
 }
 
-.info-card .icon{
-  font-size:28px
+.location-panel label{
+  display:block;
+  font-size:11px;
+  color:#aaa;
+  margin-bottom:7px;
+  font-weight:800;
 }
 
-.info-card h3{
-  margin:9px 0 5px
+.location-panel input{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:12px;
+  outline:none;
 }
 
-.info-card p{
-  color:#999;
-  font-size:14px
+.location-panel input:focus{
+  border-color:var(--orange);
 }
 
-/* TRACK */
-.track-box{
-  max-width:760px;
+.location-btn{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border:1px solid rgba(255,106,0,.5);
+  background:rgba(255,106,0,.07);
+  color:#fff;
+  border-radius:10px;
+  font-weight:850;
+}
+
+.location-btn:hover{
+  background:var(--orange);
+  color:#080808;
+}
+
+.location-result{
+  margin-top:12px;
+  color:#888;
+  font-size:11px;
+  line-height:1.6;
+}
+
+/* =========================
+   TRACK
+========================= */
+
+.track-section{
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(255,106,0,.055),
+      transparent 45%
+    );
+}
+
+.track-card{
+  max-width:850px;
   margin:auto;
-  padding:25px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:#0c0c0c
+  padding:28px;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:25px;
+  background:#0c0c0c;
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
 }
 
 .track-input{
   display:flex;
-  gap:10px
+  gap:10px;
 }
 
 .track-input input{
-  flex:1
+  flex:1;
+  min-width:0;
+  background:#111;
+  border:1px solid #292929;
+  color:#fff;
+  padding:14px;
+  border-radius:11px;
+  outline:none;
 }
 
-.steps{
+.track-input input:focus{
+  border-color:var(--orange);
+}
+
+.track-btn{
+  padding:0 20px;
+  border:0;
+  border-radius:11px;
+  background:var(--orange);
+  color:#080808;
+  font-weight:900;
+}
+
+.track-result{
+  margin-top:25px;
+  display:none;
+}
+
+.track-order-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding-bottom:18px;
+  border-bottom:1px solid #222;
+}
+
+.track-order-id{
+  color:#fff;
+  font-weight:900;
+}
+
+.track-order-status{
+  color:var(--orange2);
+  font-weight:900;
+  text-transform:capitalize;
+}
+
+.track-steps{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  margin-top:25px;
-  gap:5px
+  gap:8px;
+  margin-top:30px;
 }
 
-.step{
+.track-step{
   text-align:center;
-  color:#666;
-  font-size:11px
+  color:#555;
+  font-size:10px;
 }
 
-.dot{
-  width:25px;
-  height:25px;
-  border:1px solid #555;
+.track-circle{
+  width:32px;
+  height:32px;
+  margin:0 auto 8px;
   border-radius:50%;
-  margin:0 auto 7px;
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
-
-.step.active{
-  color:var(--gold2)
-}
-
-.step.active .dot{
-  border-color:var(--gold);
-  background:var(--gold);
-  color:#000
-}
-
-/* FOOTER */
-footer{
-  padding:35px 0;
-  border-top:1px solid var(--line);
-  color:#888;
-  text-align:center;
-  font-size:13px
-}
-
-.footer-brand{
-  color:#fff;
-  font-weight:800;
-  margin-bottom:6px
-}
-
-/* FORM */
-input,
-textarea,
-select{
-  width:100%;
-  background:#111;
-  color:#fff;
   border:1px solid #333;
-  border-radius:9px;
-  padding:11px;
-  outline:none
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:var(--gold)
-}
-
-label{
-  display:block;
-  color:#ccc;
-  font-size:12px;
-  margin:0 0 6px;
-  font-weight:700
-}
-
-.form-group{
-  margin-bottom:13px
-}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:80;
-  background:rgba(0,0,0,.76);
-  display:none;
+  display:flex;
   align-items:center;
   justify-content:center;
-  padding:15px
 }
 
-.modal.open{
-  display:flex
+.track-step.active{
+  color:#ddd;
 }
 
-.modal-card{
-  width:min(620px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:#0d0d0d;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:22px
+.track-step.active .track-circle{
+  background:var(--orange);
+  color:#080808;
+  border-color:var(--orange);
+  box-shadow:0 0 18px rgba(255,106,0,.2);
 }
 
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-  margin-bottom:18px
+/* =========================
+   CART DRAWER
+========================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:180;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(4px);
+  display:none;
 }
 
-.close{
-  background:#171717;
-  border:1px solid #333;
-  color:#fff;
-  border-radius:8px;
-  width:35px;
-  height:35px
+.overlay.show{
+  display:block;
 }
 
-.summary{
-  background:#080808;
-  border:1px solid #222;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:16px
-}
-
-.summary-row{
-  display:flex;
-  justify-content:space-between;
-  padding:5px 0;
-  color:#aaa;
-  font-size:13px
-}
-
-.summary-row.total{
-  color:#fff;
-  font-size:17px;
-  font-weight:800;
-  border-top:1px solid #333;
-  margin-top:5px;
-  padding-top:10px
-}
-
-.location-status{
-  font-size:11px;
-  color:#888;
-  margin-top:6px
-}
-
-.location-btn{
-  margin-top:6px
-}
-
-.order-btn{
-  width:100%;
-  margin-top:4px;
-  padding:12px;
-  border:0;
-  border-radius:10px;
-  background:linear-gradient(135deg,#f0cf7d,#a97920);
-  font-weight:900
-}
-
-/* CART */
 .cart-drawer{
   position:fixed;
-  right:0;
   top:0;
+  right:0;
   bottom:0;
-  width:min(430px,100%);
-  z-index:70;
+  width:min(450px,100%);
+  z-index:200;
   background:#0b0b0b;
-  border-left:1px solid var(--line);
+  border-left:1px solid rgba(255,106,0,.2);
   transform:translateX(100%);
-  transition:.25s;
+  transition:.3s ease;
   display:flex;
-  flex-direction:column
+  flex-direction:column;
+  box-shadow:-25px 0 80px rgba(0,0,0,.5);
 }
 
 .cart-drawer.open{
-  transform:translateX(0)
+  transform:translateX(0);
 }
 
 .cart-head{
-  padding:17px;
-  border-bottom:1px solid #222;
+  padding:20px;
   display:flex;
-  justify-content:space-between
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #222;
 }
 
-.cart-items{
+.cart-head strong{
+  font-size:18px;
+}
+
+.close-btn{
+  width:35px;
+  height:35px;
+  border-radius:9px;
+  border:1px solid #333;
+  background:#151515;
+  color:#fff;
+  font-size:20px;
+}
+
+.cart-list{
   flex:1;
   overflow:auto;
-  padding:15px
+  padding:17px;
+}
+
+.cart-empty{
+  padding:70px 20px;
+  text-align:center;
+  color:#666;
 }
 
 .cart-item{
+  padding:14px 0;
   border-bottom:1px solid #222;
-  padding:12px 0
 }
 
 .cart-item-top{
   display:flex;
   justify-content:space-between;
-  gap:8px
+  gap:10px;
 }
 
-.qty{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin-top:9px
+.cart-item-name{
+  font-weight:850;
 }
 
-.qty button{
-  width:27px;
-  height:27px;
-  background:#171717;
-  color:#fff;
-  border:1px solid #333;
-  border-radius:6px
-}
-
-.cart-foot{
-  padding:15px;
-  border-top:1px solid #222
-}
-
-.empty{
-  text-align:center;
-  color:#777;
-  padding:50px 15px
+.cart-item-price{
+  color:var(--orange2);
+  font-size:12px;
+  margin-top:3px;
 }
 
 .remove-btn{
-  background:#171717;
   border:1px solid #333;
+  background:#151515;
   color:#ff7777;
+  border-radius:7px;
   padding:5px 8px;
-  border-radius:6px;
-  font-size:11px
+  font-size:10px;
 }
 
-/* TOAST */
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:22px;
-  transform:translate(-50%,20px);
+.qty-row{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:10px;
+}
+
+.qty-row button{
+  width:28px;
+  height:28px;
+  border:1px solid #333;
   background:#151515;
   color:#fff;
-  border:1px solid var(--gold);
-  padding:11px 16px;
+  border-radius:7px;
+}
+
+.qty-total{
+  margin-left:auto;
+  color:var(--orange2);
+  font-weight:900;
+}
+
+.cart-footer{
+  padding:18px;
+  border-top:1px solid #222;
+}
+
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  color:#aaa;
+  margin-bottom:5px;
+}
+
+.total-row.grand{
+  color:#fff;
+  font-size:20px;
+  font-weight:900;
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px solid #333;
+}
+
+.checkout-btn{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(
+    135deg,
+    #ff7b1a,
+    #e95000
+  );
+  color:#080808;
+  font-weight:900;
+}
+
+/* =========================
+   CHECKOUT MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(7px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(650px,100%);
+  max-height:94vh;
+  overflow:auto;
+  border:1px solid rgba(255,106,0,.2);
+  border-radius:25px;
+  background:#0d0d0d;
+  box-shadow:0 30px 100px rgba(0,0,0,.6);
+  padding:25px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.modal-label{
+  color:var(--orange2);
+  font-size:9px;
+  letter-spacing:3px;
+  font-weight:900;
+}
+
+.modal-head h2{
+  margin-top:4px;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group label{
+  display:block;
+  color:#aaa;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:1px solid #292929;
   border-radius:10px;
+  padding:12px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:var(--orange);
+}
+
+.checkout-summary{
+  padding:15px;
+  background:#080808;
+  border:1px solid #222;
+  border-radius:14px;
+  margin-bottom:18px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:6px 0;
+  color:#999;
+  font-size:12px;
+}
+
+.summary-row.total{
+  color:#fff;
+  font-size:17px;
+  font-weight:900;
+  border-top:1px solid #333;
+  margin-top:6px;
+  padding-top:12px;
+}
+
+.checkout-location{
+  padding:13px;
+  border-radius:11px;
+  background:rgba(255,106,0,.045);
+  border:1px solid rgba(255,106,0,.15);
+  color:#888;
+  font-size:11px;
+  margin-top:8px;
+}
+
+.place-order{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(
+    135deg,
+    #ff7a18,
+    #e94f00
+  );
+  color:#080808;
+  font-weight:950;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  padding:75px 0 35px;
+  border-top:1px solid rgba(255,255,255,.06);
+  background:#080808;
+}
+
+.footer-main{
+  text-align:center;
+}
+
+.footer-logo{
+  font-size:28px;
+  font-weight:950;
+  letter-spacing:2px;
+}
+
+.footer-logo span{
+  color:var(--orange);
+}
+
+.footer-tagline{
+  color:#777;
+  margin-top:8px;
+  font-size:13px;
+}
+
+.footer-contact{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.contact-box{
+  min-width:200px;
+  padding:15px 18px;
+  border:1px solid rgba(255,255,255,.07);
+  background:#0e0e0e;
+  border-radius:14px;
+}
+
+.contact-box .icon{
+  color:var(--orange);
+  font-size:20px;
+}
+
+.contact-box strong{
+  display:block;
+  margin-top:5px;
+  font-size:12px;
+}
+
+.contact-box span{
+  display:block;
+  color:#777;
+  font-size:11px;
+  margin-top:2px;
+}
+
+.thank-you{
+  margin-top:45px;
+  color:var(--orange2);
+  font-size:16px;
+  font-weight:850;
+}
+
+.thank-you-sub{
+  color:#555;
+  font-size:11px;
+  margin-top:5px;
+}
+
+.copyright{
+  margin-top:35px;
+  padding-top:20px;
+  border-top:1px solid #171717;
+  color:#444;
+  font-size:10px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  z-index:500;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  padding:12px 17px;
+  border-radius:11px;
+  background:#151515;
+  border:1px solid rgba(255,106,0,.55);
+  color:#fff;
+  font-size:12px;
   opacity:0;
   pointer-events:none;
   transition:.25s;
-  z-index:150;
-  font-size:13px
+  box-shadow:0 10px 35px rgba(0,0,0,.4);
 }
 
 .toast.show{
   opacity:1;
-  transform:translate(-50%,0)
+  transform:translate(-50%,0);
 }
 
-/* MOBILE */
-@media(max-width:900px){
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
   .menu-grid{
-    grid-template-columns:repeat(2,1fr)
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .why-grid,
-  .visit-grid{
-    grid-template-columns:1fr
+  .hero-grid{
+    grid-template-columns:1fr;
   }
 
-  .phone-top{
-    display:none
+  .hero-content{
+    text-align:center;
+    margin:auto;
   }
+
+  .hero-line{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-description{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .hero-visual{
+    min-height:430px;
+  }
+
+  .delivery-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 
-@media(max-width:560px){
+@media(max-width:700px){
+
   .nav{
-    min-height:62px
+    min-height:65px;
   }
 
-  .brand{
-    font-size:13px
+  .nav-phone{
+    display:none;
+  }
+
+  .brand-name{
+    font-size:13px;
+  }
+
+  .brand-crown{
+    width:37px;
+    height:37px;
+  }
+
+  .hero{
+    min-height:auto;
+  }
+
+  .hero-grid{
+    padding:65px 0;
+  }
+
+  .hero h1{
+    font-size:clamp(44px,13vw,65px);
+    letter-spacing:-3px;
+  }
+
+  .hero-visual{
+    min-height:360px;
+  }
+
+  .hero-card{
+    min-height:350px;
+  }
+
+  .hero-food-placeholder{
+    font-size:90px;
   }
 
   .menu-grid{
     grid-template-columns:1fr 1fr;
-    gap:10px
+    gap:12px;
   }
 
-  .product-img{
-    height:145px
+  .food-image{
+    height:160px;
   }
 
-  .product-body{
-    padding:11px
+  .food-body{
+    padding:12px;
   }
 
-  .product-body h3{
-    font-size:14px
+  .food-name{
+    font-size:14px;
   }
 
-  .price{
-    font-size:16px
+  .food-bottom{
+    align-items:flex-end;
+    flex-direction:column;
+  }
+
+  .add-btn{
+    width:100%;
+  }
+
+  section{
+    padding:70px 0;
+  }
+
+  .delivery-box{
+    padding:25px;
+  }
+
+  .track-card{
+    padding:18px;
+  }
+
+  .track-steps{
+    gap:3px;
+  }
+
+  .track-step{
+    font-size:8px;
+  }
+
+  .track-circle{
+    width:27px;
+    height:27px;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .menu-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .food-image{
+    height:145px;
+  }
+
+  .food-price{
+    font-size:16px;
+  }
+
+  .track-input{
+    flex-direction:column;
+  }
+
+  .track-btn{
+    min-height:45px;
   }
 
   .trust-grid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
-  .hero{
-    padding:60px 0 45px
+  .trust-item{
+    border-right:0;
+    border-bottom:1px solid rgba(255,255,255,.05);
   }
 
-  .steps{
-    grid-template-columns:repeat(5,1fr)
+  .trust-item:last-child{
+    border-bottom:0;
   }
 
-  .step{
-    font-size:9px
+  .footer-contact{
+    flex-direction:column;
   }
+
+  .contact-box{
+    width:100%;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
+
 <div class="container nav">
 
-<a class="brand" href="#">
-<span class="crown">♛</span>
+<a href="#" class="brand">
 
-<span>
+<div class="brand-crown">
+♛
+</div>
+
+<div>
+<div class="brand-name">
 THE QUEEN
-<small>FAST FOOD</small>
-</span>
+</div>
+
+<div class="brand-sub">
+FAST FOOD
+</div>
+</div>
 
 </a>
 
-<div class="nav-right">
+<div class="nav-actions">
 
-<a class="phone-top" href="tel:+919776856111">
+<a
+class="nav-phone"
+href="tel:+919776856111"
+>
 ☎ 97768 56111
 </a>
 
-<button class="cart-btn" id="openCartBtn">
+<button
+class="cart-top"
+id="openCartBtn"
+>
 🛒 Cart
-<span class="cart-count" id="cartCount">0</span>
+<span
+class="cart-count"
+id="cartCount"
+>
+0
+</span>
 </button>
 
 </div>
+
 </div>
+
 </header>
 
 
-<main>
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<div class="container">
+<div class="container hero-grid">
 
-<div class="hero-kicker">
-ROYAL TASTE • LOCAL LOVE
+<div class="hero-content">
+
+<div class="hero-tag">
+<span></span>
+FRESH • LOCAL • DELICIOUS
 </div>
 
 <h1>
-Choose. <span>Add.</span> Enjoy.
+Good Food.<br>
+<span class="orange">
+Good Mood.
+</span>
 </h1>
 
-<p>
-Freshly prepared favourites from The Queen Fast Food, Ibrisingh.
-Order online and enjoy a simple, royal food experience.
+<div class="hero-line"></div>
+
+<p class="hero-description">
+Welcome to <b>The Queen Fast Food</b>.
+Freshly prepared favourites, bold flavours
+and a simple ordering experience made for
+your everyday cravings.
 </p>
 
-<div id="shopStatusHome" class="shop-status-home">
+<div class="hero-buttons">
 
-<span id="shopDotHome" class="shop-dot-home"></span>
+<a
+href="#menu"
+class="primary-btn"
+>
+Explore Menu
+</a>
 
-<span id="shopStatusHomeText">
+<button
+class="secondary-btn"
+id="heroCartBtn"
+>
+🛒 View Cart
+</button>
+
+</div>
+
+<div class="hero-status">
+
+<span
+class="status-dot"
+id="statusDot"
+></span>
+
+<span id="statusText">
 CHECKING SHOP STATUS...
 </span>
 
 </div>
 
-<div class="hero-actions">
+</div>
 
-<a class="gold-btn" href="#menu">
-Explore Menu
-</a>
 
-<button class="outline-btn" id="heroCartBtn">
-View Cart
-</button>
+<div class="hero-visual">
+
+<div class="hero-glow"></div>
+
+<div class="hero-card">
+
+<div class="hero-food-placeholder">
+🍔
+</div>
+
+<div class="hero-card-bottom">
+
+<small>
+THE QUEEN EXPERIENCE
+</small>
+
+<h3>
+Freshly Made. Simply Delicious.
+</h3>
+
+</div>
+
+</div>
 
 </div>
 
@@ -865,29 +1688,72 @@ View Cart
 </section>
 
 
+<!-- =========================
+     TRUST
+========================= -->
+
 <div class="trust">
 
 <div class="container trust-grid">
 
-<div>
-<b>Freshly Prepared</b>
-Made for your order
+<div class="trust-item">
+
+<div class="trust-icon">
+🍽️
 </div>
 
-<div>
-<b>Easy Ordering</b>
-Cart to WhatsApp
-</div>
+<strong>
+Freshly Prepared
+</strong>
 
-<div>
-<b>Local Delivery</b>
-₹6/km delivery charge
-</div>
-
-</div>
+<span>
+Made fresh for your order
+</span>
 
 </div>
 
+
+<div class="trust-item">
+
+<div class="trust-icon">
+🚚
+</div>
+
+<strong>
+Local Delivery
+</strong>
+
+<span>
+₹6 per km delivery
+</span>
+
+</div>
+
+
+<div class="trust-item">
+
+<div class="trust-icon">
+📲
+</div>
+
+<strong>
+Easy Ordering
+</strong>
+
+<span>
+Order directly on WhatsApp
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     MENU
+========================= -->
 
 <section id="menu">
 
@@ -895,70 +1761,95 @@ Cart to WhatsApp
 
 <div class="section-head">
 
-<div class="eyebrow">
+<div class="section-label">
 THE QUEEN MENU
 </div>
 
 <h2>
-Pick Your Favourite
+Choose Your Favourite
 </h2>
 
 <p>
-Choose an item, add quantity and place your order.
+Fresh food, simple choices and flavours
+you will want again.
 </p>
 
 </div>
 
-<div class="menu-grid" id="menuGrid"></div>
+<div
+class="menu-grid"
+id="menuGrid"
+></div>
 
 </div>
 
 </section>
 
 
-<section>
+<!-- =========================
+     DELIVERY
+========================= -->
+
+<section class="delivery-section">
 
 <div class="container">
 
-<div class="section-head">
+<div class="delivery-box">
 
-<div class="eyebrow">
-WHY THE QUEEN
+<div class="delivery-grid">
+
+<div class="delivery-copy">
+
+<div class="section-label">
+LOCAL DELIVERY
 </div>
 
 <h2>
-Made For A Royal Bite
+Good Food,<br>
+<span>Delivered To You.</span>
 </h2>
 
+<p>
+Allow your location and we will calculate
+the delivery distance from The Queen Fast Food
+to your location.
+</p>
+
+<div class="delivery-rate">
+🚚 Delivery starts at ₹6/km
 </div>
 
-<div class="why-grid">
-
-<div class="info-card">
-<div class="icon">👑</div>
-<h3>Queen Quality</h3>
-<p>
-Carefully prepared food with a focus on taste,
-freshness and presentation.
-</p>
 </div>
 
-<div class="info-card">
-<div class="icon">⚡</div>
-<h3>Simple Ordering</h3>
-<p>
-Add your favourites to the cart, confirm delivery
-details and order through WhatsApp.
-</p>
+
+<div class="location-panel">
+
+<label>
+📍 DELIVERY LOCATION
+</label>
+
+<input
+id="customerAddressQuick"
+placeholder="Enter your delivery address"
+/>
+
+<button
+class="location-btn"
+id="quickLocationBtn"
+>
+📍 Use My Current Location
+</button>
+
+<div
+class="location-result"
+id="quickLocationResult"
+>
+Your location will be used to calculate
+the delivery charge.
 </div>
 
-<div class="info-card">
-<div class="icon">📍</div>
-<h3>Local Delivery</h3>
-<p>
-Delivery charge is calculated from the restaurant
-using road distance.
-</p>
+</div>
+
 </div>
 
 </div>
@@ -968,63 +1859,20 @@ using road distance.
 </section>
 
 
-<section>
+<!-- =========================
+     TRACK ORDER
+========================= -->
+
+<section
+class="track-section"
+id="track"
+>
 
 <div class="container">
 
 <div class="section-head">
 
-<div class="eyebrow">
-VISIT THE QUEEN
-</div>
-
-<h2>
-Come Hungry. Leave Happy.
-</h2>
-
-</div>
-
-<div class="visit-grid">
-
-<div class="info-card">
-<div class="icon">📍</div>
-<h3>Ibrisingh</h3>
-<p>
-Tirtol, Jagatsinghpur, Odisha
-</p>
-</div>
-
-<div class="info-card">
-<div class="icon">📞</div>
-<h3>Call / WhatsApp</h3>
-<p>
-97768 56111
-</p>
-</div>
-
-<div class="info-card">
-<div class="icon">🍽️</div>
-<h3>Fresh Favourites</h3>
-<p>
-Chowmin, rolls, chicken dishes,
-biriyani and more.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section>
-
-<div class="container">
-
-<div class="section-head">
-
-<div class="eyebrow">
+<div class="section-label">
 ORDER TRACKING
 </div>
 
@@ -1033,27 +1881,35 @@ Track Your Order
 </h2>
 
 <p>
-Enter the order ID received after placing your order.
+Enter your Order ID and check your order status.
 </p>
 
 </div>
 
-<div class="track-box">
+
+<div class="track-card">
 
 <div class="track-input">
 
 <input
 id="trackOrderId"
-placeholder="e.g. QF123456"
->
+placeholder="Enter Order ID e.g. QF12345678"
+/>
 
-<button class="gold-btn" id="trackBtn">
-Track
+<button
+class="track-btn"
+id="trackBtn"
+>
+TRACK ORDER
 </button>
 
 </div>
 
-<div id="trackResult" style="display:none"></div>
+
+<div
+class="track-result"
+id="trackResult"
+></div>
 
 </div>
 
@@ -1061,22 +1917,72 @@ Track
 
 </section>
 
-</main>
 
+<!-- =========================
+     FOOTER
+========================= -->
 
-<footer>
+<footer class="footer">
 
-<div class="container">
+<div class="container footer-main">
 
-<div class="footer-brand">
-♛ THE QUEEN FAST FOOD
+<div class="footer-logo">
+THE <span>QUEEN</span> FAST FOOD
 </div>
 
-<div>
-Ibrisingh, Tirtol, Jagatsinghpur, Odisha
+<div class="footer-tagline">
+Good Food. Good Mood.
 </div>
 
-<div style="margin-top:5px">
+
+<div class="footer-contact">
+
+<div class="contact-box">
+
+<div class="icon">
+📞
+</div>
+
+<strong>
+9090220791
+</strong>
+
+<span>
+Call / WhatsApp
+</span>
+
+</div>
+
+
+<div class="contact-box">
+
+<div class="icon">
+📍
+</div>
+
+<strong>
+Ibrisingh
+</strong>
+
+<span>
+Tirtol, Jagatsinghpur, Odisha
+</span>
+
+</div>
+
+</div>
+
+
+<div class="thank-you">
+Thank You For Visiting 👑
+</div>
+
+<div class="thank-you-sub">
+We look forward to serving you again.
+</div>
+
+
+<div class="copyright">
 © <span id="year"></span>
 The Queen Fast Food. All rights reserved.
 </div>
@@ -1086,9 +1992,24 @@ The Queen Fast Food. All rights reserved.
 </footer>
 
 
-<!-- CART -->
+<!-- =========================
+     OVERLAY
+========================= -->
 
-<aside class="cart-drawer" id="cartDrawer">
+<div
+class="overlay"
+id="overlay"
+></div>
+
+
+<!-- =========================
+     CART
+========================= -->
+
+<aside
+class="cart-drawer"
+id="cartDrawer"
+>
 
 <div class="cart-head">
 
@@ -1096,34 +2017,68 @@ The Queen Fast Food. All rights reserved.
 🛒 Your Cart
 </strong>
 
-<button class="close" id="closeCartBtn">
+<button
+class="close-btn"
+id="closeCartBtn"
+>
 ×
 </button>
 
 </div>
 
-<div class="cart-items" id="cartItems"></div>
 
-<div class="cart-foot">
+<div
+class="cart-list"
+id="cartList"
+></div>
 
-<div class="summary-row total">
+
+<div class="cart-footer">
+
+<div class="total-row">
 
 <span>
 Subtotal
 </span>
 
-<span id="cartSubtotal">
+<strong id="cartSubtotal">
 ₹0
-</span>
+</strong>
 
 </div>
 
+
+<div class="total-row">
+
+<span>
+Delivery
+</span>
+
+<strong id="cartDelivery">
+₹0
+</strong>
+
+</div>
+
+
+<div class="total-row grand">
+
+<span>
+Total
+</span>
+
+<strong id="cartTotal">
+₹0
+</strong>
+
+</div>
+
+
 <button
-class="gold-btn"
-style="width:100%;margin-top:10px"
+class="checkout-btn"
 id="checkoutBtn"
 >
-Proceed to Checkout
+PROCEED TO CHECKOUT
 </button>
 
 </div>
@@ -1131,9 +2086,14 @@ Proceed to Checkout
 </aside>
 
 
-<!-- CHECKOUT -->
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
 
-<div class="modal" id="checkoutModal">
+<div
+class="modal"
+id="checkoutModal"
+>
 
 <div class="modal-card">
 
@@ -1141,8 +2101,8 @@ Proceed to Checkout
 
 <div>
 
-<div class="eyebrow">
-ROYAL CHECKOUT
+<div class="modal-label">
+THE QUEEN CHECKOUT
 </div>
 
 <h2>
@@ -1151,61 +2111,63 @@ Complete Your Order
 
 </div>
 
-<button class="close" id="closeCheckoutBtn">
+<button
+class="close-btn"
+id="closeCheckoutBtn"
+>
 ×
 </button>
 
 </div>
 
 
-<div class="summary" id="checkoutSummary"></div>
+<div
+class="checkout-summary"
+id="checkoutSummary"
+></div>
 
 
 <div class="form-group">
 
-<label for="customerName">
-Customer Name
+<label>
+CUSTOMER NAME
 </label>
 
 <input
 id="customerName"
 placeholder="Enter your name"
->
+/>
 
 </div>
 
 
 <div class="form-group">
 
-<label for="customerPhone">
-Order Contact Number
+<label>
+CONTACT NUMBER
 </label>
 
 <input
 id="customerPhone"
 type="tel"
-inputmode="numeric"
 maxlength="10"
-placeholder="Enter 10-digit mobile number"
->
-
-<div class="location-status">
-Enter the mobile number where we can contact you for this order.
-</div>
+inputmode="numeric"
+placeholder="10-digit mobile number"
+/>
 
 </div>
 
 
 <div class="form-group">
 
-<label for="customerAddress">
-Delivery Address
+<label>
+DELIVERY ADDRESS
 </label>
 
 <textarea
 id="customerAddress"
 rows="3"
-placeholder="Enter complete delivery address"
+placeholder="Enter your complete delivery address"
 ></textarea>
 
 </div>
@@ -1214,22 +2176,22 @@ placeholder="Enter complete delivery address"
 <div class="form-group">
 
 <label>
-Delivery Location
+DELIVERY LOCATION
 </label>
 
 <button
-id="locationBtn"
-class="outline-btn location-btn"
+class="location-btn"
+id="checkoutLocationBtn"
 type="button"
 >
 📍 Use My Current Location
 </button>
 
 <div
-class="location-status"
-id="locationStatus"
+class="checkout-location"
+id="checkoutLocationStatus"
 >
-Location is required for delivery charge calculation.
+Location is required to calculate delivery charge.
 </div>
 
 </div>
@@ -1237,8 +2199,8 @@ Location is required for delivery charge calculation.
 
 <div class="form-group">
 
-<label for="paymentMethod">
-Payment Method
+<label>
+PAYMENT METHOD
 </label>
 
 <select id="paymentMethod">
@@ -1257,10 +2219,10 @@ UPI
 
 
 <button
+class="place-order"
 id="placeOrderBtn"
-class="order-btn"
 >
-PLACE ORDER ON WHATSAPP
+📲 PLACE ORDER ON WHATSAPP
 </button>
 
 </div>
@@ -1268,41 +2230,47 @@ PLACE ORDER ON WHATSAPP
 </div>
 
 
-<div class="toast" id="toast"></div>
+<div
+class="toast"
+id="toast"
+></div>
 
 
 <script type="module">
 
+/* ==========================================
+   FIREBASE
+========================================== */
+
 import {
-initializeApp
+  initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-getDatabase,
-ref,
-onValue,
-set,
-get
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  get
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import {
-getAuth,
-onAuthStateChanged,
-signInAnonymously
+  getAuth,
+  onAuthStateChanged,
+  signInAnonymously
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-/* FIREBASE */
-
 const firebaseConfig={
 
-apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+apiKey:
+"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
 
 authDomain:
 "the-queen-fast-food.firebaseapp.com",
@@ -1335,13 +2303,9 @@ const db=getDatabase(app);
 const auth=getAuth(app);
 
 
-/* ADMIN UID - HOME ONLY USE */
-
-const ADMIN_UID=
-"eWlMt1dG2pUOxsTo0NaXgY1avn33";
-
-
-/* RESTAURANT LOCATION */
+/* ==========================================
+   RESTAURANT
+========================================== */
 
 const restaurantLat=
 20.216780359694468;
@@ -1351,8 +2315,13 @@ const restaurantLng=
 
 const DELIVERY_RATE=6;
 
+const ADMIN_UID=
+"eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
-/* DEFAULT MENU */
+
+/* ==========================================
+   DEFAULT ITEMS
+========================================== */
 
 const defaultMenu=[
 
@@ -1443,11 +2412,16 @@ image:""
 ];
 
 
+/* ==========================================
+   VARIABLES
+========================================== */
+
 let menu=[...defaultMenu];
 
 let cart=[];
 
-let whatsappNumber="9090220791";
+let whatsappNumber=
+"9090220791";
 
 let currentUser=null;
 
@@ -1457,10 +2431,8 @@ let selectedLng=null;
 
 let selectedDistanceKm=null;
 
-let trackingUnsubscribe=null;
+let trackingListener=null;
 
-
-/* SHOP SETTINGS */
 
 let shopSettings={
 
@@ -1477,10 +2449,14 @@ closedMessage:"SHOP IS CLOSED."
 };
 
 
-/* HELPERS */
+/* ==========================================
+   HELPERS
+========================================== */
 
 function $(id){
+
 return document.getElementById(id);
+
 }
 
 
@@ -1512,31 +2488,38 @@ return "₹"+Number(value||0).toFixed(0);
 }
 
 
-function showToast(message){
+function toast(message){
 
-const toast=$("toast");
+const box=$("toast");
 
-toast.textContent=message;
+box.textContent=message;
 
-toast.classList.add("show");
+box.classList.add("show");
 
-clearTimeout(window.__toastTimer);
+clearTimeout(window.__toast);
 
-window.__toastTimer=setTimeout(
-()=>toast.classList.remove("show"),
+window.__toast=
+setTimeout(
+()=>{
+box.classList.remove("show");
+},
 2500
 );
 
 }
 
 
-/* AVAILABLE */
+/* ==========================================
+   AVAILABLE
+========================================== */
 
 function normalizeAvailable(value){
 
-if(value===undefined||
+if(
+value===undefined||
 value===null||
-value==="")
+value===""
+)
 return true;
 
 if(value===true)
@@ -1550,7 +2533,8 @@ return value!==0;
 
 if(typeof value==="string"){
 
-const v=value.trim().toLowerCase();
+const v=
+value.trim().toLowerCase();
 
 if(
 v==="false"||
@@ -1575,30 +2559,32 @@ return true;
 }
 
 
-/* TIME */
+/* ==========================================
+   SHOP TIME
+========================================== */
 
 function parseTime(value){
 
-const m=
+const match=
 String(value||"")
 .match(/^(\d{1,2}):(\d{2})$/);
 
-if(!m)
+if(!match)
 return null;
 
-const h=Number(m[1]);
+const h=Number(match[1]);
 
-const min=Number(m[2]);
+const m=Number(match[2]);
 
 if(
 h<0||
 h>23||
-min<0||
-min>59
+m<0||
+m>59
 )
 return null;
 
-return h*60+min;
+return h*60+m;
 
 }
 
@@ -1620,12 +2606,16 @@ hour12:false
 
 let hour=
 Number(
-parts.find(x=>x.type==="hour")?.value||0
+parts.find(
+x=>x.type==="hour"
+)?.value||0
 );
 
 const minute=
 Number(
-parts.find(x=>x.type==="minute")?.value||0
+parts.find(
+x=>x.type==="minute"
+)?.value||0
 );
 
 if(hour===24)
@@ -1635,16 +2625,16 @@ return hour*60+minute;
 
 }catch{
 
-const d=new Date();
+const date=new Date();
 
-return d.getHours()*60+d.getMinutes();
+return
+date.getHours()*60+
+date.getMinutes();
 
 }
 
 }
 
-
-/* SHOP OPEN */
 
 function isShopOpen(){
 
@@ -1659,7 +2649,9 @@ return true;
 if(override==="closed")
 return false;
 
-if(shopSettings.scheduleEnabled===false)
+if(
+shopSettings.scheduleEnabled===false
+)
 return true;
 
 const open=
@@ -1668,13 +2660,17 @@ parseTime(shopSettings.openTime);
 const close=
 parseTime(shopSettings.closeTime);
 
-if(open===null||close===null)
+if(
+open===null||
+close===null
+)
 return true;
 
 if(open===close)
 return true;
 
-const now=indiaMinutes();
+const now=
+indiaMinutes();
 
 if(open<close)
 return now>=open&&now<close;
@@ -1684,49 +2680,45 @@ return now>=open||now<close;
 }
 
 
-/* HOME SHOP STATUS */
+/* ==========================================
+   STATUS
+========================================== */
 
-function updateShopStatusHome(){
+function updateStatus(){
 
-const open=isShopOpen();
+const open=
+isShopOpen();
 
-const box=$("shopStatusHome");
-
-const dot=$("shopDotHome");
-
-const text=$("shopStatusHomeText");
-
-box.classList.toggle("closed",!open);
-
-dot.classList.toggle("closed",!open);
-
-text.textContent=
+$("statusText").textContent=
 open
 ?
 "SHOP IS OPEN"
 :
 (
 shopSettings.closedMessage||
-"SHOP IS CLOSED."
+"SHOP IS CLOSED"
+);
+
+$("statusDot")
+.classList.toggle(
+"closed",
+!open
 );
 
 }
 
 
-/* FIREBASE SETTINGS */
+/* ==========================================
+   FIREBASE SETTINGS
+========================================== */
 
 onValue(
 ref(db,"settings"),
 snapshot=>{
 
-const s=snapshot.val()||{};
+const s=
+snapshot.val()||{};
 
-
-/*
-IMPORTANT:
-HOME PAGE ONLY READS ADMIN SETTINGS.
-ADMIN CODE IS NOT CHANGED.
-*/
 
 shopSettings={
 
@@ -1749,18 +2741,17 @@ s.closedMessage||
 };
 
 
-if(s.whatsappNumber)
+if(s.whatsappNumber){
+
 whatsappNumber=
-phoneDigits(s.whatsappNumber);
+phoneDigits(
+s.whatsappNumber
+);
+
+}
 
 
-/*
-FIREBASE MENU IMAGE
--------------------
-ADMIN re image save hele
-settings/menu/itemId/image
-ru image read haba.
-*/
+/* MENU FROM FIREBASE */
 
 if(s.menu){
 
@@ -1778,10 +2769,6 @@ return{
 
 id:item.id,
 
-/*
-THIS IS THE IMPORTANT IMAGE LINE
-*/
-
 image:
 saved.image||
 item.image||
@@ -1797,11 +2784,9 @@ saved.available
 });
 
 
-/*
-If Firebase has extra food items
-*/
-
-Object.entries(s.menu).forEach(
+Object.entries(
+s.menu
+).forEach(
 ([id,item])=>{
 
 if(
@@ -1812,13 +2797,11 @@ x=>String(x.id)===String(id)
 
 menu.push({
 
-id,
+id:id,
 
 ...item,
 
-image:
-item.image||
-"",
+image:item.image||"",
 
 available:
 normalizeAvailable(
@@ -1844,7 +2827,7 @@ available:true
 }
 
 
-updateShopStatusHome();
+updateStatus();
 
 renderMenu();
 
@@ -1853,25 +2836,24 @@ renderCart();
 },
 error=>{
 
-console.error(
-"Settings error:",
-error
-);
+console.error(error);
 
-showToast(
-"Could not load shop settings."
+toast(
+"Could not load menu."
 );
 
 }
 );
 
 
-/* RENDER HOME MENU */
+/* ==========================================
+   RENDER MENU
+========================================== */
 
 function renderMenu(){
 
-const grid=$("menuGrid");
-
+const grid=
+$("menuGrid");
 
 if(!menu.length){
 
@@ -1881,11 +2863,11 @@ grid.innerHTML=`
 style="
 grid-column:1/-1;
 text-align:center;
-padding:30px;
-color:#777
+padding:50px;
+color:#666;
 "
 >
-Food items not found.
+No food items available.
 </div>
 
 `;
@@ -1903,24 +2885,13 @@ normalizeAvailable(
 item.available
 );
 
-const safeId=
-String(item.id)
-.replace(
-/[^a-zA-Z0-9_-]/g,
-""
-);
-
-
-/*
-FIREBASE IMAGE DISPLAY
-*/
 
 let imageHTML="";
 
 
 if(
 item.image &&
-String(item.image).trim()!==""
+String(item.image).trim()
 ){
 
 imageHTML=`
@@ -1930,13 +2901,6 @@ src="${escapeHTML(item.image)}"
 alt="${escapeHTML(item.name)}"
 loading="lazy"
 
-style="
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-"
-
 onerror="
 this.style.display='none';
 this.nextElementSibling.style.display='flex';
@@ -1944,15 +2908,8 @@ this.nextElementSibling.style.display='flex';
 >
 
 <div
-style="
-display:none;
-width:100%;
-height:100%;
-align-items:center;
-justify-content:center;
-font-size:45px;
-opacity:.25;
-"
+class="food-placeholder"
+style="display:none"
 >
 🍽️
 </div>
@@ -1963,12 +2920,7 @@ opacity:.25;
 
 imageHTML=`
 
-<div
-style="
-font-size:45px;
-opacity:.25;
-"
->
+<div class="food-placeholder">
 🍽️
 </div>
 
@@ -1977,13 +2929,13 @@ opacity:.25;
 }
 
 
-return `
+return`
 
 <article
-class="product ${available?"":"item-out"}"
+class="food-card"
 >
 
-<div class="product-img">
+<div class="food-image">
 
 ${imageHTML}
 
@@ -1993,28 +2945,31 @@ available
 ""
 :
 `
-<span class="stock-badge-home">
+<div class="out-badge">
 OUT OF STOCK
-</span>
+</div>
 `
 }
 
 </div>
 
 
-<div class="product-body">
+<div class="food-body">
 
-<h3>
+<div class="food-name">
 ${escapeHTML(item.name)}
-</h3>
-
-<div class="price">
-${money(item.price)}
 </div>
 
-<p>
+<div class="food-desc">
 Freshly prepared • Queen favourite
-</p>
+</div>
+
+
+<div class="food-bottom">
+
+<div class="food-price">
+${money(item.price)}
+</div>
 
 
 ${
@@ -2023,7 +2978,7 @@ available
 `
 <button
 class="add-btn"
-data-add="${escapeHTML(safeId)}"
+data-add="${escapeHTML(item.id)}"
 >
 ADD TO CART
 </button>
@@ -2031,13 +2986,15 @@ ADD TO CART
 :
 `
 <button
-class="add-btn out-of-stock"
+class="add-btn out"
 disabled
 >
 OUT OF STOCK
 </button>
 `
 }
+
+</div>
 
 </div>
 
@@ -2063,15 +3020,15 @@ button
 }
 
 
-/* ADD TO CART */
+/* ==========================================
+   ADD TO CART
+========================================== */
 
 function addToCart(id,button){
 
-updateShopStatusHome();
-
 if(!isShopOpen()){
 
-showToast(
+toast(
 shopSettings.closedMessage||
 "SHOP IS CLOSED."
 );
@@ -2089,7 +3046,7 @@ x=>String(x.id)===String(id)
 
 if(!item){
 
-showToast(
+toast(
 "Food item not found."
 );
 
@@ -2104,7 +3061,7 @@ item.available
 )
 ){
 
-showToast(
+toast(
 `${item.name} is OUT OF STOCK.`
 );
 
@@ -2121,7 +3078,7 @@ x=>String(x.id)===String(id)
 
 if(existing){
 
-existing.qty+=1;
+existing.qty++;
 
 }else{
 
@@ -2143,63 +3100,109 @@ qty:1
 renderCart();
 
 
-/*
-ADD TO CART BLINK
-*/
-
 if(button){
 
-button.classList.remove(
-"add-to-cart-blink"
-);
+button.classList.remove("blink");
 
 void button.offsetWidth;
 
-button.classList.add(
-"add-to-cart-blink"
+button.classList.add("blink");
+
+setTimeout(
+()=>{
+button.classList.remove("blink");
+},
+600
 );
-
-clearTimeout(
-button.__blinkTimer
-);
-
-button.__blinkTimer=
-setTimeout(()=>{
-
-button.classList.remove(
-"add-to-cart-blink"
-);
-
-/*
-BLINK COMPLETE
-THEN OPEN CART
-*/
-
-openCart();
-
-},750);
-
-}else{
-
-openCart();
 
 }
 
 
-showToast(
+toast(
 `${item.name} added to cart 👑`
 );
 
+
+/*
+OPEN CART AFTER ADD
+*/
+
+setTimeout(
+openCart,
+300
+);
+
 }
 
 
-/* CART TOTAL */
+/* ==========================================
+   DISTANCE
+========================================== */
+
+async function calculateDistance(){
+
+if(
+selectedLat===null||
+selectedLng===null
+)
+return null;
+
+
+const url=
+`https://router.project-osrm.org/route/v1/driving/${restaurantLng},${restaurantLat};${selectedLng},${selectedLat}?overview=false`;
+
+
+const response=
+await fetch(url);
+
+
+const data=
+await response.json();
+
+
+if(
+!data.routes||
+!data.routes.length
+)
+throw new Error(
+"No route found"
+);
+
+
+selectedDistanceKm=
+data.routes[0].distance/1000;
+
+
+return selectedDistanceKm;
+
+}
+
+
+function getDeliveryCharge(){
+
+if(
+selectedDistanceKm===null
+)
+return 0;
+
+return
+Math.ceil(
+selectedDistanceKm
+)*
+DELIVERY_RATE;
+
+}
+
+
+/* ==========================================
+   CART
+========================================== */
 
 function getSubtotal(){
 
 return cart.reduce(
-(sum,item)=>
-sum+
+(total,item)=>
+total+
 Number(item.price||0)*
 Number(item.qty||0),
 0
@@ -2208,37 +3211,41 @@ Number(item.qty||0),
 }
 
 
-/* RENDER CART */
-
 function renderCart(){
 
-const box=$("cartItems");
+const list=
+$("cartList");
+
 
 const count=
 cart.reduce(
-(sum,item)=>
-sum+Number(item.qty||0),
+(total,item)=>
+total+Number(item.qty||0),
 0
 );
 
-$("cartCount").textContent=count;
+
+$("cartCount").textContent=
+count;
 
 
 if(!cart.length){
 
-box.innerHTML=`
+list.innerHTML=`
 
-<div class="empty">
+<div class="cart-empty">
 
+<div style="font-size:45px">
 🛒
+</div>
 
-<br><br>
-
+<div style="margin-top:15px">
 Your cart is empty.
+</div>
 
-<br>
-
-Add something delicious!
+<div style="margin-top:5px">
+Add something delicious 👑
+</div>
 
 </div>
 
@@ -2246,7 +3253,7 @@ Add something delicious!
 
 }else{
 
-box.innerHTML=
+list.innerHTML=
 cart.map(item=>`
 
 <div class="cart-item">
@@ -2255,33 +3262,27 @@ cart.map(item=>`
 
 <div>
 
-<strong>
+<div class="cart-item-name">
 ${escapeHTML(item.name)}
-</strong>
+</div>
 
-<div
-style="
-color:var(--gold2);
-margin-top:3px
-"
->
-${money(item.price)}
+<div class="cart-item-price">
+${money(item.price)} each
 </div>
 
 </div>
-
 
 <button
 class="remove-btn"
 data-remove="${escapeHTML(item.id)}"
 >
-Remove
+REMOVE
 </button>
 
 </div>
 
 
-<div class="qty">
+<div class="qty-row">
 
 <button
 data-minus="${escapeHTML(item.id)}"
@@ -2299,15 +3300,9 @@ data-plus="${escapeHTML(item.id)}"
 +
 </button>
 
-<span
-style="
-margin-left:auto;
-color:var(--gold2);
-font-weight:800
-"
->
+<div class="qty-total">
 ${money(item.price*item.qty)}
-</span>
+</div>
 
 </div>
 
@@ -2318,8 +3313,32 @@ ${money(item.price*item.qty)}
 }
 
 
+const subtotal=
+getSubtotal();
+
+const delivery=
+getDeliveryCharge();
+
+const total=
+subtotal+delivery;
+
+
 $("cartSubtotal").textContent=
-money(getSubtotal());
+money(subtotal);
+
+$("cartDelivery").textContent=
+selectedDistanceKm===null
+?
+"Location needed"
+:
+money(delivery);
+
+$("cartTotal").textContent=
+selectedDistanceKm===null
+?
+money(subtotal)
+:
+money(total);
 
 
 document
@@ -2327,7 +3346,7 @@ document
 .forEach(button=>{
 
 button.onclick=
-()=>updateCartItem(
+()=>changeQty(
 button.dataset.plus,
 1
 );
@@ -2340,7 +3359,7 @@ document
 .forEach(button=>{
 
 button.onclick=
-()=>updateCartItem(
+()=>changeQty(
 button.dataset.minus,
 -1
 );
@@ -2356,8 +3375,8 @@ button.onclick=()=>{
 
 cart=
 cart.filter(
-x=>
-String(x.id)!==
+item=>
+String(item.id)!==
 String(button.dataset.remove)
 );
 
@@ -2370,9 +3389,11 @@ renderCart();
 }
 
 
-/* UPDATE CART */
+/* ==========================================
+   QUANTITY
+========================================== */
 
-function updateCartItem(id,delta){
+function changeQty(id,change){
 
 const item=
 cart.find(
@@ -2383,16 +3404,11 @@ if(!item)
 return;
 
 
-if(delta>0){
-
-const menuItem=
-menu.find(
-x=>String(x.id)===String(id)
-);
+if(change>0){
 
 if(!isShopOpen()){
 
-showToast(
+toast(
 shopSettings.closedMessage||
 "SHOP IS CLOSED."
 );
@@ -2402,15 +3418,21 @@ return;
 }
 
 
+const latest=
+menu.find(
+x=>String(x.id)===String(id)
+);
+
+
 if(
-menuItem &&
+latest &&
 !normalizeAvailable(
-menuItem.available
+latest.available
 )
 ){
 
-showToast(
-`${menuItem.name} is OUT OF STOCK.`
+toast(
+`${latest.name} is OUT OF STOCK.`
 );
 
 return;
@@ -2420,15 +3442,14 @@ return;
 }
 
 
-item.qty+=delta;
+item.qty+=change;
 
 
 if(item.qty<=0){
 
 cart=
 cart.filter(
-x=>String(x.id)!==
-String(id)
+x=>String(x.id)!==String(id)
 );
 
 }
@@ -2439,7 +3460,9 @@ renderCart();
 }
 
 
-/* CART OPEN */
+/* ==========================================
+   CART OPEN / CLOSE
+========================================== */
 
 function openCart(){
 
@@ -2447,6 +3470,9 @@ renderCart();
 
 $("cartDrawer")
 .classList.add("open");
+
+$("overlay")
+.classList.add("show");
 
 }
 
@@ -2456,24 +3482,30 @@ function closeCart(){
 $("cartDrawer")
 .classList.remove("open");
 
+$("overlay")
+.classList.remove("show");
+
 }
 
 
 $("openCartBtn").onclick=
 openCart;
 
-
 $("heroCartBtn").onclick=
 openCart;
-
 
 $("closeCartBtn").onclick=
 closeCart;
 
+$("overlay").onclick=
+closeCart;
 
-/* AUTH */
 
-async function ensureCustomerAuth(){
+/* ==========================================
+   AUTH
+========================================== */
+
+async function ensureAuth(){
 
 try{
 
@@ -2508,12 +3540,9 @@ return true;
 
 }catch(error){
 
-console.error(
-"Anonymous auth error:",
-error
-);
+console.error(error);
 
-showToast(
+toast(
 "Could not connect to order system."
 );
 
@@ -2545,16 +3574,26 @@ currentUser=null;
 );
 
 
-/* CHECKOUT */
+/* ==========================================
+   CHECKOUT
+========================================== */
 
 async function openCheckout(){
 
-updateShopStatusHome();
+if(!cart.length){
+
+toast(
+"Your cart is empty."
+);
+
+return;
+
+}
 
 
 if(!isShopOpen()){
 
-showToast(
+toast(
 shopSettings.closedMessage||
 "SHOP IS CLOSED."
 );
@@ -2564,58 +3603,23 @@ return;
 }
 
 
-if(!cart.length){
-
-showToast(
-"Your cart is empty."
-);
-
-return;
-
-}
-
-
 if(!currentUser){
 
-const loggedIn=
-await ensureCustomerAuth();
+const ok=
+await ensureAuth();
 
-if(!loggedIn){
-
-showToast(
-"Could not connect to order system."
-);
-
+if(!ok)
 return;
-
-}
 
 }
 
 
 closeCart();
 
-
-$("customerPhone").value="";
-
-$("customerPhone").readOnly=false;
-
-selectedLat=null;
-
-selectedLng=null;
-
-selectedDistanceKm=null;
-
-
-$("locationStatus").textContent=
-"Location is required for delivery charge calculation.";
-
-
 renderCheckoutSummary();
 
-
 $("checkoutModal")
-.classList.add("open");
+.classList.add("show");
 
 }
 
@@ -2623,7 +3627,7 @@ $("checkoutModal")
 function closeCheckout(){
 
 $("checkoutModal")
-.classList.remove("open");
+.classList.remove("show");
 
 }
 
@@ -2631,12 +3635,13 @@ $("checkoutModal")
 $("checkoutBtn").onclick=
 openCheckout;
 
-
 $("closeCheckoutBtn").onclick=
 closeCheckout;
 
 
-/* CHECKOUT SUMMARY */
+/* ==========================================
+   CHECKOUT SUMMARY
+========================================== */
 
 function renderCheckoutSummary(){
 
@@ -2644,12 +3649,10 @@ const subtotal=
 getSubtotal();
 
 const delivery=
-selectedDistanceKm==null
-?
-null
-:
-Math.ceil(selectedDistanceKm)*
-DELIVERY_RATE;
+getDeliveryCharge();
+
+const total=
+subtotal+delivery;
 
 
 $("checkoutSummary").innerHTML=
@@ -2659,12 +3662,13 @@ cart.map(item=>`
 <div class="summary-row">
 
 <span>
-${escapeHTML(item.name)} × ${item.qty}
+${escapeHTML(item.name)}
+× ${item.qty}
 </span>
 
-<span>
+<strong>
 ${money(item.price*item.qty)}
-</span>
+</strong>
 
 </div>
 
@@ -2678,9 +3682,9 @@ ${money(item.price*item.qty)}
 Subtotal
 </span>
 
-<span>
+<strong>
 ${money(subtotal)}
-</span>
+</strong>
 
 </div>
 
@@ -2691,15 +3695,15 @@ ${money(subtotal)}
 Delivery
 </span>
 
-<span>
+<strong>
 ${
-delivery==null
+selectedDistanceKm===null
 ?
-"Calculated after location"
+"After location"
 :
 money(delivery)
 }
-</span>
+</strong>
 
 </div>
 
@@ -2707,12 +3711,18 @@ money(delivery)
 <div class="summary-row total">
 
 <span>
-Total
+TOTAL
 </span>
 
-<span>
-${money(subtotal+(delivery||0))}
-</span>
+<strong>
+${
+selectedDistanceKm===null
+?
+money(subtotal)
+:
+money(total)
+}
+</strong>
 
 </div>
 
@@ -2721,15 +3731,17 @@ ${money(subtotal+(delivery||0))}
 }
 
 
-/* PHONE */
+/* ==========================================
+   PHONE
+========================================== */
 
 $("customerPhone")
 .addEventListener(
 "input",
-e=>{
+event=>{
 
-e.target.value=
-e.target.value
+event.target.value=
+event.target.value
 .replace(/\D/g,"")
 .slice(0,10);
 
@@ -2737,25 +3749,24 @@ e.target.value
 );
 
 
-/* LOCATION */
+/* ==========================================
+   QUICK LOCATION
+========================================== */
 
-$("locationBtn").onclick=function(){
+async function getCurrentLocation(){
 
 if(!navigator.geolocation){
 
-$("locationStatus").textContent=
-"Location is not supported by this browser.";
+toast(
+"Location is not supported."
+);
 
-return;
+return false;
 
 }
 
 
-$("locationBtn").disabled=true;
-
-$("locationStatus").textContent=
-"Getting your location...";
-
+return new Promise(resolve=>{
 
 navigator.geolocation.getCurrentPosition(
 
@@ -2768,50 +3779,11 @@ selectedLng=
 position.coords.longitude;
 
 
-$("locationStatus").textContent=
-"Calculating road distance...";
-
-
 try{
 
-const url=
-`https://router.project-osrm.org/route/v1/driving/${restaurantLng},${restaurantLat};${selectedLng},${selectedLat}?overview=false`;
+await calculateDistance();
 
-
-const response=
-await fetch(url);
-
-const data=
-await response.json();
-
-
-if(
-!data.routes||
-!data.routes.length
-){
-
-throw new Error(
-"No route found."
-);
-
-}
-
-
-selectedDistanceKm=
-data.routes[0].distance/1000;
-
-
-const charge=
-Math.ceil(selectedDistanceKm)*
-DELIVERY_RATE;
-
-
-$("locationStatus").textContent=
-`Distance: ${selectedDistanceKm.toFixed(2)} km • Delivery charge: ${money(charge)}`;
-
-
-renderCheckoutSummary();
-
+resolve(true);
 
 }catch(error){
 
@@ -2819,12 +3791,7 @@ console.error(error);
 
 selectedDistanceKm=null;
 
-$("locationStatus").textContent=
-"Could not calculate road distance. Please try again.";
-
-}finally{
-
-$("locationBtn").disabled=false;
+resolve(false);
 
 }
 
@@ -2832,20 +3799,23 @@ $("locationBtn").disabled=false;
 
 error=>{
 
-$("locationBtn").disabled=false;
-
+console.error(error);
 
 if(error.code===1){
 
-$("locationStatus").textContent=
-"Location permission denied. Please allow location access.";
+toast(
+"Please allow location access."
+);
 
 }else{
 
-$("locationStatus").textContent=
-"Could not get your location.";
+toast(
+"Could not get your location."
+);
 
 }
+
+resolve(false);
 
 },
 
@@ -2857,12 +3827,125 @@ maximumAge:0
 
 );
 
+});
+
+}
+
+
+$("quickLocationBtn").onclick=
+async function(){
+
+const button=
+$("quickLocationBtn");
+
+button.disabled=true;
+
+button.textContent=
+"📍 Getting Location...";
+
+
+const ok=
+await getCurrentLocation();
+
+
+if(ok){
+
+$("quickLocationResult").innerHTML=
+
+`
+<span style="color:#aaa">
+📍 Location detected
+</span>
+<br>
+<span style="color:var(--orange2)">
+🚚 Distance: ${selectedDistanceKm.toFixed(2)} km
+</span>
+<br>
+<span style="color:#fff">
+Delivery: ${money(getDeliveryCharge())}
+</span>
+`;
+
+renderCart();
+
+}else{
+
+$("quickLocationResult").textContent=
+"Could not calculate your location.";
+
+}
+
+
+button.disabled=false;
+
+button.textContent=
+"📍 Use My Current Location";
+
 };
 
 
-/* ORDER ID */
+/* ==========================================
+   CHECKOUT LOCATION
+========================================== */
 
-function makeOrderId(){
+$("checkoutLocationBtn").onclick=
+async function(){
+
+const button=
+$("checkoutLocationBtn");
+
+button.disabled=true;
+
+button.textContent=
+"📍 Getting Location...";
+
+
+const ok=
+await getCurrentLocation();
+
+
+if(ok){
+
+$("checkoutLocationStatus").innerHTML=
+
+`
+📍 Location detected.<br>
+Distance:
+<b style="color:var(--orange2)">
+${selectedDistanceKm.toFixed(2)} km
+</b>
+<br>
+Delivery charge:
+<b style="color:#fff">
+${money(getDeliveryCharge())}
+</b>
+`;
+
+}else{
+
+$("checkoutLocationStatus").textContent=
+"Could not calculate location. Please try again.";
+
+}
+
+
+renderCheckoutSummary();
+
+renderCart();
+
+button.disabled=false;
+
+button.textContent=
+"📍 Use My Current Location";
+
+};
+
+
+/* ==========================================
+   ORDER ID
+========================================== */
+
+function createOrderId(){
 
 return "QF"+
 Date.now()
@@ -2872,50 +3955,53 @@ Date.now()
 }
 
 
-/* WHATSAPP */
+/* ==========================================
+   WHATSAPP MESSAGE
+========================================== */
 
-function openWhatsApp(order,items){
+function sendWhatsApp(order){
 
-const lines=[
+const mapLink=
+`https://www.google.com/maps?q=${order.customerLat},${order.customerLng}`;
 
-"👑 *THE QUEEN FAST FOOD*",
 
-`Order ID: ${order.orderId}`,
-
-"",
-
-`👤 Name: ${order.customerName}`,
-
-`☎️ Order Contact: +91 ${order.orderContactPhone}`,
-
-`📍 Address: ${order.address}`,
-
-`💳 Payment: ${order.paymentMethod}`,
-
-"",
-
-"🍽️ *Items*",
-
-...items.map(
+const itemsText=
+order.items.map(
 item=>
-`• ${item.name} × ${item.qty} = ${money(item.price*item.qty)}`
-),
+`🍽️ **${item.name} × ${item.qty}** — ${money(item.price*item.qty)}`
+);
 
-"",
 
-`Subtotal: ${money(order.subtotal)}`,
+const message=
 
-`Distance: ${Number(order.distanceKm).toFixed(2)} km`,
+`👑 *THE QUEEN FAST FOOD*
 
-`Delivery: ${money(order.deliveryCharge)}`,
+🧾 *ORDER CONFIRMATION*
 
-`*Total: ${money(order.total)}*`,
+*Order ID:* ${order.orderId}
 
-"",
+👤 *CUSTOMER DETAILS*
+*Name:* ${order.customerName}
+*Contact:* +91 ${order.orderContactPhone}
 
-"Please confirm my order. Thank you! 👑"
+🍽️ *ORDER ITEMS*
+${itemsText.join("\n")}
 
-];
+💰 *BILL DETAILS*
+*Subtotal:* ${money(order.subtotal)}
+*Distance:* ${Number(order.distanceKm).toFixed(2)} km
+*Delivery Charge:* ${money(order.deliveryCharge)}
+*TOTAL:* ${money(order.total)}
+
+📍 *DELIVERY LOCATION*
+*Address:* ${order.address}
+*Customer GPS Location:* ${mapLink}
+
+💳 *PAYMENT:* ${order.paymentMethod}
+
+🙏 *Please confirm my order.*
+
+❤️ *Thank you for ordering from The Queen Fast Food!*`;
 
 
 const number=
@@ -2924,8 +4010,8 @@ phoneDigits(whatsappNumber);
 
 if(number.length!==10){
 
-showToast(
-"WhatsApp number is not configured correctly."
+toast(
+"WhatsApp number is not configured."
 );
 
 return;
@@ -2933,25 +4019,39 @@ return;
 }
 
 
+const url=
+`https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+
+
 window.open(
-`https://wa.me/${number}?text=${encodeURIComponent(lines.join("\n"))}`,
+url,
 "_blank"
 );
 
 }
 
 
-/* PLACE ORDER */
+/* ==========================================
+   PLACE ORDER
+========================================== */
 
 $("placeOrderBtn").onclick=
 async function(){
 
-updateShopStatusHome();
+if(!cart.length){
+
+toast(
+"Your cart is empty."
+);
+
+return;
+
+}
 
 
 if(!isShopOpen()){
 
-showToast(
+toast(
 shopSettings.closedMessage||
 "SHOP IS CLOSED."
 );
@@ -2961,40 +4061,13 @@ return;
 }
 
 
-if(!cart.length){
-
-showToast(
-"Your cart is empty."
-);
-
-return;
-
-}
-
-
-if(!currentUser){
-
-const loggedIn=
-await ensureCustomerAuth();
-
-if(!loggedIn){
-
-showToast(
-"Could not connect to order system."
-);
-
-return;
-
-}
-
-}
-
-
 const name=
-$("customerName").value.trim();
+$("customerName")
+.value
+.trim();
 
 
-const orderContactPhone=
+const phone=
 $("customerPhone")
 .value
 .replace(/\D/g,"");
@@ -3006,14 +4079,14 @@ $("customerAddress")
 .trim();
 
 
-const paymentMethod=
+const payment=
 $("paymentMethod")
 .value;
 
 
 if(!name){
 
-showToast(
+toast(
 "Please enter your name."
 );
 
@@ -3024,10 +4097,10 @@ return;
 }
 
 
-if(orderContactPhone.length!==10){
+if(phone.length!==10){
 
-showToast(
-"Please enter a valid 10-digit order contact number."
+toast(
+"Please enter a valid 10-digit number."
 );
 
 $("customerPhone").focus();
@@ -3039,7 +4112,7 @@ return;
 
 if(!address){
 
-showToast(
+toast(
 "Please enter delivery address."
 );
 
@@ -3056,8 +4129,8 @@ selectedLng===null||
 selectedDistanceKm===null
 ){
 
-showToast(
-"Please use your current location first."
+toast(
+"Please select your current location."
 );
 
 return;
@@ -3065,15 +4138,26 @@ return;
 }
 
 
+if(!currentUser){
+
+const ok=
+await ensureAuth();
+
+if(!ok)
+return;
+
+}
+
+
+/* CHECK STOCK */
+
 for(
 const cartItem of cart
 ){
 
 const latest=
 menu.find(
-x=>
-String(x.id)===
-String(cartItem.id)
+x=>String(x.id)===String(cartItem.id)
 );
 
 
@@ -3084,7 +4168,7 @@ latest.available
 )
 ){
 
-showToast(
+toast(
 `${latest.name} is OUT OF STOCK.`
 );
 
@@ -3096,33 +4180,29 @@ return;
 
 
 const orderId=
-makeOrderId();
-
+createOrderId();
 
 const subtotal=
 getSubtotal();
 
-
 const deliveryCharge=
-Math.ceil(selectedDistanceKm)*
-DELIVERY_RATE;
-
+getDeliveryCharge();
 
 const total=
 subtotal+
 deliveryCharge;
 
 
-const orderItems=
+const items=
 cart.map(item=>({
 
 id:item.id,
 
 name:item.name,
 
-price:item.price,
+price:Number(item.price),
 
-qty:item.qty
+qty:Number(item.qty)
 
 }));
 
@@ -3134,24 +4214,28 @@ orderId,
 ownerUid:
 currentUser.uid,
 
-loginPhone:
-orderContactPhone,
-
-orderContactPhone,
-
-phone:
-orderContactPhone,
-
 customerName:
 name,
 
+orderContactPhone:
+phone,
+
+phone:
+phone,
+
+loginPhone:
+phone,
+
+address:
 address,
 
-paymentMethod,
+paymentMethod:
+payment,
 
 items:
-orderItems,
+items,
 
+subtotal:
 subtotal,
 
 distanceKm:
@@ -3159,8 +4243,10 @@ Number(
 selectedDistanceKm.toFixed(3)
 ),
 
+deliveryCharge:
 deliveryCharge,
 
+total:
 total,
 
 customerLat:
@@ -3191,7 +4277,10 @@ button.textContent=
 try{
 
 await set(
-ref(db,`orders/${orderId}`),
+ref(
+db,
+`orders/${orderId}`
+),
 order
 );
 
@@ -3211,6 +4300,13 @@ orderId
 );
 
 
+/* SEND WHATSAPP */
+
+sendWhatsApp(order);
+
+
+/* CLEAR CART */
+
 cart=[];
 
 renderCart();
@@ -3218,29 +4314,26 @@ renderCart();
 closeCheckout();
 
 
-showToast(
+toast(
 `Order ${orderId} placed successfully 👑`
 );
 
 
-openWhatsApp(
-order,
-orderItems
-);
+/* TRACK */
 
+$("trackOrderId").value=
+orderId;
 
-startTracking(
-orderId
-);
+startTracking(orderId);
 
 
 }catch(error){
 
 console.error(error);
 
-showToast(
+toast(
 error?.message||
-"Could not place order. Please try again."
+"Could not place order."
 );
 
 }finally{
@@ -3248,14 +4341,16 @@ error?.message||
 button.disabled=false;
 
 button.textContent=
-"PLACE ORDER ON WHATSAPP";
+"📲 PLACE ORDER ON WHATSAPP";
 
 }
 
 };
 
 
-/* TRACKING */
+/* ==========================================
+   TRACKING
+========================================== */
 
 const statusSteps=[
 
@@ -3271,7 +4366,7 @@ const statusSteps=[
 
 [
 "making",
-"Making"
+"Preparing"
 ],
 
 [
@@ -3289,6 +4384,13 @@ const statusSteps=[
 
 function renderTracking(order){
 
+const result=
+$("trackResult");
+
+result.style.display=
+"block";
+
+
 const current=
 statusSteps.findIndex(
 step=>
@@ -3296,65 +4398,54 @@ step[0]===order.status
 );
 
 
-$("trackResult").style.display=
-"block";
-
-
-$("trackResult").innerHTML=
+result.innerHTML=
 
 `
 
-<div
-style="
-margin-top:18px;
-border-top:1px solid #222;
-padding-top:15px
-"
->
+<div class="track-order-head">
 
-<div
-style="
-display:flex;
-justify-content:space-between;
-color:#aaa;
-font-size:12px
-"
->
+<div>
 
-<span>
+<div style="font-size:10px;color:#666">
+ORDER ID
+</div>
 
-Order ID:
-
-<b style="color:#fff">
+<div class="track-order-id">
 ${escapeHTML(order.orderId)}
-</b>
-
-</span>
-
-<span style="color:var(--gold2)">
-
-${escapeHTML(
-order.status||"received"
-).replaceAll("_"," ")}
-
-</span>
+</div>
 
 </div>
 
 
-<div class="steps">
+<div class="track-order-status">
+
+${escapeHTML(
+order.status||
+"received"
+).replaceAll("_"," ")}
+
+</div>
+
+</div>
+
+
+<div class="track-steps">
 
 ${statusSteps.map(
 (step,index)=>
 `
 
 <div
-class="step ${
-index<=current?"active":""
+class="track-step ${
+index<=current
+?
+"active"
+:
+""
 }"
 >
 
-<div class="dot">
+<div class="track-circle">
 
 ${
 index<=current
@@ -3375,35 +4466,33 @@ ${step[1]}
 
 </div>
 
-</div>
-
 `;
 
 }
 
 
-/* START TRACKING */
-
 async function startTracking(orderId){
 
-if(trackingUnsubscribe)
-trackingUnsubscribe();
+if(!orderId)
+return;
+
+
+if(trackingListener){
+
+trackingListener();
+
+trackingListener=null;
+
+}
 
 
 if(!currentUser){
 
 const ok=
-await ensureCustomerAuth();
+await ensureAuth();
 
-if(!ok){
-
-showToast(
-"Could not connect to order system."
-);
-
+if(!ok)
 return;
-
-}
 
 }
 
@@ -3416,15 +4505,9 @@ ref(db,`orders/${orderId}`)
 );
 
 
-if(snapshot.exists()){
+if(!snapshot.exists()){
 
-renderTracking(
-snapshot.val()
-);
-
-}else{
-
-showToast(
+toast(
 "Order not found."
 );
 
@@ -3433,32 +4516,31 @@ return;
 }
 
 
-trackingUnsubscribe=
-onValue(
-ref(db,`orders/${orderId}`),
-snapshot=>{
-
-if(snapshot.exists())
 renderTracking(
 snapshot.val()
 );
 
-}
+
+trackingListener=
+onValue(
+ref(db,`orders/${orderId}`),
+snap=>{
+
+if(snap.exists()){
+
+renderTracking(
+snap.val()
 );
 
+}
 
-$("trackOrderId").value=
-orderId;
+});
 
 
-window.scrollTo({
-
-top:
-document.body.scrollHeight,
-
-behavior:
-"smooth"
-
+document
+.querySelector("#track")
+.scrollIntoView({
+behavior:"smooth"
 });
 
 
@@ -3466,8 +4548,8 @@ behavior:
 
 console.error(error);
 
-showToast(
-"Order not found or you are not authorized."
+toast(
+"Could not load order status."
 );
 
 }
@@ -3475,7 +4557,9 @@ showToast(
 }
 
 
-/* TRACK BUTTON */
+/* ==========================================
+   TRACK BUTTON
+========================================== */
 
 $("trackBtn").onclick=
 async function(){
@@ -3488,8 +4572,8 @@ $("trackOrderId")
 
 if(!id){
 
-showToast(
-"Enter your order ID."
+toast(
+"Please enter your Order ID."
 );
 
 return;
@@ -3502,13 +4586,17 @@ await startTracking(id);
 };
 
 
-/* YEAR */
+/* ==========================================
+   YEAR
+========================================== */
 
 $("year").textContent=
 new Date().getFullYear();
 
 
-/* LAST ORDER */
+/* ==========================================
+   LAST ORDER
+========================================== */
 
 const lastOrder=
 localStorage.getItem(
@@ -3516,26 +4604,31 @@ localStorage.getItem(
 );
 
 
-if(lastOrder)
-$("trackOrderId").value=
+if(lastOrder){
+
+$("trackOrderId")
+.value=
 lastOrder;
 
+}
 
-/* INITIAL */
+
+/* ==========================================
+   INITIAL
+========================================== */
 
 renderMenu();
 
 renderCart();
 
-updateShopStatusHome();
+updateStatus();
 
 setInterval(
-updateShopStatusHome,
+updateStatus,
 15000
 );
 
-
-ensureCustomerAuth();
+ensureAuth();
 
 </script>
 
