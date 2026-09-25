@@ -878,7 +878,7 @@ button{cursor:pointer}
   >
 
     <div class="folder-label">
-      ✅ DELIVERED
+      🟢 DELIVERED
     </div>
 
     <div
@@ -898,7 +898,7 @@ button{cursor:pointer}
   >
 
     <div class="folder-label">
-      ❌ CANCELLED
+      🔴 CANCELLED
     </div>
 
     <div
@@ -1291,7 +1291,7 @@ button{cursor:pointer}
   <div class="section-title">
 
     <strong>
-      ✅ Delivered Orders
+      🟢 Delivered Orders
     </strong>
 
     <span
@@ -1321,7 +1321,7 @@ button{cursor:pointer}
   <div class="section-title">
 
     <strong>
-      ❌ Cancelled Orders
+      🔴 Cancelled Orders
     </strong>
 
     <span
@@ -2476,7 +2476,9 @@ function normalizeStatus(status){
   if(
     s === "" ||
     s === "received" ||
-    s === "new"
+    s === "new" ||
+    s === "placed" ||
+    s === "pending"
   ){
     return "received";
   }
@@ -2488,21 +2490,32 @@ function normalizeStatus(status){
     return "processing";
   }
 
+  /*
+    BACKEND STATUS = making
+    CUSTOMER DISPLAY = 👨‍🍳 PREPARING
+  */
   if(
     s === "making" ||
-    s === "preparing"
+    s === "preparing" ||
+    s === "ready"
   ){
     return "making";
   }
 
   if(
     s === "out_for_delivery" ||
-    s === "out for delivery"
+    s === "out for delivery" ||
+    s === "out-for-delivery" ||
+    s === "delivery"
   ){
     return "out_for_delivery";
   }
 
-  if(s === "delivered"){
+  if(
+    s === "delivered" ||
+    s === "completed" ||
+    s === "closed"
+  ){
     return "delivered";
   }
 
@@ -2844,7 +2857,7 @@ function renderNotification(entries){
               )
             "
           >
-            ACCEPT
+            🟡 PROCESSING
           </button>
 
         </div>
@@ -2870,14 +2883,19 @@ function renderOrderCard(
       order.status
     );
 
+
+  /* =========================
+     NEW STATUS DISPLAY
+  ========================= */
+
   const statusText =
     {
-      received:"RECEIVED",
-      processing:"PROCESSING",
-      making:"MAKING",
-      out_for_delivery:"OUT FOR DELIVERY",
-      delivered:"DELIVERED",
-      cancelled:"CANCELLED"
+      received:"🟠 ORDER RECEIVED",
+      processing:"🟡 PROCESSING",
+      making:"👨‍🍳 PREPARING",
+      out_for_delivery:"🏍️🧑 OUT FOR DELIVERY",
+      delivered:"🟢 DELIVERED",
+      cancelled:"🔴 CANCELLED"
     }[status];
 
 
@@ -2920,6 +2938,10 @@ function renderOrderCard(
   let buttons = "";
 
 
+  /* =========================
+     RECEIVED
+  ========================= */
+
   if(status==="received"){
 
     buttons = `
@@ -2933,7 +2955,7 @@ function renderOrderCard(
           )
         "
       >
-        PROCESSING
+        🟡 PROCESSING
       </button>
 
       <button
@@ -2945,13 +2967,17 @@ function renderOrderCard(
           )
         "
       >
-        CANCEL
+        🔴 CANCEL
       </button>
 
     `;
 
   }
 
+
+  /* =========================
+     PROCESSING
+  ========================= */
 
   else if(status==="processing"){
 
@@ -2966,7 +2992,7 @@ function renderOrderCard(
           )
         "
       >
-        MAKING
+        👨‍🍳 PREPARING
       </button>
 
       <button
@@ -2978,13 +3004,17 @@ function renderOrderCard(
           )
         "
       >
-        CANCEL
+        🔴 CANCEL
       </button>
 
     `;
 
   }
 
+
+  /* =========================
+     PREPARING
+  ========================= */
 
   else if(status==="making"){
 
@@ -2999,7 +3029,7 @@ function renderOrderCard(
           )
         "
       >
-        OUT FOR DELIVERY
+        🏍️🧑 OUT FOR DELIVERY
       </button>
 
       <button
@@ -3011,13 +3041,17 @@ function renderOrderCard(
           )
         "
       >
-        CANCEL
+        🔴 CANCEL
       </button>
 
     `;
 
   }
 
+
+  /* =========================
+     OUT FOR DELIVERY
+  ========================= */
 
   else if(
     status==="out_for_delivery"
@@ -3034,13 +3068,17 @@ function renderOrderCard(
           )
         "
       >
-        DELIVERED
+        🟢 DELIVERED
       </button>
 
     `;
 
   }
 
+
+  /* =========================
+     DELIVERED
+  ========================= */
 
   else if(status==="delivered"){
 
@@ -3060,6 +3098,10 @@ function renderOrderCard(
 
   }
 
+
+  /* =========================
+     CANCELLED
+  ========================= */
 
   else if(status==="cancelled"){
 
@@ -3327,14 +3369,45 @@ async function(
     }
 
 
+    /*
+      When customer clicks
+      ORDER DELIVERED on Home Page,
+      Home updates:
+
+      orders/{key}/status = delivered
+
+      This Admin listener automatically
+      detects it and moves the order
+      into DELIVERED folder.
+    */
+
+
     await update(
       ref(db),
       updates
     );
 
 
+    const statusMessage = {
+
+      processing:"🟡 PROCESSING",
+
+      making:"👨‍🍳 PREPARING",
+
+      out_for_delivery:
+        "🏍️🧑 OUT FOR DELIVERY",
+
+      delivered:
+        "🟢 DELIVERED",
+
+      cancelled:
+        "🔴 CANCELLED"
+
+    }[newStatus] || newStatus;
+
+
     showToast(
-      `Order moved to ${newStatus.replaceAll("_"," ")}.`
+      `Order moved to ${statusMessage}.`
     );
 
   }catch(error){
