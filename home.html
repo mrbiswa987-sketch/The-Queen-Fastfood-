@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0a0a0a">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#080808">
 <title>The Queen Fast Food</title>
 
 <style>
@@ -25,10 +24,7 @@ body{
   overflow-x:hidden;
 }
 
-button,
-input,
-textarea,
-select{
+button,input,textarea,select{
   font-family:inherit;
 }
 
@@ -44,7 +40,7 @@ header{
   z-index:1000;
   background:rgba(8,8,8,.96);
   backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,102,0,.25);
+  border-bottom:1px solid rgba(255,106,0,.25);
 }
 
 .header-inner{
@@ -274,8 +270,7 @@ header{
 .food-image{
   width:100%;
   height:190px;
-  background:
-    radial-gradient(circle,#292929,#121212);
+  background:radial-gradient(circle,#292929,#121212);
   position:relative;
   overflow:hidden;
   display:flex;
@@ -350,6 +345,8 @@ header{
   cursor:not-allowed;
 }
 
+/* ================= BLINK ================= */
+
 .add-to-cart-blink{
   animation:addBlink .75s ease;
 }
@@ -359,18 +356,26 @@ header{
     transform:scale(1);
     box-shadow:0 0 0 rgba(255,106,0,0);
   }
-  25%{
+
+  20%{
     transform:scale(1.12);
-    box-shadow:0 0 25px rgba(255,106,0,.8);
+    box-shadow:0 0 25px rgba(255,106,0,.9);
   }
-  50%{
+
+  40%{
     transform:scale(.96);
     box-shadow:0 0 5px rgba(255,106,0,.3);
   }
-  75%{
-    transform:scale(1.08);
-    box-shadow:0 0 25px rgba(255,106,0,.7);
+
+  60%{
+    transform:scale(1.10);
+    box-shadow:0 0 28px rgba(255,106,0,.9);
   }
+
+  80%{
+    transform:scale(.98);
+  }
+
   100%{
     transform:scale(1);
     box-shadow:0 0 0 rgba(255,106,0,0);
@@ -523,7 +528,7 @@ footer{
   font-weight:900;
 }
 
-/* ================= CART DRAWER ================= */
+/* ================= CART ================= */
 
 .overlay{
   position:fixed;
@@ -783,7 +788,7 @@ textarea.input{
   font-size:14px;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:950px){
   .menu-grid{
@@ -792,6 +797,7 @@ textarea.input{
 }
 
 @media(max-width:700px){
+
   .header-inner{
     min-height:62px;
   }
@@ -839,6 +845,7 @@ textarea.input{
 }
 
 @media(max-width:430px){
+
   .menu-grid{
     grid-template-columns:1fr 1fr;
   }
@@ -850,6 +857,7 @@ textarea.input{
   .hero h1{
     letter-spacing:-1px;
   }
+
 }
 </style>
 </head>
@@ -859,6 +867,7 @@ textarea.input{
 <!-- ================= HEADER ================= -->
 
 <header>
+
   <div class="header-inner">
 
     <div class="logo">
@@ -872,14 +881,25 @@ textarea.input{
         Checking...
       </div>
 
-      <button class="cart-top" onclick="openCart()">
+      <!-- CUSTOMER MUST MANUALLY TAP THIS -->
+      <button
+        class="cart-top"
+        onclick="openCart()">
+
         🛒
-        <span id="cartCount" class="cart-count">0</span>
+
+        <span
+          id="cartCount"
+          class="cart-count">
+          0
+        </span>
+
       </button>
 
     </div>
 
   </div>
+
 </header>
 
 
@@ -894,7 +914,8 @@ textarea.input{
     </div>
 
     <h1>
-      THE QUEEN <span>FAST FOOD</span>
+      THE QUEEN
+      <span>FAST FOOD</span>
     </h1>
 
     <p>
@@ -924,22 +945,33 @@ textarea.input{
 
 <!-- ================= MENU ================= -->
 
-<section class="section" id="menu">
+<section
+  class="section"
+  id="menu">
 
   <div class="section-title">
+
     <small>OUR MENU</small>
-    <h2>Choose. Add. Enjoy.</h2>
-    <p>Fresh food prepared with care.</p>
+
+    <h2>
+      Choose. Add. Enjoy.
+    </h2>
+
+    <p>
+      Fresh food prepared with care.
+    </p>
+
   </div>
 
-  <div id="menuGrid" class="menu-grid">
+  <div
+    id="menuGrid"
+    class="menu-grid">
 
     <div style="
       grid-column:1/-1;
       text-align:center;
       padding:50px;
-      color:#777;
-    ">
+      color:#777;">
       Loading menu...
     </div>
 
@@ -953,10 +985,19 @@ textarea.input{
 <section class="section">
 
   <div class="section-title">
+
     <small>DELIVERY</small>
-    <h2>Check Delivery</h2>
-    <p>Enter your location and calculate delivery charge.</p>
+
+    <h2>
+      Check Delivery
+    </h2>
+
+    <p>
+      Enter your location and calculate delivery charge.
+    </p>
+
   </div>
+
 
   <div class="delivery-box">
 
@@ -966,32 +1007,48 @@ textarea.input{
       type="text"
       placeholder="Enter your delivery address">
 
+
     <div class="location-row">
 
       <button
         class="btn btn-orange"
         onclick="useCurrentLocation()">
+
         📍 Use My Current Location
+
       </button>
 
     </div>
 
-    <div id="deliveryResult" class="delivery-result"></div>
+
+    <div
+      id="deliveryResult"
+      class="delivery-result">
+    </div>
 
   </div>
 
 </section>
 
 
-<!-- ================= TRACK ORDER ================= -->
+<!-- ================= TRACK ================= -->
 
 <section class="section">
 
   <div class="section-title">
+
     <small>ORDER TRACKING</small>
-    <h2>Track Your Order</h2>
-    <p>Enter your order ID to see the current status.</p>
+
+    <h2>
+      Track Your Order
+    </h2>
+
+    <p>
+      Enter your order ID to see the current status.
+    </p>
+
   </div>
+
 
   <div class="track-box">
 
@@ -1000,14 +1057,21 @@ textarea.input{
       class="input"
       placeholder="Enter Order ID">
 
+
     <button
       class="btn btn-orange"
       style="width:100%"
       onclick="trackOrder()">
+
       Track Order
+
     </button>
 
-    <div id="trackResult" class="track-result"></div>
+
+    <div
+      id="trackResult"
+      class="track-result">
+    </div>
 
   </div>
 
@@ -1047,13 +1111,17 @@ textarea.input{
 </div>
 
 
-<!-- ================= CART DRAWER ================= -->
+<!-- ================= CART ================= -->
 
-<div id="cartDrawer" class="cart-drawer">
+<div
+  id="cartDrawer"
+  class="cart-drawer">
 
   <div class="cart-head">
 
-    <h2>🛒 Your Cart</h2>
+    <h2>
+      🛒 Your Cart
+    </h2>
 
     <button
       class="close-btn"
@@ -1063,35 +1131,63 @@ textarea.input{
 
   </div>
 
-  <div id="cartItems" class="cart-items"></div>
+
+  <div
+    id="cartItems"
+    class="cart-items">
+  </div>
+
 
   <div class="cart-footer">
 
     <div class="summary-row">
-      <span>Subtotal</span>
-      <strong id="cartSubtotal">₹0</strong>
+
+      <span>
+        Subtotal
+      </span>
+
+      <strong id="cartSubtotal">
+        ₹0
+      </strong>
+
     </div>
+
 
     <div class="summary-row">
-      <span>Delivery</span>
-      <strong id="cartDelivery">₹0</strong>
+
+      <span>
+        Delivery
+      </span>
+
+      <strong id="cartDelivery">
+        ₹0
+      </strong>
+
     </div>
+
 
     <div class="summary-row total">
-      <span>Total</span>
-      <strong id="cartTotal">₹0</strong>
+
+      <span>
+        Total
+      </span>
+
+      <strong id="cartTotal">
+        ₹0
+      </strong>
+
     </div>
 
-    <!-- IMPORTANT:
-         Checkout button exists ONLY inside CART.
-         Add to Cart never calls checkout directly.
-    -->
+
+    <!-- CHECKOUT ONLY FROM CART -->
 
     <button
       id="checkoutBtn"
       class="checkout-btn"
       onclick="openCheckout()">
+
       Proceed to Checkout
+
     </button>
 
   </div>
@@ -1099,15 +1195,19 @@ textarea.input{
 </div>
 
 
-<!-- ================= CHECKOUT MODAL ================= -->
+<!-- ================= CHECKOUT ================= -->
 
-<div id="checkoutModal" class="modal">
+<div
+  id="checkoutModal"
+  class="modal">
 
   <div class="modal-box">
 
     <div class="modal-head">
 
-      <h2>Checkout</h2>
+      <h2>
+        Checkout
+      </h2>
 
       <button
         class="close-btn"
@@ -1118,7 +1218,10 @@ textarea.input{
     </div>
 
 
-    <div id="checkoutSummary" class="order-summary"></div>
+    <div
+      id="checkoutSummary"
+      class="order-summary">
+    </div>
 
 
     <input
@@ -1126,37 +1229,41 @@ textarea.input{
       class="input"
       placeholder="Your Name">
 
+
     <input
       id="customerPhone"
       class="input"
       type="tel"
       placeholder="Mobile Number">
 
+
     <textarea
       id="customerAddress"
       class="input"
-      placeholder="Complete Delivery Address"></textarea>
+      placeholder="Complete Delivery Address">
+    </textarea>
 
 
     <button
       class="btn btn-dark"
       style="width:100%;margin-bottom:15px"
       onclick="useCheckoutLocation()">
+
       📍 Use My Current Location
+
     </button>
 
 
     <div
       id="checkoutLocationStatus"
       style="
-        display:none;
-        color:#00e676;
-        background:#102015;
-        padding:10px;
-        border-radius:10px;
-        margin-bottom:15px;
-        font-size:12px;
-      ">
+      display:none;
+      color:#00e676;
+      background:#102015;
+      padding:10px;
+      border-radius:10px;
+      margin-bottom:15px;
+      font-size:12px;">
     </div>
 
 
@@ -1164,20 +1271,26 @@ textarea.input{
       PAYMENT METHOD
     </div>
 
+
     <div class="payment-options">
 
       <div
         class="payment-option selected"
         data-payment="Cash on Delivery"
         onclick="selectPayment(this)">
+
         💵 Cash on Delivery
+
       </div>
+
 
       <div
         class="payment-option"
         data-payment="UPI"
         onclick="selectPayment(this)">
+
         📱 UPI
+
       </div>
 
     </div>
@@ -1186,7 +1299,9 @@ textarea.input{
     <button
       class="confirm-btn"
       onclick="placeOrderWhatsApp()">
+
       📲 Place Order on WhatsApp
+
     </button>
 
   </div>
@@ -1200,7 +1315,9 @@ textarea.input{
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
   getDatabase,
@@ -1208,44 +1325,74 @@ import {
   get,
   set,
   onValue
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 
 import {
   getAuth,
   signInAnonymously,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-/* ================= FIREBASE CONFIG ================= */
+/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
-  apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain:"the-queen-fast-food.firebaseapp.com",
-  databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId:"the-queen-fast-food",
-  storageBucket:"the-queen-fast-food.firebasestorage.app",
-  messagingSenderId:"435721389652",
-  appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId:"G-Q1YCK636KJ"
+
+  apiKey:
+  "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+  "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+  "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+  "the-queen-fast-food",
+
+  storageBucket:
+  "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+  "435721389652",
+
+  appId:
+  "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+  "G-Q1YCK636KJ"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
-
-const db = getDatabase(app);
-
-const auth = getAuth(app);
+const app =
+  initializeApp(firebaseConfig);
 
 
-/* ================= CONFIG ================= */
+const db =
+  getDatabase(app);
 
-const RESTAURANT_LAT = 20.216780359694468;
-const RESTAURANT_LNG = 86.36464363454978;
 
-const DELIVERY_RATE = 6;
+const auth =
+  getAuth(app);
 
-const WHATSAPP_NUMBER = "919090220791";
+
+/* ================= SETTINGS ================= */
+
+const RESTAURANT_LAT =
+  20.216780359694468;
+
+const RESTAURANT_LNG =
+  86.36464363454978;
+
+const DELIVERY_RATE =
+  6;
+
+const WHATSAPP_NUMBER =
+  "919090220791";
 
 
 /* ================= DEFAULT MENU ================= */
@@ -1359,7 +1506,8 @@ let cart = [];
 
 let currentUser = null;
 
-let selectedPayment = "Cash on Delivery";
+let selectedPayment =
+  "Cash on Delivery";
 
 let selectedLat = null;
 
@@ -1367,20 +1515,17 @@ let selectedLng = null;
 
 let selectedDistanceKm = 0;
 
-let currentOrderId = null;
-
 
 /* ================= AUTH ================= */
 
-onAuthStateChanged(auth,(user)=>{
-
-  if(user){
-
-    currentUser = user;
-
+onAuthStateChanged(
+  auth,
+  user=>{
+    if(user){
+      currentUser = user;
+    }
   }
-
-});
+);
 
 
 try{
@@ -1389,7 +1534,10 @@ try{
 
 }catch(error){
 
-  console.log("Anonymous auth error:",error);
+  console.log(
+    "Anonymous auth error:",
+    error
+  );
 
 }
 
@@ -1397,9 +1545,7 @@ try{
 /* ================= HELPERS ================= */
 
 function $(id){
-
   return document.getElementById(id);
-
 }
 
 
@@ -1417,7 +1563,9 @@ function escapeHTML(value){
 
 function money(value){
 
-  return "₹" + Number(value || 0).toFixed(0);
+  return "₹" +
+    Number(value || 0)
+    .toFixed(0);
 
 }
 
@@ -1428,60 +1576,66 @@ async function loadMenu(){
 
   try{
 
-    const settingsSnap =
-      await get(ref(db,"settings"));
+    const snap =
+      await get(
+        ref(db,"settings")
+      );
+
 
     const settings =
-      settingsSnap.exists()
-        ? settingsSnap.val()
+      snap.exists()
+        ? snap.val()
         : {};
+
 
     const savedMenu =
       settings.menu || {};
 
 
-    menu = defaultMenu.map(item=>{
+    menu =
+      defaultMenu.map(item=>{
 
-      const saved =
-        savedMenu[item.id] || {};
+        const saved =
+          savedMenu[item.id] || {};
 
-      return {
 
-        ...item,
+        return {
 
-        ...saved,
+          ...item,
 
-        id:item.id,
+          ...saved,
 
-        name:saved.name || item.name,
+          id:item.id,
 
-        price:
-          saved.price !== undefined
-            ? Number(saved.price)
-            : item.price,
+          name:
+            saved.name ||
+            item.name,
 
-        available:
-          saved.available !== undefined
-            ? Boolean(saved.available)
-            : true,
+          price:
+            saved.price !== undefined
+              ? Number(saved.price)
+              : item.price,
 
-        /*
-          VERY IMPORTANT:
-          Firebase image is preserved.
-        */
+          available:
+            saved.available !== undefined
+              ? Boolean(saved.available)
+              : true,
 
-        image:
-          saved.image ||
-          item.image ||
-          ""
+          /*
+            Firebase image preserved
+          */
 
-      };
+          image:
+            saved.image ||
+            item.image ||
+            ""
 
-    });
+        };
+
+      });
 
 
     renderMenu();
-
 
     updateShopStatus(settings);
 
@@ -1490,12 +1644,12 @@ async function loadMenu(){
 
     console.error(error);
 
-    menu = defaultMenu.map(item=>({...item}));
+    menu =
+      defaultMenu.map(
+        item=>({...item})
+      );
 
     renderMenu();
-
-    $("shopStatus").textContent =
-      "Shop";
 
   }
 
@@ -1507,14 +1661,17 @@ async function loadMenu(){
 function createFoodImage(item){
 
   const image =
-    String(item.image || "").trim();
+    String(
+      item.image || ""
+    ).trim();
 
 
   if(!image){
 
     return `
-      <div class="food-fallback"
-           style="display:flex">
+      <div
+        class="food-fallback"
+        style="display:flex">
         🍽️
       </div>
     `;
@@ -1548,16 +1705,18 @@ function createFoodImage(item){
 
 function renderMenu(){
 
-  const grid = $("menuGrid");
+  const grid =
+    $("menuGrid");
+
 
   if(!menu.length){
 
     grid.innerHTML = `
       <div style="
-        grid-column:1/-1;
-        text-align:center;
-        padding:50px;
-        color:#777;">
+      grid-column:1/-1;
+      text-align:center;
+      padding:50px;
+      color:#777;">
         No food items found.
       </div>
     `;
@@ -1567,105 +1726,131 @@ function renderMenu(){
   }
 
 
-  grid.innerHTML = menu.map(item=>{
+  grid.innerHTML =
+    menu.map(item=>{
 
-    const available =
-      item.available !== false;
+      const available =
+        item.available !== false;
 
 
-    return `
+      return `
 
-      <div class="food-card">
+        <div class="food-card">
 
-        <div class="food-image">
+          <div class="food-image">
 
-          ${createFoodImage(item)}
+            ${createFoodImage(item)}
 
-          ${
-            !available
-              ? `
+            ${
+              !available
+              ?
+              `
                 <div class="stock-badge">
                   OUT OF STOCK
                 </div>
               `
-              : ""
-          }
+              :
+              ""
+            }
 
-        </div>
-
-
-        <div class="food-info">
-
-          <h3>
-            ${escapeHTML(item.name)}
-          </h3>
+          </div>
 
 
-          <div class="food-bottom">
+          <div class="food-info">
 
-            <div class="price">
-              ${money(item.price)}
-            </div>
+            <h3>
+              ${escapeHTML(item.name)}
+            </h3>
 
 
-            <button
-              class="add-btn"
-              data-id="${escapeHTML(item.id)}"
-              ${
-                !available
-                  ? "disabled"
-                  : ""
-              }>
+            <div class="food-bottom">
 
-              ${
-                available
+              <div class="price">
+                ${money(item.price)}
+              </div>
+
+
+              <button
+                class="add-btn"
+                data-id="${escapeHTML(item.id)}"
+                ${!available ? "disabled" : ""}>
+
+                ${
+                  available
                   ? "Add to Cart"
                   : "Out of Stock"
-              }
+                }
 
-            </button>
+              </button>
+
+            </div>
 
           </div>
 
         </div>
 
-      </div>
+      `;
 
-    `;
+    }).join("");
 
-  }).join("");
-
-
-  /*
-    IMPORTANT:
-    Add to Cart does NOT call checkout.
-    It ONLY adds item and opens cart.
-  */
 
   grid
-    .querySelectorAll(".add-btn:not(:disabled)")
+    .querySelectorAll(
+      ".add-btn:not(:disabled)"
+    )
     .forEach(button=>{
 
-      button.addEventListener("click",()=>{
+      button.addEventListener(
+        "click",
+        ()=>{
 
-        const id =
-          button.dataset.id;
+          const id =
+            button.dataset.id;
 
-        addToCart(id,button);
+          addToCart(
+            id,
+            button
+          );
 
-      });
+        }
+      );
 
     });
 
 }
 
 
-/* ================= ADD TO CART ================= */
+/* ==================================================
+   IMPORTANT FINAL ADD TO CART FLOW
 
-function addToCart(id,button){
+   Add to Cart
+        ↓
+   Item added to cart
+        ↓
+   BUTTON BLINK
+        ↓
+   STAY ON HOME PAGE
+
+   ❌ NO openCart()
+   ❌ NO checkout
+   ❌ NO automatic navigation
+
+   Customer manually taps 🛒
+        ↓
+   Your Cart
+        ↓
+   Proceed to Checkout
+================================================== */
+
+function addToCart(
+  id,
+  button
+){
 
   const item =
-    menu.find(x=>x.id===id);
+    menu.find(
+      x=>x.id===id
+    );
 
 
   if(!item){
@@ -1683,7 +1868,9 @@ function addToCart(id,button){
 
 
   const existing =
-    cart.find(x=>x.id===id);
+    cart.find(
+      x=>x.id===id
+    );
 
 
   if(existing){
@@ -1709,13 +1896,16 @@ function addToCart(id,button){
   }
 
 
+  /*
+    Update cart count,
+    BUT DO NOT OPEN CART.
+  */
+
   updateCart();
 
 
   /*
-    BLINK ONLY.
-    After animation, OPEN CART.
-    NEVER OPEN CHECKOUT.
+    ONLY BUTTON BLINK
   */
 
   if(button){
@@ -1724,13 +1914,19 @@ function addToCart(id,button){
       "add-to-cart-blink"
     );
 
+
     void button.offsetWidth;
+
 
     button.classList.add(
       "add-to-cart-blink"
     );
 
-    clearTimeout(button.__blinkTimer);
+
+    clearTimeout(
+      button.__blinkTimer
+    );
+
 
     button.__blinkTimer =
       setTimeout(()=>{
@@ -1739,13 +1935,7 @@ function addToCart(id,button){
           "add-to-cart-blink"
         );
 
-        openCart();
-
       },750);
-
-  }else{
-
-    openCart();
 
   }
 
@@ -1758,7 +1948,8 @@ function updateCart(){
 
   const count =
     cart.reduce(
-      (sum,item)=>sum + item.qty,
+      (sum,item)=>
+        sum + item.qty,
       0
     );
 
@@ -1774,21 +1965,30 @@ function updateCart(){
   if(!cart.length){
 
     container.innerHTML = `
+
       <div class="empty-cart">
+
         <div>
+
           <div style="font-size:45px">
             🛒
           </div>
+
           <div>
             Your cart is empty.
           </div>
+
         </div>
+
       </div>
+
     `;
 
-    $("checkoutBtn").disabled = true;
+    $("checkoutBtn").disabled =
+      true;
 
-    $("checkoutBtn").style.opacity = ".5";
+    $("checkoutBtn").style.opacity =
+      ".5";
 
     updateCartTotals();
 
@@ -1797,9 +1997,11 @@ function updateCart(){
   }
 
 
-  $("checkoutBtn").disabled = false;
+  $("checkoutBtn").disabled =
+    false;
 
-  $("checkoutBtn").style.opacity = "1";
+  $("checkoutBtn").style.opacity =
+    "1";
 
 
   container.innerHTML =
@@ -1811,24 +2013,26 @@ function updateCart(){
 
           ${
             item.image
-              ? `
-                <img
-                  src="${escapeHTML(item.image)}"
-                  onerror="
-                    this.style.display='none';
-                  ">
-              `
-              : `
-                <div style="
-                  width:100%;
-                  height:100%;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  font-size:25px;">
-                  🍽️
-                </div>
-              `
+            ?
+            `
+              <img
+                src="${escapeHTML(item.image)}"
+                onerror="
+                this.style.display='none';
+                ">
+            `
+            :
+            `
+              <div style="
+              width:100%;
+              height:100%;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              font-size:25px;">
+                🍽️
+              </div>
+            `
           }
 
         </div>
@@ -1848,17 +2052,31 @@ function updateCart(){
           <div class="qty">
 
             <button
-              onclick="changeQty('${escapeHTML(item.id)}',-1)">
+              onclick="
+              changeQty(
+                '${escapeHTML(item.id)}',
+                -1
+              )">
+
               −
+
             </button>
+
 
             <span>
               ${item.qty}
             </span>
 
+
             <button
-              onclick="changeQty('${escapeHTML(item.id)}',1)">
+              onclick="
+              changeQty(
+                '${escapeHTML(item.id)}',
+                1
+              )">
+
               +
+
             </button>
 
           </div>
@@ -1867,9 +2085,14 @@ function updateCart(){
 
 
         <div style="
-          font-size:13px;
-          font-weight:900;">
-          ${money(item.price * item.qty)}
+        font-size:13px;
+        font-weight:900;">
+
+          ${money(
+            item.price *
+            item.qty
+          )}
+
         </div>
 
       </div>
@@ -1882,16 +2105,19 @@ function updateCart(){
 }
 
 
-function changeQty(id,change){
+function changeQty(
+  id,
+  change
+){
 
   const item =
-    cart.find(x=>x.id===id);
+    cart.find(
+      x=>x.id===id
+    );
 
 
   if(!item){
-
     return;
-
   }
 
 
@@ -1901,7 +2127,9 @@ function changeQty(id,change){
   if(item.qty <= 0){
 
     cart =
-      cart.filter(x=>x.id!==id);
+      cart.filter(
+        x=>x.id!==id
+      );
 
   }
 
@@ -1915,7 +2143,9 @@ function getSubtotal(){
 
   return cart.reduce(
     (sum,item)=>
-      sum + item.price * item.qty,
+      sum +
+      item.price *
+      item.qty,
     0
   );
 
@@ -1930,7 +2160,8 @@ function getDeliveryCharge(){
   ){
 
     return Math.ceil(
-      selectedDistanceKm * DELIVERY_RATE
+      selectedDistanceKm *
+      DELIVERY_RATE
     );
 
   }
@@ -1945,18 +2176,23 @@ function updateCartTotals(){
   const subtotal =
     getSubtotal();
 
+
   const delivery =
     getDeliveryCharge();
 
+
   const total =
-    subtotal + delivery;
+    subtotal +
+    delivery;
 
 
   $("cartSubtotal").textContent =
     money(subtotal);
 
+
   $("cartDelivery").textContent =
     money(delivery);
+
 
   $("cartTotal").textContent =
     money(total);
@@ -1964,14 +2200,16 @@ function updateCartTotals(){
 }
 
 
-/* ================= CART OPEN ================= */
+/* ================= OPEN CART ================= */
 
 window.openCart = function(){
 
   updateCart();
 
+
   $("cartDrawer")
     .classList.add("show");
+
 
   $("cartOverlay")
     .classList.add("show");
@@ -1979,12 +2217,13 @@ window.openCart = function(){
 };
 
 
-/* ================= CART CLOSE ================= */
+/* ================= CLOSE CART ================= */
 
 window.closeCart = function(){
 
   $("cartDrawer")
     .classList.remove("show");
+
 
   $("cartOverlay")
     .classList.remove("show");
@@ -1995,11 +2234,6 @@ window.closeCart = function(){
 /* ================= CHECKOUT ================= */
 
 window.openCheckout = function(){
-
-  /*
-    THIS IS THE ONLY PLACE
-    WHERE CHECKOUT OPENS.
-  */
 
   if(!cart.length){
 
@@ -2035,11 +2269,14 @@ function renderCheckoutSummary(){
   const subtotal =
     getSubtotal();
 
+
   const delivery =
     getDeliveryCharge();
 
+
   const total =
-    subtotal + delivery;
+    subtotal +
+    delivery;
 
 
   $("checkoutSummary").innerHTML = `
@@ -2054,7 +2291,10 @@ function renderCheckoutSummary(){
         </span>
 
         <strong>
-          ${money(item.price * item.qty)}
+          ${money(
+            item.price *
+            item.qty
+          )}
         </strong>
 
       </div>
@@ -2063,27 +2303,52 @@ function renderCheckoutSummary(){
 
 
     <hr style="
-      border:0;
-      border-top:1px solid #333;
-      margin:10px 0;">
+    border:0;
+    border-top:1px solid #333;
+    margin:10px 0;">
+
 
     <div class="line">
-      <span>Subtotal</span>
-      <strong>${money(subtotal)}</strong>
+
+      <span>
+        Subtotal
+      </span>
+
+      <strong>
+        ${money(subtotal)}
+      </strong>
+
     </div>
+
 
     <div class="line">
-      <span>Delivery</span>
-      <strong>${money(delivery)}</strong>
+
+      <span>
+        Delivery
+      </span>
+
+      <strong>
+        ${money(delivery)}
+      </strong>
+
     </div>
 
-    <div class="line"
-         style="
-         color:#ff6a00;
-         font-size:16px;
-         font-weight:900;">
-      <span>Total</span>
-      <strong>${money(total)}</strong>
+
+    <div
+      class="line"
+      style="
+      color:#ff6a00;
+      font-size:16px;
+      font-weight:900;">
+
+      <span>
+        Total
+      </span>
+
+      <strong>
+        ${money(total)}
+      </strong>
+
     </div>
 
   `;
@@ -2093,16 +2358,23 @@ function renderCheckoutSummary(){
 
 /* ================= PAYMENT ================= */
 
-window.selectPayment = function(element){
+window.selectPayment =
+function(element){
 
   document
-    .querySelectorAll(".payment-option")
+    .querySelectorAll(
+      ".payment-option"
+    )
     .forEach(x=>{
-      x.classList.remove("selected");
+      x.classList.remove(
+        "selected"
+      );
     });
 
 
-  element.classList.add("selected");
+  element.classList.add(
+    "selected"
+  );
 
 
   selectedPayment =
@@ -2111,11 +2383,14 @@ window.selectPayment = function(element){
 };
 
 
-/* ================= CURRENT LOCATION ================= */
+/* ================= LOCATION ================= */
 
-window.useCurrentLocation = function(){
+window.useCurrentLocation =
+function(){
 
-  if(!navigator.geolocation){
+  if(
+    !navigator.geolocation
+  ){
 
     alert(
       "Your browser does not support location."
@@ -2126,7 +2401,8 @@ window.useCurrentLocation = function(){
   }
 
 
-  navigator.geolocation.getCurrentPosition(
+  navigator.geolocation
+    .getCurrentPosition(
 
     async position=>{
 
@@ -2139,7 +2415,7 @@ window.useCurrentLocation = function(){
 
       try{
 
-        const distance =
+        selectedDistanceKm =
           await calculateDistance(
             RESTAURANT_LAT,
             RESTAURANT_LNG,
@@ -2148,37 +2424,38 @@ window.useCurrentLocation = function(){
           );
 
 
-        selectedDistanceKm =
-          distance;
-
-
         const charge =
           Math.ceil(
-            distance * DELIVERY_RATE
+            selectedDistanceKm *
+            DELIVERY_RATE
           );
 
 
-        $("deliveryResult").style.display =
+        $("deliveryResult")
+          .style.display =
           "block";
 
 
-        $("deliveryResult").innerHTML = `
+        $("deliveryResult")
+          .innerHTML = `
 
-          📍 Location detected successfully.<br><br>
+            📍 Location detected
+            successfully.<br><br>
 
-          Distance:
-          <strong>
-            ${distance.toFixed(2)} km
-          </strong>
+            Distance:
+            <strong>
+              ${selectedDistanceKm.toFixed(2)}
+              km
+            </strong>
 
-          <br>
+            <br>
 
-          Delivery Charge:
-          <strong>
-            ₹${charge}
-          </strong>
+            Delivery Charge:
+            <strong>
+              ₹${charge}
+            </strong>
 
-        `;
+          `;
 
 
         updateCartTotals();
@@ -2217,9 +2494,12 @@ window.useCurrentLocation = function(){
 
 /* ================= CHECKOUT LOCATION ================= */
 
-window.useCheckoutLocation = function(){
+window.useCheckoutLocation =
+function(){
 
-  if(!navigator.geolocation){
+  if(
+    !navigator.geolocation
+  ){
 
     alert(
       "Your browser does not support location."
@@ -2230,7 +2510,8 @@ window.useCheckoutLocation = function(){
   }
 
 
-  navigator.geolocation.getCurrentPosition(
+  navigator.geolocation
+    .getCurrentPosition(
 
     async position=>{
 
@@ -2266,11 +2547,16 @@ window.useCheckoutLocation = function(){
 
         $("checkoutLocationStatus")
           .innerHTML = `
+
             📍 Location captured<br>
+
             Distance:
-            ${selectedDistanceKm.toFixed(2)} km<br>
+            ${selectedDistanceKm.toFixed(2)}
+            km<br>
+
             Delivery Charge:
             ₹${charge}
+
           `;
 
 
@@ -2354,14 +2640,18 @@ async function calculateDistance(
   }
 
 
-  return data.routes[0].distance / 1000;
+  return (
+    data.routes[0].distance /
+    1000
+  );
 
 }
 
 
 /* ================= PLACE ORDER ================= */
 
-window.placeOrderWhatsApp = async function(){
+window.placeOrderWhatsApp =
+async function(){
 
   if(!cart.length){
 
@@ -2391,7 +2681,9 @@ window.placeOrderWhatsApp = async function(){
 
   if(!name){
 
-    alert("Please enter your name.");
+    alert(
+      "Please enter your name."
+    );
 
     return;
 
@@ -2400,7 +2692,9 @@ window.placeOrderWhatsApp = async function(){
 
   if(!phone){
 
-    alert("Please enter your mobile number.");
+    alert(
+      "Please enter your mobile number."
+    );
 
     return;
 
@@ -2409,7 +2703,9 @@ window.placeOrderWhatsApp = async function(){
 
   if(!address){
 
-    alert("Please enter your delivery address.");
+    alert(
+      "Please enter your delivery address."
+    );
 
     return;
 
@@ -2421,13 +2717,13 @@ window.placeOrderWhatsApp = async function(){
     !selectedLng
   ){
 
-    const confirmLocation =
+    const ok =
       confirm(
         "GPS location is not selected. Continue without GPS location?"
       );
 
 
-    if(!confirmLocation){
+    if(!ok){
 
       return;
 
@@ -2443,10 +2739,6 @@ window.placeOrderWhatsApp = async function(){
       .slice(-8);
 
 
-  currentOrderId =
-    orderId;
-
-
   const subtotal =
     getSubtotal();
 
@@ -2456,7 +2748,8 @@ window.placeOrderWhatsApp = async function(){
 
 
   const total =
-    subtotal + delivery;
+    subtotal +
+    delivery;
 
 
   const orderItems =
@@ -2471,7 +2764,8 @@ window.placeOrderWhatsApp = async function(){
       quantity:item.qty,
 
       total:
-        item.price * item.qty
+        item.price *
+        item.qty
 
     }));
 
@@ -2487,17 +2781,21 @@ window.placeOrderWhatsApp = async function(){
     address,
 
     latitude:
-      selectedLat || null,
+      selectedLat ||
+      null,
 
     longitude:
-      selectedLng || null,
+      selectedLng ||
+      null,
 
     distanceKm:
       Number(
-        selectedDistanceKm || 0
+        selectedDistanceKm ||
+        0
       ),
 
-    deliveryCharge:delivery,
+    deliveryCharge:
+      delivery,
 
     subtotal,
 
@@ -2506,9 +2804,11 @@ window.placeOrderWhatsApp = async function(){
     paymentMethod:
       selectedPayment,
 
-    items:orderItems,
+    items:
+      orderItems,
 
-    status:"received",
+    status:
+      "received",
 
     createdAt:
       Date.now()
@@ -2519,7 +2819,10 @@ window.placeOrderWhatsApp = async function(){
   try{
 
     await set(
-      ref(db,`orders/${orderId}`),
+      ref(
+        db,
+        `orders/${orderId}`
+      ),
       orderData
     );
 
@@ -2546,13 +2849,9 @@ window.placeOrderWhatsApp = async function(){
       selectedLng
     ){
 
-      const mapsUrl =
+      locationText =
         `https://www.google.com/maps?q=`+
         `${selectedLat},${selectedLng}`;
-
-
-      locationText =
-        `${mapsUrl}`;
 
     }
 
@@ -2571,11 +2870,11 @@ window.placeOrderWhatsApp = async function(){
 `;
 
 
-
     cart.forEach(item=>{
 
       message +=
-`\n*🍽️ ${item.name}*
+`
+*🍽️ ${item.name}*
 *Quantity:* ${item.qty}
 *Price:* ₹${item.price}
 *Item Total:* ₹${item.price * item.qty}
@@ -2607,8 +2906,11 @@ ${locationText}
 
 
     const whatsappUrl =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=`+
-      encodeURIComponent(message);
+      `https://wa.me/${WHATSAPP_NUMBER}`+
+      `?text=`+
+      encodeURIComponent(
+        message
+      );
 
 
     window.open(
@@ -2631,7 +2933,8 @@ ${locationText}
     $("customerAddress").value = "";
 
     $("checkoutLocationStatus")
-      .style.display = "none";
+      .style.display =
+      "none";
 
 
     alert(
@@ -2652,9 +2955,10 @@ ${locationText}
 };
 
 
-/* ================= TRACK ORDER ================= */
+/* ================= TRACK ================= */
 
-window.trackOrder = async function(){
+window.trackOrder =
+async function(){
 
   const id =
     $("trackOrderId")
@@ -2688,7 +2992,10 @@ window.trackOrder = async function(){
 
     const snap =
       await get(
-        ref(db,`orders/${id}`)
+        ref(
+          db,
+          `orders/${id}`
+        )
       );
 
 
@@ -2709,11 +3016,16 @@ window.trackOrder = async function(){
       snap.val();
 
 
-    renderTrackResult(order);
+    renderTrackResult(
+      order
+    );
 
 
     onValue(
-      ref(db,`orders/${id}`),
+      ref(
+        db,
+        `orders/${id}`
+      ),
       snapshot=>{
 
         if(snapshot.exists()){
@@ -2748,78 +3060,100 @@ window.trackOrder = async function(){
 function renderTrackResult(order){
 
   const status =
-    order.status || "received";
+    order.status ||
+    "received";
 
 
   const statuses = [
+
     "received",
+
     "confirmed",
+
     "making",
+
     "out_for_delivery",
+
     "delivered"
+
   ];
 
 
   const currentIndex =
-    statuses.indexOf(status);
+    statuses.indexOf(
+      status
+    );
 
 
   const labels = [
+
     "Received",
+
     "Confirmed",
+
     "Making",
+
     "Out for Delivery",
+
     "Delivered"
+
   ];
 
 
-  $("trackResult").innerHTML = `
+  $("trackResult")
+    .innerHTML = `
 
-    <div class="track-status">
+      <div class="track-status">
 
-      <strong>
-        Order ID:
-      </strong>
+        <strong>
+          Order ID:
+        </strong>
 
-      ${escapeHTML(order.orderId || "")}
-
-      <br><br>
-
-      <strong>
-        Current Status:
-      </strong>
-
-      <span style="color:#ff6a00">
         ${escapeHTML(
-          formatStatus(status)
+          order.orderId || ""
         )}
-      </span>
+
+        <br><br>
+
+        <strong>
+          Current Status:
+        </strong>
+
+        <span style="color:#ff6a00">
+          ${escapeHTML(
+            formatStatus(status)
+          )}
+        </span>
 
 
-      <div class="progress">
+        <div class="progress">
 
-        ${statuses.map((s,index)=>`
+          ${statuses.map(
+            (s,index)=>`
 
-          <div
-            class="step ${
-              index <= currentIndex
-                ? "active"
-                : ""
-            }">
+              <div
+                class="step ${
+                  index <= currentIndex
+                  ? "active"
+                  : ""
+                }">
 
-            <div class="step-dot"></div>
+                <div
+                  class="step-dot">
+                </div>
 
-            ${labels[index]}
+                ${labels[index]}
 
-          </div>
+              </div>
 
-        `).join("")}
+            `
+          ).join("")}
+
+        </div>
 
       </div>
 
-    </div>
-
-  `;
+    `;
 
 }
 
@@ -2828,15 +3162,20 @@ function formatStatus(status){
 
   const map = {
 
-    received:"Order Received",
+    received:
+      "Order Received",
 
-    confirmed:"Order Confirmed",
+    confirmed:
+      "Order Confirmed",
 
-    making:"Preparing Food",
+    making:
+      "Preparing Food",
 
-    out_for_delivery:"Out for Delivery",
+    out_for_delivery:
+      "Out for Delivery",
 
-    delivered:"Delivered"
+    delivered:
+      "Delivered"
 
   };
 
@@ -2849,15 +3188,13 @@ function formatStatus(status){
 
 /* ================= SHOP STATUS ================= */
 
-function updateShopStatus(settings){
+function updateShopStatus(
+  settings
+){
 
   const status =
     $("shopStatus");
 
-
-  /*
-    Home reads shop status from Firebase.
-  */
 
   if(
     settings.shopOpen === true
@@ -2889,11 +3226,6 @@ function updateShopStatus(settings){
   }
 
 
-  /*
-    If shopOpen is not available,
-    use normal time setting if present.
-  */
-
   if(
     settings.openTime &&
     settings.closeTime
@@ -2902,18 +3234,25 @@ function updateShopStatus(settings){
     const now =
       new Date();
 
+
     const current =
       now.getHours() * 60 +
       now.getMinutes();
 
 
-    const [oh,om] =
+    const [
+      oh,
+      om
+    ] =
       settings.openTime
         .split(":")
         .map(Number);
 
 
-    const [ch,cm] =
+    const [
+      ch,
+      cm
+    ] =
       settings.closeTime
         .split(":")
         .map(Number);
@@ -2931,7 +3270,8 @@ function updateShopStatus(settings){
 
 
     if(
-      closeMinutes >= openMinutes
+      closeMinutes >=
+      openMinutes
     ){
 
       isOpen =
@@ -2949,14 +3289,14 @@ function updateShopStatus(settings){
 
     status.textContent =
       isOpen
-        ? "● OPEN"
-        : "● CLOSED";
+      ? "● OPEN"
+      : "● CLOSED";
 
 
     status.className =
       isOpen
-        ? "status open"
-        : "status closed";
+      ? "status open"
+      : "status closed";
 
 
     return;
@@ -2966,6 +3306,7 @@ function updateShopStatus(settings){
 
   status.textContent =
     "● OPEN";
+
 
   status.className =
     "status open";
