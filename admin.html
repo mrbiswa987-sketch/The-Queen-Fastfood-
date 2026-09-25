@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#070707">
 <title>The Queen Fast Food - Admin</title>
 
 <style>
@@ -45,6 +46,8 @@ button{
 .hidden{
   display:none!important;
 }
+
+/* ================= LOGIN ================= */
 
 .login-screen{
   min-height:100vh;
@@ -165,6 +168,8 @@ textarea{
   color:#73baff;
 }
 
+/* ================= ADMIN ================= */
+
 .admin{
   display:none;
 }
@@ -269,6 +274,8 @@ textarea{
   color:#ff7777;
 }
 
+/* ================= SHOP ================= */
+
 .shop-status{
   display:flex;
   align-items:center;
@@ -343,6 +350,8 @@ textarea{
   color:#ff8888;
 }
 
+/* ================= DELIVERY ================= */
+
 .delivery-box{
   background:linear-gradient(135deg,#17140a,#111);
   border:1px solid #4c3d13;
@@ -364,6 +373,8 @@ textarea{
   border-radius:7px;
   padding:8px;
 }
+
+/* ================= MENU ================= */
 
 .menu-list{
   display:grid;
@@ -476,6 +487,8 @@ textarea{
   font-size:9px;
   outline:none;
 }
+
+/* ================= ORDERS ================= */
 
 .order-filter{
   display:flex;
@@ -672,6 +685,8 @@ textarea{
   padding:5px 7px;
 }
 
+/* ================= DELIVERED ================= */
+
 .delivered-folder{
   margin-top:13px;
   border:1px solid #245b38;
@@ -707,6 +722,8 @@ textarea{
   padding:8px;
 }
 
+/* ================= RATINGS ================= */
+
 .rating{
   background:#171717;
   border:1px solid #292929;
@@ -727,6 +744,8 @@ textarea{
   font-size:10px;
   line-height:1.45;
 }
+
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
@@ -751,7 +770,10 @@ textarea{
   transform:translateX(-50%) translateY(0);
 }
 
+/* ================= RESPONSIVE ================= */
+
 @media(max-width:900px){
+
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
@@ -767,9 +789,11 @@ textarea{
   .order-info{
     grid-template-columns:1fr 1fr;
   }
+
 }
 
 @media(max-width:600px){
+
   .dashboard{
     padding:12px 9px 35px;
   }
@@ -796,13 +820,17 @@ textarea{
   }
 
   .stock-control{
-    grid-template-columns:1fr;
+    flex-direction:column;
+    align-items:stretch;
   }
+
 }
 </style>
 </head>
 
 <body>
+
+<!-- ================= LOGIN ================= -->
 
 <div class="login-screen" id="loginScreen">
 
@@ -816,12 +844,20 @@ textarea{
 
     <div class="field">
       <label>Email</label>
-      <input id="loginEmail" type="email" placeholder="Admin email">
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Admin email"
+      >
     </div>
 
     <div class="field">
       <label>Password</label>
-      <input id="loginPassword" type="password" placeholder="Password">
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Password"
+      >
     </div>
 
     <button
@@ -843,6 +879,8 @@ textarea{
 </div>
 
 
+<!-- ================= ADMIN ================= -->
+
 <div class="admin" id="adminPanel">
 
   <div class="topbar">
@@ -853,7 +891,10 @@ textarea{
         👑 <span>The Queen Fast Food</span> — Admin
       </div>
 
-      <button class="btn btn-dark" onclick="adminLogout()">
+      <button
+        class="btn btn-dark"
+        onclick="adminLogout()"
+      >
         Logout
       </button>
 
@@ -863,6 +904,8 @@ textarea{
 
 
   <div class="dashboard">
+
+    <!-- STATS -->
 
     <div class="stats">
 
@@ -891,15 +934,23 @@ textarea{
 
     <div class="grid">
 
+      <!-- SHOP CONTROL -->
+
       <div class="card">
 
         <h2>🏪 Shop Control</h2>
 
         <div class="shop-status">
 
-          <span id="shopLight" class="shop-light"></span>
+          <span
+            id="shopLight"
+            class="shop-light"
+          ></span>
 
-          <span id="shopStatusText" class="shop-status-text">
+          <span
+            id="shopStatusText"
+            class="shop-status-text"
+          >
             CHECKING...
           </span>
 
@@ -910,7 +961,7 @@ textarea{
           India Standard Time (IST)
           <br>
           <strong>Automatic Schedule:</strong>
-          Customer status follows the time set below.
+          Customer website will follow the same settings.
         </div>
 
         <h3>Shop Status Control</h3>
@@ -943,6 +994,7 @@ textarea{
 
         </div>
 
+
         <div
           style="
             background:#171717;
@@ -952,7 +1004,10 @@ textarea{
           "
         >
 
-          <strong id="shopControlTitle" style="font-size:11px;">
+          <strong
+            id="shopControlTitle"
+            style="font-size:11px;"
+          >
             Automatic Schedule
           </strong>
 
@@ -969,23 +1024,44 @@ textarea{
 
         </div>
 
+
         <div class="field">
+
           <label>Opening Time</label>
-          <input id="openingTime" type="time" value="12:00">
+
+          <input
+            id="openingTime"
+            type="time"
+            value="12:00"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>Closing Time</label>
-          <input id="closingTime" type="time" value="23:00">
+
+          <input
+            id="closingTime"
+            type="time"
+            value="23:00"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>Closed Message</label>
+
           <textarea
             id="closedMessage"
             placeholder="Sorry, we are closed right now."
           ></textarea>
+
         </div>
+
 
         <button
           class="btn btn-gold"
@@ -997,6 +1073,8 @@ textarea{
       </div>
 
 
+      <!-- WEBSITE CONTROL -->
+
       <div class="card">
 
         <h2>🌐 Website Control</h2>
@@ -1006,16 +1084,29 @@ textarea{
           <label>Website Mode</label>
 
           <select id="websiteMode">
-            <option value="normal">Normal</option>
-            <option value="updating">Updating</option>
-            <option value="maintenance">Maintenance</option>
+
+            <option value="normal">
+              Normal
+            </option>
+
+            <option value="updating">
+              Updating
+            </option>
+
+            <option value="maintenance">
+              Maintenance
+            </option>
+
           </select>
 
         </div>
 
+
         <div class="field">
 
-          <label>Update / Maintenance Message</label>
+          <label>
+            Update / Maintenance Message
+          </label>
 
           <textarea
             id="updateMessage"
@@ -1023,6 +1114,7 @@ textarea{
           ></textarea>
 
         </div>
+
 
         <button
           class="btn btn-gold"
@@ -1033,6 +1125,8 @@ textarea{
 
       </div>
 
+
+      <!-- WHATSAPP -->
 
       <div class="card">
 
@@ -1055,6 +1149,7 @@ textarea{
 
         </div>
 
+
         <div class="field">
 
           <label>Admin Password</label>
@@ -1067,6 +1162,7 @@ textarea{
 
         </div>
 
+
         <button
           class="btn btn-gold"
           onclick="saveWhatsApp()"
@@ -1077,12 +1173,14 @@ textarea{
       </div>
 
 
+      <!-- FONT -->
+
       <div class="card">
 
         <h2>🔤 Customer Font Control</h2>
 
         <div class="notice">
-          This setting controls the customer website font size.
+          This setting controls customer website font size.
         </div>
 
         <div class="field">
@@ -1091,18 +1189,42 @@ textarea{
 
           <select id="fontSize">
 
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-            <option value="90%">Custom 90%</option>
-            <option value="100%">Custom 100%</option>
-            <option value="110%">Custom 110%</option>
-            <option value="120%">Custom 120%</option>
-            <option value="130%">Custom 130%</option>
+            <option value="small">
+              Small
+            </option>
+
+            <option value="medium">
+              Medium
+            </option>
+
+            <option value="large">
+              Large
+            </option>
+
+            <option value="90%">
+              Custom 90%
+            </option>
+
+            <option value="100%">
+              Custom 100%
+            </option>
+
+            <option value="110%">
+              Custom 110%
+            </option>
+
+            <option value="120%">
+              Custom 120%
+            </option>
+
+            <option value="130%">
+              Custom 130%
+            </option>
 
           </select>
 
         </div>
+
 
         <button
           class="btn btn-gold"
@@ -1114,29 +1236,44 @@ textarea{
       </div>
 
 
+      <!-- DELIVERY -->
+
       <div class="card">
 
         <h2>🚚 Delivery Charge</h2>
 
         <div class="delivery-box">
 
-          <div style="font-size:11px;font-weight:900;margin-bottom:8px;">
+          <div
+            style="
+              font-size:11px;
+              font-weight:900;
+              margin-bottom:8px;
+            "
+          >
             Customer Delivery Rate
           </div>
 
           <div class="delivery-rate-row">
 
-            <span style="color:#777;">₹</span>
+            <span style="color:#777;">
+              ₹
+            </span>
 
             <input
               id="deliveryRate"
               type="number"
               min="0"
-              step="1"
+              step="0.1"
               placeholder="6"
             >
 
-            <span style="color:#aaa;font-size:11px;">
+            <span
+              style="
+                color:#aaa;
+                font-size:11px;
+              "
+            >
               per KM
             </span>
 
@@ -1149,7 +1286,13 @@ textarea{
 
           </div>
 
-          <div style="color:#666;font-size:9px;margin-top:7px;">
+          <div
+            style="
+              color:#666;
+              font-size:9px;
+              margin-top:7px;
+            "
+          >
             Example: 3.2 KM × ₹6 = ₹19.20
           </div>
 
@@ -1160,30 +1303,50 @@ textarea{
     </div>
 
 
-    <!-- MENU -->
+    <!-- ================= MENU ================= -->
 
-    <div class="card" style="margin-bottom:12px;">
+    <div
+      class="card"
+      style="margin-bottom:12px;"
+    >
 
-      <h2>🍽️ Menu Price, Stock & Food Image Management</h2>
+      <h2>
+        🍽️ Menu Price, Stock & Food Image Management
+      </h2>
 
       <div class="notice">
+
         Change food price, food image and stock status from here.
+
         <br>
-        <strong>🟢 Available</strong> = Customer can order.
+
+        <strong>🟢 Available</strong>
+        = Customer can order.
+
         <br>
-        <strong>🔴 Out of Stock</strong> = Customer cannot add this item to cart.
+
+        <strong>🔴 Out of Stock</strong>
+        = Customer cannot add this item to cart.
+
       </div>
 
-      <div id="menuAdmin" class="menu-list">
+
+      <div
+        id="menuAdmin"
+        class="menu-list"
+      >
         Loading menu...
       </div>
 
     </div>
 
 
-    <!-- ORDERS -->
+    <!-- ================= ORDERS ================= -->
 
-    <div class="card" style="margin-bottom:12px;">
+    <div
+      class="card"
+      style="margin-bottom:12px;"
+    >
 
       <h2>📦 Order Management</h2>
 
@@ -1219,14 +1382,18 @@ textarea{
 
       </div>
 
-      <div id="orders" class="orders">
+
+      <div
+        id="orders"
+        class="orders"
+      >
         Loading orders...
       </div>
 
     </div>
 
 
-    <!-- DELIVERED FOLDER -->
+    <!-- ================= DELIVERED FOLDER ================= -->
 
     <div class="delivered-folder">
 
@@ -1242,6 +1409,7 @@ textarea{
 
       </div>
 
+
       <div
         class="delivered-content"
         id="deliveredOrdersList"
@@ -1252,9 +1420,12 @@ textarea{
     </div>
 
 
-    <!-- RATINGS -->
+    <!-- ================= RATINGS ================= -->
 
-    <div class="card" style="margin-top:12px;">
+    <div
+      class="card"
+      style="margin-top:12px;"
+    >
 
       <h2>⭐ Customer Ratings</h2>
 
@@ -1276,10 +1447,17 @@ textarea{
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div
+  id="toast"
+  class="toast"
+></div>
 
 
 <script type="module">
+
+/* =====================================================
+   FIREBASE IMPORT
+===================================================== */
 
 import {
   initializeApp
@@ -1299,16 +1477,16 @@ import {
 import {
   getDatabase,
   ref,
-  get,
   set,
+  get,
   onValue,
   update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* =========================================
-   FIREBASE
-========================================= */
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
@@ -1338,6 +1516,7 @@ const firebaseConfig = {
 
 };
 
+
 const app =
   initializeApp(firebaseConfig);
 
@@ -1348,17 +1527,17 @@ const db =
   getDatabase(app);
 
 
-/* =========================================
+/* =====================================================
    ADMIN UID
-========================================= */
+===================================================== */
 
 const ADMIN_UID =
   "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
-/* =========================================
-   VARIABLES
-========================================= */
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
 
 let currentAdmin = null;
 
@@ -1379,9 +1558,9 @@ let audioContext = null;
 let toastTimer = null;
 
 
-/* =========================================
+/* =====================================================
    DEFAULT SETTINGS
-========================================= */
+===================================================== */
 
 const DEFAULT_SETTINGS = {
 
@@ -1406,14 +1585,15 @@ const DEFAULT_SETTINGS = {
 
   deliveryRate:6,
 
-  closedMessage:""
+  closedMessage:
+    "Sorry, we are closed right now."
 
 };
 
 
-/* =========================================
-   AUTH
-========================================= */
+/* =====================================================
+   AUTH PERSISTENCE
+===================================================== */
 
 try{
 
@@ -1432,6 +1612,10 @@ try{
 }
 
 
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
 onAuthStateChanged(
   auth,
   user => {
@@ -1448,8 +1632,7 @@ onAuthStateChanged(
 
 
     if(
-      user.uid !==
-      ADMIN_UID
+      user.uid !== ADMIN_UID
     ){
 
       signOut(auth);
@@ -1474,19 +1657,21 @@ onAuthStateChanged(
 );
 
 
-/* =========================================
-   LOGIN
-========================================= */
+/* =====================================================
+   LOGIN UI
+===================================================== */
 
 function showLogin(){
 
   document.getElementById(
     "loginScreen"
-  ).style.display = "flex";
+  ).style.display =
+    "flex";
 
   document.getElementById(
     "adminPanel"
-  ).style.display = "none";
+  ).style.display =
+    "none";
 
 }
 
@@ -1495,14 +1680,20 @@ function showAdmin(){
 
   document.getElementById(
     "loginScreen"
-  ).style.display = "none";
+  ).style.display =
+    "none";
 
   document.getElementById(
     "adminPanel"
-  ).style.display = "block";
+  ).style.display =
+    "block";
 
 }
 
+
+/* =====================================================
+   LOGIN
+===================================================== */
 
 window.adminLogin =
 async function(){
@@ -1524,6 +1715,7 @@ async function(){
 
   error.textContent = "";
 
+
   if(!email || !password){
 
     error.textContent =
@@ -1532,6 +1724,7 @@ async function(){
     return;
 
   }
+
 
   try{
 
@@ -1559,6 +1752,10 @@ async function(){
 };
 
 
+/* =====================================================
+   LOGOUT
+===================================================== */
+
 window.adminLogout =
 async function(){
 
@@ -1575,9 +1772,9 @@ async function(){
 };
 
 
-/* =========================================
-   LOAD ALL
-========================================= */
+/* =====================================================
+   LOAD EVERYTHING
+===================================================== */
 
 function loadAll(){
 
@@ -1592,9 +1789,9 @@ function loadAll(){
 }
 
 
-/* =========================================
-   SETTINGS
-========================================= */
+/* =====================================================
+   SETTINGS LISTENER
+===================================================== */
 
 function loadSettings(){
 
@@ -1605,10 +1802,12 @@ function loadSettings(){
       const data =
         snapshot.val() || {};
 
+
       const opening =
         data.openTime ||
         data.openingTime ||
         DEFAULT_SETTINGS.openTime;
+
 
       const closing =
         data.closeTime ||
@@ -1621,7 +1820,7 @@ function loadSettings(){
       ).value =
         normalizeTimeInput(
           opening,
-          "12:00"
+          DEFAULT_SETTINGS.openTime
         );
 
 
@@ -1630,15 +1829,15 @@ function loadSettings(){
       ).value =
         normalizeTimeInput(
           closing,
-          "23:00"
+          DEFAULT_SETTINGS.closeTime
         );
 
 
       document.getElementById(
         "closedMessage"
       ).value =
-        data.closedMessage ||
-        "";
+        data.closedMessage ??
+        DEFAULT_SETTINGS.closedMessage;
 
 
       document.getElementById(
@@ -1678,15 +1877,29 @@ function loadSettings(){
         );
 
 
+      /*
+       * VERY IMPORTANT
+       *
+       * statusOverride has priority.
+       *
+       * auto   = time schedule
+       * open   = always open
+       * closed = always closed
+       */
+
       shopOverride =
         normalizeOverride(data);
+
 
       updateShopStatusDisplay();
 
     },
     error => {
 
-      console.error(error);
+      console.error(
+        "Settings error:",
+        error
+      );
 
       showToast(
         "Could not load settings."
@@ -1698,22 +1911,35 @@ function loadSettings(){
 }
 
 
+/* =====================================================
+   NORMALIZE SHOP OVERRIDE
+===================================================== */
+
 function normalizeOverride(data){
 
   const value =
     String(
       data.statusOverride ||
       ""
-    ).toLowerCase();
+    )
+    .trim()
+    .toLowerCase();
+
 
   if(
-    ["auto","open","closed"]
-    .includes(value)
+    value === "auto" ||
+    value === "open" ||
+    value === "closed"
   ){
 
     return value;
 
   }
+
+
+  /*
+   * OLD DATABASE SUPPORT
+   */
 
   if(
     data.manualClosed === true ||
@@ -1724,14 +1950,15 @@ function normalizeOverride(data){
 
   }
 
+
   return "auto";
 
 }
 
 
-/* =========================================
-   TIME
-========================================= */
+/* =====================================================
+   TIME FUNCTIONS
+===================================================== */
 
 function parseTimeToMinutes(value){
 
@@ -1743,6 +1970,7 @@ function parseTimeToMinutes(value){
     return null;
 
   }
+
 
   let text =
     String(value)
@@ -1768,6 +1996,7 @@ function parseTimeToMinutes(value){
     const suffix =
       ampm[1];
 
+
     text =
       text
         .replace(
@@ -1792,6 +2021,7 @@ function parseTimeToMinutes(value){
 
     let hour =
       Number(match[1]);
+
 
     const minute =
       Number(match[2] || 0);
@@ -1828,7 +2058,10 @@ function parseTimeToMinutes(value){
     }
 
 
-    return hour * 60 + minute;
+    return (
+      hour * 60 +
+      minute
+    );
 
   }
 
@@ -1865,7 +2098,10 @@ function parseTimeToMinutes(value){
   }
 
 
-  return hour * 60 + minute;
+  return (
+    hour * 60 +
+    minute
+  );
 
 }
 
@@ -1887,7 +2123,10 @@ function normalizeTimeInput(
 
 
   const hour =
-    Math.floor(minutes / 60);
+    Math.floor(
+      minutes / 60
+    );
+
 
   const minute =
     minutes % 60;
@@ -1907,23 +2146,33 @@ function formatTimeDisplay(value){
   const minutes =
     parseTimeToMinutes(value);
 
+
   if(minutes === null){
 
     return value;
 
   }
 
+
   let hour =
-    Math.floor(minutes / 60);
+    Math.floor(
+      minutes / 60
+    );
+
 
   const minute =
     minutes % 60;
 
+
   const suffix =
-    hour >= 12 ? "PM" : "AM";
+    hour >= 12
+      ? "PM"
+      : "AM";
+
 
   hour =
     hour % 12 || 12;
+
 
   return (
     `${hour}:${String(minute).padStart(2,"0")} ${suffix}`
@@ -1931,6 +2180,10 @@ function formatTimeDisplay(value){
 
 }
 
+
+/* =====================================================
+   INDIA CURRENT TIME
+===================================================== */
 
 function getIndiaCurrentMinutes(){
 
@@ -1953,14 +2206,17 @@ function getIndiaCurrentMinutes(){
     let hour =
       Number(
         parts.find(
-          p => p.type === "hour"
+          p =>
+            p.type === "hour"
         )?.value
       );
+
 
     const minute =
       Number(
         parts.find(
-          p => p.type === "minute"
+          p =>
+            p.type === "minute"
         )?.value
       );
 
@@ -1972,12 +2228,16 @@ function getIndiaCurrentMinutes(){
     }
 
 
-    return hour * 60 + minute;
+    return (
+      hour * 60 +
+      minute
+    );
 
   }catch(error){
 
     const now =
       new Date();
+
 
     return (
       now.getHours() * 60 +
@@ -1989,21 +2249,29 @@ function getIndiaCurrentMinutes(){
 }
 
 
+/* =====================================================
+   CHECK AUTOMATIC SCHEDULE
+===================================================== */
+
 function isWithinShopHours(){
 
   const opening =
     document.getElementById(
       "openingTime"
-    ).value || "12:00";
+    ).value ||
+    DEFAULT_SETTINGS.openTime;
+
 
   const closing =
     document.getElementById(
       "closingTime"
-    ).value || "23:00";
+    ).value ||
+    DEFAULT_SETTINGS.closeTime;
 
 
   const openMinutes =
     parseTimeToMinutes(opening);
+
 
   const closeMinutes =
     parseTimeToMinutes(closing);
@@ -2023,7 +2291,15 @@ function isWithinShopHours(){
     getIndiaCurrentMinutes();
 
 
-  if(openMinutes < closeMinutes){
+  /*
+   * NORMAL
+   *
+   * 12:00 → 23:00
+   */
+
+  if(
+    openMinutes < closeMinutes
+  ){
 
     return (
       current >= openMinutes &&
@@ -2033,7 +2309,15 @@ function isWithinShopHours(){
   }
 
 
-  if(openMinutes > closeMinutes){
+  /*
+   * OVERNIGHT
+   *
+   * 20:00 → 02:00
+   */
+
+  if(
+    openMinutes > closeMinutes
+  ){
 
     return (
       current >= openMinutes ||
@@ -2043,43 +2327,72 @@ function isWithinShopHours(){
   }
 
 
+  /*
+   * Same opening & closing time
+   * means open 24 hours.
+   */
+
   return true;
 
 }
 
 
-/* =========================================
-   SHOP STATUS
-========================================= */
+/* =====================================================
+   FINAL SHOP STATUS
+===================================================== */
 
 function isShopOpen(){
 
-  if(shopOverride === "open"){
+  /*
+   * FORCE OPEN
+   */
+
+  if(
+    shopOverride === "open"
+  ){
 
     return true;
 
   }
 
-  if(shopOverride === "closed"){
+
+  /*
+   * FORCE CLOSED
+   */
+
+  if(
+    shopOverride === "closed"
+  ){
 
     return false;
 
   }
+
+
+  /*
+   * AUTO
+   */
 
   return isWithinShopHours();
 
 }
 
 
+/* =====================================================
+   UPDATE SHOP DISPLAY
+===================================================== */
+
 function updateShopStatusDisplay(){
 
   const open =
     isShopOpen();
 
+
   const light =
     document.getElementById(
       "shopLight"
     );
+
 
   const text =
     document.getElementById(
@@ -2089,18 +2402,26 @@ function updateShopStatusDisplay(){
 
   if(open){
 
-    light.classList.remove("closed");
+    light.classList.remove(
+      "closed"
+    );
 
-    text.classList.remove("closed");
+    text.classList.remove(
+      "closed"
+    );
 
     text.textContent =
       "SHOP IS OPEN";
 
   }else{
 
-    light.classList.add("closed");
+    light.classList.add(
+      "closed"
+    );
 
-    text.classList.add("closed");
+    text.classList.add(
+      "closed"
+    );
 
     text.textContent =
       "SHOP IS CLOSED";
@@ -2116,13 +2437,16 @@ function updateShopStatusDisplay(){
       "shopControlTitle"
     );
 
+
   const info =
     document.getElementById(
       "shopControlText"
     );
 
 
-  if(shopOverride === "open"){
+  if(
+    shopOverride === "open"
+  ){
 
     title.textContent =
       "Force Open";
@@ -2130,7 +2454,10 @@ function updateShopStatusDisplay(){
     info.textContent =
       "Customers can order even outside normal hours.";
 
-  }else if(shopOverride === "closed"){
+  }
+  else if(
+    shopOverride === "closed"
+  ){
 
     title.textContent =
       "Force Closed";
@@ -2138,22 +2465,31 @@ function updateShopStatusDisplay(){
     info.textContent =
       "Customers cannot place new orders.";
 
-  }else{
+  }
+  else{
 
     title.textContent =
       "Automatic Schedule";
 
     info.textContent =
       `Shop follows ${formatTimeDisplay(
-        document.getElementById("openingTime").value
+        document.getElementById(
+          "openingTime"
+        ).value
       )} – ${formatTimeDisplay(
-        document.getElementById("closingTime").value
+        document.getElementById(
+          "closingTime"
+        ).value
       )}.`;
 
   }
 
 }
 
+
+/* =====================================================
+   OVERRIDE BUTTON UI
+===================================================== */
 
 function updateOverrideUI(){
 
@@ -2173,38 +2509,67 @@ function updateOverrideUI(){
     );
 
 
-  auto.classList.remove("active-auto");
-  open.classList.remove("active-open");
-  closed.classList.remove("active-closed");
+  auto.classList.remove(
+    "active-auto"
+  );
+
+  open.classList.remove(
+    "active-open"
+  );
+
+  closed.classList.remove(
+    "active-closed"
+  );
 
 
-  if(shopOverride === "auto"){
+  if(
+    shopOverride === "auto"
+  ){
 
-    auto.classList.add("active-auto");
+    auto.classList.add(
+      "active-auto"
+    );
 
   }
 
-  if(shopOverride === "open"){
 
-    open.classList.add("active-open");
+  if(
+    shopOverride === "open"
+  ){
+
+    open.classList.add(
+      "active-open"
+    );
 
   }
 
-  if(shopOverride === "closed"){
 
-    closed.classList.add("active-closed");
+  if(
+    shopOverride === "closed"
+  ){
+
+    closed.classList.add(
+      "active-closed"
+    );
 
   }
 
 }
 
 
+/* =====================================================
+   SHOP OVERRIDE
+===================================================== */
+
 window.setShopOverride =
 async function(mode){
 
   if(
-    !["auto","open","closed"]
-    .includes(mode)
+    ![
+      "auto",
+      "open",
+      "closed"
+    ].includes(mode)
   ){
 
     return;
@@ -2212,7 +2577,12 @@ async function(mode){
   }
 
 
-  shopOverride = mode;
+  /*
+   * Update local UI immediately
+   */
+
+  shopOverride =
+    mode;
 
   updateShopStatusDisplay();
 
@@ -2220,13 +2590,34 @@ async function(mode){
   try{
 
     await update(
-      ref(db,"settings"),
+      ref(
+        db,
+        "settings"
+      ),
       {
 
-        statusOverride:mode,
+        /*
+         * THIS IS THE MAIN CUSTOMER CONTROL
+         */
+
+        statusOverride:
+          mode,
+
+        /*
+         * Old compatibility
+         */
 
         manualClosed:
-          mode === "closed"
+          mode === "closed",
+
+        /*
+         * Keep schedule enabled
+         */
+
+        scheduleEnabled:true,
+
+        autoSchedule:
+          mode === "auto"
 
       }
     );
@@ -2234,15 +2625,19 @@ async function(mode){
 
     showToast(
       mode === "auto"
-        ? "Automatic schedule enabled."
+        ? "🕐 Automatic schedule enabled."
         : mode === "open"
-          ? "Shop forced OPEN."
-          : "Shop forced CLOSED."
+          ? "🟢 Shop forced OPEN."
+          : "🔴 Shop forced CLOSED."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Shop override error:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -2254,15 +2649,19 @@ async function(mode){
 };
 
 
+/*
+ * Refresh shop status every 30 seconds
+ */
+
 setInterval(
   updateShopStatusDisplay,
   30000
 );
 
 
-/* =========================================
-   SAVE SHOP
-========================================= */
+/* =====================================================
+   SAVE SHOP SETTINGS
+===================================================== */
 
 window.saveShopSettings =
 async function(){
@@ -2272,10 +2671,12 @@ async function(){
       "openingTime"
     ).value;
 
+
   const closing =
     document.getElementById(
       "closingTime"
     ).value;
+
 
   const closedMessage =
     document.getElementById(
@@ -2300,23 +2701,39 @@ async function(){
   try{
 
     await update(
-      ref(db,"settings"),
+      ref(
+        db,
+        "settings"
+      ),
       {
+
+        /*
+         * Keep current FORCE/AUTO mode.
+         */
 
         statusOverride:
           shopOverride,
 
         scheduleEnabled:true,
 
-        openTime:opening,
+        autoSchedule:
+          shopOverride === "auto",
 
-        closeTime:closing,
+        openTime:
+          opening,
 
-        openingTime:opening,
+        closeTime:
+          closing,
 
-        closingTime:closing,
+        /*
+         * Old field compatibility
+         */
 
-        autoSchedule:true,
+        openingTime:
+          opening,
+
+        closingTime:
+          closing,
 
         manualClosed:
           shopOverride === "closed",
@@ -2330,13 +2747,18 @@ async function(){
 
     updateShopStatusDisplay();
 
+
     showToast(
-      "Shop settings saved."
+      "✅ Shop settings saved."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Save shop error:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -2348,9 +2770,9 @@ async function(){
 };
 
 
-/* =========================================
-   WEBSITE
-========================================= */
+/* =====================================================
+   WEBSITE SETTINGS
+===================================================== */
 
 window.saveWebsiteSettings =
 async function(){
@@ -2359,6 +2781,7 @@ async function(){
     document.getElementById(
       "websiteMode"
     ).value;
+
 
   const message =
     document.getElementById(
@@ -2369,10 +2792,14 @@ async function(){
   try{
 
     await update(
-      ref(db,"settings"),
+      ref(
+        db,
+        "settings"
+      ),
       {
 
-        websiteMode:mode,
+        websiteMode:
+          mode,
 
         updateMessage:
           message ||
@@ -2383,7 +2810,7 @@ async function(){
 
 
     showToast(
-      "Website settings updated."
+      "✅ Website settings updated."
     );
 
   }catch(error){
@@ -2400,11 +2827,13 @@ async function(){
 };
 
 
-/* =========================================
-   ADMIN PASSWORD
-========================================= */
+/* =====================================================
+   VERIFY ADMIN PASSWORD
+===================================================== */
 
-async function verifyAdminPassword(password){
+async function verifyAdminPassword(
+  password
+){
 
   if(!currentAdmin){
 
@@ -2413,6 +2842,7 @@ async function verifyAdminPassword(password){
     );
 
   }
+
 
   if(!password){
 
@@ -2438,9 +2868,9 @@ async function verifyAdminPassword(password){
 }
 
 
-/* =========================================
+/* =====================================================
    WHATSAPP
-========================================= */
+===================================================== */
 
 window.saveWhatsApp =
 async function(){
@@ -2448,10 +2878,12 @@ async function(){
   const number =
     document.getElementById(
       "whatsappNumber"
-    ).value.replace(
-      /\D/g,
-      ""
-    );
+    ).value
+      .replace(
+        /\D/g,
+        ""
+      );
+
 
   const password =
     document.getElementById(
@@ -2480,7 +2912,10 @@ async function(){
 
 
     await set(
-      ref(db,"settings/whatsappNumber"),
+      ref(
+        db,
+        "settings/whatsappNumber"
+      ),
       number
     );
 
@@ -2491,7 +2926,7 @@ async function(){
 
 
     showToast(
-      "WhatsApp number updated."
+      "✅ WhatsApp number updated."
     );
 
   }catch(error){
@@ -2508,9 +2943,9 @@ async function(){
 };
 
 
-/* =========================================
+/* =====================================================
    FONT
-========================================= */
+===================================================== */
 
 window.saveFontSize =
 async function(){
@@ -2524,12 +2959,16 @@ async function(){
   try{
 
     await set(
-      ref(db,"settings/fontSize"),
+      ref(
+        db,
+        "settings/fontSize"
+      ),
       size
     );
 
+
     showToast(
-      "Customer font size updated."
+      "✅ Customer font size updated."
     );
 
   }catch(error){
@@ -2546,9 +2985,9 @@ async function(){
 };
 
 
-/* =========================================
+/* =====================================================
    DELIVERY RATE
-========================================= */
+===================================================== */
 
 window.saveDeliveryRate =
 async function(){
@@ -2578,13 +3017,16 @@ async function(){
   try{
 
     await set(
-      ref(db,"settings/deliveryRate"),
+      ref(
+        db,
+        "settings/deliveryRate"
+      ),
       rate
     );
 
 
     showToast(
-      `Delivery charge updated to ₹${rate}/KM`
+      `✅ Delivery charge updated to ₹${rate}/KM`
     );
 
   }catch(error){
@@ -2601,30 +3043,44 @@ async function(){
 };
 
 
-/* =========================================
-   MENU
-========================================= */
+/* =====================================================
+   MENU LISTENER
+===================================================== */
 
 function loadMenu(){
 
   onValue(
-    ref(db,"settings/menu"),
+    ref(
+      db,
+      "settings/menu"
+    ),
     snapshot => {
 
       const data =
         snapshot.val() || {};
 
-      renderMenuAdmin(data);
+
+      renderMenuAdmin(
+        data
+      );
 
     },
     error => {
 
-      console.error(error);
+      console.error(
+        "Menu error:",
+        error
+      );
+
 
       document.getElementById(
         "menuAdmin"
       ).innerHTML =
-        `<p class="danger">Could not load menu.</p>`;
+        `
+          <p class="danger">
+            Could not load menu.
+          </p>
+        `;
 
     }
   );
@@ -2632,7 +3088,13 @@ function loadMenu(){
 }
 
 
-function renderMenuAdmin(data){
+/* =====================================================
+   RENDER MENU
+===================================================== */
+
+function renderMenuAdmin(
+  data
+){
 
   const container =
     document.getElementById(
@@ -2647,17 +3109,47 @@ function renderMenuAdmin(data){
   if(!entries.length){
 
     container.innerHTML =
-      `<p style="color:#777">No menu items found.</p>`;
+      `
+        <p style="color:#777">
+          No menu items found.
+        </p>
+      `;
 
     return;
 
   }
 
 
+  /*
+   * Numeric IDs first.
+   */
+
   entries.sort(
-    (a,b) =>
-      Number(a[0]) -
-      Number(b[0])
+    (a,b) => {
+
+      const aNum =
+        Number(a[0]);
+
+      const bNum =
+        Number(b[0]);
+
+
+      if(
+        Number.isFinite(aNum) &&
+        Number.isFinite(bNum)
+      ){
+
+        return aNum - bNum;
+
+      }
+
+
+      return String(a[0])
+        .localeCompare(
+          String(b[0])
+        );
+
+    }
   );
 
 
@@ -2665,16 +3157,28 @@ function renderMenuAdmin(data){
     entries.map(
       ([id,item]) => {
 
+        item =
+          item || {};
+
+
         const image =
           item.image || "";
 
+
         /*
-          IMPORTANT:
-          Old items without "available"
-          are treated as AVAILABLE.
-        */
+         * VERY IMPORTANT
+         *
+         * undefined = AVAILABLE
+         * false    = OUT OF STOCK
+         * true     = AVAILABLE
+         */
+
         const available =
           item.available !== false;
+
+
+        const safeId =
+          escapeAttribute(id);
 
 
         return `
@@ -2698,10 +3202,11 @@ function renderMenuAdmin(data){
 
               </div>
 
+
               <div class="menu-price-area">
 
                 <input
-                  id="price-${id}"
+                  id="price-${safeId}"
                   class="menu-price-input"
                   type="number"
                   min="0"
@@ -2712,7 +3217,7 @@ function renderMenuAdmin(data){
 
                 <button
                   class="btn btn-gold"
-                  onclick="saveMenuItem('${escapeAttribute(id)}')"
+                  onclick="saveMenuItem('${safeId}')"
                 >
                   Save
                 </button>
@@ -2722,7 +3227,7 @@ function renderMenuAdmin(data){
             </div>
 
 
-            <!-- STOCK CONTROL -->
+            <!-- STOCK -->
 
             <div class="stock-control">
 
@@ -2730,26 +3235,37 @@ function renderMenuAdmin(data){
                 STOCK STATUS
               </label>
 
+
               <select
-                id="stock-${id}"
-                class="stock-select ${
-                  available
+                id="stock-${safeId}"
+                class="
+                  stock-select
+                  ${available
                     ? "available"
-                    : "out"
-                }"
-                onchange="setStockStatus('${escapeAttribute(id)}',this.value)"
+                    : "out"}
+                "
+                onchange="
+                  setStockStatus(
+                    '${safeId}',
+                    this.value
+                  )
+                "
               >
 
                 <option
                   value="available"
-                  ${available ? "selected" : ""}
+                  ${available
+                    ? "selected"
+                    : ""}
                 >
                   🟢 Available
                 </option>
 
                 <option
                   value="out"
-                  ${!available ? "selected" : ""}
+                  ${!available
+                    ? "selected"
+                    : ""}
                 >
                   🔴 Out of Stock
                 </option>
@@ -2759,25 +3275,34 @@ function renderMenuAdmin(data){
             </div>
 
 
+            <!-- IMAGE -->
+
             <div class="image-area">
 
               <img
-                id="preview-${id}"
+                id="preview-${safeId}"
                 class="image-preview"
                 src="${escapeAttribute(image)}"
                 alt=""
-                onerror="this.src='https://via.placeholder.com/150x100/171717/777?text=Food'"
+                onerror="
+                  this.src=
+                  'https://via.placeholder.com/150x100/171717/777?text=Food'
+                "
               >
 
 
               <div class="image-url">
 
                 <input
-                  id="image-${id}"
+                  id="image-${safeId}"
                   type="url"
                   placeholder="Paste food image URL"
                   value="${escapeAttribute(image)}"
-                  oninput="previewMenuImage('${escapeAttribute(id)}')"
+                  oninput="
+                    previewMenuImage(
+                      '${safeId}'
+                    )
+                  "
                 >
 
               </div>
@@ -2785,7 +3310,11 @@ function renderMenuAdmin(data){
 
               <button
                 class="btn btn-blue image-save"
-                onclick="saveMenuImage('${escapeAttribute(id)}')"
+                onclick="
+                  saveMenuImage(
+                    '${safeId}'
+                  )
+                "
               >
                 Save Image
               </button>
@@ -2802,9 +3331,9 @@ function renderMenuAdmin(data){
 }
 
 
-/* =========================================
-   SAVE PRICE
-========================================= */
+/* =====================================================
+   SAVE MENU PRICE
+===================================================== */
 
 window.saveMenuItem =
 async function(id){
@@ -2813,6 +3342,18 @@ async function(id){
     document.getElementById(
       `price-${id}`
     );
+
+
+  if(!input){
+
+    showToast(
+      "Food item not found."
+    );
+
+    return;
+
+  }
+
 
   const price =
     Number(input.value);
@@ -2835,9 +3376,10 @@ async function(id){
   try{
 
     /*
-      ONLY PRICE IS UPDATED.
-      STOCK STATUS IS NOT DELETED.
-    */
+     * ONLY PRICE CHANGES.
+     *
+     * available/image/name are NOT deleted.
+     */
 
     await set(
       ref(
@@ -2849,12 +3391,16 @@ async function(id){
 
 
     showToast(
-      "Price updated successfully."
+      "✅ Price updated successfully."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Price update:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -2866,12 +3412,15 @@ async function(id){
 };
 
 
-/* =========================================
+/* =====================================================
    STOCK STATUS
-========================================= */
+===================================================== */
 
 window.setStockStatus =
-async function(id,value){
+async function(
+  id,
+  value
+){
 
   const available =
     value === "available";
@@ -2886,9 +3435,11 @@ async function(id,value){
   try{
 
     /*
-      SAVE ONLY:
-      settings/menu/{id}/available
-    */
+     * ONLY available FIELD changes.
+     *
+     * false = OUT OF STOCK
+     * true  = AVAILABLE
+     */
 
     await set(
       ref(
@@ -2906,6 +3457,7 @@ async function(id,value){
         "out"
       );
 
+
       select.classList.add(
         available
           ? "available"
@@ -2917,8 +3469,8 @@ async function(id,value){
 
     showToast(
       available
-        ? "🟢 Item is now Available."
-        : "🔴 Item marked Out of Stock."
+        ? "🟢 Item is now AVAILABLE."
+        : "🔴 Item marked OUT OF STOCK."
     );
 
   }catch(error){
@@ -2930,9 +3482,9 @@ async function(id,value){
 
 
     /*
-      Reload current menu value
-      if save fails.
-    */
+     * Reload from Firebase
+     * if update fails.
+     */
 
     loadMenu();
 
@@ -2947,9 +3499,9 @@ async function(id,value){
 };
 
 
-/* =========================================
+/* =====================================================
    IMAGE PREVIEW
-========================================= */
+===================================================== */
 
 window.previewMenuImage =
 function(id){
@@ -2959,10 +3511,18 @@ function(id){
       `image-${id}`
     );
 
+
   const preview =
     document.getElementById(
       `preview-${id}`
     );
+
+
+  if(!input || !preview){
+
+    return;
+
+  }
 
 
   const url =
@@ -2976,9 +3536,9 @@ function(id){
 };
 
 
-/* =========================================
+/* =====================================================
    SAVE IMAGE
-========================================= */
+===================================================== */
 
 window.saveMenuImage =
 async function(id){
@@ -2987,6 +3547,18 @@ async function(id){
     document.getElementById(
       `image-${id}`
     );
+
+
+  if(!input){
+
+    showToast(
+      "Food item not found."
+    );
+
+    return;
+
+  }
+
 
   const imageUrl =
     input.value.trim();
@@ -3020,24 +3592,26 @@ async function(id){
 
   try{
 
-    await update(
+    await set(
       ref(
         db,
-        `settings/menu/${id}`
+        `settings/menu/${id}/image`
       ),
-      {
-        image:imageUrl
-      }
+      imageUrl
     );
 
 
     showToast(
-      "Food image updated."
+      "✅ Food image updated."
     );
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Image update:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -3049,22 +3623,31 @@ async function(id){
 };
 
 
-/* =========================================
-   ORDERS LOAD
-========================================= */
+/* =====================================================
+   ORDERS LISTENER
+===================================================== */
 
 function loadOrders(){
 
   onValue(
-    ref(db,"orders"),
+    ref(
+      db,
+      "orders"
+    ),
     snapshot => {
 
       const newData =
         snapshot.val() || {};
 
-      detectNewOrders(newData);
 
-      allOrders = newData;
+      detectNewOrders(
+        newData
+      );
+
+
+      allOrders =
+        newData;
+
 
       updateStats();
 
@@ -3075,7 +3658,11 @@ function loadOrders(){
     },
     error => {
 
-      console.error(error);
+      console.error(
+        "Orders error:",
+        error
+      );
+
 
       document.getElementById(
         "orders"
@@ -3088,24 +3675,40 @@ function loadOrders(){
 }
 
 
-/* =========================================
+/* =====================================================
    NEW ORDER DETECTION
-========================================= */
+===================================================== */
 
-function detectNewOrders(orders){
+function detectNewOrders(
+  orders
+){
 
   const keys =
-    Object.keys(orders);
+    Object.keys(
+      orders
+    );
 
 
-  if(!initialOrdersLoaded){
+  /*
+   * First Firebase load:
+   * do NOT play sound for old orders.
+   */
+
+  if(
+    !initialOrdersLoaded
+  ){
 
     keys.forEach(
       key =>
-        knownOrderKeys.add(key)
+        knownOrderKeys.add(
+          key
+        )
     );
 
-    initialOrdersLoaded = true;
+
+    initialOrdersLoaded =
+      true;
+
 
     return;
 
@@ -3115,17 +3718,23 @@ function detectNewOrders(orders){
   const newlyArrived =
     keys.filter(
       key =>
-        !knownOrderKeys.has(key)
+        !knownOrderKeys.has(
+          key
+        )
     );
 
 
   keys.forEach(
     key =>
-      knownOrderKeys.add(key)
+      knownOrderKeys.add(
+        key
+      )
   );
 
 
-  if(!newlyArrived.length){
+  if(
+    !newlyArrived.length
+  ){
 
     return;
 
@@ -3139,11 +3748,13 @@ function detectNewOrders(orders){
         const order =
           orders[key];
 
+
         return (
           order &&
           (
             !order.status ||
-            order.status === "Received"
+            order.status ===
+            "Received"
           )
         );
 
@@ -3151,7 +3762,9 @@ function detectNewOrders(orders){
     );
 
 
-  if(!receivedNew.length){
+  if(
+    !receivedNew.length
+  ){
 
     return;
 
@@ -3168,9 +3781,9 @@ function detectNewOrders(orders){
 }
 
 
-/* =========================================
+/* =====================================================
    NEW ORDER SOUND
-========================================= */
+===================================================== */
 
 function playNewOrderSound(){
 
@@ -3202,10 +3815,14 @@ function playNewOrderSound(){
 
 
     [0,0.18,0.36].forEach(
-      (delay,index) => {
+      (
+        delay,
+        index
+      ) => {
 
         const oscillator =
           audioContext.createOscillator();
+
 
         const gain =
           audioContext.createGain();
@@ -3213,6 +3830,7 @@ function playNewOrderSound(){
 
         oscillator.type =
           "sine";
+
 
         oscillator.frequency.value =
           index === 2
@@ -3225,10 +3843,12 @@ function playNewOrderSound(){
           now + delay
         );
 
+
         gain.gain.exponentialRampToValueAtTime(
           0.18,
           now + delay + 0.02
         );
+
 
         gain.gain.exponentialRampToValueAtTime(
           0.0001,
@@ -3236,7 +3856,10 @@ function playNewOrderSound(){
         );
 
 
-        oscillator.connect(gain);
+        oscillator.connect(
+          gain
+        );
+
 
         gain.connect(
           audioContext.destination
@@ -3246,6 +3869,7 @@ function playNewOrderSound(){
         oscillator.start(
           now + delay
         );
+
 
         oscillator.stop(
           now + delay + 0.14
@@ -3266,42 +3890,50 @@ function playNewOrderSound(){
 }
 
 
-/* =========================================
+/* =====================================================
    STATS
-========================================= */
+===================================================== */
 
 function updateStats(){
 
   const orders =
-    Object.values(allOrders);
+    Object.values(
+      allOrders
+    );
 
 
   const today =
-    new Date().toLocaleDateString(
-      "en-IN",
-      {
-        timeZone:"Asia/Kolkata"
-      }
-    );
+    new Date()
+      .toLocaleDateString(
+        "en-IN",
+        {
+          timeZone:"Asia/Kolkata"
+        }
+      );
 
 
   const todayCount =
     orders.filter(
       order => {
 
-        if(!order.createdAt){
+        if(
+          !order.createdAt
+        ){
 
           return false;
 
         }
 
+
         return (
           new Date(
             order.createdAt
-          ).toLocaleDateString(
+          )
+          .toLocaleDateString(
             "en-IN",
             {
-              timeZone:"Asia/Kolkata"
+              timeZone:
+                "Asia/Kolkata"
             }
           ) === today
         );
@@ -3356,35 +3988,49 @@ function updateStats(){
 }
 
 
-/* =========================================
+/* =====================================================
    FILTER
-========================================= */
+===================================================== */
 
 window.setFilter =
-function(filter,button){
+function(
+  filter,
+  button
+){
 
   currentFilter =
     filter;
 
 
-  document.querySelectorAll(
-    ".filter"
-  ).forEach(
-    el =>
-      el.classList.remove("active")
-  );
+  document
+    .querySelectorAll(
+      ".filter"
+    )
+    .forEach(
+      el =>
+        el.classList.remove(
+          "active"
+        )
+    );
 
 
-  button.classList.add("active");
+  if(button){
+
+    button.classList.add(
+      "active"
+    );
+
+  }
+
 
   renderOrders();
 
 };
 
 
-/* =========================================
+/* =====================================================
    ACTIVE ORDERS
-========================================= */
+===================================================== */
 
 function renderOrders(){
 
@@ -3400,38 +4046,58 @@ function renderOrders(){
     );
 
 
+  /*
+   * IMPORTANT SORT
+   *
+   * Received/New orders ALWAYS first.
+   * Then latest order.
+   */
+
   entries.sort(
-    (a,b) => {
+    (
+      a,
+      b
+    ) => {
 
       const aStatus =
-        a[1].status ||
+        a[1]?.status ||
         "Received";
 
+
       const bStatus =
-        b[1].status ||
+        b[1]?.status ||
         "Received";
 
 
       const aNew =
-        aStatus === "Received";
+        aStatus ===
+        "Received";
+
 
       const bNew =
-        bStatus === "Received";
+        bStatus ===
+        "Received";
 
 
-      if(aNew !== bNew){
+      if(
+        aNew !== bNew
+      ){
 
-        return bNew ? 1 : -1;
+        return bNew
+          ? 1
+          : -1;
 
       }
 
 
       return (
         Number(
-          b[1].createdAt || 0
+          b[1]?.createdAt ||
+          0
         ) -
         Number(
-          a[1].createdAt || 0
+          a[1]?.createdAt ||
+          0
         )
       );
 
@@ -3439,9 +4105,27 @@ function renderOrders(){
   );
 
 
+  /*
+   * FILTER
+   */
+
   entries =
     entries.filter(
-      ([key,order]) => {
+      (
+        [key,order]
+      ) => {
+
+        if(!order){
+
+          return false;
+
+        }
+
+
+        /*
+         * Delivered orders NEVER stay
+         * outside delivered folder.
+         */
 
         if(
           order.status ===
@@ -3487,7 +4171,9 @@ function renderOrders(){
           "today"
         ){
 
-          if(!order.createdAt){
+          if(
+            !order.createdAt
+          ){
 
             return false;
 
@@ -3497,21 +4183,25 @@ function renderOrders(){
           const orderDate =
             new Date(
               order.createdAt
-            ).toLocaleDateString(
+            )
+            .toLocaleDateString(
               "en-IN",
               {
-                timeZone:"Asia/Kolkata"
+                timeZone:
+                  "Asia/Kolkata"
               }
             );
 
 
           const todayDate =
-            new Date().toLocaleDateString(
-              "en-IN",
-              {
-                timeZone:"Asia/Kolkata"
-              }
-            );
+            new Date()
+              .toLocaleDateString(
+                "en-IN",
+                {
+                  timeZone:
+                    "Asia/Kolkata"
+                }
+              );
 
 
           return (
@@ -3528,7 +4218,9 @@ function renderOrders(){
     );
 
 
-  if(!entries.length){
+  if(
+    !entries.length
+  ){
 
     container.innerHTML = `
       <div
@@ -3550,7 +4242,9 @@ function renderOrders(){
 
   container.innerHTML =
     entries.map(
-      ([key,order]) =>
+      (
+        [key,order]
+      ) =>
         renderOrderCard(
           key,
           order,
@@ -3561,9 +4255,9 @@ function renderOrders(){
 }
 
 
-/* =========================================
+/* =====================================================
    DELIVERED ORDERS
-========================================= */
+===================================================== */
 
 function renderDeliveredOrders(){
 
@@ -3576,8 +4270,11 @@ function renderDeliveredOrders(){
   let entries =
     Object.entries(
       allOrders
-    ).filter(
-      ([key,order]) =>
+    )
+    .filter(
+      (
+        [key,order]
+      ) =>
         order &&
         order.status ===
         "Delivered"
@@ -3585,7 +4282,10 @@ function renderDeliveredOrders(){
 
 
   entries.sort(
-    (a,b) => {
+    (
+      a,
+      b
+    ) => {
 
       const aTime =
         Number(
@@ -3595,6 +4295,7 @@ function renderDeliveredOrders(){
           0
         );
 
+
       const bTime =
         Number(
           b[1].deliveredAt ||
@@ -3603,13 +4304,16 @@ function renderDeliveredOrders(){
           0
         );
 
+
       return bTime - aTime;
 
     }
   );
 
 
-  if(!entries.length){
+  if(
+    !entries.length
+  ){
 
     container.innerHTML = `
       <div
@@ -3646,7 +4350,9 @@ function renderDeliveredOrders(){
 
       ${
         entries.map(
-          ([key,order]) =>
+          (
+            [key,order]
+          ) =>
             renderOrderCard(
               key,
               order,
@@ -3662,9 +4368,9 @@ function renderDeliveredOrders(){
 }
 
 
-/* =========================================
+/* =====================================================
    ORDER CARD
-========================================= */
+===================================================== */
 
 function renderOrderCard(
   key,
@@ -3672,42 +4378,80 @@ function renderOrderCard(
   deliveredFolder
 ){
 
+  order =
+    order || {};
+
+
   const status =
     order.status ||
     "Received";
 
 
-  let statusClass = "";
+  let statusClass =
+    "";
 
-  if(status === "Received")
-    statusClass = "received";
 
-  if(status === "Confirmed")
-    statusClass = "confirmed";
+  if(
+    status ===
+    "Received"
+  )
+    statusClass =
+      "received";
 
-  if(status === "Preparing")
-    statusClass = "preparing";
 
-  if(status === "Out for Delivery")
-    statusClass = "out";
+  if(
+    status ===
+    "Confirmed"
+  )
+    statusClass =
+      "confirmed";
 
-  if(status === "Delivered")
-    statusClass = "delivered";
 
-  if(status === "Cancelled")
-    statusClass = "cancelled";
+  if(
+    status ===
+    "Preparing"
+  )
+    statusClass =
+      "preparing";
+
+
+  if(
+    status ===
+    "Out for Delivery"
+  )
+    statusClass =
+      "out";
+
+
+  if(
+    status ===
+    "Delivered"
+  )
+    statusClass =
+      "delivered";
+
+
+  if(
+    status ===
+    "Cancelled"
+  )
+    statusClass =
+      "cancelled";
 
 
   const isNew =
     !deliveredFolder &&
     (
       !order.status ||
-      order.status === "Received"
+      order.status ===
+      "Received"
     );
 
 
   const items =
-    Array.isArray(order.items)
+    Array.isArray(
+      order.items
+    )
       ? order.items
       : Object.values(
           order.items || {}
@@ -3717,6 +4461,10 @@ function renderOrderCard(
   const itemHtml =
     items.map(
       item => {
+
+        item =
+          item || {};
+
 
         const qty =
           Number(
@@ -3730,7 +4478,9 @@ function renderOrderCard(
           Number(
             item.subtotal ??
             (
-              Number(item.price || 0) *
+              Number(
+                item.price || 0
+              ) *
               qty
             )
           );
@@ -3765,8 +4515,12 @@ function renderOrderCard(
     <div
       class="
         order
-        ${isNew ? "new-order new-arrival" : ""}
-        ${deliveredFolder ? "delivered-order" : ""}
+        ${isNew
+          ? "new-order new-arrival"
+          : ""}
+        ${deliveredFolder
+          ? "delivered-order"
+          : ""}
       "
       data-order-key="${escapeAttribute(key)}"
     >
@@ -3791,20 +4545,21 @@ function renderOrderCard(
               margin-top:2px;
             "
           >
-
             ${formatDate(
               order.createdAt
             )}
-
           </div>
 
         </div>
 
 
-        <div class="status ${statusClass}">
-
+        <div
+          class="
+            status
+            ${statusClass}
+          "
+        >
           ${escapeHtml(status)}
-
         </div>
 
       </div>
@@ -3814,7 +4569,9 @@ function renderOrderCard(
 
         <div class="info-box">
 
-          <small>Customer</small>
+          <small>
+            Customer
+          </small>
 
           ${escapeHtml(
             order.customerName ||
@@ -3827,7 +4584,9 @@ function renderOrderCard(
 
         <div class="info-box">
 
-          <small>Phone</small>
+          <small>
+            Phone
+          </small>
 
           ${escapeHtml(
             order.customerPhone ||
@@ -3840,7 +4599,9 @@ function renderOrderCard(
 
         <div class="info-box">
 
-          <small>Payment</small>
+          <small>
+            Payment
+          </small>
 
           ${escapeHtml(
             order.paymentMethod ||
@@ -3852,7 +4613,9 @@ function renderOrderCard(
 
         <div class="info-box">
 
-          <small>Address</small>
+          <small>
+            Address
+          </small>
 
           ${escapeHtml(
             order.address ||
@@ -3865,7 +4628,9 @@ function renderOrderCard(
 
         <div class="info-box">
 
-          <small>Distance</small>
+          <small>
+            Distance
+          </small>
 
           ${Number(
             order.distanceKm ||
@@ -3878,12 +4643,14 @@ function renderOrderCard(
 
         <div class="info-box">
 
-          <small>Delivery Charge</small>
+          <small>
+            Delivery Charge
+          </small>
 
           ₹${Number(
             order.deliveryCharge ||
             0
-          )}
+          ).toFixed(2)}
 
         </div>
 
@@ -3894,9 +4661,16 @@ function renderOrderCard(
 
         ${
           itemHtml ||
-          `<div style="color:#777;font-size:9px;">
-             No item details
-           </div>`
+          `
+            <div
+              style="
+                color:#777;
+                font-size:9px;
+              "
+            >
+              No item details
+            </div>
+          `
         }
 
       </div>
@@ -3904,14 +4678,16 @@ function renderOrderCard(
 
       <div class="order-total">
 
-        <span>Total</span>
+        <span>
+          Total
+        </span>
 
         <strong>
           ₹${Number(
             order.total ||
             order.grandTotal ||
             0
-          )}
+          ).toFixed(2)}
         </strong>
 
       </div>
@@ -3920,7 +4696,9 @@ function renderOrderCard(
       ${
         deliveredFolder
 
-        ? `
+        ?
+
+        `
 
           <div
             style="
@@ -3934,7 +4712,9 @@ function renderOrderCard(
 
         `
 
-        : `
+        :
+
+        `
 
           <div class="status-buttons">
 
@@ -3992,9 +4772,9 @@ function renderOrderCard(
 }
 
 
-/* =========================================
+/* =====================================================
    STATUS BUTTON
-========================================= */
+===================================================== */
 
 function statusButton(
   key,
@@ -4005,19 +4785,22 @@ function statusButton(
   return `
 
     <button
-      class="btn ${
-        current === status
-          ? "btn-gold"
-          : "btn-dark"
-      }"
+      class="
+        btn
+        ${
+          current === status
+            ? "btn-gold"
+            : "btn-dark"
+        }
+      "
       onclick="
         updateOrderStatus(
           '${escapeAttribute(key)}',
-          '${status}'
+          '${escapeAttribute(status)}'
         )
       "
     >
-      ${status}
+      ${escapeHtml(status)}
     </button>
 
   `;
@@ -4025,9 +4808,9 @@ function statusButton(
 }
 
 
-/* =========================================
+/* =====================================================
    UPDATE ORDER STATUS
-========================================= */
+===================================================== */
 
 window.updateOrderStatus =
 async function(
@@ -4054,23 +4837,38 @@ async function(
       Date.now();
 
 
-    const updates = {
-
-      [`orders/${key}/status`]:
-        status,
-
-      [`orders/${key}/updatedAt`]:
-        now
-
-    };
+    const updates = {};
 
 
-    if(order.ownerUid){
+    /*
+     * MAIN ORDER
+     */
+
+    updates[
+      `orders/${key}/status`
+    ] =
+      status;
+
+
+    updates[
+      `orders/${key}/updatedAt`
+    ] =
+      now;
+
+
+    /*
+     * CUSTOMER ORDER
+     */
+
+    if(
+      order.ownerUid
+    ){
 
       updates[
         `customerOrders/${order.ownerUid}/${key}/status`
       ] =
         status;
+
 
       updates[
         `customerOrders/${order.ownerUid}/${key}/updatedAt`
@@ -4080,7 +4878,14 @@ async function(
     }
 
 
-    if(status === "Delivered"){
+    /*
+     * DELIVERED
+     */
+
+    if(
+      status ===
+      "Delivered"
+    ){
 
       updates[
         `orders/${key}/deliveredAt`
@@ -4108,22 +4913,36 @@ async function(
     }
 
 
+    /*
+     * SAVE ALL AT ONCE
+     */
+
     await update(
       ref(db),
       updates
     );
 
 
-    if(allOrders[key]){
+    /*
+     * UPDATE LOCAL DATA
+     */
+
+    if(
+      allOrders[key]
+    ){
 
       allOrders[key].status =
         status;
+
 
       allOrders[key].updatedAt =
         now;
 
 
-      if(status === "Delivered"){
+      if(
+        status ===
+        "Delivered"
+      ){
 
         allOrders[key].deliveredAt =
           now;
@@ -4141,7 +4960,9 @@ async function(
 
 
     showToast(
-      `Order ${status}.`
+      status === "Delivered"
+        ? "✅ Order delivered & moved to Delivered folder."
+        : `Order ${status}.`
     );
 
   }catch(error){
@@ -4150,6 +4971,7 @@ async function(
       "Order status error:",
       error
     );
+
 
     showToast(
       error.message ||
@@ -4161,25 +4983,33 @@ async function(
 };
 
 
-/* =========================================
+/* =====================================================
    RATINGS
-========================================= */
+===================================================== */
 
 function loadRatings(){
 
   onValue(
-    ref(db,"ratings"),
+    ref(
+      db,
+      "ratings"
+    ),
     snapshot => {
 
       allRatings =
         snapshot.val() || {};
+
 
       renderRatings();
 
     },
     error => {
 
-      console.error(error);
+      console.error(
+        "Ratings error:",
+        error
+      );
+
 
       document.getElementById(
         "ratings"
@@ -4192,6 +5022,10 @@ function loadRatings(){
 }
 
 
+/* =====================================================
+   RENDER RATINGS
+===================================================== */
+
 function renderRatings(){
 
   const entries =
@@ -4200,21 +5034,30 @@ function renderRatings(){
     );
 
 
-  if(!entries.length){
+  if(
+    !entries.length
+  ){
 
     document.getElementById(
       "ratingSummary"
     ).textContent =
       "No ratings yet.";
 
+
     document.getElementById(
       "ratings"
     ).innerHTML =
       `
-        <p style="color:#777;font-size:10px;">
+        <p
+          style="
+            color:#777;
+            font-size:10px;
+          "
+        >
           No customer feedback yet.
         </p>
       `;
+
 
     return;
 
@@ -4262,7 +5105,10 @@ function renderRatings(){
 
 
   entries.sort(
-    (a,b) =>
+    (
+      a,
+      b
+    ) =>
       Number(
         b[1].createdAt ||
         0
@@ -4279,7 +5125,13 @@ function renderRatings(){
   ).innerHTML =
 
     entries.map(
-      ([key,rating]) => {
+      (
+        [key,rating]
+      ) => {
+
+        rating =
+          rating || {};
+
 
         const stars =
           Math.max(
@@ -4298,7 +5150,11 @@ function renderRatings(){
 
           <div class="rating">
 
-            <div style="font-size:10px;">
+            <div
+              style="
+                font-size:10px;
+              "
+            >
 
               <strong>
                 ${escapeHtml(
@@ -4309,15 +5165,25 @@ function renderRatings(){
 
             </div>
 
+
             <div class="rating-stars">
 
-              ${"★".repeat(stars)}
+              ${"★".repeat(
+                stars
+              )}
 
-              <span style="color:#555;">
-                ${"★".repeat(5-stars)}
+              <span
+                style="
+                  color:#555;
+                "
+              >
+                ${"★".repeat(
+                  5 - stars
+                )}
               </span>
 
             </div>
+
 
             <div
               style="
@@ -4331,9 +5197,12 @@ function renderRatings(){
               )}
             </div>
 
+
             ${
               rating.feedback
-              ? `
+              ?
+
+              `
 
                 <div class="rating-feedback">
                   "${escapeHtml(
@@ -4342,7 +5211,10 @@ function renderRatings(){
                 </div>
 
               `
-              : ""
+
+              :
+
+              ""
             }
 
           </div>
@@ -4355,11 +5227,13 @@ function renderRatings(){
 }
 
 
-/* =========================================
+/* =====================================================
    DATE
-========================================= */
+===================================================== */
 
-function formatDate(timestamp){
+function formatDate(
+  timestamp
+){
 
   if(!timestamp){
 
@@ -4368,73 +5242,101 @@ function formatDate(timestamp){
   }
 
 
-  return new Date(
-    timestamp
-  ).toLocaleString(
+  const date =
+    new Date(
+      timestamp
+    );
+
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return "-";
+
+  }
+
+
+  return date.toLocaleString(
     "en-IN",
     {
-      timeZone:"Asia/Kolkata"
+      timeZone:
+        "Asia/Kolkata"
     }
   );
 
 }
 
 
-/* =========================================
-   ESCAPE
-========================================= */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-function escapeHtml(value){
+function escapeHtml(
+  value
+){
 
   return String(
     value ?? ""
   )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-function escapeAttribute(value){
+function escapeAttribute(
+  value
+){
 
-  return escapeHtml(value);
+  return escapeHtml(
+    value
+  );
 
 }
 
 
-/* =========================================
+/* =====================================================
    TOAST
-========================================= */
+===================================================== */
 
-function showToast(message){
+function showToast(
+  message
+){
 
   const toast =
     document.getElementById(
       "toast"
     );
 
+
   toast.textContent =
     message;
 
-  toast.classList.add("show");
+
+  toast.classList.add(
+    "show"
+  );
 
 
   clearTimeout(
@@ -4457,9 +5359,9 @@ function showToast(message){
 }
 
 
-/* =========================================
-   ACTIVATE AUDIO AFTER CLICK
-========================================= */
+/* =====================================================
+   ACTIVATE AUDIO AFTER ADMIN CLICK
+===================================================== */
 
 document.addEventListener(
   "click",
@@ -4477,6 +5379,7 @@ document.addEventListener(
 
       }
 
+
       if(
         audioContext.state ===
         "suspended"
@@ -4488,7 +5391,9 @@ document.addEventListener(
 
     }catch(error){
 
-      console.warn(error);
+      console.warn(
+        error
+      );
 
     }
 
