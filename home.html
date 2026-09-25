@@ -93,7 +93,7 @@ color:#aaa;
 margin-top:3px
 }
 
-/* CART BUTTON */
+/* CART */
 
 .cart-btn{
 border:1px solid rgba(212,175,55,.45);
@@ -220,7 +220,7 @@ letter-spacing:1.8px;
 margin-bottom:20px
 }
 
-/* SHOP STATUS */
+/* STATUS */
 
 .status-badge{
 display:inline-flex;
@@ -1424,11 +1424,8 @@ padding:6px 8px
 <div class="brand-crown">♛</div>
 
 <div class="brand-text">
-
 <strong>The Queen Fast Food</strong>
-
 <span>IBRISINGH • ODISHA</span>
-
 </div>
 
 </a>
@@ -2173,35 +2170,11 @@ How was your experience with The Queen?
 class="stars"
 id="stars">
 
-<button
-class="star"
-data-rating="1">
-★
-</button>
-
-<button
-class="star"
-data-rating="2">
-★
-</button>
-
-<button
-class="star"
-data-rating="3">
-★
-</button>
-
-<button
-class="star"
-data-rating="4">
-★
-</button>
-
-<button
-class="star"
-data-rating="5">
-★
-</button>
+<button class="star" data-rating="1">★</button>
+<button class="star" data-rating="2">★</button>
+<button class="star" data-rating="3">★</button>
+<button class="star" data-rating="4">★</button>
+<button class="star" data-rating="5">★</button>
 
 </div>
 
@@ -2313,9 +2286,7 @@ measurementId:
 
 
 const app=initializeApp(firebaseConfig);
-
 const auth=getAuth(app);
-
 const db=getDatabase(app);
 
 
@@ -2329,10 +2300,11 @@ const RESTAURANT_LAT=
 const RESTAURANT_LNG=
 86.36464363454978;
 
-const DELIVERY_RATE=6;
-
 const DEFAULT_WHATSAPP=
 "9090220791";
+
+const DEFAULT_DELIVERY_RATE=
+6;
 
 
 const DEFAULT_SCHEDULE={
@@ -2425,6 +2397,16 @@ let settings={
 whatsappNumber:
 DEFAULT_WHATSAPP,
 
+/*
+  IMPORTANT
+
+  open   = admin force open
+  closed = admin force closed
+  auto   = schedule
+*/
+
+statusOverride:"auto",
+
 manualOpen:false,
 
 manualClosed:false,
@@ -2437,6 +2419,9 @@ websiteMode:"normal",
 
 updateMessage:
 "We are making some improvements. Please wait a little while and refresh the page.",
+
+deliveryRate:
+DEFAULT_DELIVERY_RATE,
 
 ...DEFAULT_SCHEDULE
 
@@ -2596,7 +2581,7 @@ loadMenu();
 
 
 /* =====================================================
-   SETTINGS
+   SETTINGS - LIVE FIREBASE
 ===================================================== */
 
 function loadSettings(){
@@ -2621,32 +2606,81 @@ settings={
 };
 
 
-if(!settings.openTime)
+/*
+  ==========================================
+  NEW ADMIN STATUS SYSTEM
+  ==========================================
+*/
+
+if(
+settings.statusOverride!=="open" &&
+settings.statusOverride!=="closed" &&
+settings.statusOverride!=="auto"
+){
+
+if(settings.manualClosed===true){
+
+settings.statusOverride="closed";
+
+}else if(settings.manualOpen===true){
+
+settings.statusOverride="open";
+
+}else{
+
+settings.statusOverride="auto";
+
+}
+
+}
+
+
+/*
+  TIME FALLBACK
+*/
+
+if(!settings.openTime){
+
 settings.openTime=
+settings.openingTime||
 DEFAULT_SCHEDULE.openTime;
 
+}
 
-if(!settings.closeTime)
+
+if(!settings.closeTime){
+
 settings.closeTime=
+settings.closingTime||
 DEFAULT_SCHEDULE.closeTime;
+
+}
 
 
 if(
 typeof settings.scheduleEnabled!=="boolean"
-)
+){
+
 settings.scheduleEnabled=true;
 
-
-if(
-typeof settings.manualOpen!=="boolean"
-)
-settings.manualOpen=false;
+}
 
 
 if(
-typeof settings.manualClosed!=="boolean"
-)
-settings.manualClosed=false;
+typeof settings.deliveryRate!=="number"
+){
+
+const rate=
+Number(settings.deliveryRate);
+
+settings.deliveryRate=
+Number.isFinite(rate)
+?
+rate
+:
+DEFAULT_DELIVERY_RATE;
+
+}
 
 
 applyFontSize();
@@ -2676,7 +2710,7 @@ showToast(
 
 
 /* =====================================================
-   MENU LOAD
+   MENU LOAD - LIVE FIREBASE
 ===================================================== */
 
 function loadMenu(){
@@ -2748,8 +2782,8 @@ return {
 id:numericId,
 
 name:
-item.name ||
-defaultItem?.name ||
+item.name||
+defaultItem?.name||
 "Food Item",
 
 price:
@@ -2762,10 +2796,16 @@ defaultItem?.price||0
 ),
 
 image:
-item.image ||
-DEFAULT_IMAGES[numericId] ||
-defaultItem?.image ||
+item.image||
+DEFAULT_IMAGES[numericId]||
+defaultItem?.image||
 FALLBACK_IMAGE,
+
+/*
+  IMPORTANT:
+  missing available = AVAILABLE
+  false = OUT OF STOCK
+*/
 
 available:
 item.available!==false
@@ -2803,7 +2843,7 @@ return {
 id:defaultItem.id,
 
 name:
-firebaseItem.name ||
+firebaseItem.name||
 defaultItem.name,
 
 price:
@@ -2816,7 +2856,7 @@ firebaseItem.price
 defaultItem.price,
 
 image:
-firebaseItem.image ||
+firebaseItem.image||
 defaultItem.image,
 
 available:
@@ -2831,6 +2871,10 @@ return defaultItem;
 
 });
 
+
+/*
+  Keep extra Firebase items
+*/
 
 firebaseItems.forEach(
 firebaseItem=>{
@@ -2874,13 +2918,11 @@ console.error(
 error
 );
 
-
 if(!menu.length){
 
 menu=getDefaultMenu();
 
 }
-
 
 renderProducts();
 
@@ -2900,7 +2942,7 @@ renderCart();
 function timeToMinutes(time){
 
 if(
-!time ||
+!time||
 !/^\d{2}:\d{2}$/.test(
 String(time)
 )
@@ -2921,9 +2963,9 @@ String(time)
 
 
 if(
-hours<0 ||
-hours>23 ||
-minutes<0 ||
+hours<0||
+hours>23||
+minutes<0||
 minutes>59
 ){
 
@@ -2937,11 +2979,16 @@ return hours*60+minutes;
 }
 
 
+/* =====================================================
+   INDIA TIME SCHEDULE
+===================================================== */
+
 function isWithinSchedule(){
 
 const openMinutes=
 timeToMinutes(
 settings.openTime||
+settings.openingTime||
 DEFAULT_SCHEDULE.openTime
 );
 
@@ -2949,6 +2996,7 @@ DEFAULT_SCHEDULE.openTime
 const closeMinutes=
 timeToMinutes(
 settings.closeTime||
+settings.closingTime||
 DEFAULT_SCHEDULE.closeTime
 );
 
@@ -2963,32 +3011,89 @@ return true;
 }
 
 
-const now=new Date();
+/*
+  INDIA STANDARD TIME
+*/
+
+const now=
+new Date();
+
+
+const parts=
+new Intl.DateTimeFormat(
+"en-IN",
+{
+timeZone:"Asia/Kolkata",
+hour:"2-digit",
+minute:"2-digit",
+hour12:false
+}
+).formatToParts(now);
+
+
+let hour=0;
+
+let minute=0;
+
+
+parts.forEach(part=>{
+
+if(part.type==="hour"){
+
+hour=
+Number(part.value);
+
+}
+
+if(part.type==="minute"){
+
+minute=
+Number(part.value);
+
+}
+
+});
+
 
 const currentMinutes=
-now.getHours()*60+
-now.getMinutes();
+hour*60+minute;
 
+
+/*
+  NORMAL
+
+  12:00 -> 23:00
+*/
 
 if(openMinutes<closeMinutes){
 
-return (
-currentMinutes>=openMinutes &&
+return(
+currentMinutes>=openMinutes&&
 currentMinutes<closeMinutes
 );
 
 }
 
+
+/*
+  OVERNIGHT
+
+  18:00 -> 02:00
+*/
 
 if(openMinutes>closeMinutes){
 
-return (
-currentMinutes>=openMinutes ||
+return(
+currentMinutes>=openMinutes||
 currentMinutes<closeMinutes
 );
 
 }
 
+
+/*
+  Same time = 24 hours
+*/
 
 return true;
 
@@ -2996,33 +3101,64 @@ return true;
 
 
 /* =====================================================
-   SHOP STATUS
+   SHOP OPEN/CLOSED
 ===================================================== */
 
 function isShopOpen(){
 
-if(
-settings.manualClosed===true
-)
+/*
+  ========================================
+  ADMIN OVERRIDE HAS HIGHEST PRIORITY
+  ========================================
+*/
+
+const override=
+String(
+settings.statusOverride||"auto"
+).toLowerCase();
+
+
+/*
+  ADMIN -> OPEN
+*/
+
+if(override==="open"){
+
+return true;
+
+}
+
+
+/*
+  ADMIN -> CLOSED
+*/
+
+if(override==="closed"){
+
 return false;
 
+}
 
-if(
-settings.manualOpen===true
-)
+
+/*
+  ADMIN -> AUTO
+*/
+
+if(settings.scheduleEnabled===false){
+
 return true;
 
-
-if(
-settings.scheduleEnabled===false
-)
-return true;
+}
 
 
 return isWithinSchedule();
 
 }
 
+
+/* =====================================================
+   FORMAT TIME
+===================================================== */
 
 function formatTimeForDisplay(time){
 
@@ -3058,7 +3194,7 @@ if(hours===0)
 hours=12;
 
 
-return (
+return(
 hours+
 ":"+
 String(mins).padStart(2,"0")+
@@ -3072,8 +3208,11 @@ suffix
 function getNextOpenTime(){
 
 return formatTimeForDisplay(
+
 settings.openTime||
+settings.openingTime||
 DEFAULT_SCHEDULE.openTime
+
 );
 
 }
@@ -3110,35 +3249,68 @@ if(!badge||!dot)
 return;
 
 
+const override=
+String(
+settings.statusOverride||"auto"
+).toLowerCase();
+
+
 const open=
 isShopOpen();
 
+
+/*
+  =====================================
+  OPEN
+  =====================================
+*/
 
 if(open){
 
 badge.textContent=
 "Open • Taking Orders";
 
+
 dot.classList.remove(
 "closed"
 );
 
-if(statusBadge)
+
+if(statusBadge){
+
 statusBadge.classList.remove(
 "closed-badge"
 );
 
-if(closedMessage)
+}
+
+
+if(closedMessage){
+
 closedMessage.classList.remove(
 "show"
 );
 
-}else{
-
-let text="";
+}
 
 
-if(settings.manualClosed===true){
+renderProducts();
+
+return;
+
+}
+
+
+/*
+  =====================================
+  CLOSED
+  =====================================
+*/
+
+let text;
+
+
+if(override==="closed"){
 
 text=
 String(
@@ -3157,13 +3329,17 @@ getNextOpenTime();
 
 badge.textContent=text;
 
+
 dot.classList.add("closed");
 
 
-if(statusBadge)
+if(statusBadge){
+
 statusBadge.classList.add(
 "closed-badge"
 );
+
+}
 
 
 if(closedMessage){
@@ -3177,13 +3353,15 @@ closedMessage.classList.add(
 
 }
 
-}
-
 
 renderProducts();
 
 }
 
+
+/*
+  Update every 15 seconds
+*/
 
 setInterval(
 ()=>{
@@ -3194,7 +3372,7 @@ updateShopStatus();
 
 
 /* =====================================================
-   PRODUCTS - FIXED
+   PRODUCTS
 ===================================================== */
 
 function renderProducts(){
@@ -3227,22 +3405,8 @@ return;
 }
 
 
-/*
-IMPORTANT:
-
-Shop closed hele Add button hide heba nahi.
-
-Customer Add click karipariba,
-but addToCart() bhitare shop-open check
-already achhi.
-
-So:
-AVAILABLE = + Add
-OUT OF STOCK = Out of Stock
-CLOSED + AVAILABLE = + Add
-*/
-
 grid.innerHTML=
+
 menu.map(item=>{
 
 const safeId=
@@ -3257,7 +3421,7 @@ let addButton="";
 
 
 /*
-OUT OF STOCK
+  OUT OF STOCK
 */
 
 if(!available){
@@ -3275,17 +3439,14 @@ Out of Stock
 
 `;
 
-}
-
+}else{
 
 /*
-AVAILABLE
+  AVAILABLE
 
-Even when shop is CLOSED,
-+ Add button remains visible.
+  Shop closed hele bhi button visible.
+  Click kale addToCart() shop status check kariba.
 */
-
-else{
 
 addButton=`
 
@@ -3338,23 +3499,18 @@ onerror="this.src='${FALLBACK_IMAGE}'">
 
 ${
 available
-
 ?
-
 `
 <div class="stock-badge available">
 ● AVAILABLE
 </div>
 `
-
 :
-
 `
 <div class="stock-badge out">
 ● OUT OF STOCK
 </div>
 `
-
 }
 
 </div>
@@ -3415,7 +3571,6 @@ JSON.parse(saved)
 
 if(!Array.isArray(cart))
 cart=[];
-
 
 }catch(error){
 
@@ -3521,10 +3676,7 @@ cartCount.classList.remove(
 function addToCart(id){
 
 /*
-SHOP CLOSED CHECK
-
-Button visible rahiba,
-but closed time re add allow heba nahi.
+  SHOP STATUS CHECK
 */
 
 if(!isShopOpen()){
@@ -3532,12 +3684,16 @@ if(!isShopOpen()){
 updateShopStatus();
 
 showToast(
-settings.manualClosed &&
+
+settings.statusOverride==="closed"&&
 settings.closedMessage
+
 ?
 settings.closedMessage
+
 :
 "SHOP IS CLOSED."
+
 );
 
 return;
@@ -3556,6 +3712,10 @@ Number(product.id)===
 numericId
 );
 
+
+/*
+  FALLBACK
+*/
 
 if(!item){
 
@@ -3594,7 +3754,7 @@ return;
 
 
 /*
-STOCK CHECK
+  STOCK CHECK
 */
 
 if(item.available===false){
@@ -3608,6 +3768,10 @@ return;
 
 }
 
+
+/*
+  ADD
+*/
 
 const existing=
 cart.find(
@@ -3696,7 +3860,7 @@ item.name+
 
 
 /* =====================================================
-   OUT OF STOCK CART ITEMS
+   OUT OF STOCK CART
 ===================================================== */
 
 function getOutOfStockCartItems(){
@@ -3712,8 +3876,8 @@ Number(cartItem.id)
 );
 
 
-return (
-currentItem &&
+return(
+currentItem&&
 currentItem.available===false
 );
 
@@ -3755,7 +3919,7 @@ numericId
 
 
 if(
-currentMenuItem &&
+currentMenuItem&&
 currentMenuItem.available===false
 ){
 
@@ -3895,6 +4059,7 @@ Add something delicious.
 }else{
 
 container.innerHTML=
+
 cart.map(item=>{
 
 const subtotal=
@@ -3911,7 +4076,7 @@ Number(item.id)
 
 
 const outOfStock=
-currentMenuItem &&
+currentMenuItem&&
 currentMenuItem.available===false;
 
 
@@ -4002,7 +4167,8 @@ Remove
 
 if(total)
 total.textContent=
-"₹"+getFoodTotal();
+"₹"+
+getFoodTotal();
 
 }
 
@@ -4061,8 +4227,16 @@ updateShopStatus();
 closeModal("cartModal");
 
 showToast(
-settings.closedMessage||
+
+settings.statusOverride==="closed"&&
+settings.closedMessage
+
+?
+settings.closedMessage
+
+:
 "SHOP IS CLOSED."
+
 );
 
 return;
@@ -4107,9 +4281,12 @@ document.getElementById(
 );
 
 
-if(foodElement)
+if(foodElement){
+
 foodElement.textContent=
 "₹"+foodTotal;
+
+}
 
 
 const distanceElement=
@@ -4130,27 +4307,39 @@ document.getElementById(
 
 if(deliveryDistance!==null){
 
-if(distanceElement)
+if(distanceElement){
+
 distanceElement.textContent=
 formatDistance(
 deliveryDistance
 );
 
+}
 
-if(deliveryElement)
+
+if(deliveryElement){
+
 deliveryElement.textContent=
 "₹"+deliveryCharge;
 
+}
+
 }else{
 
-if(distanceElement)
+if(distanceElement){
+
 distanceElement.textContent=
 "--";
 
+}
 
-if(deliveryElement)
+
+if(deliveryElement){
+
 deliveryElement.textContent=
 "₹0";
+
+}
 
 }
 
@@ -4242,7 +4431,6 @@ false
 
 },
 
-
 error=>{
 
 console.error(
@@ -4266,7 +4454,6 @@ showToast(
 }
 
 },
-
 
 {
 enableHighAccuracy:true,
@@ -4330,10 +4517,13 @@ const response=
 await fetch(url);
 
 
-if(!response.ok)
+if(!response.ok){
+
 throw new Error(
 "OSRM request failed"
 );
+
+}
 
 
 const data=
@@ -4343,10 +4533,13 @@ await response.json();
 if(
 !data.routes||
 !data.routes.length
-)
+){
+
 throw new Error(
 "No road route found"
 );
+
+}
 
 
 const meters=
@@ -4357,11 +4550,29 @@ deliveryDistance=
 meters/1000;
 
 
+/*
+  ADMIN DELIVERY RATE
+*/
+
+const rate=
+Number(
+settings.deliveryRate
+);
+
+
+const finalRate=
+Number.isFinite(rate)
+?
+rate
+:
+DEFAULT_DELIVERY_RATE;
+
+
 deliveryCharge=
 Math.ceil(
 deliveryDistance
 )*
-DELIVERY_RATE;
+finalRate;
 
 
 updateCheckoutSummary();
@@ -4374,7 +4585,7 @@ return deliveryDistance;
 
 function formatDistance(km){
 
-return (
+return(
 Number(km).toFixed(1)+
 " KM"
 );
@@ -4440,8 +4651,16 @@ if(!isShopOpen()){
 updateShopStatus();
 
 showToast(
-settings.closedMessage||
+
+settings.statusOverride==="closed"&&
+settings.closedMessage
+
+?
+settings.closedMessage
+
+:
 "SHOP IS CLOSED."
+
 );
 
 return;
@@ -4779,7 +4998,7 @@ const serial=
 result.snapshot.val();
 
 
-return (
+return(
 "TQF"+
 year+
 "-"+
@@ -4860,8 +5079,11 @@ String(number).replace(
 );
 
 
-if(number.length===10)
+if(number.length===10){
+
 number="91"+number;
+
+}
 
 
 const message=
@@ -5062,7 +5284,7 @@ statuses.forEach(
 (status,index)=>{
 
 const active=
-index<=currentIndex &&
+index<=currentIndex&&
 currentIndex>=0
 ?
 "active"
@@ -5169,8 +5391,7 @@ padding:15px;
 border:1px solid rgba(255,77,77,.3);
 border-radius:13px;
 color:#ff7777;
-background:rgba(255,77,77,.05);
-">
+background:rgba(255,77,77,.05);">
 
 ❌ This order has been cancelled.
 
@@ -5514,11 +5735,14 @@ document.getElementById(
 "websiteOverlay"
 );
 
-
 const message=
 document.getElementById(
 "overlayMessage"
 );
+
+
+if(!overlay)
+return;
 
 
 if(settings.websiteMode==="normal"){
@@ -5567,10 +5791,13 @@ const element=
 document.getElementById(id);
 
 
-if(element)
+if(element){
+
 element.classList.add(
 "show"
 );
+
+}
 
 };
 
@@ -5581,10 +5808,13 @@ const element=
 document.getElementById(id);
 
 
-if(element)
+if(element){
+
 element.classList.remove(
 "show"
 );
+
+}
 
 };
 
@@ -5598,10 +5828,13 @@ modal.addEventListener(
 "click",
 event=>{
 
-if(event.target===modal)
+if(event.target===modal){
+
 modal.classList.remove(
 "show"
 );
+
+}
 
 }
 
@@ -5701,10 +5934,18 @@ return String(value)
 
 function init(){
 
+const footerYear=
 document.getElementById(
 "footerYear"
-).textContent=
+);
+
+
+if(footerYear){
+
+footerYear.textContent=
 new Date().getFullYear();
+
+}
 
 
 loadCart();
