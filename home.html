@@ -29,10 +29,6 @@ body{
   line-height:1.5
 }
 
-body.locked{
-  overflow:hidden
-}
-
 button,input,textarea,select{
   font:inherit
 }
@@ -500,139 +496,6 @@ label{
   margin-bottom:13px
 }
 
-/* LOGIN */
-
-.overlay{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:rgba(0,0,0,.96);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  overflow:auto
-}
-
-.overlay.hidden{
-  display:none
-}
-
-.login-card{
-  width:min(460px,100%);
-  background:
-    linear-gradient(
-      145deg,
-      #151515,
-      #080808
-    );
-  border:1px solid rgba(216,177,90,.4);
-  border-radius:24px;
-  padding:32px 27px;
-  box-shadow:0 30px 100px rgba(0,0,0,.75);
-  position:relative
-}
-
-.login-logo{
-  text-align:center;
-  font-size:44px;
-  color:var(--gold)
-}
-
-.login-kicker{
-  text-align:center;
-  color:#cdb36d;
-  letter-spacing:4px;
-  font-size:10px;
-  margin-top:4px
-}
-
-.login-title{
-  text-align:center;
-  font-size:28px;
-  margin:7px 0 5px
-}
-
-.login-title span{
-  color:var(--gold)
-}
-
-.login-sub{
-  text-align:center;
-  color:#999;
-  font-size:13px;
-  margin-bottom:25px
-}
-
-.phone-row{
-  display:grid;
-  grid-template-columns:74px 1fr;
-  gap:8px
-}
-
-.country{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#111;
-  border:1px solid #333;
-  border-radius:9px;
-  color:#ddd;
-  font-weight:700
-}
-
-.main-action{
-  width:100%;
-  padding:12px;
-  border:0;
-  border-radius:10px;
-  background:
-    linear-gradient(
-      135deg,
-      #f0cf7d,
-      #a97920
-    );
-  color:#090909;
-  font-weight:900
-}
-
-.login-note{
-  text-align:center;
-  color:#777;
-  font-size:11px;
-  margin-top:14px
-}
-
-.auth-message{
-  text-align:center;
-  min-height:19px;
-  color:#e8c978;
-  font-size:12px;
-  margin-top:10px
-}
-
-.otp-title{
-  text-align:center;
-  color:#ddd;
-  font-size:13px;
-  margin-bottom:15px
-}
-
-.resend-row{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-top:14px
-}
-
-.text-btn{
-  background:none;
-  border:0;
-  color:var(--gold2);
-  font-size:12px;
-  text-decoration:underline
-}
-
 /* MODAL */
 
 .modal{
@@ -700,32 +563,6 @@ label{
   border-top:1px solid #333;
   margin-top:5px;
   padding-top:10px
-}
-
-.phone-choice{
-  display:flex;
-  gap:8px
-}
-
-.phone-choice input{
-  flex:1
-}
-
-.small-action{
-  white-space:nowrap;
-  background:#171717;
-  color:var(--gold2);
-  border:1px solid var(--line);
-  border-radius:9px;
-  padding:8px 10px;
-  font-size:11px;
-  font-weight:700
-}
-
-.login-as{
-  font-size:11px;
-  color:#888;
-  margin-top:5px
 }
 
 .location-status{
@@ -915,167 +752,11 @@ label{
     font-size:9px
   }
 
-  .phone-choice{
-    display:block
-  }
-
-  .phone-choice .small-action{
-    margin-top:7px
-  }
-
-  .login-card{
-    padding:27px 20px
-  }
-
 }
 </style>
 </head>
 
-<body class="locked">
-
-<!-- ================= LOGIN ================= -->
-
-<div id="loginOverlay" class="overlay">
-
-  <div class="login-card">
-
-    <div class="login-logo">♛</div>
-
-    <div class="login-kicker">
-      WELCOME TO
-    </div>
-
-    <div class="login-title">
-      THE <span>QUEEN</span> FAST FOOD
-    </div>
-
-    <div class="login-sub">
-      Your cravings deserve the royal treatment.
-    </div>
-
-
-    <div id="phoneStep">
-
-      <div class="form-group">
-
-        <label for="loginPhone">
-          Mobile Number
-        </label>
-
-        <div class="phone-row">
-
-          <div class="country">
-            +91
-          </div>
-
-          <input
-            id="loginPhone"
-            type="tel"
-            inputmode="numeric"
-            maxlength="10"
-            placeholder="Enter mobile number"
-            autocomplete="tel"
-          >
-
-        </div>
-
-      </div>
-
-
-      <button
-        id="sendOtpBtn"
-        class="main-action"
-      >
-        SEND OTP
-      </button>
-
-
-      <div
-        class="auth-message"
-        id="authMessage"
-      ></div>
-
-
-      <div
-        id="recaptcha-container"
-      ></div>
-
-
-      <div class="login-note">
-        Login to order your favourites &
-        enjoy a royal food experience.
-      </div>
-
-    </div>
-
-
-    <div
-      id="otpStep"
-      style="display:none"
-    >
-
-      <div class="otp-title">
-
-        Enter the 6-digit OTP sent to
-        <br>
-
-        <strong id="otpPhoneDisplay"></strong>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <input
-          id="otpInput"
-          type="tel"
-          inputmode="numeric"
-          maxlength="6"
-          placeholder="Enter OTP"
-          autocomplete="one-time-code"
-        >
-
-      </div>
-
-
-      <button
-        id="verifyOtpBtn"
-        class="main-action"
-      >
-        VERIFY & ENTER
-      </button>
-
-
-      <div
-        class="auth-message"
-        id="otpMessage"
-      ></div>
-
-
-      <div class="resend-row">
-
-        <button
-          id="changeLoginNumberBtn"
-          class="text-btn"
-        >
-          Change Number
-        </button>
-
-        <button
-          id="resendOtpBtn"
-          class="text-btn"
-        >
-          Resend OTP
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
+<body>
 
 <!-- ================= HEADER ================= -->
 
@@ -1101,7 +782,6 @@ label{
 
     </a>
 
-
     <div class="nav-right">
 
       <a
@@ -1110,7 +790,6 @@ label{
       >
         ☎ 97768 56111
       </a>
-
 
       <button
         class="cart-btn"
@@ -1144,13 +823,11 @@ label{
       ROYAL TASTE • LOCAL LOVE
     </div>
 
-
     <h1>
       Choose.
       <span>Add.</span>
       Enjoy.
     </h1>
-
 
     <p>
       Freshly prepared favourites from
@@ -1158,7 +835,6 @@ label{
       Order online and enjoy a simple,
       royal food experience.
     </p>
-
 
     <div
       id="shopStatusHome"
@@ -1175,7 +851,6 @@ label{
       </span>
 
     </div>
-
 
     <div class="hero-actions">
 
@@ -1249,7 +924,6 @@ label{
 
     </div>
 
-
     <div
       class="menu-grid"
       id="menuGrid"
@@ -1278,7 +952,6 @@ label{
 
     </div>
 
-
     <div class="why-grid">
 
       <div class="info-card">
@@ -1299,7 +972,6 @@ label{
 
       </div>
 
-
       <div class="info-card">
 
         <div class="icon">
@@ -1317,7 +989,6 @@ label{
         </p>
 
       </div>
-
 
       <div class="info-card">
 
@@ -1362,7 +1033,6 @@ label{
 
     </div>
 
-
     <div class="visit-grid">
 
       <div class="info-card">
@@ -1381,7 +1051,6 @@ label{
 
       </div>
 
-
       <div class="info-card">
 
         <div class="icon">
@@ -1397,7 +1066,6 @@ label{
         </p>
 
       </div>
-
 
       <div class="info-card">
 
@@ -1446,7 +1114,6 @@ label{
 
     </div>
 
-
     <div class="track-box">
 
       <div class="track-input">
@@ -1464,7 +1131,6 @@ label{
         </button>
 
       </div>
-
 
       <div
         id="trackResult"
@@ -1529,12 +1195,10 @@ label{
 
   </div>
 
-
   <div
     class="cart-items"
     id="cartItems"
   ></div>
-
 
   <div class="cart-foot">
 
@@ -1549,7 +1213,6 @@ label{
       </span>
 
     </div>
-
 
     <button
       class="gold-btn"
@@ -1587,7 +1250,6 @@ label{
 
       </div>
 
-
       <button
         class="close"
         id="closeCheckoutBtn"
@@ -1624,60 +1286,19 @@ label{
         Order Contact Number
       </label>
 
-      <div class="phone-choice">
-
-        <input
-          id="customerPhone"
-          type="tel"
-          inputmode="numeric"
-          maxlength="10"
-          readonly
-        >
-
-        <button
-          id="changePhoneButton"
-          class="small-action"
-          type="button"
-        >
-          Use Another Number
-        </button>
-
-      </div>
-
-      <div
-        id="alternatePhoneHint"
-        class="login-as"
-      ></div>
-
-    </div>
-
-
-    <div
-      class="form-group"
-      id="alternatePhoneWrap"
-      style="display:none"
-    >
-
-      <label for="alternatePhone">
-        Another Contact Number
-      </label>
-
       <input
-        id="alternatePhone"
+        id="customerPhone"
         type="tel"
         inputmode="numeric"
         maxlength="10"
-        placeholder="Enter 10-digit number"
+        placeholder="Enter 10-digit mobile number"
       >
 
-      <button
-        id="useLoginPhoneButton"
-        class="small-action"
-        type="button"
-        style="margin-top:7px"
+      <div
+        class="location-status"
       >
-        Use Login Number
-      </button>
+        Enter the mobile number where we can contact you for this order.
+      </div>
 
     </div>
 
@@ -1781,12 +1402,14 @@ import {
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
+/* OTP REMOVED
+   Anonymous authentication is now used.
+*/
+
 import {
   getAuth,
   onAuthStateChanged,
-  signOut,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
+  signInAnonymously
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -1954,18 +1577,6 @@ let whatsappNumber =
 let currentUser =
   null;
 
-let confirmationResult =
-  null;
-
-let recaptchaVerifier =
-  null;
-
-let currentLoginPhone =
-  "";
-
-let usingAlternatePhone =
-  false;
-
 let selectedLat =
   null;
 
@@ -2090,16 +1701,6 @@ function showToast(message){
 
 /* =====================================================
    IMPORTANT STOCK NORMALIZER
-
-   Firebase can contain:
-   true
-   false
-   "true"
-   "false"
-   1
-   0
-   "available"
-   "out"
 ===================================================== */
 
 function normalizeAvailable(
@@ -2300,8 +1901,6 @@ function isShopOpen(){
     .toLowerCase();
 
 
-  /* ADMIN FORCE OPEN */
-
   if(
     override === "open"
   ){
@@ -2311,8 +1910,6 @@ function isShopOpen(){
   }
 
 
-  /* ADMIN FORCE CLOSED */
-
   if(
     override === "closed"
   ){
@@ -2321,8 +1918,6 @@ function isShopOpen(){
 
   }
 
-
-  /* AUTO MODE */
 
   if(
     shopSettings.scheduleEnabled ===
@@ -2368,8 +1963,6 @@ function isShopOpen(){
     indiaMinutes();
 
 
-  /* SAME DAY */
-
   if(
     open < close
   ){
@@ -2381,8 +1974,6 @@ function isShopOpen(){
 
   }
 
-
-  /* OVERNIGHT */
 
   return (
     now >= open ||
@@ -2427,7 +2018,7 @@ function updateShopStatusHome(){
       ? "SHOP IS OPEN"
       : (
           shopSettings.closedMessage ||
-          "SHOP IS CLOSED"
+          "SHOP IS CLOSED."
         );
 
 }
@@ -2484,12 +2075,6 @@ onValue(
     }
 
 
-    /*
-      IMPORTANT:
-      Read menu from settings/menu
-      and normalize availability.
-    */
-
     if(
       s.menu
     ){
@@ -2522,10 +2107,6 @@ onValue(
           }
         );
 
-
-      /*
-        Include extra admin-added items
-      */
 
       Object.entries(
         s.menu
@@ -2630,10 +2211,6 @@ function renderMenu(){
   grid.innerHTML =
     menu.map(
       item => {
-
-        /*
-          ALWAYS normalize availability
-        */
 
         const available =
           normalizeAvailable(
@@ -2822,11 +2399,6 @@ function addToCart(id){
 
   }
 
-
-  /*
-    IMPORTANT:
-    Admin Out of Stock -> no cart.
-  */
 
   if(
     !normalizeAvailable(
@@ -3135,11 +2707,6 @@ function updateCartItem(
     }
 
 
-    /*
-      Prevent increasing quantity
-      if admin marked item out of stock.
-    */
-
     if(
       menuItem &&
       !normalizeAvailable(
@@ -3212,331 +2779,89 @@ $("closeCartBtn").onclick =
   closeCart;
 
 
-/* ================= LOGIN ================= */
+/* =====================================================
+   ANONYMOUS CUSTOMER AUTH
+   OTP COMPLETELY REMOVED
+===================================================== */
 
-function showLogin(){
+async function ensureCustomerAuth(){
 
-  $("loginOverlay")
-    .classList
-    .remove("hidden");
+  try{
 
-  document.body
-    .classList
-    .add("locked");
+    if(
+      auth.currentUser
+    ){
 
-}
+      if(
+        auth.currentUser.uid ===
+        ADMIN_UID
+      ){
 
+        currentUser =
+          null;
 
-function hideLogin(){
+        return false;
 
-  $("loginOverlay")
-    .classList
-    .add("hidden");
-
-  document.body
-    .classList
-    .remove("locked");
-
-}
-
-
-function getLoginPhone(){
-
-  return phoneDigits(
-    currentLoginPhone
-  );
-
-}
-
-
-function setupRecaptcha(){
-
-  if(
-    recaptchaVerifier
-  ){
-
-    try{
-
-      recaptchaVerifier.clear();
-
-    }catch{}
-
-  }
-
-
-  recaptchaVerifier =
-    new RecaptchaVerifier(
-      auth,
-      "recaptcha-container",
-      {
-        size:"invisible"
       }
+
+
+      currentUser =
+        auth.currentUser;
+
+      return true;
+
+    }
+
+
+    const result =
+      await signInAnonymously(
+        auth
+      );
+
+
+    currentUser =
+      result.user;
+
+
+    return true;
+
+  }catch(error){
+
+    console.error(
+      "Anonymous auth error:",
+      error
     );
+
+
+    showToast(
+      "Could not connect to order system."
+    );
+
+
+    return false;
+
+  }
 
 }
 
-
-$("sendOtpBtn").onclick =
-async function(){
-
-  const phone =
-    phoneDigits(
-      $("loginPhone").value
-    );
-
-
-  if(
-    phone.length !== 10
-  ){
-
-    $("authMessage").textContent =
-      "Please enter a valid 10-digit mobile number.";
-
-    return;
-
-  }
-
-
-  $("authMessage").textContent =
-    "Sending OTP...";
-
-
-  $("sendOtpBtn").disabled =
-    true;
-
-
-  try{
-
-    setupRecaptcha();
-
-
-    confirmationResult =
-      await signInWithPhoneNumber(
-        auth,
-        `+91${phone}`,
-        recaptchaVerifier
-      );
-
-
-    currentLoginPhone =
-      phone;
-
-
-    $("otpPhoneDisplay").textContent =
-      `+91 ${phone}`;
-
-
-    $("phoneStep").style.display =
-      "none";
-
-    $("otpStep").style.display =
-      "block";
-
-
-    $("authMessage").textContent =
-      "";
-
-
-    $("otpMessage").textContent =
-      "OTP sent successfully.";
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-
-    $("authMessage").textContent =
-      error.message ||
-      "Could not send OTP.";
-
-    try{
-
-      recaptchaVerifier.clear();
-
-    }catch{}
-
-    recaptchaVerifier =
-      null;
-
-  }finally{
-
-    $("sendOtpBtn").disabled =
-      false;
-
-  }
-
-};
-
-
-/* VERIFY OTP */
-
-$("verifyOtpBtn").onclick =
-async function(){
-
-  const otp =
-    $("otpInput").value
-      .trim();
-
-
-  if(
-    otp.length !== 6
-  ){
-
-    $("otpMessage").textContent =
-      "Enter the 6-digit OTP.";
-
-    return;
-
-  }
-
-
-  if(
-    !confirmationResult
-  ){
-
-    $("otpMessage").textContent =
-      "Please request OTP again.";
-
-    return;
-
-  }
-
-
-  $("verifyOtpBtn").disabled =
-    true;
-
-
-  $("verifyOtpBtn").textContent =
-    "VERIFYING...";
-
-
-  try{
-
-    await confirmationResult
-      .confirm(
-        otp
-      );
-
-
-    $("otpMessage").textContent =
-      "Login successful.";
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-
-    $("otpMessage").textContent =
-      error.message ||
-      "Invalid OTP.";
-
-  }finally{
-
-    $("verifyOtpBtn").disabled =
-      false;
-
-    $("verifyOtpBtn").textContent =
-      "VERIFY & ENTER";
-
-  }
-
-};
-
-
-/* CHANGE NUMBER */
-
-$("changeLoginNumberBtn").onclick =
-function(){
-
-  $("otpStep").style.display =
-    "none";
-
-  $("phoneStep").style.display =
-    "block";
-
-  $("otpInput").value =
-    "";
-
-  $("otpMessage").textContent =
-    "";
-
-  $("authMessage").textContent =
-    "";
-
-};
-
-
-/* RESEND */
-
-$("resendOtpBtn").onclick =
-function(){
-
-  $("sendOtpBtn").click();
-
-};
-
-
-/* AUTH STATE */
 
 onAuthStateChanged(
   auth,
   user => {
 
     if(
-      user
+      user &&
+      user.uid !==
+      ADMIN_UID
     ){
-
-      if(
-        user.uid ===
-        ADMIN_UID
-      ){
-
-        /*
-          Do not allow admin
-          inside customer page.
-        */
-
-        signOut(
-          auth
-        );
-
-        showToast(
-          "Admin account cannot order from customer page."
-        );
-
-        return;
-
-      }
-
 
       currentUser =
         user;
-
-
-      if(
-        user.phoneNumber
-      ){
-
-        currentLoginPhone =
-          phoneDigits(
-            user.phoneNumber
-          );
-
-      }
-
-
-      hideLogin();
 
     }else{
 
       currentUser =
         null;
-
-      showLogin();
 
     }
 
@@ -3546,7 +2871,7 @@ onAuthStateChanged(
 
 /* ================= CHECKOUT ================= */
 
-function openCheckout(){
+async function openCheckout(){
 
   updateShopStatusHome();
 
@@ -3566,17 +2891,6 @@ function openCheckout(){
 
 
   if(
-    !currentUser
-  ){
-
-    showLogin();
-
-    return;
-
-  }
-
-
-  if(
     !cart.length
   ){
 
@@ -3589,33 +2903,42 @@ function openCheckout(){
   }
 
 
+  /*
+    Automatically create anonymous
+    Firebase customer account.
+  */
+
+  if(
+    !currentUser
+  ){
+
+    const loggedIn =
+      await ensureCustomerAuth();
+
+
+    if(
+      !loggedIn
+    ){
+
+      showToast(
+        "Could not connect to order system."
+      );
+
+      return;
+
+    }
+
+  }
+
+
   closeCart();
 
 
-  usingAlternatePhone =
-    false;
-
-
   $("customerPhone").value =
-    getLoginPhone();
-
-
-  $("customerPhone").readOnly =
-    true;
-
-
-  $("alternatePhoneWrap")
-    .style
-    .display =
-    "none";
-
-
-  $("alternatePhone").value =
     "";
 
-
-  $("alternatePhoneHint").textContent =
-    `Logged in as +91 ${getLoginPhone()}. This number will be used for the order unless you choose another number.`;
+  $("customerPhone").readOnly =
+    false;
 
 
   selectedLat =
@@ -3755,62 +3078,9 @@ function renderCheckoutSummary(){
 }
 
 
-/* ================= PHONE CHANGE ================= */
+/* ================= PHONE INPUT ================= */
 
-$("changePhoneButton").onclick =
-function(){
-
-  usingAlternatePhone =
-    true;
-
-
-  $("customerPhone").readOnly =
-    true;
-
-
-  $("alternatePhoneWrap")
-    .style
-    .display =
-    "block";
-
-
-  $("alternatePhone").focus();
-
-
-  $("alternatePhoneHint").textContent =
-    "Your login number stays unchanged. The alternate number will be saved only for this order.";
-
-};
-
-
-$("useLoginPhoneButton").onclick =
-function(){
-
-  usingAlternatePhone =
-    false;
-
-
-  $("alternatePhoneWrap")
-    .style
-    .display =
-    "none";
-
-
-  $("alternatePhone").value =
-    "";
-
-
-  $("customerPhone").value =
-    getLoginPhone();
-
-
-  $("alternatePhoneHint").textContent =
-    `Logged in as +91 ${getLoginPhone()}.`;
-
-};
-
-
-$("alternatePhone").addEventListener(
+$("customerPhone").addEventListener(
   "input",
   e => {
 
@@ -4001,8 +3271,6 @@ function openWhatsApp(
 
     `👤 Name: ${order.customerName}`,
 
-    `📱 Login Mobile: +91 ${order.loginPhone}`,
-
     `☎️ Order Contact: +91 ${order.orderContactPhone}`,
 
     `📍 Address: ${order.address}`,
@@ -4085,17 +3353,6 @@ async function(){
 
 
   if(
-    !currentUser
-  ){
-
-    showLogin();
-
-    return;
-
-  }
-
-
-  if(
     !cart.length
   ){
 
@@ -4108,28 +3365,47 @@ async function(){
   }
 
 
+  /*
+    Make sure anonymous customer
+    authentication exists.
+  */
+
+  if(
+    !currentUser
+  ){
+
+    const loggedIn =
+      await ensureCustomerAuth();
+
+
+    if(
+      !loggedIn
+    ){
+
+      showToast(
+        "Could not connect to order system."
+      );
+
+      return;
+
+    }
+
+  }
+
+
   const name =
     $("customerName")
       .value
       .trim();
 
 
-  const loginPhone =
-    getLoginPhone();
-
-
   const orderContactPhone =
-    (
-      usingAlternatePhone
-        ?
-        $("alternatePhone").value
-        :
-        $("customerPhone").value
-    )
-    .replace(
-      /\D/g,
-      ""
-    );
+    $("customerPhone")
+      .value
+      .replace(
+        /\D/g,
+        ""
+      );
 
 
   const address =
@@ -4168,19 +3444,8 @@ async function(){
       "Please enter a valid 10-digit order contact number."
     );
 
-    return;
-
-  }
-
-
-  if(
-    loginPhone.length !==
-    10
-  ){
-
-    showToast(
-      "Your login phone is not available. Please login again."
-    );
+    $("customerPhone")
+      .focus();
 
     return;
 
@@ -4220,8 +3485,6 @@ async function(){
 
   /*
     Re-check stock before order.
-    This prevents old cart items being
-    ordered after admin changes stock.
   */
 
   for(
@@ -4290,6 +3553,12 @@ async function(){
     );
 
 
+  /*
+    loginPhone is kept here only for
+    compatibility with existing Admin code.
+    It is NOT an OTP login number anymore.
+  */
+
   const order = {
 
     orderId,
@@ -4297,7 +3566,8 @@ async function(){
     ownerUid:
       currentUser.uid,
 
-    loginPhone,
+    loginPhone:
+      orderContactPhone,
 
     orderContactPhone,
 
@@ -4361,11 +3631,6 @@ async function(){
       order
     );
 
-
-    /*
-      Also keep customer's own
-      order under customerOrders.
-    */
 
     await set(
       ref(
@@ -4581,6 +3846,32 @@ async function startTracking(
   }
 
 
+  /*
+    Make sure anonymous auth exists
+    before reading order.
+  */
+
+  if(
+    !currentUser
+  ){
+
+    const ok =
+      await ensureCustomerAuth();
+
+
+    if(!ok){
+
+      showToast(
+        "Could not connect to order system."
+      );
+
+      return;
+
+    }
+
+  }
+
+
   try{
 
     const snapshot =
@@ -4665,7 +3956,7 @@ async function startTracking(
 /* ================= TRACK BUTTON ================= */
 
 $("trackBtn").onclick =
-function(){
+async function(){
 
   const id =
     $("trackOrderId")
@@ -4684,7 +3975,7 @@ function(){
   }
 
 
-  startTracking(
+  await startTracking(
     id
   );
 
@@ -4729,6 +4020,15 @@ setInterval(
   updateShopStatusHome,
   15000
 );
+
+
+/*
+  Start anonymous Firebase
+  authentication silently.
+  NO OTP / NO LOGIN POPUP.
+*/
+
+ensureCustomerAuth();
 
 </script>
 
