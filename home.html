@@ -47,7 +47,7 @@ a{
   margin:auto
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 header{
   position:sticky;
@@ -120,7 +120,7 @@ header{
   margin-left:4px
 }
 
-/* HERO */
+/* ================= HERO ================= */
 
 .hero{
   padding:78px 0 60px;
@@ -172,7 +172,7 @@ header{
   font-weight:700
 }
 
-/* SHOP STATUS */
+/* ================= SHOP STATUS ================= */
 
 .shop-status-home{
   display:inline-flex;
@@ -206,7 +206,7 @@ header{
   color:#ff7777
 }
 
-/* TRUST */
+/* ================= TRUST ================= */
 
 .trust{
   border-top:1px solid var(--line);
@@ -232,7 +232,7 @@ header{
   font-size:15px
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 
 section{
   padding:55px 0
@@ -260,7 +260,7 @@ section{
   margin-top:7px
 }
 
-/* MENU */
+/* ================= MENU ================= */
 
 .menu-grid{
   display:grid;
@@ -299,7 +299,8 @@ section{
 .product-img img{
   width:100%;
   height:100%;
-  object-fit:cover
+  object-fit:cover;
+  display:block
 }
 
 .product.item-out .product-img img{
@@ -350,10 +351,7 @@ section{
   color:#fff;
   border-radius:9px;
   font-weight:800;
-  position:relative;
-  overflow:hidden;
-  transform-origin:center;
-  will-change:transform,opacity,box-shadow,background
+  transition:.2s
 }
 
 .add-btn:hover{
@@ -369,86 +367,59 @@ section{
   background:#140909!important
 }
 
-/* =====================================================
-   ADD TO CART STRONG BLINK ANIMATION
-===================================================== */
+/* ================= ADD TO CART BLINK ================= */
 
 @keyframes addToCartBlink{
 
   0%{
     opacity:1;
-    transform:scale(1) translateX(0);
-    background:transparent;
-    color:#fff;
-    box-shadow:0 0 0 rgba(216,177,90,0);
+    transform:scale(1);
+    box-shadow:0 0 0 rgba(216,177,90,0)
   }
 
-  12%{
+  20%{
     opacity:.25;
-    transform:scale(.90) translateX(-2px);
-    background:#d8b15a;
-    color:#000;
-    box-shadow:0 0 22px rgba(216,177,90,.8);
+    transform:scale(.93);
+    box-shadow:0 0 18px rgba(216,177,90,.8)
   }
 
-  25%{
+  40%{
     opacity:1;
-    transform:scale(1.08) translateX(2px);
-    background:#f4d98b;
-    color:#000;
-    box-shadow:0 0 30px rgba(216,177,90,1);
+    transform:scale(1.06);
+    box-shadow:0 0 28px rgba(216,177,90,.95);
+    background:var(--gold);
+    color:#090909
   }
 
-  38%{
+  60%{
     opacity:.25;
-    transform:scale(.92) translateX(-2px);
-    background:#d8b15a;
-    color:#000;
-    box-shadow:0 0 20px rgba(216,177,90,.75);
-  }
-
-  52%{
-    opacity:1;
-    transform:scale(1.08) translateX(2px);
-    background:#f4d98b;
-    color:#000;
-    box-shadow:0 0 32px rgba(216,177,90,1);
-  }
-
-  66%{
-    opacity:.35;
-    transform:scale(.94) translateX(-1px);
-    background:#d8b15a;
-    color:#000;
-    box-shadow:0 0 20px rgba(216,177,90,.7);
+    transform:scale(.93);
+    box-shadow:0 0 18px rgba(216,177,90,.8)
   }
 
   80%{
     opacity:1;
-    transform:scale(1.04) translateX(1px);
-    background:#f4d98b;
-    color:#000;
-    box-shadow:0 0 25px rgba(216,177,90,.9);
+    transform:scale(1.04);
+    box-shadow:0 0 22px rgba(216,177,90,.7);
+    background:var(--gold);
+    color:#090909
   }
 
   100%{
     opacity:1;
-    transform:scale(1) translateX(0);
-    background:transparent;
-    color:#fff;
+    transform:scale(1);
     box-shadow:0 0 0 rgba(216,177,90,0);
+    background:transparent;
+    color:#fff
   }
 
 }
 
 .add-btn.add-to-cart-blink{
-  animation:
-    addToCartBlink .85s
-    cubic-bezier(.2,.8,.3,1)
-    both;
+  animation:addToCartBlink .75s ease
 }
 
-/* INFO */
+/* ================= INFO ================= */
 
 .why-grid,
 .visit-grid{
@@ -477,7 +448,7 @@ section{
   font-size:14px
 }
 
-/* TRACK */
+/* ================= TRACK ================= */
 
 .track-box{
   max-width:760px;
@@ -531,7 +502,7 @@ section{
   color:#000
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 footer{
   padding:35px 0;
@@ -547,7 +518,7 @@ footer{
   margin-bottom:6px
 }
 
-/* FORM */
+/* ================= FORM ================= */
 
 input,
 textarea,
@@ -579,7 +550,7 @@ label{
   margin-bottom:13px
 }
 
-/* MODAL */
+/* ================= MODAL ================= */
 
 .modal{
   position:fixed;
@@ -673,7 +644,7 @@ label{
   font-weight:900
 }
 
-/* CART */
+/* ================= CART ================= */
 
 .cart-drawer{
   position:fixed;
@@ -745,7 +716,16 @@ label{
   padding:50px 15px
 }
 
-/* TOAST */
+.remove-btn{
+  background:#171717;
+  border:1px solid #333;
+  color:#ff7777;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px
+}
+
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
@@ -769,7 +749,7 @@ label{
   transform:translate(-50%,0)
 }
 
-/* MOBILE */
+/* ================= MOBILE ================= */
 
 @media(max-width:900px){
 
@@ -847,22 +827,13 @@ label{
 
   <div class="container nav">
 
-    <a
-      class="brand"
-      href="#"
-    >
-
-      <span class="crown">
-        ♛
-      </span>
+    <a class="brand" href="#">
+      <span class="crown">♛</span>
 
       <span>
         THE QUEEN
-        <small>
-          FAST FOOD
-        </small>
+        <small>FAST FOOD</small>
       </span>
-
     </a>
 
     <div class="nav-right">
@@ -893,10 +864,11 @@ label{
 
 </header>
 
-
 <!-- ================= MAIN ================= -->
 
 <main>
+
+<!-- HERO -->
 
 <section class="hero">
 
@@ -957,7 +929,6 @@ label{
 
 </section>
 
-
 <!-- TRUST -->
 
 <div class="trust">
@@ -982,7 +953,6 @@ label{
   </div>
 
 </div>
-
 
 <!-- MENU -->
 
@@ -1015,7 +985,6 @@ label{
   </div>
 
 </section>
-
 
 <!-- WHY -->
 
@@ -1097,7 +1066,6 @@ label{
 
 </section>
 
-
 <!-- VISIT -->
 
 <section>
@@ -1173,7 +1141,6 @@ label{
 
 </section>
 
-
 <!-- TRACKING -->
 
 <section>
@@ -1228,7 +1195,6 @@ label{
 
 </main>
 
-
 <!-- ================= FOOTER ================= -->
 
 <footer>
@@ -1245,16 +1211,17 @@ label{
     </div>
 
     <div style="margin-top:5px">
+
       ©
       <span id="year"></span>
       The Queen Fast Food.
       All rights reserved.
+
     </div>
 
   </div>
 
 </footer>
-
 
 <!-- ================= CART ================= -->
 
@@ -1297,6 +1264,11 @@ label{
 
     </div>
 
+    <!-- IMPORTANT:
+         THIS IS THE ONLY CHECKOUT ENTRY.
+         ADD TO CART WILL NEVER OPEN CHECKOUT DIRECTLY.
+    -->
+
     <button
       class="gold-btn"
       style="width:100%;margin-top:10px"
@@ -1308,7 +1280,6 @@ label{
   </div>
 
 </aside>
-
 
 <!-- ================= CHECKOUT ================= -->
 
@@ -1342,12 +1313,10 @@ label{
 
     </div>
 
-
     <div
       class="summary"
       id="checkoutSummary"
     ></div>
-
 
     <div class="form-group">
 
@@ -1361,7 +1330,6 @@ label{
       >
 
     </div>
-
 
     <div class="form-group">
 
@@ -1378,11 +1346,11 @@ label{
       >
 
       <div class="location-status">
-        Enter the mobile number where we can contact you for this order.
+        Enter the mobile number where we can
+        contact you for this order.
       </div>
 
     </div>
-
 
     <div class="form-group">
 
@@ -1397,7 +1365,6 @@ label{
       ></textarea>
 
     </div>
-
 
     <div class="form-group">
 
@@ -1423,7 +1390,6 @@ label{
 
     </div>
 
-
     <div class="form-group">
 
       <label for="paymentMethod">
@@ -1444,7 +1410,6 @@ label{
 
     </div>
 
-
     <button
       id="placeOrderBtn"
       class="order-btn"
@@ -1456,12 +1421,10 @@ label{
 
 </div>
 
-
 <div
   class="toast"
   id="toast"
 ></div>
-
 
 <!-- ================= FIREBASE ================= -->
 
@@ -1487,7 +1450,6 @@ import {
   signInAnonymously
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 
 /* ================= FIREBASE CONFIG ================= */
 
@@ -1519,7 +1481,6 @@ const firebaseConfig = {
 
 };
 
-
 const app =
   initializeApp(
     firebaseConfig
@@ -1531,10 +1492,8 @@ const db =
 const auth =
   getAuth(app);
 
-
 const ADMIN_UID =
   "eWlMt1dG2pUOxsTo0NaXgY1avn33";
-
 
 /* ================= RESTAURANT ================= */
 
@@ -1546,7 +1505,6 @@ const restaurantLng =
 
 const DELIVERY_RATE =
   6;
-
 
 /* ================= DEFAULT MENU ================= */
 
@@ -1638,7 +1596,6 @@ const defaultMenu = [
 
 ];
 
-
 /* ================= STATE ================= */
 
 let menu =
@@ -1664,7 +1621,6 @@ let selectedDistanceKm =
 let trackingUnsubscribe =
   null;
 
-
 let shopSettings = {
 
   scheduleEnabled:true,
@@ -1680,58 +1636,34 @@ let shopSettings = {
 
 };
 
-
 /* ================= HELPERS ================= */
 
 function $(id){
-
   return document.getElementById(id);
-
 }
-
 
 function escapeHTML(value){
 
   return String(
     value ?? ""
   )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
-
 
 function phoneDigits(value){
 
   return String(
     value || ""
   )
-  .replace(
-    /\D/g,
-    ""
-  )
+  .replace(/\D/g,"")
   .slice(-10);
 
 }
-
 
 function money(value){
 
@@ -1741,7 +1673,6 @@ function money(value){
     ).toFixed(0);
 
 }
-
 
 function showToast(message){
 
@@ -1773,62 +1704,36 @@ function showToast(message){
 
 }
 
+/* ================= STOCK NORMALIZER ================= */
 
-/* =====================================================
-   IMPORTANT STOCK NORMALIZER
-===================================================== */
-
-function normalizeAvailable(
-  value
-){
+function normalizeAvailable(value){
 
   if(
     value === undefined ||
     value === null ||
     value === ""
   ){
-
     return true;
-
   }
 
-
-  if(
-    value === true
-  ){
-
+  if(value === true){
     return true;
-
   }
 
-
-  if(
-    value === false
-  ){
-
+  if(value === false){
     return false;
-
   }
 
-
-  if(
-    typeof value === "number"
-  ){
-
+  if(typeof value === "number"){
     return value !== 0;
-
   }
 
-
-  if(
-    typeof value === "string"
-  ){
+  if(typeof value === "string"){
 
     const v =
       value
         .trim()
         .toLowerCase();
-
 
     if(
       v === "false" ||
@@ -1837,29 +1742,21 @@ function normalizeAvailable(
       v === "out of stock" ||
       v === "unavailable"
     ){
-
       return false;
-
     }
-
 
     if(
       v === "true" ||
       v === "1" ||
       v === "available"
     ){
-
       return true;
-
     }
 
   }
 
-
   return true;
-
 }
-
 
 /* ================= SHOP TIME ================= */
 
@@ -1873,10 +1770,8 @@ function parseTime(value){
       /^(\d{1,2}):(\d{2})$/
     );
 
-
   if(!m)
     return null;
-
 
   const h =
     Number(m[1]);
@@ -1884,23 +1779,17 @@ function parseTime(value){
   const min =
     Number(m[2]);
 
-
   if(
     h < 0 ||
     h > 23 ||
     min < 0 ||
     min > 59
   ){
-
     return null;
-
   }
 
-
   return h * 60 + min;
-
 }
-
 
 function indiaMinutes(){
 
@@ -1920,38 +1809,27 @@ function indiaMinutes(){
         new Date()
       );
 
-
     let hour =
       Number(
         parts.find(
           x =>
-            x.type ===
-            "hour"
+            x.type === "hour"
         )?.value || 0
       );
-
 
     const minute =
       Number(
         parts.find(
           x =>
-            x.type ===
-            "minute"
+            x.type === "minute"
         )?.value || 0
       );
 
-
-    if(
-      hour === 24
-    ){
-
+    if(hour === 24){
       hour = 0;
-
     }
 
-
-    return hour * 60 +
-      minute;
+    return hour * 60 + minute;
 
   }catch{
 
@@ -1965,7 +1843,6 @@ function indiaMinutes(){
 
 }
 
-
 function isShopOpen(){
 
   const override =
@@ -1975,34 +1852,20 @@ function isShopOpen(){
     )
     .toLowerCase();
 
-
-  if(
-    override === "open"
-  ){
-
+  if(override === "open"){
     return true;
-
   }
 
-
-  if(
-    override === "closed"
-  ){
-
+  if(override === "closed"){
     return false;
-
   }
-
 
   if(
     shopSettings.scheduleEnabled ===
     false
   ){
-
     return true;
-
   }
-
 
   const open =
     parseTime(
@@ -2014,33 +1877,21 @@ function isShopOpen(){
       shopSettings.closeTime
     );
 
-
   if(
     open === null ||
     close === null
   ){
-
     return true;
-
   }
 
-
-  if(
-    open === close
-  ){
-
+  if(open === close){
     return true;
-
   }
-
 
   const now =
     indiaMinutes();
 
-
-  if(
-    open < close
-  ){
+  if(open < close){
 
     return (
       now >= open &&
@@ -2049,7 +1900,6 @@ function isShopOpen(){
 
   }
 
-
   return (
     now >= open ||
     now < close
@@ -2057,14 +1907,12 @@ function isShopOpen(){
 
 }
 
-
-/* ================= SHOP STATUS UI ================= */
+/* ================= SHOP STATUS ================= */
 
 function updateShopStatusHome(){
 
   const open =
     isShopOpen();
-
 
   const box =
     $("shopStatusHome");
@@ -2075,18 +1923,15 @@ function updateShopStatusHome(){
   const text =
     $("shopStatusHomeText");
 
-
   box.classList.toggle(
     "closed",
     !open
   );
 
-
   dot.classList.toggle(
     "closed",
     !open
   );
-
 
   text.textContent =
     open
@@ -2098,38 +1943,28 @@ function updateShopStatusHome(){
 
 }
 
-
-/* ================= SETTINGS ================= */
+/* ================= FIREBASE SETTINGS ================= */
 
 onValue(
-  ref(
-    db,
-    "settings"
-  ),
+  ref(db,"settings"),
   snapshot => {
 
     const s =
-      snapshot.val() ||
-      {};
-
+      snapshot.val() || {};
 
     shopSettings = {
 
       scheduleEnabled:
-        s.scheduleEnabled !==
-        false,
+        s.scheduleEnabled !== false,
 
       openTime:
-        s.openTime ||
-        "12:00",
+        s.openTime || "12:00",
 
       closeTime:
-        s.closeTime ||
-        "23:00",
+        s.closeTime || "23:00",
 
       statusOverride:
-        s.statusOverride ||
-        "auto",
+        s.statusOverride || "auto",
 
       closedMessage:
         s.closedMessage ||
@@ -2137,10 +1972,7 @@ onValue(
 
     };
 
-
-    if(
-      s.whatsappNumber
-    ){
+    if(s.whatsappNumber){
 
       whatsappNumber =
         phoneDigits(
@@ -2149,20 +1981,14 @@ onValue(
 
     }
 
-
-    if(
-      s.menu
-    ){
+    if(s.menu){
 
       menu =
         defaultMenu.map(
           item => {
 
             const saved =
-              s.menu[
-                item.id
-              ] || {};
-
+              s.menu[item.id] || {};
 
             return {
 
@@ -2171,6 +1997,14 @@ onValue(
               ...saved,
 
               id:item.id,
+
+              /*
+               * Firebase image is preserved.
+               */
+              image:
+                saved.image ||
+                item.image ||
+                "",
 
               available:
                 normalizeAvailable(
@@ -2181,7 +2015,6 @@ onValue(
 
           }
         );
-
 
       Object.entries(
         s.menu
@@ -2202,6 +2035,10 @@ onValue(
               id,
 
               ...item,
+
+              image:
+                item.image ||
+                "",
 
               available:
                 normalizeAvailable(
@@ -2230,7 +2067,6 @@ onValue(
 
     }
 
-
     updateShopStatusHome();
 
     renderMenu();
@@ -2252,7 +2088,6 @@ onValue(
   }
 );
 
-
 /* ================= MENU ================= */
 
 function renderMenu(){
@@ -2260,10 +2095,7 @@ function renderMenu(){
   const grid =
     $("menuGrid");
 
-
-  if(
-    !menu.length
-  ){
+  if(!menu.length){
 
     grid.innerHTML = `
       <div
@@ -2279,9 +2111,7 @@ function renderMenu(){
     `;
 
     return;
-
   }
-
 
   grid.innerHTML =
     menu.map(
@@ -2292,119 +2122,125 @@ function renderMenu(){
             item.available
           );
 
-
         const safeId =
-          String(
-            item.id
-          )
+          String(item.id)
           .replace(
             /[^a-zA-Z0-9_-]/g,
             ""
           );
 
+        /*
+         * IMAGE:
+         * Firebase item.image is used directly.
+         */
 
-        return `
-
-        <article
-          class="
-            product
-            ${available ? "" : "item-out"}
-          "
-        >
-
-          <div
-            class="product-img"
-          >
-
-            ${
-              item.image
-
-              ?
-
-              `<img
+        const imageHTML =
+          item.image
+            ?
+            `
+              <img
                 src="${escapeHTML(item.image)}"
                 alt="${escapeHTML(item.name)}"
                 loading="lazy"
-                onerror="this.style.display='none'"
-              >`
+                onerror="
+                  this.style.display='none';
+                  this.nextElementSibling.style.display='flex';
+                "
+              >
 
-              :
-
-              `<div
+              <div
+                style="
+                  display:none;
+                  width:100%;
+                  height:100%;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:45px;
+                  opacity:.25
+                "
+              >
+                🍽️
+              </div>
+            `
+            :
+            `
+              <div
                 style="
                   font-size:45px;
                   opacity:.25
                 "
               >
                 🍽️
-              </div>`
+              </div>
+            `;
 
-            }
+        return `
 
+          <article
+            class="
+              product
+              ${available ? "" : "item-out"}
+            "
+          >
 
-            ${
-              available
-              ? ""
-              :
-              `
-                <span
-                  class="stock-badge-home"
-                >
-                  OUT OF STOCK
-                </span>
-              `
-            }
+            <div class="product-img">
 
-          </div>
+              ${imageHTML}
 
+              ${
+                available
+                  ? ""
+                  :
+                  `
+                    <span
+                      class="stock-badge-home"
+                    >
+                      OUT OF STOCK
+                    </span>
+                  `
+              }
 
-          <div class="product-body">
-
-            <h3>
-              ${escapeHTML(item.name)}
-            </h3>
-
-
-            <div class="price">
-              ${money(item.price)}
             </div>
 
+            <div class="product-body">
 
-            <p>
-              Freshly prepared • Queen favourite
-            </p>
+              <h3>
+                ${escapeHTML(item.name)}
+              </h3>
 
+              <div class="price">
+                ${money(item.price)}
+              </div>
 
-            ${
-              available
+              <p>
+                Freshly prepared • Queen favourite
+              </p>
 
-              ?
+              ${
+                available
+                  ?
+                  `
+                    <button
+                      class="add-btn"
+                      data-add="${escapeHTML(safeId)}"
+                    >
+                      ADD TO CART
+                    </button>
+                  `
+                  :
+                  `
+                    <button
+                      class="add-btn out-of-stock"
+                      disabled
+                    >
+                      OUT OF STOCK
+                    </button>
+                  `
+              }
 
-              `
-                <button
-                  class="add-btn"
-                  data-add="${escapeHTML(safeId)}"
-                >
-                  ADD TO CART
-                </button>
-              `
+            </div>
 
-              :
-
-              `
-                <button
-                  class="add-btn out-of-stock"
-                  disabled
-                >
-                  OUT OF STOCK
-                </button>
-              `
-
-            }
-
-          </div>
-
-        </article>
+          </article>
 
         `;
 
@@ -2412,11 +2248,8 @@ function renderMenu(){
     )
     .join("");
 
-
   document
-    .querySelectorAll(
-      "[data-add]"
-    )
+    .querySelectorAll("[data-add]")
     .forEach(
       button => {
 
@@ -2435,17 +2268,18 @@ function renderMenu(){
 
 }
 
-
 /* ================= ADD TO CART ================= */
+/*
+   IMPORTANT:
+   ADD TO CART -> CART ONLY.
+   CHECKOUT WILL NOT OPEN AUTOMATICALLY.
+*/
 
-function addToCart(id, button){
+function addToCart(id,button){
 
   updateShopStatusHome();
 
-
-  if(
-    !isShopOpen()
-  ){
+  if(!isShopOpen()){
 
     showToast(
       shopSettings.closedMessage ||
@@ -2453,9 +2287,7 @@ function addToCart(id, button){
     );
 
     return;
-
   }
-
 
   const item =
     menu.find(
@@ -2464,7 +2296,6 @@ function addToCart(id, button){
         String(id)
     );
 
-
   if(!item){
 
     showToast(
@@ -2472,9 +2303,7 @@ function addToCart(id, button){
     );
 
     return;
-
   }
-
 
   if(
     !normalizeAvailable(
@@ -2487,9 +2316,7 @@ function addToCart(id, button){
     );
 
     return;
-
   }
-
 
   const existing =
     cart.find(
@@ -2497,7 +2324,6 @@ function addToCart(id, button){
         String(x.id) ===
         String(id)
     );
-
 
   if(existing){
 
@@ -2521,16 +2347,15 @@ function addToCart(id, button){
 
   }
 
+  renderCart();
 
-  /* =================================================
-     IMPORTANT:
-     BLINK FIRST
-     CART OPENS ONLY AFTER ANIMATION
-  ================================================= */
+  /*
+   * Blink first.
+   * Then ONLY cart opens.
+   * Checkout does NOT open.
+   */
 
   if(button){
-
-    button.disabled = true;
 
     button.classList.remove(
       "add-to-cart-blink"
@@ -2542,37 +2367,35 @@ function addToCart(id, button){
       "add-to-cart-blink"
     );
 
-    showToast(
-      `${item.name} added to cart 👑`
+    clearTimeout(
+      button.__blinkTimer
     );
 
-    renderCart();
+    button.__blinkTimer =
+      setTimeout(
+        () => {
 
-    setTimeout(
-      () => {
+          button.classList.remove(
+            "add-to-cart-blink"
+          );
 
-        button.classList.remove(
-          "add-to-cart-blink"
-        );
+          openCart();
 
-        button.disabled = false;
-
-        openCart();
-
-      },
-      850
-    );
+        },
+        750
+      );
 
   }else{
-
-    renderCart();
 
     openCart();
 
   }
 
-}
+  showToast(
+    `${item.name} added to cart 👑`
+  );
 
+}
 
 /* ================= CART ================= */
 
@@ -2588,12 +2411,10 @@ function getSubtotal(){
 
 }
 
-
 function renderCart(){
 
   const box =
     $("cartItems");
-
 
   const count =
     cart.reduce(
@@ -2603,14 +2424,10 @@ function renderCart(){
       0
     );
 
-
   $("cartCount").textContent =
     count;
 
-
-  if(
-    !cart.length
-  ){
+  if(!cart.length){
 
     box.innerHTML = `
       <div class="empty">
@@ -2628,72 +2445,70 @@ function renderCart(){
       cart.map(
         item => `
 
-        <div class="cart-item">
+          <div class="cart-item">
 
-          <div class="cart-item-top">
+            <div class="cart-item-top">
 
-            <div>
+              <div>
 
-              <strong>
-                ${escapeHTML(item.name)}
-              </strong>
+                <strong>
+                  ${escapeHTML(item.name)}
+                </strong>
 
-              <div
-                style="
-                  color:var(--gold2);
-                  margin-top:3px
-                "
-              >
-                ${money(item.price)}
+                <div
+                  style="
+                    color:var(--gold2);
+                    margin-top:3px
+                  "
+                >
+                  ${money(item.price)}
+                </div>
+
               </div>
+
+              <button
+                class="remove-btn"
+                data-remove="${escapeHTML(item.id)}"
+              >
+                Remove
+              </button>
 
             </div>
 
+            <div class="qty">
 
-            <button
-              class="small-action"
-              data-remove="${escapeHTML(item.id)}"
-            >
-              Remove
-            </button>
+              <button
+                data-minus="${escapeHTML(item.id)}"
+              >
+                −
+              </button>
 
-          </div>
+              <strong>
+                ${item.qty}
+              </strong>
 
+              <button
+                data-plus="${escapeHTML(item.id)}"
+              >
+                +
+              </button>
 
-          <div class="qty">
+              <span
+                style="
+                  margin-left:auto;
+                  color:var(--gold2);
+                  font-weight:800
+                "
+              >
+                ${money(
+                  item.price *
+                  item.qty
+                )}
+              </span>
 
-            <button
-              data-minus="${escapeHTML(item.id)}"
-            >
-              −
-            </button>
-
-            <strong>
-              ${item.qty}
-            </strong>
-
-            <button
-              data-plus="${escapeHTML(item.id)}"
-            >
-              +
-            </button>
-
-            <span
-              style="
-                margin-left:auto;
-                color:var(--gold2);
-                font-weight:800
-              "
-            >
-              ${money(
-                item.price *
-                item.qty
-              )}
-            </span>
+            </div>
 
           </div>
-
-        </div>
 
         `
       )
@@ -2701,83 +2516,72 @@ function renderCart(){
 
   }
 
-
   $("cartSubtotal").textContent =
     money(
       getSubtotal()
     );
 
-
   document
-    .querySelectorAll(
-      "[data-plus]"
-    )
+    .querySelectorAll("[data-plus]")
     .forEach(
       button => {
 
         button.onclick =
-          () => {
+        () => {
 
-            updateCartItem(
-              button.dataset.plus,
-              1
-            );
+          updateCartItem(
+            button.dataset.plus,
+            1
+          );
 
-          };
+        };
 
       }
     );
 
-
   document
-    .querySelectorAll(
-      "[data-minus]"
-    )
+    .querySelectorAll("[data-minus]")
     .forEach(
       button => {
 
         button.onclick =
-          () => {
+        () => {
 
-            updateCartItem(
-              button.dataset.minus,
-              -1
-            );
+          updateCartItem(
+            button.dataset.minus,
+            -1
+          );
 
-          };
+        };
 
       }
     );
 
-
   document
-    .querySelectorAll(
-      "[data-remove]"
-    )
+    .querySelectorAll("[data-remove]")
     .forEach(
       button => {
 
         button.onclick =
-          () => {
+        () => {
 
-            cart =
-              cart.filter(
-                x =>
-                  String(x.id) !==
-                  String(
-                    button.dataset.remove
-                  )
-              );
+          cart =
+            cart.filter(
+              x =>
+                String(x.id) !==
+                String(
+                  button.dataset.remove
+                )
+            );
 
-            renderCart();
+          renderCart();
 
-          };
+        };
 
       }
     );
 
 }
-
 
 /* ================= CART QUANTITY ================= */
 
@@ -2793,14 +2597,10 @@ function updateCartItem(
         String(id)
     );
 
-
   if(!item)
     return;
 
-
-  if(
-    delta > 0
-  ){
+  if(delta > 0){
 
     const menuItem =
       menu.find(
@@ -2809,10 +2609,7 @@ function updateCartItem(
           String(id)
       );
 
-
-    if(
-      !isShopOpen()
-    ){
+    if(!isShopOpen()){
 
       showToast(
         shopSettings.closedMessage ||
@@ -2820,9 +2617,7 @@ function updateCartItem(
       );
 
       return;
-
     }
-
 
     if(
       menuItem &&
@@ -2836,18 +2631,13 @@ function updateCartItem(
       );
 
       return;
-
     }
 
   }
 
-
   item.qty += delta;
 
-
-  if(
-    item.qty <= 0
-  ){
+  if(item.qty <= 0){
 
     cart =
       cart.filter(
@@ -2858,13 +2648,11 @@ function updateCartItem(
 
   }
 
-
   renderCart();
 
 }
 
-
-/* ================= CART OPEN/CLOSE ================= */
+/* ================= CART OPEN / CLOSE ================= */
 
 function openCart(){
 
@@ -2876,7 +2664,6 @@ function openCart(){
 
 }
 
-
 function closeCart(){
 
   $("cartDrawer")
@@ -2884,7 +2671,6 @@ function closeCart(){
     .remove("open");
 
 }
-
 
 $("openCartBtn").onclick =
   openCart;
@@ -2895,18 +2681,13 @@ $("heroCartBtn").onclick =
 $("closeCartBtn").onclick =
   closeCart;
 
-
-/* =====================================================
-   ANONYMOUS CUSTOMER AUTH
-===================================================== */
+/* ================= CUSTOMER AUTH ================= */
 
 async function ensureCustomerAuth(){
 
   try{
 
-    if(
-      auth.currentUser
-    ){
+    if(auth.currentUser){
 
       if(
         auth.currentUser.uid ===
@@ -2920,7 +2701,6 @@ async function ensureCustomerAuth(){
 
       }
 
-
       currentUser =
         auth.currentUser;
 
@@ -2928,16 +2708,13 @@ async function ensureCustomerAuth(){
 
     }
 
-
     const result =
       await signInAnonymously(
         auth
       );
 
-
     currentUser =
       result.user;
-
 
     return true;
 
@@ -2948,18 +2725,15 @@ async function ensureCustomerAuth(){
       error
     );
 
-
     showToast(
       "Could not connect to order system."
     );
-
 
     return false;
 
   }
 
 }
-
 
 onAuthStateChanged(
   auth,
@@ -2984,17 +2758,17 @@ onAuthStateChanged(
   }
 );
 
-
 /* ================= CHECKOUT ================= */
+/*
+   Checkout opens ONLY when the customer
+   clicks "Proceed to Checkout" in cart.
+*/
 
 async function openCheckout(){
 
   updateShopStatusHome();
 
-
-  if(
-    !isShopOpen()
-  ){
+  if(!isShopOpen()){
 
     showToast(
       shopSettings.closedMessage ||
@@ -3002,55 +2776,40 @@ async function openCheckout(){
     );
 
     return;
-
   }
 
-
-  if(
-    !cart.length
-  ){
+  if(!cart.length){
 
     showToast(
       "Your cart is empty."
     );
 
     return;
-
   }
 
-
-  if(
-    !currentUser
-  ){
+  if(!currentUser){
 
     const loggedIn =
       await ensureCustomerAuth();
 
-
-    if(
-      !loggedIn
-    ){
+    if(!loggedIn){
 
       showToast(
         "Could not connect to order system."
       );
 
       return;
-
     }
 
   }
 
-
   closeCart();
-
 
   $("customerPhone").value =
     "";
 
   $("customerPhone").readOnly =
     false;
-
 
   selectedLat =
     null;
@@ -3061,20 +2820,16 @@ async function openCheckout(){
   selectedDistanceKm =
     null;
 
-
   $("locationStatus").textContent =
     "Location is required for delivery charge calculation.";
 
-
   renderCheckoutSummary();
-
 
   $("checkoutModal")
     .classList
     .add("open");
 
 }
-
 
 function closeCheckout(){
 
@@ -3084,13 +2839,11 @@ function closeCheckout(){
 
 }
 
-
 $("checkoutBtn").onclick =
   openCheckout;
 
 $("closeCheckoutBtn").onclick =
   closeCheckout;
-
 
 /* ================= CHECKOUT SUMMARY ================= */
 
@@ -3098,7 +2851,6 @@ function renderCheckoutSummary(){
 
   const subtotal =
     getSubtotal();
-
 
   const delivery =
     selectedDistanceKm == null
@@ -3108,7 +2860,6 @@ function renderCheckoutSummary(){
           selectedDistanceKm
         ) *
         DELIVERY_RATE;
-
 
   $("checkoutSummary").innerHTML =
 
@@ -3151,7 +2902,6 @@ function renderCheckoutSummary(){
 
       </div>
 
-
       <div class="summary-row">
 
         <span>
@@ -3167,7 +2917,6 @@ function renderCheckoutSummary(){
         </span>
 
       </div>
-
 
       <div class="summary-row total">
 
@@ -3188,8 +2937,7 @@ function renderCheckoutSummary(){
 
 }
 
-
-/* ================= PHONE INPUT ================= */
+/* ================= PHONE ================= */
 
 $("customerPhone").addEventListener(
   "input",
@@ -3197,40 +2945,30 @@ $("customerPhone").addEventListener(
 
     e.target.value =
       e.target.value
-        .replace(
-          /\D/g,
-          ""
-        )
+        .replace(/\D/g,"")
         .slice(0,10);
 
   }
 );
-
 
 /* ================= LOCATION ================= */
 
 $("locationBtn").onclick =
 function(){
 
-  if(
-    !navigator.geolocation
-  ){
+  if(!navigator.geolocation){
 
     $("locationStatus").textContent =
       "Location is not supported by this browser.";
 
     return;
-
   }
-
 
   $("locationBtn").disabled =
     true;
 
-
   $("locationStatus").textContent =
     "Getting your location...";
-
 
   navigator.geolocation.getCurrentPosition(
 
@@ -3242,10 +2980,8 @@ function(){
       selectedLng =
         position.coords.longitude;
 
-
       $("locationStatus").textContent =
         "Calculating road distance...";
-
 
       try{
 
@@ -3255,16 +2991,11 @@ function(){
           `${selectedLng},${selectedLat}` +
           `?overview=false`;
 
-
         const response =
-          await fetch(
-            url
-          );
-
+          await fetch(url);
 
         const data =
           await response.json();
-
 
         if(
           !data.routes ||
@@ -3277,12 +3008,9 @@ function(){
 
         }
 
-
         selectedDistanceKm =
           data.routes[0]
-            .distance /
-          1000;
-
+            .distance / 1000;
 
         const charge =
           Math.ceil(
@@ -3290,23 +3018,17 @@ function(){
           ) *
           DELIVERY_RATE;
 
-
         $("locationStatus").textContent =
           `Distance: ${selectedDistanceKm.toFixed(2)} km • Delivery charge: ${money(charge)}`;
-
 
         renderCheckoutSummary();
 
       }catch(error){
 
-        console.error(
-          error
-        );
-
+        console.error(error);
 
         selectedDistanceKm =
           null;
-
 
         $("locationStatus").textContent =
           "Could not calculate road distance. Please try again.";
@@ -3325,10 +3047,7 @@ function(){
       $("locationBtn").disabled =
         false;
 
-
-      if(
-        error.code === 1
-      ){
+      if(error.code === 1){
 
         $("locationStatus").textContent =
           "Location permission denied. Please allow location access.";
@@ -3352,7 +3071,6 @@ function(){
 
 };
 
-
 /* ================= ORDER ID ================= */
 
 function makeOrderId(){
@@ -3363,7 +3081,6 @@ function makeOrderId(){
       .slice(-8);
 
 }
-
 
 /* ================= WHATSAPP ================= */
 
@@ -3413,25 +3130,19 @@ function openWhatsApp(
 
   ];
 
-
   const number =
     phoneDigits(
       whatsappNumber
     );
 
-
-  if(
-    number.length !== 10
-  ){
+  if(number.length !== 10){
 
     showToast(
       "WhatsApp number is not configured correctly."
     );
 
     return;
-
   }
-
 
   window.open(
     `https://wa.me/${number}?text=${encodeURIComponent(lines.join("\n"))}`,
@@ -3440,7 +3151,6 @@ function openWhatsApp(
 
 }
 
-
 /* ================= PLACE ORDER ================= */
 
 $("placeOrderBtn").onclick =
@@ -3448,10 +3158,7 @@ async function(){
 
   updateShopStatusHome();
 
-
-  if(
-    !isShopOpen()
-  ){
+  if(!isShopOpen()){
 
     showToast(
       shopSettings.closedMessage ||
@@ -3459,87 +3166,62 @@ async function(){
     );
 
     return;
-
   }
 
-
-  if(
-    !cart.length
-  ){
+  if(!cart.length){
 
     showToast(
       "Your cart is empty."
     );
 
     return;
-
   }
 
-
-  if(
-    !currentUser
-  ){
+  if(!currentUser){
 
     const loggedIn =
       await ensureCustomerAuth();
 
-
-    if(
-      !loggedIn
-    ){
+    if(!loggedIn){
 
       showToast(
         "Could not connect to order system."
       );
 
       return;
-
     }
 
   }
-
 
   const name =
     $("customerName")
       .value
       .trim();
 
-
   const orderContactPhone =
     $("customerPhone")
       .value
-      .replace(
-        /\D/g,
-        ""
-      );
-
+      .replace(/\D/g,"");
 
   const address =
     $("customerAddress")
       .value
       .trim();
 
-
   const paymentMethod =
     $("paymentMethod")
       .value;
 
-
-  if(
-    !name
-  ){
+  if(!name){
 
     showToast(
       "Please enter your name."
     );
 
-    $("customerName")
-      .focus();
+    $("customerName").focus();
 
     return;
-
   }
-
 
   if(
     orderContactPhone.length !==
@@ -3550,29 +3232,21 @@ async function(){
       "Please enter a valid 10-digit order contact number."
     );
 
-    $("customerPhone")
-      .focus();
+    $("customerPhone").focus();
 
     return;
-
   }
 
-
-  if(
-    !address
-  ){
+  if(!address){
 
     showToast(
       "Please enter delivery address."
     );
 
-    $("customerAddress")
-      .focus();
+    $("customerAddress").focus();
 
     return;
-
   }
-
 
   if(
     selectedLat === null ||
@@ -3585,11 +3259,9 @@ async function(){
     );
 
     return;
-
   }
 
-
-  /* Re-check stock before order */
+  /* STOCK RE-CHECK */
 
   for(
     const cartItem of cart
@@ -3601,7 +3273,6 @@ async function(){
           String(x.id) ===
           String(cartItem.id)
       );
-
 
     if(
       latest &&
@@ -3615,19 +3286,15 @@ async function(){
       );
 
       return;
-
     }
 
   }
 
-
   const orderId =
     makeOrderId();
 
-
   const subtotal =
     getSubtotal();
-
 
   const deliveryCharge =
     Math.ceil(
@@ -3635,11 +3302,9 @@ async function(){
     ) *
     DELIVERY_RATE;
 
-
   const total =
     subtotal +
     deliveryCharge;
-
 
   const orderItems =
     cart.map(
@@ -3655,7 +3320,6 @@ async function(){
 
       })
     );
-
 
   const order = {
 
@@ -3707,17 +3371,14 @@ async function(){
 
   };
 
-
   const button =
     $("placeOrderBtn");
-
 
   button.disabled =
     true;
 
   button.textContent =
     "PLACING ORDER...";
-
 
   try{
 
@@ -3729,7 +3390,6 @@ async function(){
       order
     );
 
-
     await set(
       ref(
         db,
@@ -3738,12 +3398,10 @@ async function(){
       order
     );
 
-
     localStorage.setItem(
       "lastQueenOrderId",
       orderId
     );
-
 
     cart = [];
 
@@ -3751,17 +3409,14 @@ async function(){
 
     closeCheckout();
 
-
     showToast(
       `Order ${orderId} placed successfully 👑`
     );
-
 
     openWhatsApp(
       order,
       orderItems
     );
-
 
     startTracking(
       orderId
@@ -3772,7 +3427,6 @@ async function(){
     console.error(
       error
     );
-
 
     showToast(
       error?.message ||
@@ -3790,7 +3444,6 @@ async function(){
   }
 
 };
-
 
 /* ================= TRACKING ================= */
 
@@ -3823,10 +3476,7 @@ const statusSteps = [
 
 ];
 
-
-function renderTracking(
-  order
-){
+function renderTracking(order){
 
   const current =
     statusSteps.findIndex(
@@ -3835,12 +3485,10 @@ function renderTracking(
         order.status
     );
 
-
   $("trackResult")
     .style
     .display =
     "block";
-
 
   $("trackResult").innerHTML = `
 
@@ -3873,7 +3521,6 @@ function renderTracking(
 
         </span>
 
-
         <span
           style="color:var(--gold2)"
         >
@@ -3887,7 +3534,6 @@ function renderTracking(
         </span>
 
       </div>
-
 
       <div class="steps">
 
@@ -3930,27 +3576,18 @@ function renderTracking(
 
 }
 
+async function startTracking(orderId){
 
-async function startTracking(
-  orderId
-){
-
-  if(
-    trackingUnsubscribe
-  ){
+  if(trackingUnsubscribe){
 
     trackingUnsubscribe();
 
   }
 
-
-  if(
-    !currentUser
-  ){
+  if(!currentUser){
 
     const ok =
       await ensureCustomerAuth();
-
 
     if(!ok){
 
@@ -3959,11 +3596,9 @@ async function startTracking(
       );
 
       return;
-
     }
 
   }
-
 
   try{
 
@@ -3975,10 +3610,7 @@ async function startTracking(
         )
       );
 
-
-    if(
-      snapshot.exists()
-    ){
+    if(snapshot.exists()){
 
       renderTracking(
         snapshot.val()
@@ -3991,9 +3623,7 @@ async function startTracking(
       );
 
       return;
-
     }
-
 
     trackingUnsubscribe =
       onValue(
@@ -4003,9 +3633,7 @@ async function startTracking(
         ),
         snapshot => {
 
-          if(
-            snapshot.exists()
-          ){
+          if(snapshot.exists()){
 
             renderTracking(
               snapshot.val()
@@ -4016,26 +3644,21 @@ async function startTracking(
         }
       );
 
-
     $("trackOrderId").value =
       orderId;
-
 
     window.scrollTo({
 
       top:
         document.body.scrollHeight,
 
-      behavior:
-        "smooth"
+      behavior:"smooth"
 
     });
 
   }catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
     showToast(
       "Order not found or you are not authorized."
@@ -4044,7 +3667,6 @@ async function startTracking(
   }
 
 }
-
 
 /* ================= TRACK BUTTON ================= */
 
@@ -4056,7 +3678,6 @@ async function(){
       .value
       .trim();
 
-
   if(!id){
 
     showToast(
@@ -4064,9 +3685,7 @@ async function(){
     );
 
     return;
-
   }
-
 
   await startTracking(
     id
@@ -4074,13 +3693,11 @@ async function(){
 
 };
 
-
 /* ================= YEAR ================= */
 
 $("year").textContent =
   new Date()
     .getFullYear();
-
 
 /* ================= LAST ORDER ================= */
 
@@ -4089,16 +3706,12 @@ const lastOrder =
     "lastQueenOrderId"
   );
 
-
-if(
-  lastOrder
-){
+if(lastOrder){
 
   $("trackOrderId").value =
     lastOrder;
 
 }
-
 
 /* ================= INITIAL ================= */
 
@@ -4108,12 +3721,10 @@ renderCart();
 
 updateShopStatusHome();
 
-
 setInterval(
   updateShopStatusHome,
   15000
 );
-
 
 /* ================= START AUTH ================= */
 
