@@ -535,6 +535,59 @@ button{cursor:pointer}
 }
 
 /* =========================
+   PAYMENT METHOD CONTROL
+========================= */
+
+.payment-options{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-top:10px;
+}
+
+.payment-option{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#0b0b0b;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:11px;
+  transition:.2s;
+  cursor:pointer;
+}
+
+.payment-option:hover{
+  border-color:#444;
+}
+
+.payment-option:has(input:checked){
+  border-color:var(--gold);
+  background:#171109;
+}
+
+.payment-option input{
+  width:17px;
+  height:17px;
+  accent-color:var(--gold);
+  cursor:pointer;
+}
+
+.payment-option-text{
+  font-size:10px;
+  font-weight:800;
+  color:#ddd;
+}
+
+.payment-option-sub{
+  display:block;
+  color:#666;
+  font-size:8px;
+  margin-top:2px;
+  font-weight:400;
+}
+
+/* =========================
    MENU
 ========================= */
 
@@ -916,7 +969,6 @@ button{cursor:pointer}
       <small>ADMIN CONTROL PANEL</small>
     </div>
 
-    <!-- TOP RIGHT BELL + LOGOUT -->
     <div class="header-actions">
 
       <button
@@ -1322,6 +1374,76 @@ button{cursor:pointer}
 
 </div>
 
+
+<!-- PAYMENT METHOD CONTROL -->
+
+<div class="card">
+
+  <h2>💳 Payment Method Control</h2>
+
+  <div class="notice">
+    Select which payment methods customers can use.
+    You can enable one or both options.
+  </div>
+
+  <div class="payment-options">
+
+    <label class="payment-option">
+
+      <input
+        id="paymentCOD"
+        type="checkbox"
+      >
+
+      <div>
+
+        <div class="payment-option-text">
+          💵 Cash on Delivery
+        </div>
+
+        <span class="payment-option-sub">
+          Customer can place order with Cash on Delivery.
+        </span>
+
+      </div>
+
+    </label>
+
+
+    <label class="payment-option">
+
+      <input
+        id="paymentOnline"
+        type="checkbox"
+      >
+
+      <div>
+
+        <div class="payment-option-text">
+          💳 Online Payment
+        </div>
+
+        <span class="payment-option-sub">
+          Customer can pay online.
+        </span>
+
+      </div>
+
+    </label>
+
+  </div>
+
+  <br>
+
+  <button
+    class="btn btn-gold"
+    onclick="savePaymentMethods()"
+  >
+    Save Payment Settings
+  </button>
+
+</div>
+
 </div>
 
 
@@ -1604,7 +1726,12 @@ const DEFAULT_SETTINGS = {
     "We are making some improvements.",
 
   deliveryRate:
-    6
+    6,
+
+  paymentMethods:{
+    cod:true,
+    online:true
+  }
 
 };
 
@@ -1807,6 +1934,23 @@ function loadSettings(){
           settings.deliveryRate ?? 6
         );
 
+
+      /* PAYMENT METHODS */
+
+      const paymentMethods =
+        settings.paymentMethods || {};
+
+      document.getElementById(
+        "paymentCOD"
+      ).checked =
+        paymentMethods.cod !== false;
+
+      document.getElementById(
+        "paymentOnline"
+      ).checked =
+        paymentMethods.online !== false;
+
+
       updateOverrideButtons();
 
       updateShopStatus(settings);
@@ -1815,6 +1959,82 @@ function loadSettings(){
   );
 
 }
+
+
+/* =========================
+   PAYMENT METHOD CONTROL
+========================= */
+
+window.savePaymentMethods =
+async function(){
+
+  const cod =
+    document.getElementById(
+      "paymentCOD"
+    ).checked;
+
+  const online =
+    document.getElementById(
+      "paymentOnline"
+    ).checked;
+
+
+  if(!cod && !online){
+
+    showToast(
+      "Select at least one payment method."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    await set(
+      ref(
+        db,
+        "settings/paymentMethods"
+      ),
+      {
+        cod:cod,
+        online:online
+      }
+    );
+
+
+    if(cod && online){
+
+      showToast(
+        "COD + Online Payment enabled."
+      );
+
+    }else if(cod){
+
+      showToast(
+        "Cash on Delivery enabled."
+      );
+
+    }else{
+
+      showToast(
+        "Online Payment enabled."
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Could not save payment settings."
+    );
+
+  }
+
+};
 
 
 /* =========================
@@ -2691,10 +2911,8 @@ function detectNewOrders(orders){
   if(!received.length)
     return;
 
-  /* SOUND */
   playNewOrderSound();
 
-  /* BELL ANIMATION */
   const bell =
     document.getElementById(
       "adminBell"
@@ -2844,11 +3062,6 @@ function renderAllOrderFolders(){
     `${groups.cancelled.length} orders`;
 
 
-  /*
-    TOP RIGHT BELL COUNT
-    = CURRENT NEW ORDERS
-  */
-
   updateBellCount(
     groups.received.length
   );
@@ -2940,15 +3153,7 @@ function updateBellCount(count){
 window.adminBellClick =
 function(){
 
-  /*
-    Open NEW orders folder.
-  */
-
   openOrderFolder("new");
-
-  /*
-    Resume browser audio.
-  */
 
   try{
 
