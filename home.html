@@ -365,6 +365,47 @@ section{
   background:#140909!important
 }
 
+/* ================= ADD TO CART BLINK ================= */
+
+@keyframes addToCartBlink{
+
+  0%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  20%{
+    opacity:.35;
+    transform:scale(.94);
+  }
+
+  40%{
+    opacity:1;
+    transform:scale(1.05);
+  }
+
+  60%{
+    opacity:.35;
+    transform:scale(.94);
+  }
+
+  80%{
+    opacity:1;
+    transform:scale(1.03);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+}
+
+.add-btn.add-to-cart-blink{
+  animation:addToCartBlink .65s ease;
+}
+
+
 /* INFO */
 
 .why-grid,
@@ -1402,10 +1443,6 @@ import {
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* OTP REMOVED
-   Anonymous authentication is now used.
-*/
-
 import {
   getAuth,
   onAuthStateChanged,
@@ -2349,7 +2386,8 @@ function renderMenu(){
         () => {
 
           addToCart(
-            button.dataset.add
+            button.dataset.add,
+            button
           );
 
         };
@@ -2362,7 +2400,7 @@ function renderMenu(){
 
 /* ================= ADD TO CART ================= */
 
-function addToCart(id){
+function addToCart(id, button){
 
   updateShopStatusHome();
 
@@ -2442,6 +2480,36 @@ function addToCart(id){
       qty:1
 
     });
+
+  }
+
+
+  /* ===============================
+     ADD TO CART BUTTON BLINK
+  =============================== */
+
+  if(button){
+
+    button.classList.remove(
+      "add-to-cart-blink"
+    );
+
+    void button.offsetWidth;
+
+    button.classList.add(
+      "add-to-cart-blink"
+    );
+
+    setTimeout(
+      () => {
+
+        button.classList.remove(
+          "add-to-cart-blink"
+        );
+
+      },
+      700
+    );
 
   }
 
@@ -2903,11 +2971,6 @@ async function openCheckout(){
   }
 
 
-  /*
-    Automatically create anonymous
-    Firebase customer account.
-  */
-
   if(
     !currentUser
   ){
@@ -3365,11 +3428,6 @@ async function(){
   }
 
 
-  /*
-    Make sure anonymous customer
-    authentication exists.
-  */
-
   if(
     !currentUser
   ){
@@ -3483,9 +3541,7 @@ async function(){
   }
 
 
-  /*
-    Re-check stock before order.
-  */
+  /* Re-check stock before order */
 
   for(
     const cartItem of cart
@@ -3552,12 +3608,6 @@ async function(){
       })
     );
 
-
-  /*
-    loginPhone is kept here only for
-    compatibility with existing Admin code.
-    It is NOT an OTP login number anymore.
-  */
 
   const order = {
 
@@ -3846,11 +3896,6 @@ async function startTracking(
   }
 
 
-  /*
-    Make sure anonymous auth exists
-    before reading order.
-  */
-
   if(
     !currentUser
   ){
@@ -4022,11 +4067,7 @@ setInterval(
 );
 
 
-/*
-  Start anonymous Firebase
-  authentication silently.
-  NO OTP / NO LOGIN POPUP.
-*/
+/* ================= START AUTH ================= */
 
 ensureCustomerAuth();
 
