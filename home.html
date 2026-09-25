@@ -349,7 +349,11 @@ section{
   background:transparent;
   color:#fff;
   border-radius:9px;
-  font-weight:800
+  font-weight:800;
+  position:relative;
+  overflow:hidden;
+  transform-origin:center;
+  will-change:transform,opacity,box-shadow,background
 }
 
 .add-btn:hover{
@@ -365,46 +369,84 @@ section{
   background:#140909!important
 }
 
-/* ================= ADD TO CART BLINK ================= */
+/* =====================================================
+   ADD TO CART STRONG BLINK ANIMATION
+===================================================== */
 
 @keyframes addToCartBlink{
 
   0%{
     opacity:1;
-    transform:scale(1);
+    transform:scale(1) translateX(0);
+    background:transparent;
+    color:#fff;
+    box-shadow:0 0 0 rgba(216,177,90,0);
   }
 
-  20%{
-    opacity:.35;
-    transform:scale(.94);
+  12%{
+    opacity:.25;
+    transform:scale(.90) translateX(-2px);
+    background:#d8b15a;
+    color:#000;
+    box-shadow:0 0 22px rgba(216,177,90,.8);
   }
 
-  40%{
+  25%{
     opacity:1;
-    transform:scale(1.05);
+    transform:scale(1.08) translateX(2px);
+    background:#f4d98b;
+    color:#000;
+    box-shadow:0 0 30px rgba(216,177,90,1);
   }
 
-  60%{
+  38%{
+    opacity:.25;
+    transform:scale(.92) translateX(-2px);
+    background:#d8b15a;
+    color:#000;
+    box-shadow:0 0 20px rgba(216,177,90,.75);
+  }
+
+  52%{
+    opacity:1;
+    transform:scale(1.08) translateX(2px);
+    background:#f4d98b;
+    color:#000;
+    box-shadow:0 0 32px rgba(216,177,90,1);
+  }
+
+  66%{
     opacity:.35;
-    transform:scale(.94);
+    transform:scale(.94) translateX(-1px);
+    background:#d8b15a;
+    color:#000;
+    box-shadow:0 0 20px rgba(216,177,90,.7);
   }
 
   80%{
     opacity:1;
-    transform:scale(1.03);
+    transform:scale(1.04) translateX(1px);
+    background:#f4d98b;
+    color:#000;
+    box-shadow:0 0 25px rgba(216,177,90,.9);
   }
 
   100%{
     opacity:1;
-    transform:scale(1);
+    transform:scale(1) translateX(0);
+    background:transparent;
+    color:#fff;
+    box-shadow:0 0 0 rgba(216,177,90,0);
   }
 
 }
 
 .add-btn.add-to-cart-blink{
-  animation:addToCartBlink .65s ease;
+  animation:
+    addToCartBlink .85s
+    cubic-bezier(.2,.8,.3,1)
+    both;
 }
-
 
 /* INFO */
 
@@ -1335,9 +1377,7 @@ label{
         placeholder="Enter 10-digit mobile number"
       >
 
-      <div
-        class="location-status"
-      >
+      <div class="location-status">
         Enter the mobile number where we can contact you for this order.
       </div>
 
@@ -1432,7 +1472,6 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-
 import {
   getDatabase,
   ref,
@@ -1441,7 +1480,6 @@ import {
   get
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
 
 import {
   getAuth,
@@ -2484,11 +2522,15 @@ function addToCart(id, button){
   }
 
 
-  /* ===============================
-     ADD TO CART BUTTON BLINK
-  =============================== */
+  /* =================================================
+     IMPORTANT:
+     BLINK FIRST
+     CART OPENS ONLY AFTER ANIMATION
+  ================================================= */
 
   if(button){
+
+    button.disabled = true;
 
     button.classList.remove(
       "add-to-cart-blink"
@@ -2500,6 +2542,12 @@ function addToCart(id, button){
       "add-to-cart-blink"
     );
 
+    showToast(
+      `${item.name} added to cart 👑`
+    );
+
+    renderCart();
+
     setTimeout(
       () => {
 
@@ -2507,20 +2555,21 @@ function addToCart(id, button){
           "add-to-cart-blink"
         );
 
+        button.disabled = false;
+
+        openCart();
+
       },
-      700
+      850
     );
 
+  }else{
+
+    renderCart();
+
+    openCart();
+
   }
-
-
-  renderCart();
-
-  openCart();
-
-  showToast(
-    `${item.name} added to cart 👑`
-  );
 
 }
 
@@ -2849,7 +2898,6 @@ $("closeCartBtn").onclick =
 
 /* =====================================================
    ANONYMOUS CUSTOMER AUTH
-   OTP COMPLETELY REMOVED
 ===================================================== */
 
 async function ensureCustomerAuth(){
