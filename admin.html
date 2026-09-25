@@ -830,8 +830,6 @@ textarea{
 
 <body>
 
-<!-- ================= LOGIN ================= -->
-
 <div class="login-screen" id="loginScreen">
 
   <div class="login-box">
@@ -879,8 +877,6 @@ textarea{
 </div>
 
 
-<!-- ================= ADMIN ================= -->
-
 <div class="admin" id="adminPanel">
 
   <div class="topbar">
@@ -904,8 +900,6 @@ textarea{
 
 
   <div class="dashboard">
-
-    <!-- STATS -->
 
     <div class="stats">
 
@@ -933,8 +927,6 @@ textarea{
 
 
     <div class="grid">
-
-      <!-- SHOP CONTROL -->
 
       <div class="card">
 
@@ -994,7 +986,6 @@ textarea{
 
         </div>
 
-
         <div
           style="
             background:#171717;
@@ -1024,7 +1015,6 @@ textarea{
 
         </div>
 
-
         <div class="field">
 
           <label>Opening Time</label>
@@ -1036,7 +1026,6 @@ textarea{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -1050,7 +1039,6 @@ textarea{
 
         </div>
 
-
         <div class="field">
 
           <label>Closed Message</label>
@@ -1062,7 +1050,6 @@ textarea{
 
         </div>
 
-
         <button
           class="btn btn-gold"
           onclick="saveShopSettings()"
@@ -1072,8 +1059,6 @@ textarea{
 
       </div>
 
-
-      <!-- WEBSITE CONTROL -->
 
       <div class="card">
 
@@ -1085,28 +1070,17 @@ textarea{
 
           <select id="websiteMode">
 
-            <option value="normal">
-              Normal
-            </option>
-
-            <option value="updating">
-              Updating
-            </option>
-
-            <option value="maintenance">
-              Maintenance
-            </option>
+            <option value="normal">Normal</option>
+            <option value="updating">Updating</option>
+            <option value="maintenance">Maintenance</option>
 
           </select>
 
         </div>
 
-
         <div class="field">
 
-          <label>
-            Update / Maintenance Message
-          </label>
+          <label>Update / Maintenance Message</label>
 
           <textarea
             id="updateMessage"
@@ -1114,7 +1088,6 @@ textarea{
           ></textarea>
 
         </div>
-
 
         <button
           class="btn btn-gold"
@@ -1125,8 +1098,6 @@ textarea{
 
       </div>
 
-
-      <!-- WHATSAPP -->
 
       <div class="card">
 
@@ -1149,7 +1120,6 @@ textarea{
 
         </div>
 
-
         <div class="field">
 
           <label>Admin Password</label>
@@ -1162,7 +1132,6 @@ textarea{
 
         </div>
 
-
         <button
           class="btn btn-gold"
           onclick="saveWhatsApp()"
@@ -1172,8 +1141,6 @@ textarea{
 
       </div>
 
-
-      <!-- FONT -->
 
       <div class="card">
 
@@ -1189,42 +1156,18 @@ textarea{
 
           <select id="fontSize">
 
-            <option value="small">
-              Small
-            </option>
-
-            <option value="medium">
-              Medium
-            </option>
-
-            <option value="large">
-              Large
-            </option>
-
-            <option value="90%">
-              Custom 90%
-            </option>
-
-            <option value="100%">
-              Custom 100%
-            </option>
-
-            <option value="110%">
-              Custom 110%
-            </option>
-
-            <option value="120%">
-              Custom 120%
-            </option>
-
-            <option value="130%">
-              Custom 130%
-            </option>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <option value="90%">Custom 90%</option>
+            <option value="100%">Custom 100%</option>
+            <option value="110%">Custom 110%</option>
+            <option value="120%">Custom 120%</option>
+            <option value="130%">Custom 130%</option>
 
           </select>
 
         </div>
-
 
         <button
           class="btn btn-gold"
@@ -1235,8 +1178,6 @@ textarea{
 
       </div>
 
-
-      <!-- DELIVERY -->
 
       <div class="card">
 
@@ -1256,9 +1197,7 @@ textarea{
 
           <div class="delivery-rate-row">
 
-            <span style="color:#777;">
-              ₹
-            </span>
+            <span style="color:#777;">₹</span>
 
             <input
               id="deliveryRate"
@@ -1303,8 +1242,6 @@ textarea{
     </div>
 
 
-    <!-- ================= MENU ================= -->
-
     <div
       class="card"
       style="margin-bottom:12px;"
@@ -1330,7 +1267,6 @@ textarea{
 
       </div>
 
-
       <div
         id="menuAdmin"
         class="menu-list"
@@ -1340,8 +1276,6 @@ textarea{
 
     </div>
 
-
-    <!-- ================= ORDERS ================= -->
 
     <div
       class="card"
@@ -1382,7 +1316,6 @@ textarea{
 
       </div>
 
-
       <div
         id="orders"
         class="orders"
@@ -1392,8 +1325,6 @@ textarea{
 
     </div>
 
-
-    <!-- ================= DELIVERED FOLDER ================= -->
 
     <div class="delivered-folder">
 
@@ -1409,7 +1340,6 @@ textarea{
 
       </div>
 
-
       <div
         class="delivered-content"
         id="deliveredOrdersList"
@@ -1419,8 +1349,6 @@ textarea{
 
     </div>
 
-
-    <!-- ================= RATINGS ================= -->
 
     <div
       class="card"
@@ -1455,10 +1383,6 @@ textarea{
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE IMPORT
-===================================================== */
-
 import {
   initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -1478,116 +1402,65 @@ import {
   getDatabase,
   ref,
   set,
-  get,
   onValue,
   update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
 /* =====================================================
-   FIREBASE CONFIG
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-
-  authDomain:
-    "the-queen-fast-food.firebaseapp.com",
-
-  databaseURL:
-    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-
-  projectId:
-    "the-queen-fast-food",
-
-  storageBucket:
-    "the-queen-fast-food.firebasestorage.app",
-
-  messagingSenderId:
-    "435721389652",
-
-  appId:
-    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-
-  measurementId:
-    "G-Q1YCK636KJ"
-
+  apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+  authDomain:"the-queen-fast-food.firebaseapp.com",
+  databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
+  projectId:"the-queen-fast-food",
+  storageBucket:"the-queen-fast-food.firebasestorage.app",
+  messagingSenderId:"435721389652",
+  appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+  measurementId:"G-Q1YCK636KJ"
 };
 
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getDatabase(app);
 
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getDatabase(app);
+const ADMIN_UID="eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
 /* =====================================================
-   ADMIN UID
+   GLOBALS
 ===================================================== */
 
-const ADMIN_UID =
-  "eWlMt1dG2pUOxsTo0NaXgY1avn33";
-
-
-/* =====================================================
-   GLOBAL VARIABLES
-===================================================== */
-
-let currentAdmin = null;
-
-let allOrders = {};
-
-let allRatings = {};
-
-let currentFilter = "all";
-
-let shopOverride = "auto";
-
-let initialOrdersLoaded = false;
-
-let knownOrderKeys = new Set();
-
-let audioContext = null;
-
-let toastTimer = null;
+let currentAdmin=null;
+let allOrders={};
+let allRatings={};
+let currentFilter="all";
+let shopOverride="auto";
+let initialOrdersLoaded=false;
+let knownOrderKeys=new Set();
+let audioContext=null;
+let toastTimer=null;
 
 
 /* =====================================================
    DEFAULT SETTINGS
 ===================================================== */
 
-const DEFAULT_SETTINGS = {
-
+const DEFAULT_SETTINGS={
   statusOverride:"auto",
-
   openTime:"12:00",
-
   closeTime:"23:00",
-
   openingTime:"12:00",
-
   closingTime:"23:00",
-
   whatsappNumber:"9090220791",
-
   fontSize:"medium",
-
   websiteMode:"normal",
-
   updateMessage:
     "We are making some improvements. Please wait a little while and refresh the page.",
-
   deliveryRate:6,
-
-  closedMessage:
-    "Sorry, we are closed right now."
-
+  closedMessage:"Sorry, we are closed right now."
 };
 
 
@@ -1618,39 +1491,31 @@ try{
 
 onAuthStateChanged(
   auth,
-  user => {
+  user=>{
 
     if(!user){
 
-      currentAdmin = null;
-
+      currentAdmin=null;
       showLogin();
-
       return;
 
     }
 
-
-    if(
-      user.uid !== ADMIN_UID
-    ){
+    if(user.uid!==ADMIN_UID){
 
       signOut(auth);
 
       document.getElementById(
         "loginError"
-      ).textContent =
-        "Access denied.";
+      ).textContent="Access denied.";
 
       return;
 
     }
 
-
-    currentAdmin = user;
+    currentAdmin=user;
 
     showAdmin();
-
     loadAll();
 
   }
@@ -1665,28 +1530,23 @@ function showLogin(){
 
   document.getElementById(
     "loginScreen"
-  ).style.display =
-    "flex";
+  ).style.display="flex";
 
   document.getElementById(
     "adminPanel"
-  ).style.display =
-    "none";
+  ).style.display="none";
 
 }
-
 
 function showAdmin(){
 
   document.getElementById(
     "loginScreen"
-  ).style.display =
-    "none";
+  ).style.display="none";
 
   document.getElementById(
     "adminPanel"
-  ).style.display =
-    "block";
+  ).style.display="block";
 
 }
 
@@ -1695,36 +1555,33 @@ function showAdmin(){
    LOGIN
 ===================================================== */
 
-window.adminLogin =
-async function(){
+window.adminLogin=async function(){
 
-  const email =
+  const email=
     document.getElementById(
       "loginEmail"
     ).value.trim();
 
-  const password =
+  const password=
     document.getElementById(
       "loginPassword"
     ).value;
 
-  const error =
+  const error=
     document.getElementById(
       "loginError"
     );
 
-  error.textContent = "";
+  error.textContent="";
 
+  if(!email||!password){
 
-  if(!email || !password){
-
-    error.textContent =
+    error.textContent=
       "Enter email and password.";
 
     return;
 
   }
-
 
   try{
 
@@ -1743,8 +1600,8 @@ async function(){
 
     console.error(err);
 
-    error.textContent =
-      err.message ||
+    error.textContent=
+      err.message||
       "Login failed.";
 
   }
@@ -1756,8 +1613,7 @@ async function(){
    LOGOUT
 ===================================================== */
 
-window.adminLogout =
-async function(){
+window.adminLogout=async function(){
 
   try{
 
@@ -1773,128 +1629,103 @@ async function(){
 
 
 /* =====================================================
-   LOAD EVERYTHING
+   LOAD ALL
 ===================================================== */
 
 function loadAll(){
 
   loadSettings();
-
   loadMenu();
-
   loadOrders();
-
   loadRatings();
 
 }
 
 
 /* =====================================================
-   SETTINGS LISTENER
+   SETTINGS
 ===================================================== */
 
 function loadSettings(){
 
   onValue(
     ref(db,"settings"),
-    snapshot => {
+    snapshot=>{
 
-      const data =
-        snapshot.val() || {};
+      const data=
+        snapshot.val()||{};
 
-
-      const opening =
-        data.openTime ||
-        data.openingTime ||
+      const opening=
+        data.openTime||
+        data.openingTime||
         DEFAULT_SETTINGS.openTime;
 
-
-      const closing =
-        data.closeTime ||
-        data.closingTime ||
+      const closing=
+        data.closeTime||
+        data.closingTime||
         DEFAULT_SETTINGS.closeTime;
-
 
       document.getElementById(
         "openingTime"
-      ).value =
+      ).value=
         normalizeTimeInput(
           opening,
           DEFAULT_SETTINGS.openTime
         );
 
-
       document.getElementById(
         "closingTime"
-      ).value =
+      ).value=
         normalizeTimeInput(
           closing,
           DEFAULT_SETTINGS.closeTime
         );
 
-
       document.getElementById(
         "closedMessage"
-      ).value =
-        data.closedMessage ??
+      ).value=
+        data.closedMessage??
         DEFAULT_SETTINGS.closedMessage;
-
 
       document.getElementById(
         "whatsappNumber"
-      ).value =
-        data.whatsappNumber ||
+      ).value=
+        data.whatsappNumber||
         DEFAULT_SETTINGS.whatsappNumber;
-
 
       document.getElementById(
         "fontSize"
-      ).value =
-        data.fontSize ||
+      ).value=
+        data.fontSize||
         DEFAULT_SETTINGS.fontSize;
-
 
       document.getElementById(
         "websiteMode"
-      ).value =
-        data.websiteMode ||
+      ).value=
+        data.websiteMode||
         DEFAULT_SETTINGS.websiteMode;
-
 
       document.getElementById(
         "updateMessage"
-      ).value =
-        data.updateMessage ||
+      ).value=
+        data.updateMessage||
         DEFAULT_SETTINGS.updateMessage;
-
 
       document.getElementById(
         "deliveryRate"
-      ).value =
+      ).value=
         Number(
-          data.deliveryRate ??
+          data.deliveryRate??
           DEFAULT_SETTINGS.deliveryRate
         );
 
-
-      /*
-       * VERY IMPORTANT
-       *
-       * statusOverride has priority.
-       *
-       * auto   = time schedule
-       * open   = always open
-       * closed = always closed
-       */
-
-      shopOverride =
+      shopOverride=
         normalizeOverride(data);
-
 
       updateShopStatusDisplay();
 
     },
-    error => {
+    error=>{
 
       console.error(
         "Settings error:",
@@ -1912,44 +1743,37 @@ function loadSettings(){
 
 
 /* =====================================================
-   NORMALIZE SHOP OVERRIDE
+   NORMALIZE OVERRIDE
 ===================================================== */
 
 function normalizeOverride(data){
 
-  const value =
+  const value=
     String(
-      data.statusOverride ||
+      data.statusOverride||
       ""
     )
     .trim()
     .toLowerCase();
 
-
   if(
-    value === "auto" ||
-    value === "open" ||
-    value === "closed"
+    value==="auto"||
+    value==="open"||
+    value==="closed"
   ){
 
     return value;
 
   }
 
-
-  /*
-   * OLD DATABASE SUPPORT
-   */
-
   if(
-    data.manualClosed === true ||
-    data.manualClosed === "true"
+    data.manualClosed===true||
+    data.manualClosed==="true"
   ){
 
     return "closed";
 
   }
-
 
   return "auto";
 
@@ -1957,47 +1781,37 @@ function normalizeOverride(data){
 
 
 /* =====================================================
-   TIME FUNCTIONS
+   TIME
 ===================================================== */
 
 function parseTimeToMinutes(value){
 
   if(
-    value === null ||
-    value === undefined
+    value===null||
+    value===undefined
   ){
 
     return null;
 
   }
 
-
-  let text =
+  let text=
     String(value)
       .trim()
       .toUpperCase();
 
-
   if(!text){
-
     return null;
-
   }
 
-
-  const ampm =
-    text.match(
-      /\s*(AM|PM)\s*$/
-    );
-
+  const ampm=
+    text.match(/\s*(AM|PM)\s*$/);
 
   if(ampm){
 
-    const suffix =
-      ampm[1];
+    const suffix=ampm[1];
 
-
-    text =
+    text=
       text
         .replace(
           /\s*(AM|PM)\s*$/,
@@ -2005,136 +1819,89 @@ function parseTimeToMinutes(value){
         )
         .trim();
 
-
-    const match =
+    const match=
       text.match(
         /^(\d{1,2})(?::(\d{1,2}))?$/
       );
 
-
     if(!match){
-
       return null;
-
     }
 
-
-    let hour =
-      Number(match[1]);
-
-
-    const minute =
-      Number(match[2] || 0);
-
+    let hour=Number(match[1]);
+    const minute=Number(match[2]||0);
 
     if(
-      hour < 1 ||
-      hour > 12 ||
-      minute < 0 ||
-      minute > 59
+      hour<1||
+      hour>12||
+      minute<0||
+      minute>59
     ){
-
       return null;
-
     }
 
+    if(suffix==="AM"){
 
-    if(suffix === "AM"){
-
-      if(hour === 12){
-
-        hour = 0;
-
+      if(hour===12){
+        hour=0;
       }
 
     }else{
 
-      if(hour !== 12){
-
-        hour += 12;
-
+      if(hour!==12){
+        hour+=12;
       }
 
     }
 
-
-    return (
-      hour * 60 +
-      minute
-    );
+    return hour*60+minute;
 
   }
 
-
-  const normal =
+  const normal=
     text.match(
       /^(\d{1,2}):(\d{1,2})$/
     );
 
-
   if(!normal){
-
     return null;
-
   }
 
-
-  const hour =
-    Number(normal[1]);
-
-  const minute =
-    Number(normal[2]);
-
+  const hour=Number(normal[1]);
+  const minute=Number(normal[2]);
 
   if(
-    hour < 0 ||
-    hour > 23 ||
-    minute < 0 ||
-    minute > 59
+    hour<0||
+    hour>23||
+    minute<0||
+    minute>59
   ){
-
     return null;
-
   }
 
-
-  return (
-    hour * 60 +
-    minute
-  );
+  return hour*60+minute;
 
 }
 
 
-function normalizeTimeInput(
-  value,
-  fallback
-){
+function normalizeTimeInput(value,fallback){
 
-  const minutes =
+  const minutes=
     parseTimeToMinutes(value);
 
-
-  if(minutes === null){
-
+  if(minutes===null){
     return fallback;
-
   }
 
+  const hour=
+    Math.floor(minutes/60);
 
-  const hour =
-    Math.floor(
-      minutes / 60
-    );
+  const minute=
+    minutes%60;
 
-
-  const minute =
-    minutes % 60;
-
-
-  return (
-    String(hour).padStart(2,"0") +
-    ":" +
+  return(
+    String(hour).padStart(2,"0")+
+    ":"+
     String(minute).padStart(2,"0")
   );
 
@@ -2143,38 +1910,24 @@ function normalizeTimeInput(
 
 function formatTimeDisplay(value){
 
-  const minutes =
+  const minutes=
     parseTimeToMinutes(value);
 
-
-  if(minutes === null){
-
+  if(minutes===null){
     return value;
-
   }
 
+  let hour=
+    Math.floor(minutes/60);
 
-  let hour =
-    Math.floor(
-      minutes / 60
-    );
+  const minute=minutes%60;
 
+  const suffix=
+    hour>=12?"PM":"AM";
 
-  const minute =
-    minutes % 60;
+  hour=hour%12||12;
 
-
-  const suffix =
-    hour >= 12
-      ? "PM"
-      : "AM";
-
-
-  hour =
-    hour % 12 || 12;
-
-
-  return (
+  return(
     `${hour}:${String(minute).padStart(2,"0")} ${suffix}`
   );
 
@@ -2182,14 +1935,14 @@ function formatTimeDisplay(value){
 
 
 /* =====================================================
-   INDIA CURRENT TIME
+   INDIA TIME
 ===================================================== */
 
 function getIndiaCurrentMinutes(){
 
   try{
 
-    const parts =
+    const parts=
       new Intl.DateTimeFormat(
         "en-IN",
         {
@@ -2198,49 +1951,34 @@ function getIndiaCurrentMinutes(){
           minute:"2-digit",
           hour12:false
         }
-      ).formatToParts(
-        new Date()
-      );
+      ).formatToParts(new Date());
 
-
-    let hour =
+    let hour=
       Number(
         parts.find(
-          p =>
-            p.type === "hour"
+          p=>p.type==="hour"
         )?.value
       );
 
-
-    const minute =
+    const minute=
       Number(
         parts.find(
-          p =>
-            p.type === "minute"
+          p=>p.type==="minute"
         )?.value
       );
 
-
-    if(hour === 24){
-
-      hour = 0;
-
+    if(hour===24){
+      hour=0;
     }
 
-
-    return (
-      hour * 60 +
-      minute
-    );
+    return hour*60+minute;
 
   }catch(error){
 
-    const now =
-      new Date();
+    const now=new Date();
 
-
-    return (
-      now.getHours() * 60 +
+    return(
+      now.getHours()*60+
       now.getMinutes()
     );
 
@@ -2250,87 +1988,58 @@ function getIndiaCurrentMinutes(){
 
 
 /* =====================================================
-   CHECK AUTOMATIC SCHEDULE
+   SHOP HOURS
 ===================================================== */
 
 function isWithinShopHours(){
 
-  const opening =
+  const opening=
     document.getElementById(
       "openingTime"
-    ).value ||
+    ).value||
     DEFAULT_SETTINGS.openTime;
 
-
-  const closing =
+  const closing=
     document.getElementById(
       "closingTime"
-    ).value ||
+    ).value||
     DEFAULT_SETTINGS.closeTime;
 
-
-  const openMinutes =
+  const openMinutes=
     parseTimeToMinutes(opening);
 
-
-  const closeMinutes =
+  const closeMinutes=
     parseTimeToMinutes(closing);
 
-
   if(
-    openMinutes === null ||
-    closeMinutes === null
+    openMinutes===null||
+    closeMinutes===null
   ){
 
     return false;
 
   }
 
-
-  const current =
+  const current=
     getIndiaCurrentMinutes();
 
+  if(openMinutes<closeMinutes){
 
-  /*
-   * NORMAL
-   *
-   * 12:00 → 23:00
-   */
-
-  if(
-    openMinutes < closeMinutes
-  ){
-
-    return (
-      current >= openMinutes &&
-      current < closeMinutes
+    return(
+      current>=openMinutes&&
+      current<closeMinutes
     );
 
   }
 
+  if(openMinutes>closeMinutes){
 
-  /*
-   * OVERNIGHT
-   *
-   * 20:00 → 02:00
-   */
-
-  if(
-    openMinutes > closeMinutes
-  ){
-
-    return (
-      current >= openMinutes ||
-      current < closeMinutes
+    return(
+      current>=openMinutes||
+      current<closeMinutes
     );
 
   }
-
-
-  /*
-   * Same opening & closing time
-   * means open 24 hours.
-   */
 
   return true;
 
@@ -2343,35 +2052,13 @@ function isWithinShopHours(){
 
 function isShopOpen(){
 
-  /*
-   * FORCE OPEN
-   */
-
-  if(
-    shopOverride === "open"
-  ){
-
+  if(shopOverride==="open"){
     return true;
-
   }
 
-
-  /*
-   * FORCE CLOSED
-   */
-
-  if(
-    shopOverride === "closed"
-  ){
-
+  if(shopOverride==="closed"){
     return false;
-
   }
-
-
-  /*
-   * AUTO
-   */
 
   return isWithinShopHours();
 
@@ -2379,99 +2066,70 @@ function isShopOpen(){
 
 
 /* =====================================================
-   UPDATE SHOP DISPLAY
+   SHOP DISPLAY
 ===================================================== */
 
 function updateShopStatusDisplay(){
 
-  const open =
-    isShopOpen();
+  const open=isShopOpen();
 
-
-  const light =
+  const light=
     document.getElementById(
       "shopLight"
     );
 
-
-  const text =
+  const text=
     document.getElementById(
       "shopStatusText"
     );
 
-
   if(open){
 
-    light.classList.remove(
-      "closed"
-    );
-
-    text.classList.remove(
-      "closed"
-    );
-
-    text.textContent =
-      "SHOP IS OPEN";
+    light.classList.remove("closed");
+    text.classList.remove("closed");
+    text.textContent="SHOP IS OPEN";
 
   }else{
 
-    light.classList.add(
-      "closed"
-    );
-
-    text.classList.add(
-      "closed"
-    );
-
-    text.textContent =
-      "SHOP IS CLOSED";
+    light.classList.add("closed");
+    text.classList.add("closed");
+    text.textContent="SHOP IS CLOSED";
 
   }
 
-
   updateOverrideUI();
 
-
-  const title =
+  const title=
     document.getElementById(
       "shopControlTitle"
     );
 
-
-  const info =
+  const info=
     document.getElementById(
       "shopControlText"
     );
 
+  if(shopOverride==="open"){
 
-  if(
-    shopOverride === "open"
-  ){
+    title.textContent="Force Open";
 
-    title.textContent =
-      "Force Open";
-
-    info.textContent =
+    info.textContent=
       "Customers can order even outside normal hours.";
 
   }
-  else if(
-    shopOverride === "closed"
-  ){
+  else if(shopOverride==="closed"){
 
-    title.textContent =
-      "Force Closed";
+    title.textContent="Force Closed";
 
-    info.textContent =
+    info.textContent=
       "Customers cannot place new orders.";
 
   }
   else{
 
-    title.textContent =
-      "Automatic Schedule";
+    title.textContent="Automatic Schedule";
 
-    info.textContent =
+    info.textContent=
       `Shop follows ${formatTimeDisplay(
         document.getElementById(
           "openingTime"
@@ -2488,70 +2146,40 @@ function updateShopStatusDisplay(){
 
 
 /* =====================================================
-   OVERRIDE BUTTON UI
+   OVERRIDE UI
 ===================================================== */
 
 function updateOverrideUI(){
 
-  const auto =
+  const auto=
     document.getElementById(
       "overrideAuto"
     );
 
-  const open =
+  const open=
     document.getElementById(
       "overrideOpen"
     );
 
-  const closed =
+  const closed=
     document.getElementById(
       "overrideClosed"
     );
 
+  auto.classList.remove("active-auto");
+  open.classList.remove("active-open");
+  closed.classList.remove("active-closed");
 
-  auto.classList.remove(
-    "active-auto"
-  );
-
-  open.classList.remove(
-    "active-open"
-  );
-
-  closed.classList.remove(
-    "active-closed"
-  );
-
-
-  if(
-    shopOverride === "auto"
-  ){
-
-    auto.classList.add(
-      "active-auto"
-    );
-
+  if(shopOverride==="auto"){
+    auto.classList.add("active-auto");
   }
 
-
-  if(
-    shopOverride === "open"
-  ){
-
-    open.classList.add(
-      "active-open"
-    );
-
+  if(shopOverride==="open"){
+    open.classList.add("active-open");
   }
 
-
-  if(
-    shopOverride === "closed"
-  ){
-
-    closed.classList.add(
-      "active-closed"
-    );
-
+  if(shopOverride==="closed"){
+    closed.classList.add("active-closed");
   }
 
 }
@@ -2561,8 +2189,7 @@ function updateOverrideUI(){
    SHOP OVERRIDE
 ===================================================== */
 
-window.setShopOverride =
-async function(mode){
+window.setShopOverride=async function(mode){
 
   if(
     ![
@@ -2571,64 +2198,31 @@ async function(mode){
       "closed"
     ].includes(mode)
   ){
-
     return;
-
   }
 
-
-  /*
-   * Update local UI immediately
-   */
-
-  shopOverride =
-    mode;
+  shopOverride=mode;
 
   updateShopStatusDisplay();
-
 
   try{
 
     await update(
-      ref(
-        db,
-        "settings"
-      ),
+      ref(db,"settings"),
       {
-
-        /*
-         * THIS IS THE MAIN CUSTOMER CONTROL
-         */
-
-        statusOverride:
-          mode,
-
-        /*
-         * Old compatibility
-         */
-
-        manualClosed:
-          mode === "closed",
-
-        /*
-         * Keep schedule enabled
-         */
-
+        statusOverride:mode,
+        manualClosed:mode==="closed",
         scheduleEnabled:true,
-
-        autoSchedule:
-          mode === "auto"
-
+        autoSchedule:mode==="auto"
       }
     );
 
-
     showToast(
-      mode === "auto"
-        ? "🕐 Automatic schedule enabled."
-        : mode === "open"
-          ? "🟢 Shop forced OPEN."
-          : "🔴 Shop forced CLOSED."
+      mode==="auto"
+        ?"🕐 Automatic schedule enabled."
+        :mode==="open"
+          ?"🟢 Shop forced OPEN."
+          :"🔴 Shop forced CLOSED."
     );
 
   }catch(error){
@@ -2638,9 +2232,8 @@ async function(mode){
       error
     );
 
-
     showToast(
-      error.message ||
+      error.message||
       "Could not update shop status."
     );
 
@@ -2648,10 +2241,6 @@ async function(mode){
 
 };
 
-
-/*
- * Refresh shop status every 30 seconds
- */
 
 setInterval(
   updateShopStatusDisplay,
@@ -2663,30 +2252,26 @@ setInterval(
    SAVE SHOP SETTINGS
 ===================================================== */
 
-window.saveShopSettings =
-async function(){
+window.saveShopSettings=async function(){
 
-  const opening =
+  const opening=
     document.getElementById(
       "openingTime"
     ).value;
 
-
-  const closing =
+  const closing=
     document.getElementById(
       "closingTime"
     ).value;
 
-
-  const closedMessage =
+  const closedMessage=
     document.getElementById(
       "closedMessage"
     ).value.trim();
 
-
   if(
-    parseTimeToMinutes(opening) === null ||
-    parseTimeToMinutes(closing) === null
+    parseTimeToMinutes(opening)===null||
+    parseTimeToMinutes(closing)===null
   ){
 
     showToast(
@@ -2697,56 +2282,24 @@ async function(){
 
   }
 
-
   try{
 
     await update(
-      ref(
-        db,
-        "settings"
-      ),
+      ref(db,"settings"),
       {
-
-        /*
-         * Keep current FORCE/AUTO mode.
-         */
-
-        statusOverride:
-          shopOverride,
-
+        statusOverride:shopOverride,
         scheduleEnabled:true,
-
-        autoSchedule:
-          shopOverride === "auto",
-
-        openTime:
-          opening,
-
-        closeTime:
-          closing,
-
-        /*
-         * Old field compatibility
-         */
-
-        openingTime:
-          opening,
-
-        closingTime:
-          closing,
-
-        manualClosed:
-          shopOverride === "closed",
-
-        closedMessage:
-          closedMessage
-
+        autoSchedule:shopOverride==="auto",
+        openTime:opening,
+        closeTime:closing,
+        openingTime:opening,
+        closingTime:closing,
+        manualClosed:shopOverride==="closed",
+        closedMessage:closedMessage
       }
     );
 
-
     updateShopStatusDisplay();
-
 
     showToast(
       "✅ Shop settings saved."
@@ -2759,9 +2312,8 @@ async function(){
       error
     );
 
-
     showToast(
-      error.message ||
+      error.message||
       "Could not save shop settings."
     );
 
@@ -2771,43 +2323,32 @@ async function(){
 
 
 /* =====================================================
-   WEBSITE SETTINGS
+   WEBSITE
 ===================================================== */
 
-window.saveWebsiteSettings =
-async function(){
+window.saveWebsiteSettings=async function(){
 
-  const mode =
+  const mode=
     document.getElementById(
       "websiteMode"
     ).value;
 
-
-  const message =
+  const message=
     document.getElementById(
       "updateMessage"
     ).value.trim();
 
-
   try{
 
     await update(
-      ref(
-        db,
-        "settings"
-      ),
+      ref(db,"settings"),
       {
-
-        websiteMode:
-          mode,
-
+        websiteMode:mode,
         updateMessage:
-          message ||
+          message||
           DEFAULT_SETTINGS.updateMessage
-
       }
     );
-
 
     showToast(
       "✅ Website settings updated."
@@ -2818,7 +2359,7 @@ async function(){
     console.error(error);
 
     showToast(
-      error.message ||
+      error.message||
       "Could not update website."
     );
 
@@ -2828,12 +2369,10 @@ async function(){
 
 
 /* =====================================================
-   VERIFY ADMIN PASSWORD
+   PASSWORD VERIFY
 ===================================================== */
 
-async function verifyAdminPassword(
-  password
-){
+async function verifyAdminPassword(password){
 
   if(!currentAdmin){
 
@@ -2843,7 +2382,6 @@ async function verifyAdminPassword(
 
   }
 
-
   if(!password){
 
     throw new Error(
@@ -2852,13 +2390,11 @@ async function verifyAdminPassword(
 
   }
 
-
-  const credential =
+  const credential=
     EmailAuthProvider.credential(
       currentAdmin.email,
       password
     );
-
 
   await reauthenticateWithCredential(
     currentAdmin,
@@ -2872,28 +2408,20 @@ async function verifyAdminPassword(
    WHATSAPP
 ===================================================== */
 
-window.saveWhatsApp =
-async function(){
+window.saveWhatsApp=async function(){
 
-  const number =
+  const number=
     document.getElementById(
       "whatsappNumber"
     ).value
-      .replace(
-        /\D/g,
-        ""
-      );
+      .replace(/\D/g,"");
 
-
-  const password =
+  const password=
     document.getElementById(
       "whatsappPassword"
     ).value;
 
-
-  if(
-    !/^[0-9]{10}$/.test(number)
-  ){
+  if(!/^[0-9]{10}$/.test(number)){
 
     showToast(
       "Enter valid 10 digit number."
@@ -2903,13 +2431,11 @@ async function(){
 
   }
 
-
   try{
 
     await verifyAdminPassword(
       password
     );
-
 
     await set(
       ref(
@@ -2919,11 +2445,9 @@ async function(){
       number
     );
 
-
     document.getElementById(
       "whatsappPassword"
-    ).value = "";
-
+    ).value="";
 
     showToast(
       "✅ WhatsApp number updated."
@@ -2934,7 +2458,7 @@ async function(){
     console.error(error);
 
     showToast(
-      error.message ||
+      error.message||
       "Could not update WhatsApp."
     );
 
@@ -2947,14 +2471,12 @@ async function(){
    FONT
 ===================================================== */
 
-window.saveFontSize =
-async function(){
+window.saveFontSize=async function(){
 
-  const size =
+  const size=
     document.getElementById(
       "fontSize"
     ).value;
-
 
   try{
 
@@ -2966,7 +2488,6 @@ async function(){
       size
     );
 
-
     showToast(
       "✅ Customer font size updated."
     );
@@ -2976,7 +2497,7 @@ async function(){
     console.error(error);
 
     showToast(
-      error.message ||
+      error.message||
       "Could not save font size."
     );
 
@@ -2989,20 +2510,18 @@ async function(){
    DELIVERY RATE
 ===================================================== */
 
-window.saveDeliveryRate =
-async function(){
+window.saveDeliveryRate=async function(){
 
-  const rate =
+  const rate=
     Number(
       document.getElementById(
         "deliveryRate"
       ).value
     );
 
-
   if(
-    !Number.isFinite(rate) ||
-    rate < 0
+    !Number.isFinite(rate)||
+    rate<0
   ){
 
     showToast(
@@ -3012,7 +2531,6 @@ async function(){
     return;
 
   }
-
 
   try{
 
@@ -3024,7 +2542,6 @@ async function(){
       rate
     );
 
-
     showToast(
       `✅ Delivery charge updated to ₹${rate}/KM`
     );
@@ -3034,7 +2551,7 @@ async function(){
     console.error(error);
 
     showToast(
-      error.message ||
+      error.message||
       "Could not update delivery rate."
     );
 
@@ -3054,28 +2571,24 @@ function loadMenu(){
       db,
       "settings/menu"
     ),
-    snapshot => {
+    snapshot=>{
 
-      const data =
-        snapshot.val() || {};
+      const data=
+        snapshot.val()||{};
 
-
-      renderMenuAdmin(
-        data
-      );
+      renderMenuAdmin(data);
 
     },
-    error => {
+    error=>{
 
       console.error(
         "Menu error:",
         error
       );
 
-
       document.getElementById(
         "menuAdmin"
-      ).innerHTML =
+      ).innerHTML=
         `
           <p class="danger">
             Could not load menu.
@@ -3089,26 +2602,92 @@ function loadMenu(){
 
 
 /* =====================================================
+   STOCK NORMALIZER
+===================================================== */
+
+function normalizeAvailable(value){
+
+  /*
+   * Missing field = AVAILABLE
+   */
+
+  if(
+    value===undefined||
+    value===null||
+    value===""
+  ){
+
+    return true;
+
+  }
+
+  if(value===true){
+    return true;
+  }
+
+  if(value===false){
+    return false;
+  }
+
+  if(typeof value==="number"){
+
+    return value!==0;
+
+  }
+
+  if(typeof value==="string"){
+
+    const v=
+      value
+        .trim()
+        .toLowerCase();
+
+    if(
+      v==="false"||
+      v==="0"||
+      v==="out"||
+      v==="out of stock"||
+      v==="unavailable"
+    ){
+
+      return false;
+
+    }
+
+    if(
+      v==="true"||
+      v==="1"||
+      v==="available"
+    ){
+
+      return true;
+
+    }
+
+  }
+
+  return true;
+
+}
+
+
+/* =====================================================
    RENDER MENU
 ===================================================== */
 
-function renderMenuAdmin(
-  data
-){
+function renderMenuAdmin(data){
 
-  const container =
+  const container=
     document.getElementById(
       "menuAdmin"
     );
 
-
-  const entries =
+  let entries=
     Object.entries(data);
-
 
   if(!entries.length){
 
-    container.innerHTML =
+    container.innerHTML=
       `
         <p style="color:#777">
           No menu items found.
@@ -3119,30 +2698,20 @@ function renderMenuAdmin(
 
   }
 
-
-  /*
-   * Numeric IDs first.
-   */
-
   entries.sort(
-    (a,b) => {
+    (a,b)=>{
 
-      const aNum =
-        Number(a[0]);
-
-      const bNum =
-        Number(b[0]);
-
+      const aNum=Number(a[0]);
+      const bNum=Number(b[0]);
 
       if(
-        Number.isFinite(aNum) &&
+        Number.isFinite(aNum)&&
         Number.isFinite(bNum)
       ){
 
-        return aNum - bNum;
+        return aNum-bNum;
 
       }
-
 
       return String(a[0])
         .localeCompare(
@@ -3152,34 +2721,29 @@ function renderMenuAdmin(
     }
   );
 
-
-  container.innerHTML =
+  container.innerHTML=
     entries.map(
-      ([id,item]) => {
+      ([id,rawItem])=>{
 
-        item =
-          item || {};
+        const item=
+          rawItem||
+          {};
 
-
-        const image =
-          item.image || "";
-
+        const image=
+          item.image||
+          "";
 
         /*
-         * VERY IMPORTANT
-         *
-         * undefined = AVAILABLE
-         * false    = OUT OF STOCK
-         * true     = AVAILABLE
+         * FIXED STOCK LOGIC
          */
 
-        const available =
-          item.available !== false;
+        const available=
+          normalizeAvailable(
+            item.available
+          );
 
-
-        const safeId =
+        const safeId=
           escapeAttribute(id);
-
 
         return `
 
@@ -3191,7 +2755,7 @@ function renderMenuAdmin(
 
                 <div class="menu-name">
                   ${escapeHtml(
-                    item.name ||
+                    item.name||
                     "Food Item"
                   )}
                 </div>
@@ -3202,7 +2766,6 @@ function renderMenuAdmin(
 
               </div>
 
-
               <div class="menu-price-area">
 
                 <input
@@ -3211,7 +2774,7 @@ function renderMenuAdmin(
                   type="number"
                   min="0"
                   value="${Number(
-                    item.price || 0
+                    item.price||0
                   )}"
                 >
 
@@ -3227,23 +2790,19 @@ function renderMenuAdmin(
             </div>
 
 
-            <!-- STOCK -->
-
             <div class="stock-control">
 
               <label>
                 STOCK STATUS
               </label>
 
-
               <select
                 id="stock-${safeId}"
-                class="
-                  stock-select
-                  ${available
-                    ? "available"
-                    : "out"}
-                "
+                class="stock-select ${
+                  available
+                    ?"available"
+                    :"out"
+                }"
                 onchange="
                   setStockStatus(
                     '${safeId}',
@@ -3254,18 +2813,22 @@ function renderMenuAdmin(
 
                 <option
                   value="available"
-                  ${available
-                    ? "selected"
-                    : ""}
+                  ${
+                    available
+                      ?"selected"
+                      :""
+                  }
                 >
                   🟢 Available
                 </option>
 
                 <option
                   value="out"
-                  ${!available
-                    ? "selected"
-                    : ""}
+                  ${
+                    !available
+                      ?"selected"
+                      :""
+                  }
                 >
                   🔴 Out of Stock
                 </option>
@@ -3275,8 +2838,6 @@ function renderMenuAdmin(
             </div>
 
 
-            <!-- IMAGE -->
-
             <div class="image-area">
 
               <img
@@ -3285,11 +2846,9 @@ function renderMenuAdmin(
                 src="${escapeAttribute(image)}"
                 alt=""
                 onerror="
-                  this.src=
-                  'https://via.placeholder.com/150x100/171717/777?text=Food'
+                  this.src='https://via.placeholder.com/150x100/171717/777?text=Food'
                 "
               >
-
 
               <div class="image-url">
 
@@ -3299,21 +2858,16 @@ function renderMenuAdmin(
                   placeholder="Paste food image URL"
                   value="${escapeAttribute(image)}"
                   oninput="
-                    previewMenuImage(
-                      '${safeId}'
-                    )
+                    previewMenuImage('${safeId}')
                   "
                 >
 
               </div>
 
-
               <button
                 class="btn btn-blue image-save"
                 onclick="
-                  saveMenuImage(
-                    '${safeId}'
-                  )
+                  saveMenuImage('${safeId}')
                 "
               >
                 Save Image
@@ -3332,17 +2886,15 @@ function renderMenuAdmin(
 
 
 /* =====================================================
-   SAVE MENU PRICE
+   SAVE PRICE
 ===================================================== */
 
-window.saveMenuItem =
-async function(id){
+window.saveMenuItem=async function(id){
 
-  const input =
+  const input=
     document.getElementById(
       `price-${id}`
     );
-
 
   if(!input){
 
@@ -3354,14 +2906,12 @@ async function(id){
 
   }
 
-
-  const price =
+  const price=
     Number(input.value);
 
-
   if(
-    !Number.isFinite(price) ||
-    price < 0
+    !Number.isFinite(price)||
+    price<0
   ){
 
     showToast(
@@ -3372,14 +2922,7 @@ async function(id){
 
   }
 
-
   try{
-
-    /*
-     * ONLY PRICE CHANGES.
-     *
-     * available/image/name are NOT deleted.
-     */
 
     await set(
       ref(
@@ -3388,7 +2931,6 @@ async function(id){
       ),
       price
     );
-
 
     showToast(
       "✅ Price updated successfully."
@@ -3401,9 +2943,8 @@ async function(id){
       error
     );
 
-
     showToast(
-      error.message ||
+      error.message||
       "Could not update price."
     );
 
@@ -3416,29 +2957,33 @@ async function(id){
    STOCK STATUS
 ===================================================== */
 
-window.setStockStatus =
-async function(
+window.setStockStatus=async function(
   id,
   value
 ){
 
-  const available =
-    value === "available";
+  /*
+   * Dropdown:
+   *
+   * available -> TRUE
+   * out       -> FALSE
+   */
 
+  const available=
+    String(value)
+      .trim()
+      .toLowerCase()==="available";
 
-  const select =
+  const select=
     document.getElementById(
       `stock-${id}`
     );
 
-
   try{
 
     /*
-     * ONLY available FIELD changes.
-     *
-     * false = OUT OF STOCK
-     * true  = AVAILABLE
+     * IMPORTANT:
+     * Firebase gets REAL boolean.
      */
 
     await set(
@@ -3449,7 +2994,6 @@ async function(
       available
     );
 
-
     if(select){
 
       select.classList.remove(
@@ -3457,20 +3001,23 @@ async function(
         "out"
       );
 
-
       select.classList.add(
         available
-          ? "available"
-          : "out"
+          ?"available"
+          :"out"
       );
+
+      select.value=
+        available
+          ?"available"
+          :"out";
 
     }
 
-
     showToast(
       available
-        ? "🟢 Item is now AVAILABLE."
-        : "🔴 Item marked OUT OF STOCK."
+        ?"🟢 Item is now AVAILABLE."
+        :"🔴 Item marked OUT OF STOCK."
     );
 
   }catch(error){
@@ -3480,17 +3027,8 @@ async function(
       error
     );
 
-
-    /*
-     * Reload from Firebase
-     * if update fails.
-     */
-
-    loadMenu();
-
-
     showToast(
-      error.message ||
+      error.message||
       "Could not update stock status."
     );
 
@@ -3503,34 +3041,27 @@ async function(
    IMAGE PREVIEW
 ===================================================== */
 
-window.previewMenuImage =
-function(id){
+window.previewMenuImage=function(id){
 
-  const input =
+  const input=
     document.getElementById(
       `image-${id}`
     );
 
-
-  const preview =
+  const preview=
     document.getElementById(
       `preview-${id}`
     );
 
-
-  if(!input || !preview){
-
+  if(!input||!preview){
     return;
-
   }
 
-
-  const url =
+  const url=
     input.value.trim();
 
-
-  preview.src =
-    url ||
+  preview.src=
+    url||
     "https://via.placeholder.com/150x100/171717/777?text=Food";
 
 };
@@ -3540,14 +3071,12 @@ function(id){
    SAVE IMAGE
 ===================================================== */
 
-window.saveMenuImage =
-async function(id){
+window.saveMenuImage=async function(id){
 
-  const input =
+  const input=
     document.getElementById(
       `image-${id}`
     );
-
 
   if(!input){
 
@@ -3559,10 +3088,8 @@ async function(id){
 
   }
 
-
-  const imageUrl =
+  const imageUrl=
     input.value.trim();
-
 
   if(!imageUrl){
 
@@ -3573,7 +3100,6 @@ async function(id){
     return;
 
   }
-
 
   if(
     !/^https?:\/\//i.test(
@@ -3589,7 +3115,6 @@ async function(id){
 
   }
 
-
   try{
 
     await set(
@@ -3599,7 +3124,6 @@ async function(id){
       ),
       imageUrl
     );
-
 
     showToast(
       "✅ Food image updated."
@@ -3612,9 +3136,8 @@ async function(id){
       error
     );
 
-
     showToast(
-      error.message ||
+      error.message||
       "Image update failed."
     );
 
@@ -3624,7 +3147,7 @@ async function(id){
 
 
 /* =====================================================
-   ORDERS LISTENER
+   ORDERS
 ===================================================== */
 
 function loadOrders(){
@@ -3634,39 +3157,30 @@ function loadOrders(){
       db,
       "orders"
     ),
-    snapshot => {
+    snapshot=>{
 
-      const newData =
-        snapshot.val() || {};
+      const newData=
+        snapshot.val()||{};
 
+      detectNewOrders(newData);
 
-      detectNewOrders(
-        newData
-      );
-
-
-      allOrders =
-        newData;
-
+      allOrders=newData;
 
       updateStats();
-
       renderOrders();
-
       renderDeliveredOrders();
 
     },
-    error => {
+    error=>{
 
       console.error(
         "Orders error:",
         error
       );
 
-
       document.getElementById(
         "orders"
-      ).textContent =
+      ).textContent=
         "Could not load orders.";
 
     }
@@ -3676,103 +3190,65 @@ function loadOrders(){
 
 
 /* =====================================================
-   NEW ORDER DETECTION
+   NEW ORDERS
 ===================================================== */
 
-function detectNewOrders(
-  orders
-){
+function detectNewOrders(orders){
 
-  const keys =
-    Object.keys(
-      orders
-    );
+  const keys=
+    Object.keys(orders);
 
-
-  /*
-   * First Firebase load:
-   * do NOT play sound for old orders.
-   */
-
-  if(
-    !initialOrdersLoaded
-  ){
+  if(!initialOrdersLoaded){
 
     keys.forEach(
-      key =>
-        knownOrderKeys.add(
-          key
-        )
+      key=>
+        knownOrderKeys.add(key)
     );
 
-
-    initialOrdersLoaded =
-      true;
-
+    initialOrdersLoaded=true;
 
     return;
 
   }
 
-
-  const newlyArrived =
+  const newlyArrived=
     keys.filter(
-      key =>
-        !knownOrderKeys.has(
-          key
-        )
+      key=>
+        !knownOrderKeys.has(key)
     );
-
 
   keys.forEach(
-    key =>
-      knownOrderKeys.add(
-        key
-      )
+    key=>
+      knownOrderKeys.add(key)
   );
 
-
-  if(
-    !newlyArrived.length
-  ){
-
+  if(!newlyArrived.length){
     return;
-
   }
 
-
-  const receivedNew =
+  const receivedNew=
     newlyArrived.filter(
-      key => {
+      key=>{
 
-        const order =
+        const order=
           orders[key];
 
-
-        return (
-          order &&
+        return(
+          order&&
           (
-            !order.status ||
-            order.status ===
-            "Received"
+            !order.status||
+            order.status==="Received"
           )
         );
 
       }
     );
 
-
-  if(
-    !receivedNew.length
-  ){
-
+  if(!receivedNew.length){
     return;
-
   }
 
-
   playNewOrderSound();
-
 
   showToast(
     `🔔 ${receivedNew.length} NEW ORDER RECEIVED`
@@ -3782,7 +3258,7 @@ function detectNewOrders(
 
 
 /* =====================================================
-   NEW ORDER SOUND
+   SOUND
 ===================================================== */
 
 function playNewOrderSound(){
@@ -3791,17 +3267,16 @@ function playNewOrderSound(){
 
     if(!audioContext){
 
-      audioContext =
-        new (
-          window.AudioContext ||
+      audioContext=
+        new(
+          window.AudioContext||
           window.webkitAudioContext
         )();
 
     }
 
-
     if(
-      audioContext.state ===
+      audioContext.state===
       "suspended"
     ){
 
@@ -3809,70 +3284,51 @@ function playNewOrderSound(){
 
     }
 
-
-    const now =
+    const now=
       audioContext.currentTime;
 
-
     [0,0.18,0.36].forEach(
-      (
-        delay,
-        index
-      ) => {
+      (delay,index)=>{
 
-        const oscillator =
+        const oscillator=
           audioContext.createOscillator();
 
-
-        const gain =
+        const gain=
           audioContext.createGain();
 
+        oscillator.type="sine";
 
-        oscillator.type =
-          "sine";
-
-
-        oscillator.frequency.value =
-          index === 2
-            ? 1100
-            : 850;
-
+        oscillator.frequency.value=
+          index===2
+            ?1100
+            :850;
 
         gain.gain.setValueAtTime(
           0.0001,
-          now + delay
+          now+delay
         );
-
 
         gain.gain.exponentialRampToValueAtTime(
           0.18,
-          now + delay + 0.02
+          now+delay+0.02
         );
-
 
         gain.gain.exponentialRampToValueAtTime(
           0.0001,
-          now + delay + 0.13
+          now+delay+0.13
         );
 
-
-        oscillator.connect(
-          gain
-        );
-
-
+        oscillator.connect(gain);
         gain.connect(
           audioContext.destination
         );
 
-
         oscillator.start(
-          now + delay
+          now+delay
         );
 
-
         oscillator.stop(
-          now + delay + 0.14
+          now+delay+0.14
         );
 
       }
@@ -3896,13 +3352,12 @@ function playNewOrderSound(){
 
 function updateStats(){
 
-  const orders =
+  const orders=
     Object.values(
       allOrders
     );
 
-
-  const today =
+  const today=
     new Date()
       .toLocaleDateString(
         "en-IN",
@@ -3911,40 +3366,32 @@ function updateStats(){
         }
       );
 
-
-  const todayCount =
+  const todayCount=
     orders.filter(
-      order => {
+      order=>{
 
-        if(
-          !order.createdAt
-        ){
-
+        if(!order.createdAt){
           return false;
-
         }
 
-
-        return (
+        return(
           new Date(
             order.createdAt
           )
           .toLocaleDateString(
             "en-IN",
             {
-              timeZone:
-                "Asia/Kolkata"
+              timeZone:"Asia/Kolkata"
             }
-          ) === today
+          )===today
         );
 
       }
     ).length;
 
-
-  const active =
+  const active=
     orders.filter(
-      order =>
+      order=>
         ![
           "Delivered",
           "Cancelled"
@@ -3953,36 +3400,30 @@ function updateStats(){
         )
     ).length;
 
-
-  const delivered =
+  const delivered=
     orders.filter(
-      order =>
-        order.status ===
-        "Delivered"
+      order=>
+        order.status==="Delivered"
     ).length;
-
 
   document.getElementById(
     "totalOrders"
-  ).textContent =
+  ).textContent=
     orders.length;
-
 
   document.getElementById(
     "todayOrders"
-  ).textContent =
+  ).textContent=
     todayCount;
-
 
   document.getElementById(
     "pendingOrders"
-  ).textContent =
+  ).textContent=
     active;
-
 
   document.getElementById(
     "deliveredOrders"
-  ).textContent =
+  ).textContent=
     delivered;
 
 }
@@ -3992,36 +3433,25 @@ function updateStats(){
    FILTER
 ===================================================== */
 
-window.setFilter =
-function(
+window.setFilter=function(
   filter,
   button
 ){
 
-  currentFilter =
-    filter;
-
+  currentFilter=filter;
 
   document
-    .querySelectorAll(
-      ".filter"
-    )
+    .querySelectorAll(".filter")
     .forEach(
-      el =>
+      el=>
         el.classList.remove(
           "active"
         )
     );
 
-
   if(button){
-
-    button.classList.add(
-      "active"
-    );
-
+    button.classList.add("active");
   }
-
 
   renderOrders();
 
@@ -4029,131 +3459,83 @@ function(
 
 
 /* =====================================================
-   ACTIVE ORDERS
+   RENDER ACTIVE ORDERS
 ===================================================== */
 
 function renderOrders(){
 
-  const container =
+  const container=
     document.getElementById(
       "orders"
     );
 
-
-  let entries =
+  let entries=
     Object.entries(
       allOrders
     );
 
-
-  /*
-   * IMPORTANT SORT
-   *
-   * Received/New orders ALWAYS first.
-   * Then latest order.
-   */
-
   entries.sort(
-    (
-      a,
-      b
-    ) => {
+    (a,b)=>{
 
-      const aStatus =
-        a[1]?.status ||
+      const aStatus=
+        a[1]?.status||
         "Received";
 
-
-      const bStatus =
-        b[1]?.status ||
+      const bStatus=
+        b[1]?.status||
         "Received";
 
+      const aNew=
+        aStatus==="Received";
 
-      const aNew =
-        aStatus ===
-        "Received";
+      const bNew=
+        bStatus==="Received";
 
+      if(aNew!==bNew){
 
-      const bNew =
-        bStatus ===
-        "Received";
-
-
-      if(
-        aNew !== bNew
-      ){
-
-        return bNew
-          ? 1
-          : -1;
+        return bNew?1:-1;
 
       }
 
-
-      return (
+      return(
         Number(
-          b[1]?.createdAt ||
-          0
-        ) -
+          b[1]?.createdAt||0
+        )-
         Number(
-          a[1]?.createdAt ||
-          0
+          a[1]?.createdAt||0
         )
       );
 
     }
   );
 
-
-  /*
-   * FILTER
-   */
-
-  entries =
+  entries=
     entries.filter(
-      (
-        [key,order]
-      ) => {
+      ([key,order])=>{
 
         if(!order){
-
           return false;
-
         }
 
-
-        /*
-         * Delivered orders NEVER stay
-         * outside delivered folder.
-         */
-
         if(
-          order.status ===
-          "Delivered"
+          order.status==="Delivered"
         ){
-
           return false;
-
         }
 
-
         if(
-          currentFilter ===
-          "new"
+          currentFilter==="new"
         ){
 
-          return (
-            !order.status ||
-            order.status ===
-            "Received"
+          return(
+            !order.status||
+            order.status==="Received"
           );
 
         }
 
-
         if(
-          currentFilter ===
-          "active"
+          currentFilter==="active"
         ){
 
           return ![
@@ -4165,64 +3547,48 @@ function renderOrders(){
 
         }
 
-
         if(
-          currentFilter ===
-          "today"
+          currentFilter==="today"
         ){
 
-          if(
-            !order.createdAt
-          ){
-
+          if(!order.createdAt){
             return false;
-
           }
 
-
-          const orderDate =
+          const orderDate=
             new Date(
               order.createdAt
             )
             .toLocaleDateString(
               "en-IN",
               {
-                timeZone:
-                  "Asia/Kolkata"
+                timeZone:"Asia/Kolkata"
               }
             );
 
-
-          const todayDate =
+          const todayDate=
             new Date()
               .toLocaleDateString(
                 "en-IN",
                 {
-                  timeZone:
-                    "Asia/Kolkata"
+                  timeZone:"Asia/Kolkata"
                 }
               );
 
-
-          return (
-            orderDate ===
-            todayDate
+          return(
+            orderDate===todayDate
           );
 
         }
-
 
         return true;
 
       }
     );
 
+  if(!entries.length){
 
-  if(
-    !entries.length
-  ){
-
-    container.innerHTML = `
+    container.innerHTML=`
       <div
         style="
           color:#666;
@@ -4239,12 +3605,9 @@ function renderOrders(){
 
   }
 
-
-  container.innerHTML =
+  container.innerHTML=
     entries.map(
-      (
-        [key,order]
-      ) =>
+      ([key,order])=>
         renderOrderCard(
           key,
           order,
@@ -4261,61 +3624,48 @@ function renderOrders(){
 
 function renderDeliveredOrders(){
 
-  const container =
+  const container=
     document.getElementById(
       "deliveredOrdersList"
     );
 
-
-  let entries =
+  let entries=
     Object.entries(
       allOrders
     )
     .filter(
-      (
-        [key,order]
-      ) =>
-        order &&
-        order.status ===
-        "Delivered"
+      ([key,order])=>
+        order&&
+        order.status==="Delivered"
     );
 
-
   entries.sort(
-    (
-      a,
-      b
-    ) => {
+    (a,b)=>{
 
-      const aTime =
+      const aTime=
         Number(
-          a[1].deliveredAt ||
-          a[1].updatedAt ||
-          a[1].createdAt ||
+          a[1].deliveredAt||
+          a[1].updatedAt||
+          a[1].createdAt||
           0
         );
 
-
-      const bTime =
+      const bTime=
         Number(
-          b[1].deliveredAt ||
-          b[1].updatedAt ||
-          b[1].createdAt ||
+          b[1].deliveredAt||
+          b[1].updatedAt||
+          b[1].createdAt||
           0
         );
 
-
-      return bTime - aTime;
+      return bTime-aTime;
 
     }
   );
 
+  if(!entries.length){
 
-  if(
-    !entries.length
-  ){
-
-    container.innerHTML = `
+    container.innerHTML=`
       <div
         style="
           color:#577763;
@@ -4332,8 +3682,7 @@ function renderDeliveredOrders(){
 
   }
 
-
-  container.innerHTML = `
+  container.innerHTML=`
 
     <div
       style="
@@ -4350,9 +3699,7 @@ function renderDeliveredOrders(){
 
       ${
         entries.map(
-          (
-            [key,order]
-          ) =>
+          ([key,order])=>
             renderOrderCard(
               key,
               order,
@@ -4378,121 +3725,76 @@ function renderOrderCard(
   deliveredFolder
 ){
 
-  order =
-    order || {};
+  order=order||{};
 
-
-  const status =
-    order.status ||
+  const status=
+    order.status||
     "Received";
 
+  let statusClass="";
 
-  let statusClass =
-    "";
+  if(status==="Received")
+    statusClass="received";
 
+  if(status==="Confirmed")
+    statusClass="confirmed";
 
-  if(
-    status ===
-    "Received"
-  )
-    statusClass =
-      "received";
+  if(status==="Preparing")
+    statusClass="preparing";
 
+  if(status==="Out for Delivery")
+    statusClass="out";
 
-  if(
-    status ===
-    "Confirmed"
-  )
-    statusClass =
-      "confirmed";
+  if(status==="Delivered")
+    statusClass="delivered";
 
+  if(status==="Cancelled")
+    statusClass="cancelled";
 
-  if(
-    status ===
-    "Preparing"
-  )
-    statusClass =
-      "preparing";
-
-
-  if(
-    status ===
-    "Out for Delivery"
-  )
-    statusClass =
-      "out";
-
-
-  if(
-    status ===
-    "Delivered"
-  )
-    statusClass =
-      "delivered";
-
-
-  if(
-    status ===
-    "Cancelled"
-  )
-    statusClass =
-      "cancelled";
-
-
-  const isNew =
-    !deliveredFolder &&
+  const isNew=
+    !deliveredFolder&&
     (
-      !order.status ||
-      order.status ===
-      "Received"
+      !order.status||
+      order.status==="Received"
     );
 
-
-  const items =
-    Array.isArray(
-      order.items
-    )
-      ? order.items
-      : Object.values(
-          order.items || {}
+  const items=
+    Array.isArray(order.items)
+      ?order.items
+      :Object.values(
+          order.items||{}
         );
 
-
-  const itemHtml =
+  const itemHtml=
     items.map(
-      item => {
+      item=>{
 
-        item =
-          item || {};
+        item=item||{};
 
-
-        const qty =
+        const qty=
           Number(
-            item.qty ||
-            item.quantity ||
+            item.qty||
+            item.quantity||
             0
           );
 
-
-        const subtotal =
+        const subtotal=
           Number(
-            item.subtotal ??
+            item.subtotal??
             (
               Number(
-                item.price || 0
-              ) *
-              qty
+                item.price||0
+              )*qty
             )
           );
 
-
-        return `
+        return`
 
           <div class="order-item">
 
             <span>
               ${escapeHtml(
-                item.name ||
+                item.name||
                 "Food Item"
               )}
               × ${qty}
@@ -4509,18 +3811,17 @@ function renderOrderCard(
       }
     ).join("");
 
-
-  return `
+  return`
 
     <div
       class="
         order
         ${isNew
-          ? "new-order new-arrival"
-          : ""}
+          ?"new-order new-arrival"
+          :""}
         ${deliveredFolder
-          ? "delivered-order"
-          : ""}
+          ?"delivered-order"
+          :""}
       "
       data-order-key="${escapeAttribute(key)}"
     >
@@ -4530,12 +3831,10 @@ function renderOrderCard(
         <div>
 
           <div class="order-id">
-
             ${escapeHtml(
-              order.orderId ||
+              order.orderId||
               key
             )}
-
           </div>
 
           <div
@@ -4552,7 +3851,6 @@ function renderOrderCard(
 
         </div>
 
-
         <div
           class="
             status
@@ -4568,90 +3866,55 @@ function renderOrderCard(
       <div class="order-info">
 
         <div class="info-box">
-
-          <small>
-            Customer
-          </small>
-
+          <small>Customer</small>
           ${escapeHtml(
-            order.customerName ||
-            order.name ||
+            order.customerName||
+            order.name||
             "-"
           )}
-
         </div>
 
-
         <div class="info-box">
-
-          <small>
-            Phone
-          </small>
-
+          <small>Phone</small>
           ${escapeHtml(
-            order.customerPhone ||
-            order.phone ||
+            order.customerPhone||
+            order.phone||
             "-"
           )}
-
         </div>
 
-
         <div class="info-box">
-
-          <small>
-            Payment
-          </small>
-
+          <small>Payment</small>
           ${escapeHtml(
-            order.paymentMethod ||
+            order.paymentMethod||
             "-"
           )}
-
         </div>
 
-
         <div class="info-box">
-
-          <small>
-            Address
-          </small>
-
+          <small>Address</small>
           ${escapeHtml(
-            order.address ||
-            order.customerAddress ||
+            order.address||
+            order.customerAddress||
             "-"
           )}
-
         </div>
 
-
         <div class="info-box">
-
-          <small>
-            Distance
-          </small>
-
+          <small>Distance</small>
           ${Number(
-            order.distanceKm ||
+            order.distanceKm||
             0
           ).toFixed(1)}
           KM
-
         </div>
 
-
         <div class="info-box">
-
-          <small>
-            Delivery Charge
-          </small>
-
+          <small>Delivery Charge</small>
           ₹${Number(
-            order.deliveryCharge ||
+            order.deliveryCharge||
             0
           ).toFixed(2)}
-
         </div>
 
       </div>
@@ -4660,7 +3923,7 @@ function renderOrderCard(
       <div class="order-items">
 
         ${
-          itemHtml ||
+          itemHtml||
           `
             <div
               style="
@@ -4684,8 +3947,8 @@ function renderOrderCard(
 
         <strong>
           ₹${Number(
-            order.total ||
-            order.grandTotal ||
+            order.total||
+            order.grandTotal||
             0
           ).toFixed(2)}
         </strong>
@@ -4699,7 +3962,6 @@ function renderOrderCard(
         ?
 
         `
-
           <div
             style="
               margin-top:7px;
@@ -4709,13 +3971,11 @@ function renderOrderCard(
           >
             ✓ Delivered & stored
           </div>
-
         `
 
         :
 
         `
-
           <div class="status-buttons">
 
             ${statusButton(
@@ -4761,7 +4021,6 @@ function renderOrderCard(
             </button>
 
           </div>
-
         `
       }
 
@@ -4782,15 +4041,15 @@ function statusButton(
   current
 ){
 
-  return `
+  return`
 
     <button
       class="
         btn
         ${
-          current === status
-            ? "btn-gold"
-            : "btn-dark"
+          current===status
+            ?"btn-gold"
+            :"btn-dark"
         }
       "
       onclick="
@@ -4812,17 +4071,15 @@ function statusButton(
    UPDATE ORDER STATUS
 ===================================================== */
 
-window.updateOrderStatus =
-async function(
+window.updateOrderStatus=async function(
   key,
   status
 ){
 
   try{
 
-    const order =
+    const order=
       allOrders[key];
-
 
     if(!order){
 
@@ -4832,137 +4089,73 @@ async function(
 
     }
 
+    const now=Date.now();
 
-    const now =
-      Date.now();
-
-
-    const updates = {};
-
-
-    /*
-     * MAIN ORDER
-     */
+    const updates={};
 
     updates[
       `orders/${key}/status`
-    ] =
-      status;
-
+    ]=status;
 
     updates[
       `orders/${key}/updatedAt`
-    ] =
-      now;
+    ]=now;
 
-
-    /*
-     * CUSTOMER ORDER
-     */
-
-    if(
-      order.ownerUid
-    ){
+    if(order.ownerUid){
 
       updates[
         `customerOrders/${order.ownerUid}/${key}/status`
-      ] =
-        status;
-
+      ]=status;
 
       updates[
         `customerOrders/${order.ownerUid}/${key}/updatedAt`
-      ] =
-        now;
+      ]=now;
 
     }
 
-
-    /*
-     * DELIVERED
-     */
-
-    if(
-      status ===
-      "Delivered"
-    ){
+    if(status==="Delivered"){
 
       updates[
         `orders/${key}/deliveredAt`
-      ] =
-        now;
-
+      ]=now;
 
       updates[
         `deliveredOrders/${key}`
-      ] = {
-
+      ]={
         ...order,
-
-        status:
-          "Delivered",
-
-        deliveredAt:
-          now,
-
-        updatedAt:
-          now
-
+        status:"Delivered",
+        deliveredAt:now,
+        updatedAt:now
       };
 
     }
-
-
-    /*
-     * SAVE ALL AT ONCE
-     */
 
     await update(
       ref(db),
       updates
     );
 
+    if(allOrders[key]){
 
-    /*
-     * UPDATE LOCAL DATA
-     */
+      allOrders[key].status=status;
+      allOrders[key].updatedAt=now;
 
-    if(
-      allOrders[key]
-    ){
+      if(status==="Delivered"){
 
-      allOrders[key].status =
-        status;
-
-
-      allOrders[key].updatedAt =
-        now;
-
-
-      if(
-        status ===
-        "Delivered"
-      ){
-
-        allOrders[key].deliveredAt =
-          now;
+        allOrders[key].deliveredAt=now;
 
       }
 
     }
 
-
     updateStats();
-
     renderOrders();
-
     renderDeliveredOrders();
 
-
     showToast(
-      status === "Delivered"
-        ? "✅ Order delivered & moved to Delivered folder."
-        : `Order ${status}.`
+      status==="Delivered"
+        ?"✅ Order delivered & moved to Delivered folder."
+        :`Order ${status}.`
     );
 
   }catch(error){
@@ -4972,9 +4165,8 @@ async function(
       error
     );
 
-
     showToast(
-      error.message ||
+      error.message||
       "Could not update order."
     );
 
@@ -4990,30 +4182,25 @@ async function(
 function loadRatings(){
 
   onValue(
-    ref(
-      db,
-      "ratings"
-    ),
-    snapshot => {
+    ref(db,"ratings"),
+    snapshot=>{
 
-      allRatings =
-        snapshot.val() || {};
-
+      allRatings=
+        snapshot.val()||{};
 
       renderRatings();
 
     },
-    error => {
+    error=>{
 
       console.error(
         "Ratings error:",
         error
       );
 
-
       document.getElementById(
         "ratings"
-      ).textContent =
+      ).textContent=
         "Could not load ratings.";
 
     }
@@ -5022,31 +4209,23 @@ function loadRatings(){
 }
 
 
-/* =====================================================
-   RENDER RATINGS
-===================================================== */
-
 function renderRatings(){
 
-  const entries =
+  const entries=
     Object.entries(
       allRatings
     );
 
-
-  if(
-    !entries.length
-  ){
+  if(!entries.length){
 
     document.getElementById(
       "ratingSummary"
-    ).textContent =
+    ).textContent=
       "No ratings yet.";
-
 
     document.getElementById(
       "ratings"
-    ).innerHTML =
+    ).innerHTML=
       `
         <p
           style="
@@ -5058,35 +4237,31 @@ function renderRatings(){
         </p>
       `;
 
-
     return;
 
   }
 
-
-  const total =
+  const total=
     entries.reduce(
       (
         sum,
         [,item]
-      ) =>
-        sum +
+      )=>
+        sum+
         Number(
-          item.rating ||
+          item.rating||
           0
         ),
       0
     );
 
-
-  const average =
-    total /
+  const average=
+    total/
     entries.length;
-
 
   document.getElementById(
     "ratingSummary"
-  ).innerHTML = `
+  ).innerHTML=`
 
     <strong style="font-size:11px;">
       Average Rating:
@@ -5103,50 +4278,39 @@ function renderRatings(){
 
   `;
 
-
   entries.sort(
-    (
-      a,
-      b
-    ) =>
+    (a,b)=>
       Number(
-        b[1].createdAt ||
+        b[1].createdAt||
         0
-      ) -
+      )-
       Number(
-        a[1].createdAt ||
+        a[1].createdAt||
         0
       )
   );
 
-
   document.getElementById(
     "ratings"
-  ).innerHTML =
-
+  ).innerHTML=
     entries.map(
-      (
-        [key,rating]
-      ) => {
+      ([key,rating])=>{
 
-        rating =
-          rating || {};
+        rating=rating||{};
 
-
-        const stars =
+        const stars=
           Math.max(
             0,
             Math.min(
               5,
               Number(
-                rating.rating ||
+                rating.rating||
                 0
               )
             )
           );
 
-
-        return `
+        return`
 
           <div class="rating">
 
@@ -5158,19 +4322,16 @@ function renderRatings(){
 
               <strong>
                 ${escapeHtml(
-                  rating.orderId ||
+                  rating.orderId||
                   key
                 )}
               </strong>
 
             </div>
 
-
             <div class="rating-stars">
 
-              ${"★".repeat(
-                stars
-              )}
+              ${"★".repeat(stars)}
 
               <span
                 style="
@@ -5178,12 +4339,11 @@ function renderRatings(){
                 "
               >
                 ${"★".repeat(
-                  5 - stars
+                  5-stars
                 )}
               </span>
 
             </div>
-
 
             <div
               style="
@@ -5197,24 +4357,17 @@ function renderRatings(){
               )}
             </div>
 
-
             ${
               rating.feedback
               ?
-
               `
-
                 <div class="rating-feedback">
                   "${escapeHtml(
                     rating.feedback
                   )}"
                 </div>
-
               `
-
-              :
-
-              ""
+              :""
             }
 
           </div>
@@ -5231,39 +4384,27 @@ function renderRatings(){
    DATE
 ===================================================== */
 
-function formatDate(
-  timestamp
-){
+function formatDate(timestamp){
 
   if(!timestamp){
-
     return "-";
-
   }
 
-
-  const date =
-    new Date(
-      timestamp
-    );
-
+  const date=
+    new Date(timestamp);
 
   if(
     Number.isNaN(
       date.getTime()
     )
   ){
-
     return "-";
-
   }
-
 
   return date.toLocaleString(
     "en-IN",
     {
-      timeZone:
-        "Asia/Kolkata"
+      timeZone:"Asia/Kolkata"
     }
   );
 
@@ -5271,15 +4412,13 @@ function formatDate(
 
 
 /* =====================================================
-   ESCAPE HTML
+   ESCAPE
 ===================================================== */
 
-function escapeHtml(
-  value
-){
+function escapeHtml(value){
 
   return String(
-    value ?? ""
+    value??""
   )
   .replace(
     /&/g,
@@ -5305,13 +4444,9 @@ function escapeHtml(
 }
 
 
-function escapeAttribute(
-  value
-){
+function escapeAttribute(value){
 
-  return escapeHtml(
-    value
-  );
+  return escapeHtml(value);
 
 }
 
@@ -5320,38 +4455,27 @@ function escapeAttribute(
    TOAST
 ===================================================== */
 
-function showToast(
-  message
-){
+function showToast(message){
 
-  const toast =
+  const toast=
     document.getElementById(
       "toast"
     );
 
+  toast.textContent=message;
 
-  toast.textContent =
-    message;
-
-
-  toast.classList.add(
-    "show"
-  );
-
+  toast.classList.add("show");
 
   clearTimeout(
     toastTimer
   );
 
-
-  toastTimer =
+  toastTimer=
     setTimeout(
-      () => {
-
+      ()=>{
         toast.classList.remove(
           "show"
         );
-
       },
       2500
     );
@@ -5360,28 +4484,27 @@ function showToast(
 
 
 /* =====================================================
-   ACTIVATE AUDIO AFTER ADMIN CLICK
+   ACTIVATE AUDIO
 ===================================================== */
 
 document.addEventListener(
   "click",
-  () => {
-
+  ()=>{
+    
     try{
 
       if(!audioContext){
 
-        audioContext =
-          new (
-            window.AudioContext ||
+        audioContext=
+          new(
+            window.AudioContext||
             window.webkitAudioContext
           )();
 
       }
 
-
       if(
-        audioContext.state ===
+        audioContext.state===
         "suspended"
       ){
 
@@ -5391,9 +4514,7 @@ document.addEventListener(
 
     }catch(error){
 
-      console.warn(
-        error
-      );
+      console.warn(error);
 
     }
 
