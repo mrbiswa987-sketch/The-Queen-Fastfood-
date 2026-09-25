@@ -45,6 +45,98 @@ button{
   --red:#ff4d4d;
 }
 
+
+/* =========================================
+   WEBSITE MODE SCREEN
+========================================= */
+
+#websiteModeScreen{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,122,0,.10),
+      transparent 45%
+    ),
+    #070707;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:25px;
+}
+
+.website-mode-box{
+  width:min(520px,94vw);
+  padding:35px 25px;
+  border:1px solid rgba(255,122,0,.20);
+  background:#101010;
+  border-radius:22px;
+  box-shadow:
+    0 25px 90px rgba(0,0,0,.65),
+    0 0 40px rgba(255,122,0,.05);
+}
+
+.website-mode-icon{
+  width:70px;
+  height:70px;
+
+  margin:0 auto 20px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(255,122,0,.10);
+
+  border:1px solid rgba(255,122,0,.25);
+
+  font-size:30px;
+}
+
+.website-mode-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:38px;
+  font-weight:700;
+  line-height:1.1;
+}
+
+.website-mode-title span{
+  color:var(--orange);
+}
+
+.website-mode-message{
+  color:#999;
+  font-size:12px;
+  line-height:1.8;
+  margin-top:12px;
+}
+
+.website-mode-small{
+  color:#555;
+  font-size:9px;
+  margin-top:22px;
+  letter-spacing:1px;
+}
+
+
+/* =========================================
+   MAIN WEBSITE
+========================================= */
+
+#mainWebsite{
+  display:block;
+}
+
+
 /* HEADER */
 
 header{
@@ -775,6 +867,10 @@ footer{
     font-size:54px;
   }
 
+  .website-mode-title{
+    font-size:32px;
+  }
+
 }
 
 
@@ -811,6 +907,56 @@ footer{
 
 
 <body>
+
+
+<!-- =========================================
+     WEBSITE MODE SCREEN
+========================================= -->
+
+<div
+  id="websiteModeScreen"
+>
+
+  <div class="website-mode-box">
+
+    <div
+      id="websiteModeIcon"
+      class="website-mode-icon"
+    >
+      🔧
+    </div>
+
+    <div
+      id="websiteModeTitle"
+      class="website-mode-title"
+    >
+      We’re Improving
+      <span>Your Experience</span>
+    </div>
+
+    <div
+      id="websiteModeMessage"
+      class="website-mode-message"
+    >
+      We’re making a few improvements
+      to make your experience better.
+      Please check back shortly.
+    </div>
+
+    <div class="website-mode-small">
+      THE QUEEN FAST FOOD
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     MAIN WEBSITE
+========================================= -->
+
+<div id="mainWebsite">
 
 
 <!-- HEADER -->
@@ -861,7 +1007,10 @@ footer{
 
 <div class="shop-status">
 
-  <div id="shopDot" class="shop-dot open"></div>
+  <div
+    id="shopDot"
+    class="shop-dot open"
+  ></div>
 
   <span id="shopStatusText">
     SHOP OPEN
@@ -1106,6 +1255,9 @@ footer{
 </footer>
 
 
+</div>
+
+
 <script type="module">
 
 import {
@@ -1121,7 +1273,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* FIREBASE */
+/* =========================================
+   FIREBASE
+========================================= */
 
 const firebaseConfig = {
 
@@ -1159,7 +1313,9 @@ const db =
   getDatabase(app);
 
 
-/* DEFAULT MENU */
+/* =========================================
+   DEFAULT MENU
+========================================= */
 
 const defaultMenu = [
 
@@ -1231,14 +1387,19 @@ let shopOpen = true;
 let shopSettings = {};
 
 let customerLat = null;
+
 let customerLng = null;
+
 let deliveryDistance = 0;
+
 let deliveryCharge = 0;
 
 let trackingUnsubscribe = null;
 
 
-/* RESTAURANT */
+/* =========================================
+   RESTAURANT
+========================================= */
 
 const RESTAURANT_LAT =
   20.216780359694468;
@@ -1247,13 +1408,133 @@ const RESTAURANT_LNG =
   86.36464363454978;
 
 
-/* DELIVERY RATE */
+/* =========================================
+   DEFAULT DELIVERY RATE
+========================================= */
 
-const DELIVERY_RATE =
-  6;
+const DEFAULT_DELIVERY_RATE = 6;
 
 
-/* LOAD SETTINGS */
+/* =========================================
+   WEBSITE MODE
+========================================= */
+
+function renderWebsiteMode(settings){
+
+  const mode =
+    String(
+      settings.websiteMode ||
+      "normal"
+    ).toLowerCase();
+
+
+  const screen =
+    document.getElementById(
+      "websiteModeScreen"
+    );
+
+  const main =
+    document.getElementById(
+      "mainWebsite"
+    );
+
+  const icon =
+    document.getElementById(
+      "websiteModeIcon"
+    );
+
+  const title =
+    document.getElementById(
+      "websiteModeTitle"
+    );
+
+  const message =
+    document.getElementById(
+      "websiteModeMessage"
+    );
+
+
+  /* NORMAL */
+
+  if(mode === "normal"){
+
+    screen.style.display =
+      "none";
+
+    main.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  /* UPDATING */
+
+  if(mode === "updating"){
+
+    icon.textContent =
+      "🔧";
+
+    title.innerHTML =
+      `We’re Improving
+       <span>Your Experience</span>`;
+
+    message.textContent =
+      settings.updateMessage ||
+      "We’re making a few improvements to make your experience better. Please check back shortly.";
+
+    screen.style.display =
+      "flex";
+
+    main.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /* MAINTENANCE */
+
+  if(mode === "maintenance"){
+
+    icon.textContent =
+      "🛠️";
+
+    title.innerHTML =
+      `The App Is
+       <span>Under Maintenance</span>`;
+
+    message.textContent =
+      settings.updateMessage ||
+      "Our app is currently under maintenance. We’ll be back soon. Thank you for your patience.";
+
+    screen.style.display =
+      "flex";
+
+    main.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /* UNKNOWN MODE = NORMAL */
+
+  screen.style.display =
+    "none";
+
+  main.style.display =
+    "block";
+
+}
+
+
+/* =========================================
+   LOAD SETTINGS
+========================================= */
 
 onValue(
   ref(db,"settings"),
@@ -1262,10 +1543,32 @@ onValue(
     shopSettings =
       snapshot.val() || {};
 
+
+    /*
+      WEBSITE MODE
+      This runs every time admin
+      changes the setting.
+    */
+
+    renderWebsiteMode(
+      shopSettings
+    );
+
+
+    /*
+      SHOP STATUS
+    */
+
     shopOpen =
       shopSettings.shopOpen !== false;
 
+
     renderShopStatus();
+
+
+    /*
+      MENU
+    */
 
     loadMenu();
 
@@ -1277,13 +1580,26 @@ onValue(
       error
     );
 
+
+    /*
+      If Firebase settings cannot
+      be read, keep normal website.
+    */
+
+    renderWebsiteMode({
+      websiteMode:"normal"
+    });
+
+
     loadMenu();
 
   }
 );
 
 
-/* LOAD MENU */
+/* =========================================
+   LOAD MENU
+========================================= */
 
 function loadMenu(){
 
@@ -1292,40 +1608,42 @@ function loadMenu(){
 
 
   menu =
-    defaultMenu.map(item => {
+    defaultMenu.map(
+      item => {
 
-      const saved =
-        menuSettings[item.id] || {};
+        const saved =
+          menuSettings[item.id] || {};
 
 
-      return {
+        return {
 
-        ...item,
+          ...item,
 
-        ...saved,
+          ...saved,
 
-        id:item.id,
+          id:item.id,
 
-        name:
-          saved.name ||
-          item.name,
+          name:
+            saved.name ||
+            item.name,
 
-        price:
-          Number(
-            saved.price ??
-            item.price
-          ),
+          price:
+            Number(
+              saved.price ??
+              item.price
+            ),
 
-        image:
-          saved.image ||
-          item.image,
+          image:
+            saved.image ||
+            item.image,
 
-        available:
-          saved.available !== false
+          available:
+            saved.available !== false
 
-      };
+        };
 
-    });
+      }
+    );
 
 
   renderMenu();
@@ -1333,7 +1651,9 @@ function loadMenu(){
 }
 
 
-/* SHOP STATUS */
+/* =========================================
+   SHOP STATUS
+========================================= */
 
 function renderShopStatus(){
 
@@ -1369,7 +1689,9 @@ function renderShopStatus(){
 }
 
 
-/* MENU */
+/* =========================================
+   MENU
+========================================= */
 
 function renderMenu(){
 
@@ -1380,63 +1702,67 @@ function renderMenu(){
 
 
   grid.innerHTML =
-    menu.map(item => {
+    menu.map(
+      item => {
 
-      const disabled =
-        !shopOpen ||
-        item.available === false;
+        const disabled =
+          !shopOpen ||
+          item.available === false;
 
 
-      return `
+        return `
 
-        <div class="food-card">
+          <div class="food-card">
 
-          <img
-            class="food-image"
-            src="${escapeHTML(item.image)}"
-            alt="${escapeHTML(item.name)}">
+            <img
+              class="food-image"
+              src="${escapeHTML(item.image)}"
+              alt="${escapeHTML(item.name)}">
 
-          <div class="food-content">
+            <div class="food-content">
 
-            <div class="food-name">
-              ${escapeHTML(item.name)}
-            </div>
-
-            <div class="food-bottom">
-
-              <div class="food-price">
-                ₹${item.price}
+              <div class="food-name">
+                ${escapeHTML(item.name)}
               </div>
 
-              <button
-                class="add-btn"
-                ${disabled ? "disabled" : ""}
-                onclick="addToCart('${item.id}',this)">
+              <div class="food-bottom">
 
-                ${
-                  !shopOpen
-                    ? "SHOP CLOSED"
-                    : item.available === false
-                    ? "OUT OF STOCK"
-                    : "ADD TO CART"
-                }
+                <div class="food-price">
+                  ₹${item.price}
+                </div>
 
-              </button>
+                <button
+                  class="add-btn"
+                  ${disabled ? "disabled" : ""}
+                  onclick="addToCart('${item.id}',this)">
+
+                  ${
+                    !shopOpen
+                      ? "SHOP CLOSED"
+                      : item.available === false
+                      ? "OUT OF STOCK"
+                      : "ADD TO CART"
+                  }
+
+                </button>
+
+              </div>
 
             </div>
 
           </div>
 
-        </div>
+        `;
 
-      `;
-
-    }).join("");
+      }
+    ).join("");
 
 }
 
 
-/* ADD CART */
+/* =========================================
+   ADD CART
+========================================= */
 
 window.addToCart =
 function(id,button){
@@ -1457,8 +1783,10 @@ function(id,button){
     );
 
 
-  if(!item ||
-     item.available === false){
+  if(
+    !item ||
+    item.available === false
+  ){
 
     alert(
       "This item is out of stock."
@@ -1534,7 +1862,9 @@ function(id,button){
 };
 
 
-/* CART */
+/* =========================================
+   CART
+========================================= */
 
 function updateCart(){
 
@@ -1637,7 +1967,9 @@ function updateCart(){
 }
 
 
-/* CHANGE QTY */
+/* =========================================
+   CHANGE QTY
+========================================= */
 
 window.changeQty =
 function(index,value){
@@ -1666,7 +1998,9 @@ function(index,value){
 };
 
 
-/* OPEN CART */
+/* =========================================
+   OPEN CART
+========================================= */
 
 window.openCart =
 function(){
@@ -1684,7 +2018,9 @@ function(){
 };
 
 
-/* CLOSE CART */
+/* =========================================
+   CLOSE CART
+========================================= */
 
 window.closeCart =
 function(){
@@ -1700,7 +2036,9 @@ function(){
 };
 
 
-/* CHECKOUT */
+/* =========================================
+   CHECKOUT
+========================================= */
 
 window.openCheckout =
 function(){
@@ -1732,7 +2070,9 @@ function(){
 };
 
 
-/* LOCATION */
+/* =========================================
+   LOCATION
+========================================= */
 
 window.getCustomerLocation =
 function(){
@@ -1820,10 +2160,22 @@ function(){
       }
 
 
+      /*
+        Delivery rate now comes
+        from Admin settings.
+      */
+
+      const deliveryRate =
+        Number(
+          shopSettings.deliveryRate ??
+          DEFAULT_DELIVERY_RATE
+        );
+
+
       deliveryCharge =
         Math.ceil(
           deliveryDistance *
-          DELIVERY_RATE
+          deliveryRate
         );
 
 
@@ -1865,7 +2217,9 @@ function(){
 };
 
 
-/* HAVERSINE */
+/* =========================================
+   HAVERSINE
+========================================= */
 
 function haversineDistance(
   lat1,
@@ -1914,7 +2268,9 @@ function haversineDistance(
 }
 
 
-/* PLACE ORDER */
+/* =========================================
+   PLACE ORDER
+========================================= */
 
 window.placeOrder =
 async function(){
@@ -1923,6 +2279,22 @@ async function(){
 
     alert(
       "Your cart is empty."
+    );
+
+    return;
+  }
+
+
+  /*
+    Prevent ordering if admin
+    closes shop while customer
+    still has the page open.
+  */
+
+  if(!shopOpen){
+
+    alert(
+      "Shop is currently closed."
     );
 
     return;
@@ -1980,13 +2352,15 @@ async function(){
   let subtotal = 0;
 
 
-  cart.forEach(item => {
+  cart.forEach(
+    item => {
 
-    subtotal +=
-      item.price *
-      item.quantity;
+      subtotal +=
+        item.price *
+        item.quantity;
 
-  });
+    }
+  );
 
 
   const grandTotal =
@@ -2014,17 +2388,20 @@ async function(){
 
     address:address,
 
-    items:cart.map(item => ({
+    items:
+      cart.map(
+        item => ({
 
-      id:item.id,
+          id:item.id,
 
-      name:item.name,
+          name:item.name,
 
-      price:item.price,
+          price:item.price,
 
-      quantity:item.quantity
+          quantity:item.quantity
 
-    })),
+        })
+      ),
 
     subtotal:subtotal,
 
@@ -2065,7 +2442,9 @@ async function(){
     );
 
 
-    /* WHATSAPP */
+    /* =====================================
+       WHATSAPP
+    ===================================== */
 
     const savedNumber =
       shopSettings.whatsappNumber ||
@@ -2099,12 +2478,14 @@ async function(){
       `*🛒 ORDER ITEMS*\n`;
 
 
-    cart.forEach(item => {
+    cart.forEach(
+      item => {
 
-      message +=
-        `*🍴 ${item.name} × ${item.quantity} = ₹${item.price * item.quantity}*\n`;
+        message +=
+          `*🍴 ${item.name} × ${item.quantity} = ₹${item.price * item.quantity}*\n`;
 
-    });
+      }
+    );
 
 
     message +=
@@ -2207,7 +2588,9 @@ async function(){
 };
 
 
-/* TRACK ORDER */
+/* =========================================
+   TRACK ORDER
+========================================= */
 
 window.startTracking =
 function(){
@@ -2309,7 +2692,9 @@ function(){
 };
 
 
-/* TRACK RENDER */
+/* =========================================
+   TRACK RENDER
+========================================= */
 
 function renderTrackOrder(
   orderId,
@@ -2429,6 +2814,7 @@ function renderTrackOrder(
 
         let cls = "";
 
+
         if(index < currentIndex){
 
           cls =
@@ -2489,7 +2875,9 @@ function renderTrackOrder(
 }
 
 
-/* NORMALIZE STATUS */
+/* =========================================
+   NORMALIZE STATUS
+========================================= */
 
 function normalizeStatus(status){
 
@@ -2561,31 +2949,54 @@ function normalizeStatus(status){
 }
 
 
-/* ESCAPE */
+/* =========================================
+   ESCAPE
+========================================= */
 
 function escapeHTML(value){
 
   return String(
     value ?? ""
   )
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-/* INITIAL CART */
+/* =========================================
+   INITIAL CART
+========================================= */
 
 updateCart();
 
 
-/* ENTER TO TRACK */
+/* =========================================
+   ENTER TO TRACK
+========================================= */
 
 document
-  .getElementById("trackInput")
+  .getElementById(
+    "trackInput"
+  )
   .addEventListener(
     "keydown",
     e => {
