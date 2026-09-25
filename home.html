@@ -9,7 +9,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--gold:#d8b15a;--gold2:#f4d98b;--bg:#050505;--card:#101010;--muted:#aaa;--line:rgba(216,177,90,.18);--white:#fff}
 body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#fff;line-height:1.5}
-body.locked{overflow:hidden}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
@@ -17,55 +16,483 @@ a{color:inherit;text-decoration:none}
 header{position:sticky;top:0;z-index:30;background:rgba(5,5,5,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.8px}
-.crown{color:var(--gold);font-size:25px}.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:2px}
-.nav-right{display:flex;align-items:center;gap:9px}.phone-top{font-size:13px;color:#ddd}.cart-btn,.gold-btn{border:1px solid var(--gold);background:linear-gradient(135deg,#e0bb65,#a87920);color:#080808;font-weight:800;border-radius:10px;padding:10px 14px}.cart-btn{position:relative}.cart-count{background:#111;color:var(--gold2);border:1px solid var(--gold);border-radius:50%;padding:1px 6px;font-size:11px;margin-left:4px}
-.hero{padding:78px 0 60px;text-align:center;background:radial-gradient(circle at 50% 20%,rgba(216,177,90,.12),transparent 42%)}
-.hero-kicker{color:var(--gold2);font-size:12px;letter-spacing:4px;font-weight:700}.hero h1{font-size:clamp(38px,7vw,72px);line-height:1;margin:15px 0}.hero h1 span{color:var(--gold)}.hero p{max-width:650px;margin:0 auto 24px;color:#bbb}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.outline-btn{padding:11px 17px;border:1px solid var(--gold);border-radius:10px;background:transparent;color:#fff;font-weight:700}
-.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center}.trust-grid div{color:#ccc;font-size:13px}.trust-grid b{display:block;color:var(--gold2);font-size:15px}
-section{padding:55px 0}.section-head{text-align:center;margin-bottom:28px}.eyebrow{color:var(--gold);letter-spacing:3px;font-size:11px;font-weight:800}.section-head h2{font-size:32px;margin-top:6px}.section-head p{color:#aaa;margin-top:7px}
-.menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:linear-gradient(180deg,#131313,#0b0b0b);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 35px rgba(0,0,0,.25)}.product-img{height:190px;background:#171717;display:flex;align-items:center;justify-content:center;overflow:hidden}.product-img img{width:100%;height:100%;object-fit:cover}.product-body{padding:15px}.product-body h3{font-size:17px;margin-bottom:4px}.price{color:var(--gold2);font-weight:800;font-size:18px}.product-body p{font-size:12px;color:#999;margin:5px 0 13px}.add-btn{width:100%;padding:10px;border:1px solid var(--gold);background:transparent;color:#fff;border-radius:9px;font-weight:800}.add-btn:hover{background:var(--gold);color:#090909}
-.why-grid,.visit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.info-card{padding:22px;border:1px solid var(--line);border-radius:16px;background:#0d0d0d}.info-card .icon{font-size:28px}.info-card h3{margin:9px 0 5px}.info-card p{color:#999;font-size:14px}
-.track-box{max-width:760px;margin:auto;padding:25px;border:1px solid var(--line);border-radius:18px;background:#0c0c0c}.track-input{display:flex;gap:10px}.track-input input{flex:1}.steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:25px;gap:5px}.step{text-align:center;color:#666;font-size:11px}.dot{width:25px;height:25px;border:1px solid #555;border-radius:50%;margin:0 auto 7px;display:flex;align-items:center;justify-content:center}.step.active{color:var(--gold2)}.step.active .dot{border-color:var(--gold);background:var(--gold);color:#000}
-footer{padding:35px 0;border-top:1px solid var(--line);color:#888;text-align:center;font-size:13px}.footer-brand{color:#fff;font-weight:800;margin-bottom:6px}
-input,textarea,select{width:100%;background:#111;color:#fff;border:1px solid #333;border-radius:9px;padding:11px;outline:none}input:focus,textarea:focus,select:focus{border-color:var(--gold)}label{display:block;color:#ccc;font-size:12px;margin:0 0 6px;font-weight:700}.form-group{margin-bottom:13px}
-.modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.76);display:none;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}.modal-card{width:min(620px,100%);max-height:92vh;overflow:auto;background:#0d0d0d;border:1px solid var(--line);border-radius:18px;padding:22px}.modal-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px}.close{background:#171717;border:1px solid #333;color:#fff;border-radius:8px;width:35px;height:35px}.summary{background:#080808;border:1px solid #222;padding:12px;border-radius:10px;margin-bottom:16px}.summary-row{display:flex;justify-content:space-between;padding:5px 0;color:#aaa;font-size:13px}.summary-row.total{color:#fff;font-size:17px;font-weight:800;border-top:1px solid #333;margin-top:5px;padding-top:10px}.phone-choice{display:flex;gap:8px}.phone-choice input{flex:1}.small-action{white-space:nowrap;background:#171717;color:var(--gold2);border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:11px;font-weight:700}.login-as{font-size:11px;color:#888;margin-top:5px}.location-status{font-size:11px;color:#888;margin-top:6px}.location-btn{margin-top:6px}.order-btn{width:100%;margin-top:4px;padding:12px;border:0;border-radius:10px;background:linear-gradient(135deg,#f0cf7d,#a97920);font-weight:900}
-.cart-drawer{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);z-index:70;background:#0b0b0b;border-left:1px solid var(--line);transform:translateX(100%);transition:.25s;display:flex;flex-direction:column}.cart-drawer.open{transform:translateX(0)}.cart-head{padding:17px;border-bottom:1px solid #222;display:flex;justify-content:space-between}.cart-items{flex:1;overflow:auto;padding:15px}.cart-item{border-bottom:1px solid #222;padding:12px 0}.cart-item-top{display:flex;justify-content:space-between;gap:8px}.qty{display:flex;align-items:center;gap:9px;margin-top:9px}.qty button{width:27px;height:27px;background:#171717;color:#fff;border:1px solid #333;border-radius:6px}.cart-foot{padding:15px;border-top:1px solid #222}.empty{text-align:center;color:#777;padding:50px 15px}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:#151515;color:#fff;border:1px solid var(--gold);padding:11px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.25s;z-index:150;font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:900px){.menu-grid{grid-template-columns:repeat(2,1fr)}.why-grid,.visit-grid{grid-template-columns:1fr}.phone-top{display:none}}
-@media(max-width:560px){.nav{min-height:62px}.brand{font-size:13px}.menu-grid{grid-template-columns:1fr 1fr;gap:10px}.product-img{height:145px}.product-body{padding:11px}.product-body h3{font-size:14px}.price{font-size:16px}.trust-grid{grid-template-columns:1fr}.hero{padding:60px 0 45px}.steps{grid-template-columns:repeat(5,1fr)}.step{font-size:9px}.phone-choice{display:block}.phone-choice .small-action{margin-top:7px}.login-card{padding:27px 20px}}
+.crown{color:var(--gold);font-size:25px}
+.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:2px}
+.nav-right{display:flex;align-items:center;gap:9px}
+.phone-top{font-size:13px;color:#ddd}
+.cart-btn,.gold-btn{
+  border:1px solid var(--gold);
+  background:linear-gradient(135deg,#e0bb65,#a87920);
+  color:#080808;
+  font-weight:800;
+  border-radius:10px;
+  padding:10px 14px
+}
+.cart-btn{position:relative}
+.cart-count{
+  background:#111;
+  color:var(--gold2);
+  border:1px solid var(--gold);
+  border-radius:50%;
+  padding:1px 6px;
+  font-size:11px;
+  margin-left:4px
+}
 
-.shop-status-home{display:inline-flex;align-items:center;gap:8px;margin:14px 0;padding:8px 12px;border:1px solid #333;border-radius:999px;background:#111;color:#ddd;font-size:11px;font-weight:800;letter-spacing:.4px}
-.shop-dot-home{width:8px;height:8px;border-radius:50%;background:#25d366;box-shadow:0 0 10px rgba(37,211,102,.55)}
-.shop-dot-home.closed{background:#ff4545;box-shadow:0 0 10px rgba(255,69,69,.45)}
-.shop-status-home.closed{border-color:rgba(255,69,69,.35);color:#ff7777}
-.stock-badge-home{position:absolute;top:10px;right:10px;padding:6px 9px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.4px;z-index:3}.stock-badge-home.out{background:rgba(255,48,48,.14);border-color:rgba(255,48,48,.55);color:#ff7777}
-.product.item-out .product-img img{filter:brightness(.58) saturate(.5)}
-.add-btn.out-of-stock{opacity:.55;cursor:not-allowed;border-color:rgba(255,48,48,.4)!important;color:#ff7777!important;background:#140909!important}
+.hero{
+  padding:78px 0 60px;
+  text-align:center;
+  background:radial-gradient(circle at 50% 20%,rgba(216,177,90,.12),transparent 42%)
+}
+.hero-kicker{color:var(--gold2);font-size:12px;letter-spacing:4px;font-weight:700}
+.hero h1{font-size:clamp(38px,7vw,72px);line-height:1;margin:15px 0}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:650px;margin:0 auto 24px;color:#bbb}
+.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.outline-btn{
+  padding:11px 17px;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  background:transparent;
+  color:#fff;
+  font-weight:700
+}
+
+.trust{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:16px 0
+}
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  text-align:center
+}
+.trust-grid div{color:#ccc;font-size:13px}
+.trust-grid b{display:block;color:var(--gold2);font-size:15px}
+
+section{padding:55px 0}
+.section-head{text-align:center;margin-bottom:28px}
+.eyebrow{color:var(--gold);letter-spacing:3px;font-size:11px;font-weight:800}
+.section-head h2{font-size:32px;margin-top:6px}
+.section-head p{color:#aaa;margin-top:7px}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px
+}
+.product{
+  background:linear-gradient(180deg,#131313,#0b0b0b);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 35px rgba(0,0,0,.25)
+}
+.product-img{
+  height:190px;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden
+}
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+.product-body{padding:15px}
+.product-body h3{font-size:17px;margin-bottom:4px}
+.price{color:var(--gold2);font-weight:800;font-size:18px}
+.product-body p{font-size:12px;color:#999;margin:5px 0 13px}
+.add-btn{
+  width:100%;
+  padding:10px;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:#fff;
+  border-radius:9px;
+  font-weight:800
+}
+.add-btn:hover{background:var(--gold);color:#090909}
+
+.why-grid,.visit-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px
+}
+.info-card{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#0d0d0d
+}
+.info-card .icon{font-size:28px}
+.info-card h3{margin:9px 0 5px}
+.info-card p{color:#999;font-size:14px}
+
+.track-box{
+  max-width:760px;
+  margin:auto;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#0c0c0c
+}
+.track-input{display:flex;gap:10px}
+.track-input input{flex:1}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  margin-top:25px;
+  gap:5px
+}
+.step{text-align:center;color:#666;font-size:11px}
+.dot{
+  width:25px;
+  height:25px;
+  border:1px solid #555;
+  border-radius:50%;
+  margin:0 auto 7px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.step.active{color:var(--gold2)}
+.step.active .dot{
+  border-color:var(--gold);
+  background:var(--gold);
+  color:#000
+}
+
+footer{
+  padding:35px 0;
+  border-top:1px solid var(--line);
+  color:#888;
+  text-align:center;
+  font-size:13px
+}
+.footer-brand{
+  color:#fff;
+  font-weight:800;
+  margin-bottom:6px
+}
+
+input,textarea,select{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:9px;
+  padding:11px;
+  outline:none
+}
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+label{
+  display:block;
+  color:#ccc;
+  font-size:12px;
+  margin:0 0 6px;
+  font-weight:700
+}
+.form-group{margin-bottom:13px}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:80;
+  background:rgba(0,0,0,.76);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(620px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#0d0d0d;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px
+}
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-bottom:18px
+}
+.close{
+  background:#171717;
+  border:1px solid #333;
+  color:#fff;
+  border-radius:8px;
+  width:35px;
+  height:35px
+}
+.summary{
+  background:#080808;
+  border:1px solid #222;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:16px
+}
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  padding:5px 0;
+  color:#aaa;
+  font-size:13px
+}
+.summary-row.total{
+  color:#fff;
+  font-size:17px;
+  font-weight:800;
+  border-top:1px solid #333;
+  margin-top:5px;
+  padding-top:10px
+}
+.phone-choice{display:flex;gap:8px}
+.phone-choice input{flex:1}
+.location-status{
+  font-size:11px;
+  color:#888;
+  margin-top:6px
+}
+.location-btn{margin-top:6px}
+.order-btn{
+  width:100%;
+  margin-top:4px;
+  padding:12px;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(135deg,#f0cf7d,#a97920);
+  font-weight:900
+}
+
+.cart-drawer{
+  position:fixed;
+  right:0;
+  top:0;
+  bottom:0;
+  width:min(430px,100%);
+  z-index:70;
+  background:#0b0b0b;
+  border-left:1px solid var(--line);
+  transform:translateX(100%);
+  transition:.25s;
+  display:flex;
+  flex-direction:column
+}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{
+  padding:17px;
+  border-bottom:1px solid #222;
+  display:flex;
+  justify-content:space-between
+}
+.cart-items{
+  flex:1;
+  overflow:auto;
+  padding:15px
+}
+.cart-item{
+  border-bottom:1px solid #222;
+  padding:12px 0
+}
+.cart-item-top{
+  display:flex;
+  justify-content:space-between;
+  gap:8px
+}
+.qty{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:9px
+}
+.qty button{
+  width:27px;
+  height:27px;
+  background:#171717;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:6px
+}
+.cart-foot{
+  padding:15px;
+  border-top:1px solid #222
+}
+.empty{
+  text-align:center;
+  color:#777;
+  padding:50px 15px
+}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translate(-50%,20px);
+  background:#151515;
+  color:#fff;
+  border:1px solid var(--gold);
+  padding:11px 16px;
+  border-radius:10px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:150;
+  font-size:13px
+}
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0)
+}
+
+@media(max-width:900px){
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid,.visit-grid{grid-template-columns:1fr}
+  .phone-top{display:none}
+}
+
+@media(max-width:560px){
+  .nav{min-height:62px}
+  .brand{font-size:13px}
+  .menu-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .product-img{height:145px}
+  .product-body{padding:11px}
+  .product-body h3{font-size:14px}
+  .price{font-size:16px}
+  .trust-grid{grid-template-columns:1fr}
+  .hero{padding:60px 0 45px}
+  .steps{grid-template-columns:repeat(5,1fr)}
+  .step{font-size:9px}
+  .phone-choice{display:block}
+}
+
+.shop-status-home{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:14px 0;
+  padding:8px 12px;
+  border:1px solid #333;
+  border-radius:999px;
+  background:#111;
+  color:#ddd;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.4px
+}
+.shop-dot-home{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#25d366;
+  box-shadow:0 0 10px rgba(37,211,102,.55)
+}
+.shop-dot-home.closed{
+  background:#ff4545;
+  box-shadow:0 0 10px rgba(255,69,69,.45)
+}
+.shop-status-home.closed{
+  border-color:rgba(255,69,69,.35);
+  color:#ff7777
+}
+.stock-badge-home{
+  position:absolute;
+  top:10px;
+  right:10px;
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.4px;
+  z-index:3
+}
+.stock-badge-home.out{
+  background:rgba(255,48,48,.14);
+  border-color:rgba(255,48,48,.55);
+  color:#ff7777
+}
+.product.item-out .product-img img{
+  filter:brightness(.58) saturate(.5)
+}
+.add-btn.out-of-stock{
+  opacity:.55;
+  cursor:not-allowed;
+  border-color:rgba(255,48,48,.4)!important;
+  color:#ff7777!important;
+  background:#140909!important
+}
 </style>
 </head>
+
 <body>
 
 <header>
   <div class="container nav">
-    <a class="brand" href="home.html"><span class="crown">♛</span><span>THE QUEEN<small>FAST FOOD</small></span></a>
+    <a class="brand" href="home.html">
+      <span class="crown">♛</span>
+      <span>THE QUEEN<small>FAST FOOD</small></span>
+    </a>
+
     <div class="nav-right">
       <a class="phone-top" href="tel:+919776856111">☎ 97768 56111</a>
-      <button class="cart-btn" id="openCartBtn">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
+      <button class="cart-btn" id="openCartBtn">
+        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
     </div>
   </div>
 </header>
 
 <main id="mainContent">
+
 <section class="hero">
   <div class="container">
     <div class="hero-kicker">ROYAL TASTE • LOCAL LOVE</div>
+
     <h1>Choose. <span>Add.</span> Enjoy.</h1>
-    <p>Freshly prepared favourites from The Queen Fast Food, Ibrisingh. Order online and enjoy a simple, royal food experience.</p>
-    <div id="shopStatusHome" class="shop-status-home"><span id="shopDotHome" class="shop-dot-home"></span><span id="shopStatusHomeText">CHECKING SHOP STATUS...</span></div>
-    <div class="hero-actions"><a class="gold-btn" href="#menu">Explore Menu</a><button class="outline-btn" id="heroCartBtn">View Cart</button></div>
+
+    <p>
+      Freshly prepared favourites from The Queen Fast Food, Ibrisingh.
+      Order online and enjoy a simple, royal food experience.
+    </p>
+
+    <div id="shopStatusHome" class="shop-status-home">
+      <span id="shopDotHome" class="shop-dot-home"></span>
+      <span id="shopStatusHomeText">CHECKING SHOP STATUS...</span>
+    </div>
+
+    <div class="hero-actions">
+      <a class="gold-btn" href="#menu">Explore Menu</a>
+      <button class="outline-btn" id="heroCartBtn">View Cart</button>
+    </div>
   </div>
 </section>
 
-<div class="trust"><div class="container trust-grid"><div><b>Freshly Prepared</b>Made for your order</div><div><b>Easy Ordering</b>Cart to WhatsApp</div><div><b>Local Delivery</b>₹6/km delivery charge</div></div></div>
+<div class="trust">
+  <div class="container trust-grid">
+    <div>
+      <b>Freshly Prepared</b>
+      Made for your order
+    </div>
+
+    <div>
+      <b>Easy Ordering</b>
+      Cart to WhatsApp
+    </div>
+
+    <div>
+      <b>Local Delivery</b>
+      ₹6/km delivery charge
+    </div>
+  </div>
+</div>
 
 <section id="menu">
   <div class="container">
@@ -74,6 +501,7 @@ input,textarea,select{width:100%;background:#111;color:#fff;border:1px solid #33
       <h2>Pick Your Favourite</h2>
       <p>Choose an item, add quantity and place your order.</p>
     </div>
+
     <div class="menu-grid" id="menuGrid"></div>
   </div>
 </section>
@@ -84,80 +512,113 @@ input,textarea,select{width:100%;background:#111;color:#fff;border:1px solid #33
       <div class="eyebrow">WHY THE QUEEN</div>
       <h2>Made For A Royal Bite</h2>
     </div>
+
     <div class="why-grid">
+
       <div class="info-card">
         <div class="icon">👑</div>
         <h3>Queen Quality</h3>
-        <p>Carefully prepared food with a focus on taste, freshness and presentation.</p>
+        <p>
+          Carefully prepared food with a focus on taste,
+          freshness and presentation.
+        </p>
       </div>
+
       <div class="info-card">
         <div class="icon">⚡</div>
         <h3>Simple Ordering</h3>
-        <p>Add your favourites to the cart, confirm delivery details and order through WhatsApp.</p>
+        <p>
+          Add your favourites to the cart, confirm delivery
+          details and order through WhatsApp.
+        </p>
       </div>
+
       <div class="info-card">
         <div class="icon">📍</div>
         <h3>Local Delivery</h3>
-        <p>Delivery charge is calculated from the restaurant using road distance.</p>
+        <p>
+          Delivery charge is calculated from the restaurant
+          using road distance.
+        </p>
       </div>
+
     </div>
   </div>
 </section>
 
 <section>
   <div class="container">
+
     <div class="section-head">
       <div class="eyebrow">VISIT THE QUEEN</div>
       <h2>Come Hungry. Leave Happy.</h2>
     </div>
+
     <div class="visit-grid">
+
       <div class="info-card">
         <div class="icon">📍</div>
         <h3>Ibrisingh</h3>
         <p>Tirtol, Jagatsinghpur, Odisha</p>
       </div>
+
       <div class="info-card">
         <div class="icon">📞</div>
         <h3>Call / WhatsApp</h3>
         <p>97768 56111</p>
       </div>
+
       <div class="info-card">
         <div class="icon">🍽️</div>
         <h3>Fresh Favourites</h3>
-        <p>Chowmin, rolls, chicken dishes, biriyani and more.</p>
+        <p>
+          Chowmin, rolls, chicken dishes, biriyani and more.
+        </p>
       </div>
+
     </div>
   </div>
 </section>
 
 <section>
   <div class="container">
+
     <div class="section-head">
       <div class="eyebrow">ORDER TRACKING</div>
       <h2>Track Your Order</h2>
       <p>Enter the order ID received after placing your order.</p>
     </div>
+
     <div class="track-box">
+
       <div class="track-input">
         <input id="trackOrderId" placeholder="e.g. QF123456">
         <button class="gold-btn" id="trackBtn">Track</button>
       </div>
+
       <div id="trackResult" style="display:none"></div>
+
     </div>
+
   </div>
 </section>
+
 </main>
 
 <footer>
   <div class="container">
     <div class="footer-brand">♛ THE QUEEN FAST FOOD</div>
     <div>Ibrisingh, Tirtol, Jagatsinghpur, Odisha</div>
-    <div style="margin-top:5px">© <span id="year"></span> The Queen Fast Food. All rights reserved.</div>
+    <div style="margin-top:5px">
+      © <span id="year"></span> The Queen Fast Food. All rights reserved.
+    </div>
   </div>
 </footer>
 
 <!-- CART -->
+
 <aside class="cart-drawer" id="cartDrawer">
+
   <div class="cart-head">
     <strong>🛒 Your Cart</strong>
     <button class="close" id="closeCartBtn">×</button>
@@ -166,80 +627,152 @@ input,textarea,select{width:100%;background:#111;color:#fff;border:1px solid #33
   <div class="cart-items" id="cartItems"></div>
 
   <div class="cart-foot">
+
     <div class="summary-row total">
       <span>Subtotal</span>
       <span id="cartSubtotal">₹0</span>
     </div>
-    <button class="gold-btn" style="width:100%;margin-top:10px" id="checkoutBtn">
+
+    <button
+      class="gold-btn"
+      style="width:100%;margin-top:10px"
+      id="checkoutBtn"
+    >
       Proceed to Checkout
     </button>
+
   </div>
+
 </aside>
 
 <!-- CHECKOUT -->
+
 <div class="modal" id="checkoutModal">
+
   <div class="modal-card">
 
     <div class="modal-head">
+
       <div>
         <div class="eyebrow">ROYAL CHECKOUT</div>
         <h2>Complete Your Order</h2>
       </div>
+
       <button class="close" id="closeCheckoutBtn">×</button>
+
     </div>
 
     <div class="summary" id="checkoutSummary"></div>
 
     <div class="form-group">
       <label for="customerName">Customer Name</label>
-      <input id="customerName" placeholder="Enter your name">
+      <input
+        id="customerName"
+        placeholder="Enter your name"
+      >
     </div>
 
     <div class="form-group">
-      <label for="customerPhone">Order Contact Number</label>
+
+      <label for="customerPhone">
+        Order Contact Number
+      </label>
+
       <div class="phone-choice">
-        <input id="customerPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="Enter 10-digit mobile number">
+
+        <input
+          id="customerPhone"
+          type="tel"
+          inputmode="numeric"
+          maxlength="10"
+          placeholder="Enter 10-digit mobile number"
+        >
+
       </div>
-      <div id="alternatePhoneHint" class="login-as">
+
+      <div
+        id="alternatePhoneHint"
+        style="font-size:11px;color:#888;margin-top:5px"
+      >
         Enter the mobile number for this order.
       </div>
+
     </div>
 
     <div class="form-group">
-      <label for="customerAddress">Delivery Address</label>
-      <textarea id="customerAddress" rows="3" placeholder="Enter complete delivery address"></textarea>
+
+      <label for="customerAddress">
+        Delivery Address
+      </label>
+
+      <textarea
+        id="customerAddress"
+        rows="3"
+        placeholder="Enter complete delivery address"
+      ></textarea>
+
     </div>
 
     <div class="form-group">
+
       <label>Delivery Location</label>
-      <button id="locationBtn" class="outline-btn location-btn" type="button">
+
+      <button
+        id="locationBtn"
+        class="outline-btn location-btn"
+        type="button"
+      >
         📍 Use My Current Location
       </button>
-      <div class="location-status" id="locationStatus">
+
+      <div
+        class="location-status"
+        id="locationStatus"
+      >
         Location is required for delivery charge calculation.
       </div>
+
     </div>
 
     <div class="form-group">
-      <label for="paymentMethod">Payment Method</label>
+
+      <label for="paymentMethod">
+        Payment Method
+      </label>
+
       <select id="paymentMethod">
-        <option value="Cash on Delivery">Cash on Delivery</option>
-        <option value="UPI">UPI</option>
+
+        <option value="Cash on Delivery">
+          Cash on Delivery
+        </option>
+
+        <option value="UPI">
+          UPI
+        </option>
+
       </select>
+
     </div>
 
-    <button id="placeOrderBtn" class="order-btn">
+    <button
+      id="placeOrderBtn"
+      class="order-btn"
+    >
       PLACE ORDER ON WHATSAPP
     </button>
 
   </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 import {
   getDatabase,
   ref,
@@ -248,295 +781,370 @@ import {
   get
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+
 const firebaseConfig = {
+
   apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
   authDomain: "the-queen-fast-food.firebaseapp.com",
-  databaseURL: "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
   projectId: "the-queen-fast-food",
-  storageBucket: "the-queen-fast-food.firebasestorage.app",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
   messagingSenderId: "435721389652",
-  appId: "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
   measurementId: "G-Q1YCK636KJ"
+
 };
+
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const restaurantLat = 20.216780359694468;
-const restaurantLng = 86.36464363454978;
+
+const ADMIN_UID =
+  "eWlMt1dG2pUOxsTo0NaXgY1avn33";
+
+
+const restaurantLat =
+  20.216780359694468;
+
+const restaurantLng =
+  86.36464363454978;
+
+
+let whatsappNumber =
+  "919776856111";
 
 const DELIVERY_RATE = 6;
 
-const defaultMenu = [
- {
-  id:"veg-chowmin",
-  name:"Veg Chowmin",
-  price:50,
-  image:"https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"veg-roll",
-  name:"Veg Roll",
-  price:50,
-  image:"https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"manchurian",
-  name:"Manchurian",
-  price:50,
-  image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"paneer-tikka",
-  name:"Paneer Tikka",
-  price:60,
-  image:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"paneer-butter-masala",
-  name:"Paneer Butter Masala",
-  price:130,
-  image:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"egg-chicken-chowmin",
-  name:"Egg Chicken Chowmin",
-  price:65,
-  image:"https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"egg-chicken-roll",
-  name:"Egg Chicken Roll",
-  price:60,
-  image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"pakoda",
-  name:"Pakoda",
-  price:60,
-  image:"https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"chilli-chicken",
-  name:"Chilli Chicken",
-  price:120,
-  image:"https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"chicken-garlic",
-  name:"Chicken Garlic",
-  price:80,
-  image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"chicken-biriyani",
-  name:"Chicken Biriyani",
-  price:120,
-  image:"https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=900&q=80"
- },
- {
-  id:"veg-biriyani",
-  name:"Veg Biriyani",
-  price:100,
-  image:"https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=900&q=80"
- }
-];
-
-let menu = [...defaultMenu];
-
-let cart = [];
-
-let whatsappNumber = "9776856111";
 
 let selectedLat = null;
 let selectedLng = null;
 let selectedDistanceKm = null;
 
-let usingAlternatePhone = false;
 
-const $ = id => document.getElementById(id);
+let cart = [];
 
-$('year').textContent = new Date().getFullYear();
+
+let menu = [];
+
+
+const defaultMenu = [
+
+  {
+    id:"veg-chowmin",
+    name:"Veg Chowmin",
+    price:50,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"veg-roll",
+    name:"Veg Roll",
+    price:50,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"manchurian",
+    name:"Manchurian",
+    price:50,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"paneer-tikka",
+    name:"Paneer Tikka",
+    price:60,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"paneer-butter-masala",
+    name:"Paneer Butter Masala",
+    price:130,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"egg-chicken-chowmin",
+    name:"Egg Chicken Chowmin",
+    price:65,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"egg-chicken-roll",
+    name:"Egg Chicken Roll",
+    price:60,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"pakoda",
+    name:"Pakoda",
+    price:60,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chilli-chicken",
+    name:"Chilli Chicken",
+    price:120,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chicken-garlic",
+    name:"Chicken Garlic",
+    price:80,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chicken-biriyani",
+    name:"Chicken Biriyani",
+    price:120,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"veg-biriyani",
+    name:"Veg Biriyani",
+    price:100,
+    image:"",
+    available:true
+  }
+
+];
+
+
+menu = defaultMenu.map(x => ({...x}));
+
+
+const defaultShopSettings = {
+
+  scheduleEnabled:true,
+
+  openTime:"12:00",
+
+  closeTime:"23:00",
+
+  statusOverride:"auto",
+
+  closedMessage:"SHOP IS CLOSED."
+
+};
+
+
+let shopSettings =
+  {...defaultShopSettings};
+
+
+function $(id){
+  return document.getElementById(id);
+}
+
+
+function money(n){
+
+  return "₹" +
+    Number(n || 0).toFixed(0);
+
+}
+
+
+function escapeHTML(str){
+
+  return String(str ?? "")
+    .replace(
+      /[&<>'"]/g,
+      c => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        "'":'&#39;',
+        '"':'&quot;'
+      }[c])
+    );
+
+}
+
+
+function phoneDigits(phone){
+
+  return String(phone || "")
+    .replace(/\D/g,"")
+    .slice(-10);
+
+}
+
 
 function normalizeAvailable(value){
 
-  if(value===undefined || value===null || value==="") return true;
+  if(value === false) return false;
 
-  if(value===true) return true;
+  if(value === "false") return false;
 
-  if(value===false) return false;
+  if(value === 0) return false;
 
-  if(typeof value==="number") return value!==0;
-
-  if(typeof value==="string"){
-
-    const v=value.trim().toLowerCase();
-
-    if(
-      v==="false" ||
-      v==="0" ||
-      v==="out" ||
-      v==="out of stock" ||
-      v==="unavailable"
-    ) return false;
-
-    if(
-      v==="true" ||
-      v==="1" ||
-      v==="available"
-    ) return true;
-  }
+  if(value === "0") return false;
 
   return true;
+
 }
 
-function money(n){
-  return "₹" + Number(n||0).toFixed(0);
-}
-
-function escapeHTML(str){
-  return String(str??"").replace(
-    /[&<>'"]/g,
-    c=>({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      "'":'&#39;',
-      '"':'&quot;'
-    }[c])
-  );
-}
-
-function phoneDigits(phone){
-  return String(phone||"").replace(/\D/g,"").slice(-10);
-}
 
 function showToast(msg){
-  const t=$('toast');
 
-  t.textContent=msg;
+  const t = $('toast');
+
+  t.textContent = msg;
 
   t.classList.add('show');
 
   setTimeout(
-    ()=>t.classList.remove('show'),
+    () => t.classList.remove('show'),
     2800
   );
+
 }
 
-
-/* =========================
-   SHOP SETTINGS
-========================= */
-
-const defaultShopSettings={
-  scheduleEnabled:true,
-  openTime:"12:00",
-  closeTime:"23:00",
-  statusOverride:"auto",
-  closedMessage:"SHOP IS CLOSED."
-};
-
-let shopSettings={
-  ...defaultShopSettings
-};
 
 function parseTimeMinutes(value){
 
-  const m=String(value||"").match(/^(\d{1,2}):(\d{2})$/);
+  const m =
+    String(value || "")
+      .match(/^(\d{1,2}):(\d{2})$/);
 
-  if(!m)return null;
+  if(!m) return null;
 
-  const h=Number(m[1]);
-  const min=Number(m[2]);
+  const h = Number(m[1]);
+  const min = Number(m[2]);
 
   if(
-    h<0 ||
-    h>23 ||
-    min<0 ||
-    min>59
-  ) return null;
+    h < 0 ||
+    h > 23 ||
+    min < 0 ||
+    min > 59
+  ){
+    return null;
+  }
 
-  return h*60+min;
+  return h * 60 + min;
+
 }
+
 
 function indiaMinutes(){
 
   try{
 
-    const parts=new Intl.DateTimeFormat(
-      "en-IN",
-      {
-        timeZone:"Asia/Kolkata",
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:false
-      }
-    ).formatToParts(new Date());
+    const parts =
+      new Intl.DateTimeFormat(
+        "en-IN",
+        {
+          timeZone:"Asia/Kolkata",
+          hour:"2-digit",
+          minute:"2-digit",
+          hour12:false
+        }
+      ).formatToParts(new Date());
 
-    let h=Number(
-      parts.find(x=>x.type==="hour")?.value||0
-    );
+    let h =
+      Number(
+        parts.find(
+          x => x.type === "hour"
+        )?.value || 0
+      );
 
-    const m=Number(
-      parts.find(x=>x.type==="minute")?.value||0
-    );
+    const m =
+      Number(
+        parts.find(
+          x => x.type === "minute"
+        )?.value || 0
+      );
 
-    if(h===24)h=0;
+    if(h === 24) h = 0;
 
-    return h*60+m;
+    return h * 60 + m;
 
   }catch(e){
 
-    return new Date().getHours()*60+
-           new Date().getMinutes();
+    return new Date().getHours() * 60 +
+      new Date().getMinutes();
 
   }
+
 }
+
 
 function isShopOpen(){
 
-  const override=
-    String(shopSettings.statusOverride||"")
-    .toLowerCase();
+  const override =
+    String(
+      shopSettings.statusOverride || ""
+    ).toLowerCase();
 
-  if(override==="open")
+  if(override === "open") return true;
+
+  if(override === "closed") return false;
+
+  if(shopSettings.scheduleEnabled === false)
     return true;
 
-  if(override==="closed")
-    return false;
+  const open =
+    parseTimeMinutes(
+      shopSettings.openTime || "12:00"
+    );
 
-  if(shopSettings.scheduleEnabled===false)
+  const close =
+    parseTimeMinutes(
+      shopSettings.closeTime || "23:00"
+    );
+
+  if(open === null || close === null)
     return true;
 
-  const open=parseTimeMinutes(
-    shopSettings.openTime||"12:00"
-  );
-
-  const close=parseTimeMinutes(
-    shopSettings.closeTime||"23:00"
-  );
-
-  if(open===null || close===null)
+  if(open === close)
     return true;
 
-  if(open===close)
-    return true;
+  const now = indiaMinutes();
 
-  const now=indiaMinutes();
+  return open < close
+    ? now >= open && now < close
+    : now >= open || now < close;
 
-  return open<close
-    ? now>=open && now<close
-    : now>=open || now<close;
 }
+
 
 function updateShopStatusHome(){
 
-  const open=isShopOpen();
+  const open = isShopOpen();
 
-  const box=$("shopStatusHome");
-  const dot=$("shopDotHome");
-  const text=$("shopStatusHomeText");
+  const box = $("shopStatusHome");
+  const dot = $("shopDotHome");
+  const text = $("shopStatusHomeText");
 
   if(!box || !dot || !text)
     return;
@@ -551,59 +1159,59 @@ function updateShopStatusHome(){
     !open
   );
 
-  text.textContent=
+  text.textContent =
     open
       ? "SHOP IS OPEN"
       : "SHOP IS CLOSED";
+
 }
 
 
-/* =========================
-   FIREBASE SETTINGS
-========================= */
-
 onValue(
   ref(db,"settings"),
-  snap=>{
+  snap => {
 
-    const s=snap.val()||{};
+    const s = snap.val() || {};
 
     if(s.whatsappNumber)
-      whatsappNumber=
+      whatsappNumber =
         phoneDigits(s.whatsappNumber);
 
-    shopSettings={
+
+    shopSettings = {
       ...defaultShopSettings,
       ...s
     };
 
+
     if(
-      s.statusOverride==null &&
-      s.manualClosed===true
+      s.statusOverride == null &&
+      s.manualClosed === true
     ){
-      shopSettings.statusOverride="closed";
+      shopSettings.statusOverride =
+        "closed";
     }
 
 
-    /* MENU ARRAY */
-
     if(Array.isArray(s.menu)){
 
-      menu=s.menu.map(
-        (item,index)=>({
+      menu = s.menu.map(
+        (item,index) => ({
 
-          ...(defaultMenu[index]||{}),
+          ...(defaultMenu[index] || {}),
 
-          ...(item||{}),
+          ...(item || {}),
 
           id:
-            item &&
-            item.id!=null
+            (
+              item &&
+              item.id != null
+            )
               ? item.id
               : (
-                  defaultMenu[index]?.id ||
-                  String(index+1)
-                ),
+                defaultMenu[index]?.id ||
+                String(index + 1)
+              ),
 
           available:
             normalizeAvailable(
@@ -613,32 +1221,30 @@ onValue(
         })
       );
 
-    }
-
-    /* MENU OBJECT */
-
-    else if(
+    }else if(
       s.menu &&
-      typeof s.menu==='object'
+      typeof s.menu === 'object'
     ){
 
-      const entries=
+      const entries =
         Object.entries(s.menu);
 
-      menu=defaultMenu.map(
-        (item,index)=>{
 
-          const byString=
+      menu = defaultMenu.map(
+        (item,index) => {
+
+          const byString =
             s.menu[item.id];
 
-          const byNumber=
-            s.menu[String(index+1)];
+          const byNumber =
+            s.menu[String(index + 1)];
 
-          const firebaseItem=
+          const firebaseItem =
             byString ||
             byNumber ||
             {};
 
+
           return {
 
             ...item,
@@ -657,71 +1263,79 @@ onValue(
         }
       );
 
-      const defaultKeys=
+
+      const defaultKeys =
         new Set(
           defaultMenu.flatMap(
-            (item,index)=>[
+            (item,index) => [
               String(item.id),
-              String(index+1)
+              String(index + 1)
             ]
           )
         );
 
-      const extras=
+
+      const extras =
         entries
-        .filter(
-          ([id])=>
-            !defaultKeys.has(String(id))
-        )
-        .map(
-          ([id,item])=>({
+          .filter(
+            ([id]) =>
+              !defaultKeys.has(String(id))
+          )
+          .map(
+            ([id,item]) => ({
 
-            id,
+              id,
 
-            ...(item||{}),
+              ...(item || {}),
 
-            available:
-              normalizeAvailable(
-                item?.available
-              )
+              available:
+                normalizeAvailable(
+                  item?.available
+                )
 
-          })
-        );
+            })
+          );
 
-      menu=[
+
+      menu = [
         ...menu,
         ...extras
       ];
-    }
 
-    /* OLD MENU ITEMS FORMAT */
-
-    else if(
+    }else if(
       s.menuItems &&
-      typeof s.menuItems==='object'
+      typeof s.menuItems === 'object'
     ){
 
-      menu=defaultMenu.map(
-        (item,index)=>{
+      menu = defaultMenu.map(
+        (item,index) => {
 
-          const firebaseItem=
+          const firebaseItem =
             s.menuItems[item.id] ||
-            s.menuItems[String(index+1)] ||
+            s.menuItems[String(index + 1)] ||
             {};
 
+
           return {
+
             ...item,
+
             ...firebaseItem,
+
             id:item.id,
+
             available:
               normalizeAvailable(
                 firebaseItem.available
               )
+
           };
 
         }
       );
+
     }
+
 
     renderMenu();
 
@@ -731,122 +1345,132 @@ onValue(
 );
 
 
-/* =========================
-   MENU
-========================= */
-
 function renderMenu(){
 
-  $('menuGrid').innerHTML=
-    menu.map(item=>{
+  $('menuGrid').innerHTML =
+    menu.map(item => {
 
-      const available=
+      const available =
         normalizeAvailable(
           item.available
         );
 
-      const id=
+      const id =
         String(item.id);
 
-      const safeId=
+      const safeId =
         escapeHTML(id);
 
+
       return `
-      <article class="product ${available?'':'item-out'}">
 
-        <div
-          class="product-img"
-          style="position:relative"
-        >
+<article class="product ${available ? '' : 'item-out'}">
 
-          <img
-            src="${escapeHTML(item.image||'')}"
-            alt="${escapeHTML(item.name)}"
-            loading="lazy"
-            onerror="this.style.display='none'"
-          >
+  <div
+    class="product-img"
+    style="position:relative"
+  >
 
-          ${
-            available
-              ? ""
-              : `
-              <span class="stock-badge-home out">
-                OUT OF STOCK
-              </span>
-              `
-          }
+    <img
+      src="${escapeHTML(item.image || '')}"
+      alt="${escapeHTML(item.name)}"
+      loading="lazy"
+      onerror="this.style.display='none'"
+    >
 
-        </div>
+    ${
+      available
+        ? ""
+        :
+        `
+        <span class="stock-badge-home out">
+          OUT OF STOCK
+        </span>
+        `
+    }
 
-        <div class="product-body">
+  </div>
 
-          <h3>
-            ${escapeHTML(item.name)}
-          </h3>
+  <div class="product-body">
 
-          <div class="price">
-            ${money(item.price)}
-          </div>
+    <h3>
+      ${escapeHTML(item.name)}
+    </h3>
 
-          <p>
-            Freshly prepared • Queen favourite
-          </p>
+    <div class="price">
+      ${money(item.price)}
+    </div>
 
-          ${
-            available
-              ? `
-              <button
-                class="add-btn"
-                data-add="${safeId}"
-              >
-                ADD TO CART
-              </button>
-              `
-              : `
-              <button
-                class="add-btn out-of-stock"
-                disabled
-              >
-                OUT OF STOCK
-              </button>
-              `
-          }
+    <p>
+      Freshly prepared • Queen favourite
+    </p>
 
-        </div>
+    ${
+      available
 
-      </article>
-      `;
+      ?
+
+      `
+      <button
+        class="add-btn"
+        data-add="${safeId}"
+      >
+        ADD TO CART
+      </button>
+      `
+
+      :
+
+      `
+      <button
+        class="add-btn out-of-stock"
+        disabled
+      >
+        OUT OF STOCK
+      </button>
+      `
+    }
+
+  </div>
+
+</article>
+
+`;
 
     }).join('');
+
 
   document
     .querySelectorAll('[data-add]')
     .forEach(
-      btn=>btn.addEventListener(
-        'click',
-        ()=>addToCart(
-          btn.dataset.add
+      btn =>
+        btn.addEventListener(
+          'click',
+          () =>
+            addToCart(
+              btn.dataset.add
+            )
         )
-      )
     );
+
 }
 
 
-/* =========================
-   CART
-========================= */
-
 function addToCart(id){
 
-  const item=
+  const item =
     menu.find(
-      x=>String(x.id)===String(id)
+      x =>
+        String(x.id) ===
+        String(id)
     );
 
   if(!item)
     return;
 
+
   updateShopStatusHome();
+
 
   if(!isShopOpen()){
 
@@ -856,32 +1480,33 @@ function addToCart(id){
     );
 
     return;
+
   }
 
-  if(
-    !normalizeAvailable(
-      item.available
-    )
-  ){
+
+  if(!normalizeAvailable(item.available)){
 
     showToast(
       `${item.name} is OUT OF STOCK.`
     );
 
     return;
+
   }
 
-  const found=
+
+  const found =
     cart.find(
-      x=>String(x.id)===String(id)
+      x =>
+        String(x.id) ===
+        String(id)
     );
 
-  if(found){
 
+  if(found)
     found.qty++;
 
-  }else{
-
+  else
     cart.push({
 
       id:item.id,
@@ -896,168 +1521,196 @@ function addToCart(id){
 
     });
 
-  }
 
   renderCart();
 
   showToast(
     `${item.name} added to cart`
   );
+
 }
+
 
 function getSubtotal(){
 
   return cart.reduce(
-    (sum,i)=>
-      sum+i.price*i.qty,
+    (sum,i) =>
+      sum + i.price * i.qty,
     0
   );
 
 }
+
 
 function getCartCount(){
 
   return cart.reduce(
-    (sum,i)=>
-      sum+i.qty,
+    (sum,i) =>
+      sum + i.qty,
     0
   );
 
 }
 
+
 function renderCart(){
 
-  $('cartCount').textContent=
+  $('cartCount').textContent =
     getCartCount();
+
 
   if(!cart.length){
 
-    $('cartItems').innerHTML=
-      '<div class="empty">Your cart is empty.<br>Add something delicious 👑</div>';
+    $('cartItems').innerHTML =
+      `
+      <div class="empty">
+        Your cart is empty.<br>
+        Add something delicious 👑
+      </div>
+      `;
 
-    $('cartSubtotal').textContent=
+    $('cartSubtotal').textContent =
       '₹0';
 
     return;
+
   }
 
-  $('cartItems').innerHTML=
+
+  $('cartItems').innerHTML =
     cart.map(
-      i=>`
+      i =>
+        `
+        <div class="cart-item">
 
-      <div class="cart-item">
+          <div class="cart-item-top">
 
-        <div class="cart-item-top">
+            <div>
 
-          <div>
+              <strong>
+                ${escapeHTML(i.name)}
+              </strong>
+
+              <div
+                style="color:#aaa;font-size:12px"
+              >
+                ${money(i.price)} each
+              </div>
+
+            </div>
 
             <strong>
-              ${escapeHTML(i.name)}
+              ${money(i.price * i.qty)}
             </strong>
-
-            <div
-              style="color:#aaa;font-size:12px"
-            >
-              ${money(i.price)} each
-            </div>
 
           </div>
 
-          <strong>
-            ${money(i.price*i.qty)}
-          </strong>
+
+          <div class="qty">
+
+            <button
+              data-minus="${escapeHTML(i.id)}"
+            >
+              −
+            </button>
+
+            <span>
+              ${i.qty}
+              plate${i.qty > 1 ? 's' : ''}
+            </span>
+
+            <button
+              data-plus="${escapeHTML(i.id)}"
+            >
+              +
+            </button>
+
+            <button
+              data-remove="${escapeHTML(i.id)}"
+              style="margin-left:auto;width:auto;padding:0 8px"
+            >
+              Remove
+            </button>
+
+          </div>
 
         </div>
-
-        <div class="qty">
-
-          <button
-            data-minus="${escapeHTML(i.id)}"
-          >
-            −
-          </button>
-
-          <span>
-            ${i.qty}
-            plate${i.qty>1?'s':''}
-          </span>
-
-          <button
-            data-plus="${escapeHTML(i.id)}"
-          >
-            +
-          </button>
-
-          <button
-            data-remove="${escapeHTML(i.id)}"
-            style="margin-left:auto;width:auto;padding:0 8px"
-          >
-            Remove
-          </button>
-
-        </div>
-
-      </div>
-
-      `
+        `
     ).join('');
 
-  $('cartSubtotal').textContent=
+
+  $('cartSubtotal').textContent =
     money(getSubtotal());
+
 
   document
     .querySelectorAll('[data-plus]')
     .forEach(
-      b=>
-        b.onclick=()=>
-          updateCartItem(
-            b.dataset.plus,
-            1
-          )
+      b =>
+        b.onclick =
+          () =>
+            updateCartItem(
+              b.dataset.plus,
+              1
+            )
     );
+
 
   document
     .querySelectorAll('[data-minus]')
     .forEach(
-      b=>
-        b.onclick=()=>
-          updateCartItem(
-            b.dataset.minus,
-            -1
-          )
+      b =>
+        b.onclick =
+          () =>
+            updateCartItem(
+              b.dataset.minus,
+              -1
+            )
     );
+
 
   document
     .querySelectorAll('[data-remove]')
     .forEach(
-      b=>
-        b.onclick=()=>{
-          cart=
-            cart.filter(
-              x=>x.id!==b.dataset.remove
-            );
+      b =>
+        b.onclick =
+          () => {
 
-          renderCart();
-        }
+            cart =
+              cart.filter(
+                x =>
+                  x.id !==
+                  b.dataset.remove
+              );
+
+            renderCart();
+
+          }
     );
+
 }
+
 
 function updateCartItem(id,delta){
 
-  const item=
+  const item =
     cart.find(
-      x=>x.id===id
+      x => x.id === id
     );
 
   if(!item)
     return;
 
-  if(delta>0){
 
-    const menuItem=
+  if(delta > 0){
+
+    const menuItem =
       menu.find(
-        x=>String(x.id)===String(id)
+        x =>
+          String(x.id) ===
+          String(id)
       );
+
 
     if(!isShopOpen()){
 
@@ -1067,7 +1720,9 @@ function updateCartItem(id,delta){
       );
 
       return;
+
     }
+
 
     if(
       menuItem &&
@@ -1081,22 +1736,29 @@ function updateCartItem(id,delta){
       );
 
       return;
+
     }
+
   }
 
-  item.qty+=delta;
 
-  if(item.qty<=0){
+  item.qty += delta;
 
-    cart=
+
+  if(item.qty <= 0){
+
+    cart =
       cart.filter(
-        x=>x.id!==id
+        x => x.id !== id
       );
 
   }
 
+
   renderCart();
+
 }
+
 
 function openCart(){
 
@@ -1104,31 +1766,32 @@ function openCart(){
 
   $('cartDrawer')
     .classList.add('open');
+
 }
+
 
 function closeCart(){
 
   $('cartDrawer')
     .classList.remove('open');
+
 }
 
-$('openCartBtn').onclick=
+
+$('openCartBtn').onclick =
   openCart;
 
-$('heroCartBtn').onclick=
+$('heroCartBtn').onclick =
   openCart;
 
-$('closeCartBtn').onclick=
+$('closeCartBtn').onclick =
   closeCart;
 
-
-/* =========================
-   CHECKOUT
-========================= */
 
 function openCheckout(){
 
   updateShopStatusHome();
+
 
   if(!isShopOpen()){
 
@@ -1138,7 +1801,9 @@ function openCheckout(){
     );
 
     return;
+
   }
+
 
   if(!cart.length){
 
@@ -1147,61 +1812,71 @@ function openCheckout(){
     );
 
     return;
+
   }
+
 
   closeCart();
 
-  usingAlternatePhone=false;
 
-  $('customerPhone').value='';
+  $('customerPhone').value =
+    '';
 
-  $('customerPhone').readOnly=false;
+  $('customerPhone').readOnly =
+    false;
 
-  $('alternatePhoneHint').textContent=
+
+  $('alternatePhoneHint').textContent =
     'Enter the mobile number for this order.';
+
 
   renderCheckoutSummary();
 
   $('checkoutModal')
     .classList.add('open');
+
 }
+
 
 function closeCheckout(){
 
   $('checkoutModal')
     .classList.remove('open');
+
 }
 
-$('checkoutBtn').onclick=
+
+$('checkoutBtn').onclick =
   openCheckout;
 
-$('closeCheckoutBtn').onclick=
+$('closeCheckoutBtn').onclick =
   closeCheckout;
+
 
 function renderCheckoutSummary(){
 
-  const subtotal=
+  const subtotal =
     getSubtotal();
 
-  $('checkoutSummary').innerHTML=
+
+  $('checkoutSummary').innerHTML =
 
     cart.map(
-      i=>`
+      i =>
+        `
+        <div class="summary-row">
 
-      <div class="summary-row">
+          <span>
+            ${escapeHTML(i.name)}
+            × ${i.qty}
+          </span>
 
-        <span>
-          ${escapeHTML(i.name)}
-          × ${i.qty}
-        </span>
+          <span>
+            ${money(i.price * i.qty)}
+          </span>
 
-        <span>
-          ${money(i.price*i.qty)}
-        </span>
-
-      </div>
-
-      `
+        </div>
+        `
     ).join('')
 
     +
@@ -1218,8 +1893,10 @@ function renderCheckoutSummary(){
         ${
           selectedDistanceKm
             ? money(
-                Math.ceil(selectedDistanceKm)
-                *DELIVERY_RATE
+                Math.ceil(
+                  selectedDistanceKm
+                ) *
+                DELIVERY_RATE
               )
             : 'Calculated after location'
         }
@@ -1227,153 +1904,180 @@ function renderCheckoutSummary(){
     </div>
 
     <div class="summary-row total">
+
       <span>Total</span>
+
       <span id="checkoutTotal">
+
         ${
           selectedDistanceKm
             ? money(
-                subtotal+
-                Math.ceil(selectedDistanceKm)
-                *DELIVERY_RATE
+                subtotal +
+                Math.ceil(
+                  selectedDistanceKm
+                ) *
+                DELIVERY_RATE
               )
             : money(subtotal)
         }
+
       </span>
+
     </div>
     `;
+
 }
+
 
 function updateCheckoutDelivery(){
 
-  const subtotal=
+  const subtotal =
     getSubtotal();
 
-  const delivery=
-    selectedDistanceKm==null
+  const delivery =
+    selectedDistanceKm == null
       ? null
-      : Math.ceil(
+      :
+        Math.ceil(
           selectedDistanceKm
-        )*DELIVERY_RATE;
+        ) *
+        DELIVERY_RATE;
 
-  const d=
+
+  const d =
     $('checkoutDelivery');
 
-  const t=
+  const t =
     $('checkoutTotal');
 
+
   if(d)
-    d.textContent=
-      delivery==null
+
+    d.textContent =
+      delivery == null
         ? 'Calculated after location'
         : money(delivery);
 
+
   if(t)
-    t.textContent=
+
+    t.textContent =
       money(
-        subtotal+
-        (delivery||0)
+        subtotal +
+        (delivery || 0)
       );
+
 }
 
 
-/* =========================
-   CUSTOMER PHONE
-========================= */
+$('customerPhone').addEventListener(
+  'input',
+  e => {
 
-$('customerPhone')
-  .addEventListener(
-    'input',
-    e=>{
-      e.target.value=
-        e.target.value
-          .replace(/\D/g,'')
-          .slice(0,10);
-    }
-  );
+    e.target.value =
+      e.target.value
+        .replace(/\D/g,'')
+        .slice(0,10);
+
+  }
+);
 
 
-/* =========================
-   LOCATION
-========================= */
-
-$('locationBtn').onclick=()=>{
+$('locationBtn').onclick = () => {
 
   if(!navigator.geolocation){
 
-    $('locationStatus').textContent=
+    $('locationStatus').textContent =
       'Location is not supported by this browser.';
 
     return;
+
   }
 
-  $('locationBtn').disabled=true;
 
-  $('locationStatus').textContent=
+  $('locationBtn').disabled =
+    true;
+
+  $('locationStatus').textContent =
     'Getting your location...';
+
 
   navigator.geolocation.getCurrentPosition(
 
-    async pos=>{
+    async pos => {
 
-      selectedLat=
+      selectedLat =
         pos.coords.latitude;
 
-      selectedLng=
+      selectedLng =
         pos.coords.longitude;
 
-      $('locationStatus').textContent=
+
+      $('locationStatus').textContent =
         'Calculating road distance...';
+
 
       try{
 
-        const url=
+        const url =
           `https://router.project-osrm.org/route/v1/driving/${restaurantLng},${restaurantLat};${selectedLng},${selectedLat}?overview=false`;
 
-        const res=
+
+        const res =
           await fetch(url);
 
-        const data=
+        const data =
           await res.json();
+
 
         if(!data.routes?.length)
           throw new Error('No route');
 
-        selectedDistanceKm=
-          data.routes[0].distance/1000;
 
-        const charge=
+        selectedDistanceKm =
+          data.routes[0].distance / 1000;
+
+
+        const charge =
           Math.ceil(
             selectedDistanceKm
-          )*DELIVERY_RATE;
+          ) *
+          DELIVERY_RATE;
 
-        $('locationStatus').textContent=
+
+        $('locationStatus').textContent =
           `Distance: ${selectedDistanceKm.toFixed(2)} km • Delivery charge: ${money(charge)}`;
 
+
         renderCheckoutSummary();
+
 
       }catch(e){
 
         console.error(e);
 
-        selectedDistanceKm=null;
+        selectedDistanceKm =
+          null;
 
-        $('locationStatus').textContent=
+        $('locationStatus').textContent =
           'Could not calculate road distance. Please try again.';
 
       }finally{
 
-        $('locationBtn').disabled=false;
+        $('locationBtn').disabled =
+          false;
 
       }
 
     },
 
-    err=>{
+    err => {
 
-      $('locationBtn').disabled=false;
+      $('locationBtn').disabled =
+        false;
 
-      $('locationStatus').textContent=
-        err.code===1
+      $('locationStatus').textContent =
+        err.code === 1
           ? 'Location permission denied. Please allow location access.'
           : 'Could not get your location.';
 
@@ -1386,25 +2090,23 @@ $('locationBtn').onclick=()=>{
     }
 
   );
+
 };
 
 
-/* =========================
-   ORDER
-========================= */
-
 function makeOrderId(){
 
-  return 'QF'+
+  return 'QF' +
     Date.now()
       .toString()
       .slice(-8);
 
 }
 
+
 function openWhatsApp(order,items){
 
-  const lines=[
+  const lines = [
 
     `👑 *THE QUEEN FAST FOOD*`,
 
@@ -1425,8 +2127,8 @@ function openWhatsApp(order,items){
     `🍽️ *Items*`,
 
     ...items.map(
-      i=>
-        `• ${i.name} × ${i.qty} = ${money(i.price*i.qty)}`
+      i =>
+        `• ${i.name} × ${i.qty} = ${money(i.price * i.qty)}`
     ),
 
     ``,
@@ -1445,16 +2147,23 @@ function openWhatsApp(order,items){
 
   ];
 
+
   window.open(
+
     `https://wa.me/${phoneDigits(whatsappNumber)}?text=${encodeURIComponent(lines.join('\n'))}`,
+
     '_blank'
+
   );
+
 }
 
-$('placeOrderBtn').onclick=
-  async()=>{
+
+$('placeOrderBtn').onclick =
+  async () => {
 
     updateShopStatusHome();
+
 
     if(!isShopOpen()){
 
@@ -1464,7 +2173,9 @@ $('placeOrderBtn').onclick=
       );
 
       return;
+
     }
+
 
     if(!cart.length){
 
@@ -1473,28 +2184,35 @@ $('placeOrderBtn').onclick=
       );
 
       return;
+
     }
 
-    const name=
+
+    const name =
       $('customerName')
         .value
         .trim();
 
-    const orderContactPhone=
+
+    const orderContactPhone =
       $('customerPhone')
         .value
         .replace(/\D/g,'');
 
-    const loginPhone=
+
+    const loginPhone =
       orderContactPhone;
 
-    const address=
+
+    const address =
       $('customerAddress')
         .value
         .trim();
 
-    const paymentMethod=
+
+    const paymentMethod =
       $('paymentMethod').value;
+
 
     if(!name){
 
@@ -1505,16 +2223,22 @@ $('placeOrderBtn').onclick=
       $('customerName').focus();
 
       return;
+
     }
 
-    if(orderContactPhone.length!==10){
+
+    if(
+      orderContactPhone.length !== 10
+    ){
 
       showToast(
         'Please enter a valid 10-digit order contact number'
       );
 
       return;
+
     }
+
 
     if(!address){
 
@@ -1525,12 +2249,14 @@ $('placeOrderBtn').onclick=
       $('customerAddress').focus();
 
       return;
+
     }
 
+
     if(
-      selectedLat==null ||
-      selectedLng==null ||
-      selectedDistanceKm==null
+      selectedLat == null ||
+      selectedLng == null ||
+      selectedDistanceKm == null
     ){
 
       showToast(
@@ -1538,34 +2264,47 @@ $('placeOrderBtn').onclick=
       );
 
       return;
+
     }
 
-    const orderId=
+
+    const orderId =
       makeOrderId();
 
-    const subtotal=
+
+    const subtotal =
       getSubtotal();
 
-    const deliveryCharge=
+
+    const deliveryCharge =
       Math.ceil(
         selectedDistanceKm
-      )*DELIVERY_RATE;
+      ) *
+      DELIVERY_RATE;
 
-    const total=
-      subtotal+
+
+    const total =
+      subtotal +
       deliveryCharge;
 
-    const orderItems=
+
+    const orderItems =
       cart.map(
-        i=>({
+        i => ({
+
           id:i.id,
+
           name:i.name,
+
           price:i.price,
+
           qty:i.qty
+
         })
       );
 
-    const order={
+
+    const order = {
 
       orderId,
 
@@ -1611,13 +2350,17 @@ $('placeOrderBtn').onclick=
 
     };
 
-    const btn=
+
+    const btn =
       $('placeOrderBtn');
 
-    btn.disabled=true;
 
-    btn.textContent=
+    btn.disabled =
+      true;
+
+    btn.textContent =
       'PLACING ORDER...';
+
 
     try{
 
@@ -1629,29 +2372,35 @@ $('placeOrderBtn').onclick=
         order
       );
 
+
       localStorage.setItem(
         'lastQueenOrderId',
         orderId
       );
 
-      cart=[];
+
+      cart = [];
 
       renderCart();
 
       closeCheckout();
 
+
       showToast(
         `Order ${orderId} placed successfully 👑`
       );
+
 
       openWhatsApp(
         order,
         orderItems
       );
 
+
       startTracking(
         orderId
       );
+
 
     }catch(error){
 
@@ -1664,9 +2413,10 @@ $('placeOrderBtn').onclick=
 
     }finally{
 
-      btn.disabled=false;
+      btn.disabled =
+        false;
 
-      btn.textContent=
+      btn.textContent =
         'PLACE ORDER ON WHATSAPP';
 
     }
@@ -1674,13 +2424,11 @@ $('placeOrderBtn').onclick=
   };
 
 
-/* =========================
-   ORDER TRACKING
-========================= */
+let trackingUnsubscribe =
+  null;
 
-let trackingUnsubscribe=null;
 
-const statusSteps=[
+const statusSteps = [
 
   ['received','Received'],
 
@@ -1694,17 +2442,21 @@ const statusSteps=[
 
 ];
 
+
 function renderTracking(order){
 
-  const current=
+  const current =
     statusSteps.findIndex(
-      s=>s[0]===order.status
+      s =>
+        s[0] === order.status
     );
 
-  $('trackResult').style.display=
+
+  $('trackResult').style.display =
     'block';
 
-  $('trackResult').innerHTML=
+
+  $('trackResult').innerHTML =
 
     `
     <div
@@ -1735,25 +2487,37 @@ function renderTracking(order){
         <span style="color:var(--gold2)">
           ${
             escapeHTML(
-              order.status||'received'
+              order.status || 'received'
             ).replaceAll('_',' ')
           }
         </span>
 
       </div>
 
+
       <div class="steps">
 
         ${
           statusSteps.map(
-            (s,i)=>
+            (s,i) =>
+
               `
               <div
-                class="step ${i<=current?'active':''}"
+                class="step ${
+                  i <= current
+                    ? 'active'
+                    : ''
+                }"
               >
 
                 <div class="dot">
-                  ${i<=current?'✓':i+1}
+
+                  ${
+                    i <= current
+                      ? '✓'
+                      : i + 1
+                  }
+
                 </div>
 
                 ${s[1]}
@@ -1767,14 +2531,17 @@ function renderTracking(order){
 
     </div>
     `;
+
 }
+
 
 async function startTracking(orderId){
 
   if(trackingUnsubscribe)
     trackingUnsubscribe();
 
-  const snap=
+
+  const snap =
     await get(
       ref(
         db,
@@ -1782,18 +2549,20 @@ async function startTracking(orderId){
       )
     );
 
+
   if(snap.exists())
     renderTracking(
       snap.val()
     );
 
-  trackingUnsubscribe=
+
+  trackingUnsubscribe =
     onValue(
       ref(
         db,
         `orders/${orderId}`
       ),
-      snap=>{
+      snap => {
 
         if(snap.exists())
           renderTracking(
@@ -1803,62 +2572,72 @@ async function startTracking(orderId){
       }
     );
 
-  $('trackOrderId').value=
+
+  $('trackOrderId').value =
     orderId;
 
+
   window.scrollTo({
-    top:document.body.scrollHeight,
-    behavior:'smooth'
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      'smooth'
+
   });
+
 }
 
-$('trackBtn').onclick=
-  ()=>{
 
-    const id=
-      $('trackOrderId')
-        .value
-        .trim();
+$('trackBtn').onclick = () => {
 
-    if(!id){
-
-      showToast(
-        'Enter your order ID'
-      );
-
-      return;
-    }
-
-    startTracking(id)
-      .catch(
-        ()=>
-          showToast(
-            'Order not found or you are not authorized to view it.'
-          )
-      );
-
-  };
+  const id =
+    $('trackOrderId')
+      .value
+      .trim();
 
 
-/* =========================
-   START
-========================= */
+  if(!id){
 
-const lastOrder=
+    showToast(
+      'Enter your order ID'
+    );
+
+    return;
+
+  }
+
+
+  startTracking(id)
+    .catch(
+      () =>
+        showToast(
+          'Order not found. Please check your order ID.'
+        )
+    );
+
+};
+
+
+const lastOrder =
   localStorage.getItem(
     'lastQueenOrderId'
   );
 
+
 if(lastOrder){
 
-  $('trackOrderId').value=
+  $('trackOrderId').value =
     lastOrder;
 
 }
 
+
 renderMenu();
 
 renderCart();
+
 
 setInterval(
   updateShopStatusHome,
