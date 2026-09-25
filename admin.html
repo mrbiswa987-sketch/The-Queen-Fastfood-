@@ -7,69 +7,115 @@
 <title>The Queen Fast Food - Admin</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
   background:#080808;
   color:#fff;
   font-family:Arial,sans-serif;
+  font-size:14px;
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
+
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   LOGIN
+========================= */
 
 .login{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:20px;
+  padding:15px;
 }
+
 .login-box{
-  width:min(420px,100%);
+  width:min(380px,100%);
   background:#111;
-  border:1px solid #333;
-  border-radius:18px;
-  padding:28px;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:22px;
 }
+
 .login-box h1{
-  margin-bottom:8px;
+  font-size:24px;
+  margin-bottom:6px;
 }
+
 .login-box p{
   color:#888;
-  margin-bottom:22px;
+  margin-bottom:18px;
+  font-size:13px;
 }
-input,select{
+
+/* =========================
+   COMMON
+========================= */
+
+input,
+select{
   width:100%;
-  padding:12px;
-  margin-bottom:12px;
-  border-radius:9px;
+  padding:9px 10px;
+  margin-bottom:9px;
+  border-radius:7px;
   border:1px solid #333;
   background:#080808;
   color:#fff;
+  font-size:13px;
 }
+
 button{
   border:0;
-  border-radius:9px;
-  padding:11px 15px;
+  border-radius:7px;
+  padding:9px 12px;
   font-weight:700;
+  font-size:13px;
 }
+
 .primary{
   background:#f59b23;
   color:#000;
 }
+
 .danger{
   background:#b3261e;
   color:#fff;
 }
+
 .green{
   background:#208b45;
   color:#fff;
 }
+
 .gray{
   background:#292929;
   color:#fff;
 }
 
-.hidden{display:none!important}
+.message{
+  margin-top:10px;
+  color:#ff625b;
+  font-size:13px;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header{
   background:#101010;
@@ -78,162 +124,380 @@ header{
   top:0;
   z-index:50;
 }
+
 .nav{
-  max-width:1400px;
+  max-width:1250px;
   margin:auto;
-  padding:16px 20px;
+  padding:10px 15px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:15px;
 }
+
 .nav h1{
   color:#f59b23;
+  font-size:20px;
 }
+
+/* =========================
+   CONTAINER
+========================= */
+
 .container{
-  max-width:1400px;
+  max-width:1250px;
   margin:auto;
-  padding:22px;
+  padding:15px;
 }
+
+/* =========================
+   DASHBOARD
+========================= */
 
 .grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:15px;
+  gap:10px;
 }
+
 .box{
   background:#111;
   border:1px solid #292929;
-  border-radius:14px;
-  padding:18px;
+  border-radius:11px;
+  padding:13px;
 }
+
 .box h2{
-  font-size:18px;
-  margin-bottom:15px;
+  font-size:14px;
+  margin-bottom:8px;
 }
+
 .big{
-  font-size:30px;
+  font-size:24px;
   color:#f59b23;
   font-weight:800;
 }
 
+.section{
+  margin-top:14px;
+}
+
+.section > h2{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+/* =========================
+   SHOP CONTROL
+========================= */
+
 .status-buttons{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:8px;
+  gap:6px;
 }
+
 .status-buttons button{
   background:#292929;
   color:#fff;
+  padding:8px;
+  font-size:12px;
 }
+
 .status-buttons button.active{
   background:#f59b23;
   color:#000;
 }
 
-.section{
-  margin-top:20px;
+.shop-current{
+  margin-top:10px;
+  color:#aaa;
+  font-size:12px;
 }
-.section h2{
-  margin-bottom:15px;
+
+.shop-settings-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:10px;
 }
+
+.shop-settings-grid label{
+  display:block;
+  color:#999;
+  font-size:11px;
+  margin-bottom:4px;
+}
+
+.save-btn{
+  margin-top:3px;
+}
+
+/* =========================
+   WEBSITE CONTROL
+========================= */
+
+.website-control{
+  display:grid;
+  grid-template-columns:200px 1fr auto;
+  gap:8px;
+  align-items:start;
+}
+
+.website-control input,
+.website-control select{
+  margin-bottom:0;
+}
+
+/* =========================
+   MENU
+========================= */
 
 .menu-list{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
+
 .menu-item{
   background:#111;
   border:1px solid #292929;
-  border-radius:12px;
-  padding:15px;
+  border-radius:11px;
+  padding:12px;
 }
+
 .menu-item-head{
   display:flex;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
+  align-items:flex-start;
 }
+
+.menu-item-head b{
+  font-size:13px;
+}
+
 .available{
   color:#39d353;
+  font-size:11px;
 }
+
 .unavailable{
   color:#ff625b;
+  font-size:11px;
 }
+
+.menu-item .menu-price,
+.menu-item .menu-image{
+  margin-top:8px;
+  margin-bottom:0;
+}
+
+.menu-item .toggle-stock,
+.menu-item .save-menu{
+  margin-top:7px;
+  width:100%;
+  padding:8px;
+  font-size:12px;
+}
+
+/* =========================
+   ORDERS
+========================= */
 
 .orders{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:15px;
+  gap:10px;
+  align-items:start;
 }
+
 .order-column{
   background:#0f0f0f;
   border:1px solid #292929;
-  border-radius:14px;
-  min-height:250px;
-  padding:12px;
+  border-radius:11px;
+  min-height:180px;
+  padding:9px;
+  overflow:hidden;
 }
+
 .order-column h3{
-  padding:8px;
+  padding:5px 4px 8px;
   color:#f59b23;
+  font-size:14px;
+  border-bottom:1px solid #222;
 }
+
 .order{
   background:#171717;
   border:1px solid #303030;
-  border-radius:11px;
-  padding:13px;
-  margin-top:10px;
+  border-radius:9px;
+  padding:10px;
+  margin-top:8px;
+  overflow:hidden;
 }
+
 .order.new{
   border-color:#f59b23;
 }
+
 .order-id{
   color:#f59b23;
   font-weight:800;
+  font-size:12px;
+  word-break:break-word;
 }
+
 .order small{
   color:#888;
-}
-.item-line{
-  display:flex;
-  justify-content:space-between;
-  margin-top:5px;
-}
-.order-actions{
-  display:grid;
-  gap:6px;
-  margin-top:12px;
-}
-.order-actions button{
-  padding:8px;
-  font-size:12px;
-}
-.badge{
-  display:inline-block;
-  margin-top:6px;
-  padding:5px 8px;
-  background:#292929;
-  border-radius:20px;
   font-size:11px;
 }
 
-.message{
-  margin-top:12px;
-  color:#ff625b;
+.item-line{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:4px;
+  font-size:11px;
 }
 
-@media(max-width:1000px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .orders{grid-template-columns:repeat(2,1fr)}
+.item-line span:first-child{
+  min-width:0;
+  word-break:break-word;
 }
-@media(max-width:600px){
-  .grid,
-  .menu-list,
+
+.item-line span:last-child{
+  white-space:nowrap;
+}
+
+.order-actions{
+  display:grid;
+  gap:5px;
+  margin-top:9px;
+}
+
+.order-actions button{
+  padding:7px;
+  font-size:11px;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:4px 7px;
+  background:#292929;
+  border-radius:20px;
+  font-size:10px;
+}
+
+.order-address{
+  margin-top:7px;
+  color:#aaa;
+  font-size:11px;
+  line-height:1.35;
+  word-break:break-word;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+  .menu-list{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .orders{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .shop-settings-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:700px){
+
+  body{
+    font-size:13px;
+  }
+
+  .nav{
+    padding:9px 10px;
+  }
+
+  .nav h1{
+    font-size:16px;
+  }
+
+  .container{
+    padding:10px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+  }
+
+  .box{
+    padding:10px;
+  }
+
+  .big{
+    font-size:21px;
+  }
+
+  .menu-list{
+    grid-template-columns:1fr;
+  }
+
   .orders{
     grid-template-columns:1fr;
   }
+
+  .shop-settings-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .website-control{
+    grid-template-columns:1fr;
+  }
+
+  .website-control button{
+    width:100%;
+  }
+
+}
+
+@media(max-width:450px){
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
   .status-buttons{
     grid-template-columns:1fr;
   }
+
+  .shop-settings-grid{
+    grid-template-columns:1fr;
+  }
+
+  .login-box{
+    padding:18px;
+  }
+
+  .nav h1{
+    font-size:15px;
+  }
+
+  .nav .danger{
+    padding:7px 9px;
+    font-size:11px;
+  }
+
 }
 </style>
 </head>
@@ -241,9 +505,11 @@ header{
 <body>
 
 <div id="loginScreen" class="login">
+
   <div class="login-box">
 
     <h1>The Queen Fast Food</h1>
+
     <p>Admin Panel</p>
 
     <input
@@ -258,124 +524,177 @@ header{
       placeholder="Password"
     >
 
-    <button id="loginButton" class="primary" style="width:100%">
+    <button
+      id="loginButton"
+      class="primary"
+      style="width:100%"
+    >
       Login
     </button>
 
-    <div id="loginMessage" class="message"></div>
+    <div
+      id="loginMessage"
+      class="message"
+    ></div>
 
   </div>
+
 </div>
 
 
 <div id="adminApp" class="hidden">
 
 <header>
+
   <div class="nav">
 
     <h1>Queen Fast Food Admin</h1>
 
-    <button id="logoutButton" class="danger">
+    <button
+      id="logoutButton"
+      class="danger"
+    >
       Logout
     </button>
 
   </div>
+
 </header>
+
 
 <div class="container">
 
-  <!-- DASHBOARD -->
-  <div class="grid">
 
-    <div class="box">
-      <h2>New Orders</h2>
-      <div id="newCount" class="big">0</div>
-    </div>
+<!-- DASHBOARD -->
 
-    <div class="box">
-      <h2>Pending</h2>
-      <div id="pendingCount" class="big">0</div>
-    </div>
+<div class="grid">
 
-    <div class="box">
-      <h2>Delivery</h2>
-      <div id="deliveryCount" class="big">0</div>
-    </div>
-
-    <div class="box">
-      <h2>Complete</h2>
-      <div id="completeCount" class="big">0</div>
-    </div>
-
+  <div class="box">
+    <h2>New Orders</h2>
+    <div id="newCount" class="big">0</div>
   </div>
 
+  <div class="box">
+    <h2>Pending</h2>
+    <div id="pendingCount" class="big">0</div>
+  </div>
 
-  <!-- SHOP CONTROL -->
-  <div class="section box">
+  <div class="box">
+    <h2>Delivery</h2>
+    <div id="deliveryCount" class="big">0</div>
+  </div>
 
-    <h2>Shop Control</h2>
+  <div class="box">
+    <h2>Complete</h2>
+    <div id="completeCount" class="big">0</div>
+  </div>
 
-    <div class="status-buttons">
+</div>
 
-      <button id="autoButton">
-        AUTO
-      </button>
 
-      <button id="openButton">
-        FORCE OPEN
-      </button>
+<!-- SHOP CONTROL -->
 
-      <button id="closedButton">
-        FORCE CLOSED
-      </button>
+<div class="section box">
 
-    </div>
+  <h2>Shop Control</h2>
 
-    <div style="margin-top:15px;color:#aaa">
-      Current:
-      <b id="currentShopStatus">--</b>
-    </div>
+  <div class="status-buttons">
 
-    <div class="grid" style="margin-top:15px">
+    <button id="autoButton">
+      AUTO
+    </button>
 
-      <div>
-        <label>Open Time</label>
-        <input id="openTime" type="time" value="12:00">
-      </div>
+    <button id="openButton">
+      FORCE OPEN
+    </button>
 
-      <div>
-        <label>Close Time</label>
-        <input id="closeTime" type="time" value="23:00">
-      </div>
-
-      <div>
-        <label>Delivery ₹ / KM</label>
-        <input id="deliveryRate" type="number" value="6" min="0">
-      </div>
-
-      <div>
-        <label>WhatsApp</label>
-        <input id="whatsapp" placeholder="9090220791">
-      </div>
-
-    </div>
-
-    <button id="saveShopButton" class="primary">
-      Save Shop Settings
+    <button id="closedButton">
+      FORCE CLOSED
     </button>
 
   </div>
 
+  <div class="shop-current">
+    Current:
+    <b id="currentShopStatus">--</b>
+  </div>
 
-  <!-- WEBSITE CONTROL -->
-  <div class="section box">
+  <div class="shop-settings-grid">
 
-    <h2>Website Control</h2>
+    <div>
+      <label>Open Time</label>
+
+      <input
+        id="openTime"
+        type="time"
+        value="12:00"
+      >
+    </div>
+
+    <div>
+      <label>Close Time</label>
+
+      <input
+        id="closeTime"
+        type="time"
+        value="23:00"
+      >
+    </div>
+
+    <div>
+      <label>Delivery ₹ / KM</label>
+
+      <input
+        id="deliveryRate"
+        type="number"
+        value="6"
+        min="0"
+      >
+    </div>
+
+    <div>
+      <label>WhatsApp</label>
+
+      <input
+        id="whatsapp"
+        placeholder="9090220791"
+      >
+    </div>
+
+  </div>
+
+  <button
+    id="saveShopButton"
+    class="primary save-btn"
+  >
+    Save Shop Settings
+  </button>
+
+</div>
+
+
+<!-- WEBSITE CONTROL -->
+
+<div class="section box">
+
+  <h2>Website Control</h2>
+
+  <div class="website-control">
 
     <select id="websiteMode">
-      <option value="normal">Normal</option>
-      <option value="updating">Updating</option>
-      <option value="maintenance">Maintenance</option>
+
+      <option value="normal">
+        Normal
+      </option>
+
+      <option value="updating">
+        Updating
+      </option>
+
+      <option value="maintenance">
+        Maintenance
+      </option>
+
     </select>
 
     <input
@@ -383,65 +702,91 @@ header{
       placeholder="Website message"
     >
 
-    <button id="saveWebsiteButton" class="primary">
-      Save Website Settings
+    <button
+      id="saveWebsiteButton"
+      class="primary"
+    >
+      Save
     </button>
 
   </div>
 
-
-  <!-- MENU -->
-  <div class="section">
-
-    <h2>Menu Control</h2>
-
-    <div id="menuList" class="menu-list"></div>
-
-  </div>
+</div>
 
 
-  <!-- ORDERS -->
-  <div class="section">
+<!-- MENU -->
 
-    <h2>Order Management</h2>
+<div class="section">
 
-    <div class="orders">
+  <h2>Menu Control</h2>
 
-      <div class="order-column">
-        <h3>
-          NEW
-          <span id="boxNewCount">(0)</span>
-        </h3>
-        <div id="newOrders"></div>
-      </div>
+  <div
+    id="menuList"
+    class="menu-list"
+  ></div>
 
-      <div class="order-column">
-        <h3>
-          PENDING
-          <span id="boxPendingCount">(0)</span>
-        </h3>
-        <div id="pendingOrders"></div>
-      </div>
+</div>
 
-      <div class="order-column">
-        <h3>
-          DELIVERY
-          <span id="boxDeliveryCount">(0)</span>
-        </h3>
-        <div id="deliveryOrders"></div>
-      </div>
 
-      <div class="order-column">
-        <h3>
-          COMPLETE
-          <span id="boxCompleteCount">(0)</span>
-        </h3>
-        <div id="completeOrders"></div>
-      </div>
+<!-- ORDERS -->
+
+<div class="section">
+
+  <h2>Order Management</h2>
+
+  <div class="orders">
+
+    <div class="order-column">
+
+      <h3>
+        NEW
+        <span id="boxNewCount">(0)</span>
+      </h3>
+
+      <div id="newOrders"></div>
+
+    </div>
+
+
+    <div class="order-column">
+
+      <h3>
+        PENDING
+        <span id="boxPendingCount">(0)</span>
+      </h3>
+
+      <div id="pendingOrders"></div>
+
+    </div>
+
+
+    <div class="order-column">
+
+      <h3>
+        DELIVERY
+        <span id="boxDeliveryCount">(0)</span>
+      </h3>
+
+      <div id="deliveryOrders"></div>
+
+    </div>
+
+
+    <div class="order-column">
+
+      <h3>
+        COMPLETE
+        <span id="boxCompleteCount">(0)</span>
+      </h3>
+
+      <div id="completeOrders"></div>
 
     </div>
 
   </div>
+
+</div>
+
 
 </div>
 
@@ -458,29 +803,50 @@ import {
   ref,
   onValue,
   update
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain: "the-queen-fast-food.firebaseapp.com",
-  databaseURL: "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId: "the-queen-fast-food",
-  storageBucket: "the-queen-fast-food.firebasestorage.app",
-  messagingSenderId: "435721389652",
-  appId: "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId: "G-Q1YCK636KJ"
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
 };
+
 
 const ADMIN_UID =
   "eWlMt1dG2pUOxsTo0NaXgY1avn33";
+
 
 const app =
   initializeApp(firebaseConfig);
@@ -491,70 +857,86 @@ const db =
 const auth =
   getAuth(app);
 
+
 let settings = {};
 let orders = {};
 
+
 const MENU = [
+
   {
     id:"veg_chowmin",
     name:"Veg Chowmin",
     price:50
   },
+
   {
     id:"veg_roll",
     name:"Veg Roll",
     price:50
   },
+
   {
     id:"chicken_chowmin",
     name:"Chicken Chowmin",
     price:65
   },
+
   {
     id:"chicken_roll",
     name:"Chicken Roll",
     price:60
   },
+
   {
     id:"chicken_pakoda",
     name:"Chicken Pakoda",
     price:60
   },
+
   {
     id:"chilli_chicken",
     name:"Chilli Chicken",
     price:120
   },
+
   {
     id:"veg_biriyani",
     name:"Veg Biriyani",
     price:100
   },
+
   {
     id:"chicken_dum_biriyani",
     name:"Chicken Dum Biriyani",
     price:120
   }
+
 ];
 
 
-/* -------------------------
+/* =========================
    AUTH
-------------------------- */
+========================= */
 
-document.getElementById("loginButton")
-.onclick = async()=>{
+document.getElementById(
+  "loginButton"
+).onclick = async()=>{
 
   const email =
-    document.getElementById("email")
-      .value.trim();
+    document.getElementById(
+      "email"
+    ).value.trim();
 
   const password =
-    document.getElementById("password")
-      .value;
+    document.getElementById(
+      "password"
+    ).value;
 
   const msg =
-    document.getElementById("loginMessage");
+    document.getElementById(
+      "loginMessage"
+    );
 
   msg.textContent = "";
 
@@ -575,7 +957,9 @@ document.getElementById("loginButton")
       password
     );
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
 
@@ -587,58 +971,84 @@ document.getElementById("loginButton")
 };
 
 
-onAuthStateChanged(auth,user=>{
+onAuthStateChanged(
+  auth,
+  user=>{
 
-  if(
-    user &&
-    user.uid === ADMIN_UID
-  ){
+    if(
+      user &&
+      user.uid === ADMIN_UID
+    ){
 
-    document.getElementById("loginScreen")
-      .classList.add("hidden");
+      document.getElementById(
+        "loginScreen"
+      ).classList.add(
+        "hidden"
+      );
 
-    document.getElementById("adminApp")
-      .classList.remove("hidden");
+      document.getElementById(
+        "adminApp"
+      ).classList.remove(
+        "hidden"
+      );
 
-    loadData();
+      loadData();
 
-  }else{
+    }
 
-    document.getElementById("loginScreen")
-      .classList.remove("hidden");
+    else{
 
-    document.getElementById("adminApp")
-      .classList.add("hidden");
+      document.getElementById(
+        "loginScreen"
+      ).classList.remove(
+        "hidden"
+      );
 
-    if(user){
+      document.getElementById(
+        "adminApp"
+      ).classList.add(
+        "hidden"
+      );
 
-      signOut(auth);
+      if(user){
 
-      document.getElementById("loginMessage")
-        .textContent =
-        "This account is not an authorized admin.";
+        signOut(auth);
+
+        document.getElementById(
+          "loginMessage"
+        ).textContent =
+          "This account is not an authorized admin.";
+
+      }
 
     }
 
   }
+);
 
-});
 
+document.getElementById(
+  "logoutButton"
+).onclick = ()=>{
 
-document.getElementById("logoutButton")
-.onclick = ()=>{
   signOut(auth);
+
 };
 
 
-/* -------------------------
-   LOAD SETTINGS
-------------------------- */
+/* =========================
+   LOAD DATA
+========================= */
 
 function loadData(){
 
   onValue(
-    ref(db,"settings"),
+
+    ref(
+      db,
+      "settings"
+    ),
+
     snapshot=>{
 
       settings =
@@ -648,16 +1058,23 @@ function loadData(){
       renderMenu();
 
     },
+
     error=>{
 
       console.error(error);
 
     }
+
   );
 
 
   onValue(
-    ref(db,"orders"),
+
+    ref(
+      db,
+      "orders"
+    ),
+
     snapshot=>{
 
       orders =
@@ -666,145 +1083,216 @@ function loadData(){
       renderOrders();
 
     },
+
     error=>{
 
       console.error(error);
 
     }
+
   );
 
 }
 
 
-/* -------------------------
+/* =========================
    SETTINGS UI
-------------------------- */
+========================= */
 
 function renderSettings(){
 
-  document.getElementById("openTime")
-    .value =
-    settings.openTime || "12:00";
+  document.getElementById(
+    "openTime"
+  ).value =
+    settings.openTime ||
+    "12:00";
 
-  document.getElementById("closeTime")
-    .value =
-    settings.closeTime || "23:00";
 
-  document.getElementById("deliveryRate")
-    .value =
-    settings.deliveryRate || 6;
+  document.getElementById(
+    "closeTime"
+  ).value =
+    settings.closeTime ||
+    "23:00";
 
-  document.getElementById("whatsapp")
-    .value =
-    settings.whatsappNumber || "9090220791";
 
-  document.getElementById("websiteMode")
-    .value =
-    settings.websiteMode || "normal";
+  document.getElementById(
+    "deliveryRate"
+  ).value =
+    settings.deliveryRate ||
+    6;
 
-  document.getElementById("websiteMessage")
-    .value =
-    settings.websiteMessage || "";
+
+  document.getElementById(
+    "whatsapp"
+  ).value =
+    settings.whatsappNumber ||
+    "9090220791";
+
+
+  document.getElementById(
+    "websiteMode"
+  ).value =
+    settings.websiteMode ||
+    "normal";
+
+
+  document.getElementById(
+    "websiteMessage"
+  ).value =
+    settings.websiteMessage ||
+    "";
+
 
   const override =
     String(
-      settings.statusOverride || "auto"
+      settings.statusOverride ||
+      "auto"
     ).toLowerCase();
 
-  document.getElementById("autoButton")
-    .classList.toggle(
-      "active",
-      override === "auto"
-    );
 
-  document.getElementById("openButton")
-    .classList.toggle(
-      "active",
-      override === "open"
-    );
+  document.getElementById(
+    "autoButton"
+  ).classList.toggle(
+    "active",
+    override === "auto"
+  );
 
-  document.getElementById("closedButton")
-    .classList.toggle(
-      "active",
-      override === "closed"
-    );
+
+  document.getElementById(
+    "openButton"
+  ).classList.toggle(
+    "active",
+    override === "open"
+  );
+
+
+  document.getElementById(
+    "closedButton"
+  ).classList.toggle(
+    "active",
+    override === "closed"
+  );
+
 
   updateCurrentShopStatus();
 
 }
 
 
-/* -------------------------
+/* =========================
    SHOP OVERRIDE
-------------------------- */
+========================= */
 
-document.getElementById("autoButton")
-.onclick = ()=>setShopOverride("auto");
-
-document.getElementById("openButton")
-.onclick = ()=>setShopOverride("open");
-
-document.getElementById("closedButton")
-.onclick = ()=>setShopOverride("closed");
+document.getElementById(
+  "autoButton"
+).onclick =
+  ()=>setShopOverride("auto");
 
 
-async function setShopOverride(value){
+document.getElementById(
+  "openButton"
+).onclick =
+  ()=>setShopOverride("open");
+
+
+document.getElementById(
+  "closedButton"
+).onclick =
+  ()=>setShopOverride("closed");
+
+
+async function setShopOverride(
+  value
+){
 
   try{
 
     await update(
-      ref(db,"settings"),
+
+      ref(
+        db,
+        "settings"
+      ),
+
       {
-        statusOverride:value
+        statusOverride:
+          value
       }
+
     );
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
-    alert("Could not update shop status.");
+
+    alert(
+      "Could not update shop status."
+    );
 
   }
 
 }
 
 
-document.getElementById("saveShopButton")
-.onclick = async()=>{
+document.getElementById(
+  "saveShopButton"
+).onclick = async()=>{
 
   try{
 
     await update(
-      ref(db,"settings"),
+
+      ref(
+        db,
+        "settings"
+      ),
+
       {
 
         openTime:
-          document.getElementById("openTime")
-            .value || "12:00",
+          document.getElementById(
+            "openTime"
+          ).value ||
+          "12:00",
 
         closeTime:
-          document.getElementById("closeTime")
-            .value || "23:00",
+          document.getElementById(
+            "closeTime"
+          ).value ||
+          "23:00",
 
         deliveryRate:
           Number(
-            document.getElementById("deliveryRate")
-              .value || 6
+            document.getElementById(
+              "deliveryRate"
+            ).value ||
+            6
           ),
 
         whatsappNumber:
-          document.getElementById("whatsapp")
-            .value.trim()
+          document.getElementById(
+            "whatsapp"
+          ).value.trim()
 
       }
+
     );
 
-    alert("Shop settings saved.");
+    alert(
+      "Shop settings saved."
+    );
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
-    alert("Could not save settings.");
+
+    alert(
+      "Could not save settings."
+    );
 
   }
 
@@ -815,20 +1303,33 @@ function updateCurrentShopStatus(){
 
   const override =
     String(
-      settings.statusOverride || "auto"
+      settings.statusOverride ||
+      "auto"
     ).toLowerCase();
+
 
   let text = "";
 
-  if(override === "open"){
 
-    text = "FORCE OPEN";
+  if(
+    override === "open"
+  ){
 
-  }else if(override === "closed"){
+    text =
+      "FORCE OPEN";
 
-    text = "FORCE CLOSED";
+  }
 
-  }else{
+  else if(
+    override === "closed"
+  ){
+
+    text =
+      "FORCE CLOSED";
+
+  }
+
+  else{
 
     text =
       isOpenByTime()
@@ -837,318 +1338,493 @@ function updateCurrentShopStatus(){
 
   }
 
-  document.getElementById("currentShopStatus")
-    .textContent = text;
+
+  document.getElementById(
+    "currentShopStatus"
+  ).textContent =
+    text;
 
 }
 
 
 function isOpenByTime(){
 
-  const now = new Date();
+  const now =
+    new Date();
+
 
   const open =
-    settings.openTime || "12:00";
+    settings.openTime ||
+    "12:00";
+
 
   const close =
-    settings.closeTime || "23:00";
+    settings.closeTime ||
+    "23:00";
+
 
   const [oh,om] =
-    open.split(":").map(Number);
+    open
+      .split(":")
+      .map(Number);
+
 
   const [ch,cm] =
-    close.split(":").map(Number);
+    close
+      .split(":")
+      .map(Number);
+
 
   const current =
     now.getHours()*60 +
     now.getMinutes();
 
+
   const start =
     oh*60 + om;
+
 
   const end =
     ch*60 + cm;
 
+
   if(end > start){
 
-    return current >= start &&
-      current < end;
+    return (
+      current >= start &&
+      current < end
+    );
 
   }
 
-  return current >= start ||
-    current < end;
+
+  return (
+    current >= start ||
+    current < end
+  );
 
 }
 
 
-/* -------------------------
+/* =========================
    WEBSITE
-------------------------- */
+========================= */
 
-document.getElementById("saveWebsiteButton")
-.onclick = async()=>{
+document.getElementById(
+  "saveWebsiteButton"
+).onclick = async()=>{
 
   try{
 
     await update(
-      ref(db,"settings"),
+
+      ref(
+        db,
+        "settings"
+      ),
+
       {
 
         websiteMode:
-          document.getElementById("websiteMode")
-            .value,
+          document.getElementById(
+            "websiteMode"
+          ).value,
 
         websiteMessage:
-          document.getElementById("websiteMessage")
-            .value.trim()
+          document.getElementById(
+            "websiteMessage"
+          ).value.trim()
 
       }
+
     );
 
-    alert("Website settings saved.");
+    alert(
+      "Website settings saved."
+    );
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
-    alert("Could not save website settings.");
+
+    alert(
+      "Could not save website settings."
+    );
 
   }
 
 };
 
 
-/* -------------------------
+/* =========================
    MENU
-------------------------- */
+========================= */
 
 function renderMenu(){
 
   const list =
-    document.getElementById("menuList");
+    document.getElementById(
+      "menuList"
+    );
+
 
   list.innerHTML = "";
 
-  MENU.forEach(item=>{
 
-    const server =
-      settings.menu &&
-      settings.menu[item.id]
-        ? settings.menu[item.id]
-        : {};
+  MENU.forEach(
+    item=>{
 
-    const price =
-      server.price !== undefined
-        ? Number(server.price)
-        : item.price;
+      const server =
+        settings.menu &&
+        settings.menu[item.id]
+          ? settings.menu[item.id]
+          : {};
 
-    const available =
-      server.available !== false;
 
-    const div =
-      document.createElement("div");
+      const price =
+        server.price !== undefined
+          ? Number(server.price)
+          : item.price;
 
-    div.className = "menu-item";
 
-    div.innerHTML = `
+      const available =
+        server.available !== false;
 
-      <div class="menu-item-head">
 
-        <div>
-          <b>${escapeHtml(item.name)}</b>
+      const div =
+        document.createElement(
+          "div"
+        );
 
-          <div
-            class="${available ? "available" : "unavailable"}"
-            style="margin-top:6px"
-          >
-            ${available ? "AVAILABLE" : "OUT OF STOCK"}
+
+      div.className =
+        "menu-item";
+
+
+      div.innerHTML = `
+
+        <div class="menu-item-head">
+
+          <div>
+
+            <b>
+              ${escapeHtml(item.name)}
+            </b>
+
+            <div
+              class="${
+                available
+                  ? "available"
+                  : "unavailable"
+              }"
+              style="margin-top:4px"
+            >
+
+              ${
+                available
+                  ? "AVAILABLE"
+                  : "OUT OF STOCK"
+              }
+
+            </div>
+
           </div>
+
+          <b>
+            ₹${price}
+          </b>
+
         </div>
 
-        <b>₹${price}</b>
 
-      </div>
+        <div style="margin-top:8px">
 
-      <div style="margin-top:12px">
+          <input
+            class="menu-price"
+            type="number"
+            min="0"
+            value="${price}"
+          >
 
-        <input
-          class="menu-price"
-          type="number"
-          min="0"
-          value="${price}"
-        >
 
-        <input
-          class="menu-image"
-          placeholder="Image URL"
-          value="${escapeHtml(server.image || "")}"
-        >
+          <input
+            class="menu-image"
+            placeholder="Image URL"
+            value="${escapeHtml(
+              server.image || ""
+            )}"
+          >
 
-        <button
-          class="${available ? "danger" : "green"} toggle-stock"
-          style="width:100%"
-        >
-          ${available ? "Mark Out of Stock" : "Make Available"}
-        </button>
 
-        <button
-          class="primary save-menu"
-          style="width:100%;margin-top:7px"
-        >
-          Save Item
-        </button>
+          <button
+            class="${
+              available
+                ? "danger"
+                : "green"
+            } toggle-stock"
+            style="width:100%"
+          >
 
-      </div>
-    `;
-
-    div.querySelector(".toggle-stock")
-      .onclick = async()=>{
-
-        try{
-
-          await update(
-            ref(
-              db,
-              `settings/menu/${item.id}`
-            ),
-            {
-              available:!available
+            ${
+              available
+                ? "Mark Out of Stock"
+                : "Make Available"
             }
-          );
 
-        }catch(error){
-
-          console.error(error);
-          alert("Could not update stock.");
-
-        }
-
-      };
+          </button>
 
 
-    div.querySelector(".save-menu")
-      .onclick = async()=>{
+          <button
+            class="primary save-menu"
+            style="width:100%"
+          >
+            Save Item
+          </button>
 
-        const priceInput =
-          div.querySelector(".menu-price");
+        </div>
 
-        const imageInput =
-          div.querySelector(".menu-image");
-
-        const newPrice =
-          Number(priceInput.value);
-
-        if(!Number.isFinite(newPrice) ||
-           newPrice < 0){
-
-          alert("Enter a valid price.");
-          return;
-
-        }
-
-        try{
-
-          await update(
-            ref(
-              db,
-              `settings/menu/${item.id}`
-            ),
-            {
-
-              price:newPrice,
-
-              image:
-                imageInput.value.trim()
-
-            }
-          );
-
-          alert(
-            `${item.name} updated.`
-          );
-
-        }catch(error){
-
-          console.error(error);
-          alert("Could not save item.");
-
-        }
-
-      };
+      `;
 
 
-    list.appendChild(div);
+      div.querySelector(
+        ".toggle-stock"
+      ).onclick =
+        async()=>{
 
-  });
+          try{
+
+            await update(
+
+              ref(
+                db,
+                `settings/menu/${item.id}`
+              ),
+
+              {
+                available:
+                  !available
+              }
+
+            );
+
+          }
+
+          catch(error){
+
+            console.error(error);
+
+            alert(
+              "Could not update stock."
+            );
+
+          }
+
+        };
+
+
+      div.querySelector(
+        ".save-menu"
+      ).onclick =
+        async()=>{
+
+          const priceInput =
+            div.querySelector(
+              ".menu-price"
+            );
+
+
+          const imageInput =
+            div.querySelector(
+              ".menu-image"
+            );
+
+
+          const newPrice =
+            Number(
+              priceInput.value
+            );
+
+
+          if(
+            !Number.isFinite(
+              newPrice
+            ) ||
+            newPrice < 0
+          ){
+
+            alert(
+              "Enter a valid price."
+            );
+
+            return;
+
+          }
+
+
+          try{
+
+            await update(
+
+              ref(
+                db,
+                `settings/menu/${item.id}`
+              ),
+
+              {
+
+                price:
+                  newPrice,
+
+                image:
+                  imageInput.value.trim()
+
+              }
+
+            );
+
+
+            alert(
+              `${item.name} updated.`
+            );
+
+          }
+
+          catch(error){
+
+            console.error(error);
+
+            alert(
+              "Could not save item."
+            );
+
+          }
+
+        };
+
+
+      list.appendChild(
+        div
+      );
+
+    }
+  );
 
 }
 
 
-/* -------------------------
+/* =========================
    ORDERS
-------------------------- */
+========================= */
 
 function renderOrders(){
 
   const buckets = {
+
     new:[],
     pending:[],
     delivery:[],
     complete:[]
+
   };
 
-  Object.entries(orders)
-    .forEach(([key,order])=>{
 
-      if(!order) return;
+  Object.entries(
+    orders
+  ).forEach(
+    ([key,order])=>{
 
-      order.__key = key;
+      if(!order)
+        return;
+
+
+      order.__key =
+        key;
+
 
       const status =
-        String(order.status || "received")
-          .toLowerCase();
+        String(
+          order.status ||
+          "received"
+        ).toLowerCase();
 
-      /*
-        New orders remain at the top.
-      */
 
-      if(status === "received"){
-
-        buckets.new.push(order);
-
-      }else if(
-        status === "confirmed" ||
-        status === "preparing"
+      if(
+        status ===
+        "received"
       ){
 
-        buckets.pending.push(order);
-
-      }else if(
-        status === "out_for_delivery"
-      ){
-
-        buckets.delivery.push(order);
-
-      }else if(
-        status === "delivered" ||
-        status === "cancelled"
-      ){
-
-        buckets.complete.push(order);
+        buckets.new.push(
+          order
+        );
 
       }
 
-    });
+      else if(
+
+        status ===
+          "confirmed" ||
+
+        status ===
+          "preparing"
+
+      ){
+
+        buckets.pending.push(
+          order
+        );
+
+      }
+
+      else if(
+        status ===
+        "out_for_delivery"
+      ){
+
+        buckets.delivery.push(
+          order
+        );
+
+      }
+
+      else if(
+
+        status ===
+          "delivered" ||
+
+        status ===
+          "cancelled"
+
+      ){
+
+        buckets.complete.push(
+          order
+        );
+
+      }
+
+    }
+  );
 
 
-  Object.values(buckets)
-    .forEach(arr=>{
+  Object.values(
+    buckets
+  ).forEach(
+    arr=>{
+
       arr.sort(
         (a,b)=>
-          Number(b.createdAt || 0) -
-          Number(a.createdAt || 0)
+          Number(
+            b.createdAt || 0
+          ) -
+          Number(
+            a.createdAt || 0
+          )
       );
-    });
+
+    }
+  );
 
 
   renderBucket(
@@ -1156,15 +1832,18 @@ function renderOrders(){
     buckets.new
   );
 
+
   renderBucket(
     "pendingOrders",
     buckets.pending
   );
 
+
   renderBucket(
     "deliveryOrders",
     buckets.delivery
   );
+
 
   renderBucket(
     "completeOrders",
@@ -1172,217 +1851,364 @@ function renderOrders(){
   );
 
 
-  document.getElementById("newCount")
-    .textContent = buckets.new.length;
-
-  document.getElementById("pendingCount")
-    .textContent = buckets.pending.length;
-
-  document.getElementById("deliveryCount")
-    .textContent = buckets.delivery.length;
-
-  document.getElementById("completeCount")
-    .textContent = buckets.complete.length;
+  document.getElementById(
+    "newCount"
+  ).textContent =
+    buckets.new.length;
 
 
-  document.getElementById("boxNewCount")
-    .textContent = `(${buckets.new.length})`;
+  document.getElementById(
+    "pendingCount"
+  ).textContent =
+    buckets.pending.length;
 
-  document.getElementById("boxPendingCount")
-    .textContent = `(${buckets.pending.length})`;
 
-  document.getElementById("boxDeliveryCount")
-    .textContent = `(${buckets.delivery.length})`;
+  document.getElementById(
+    "deliveryCount"
+  ).textContent =
+    buckets.delivery.length;
 
-  document.getElementById("boxCompleteCount")
-    .textContent = `(${buckets.complete.length})`;
+
+  document.getElementById(
+    "completeCount"
+  ).textContent =
+    buckets.complete.length;
+
+
+  document.getElementById(
+    "boxNewCount"
+  ).textContent =
+    `(${buckets.new.length})`;
+
+
+  document.getElementById(
+    "boxPendingCount"
+  ).textContent =
+    `(${buckets.pending.length})`;
+
+
+  document.getElementById(
+    "boxDeliveryCount"
+  ).textContent =
+    `(${buckets.delivery.length})`;
+
+
+  document.getElementById(
+    "boxCompleteCount"
+  ).textContent =
+    `(${buckets.complete.length})`;
 
 }
 
 
-function renderBucket(id,list){
+function renderBucket(
+  id,
+  list
+){
 
   const container =
-    document.getElementById(id);
+    document.getElementById(
+      id
+    );
 
-  container.innerHTML = "";
 
-  list.forEach(order=>{
+  container.innerHTML =
+    "";
 
-    const div =
-      document.createElement("div");
 
-    div.className =
-      "order " +
+  list.forEach(
+    order=>{
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "order " +
+        (
+          String(
+            order.status
+          ).toLowerCase() ===
+          "received"
+            ? "new"
+            : ""
+        );
+
+
+      let items =
+        "";
+
+
       (
-        String(order.status)
-          .toLowerCase() === "received"
-          ? "new"
-          : ""
+        order.items ||
+        []
+      ).forEach(
+        item=>{
+
+          items += `
+
+            <div class="item-line">
+
+              <span>
+                ${escapeHtml(
+                  item.name
+                )}
+                × ${item.quantity}
+              </span>
+
+              <span>
+                ₹${
+                  item.price *
+                  item.quantity
+                }
+              </span>
+
+            </div>
+
+          `;
+
+        }
       );
 
-    let items = "";
 
-    (order.items || [])
-      .forEach(item=>{
+      div.innerHTML = `
 
-        items += `
-          <div class="item-line">
-            <span>
-              ${escapeHtml(item.name)}
-              × ${item.quantity}
-            </span>
-            <span>
-              ₹${item.price * item.quantity}
-            </span>
-          </div>
-        `;
+        <div class="order-id">
 
-      });
+          ${escapeHtml(
+            order.orderId ||
+            order.__key
+          )}
+
+        </div>
 
 
-    div.innerHTML = `
+        <div class="badge">
 
-      <div class="order-id">
-        ${escapeHtml(order.orderId || order.__key)}
-      </div>
+          ${escapeHtml(
+            formatStatus(
+              order.status
+            )
+          )}
 
-      <div class="badge">
-        ${escapeHtml(formatStatus(order.status))}
-      </div>
+        </div>
 
-      <div style="margin-top:10px">
-        <b>${escapeHtml(order.customerName || "")}</b>
-      </div>
 
-      <small>
-        ${escapeHtml(order.phone || "")}
-      </small>
+        <div style="margin-top:7px">
 
-      <div style="margin-top:8px;color:#aaa;font-size:12px">
-        ${escapeHtml(order.address || "")}
-      </div>
+          <b>
+            ${escapeHtml(
+              order.customerName ||
+              ""
+            )}
+          </b>
 
-      <div style="margin-top:10px">
-        ${items}
-      </div>
+        </div>
 
-      <hr style="border-color:#292929;margin:10px 0">
 
-      <div class="item-line">
-        <b>Total</b>
-        <b style="color:#f59b23">
-          ₹${order.total || 0}
-        </b>
-      </div>
+        <small>
 
-      <div class="order-actions">
+          ${escapeHtml(
+            order.phone ||
+            ""
+          )}
 
-        ${
-          String(order.status).toLowerCase() === "received"
-          ? `
-            <button
-              class="green"
-              data-action="confirm"
-            >
-              Confirm Order
-            </button>
+        </small>
 
-            <button
-              class="danger"
-              data-action="cancel"
-            >
-              Cancel Order
-            </button>
-          `
-          : ""
+
+        <div class="order-address">
+
+          ${escapeHtml(
+            order.address ||
+            ""
+          )}
+
+        </div>
+
+
+        <div style="margin-top:8px">
+
+          ${items}
+
+        </div>
+
+
+        <hr
+          style="
+            border-color:#292929;
+            margin:8px 0
+          "
+        >
+
+
+        <div class="item-line">
+
+          <b>
+            Total
+          </b>
+
+          <b
+            style="color:#f59b23"
+          >
+            ₹${order.total || 0}
+          </b>
+
+        </div>
+
+
+        <div class="order-actions">
+
+          ${
+            String(
+              order.status
+            ).toLowerCase() ===
+            "received"
+
+            ? `
+
+              <button
+                class="green"
+                data-action="confirm"
+              >
+                Confirm Order
+              </button>
+
+              <button
+                class="danger"
+                data-action="cancel"
+              >
+                Cancel Order
+              </button>
+
+            `
+
+            : ""
+          }
+
+
+          ${
+            String(
+              order.status
+            ).toLowerCase() ===
+            "confirmed"
+
+            ? `
+
+              <button
+                class="primary"
+                data-action="prepare"
+              >
+                Start Preparing
+              </button>
+
+            `
+
+            : ""
+          }
+
+
+          ${
+            String(
+              order.status
+            ).toLowerCase() ===
+            "preparing"
+
+            ? `
+
+              <button
+                class="primary"
+                data-action="delivery"
+              >
+                Out for Delivery
+              </button>
+
+            `
+
+            : ""
+          }
+
+        </div>
+
+      `;
+
+
+      div.querySelectorAll(
+        "[data-action]"
+      ).forEach(
+        button=>{
+
+          button.onclick =
+            async()=>{
+
+              const type =
+                button.dataset.action;
+
+
+              if(
+                type ===
+                "confirm"
+              ){
+
+                await changeOrderStatus(
+                  order,
+                  "confirmed"
+                );
+
+              }
+
+
+              if(
+                type ===
+                "cancel"
+              ){
+
+                await changeOrderStatus(
+                  order,
+                  "cancelled"
+                );
+
+              }
+
+
+              if(
+                type ===
+                "prepare"
+              ){
+
+                await changeOrderStatus(
+                  order,
+                  "preparing"
+                );
+
+              }
+
+
+              if(
+                type ===
+                "delivery"
+              ){
+
+                await changeOrderStatus(
+                  order,
+                  "out_for_delivery"
+                );
+
+              }
+
+            };
+
         }
-
-        ${
-          String(order.status).toLowerCase() === "confirmed"
-          ? `
-            <button
-              class="primary"
-              data-action="prepare"
-            >
-              Start Preparing
-            </button>
-          `
-          : ""
-        }
-
-        ${
-          String(order.status).toLowerCase() === "preparing"
-          ? `
-            <button
-              class="primary"
-              data-action="delivery"
-            >
-              Out for Delivery
-            </button>
-          `
-          : ""
-        }
-
-      </div>
-    `;
+      );
 
 
-    const action =
-      div.querySelector("[data-action]");
+      container.appendChild(
+        div
+      );
 
-    div.querySelectorAll("[data-action]")
-      .forEach(button=>{
-
-        button.onclick = async()=>{
-
-          const type =
-            button.dataset.action;
-
-          if(type === "confirm"){
-
-            await changeOrderStatus(
-              order,
-              "confirmed"
-            );
-
-          }
-
-          if(type === "cancel"){
-
-            await changeOrderStatus(
-              order,
-              "cancelled"
-            );
-
-          }
-
-          if(type === "prepare"){
-
-            await changeOrderStatus(
-              order,
-              "preparing"
-            );
-
-          }
-
-          if(type === "delivery"){
-
-            await changeOrderStatus(
-              order,
-              "out_for_delivery"
-            );
-
-          }
-
-        };
-
-      });
-
-
-    container.appendChild(div);
-
-  });
+    }
+  );
 
 }
 
@@ -1392,22 +2218,34 @@ async function changeOrderStatus(
   status
 ){
 
-  if(!order.__key) return;
+  if(!order.__key)
+    return;
+
 
   try{
 
     await update(
+
       ref(
         db,
         `orders/${order.__key}`
       ),
+
       {
-        status:status,
-        updatedAt:Date.now()
+
+        status:
+          status,
+
+        updatedAt:
+          Date.now()
+
       }
+
     );
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
 
@@ -1420,39 +2258,90 @@ async function changeOrderStatus(
 }
 
 
-/* -------------------------
+/* =========================
    HELPERS
-------------------------- */
+========================= */
 
-function formatStatus(status){
+function formatStatus(
+  status
+){
 
   const map = {
 
-    received:"Received",
-    confirmed:"Confirmed",
-    preparing:"Preparing",
-    out_for_delivery:"Out for Delivery",
-    delivered:"Delivered",
-    cancelled:"Cancelled"
+    received:
+      "Received",
+
+    confirmed:
+      "Confirmed",
+
+    preparing:
+      "Preparing",
+
+    out_for_delivery:
+      "Out for Delivery",
+
+    delivered:
+      "Delivered",
+
+    cancelled:
+      "Cancelled"
 
   };
 
-  return map[
-    String(status || "")
-      .toLowerCase()
-  ] || status || "";
+
+  return (
+
+    map[
+      String(
+        status || ""
+      ).toLowerCase()
+    ]
+
+    ||
+
+    status
+
+    ||
+
+    ""
+
+  );
 
 }
 
 
-function escapeHtml(value){
+function escapeHtml(
+  value
+){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
