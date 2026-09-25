@@ -1589,11 +1589,19 @@ onValue(
 
     /*
       SHOP STATUS
+
+      IMPORTANT:
+      Admin controls the shop using:
+
+      settings/statusOverride
+
+      auto   = time based
+      open   = force open
+      closed = force closed
+
+      Do NOT use old shopOpen
+      setting here.
     */
-
-    shopOpen =
-      shopSettings.shopOpen !== false;
-
 
     renderShopStatus();
 
@@ -1637,13 +1645,17 @@ onValue(
     */
 
     shopSettings = {
+      openingTime:"12:00",
+      closingTime:"21:30",
       openTime:"12:00",
-      closeTime:"21:30"
+      closeTime:"21:30",
+      statusOverride:"auto"
     };
 
 
     renderOrderTime();
 
+    renderShopStatus();
 
     loadMenu();
 
@@ -1669,12 +1681,26 @@ function renderOrderTime(){
   }
 
 
+  /*
+    Admin current code uses:
+
+    openingTime
+    closingTime
+
+    Older settings may use:
+
+    openTime
+    closeTime
+  */
+
   const openTime =
+    shopSettings.openingTime ||
     shopSettings.openTime ||
     "12:00";
 
 
   const closeTime =
+    shopSettings.closingTime ||
     shopSettings.closeTime ||
     "21:30";
 
@@ -1794,6 +1820,162 @@ function renderShopStatus(){
     );
 
 
+  if(!dot || !text){
+    return;
+  }
+
+
+  /*
+    ADMIN OVERRIDE
+
+    open   = FORCE OPEN
+    closed = FORCE CLOSED
+    auto   = use opening/closing time
+  */
+
+  const override =
+    String(
+      shopSettings.statusOverride ||
+      "auto"
+    ).toLowerCase();
+
+
+  /* =====================================
+     FORCE OPEN
+  ===================================== */
+
+  if(override === "open"){
+
+    shopOpen = true;
+
+    dot.className =
+      "shop-dot open";
+
+    text.textContent =
+      "SHOP OPEN";
+
+    renderMenu();
+
+    return;
+
+  }
+
+
+  /* =====================================
+     FORCE CLOSED
+  ===================================== */
+
+  if(override === "closed"){
+
+    shopOpen = false;
+
+    dot.className =
+      "shop-dot closed";
+
+    text.textContent =
+      "SHOP CLOSED";
+
+    renderMenu();
+
+    return;
+
+  }
+
+
+  /* =====================================
+     AUTO TIME MODE
+  ===================================== */
+
+  const openTime =
+    shopSettings.openingTime ||
+    shopSettings.openTime ||
+    "12:00";
+
+
+  const closeTime =
+    shopSettings.closingTime ||
+    shopSettings.closeTime ||
+    "23:00";
+
+
+  const now =
+    new Date();
+
+
+  const currentMinutes =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+
+  const openParts =
+    String(openTime).split(":");
+
+
+  const closeParts =
+    String(closeTime).split(":");
+
+
+  const openMinutes =
+    Number(openParts[0]) * 60 +
+    Number(openParts[1] || 0);
+
+
+  const closeMinutes =
+    Number(closeParts[0]) * 60 +
+    Number(closeParts[1] || 0);
+
+
+  let isOpen = false;
+
+
+  /*
+    NORMAL SAME-DAY TIME
+
+    Example:
+    12:00 → 23:00
+  */
+
+  if(openMinutes < closeMinutes){
+
+    isOpen =
+      currentMinutes >= openMinutes &&
+      currentMinutes < closeMinutes;
+
+  }
+
+
+  /*
+    OVERNIGHT TIME
+
+    Example:
+    18:00 → 02:00
+  */
+
+  else if(openMinutes > closeMinutes){
+
+    isOpen =
+      currentMinutes >= openMinutes ||
+      currentMinutes < closeMinutes;
+
+  }
+
+
+  /*
+    SAME OPEN/CLOSE TIME
+    Treat as CLOSED.
+  */
+
+  else{
+
+    isOpen = false;
+
+  }
+
+
+  shopOpen =
+    isOpen;
+
+
   if(shopOpen){
 
     dot.className =
@@ -1812,7 +1994,39 @@ function renderShopStatus(){
 
   }
 
+
+  renderMenu();
+
 }
+
+
+/* =========================================
+   AUTO SHOP STATUS CHECK
+========================================= */
+
+/*
+  This keeps AUTO mode correct even when
+  customer keeps the page open while the
+  opening/closing time changes.
+*/
+
+setInterval(
+  () => {
+
+    if(
+      String(
+        shopSettings.statusOverride ||
+        "auto"
+      ).toLowerCase() === "auto"
+    ){
+
+      renderShopStatus();
+
+    }
+
+  },
+  30000
+);
 
 
 /* =========================================
