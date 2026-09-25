@@ -48,10 +48,6 @@ a{
   text-decoration:none;
 }
 
-/* =========================
-   ROOT
-========================= */
-
 :root{
   --orange:#ff7a00;
   --orange2:#ff9d3d;
@@ -62,6 +58,7 @@ a{
   --muted:#a9a9a9;
   --green:#20d878;
 }
+
 
 /* =========================
    HEADER
@@ -84,8 +81,9 @@ header{
 
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:15px;
+  justify-content:center;
+
+  position:relative;
 }
 
 .brand{
@@ -97,6 +95,7 @@ header{
 .brand-crown{
   width:42px;
   height:42px;
+
   border:1px solid rgba(255,122,0,.45);
   border-radius:50%;
 
@@ -128,6 +127,9 @@ header{
 }
 
 .cart-top-btn{
+  position:absolute;
+  right:20px;
+
   border:1px solid rgba(255,122,0,.45);
   background:#111;
   color:#fff;
@@ -168,6 +170,7 @@ header{
   font-weight:800;
 }
 
+
 /* =========================
    CART BLINK
 ========================= */
@@ -206,6 +209,7 @@ header{
     box-shadow:none;
   }
 }
+
 
 /* =========================
    HERO
@@ -339,6 +343,7 @@ header{
   border-color:var(--orange);
 }
 
+
 /* =========================
    SHOP STATUS
 ========================= */
@@ -381,6 +386,7 @@ header{
   box-shadow:0 0 12px rgba(255,65,65,.5);
 }
 
+
 /* =========================
    SECTION
 ========================= */
@@ -415,6 +421,7 @@ header{
   color:#999;
   font-size:13px;
 }
+
 
 /* =========================
    MENU
@@ -542,6 +549,7 @@ header{
   color:#ff6767 !important;
 }
 
+
 /* =========================
    ADD BUTTON BLINK
 ========================= */
@@ -580,6 +588,7 @@ header{
   }
 
 }
+
 
 /* =========================
    TRACK ORDER
@@ -679,16 +688,23 @@ header{
   border:1px solid rgba(255,122,0,.3);
 }
 
+
 /* =========================
-   CART DRAWER
+   CART OVERLAY
 ========================= */
 
-..cart-drawer{
+.cart-overlay{
   position:fixed;
-  top:0;
-  left:50%;
-  right:auto;
-  transform:translateX(-50%) scale(.96);
+  inset:0;
+
+  z-index:1900;
+
+  background:rgba(0,0,0,.72);
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.25s ease;
 }
 
 .cart-overlay.show{
@@ -696,31 +712,63 @@ header{
   pointer-events:auto;
 }
 
+
+/* =========================
+   CART DRAWER - CENTER
+========================= */
+
 .cart-drawer{
   position:fixed;
 
-  top:0;
-  right:-430px;
+  top:50%;
+  left:50%;
 
   width:min(420px,94vw);
-  height:100vh;
+  height:min(720px,90vh);
 
   z-index:2000;
 
   background:#0d0d0d;
 
-  border-left:1px solid rgba(255,122,0,.18);
+  border:1px solid rgba(255,122,0,.22);
+
+  border-radius:20px;
 
   display:flex;
   flex-direction:column;
 
-  transition:.3s ease;
+  overflow:hidden;
+
+  opacity:0;
+  visibility:hidden;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.94);
+
+  transition:
+    opacity:.25s ease,
+    transform:.25s ease,
+    visibility:.25s ease;
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.65),
+    0 0 40px rgba(255,122,0,.08);
 }
 
-.cart-drawer.open{
-  transform:translateX(-50%) scale(1);
+.cart-drawer.show{
+  opacity:1;
+  visibility:visible;
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
 }
-}
+
+
+/* =========================
+   CART HEADER
+========================= */
 
 .cart-header{
   min-height:72px;
@@ -768,6 +816,11 @@ header{
   border-color:var(--orange);
   color:var(--orange);
 }
+
+
+/* =========================
+   CART BODY
+========================= */
 
 .cart-body{
   flex:1;
@@ -868,6 +921,11 @@ header{
   font-size:12px;
 }
 
+
+/* =========================
+   CART FOOTER
+========================= */
+
 .cart-footer{
   padding:17px;
 
@@ -921,6 +979,7 @@ header{
   box-shadow:0 8px 25px rgba(255,122,0,.2);
 }
 
+
 /* =========================
    CHECKOUT MODAL
 ========================= */
@@ -969,6 +1028,7 @@ header{
     opacity:0;
     transform:translateY(15px) scale(.97);
   }
+
   to{
     opacity:1;
     transform:translateY(0) scale(1);
@@ -1108,6 +1168,7 @@ header{
   font-weight:900;
 }
 
+
 /* =========================
    FOOTER
 ========================= */
@@ -1228,6 +1289,7 @@ footer{
   font-size:11px;
 }
 
+
 /* =========================
    TOAST
 ========================= */
@@ -1266,6 +1328,7 @@ footer{
   transform:translate(-50%,0);
 }
 
+
 /* =========================
    LOADING
 ========================= */
@@ -1298,6 +1361,7 @@ footer{
   }
 }
 
+
 /* =========================
    MOBILE
 ========================= */
@@ -1307,6 +1371,8 @@ footer{
   .navbar{
     min-height:67px;
     padding:10px 13px;
+
+    justify-content:center;
   }
 
   .brand-name{
@@ -1326,6 +1392,7 @@ footer{
   }
 
   .cart-top-btn{
+    right:13px;
     padding:9px 10px;
   }
 
@@ -1406,6 +1473,11 @@ footer{
     padding-top:42px;
   }
 
+  .cart-drawer{
+    width:94vw;
+    height:88vh;
+  }
+
 }
 
 @media(max-width:370px){
@@ -1425,6 +1497,7 @@ footer{
 </head>
 
 <body>
+
 
 <!-- =========================
      HEADER
@@ -1454,13 +1527,16 @@ footer{
 
     </a>
 
+
     <button
       class="cart-top-btn"
       id="cartTopBtn"
       onclick="openCart()"
     >
 
-      <span class="cart-icon">🛒</span>
+      <span class="cart-icon">
+        🛒
+      </span>
 
       <span class="cart-label">
         Your Cart
@@ -1571,6 +1647,7 @@ footer{
 
     </div>
 
+
     <div
       id="menuGrid"
       class="menu-grid"
@@ -1590,7 +1667,7 @@ footer{
 
 
   <!-- =========================
-       TRACK ORDER ONLY
+       TRACK ORDER
   ========================= -->
 
   <section
@@ -1614,6 +1691,7 @@ footer{
 
     </div>
 
+
     <div class="track-box">
 
       <div class="track-row">
@@ -1633,12 +1711,14 @@ footer{
 
       </div>
 
+
       <div
         id="trackResult"
         class="track-result"
       >
 
         <div id="trackOrderInfo"></div>
+
 
         <div
           class="track-status"
@@ -1713,8 +1793,6 @@ footer{
 
     <div class="footer-links">
 
-      <!-- DIRECT CALL -->
-
       <a
         href="tel:9776856111"
         class="footer-link"
@@ -1722,8 +1800,6 @@ footer{
         📞 97768 56111
       </a>
 
-
-      <!-- GOOGLE MAPS -->
 
       <a
         href="https://www.google.com/maps/search/?api=1&query=The+Queen+Fast+Food+Ibrisingh+Tirtol+Jagatsinghpur+Odisha"
@@ -1757,7 +1833,7 @@ footer{
 
 
 <!-- =========================
-     CART DRAWER
+     CART
 ========================= -->
 
 <aside
@@ -1778,8 +1854,6 @@ footer{
       </div>
 
     </div>
-
-    <!-- CLOSE OPTION CHANGED TO YOUR ORDER -->
 
     <button
       class="cart-close"
@@ -1811,6 +1885,7 @@ footer{
 
     </div>
 
+
     <div class="total-row">
 
       <span>
@@ -1822,6 +1897,7 @@ footer{
       </span>
 
     </div>
+
 
     <div class="total-row grand">
 
@@ -1838,6 +1914,7 @@ footer{
 
     </div>
 
+
     <button
       class="checkout-btn"
       onclick="openCheckout()"
@@ -1851,7 +1928,7 @@ footer{
 
 
 <!-- =========================
-     CHECKOUT MODAL
+     CHECKOUT
 ========================= -->
 
 <div
@@ -1933,6 +2010,7 @@ footer{
         📍 Use My Current Location
       </button>
 
+
       <div
         class="location-info"
         id="locationInfo"
@@ -1941,7 +2019,10 @@ footer{
       </div>
 
 
-      <div class="form-group" style="margin-top:13px;">
+      <div
+        class="form-group"
+        style="margin-top:13px;"
+      >
 
         <label class="form-label">
           Payment Method
@@ -1979,6 +2060,7 @@ footer{
 
         </div>
 
+
         <div class="total-row">
 
           <span>
@@ -1991,6 +2073,7 @@ footer{
 
         </div>
 
+
         <div class="total-row">
 
           <span>
@@ -2002,6 +2085,7 @@ footer{
           </span>
 
         </div>
+
 
         <div class="total-row grand">
 
@@ -2113,7 +2197,7 @@ const auth =
 
 
 /* =========================
-   DEFAULT MENU
+   ONLY 6 DEFAULT ITEMS
 ========================= */
 
 const defaultMenu = [
@@ -2152,42 +2236,6 @@ const defaultMenu = [
     id:"egg_chicken_chowmin",
     name:"Egg Chicken Chowmin",
     price:65
-  },
-
-  {
-    id:"egg_chicken_roll",
-    name:"Egg Chicken Roll",
-    price:60
-  },
-
-  {
-    id:"pakoda",
-    name:"Pakoda",
-    price:60
-  },
-
-  {
-    id:"chilli_chicken",
-    name:"Chilli Chicken",
-    price:120
-  },
-
-  {
-    id:"chicken_garlic",
-    name:"Chicken Garlic",
-    price:80
-  },
-
-  {
-    id:"chicken_biriyani",
-    name:"Chicken Biriyani",
-    price:120
-  },
-
-  {
-    id:"veg_biriyani",
-    name:"Veg Biriyani",
-    price:100
   }
 
 ];
@@ -2457,6 +2505,10 @@ async function loadMenu(){
       shopSettings.menu || {};
 
 
+    /*
+      ONLY FIRST 6 DEFAULT ITEMS
+    */
+
     menu =
       defaultMenu.map(item => {
 
@@ -2496,44 +2548,9 @@ async function loadMenu(){
       });
 
 
-    Object.keys(menuSettings)
-      .forEach(id => {
-
-        if(
-          !menu.find(
-            item => item.id === id
-          )
-        ){
-
-          const saved =
-            menuSettings[id];
-
-          menu.push({
-
-            id,
-
-            name:
-              saved.name ||
-              id,
-
-            price:
-              Number(
-                saved.price || 0
-              ),
-
-            image:
-              saved.image ||
-              "",
-
-            available:
-              saved.available !== false
-
-          });
-
-        }
-
-      });
-
+    /*
+      DO NOT ADD EXTRA ITEMS
+    */
 
     renderMenu();
 
@@ -2542,9 +2559,12 @@ async function loadMenu(){
     console.error(error);
 
     menu =
-      defaultMenu.map(item=>({
+      defaultMenu.map(item => ({
+
         ...item,
+
         available:true
+
       }));
 
     renderMenu();
@@ -2622,11 +2642,13 @@ function renderMenu(){
 
           </div>
 
+
           <div class="food-info">
 
             <div class="food-name">
               ${escapeHTML(item.name)}
             </div>
+
 
             <div class="food-bottom">
 
@@ -2634,13 +2656,13 @@ function renderMenu(){
                 ₹${Number(item.price).toFixed(0)}
               </div>
 
+
               ${
                 available
                 ?
                 `
                 <button
                   class="add-btn"
-                  data-add-id="${escapeHTML(item.id)}"
                   onclick="addToCart('${escapeHTML(item.id)}',this)"
                 >
                   Add to Cart
@@ -2728,17 +2750,8 @@ function(id,button){
   }
 
 
-  /*
-    UPDATE CART
-    BUT DO NOT OPEN CART
-  */
-
   updateCart();
 
-
-  /*
-    ADD BUTTON BLINK
-  */
 
   if(button){
 
@@ -2767,10 +2780,6 @@ function(id,button){
 
   }
 
-
-  /*
-    YOUR CART BUTTON BLINK
-  */
 
   const cartButton =
     document.getElementById(
@@ -3156,7 +3165,6 @@ function(){
 
       await calculateDelivery();
 
-
     },
 
     error => {
@@ -3247,9 +3255,6 @@ async function calculateDelivery(){
 
     console.error(error);
 
-    /*
-      Fallback straight-line distance
-    */
 
     const distance =
       calculateStraightDistance(
@@ -3642,6 +3647,11 @@ async function(){
     message +=
       `*🙏 Thank you for ordering from The Queen Fast Food!*`;
 
+
+    /*
+      WHATSAPP ONLY
+      9090220791
+    */
 
     const whatsappNumber =
       "919090220791";
