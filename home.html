@@ -137,7 +137,9 @@ button{
 }
 
 
-/* HEADER */
+/* =========================================
+   HEADER
+========================================= */
 
 header{
   height:70px;
@@ -194,7 +196,9 @@ header{
 }
 
 
-/* HERO */
+/* =========================================
+   HERO
+========================================= */
 
 .hero{
   min-height:390px;
@@ -231,7 +235,9 @@ header{
 }
 
 
-/* SHOP STATUS */
+/* =========================================
+   SHOP STATUS
+========================================= */
 
 .shop-status{
   width:min(1000px,90%);
@@ -283,7 +289,9 @@ header{
 }
 
 
-/* MENU */
+/* =========================================
+   MENU
+========================================= */
 
 .menu-wrap{
   width:min(1100px,92%);
@@ -387,7 +395,9 @@ header{
 }
 
 
-/* TRACK */
+/* =========================================
+   TRACK
+========================================= */
 
 .track-section{
   width:min(600px,92%);
@@ -434,7 +444,9 @@ header{
 }
 
 
-/* TRACK RESULT */
+/* =========================================
+   TRACK RESULT
+========================================= */
 
 .track-result{
   margin-top:15px;
@@ -466,7 +478,9 @@ header{
 }
 
 
-/* DELIVERED BUTTON */
+/* =========================================
+   DELIVERED BUTTON
+========================================= */
 
 .delivered-confirm-btn{
   width:100%;
@@ -493,7 +507,9 @@ header{
 }
 
 
-/* TIMELINE */
+/* =========================================
+   TIMELINE
+========================================= */
 
 .timeline{
   position:relative;
@@ -567,7 +583,9 @@ header{
 }
 
 
-/* CART OVERLAY */
+/* =========================================
+   CART OVERLAY
+========================================= */
 
 .cart-overlay{
   position:fixed;
@@ -586,7 +604,9 @@ header{
 }
 
 
-/* CENTER CART */
+/* =========================================
+   CENTER CART
+========================================= */
 
 .cart-drawer{
   position:fixed;
@@ -728,7 +748,9 @@ header{
 }
 
 
-/* CHECKOUT */
+/* =========================================
+   CHECKOUT
+========================================= */
 
 .checkout-overlay{
   position:fixed;
@@ -846,7 +868,9 @@ header{
 }
 
 
-/* FOOTER */
+/* =========================================
+   FOOTER
+========================================= */
 
 footer{
   text-align:center;
@@ -877,7 +901,9 @@ footer{
 }
 
 
-/* EMPTY */
+/* =========================================
+   EMPTY
+========================================= */
 
 .empty{
   text-align:center;
@@ -1329,7 +1355,8 @@ import {
   onValue,
   push,
   set,
-  update
+  update,
+  runTransaction
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
@@ -1473,6 +1500,78 @@ const RESTAURANT_LNG =
 ========================================= */
 
 const DEFAULT_DELIVERY_RATE = 6;
+
+
+/* =========================================
+   ORDER ID SETTINGS
+========================================= */
+
+const ORDER_ID_PREFIX = "TQF2026";
+
+const ORDER_ID_START = 90000;
+
+
+/* =========================================
+   GENERATE SERIAL ORDER ID
+========================================= */
+
+async function generateSerialOrderId(){
+
+  const counterRef =
+    ref(
+      db,
+      "settings/orderSerial"
+    );
+
+
+  const transactionResult =
+    await runTransaction(
+      counterRef,
+      currentValue => {
+
+        let current =
+          Number(currentValue);
+
+
+        if(
+          !Number.isFinite(current) ||
+          current < ORDER_ID_START
+        ){
+
+          current =
+            ORDER_ID_START;
+
+        }
+
+
+        return current + 1;
+
+      }
+    );
+
+
+  if(!transactionResult.committed){
+
+    throw new Error(
+      "Could not generate Order ID."
+    );
+
+  }
+
+
+  const serial =
+    Number(
+      transactionResult.snapshot.val()
+    );
+
+
+  return (
+    ORDER_ID_PREFIX +
+    "-" +
+    String(serial).padStart(5,"0")
+  );
+
+}
 
 
 /* =========================================
@@ -2531,71 +2630,112 @@ async function(){
     subtotal +
     deliveryCharge;
 
+
+  /* =====================================
+     CREATE FIREBASE ORDER KEY
+  ===================================== */
+
   const orderRef =
     push(
       ref(db,"orders")
     );
 
-  const orderId =
-    orderRef.key;
 
-  const orderData = {
+  /*
+    IMPORTANT:
 
-    orderId:orderId,
+    Firebase key and customer Order ID
+    are now different.
 
-    customerName:name,
+    Firebase key:
+    - hidden database key
 
-    phone:phone,
+    Customer Order ID:
+    - TQF2026-90001
+    - TQF2026-90002
+    - TQF2026-90003
+  */
 
-    address:address,
 
-    items:
-      cart.map(
-        item => ({
-
-          id:item.id,
-
-          name:item.name,
-
-          price:item.price,
-
-          quantity:item.quantity
-
-        })
-      ),
-
-    subtotal:subtotal,
-
-    deliveryDistance:
-      Number(
-        deliveryDistance.toFixed(2)
-      ),
-
-    deliveryCharge:
-      deliveryCharge,
-
-    total:
-      grandTotal,
-
-    customerLat:
-      customerLat,
-
-    customerLng:
-      customerLng,
-
-    status:
-      "received",
-
-    createdAt:
-      Date.now(),
-
-    updatedAt:
-      Date.now()
-
-  };
+  let orderId = "";
 
 
   try{
+
+    /* ===================================
+       GENERATE SERIAL ORDER ID
+    =================================== */
+
+    orderId =
+      await generateSerialOrderId();
+
+
+    /* ===================================
+       ORDER DATA
+    =================================== */
+
+    const orderData = {
+
+      orderId:orderId,
+
+      firebaseOrderKey:
+        orderRef.key,
+
+      customerName:name,
+
+      phone:phone,
+
+      address:address,
+
+      items:
+        cart.map(
+          item => ({
+
+            id:item.id,
+
+            name:item.name,
+
+            price:item.price,
+
+            quantity:item.quantity
+
+          })
+        ),
+
+      subtotal:subtotal,
+
+      deliveryDistance:
+        Number(
+          deliveryDistance.toFixed(2)
+        ),
+
+      deliveryCharge:
+        deliveryCharge,
+
+      total:
+        grandTotal,
+
+      customerLat:
+        customerLat,
+
+      customerLng:
+        customerLng,
+
+      status:
+        "received",
+
+      createdAt:
+        Date.now(),
+
+      updatedAt:
+        Date.now()
+
+    };
+
+
+    /* ===================================
+       SAVE ORDER
+    =================================== */
 
     await set(
       orderRef,
@@ -2670,12 +2810,15 @@ async function(){
     message +=
       `🙏 Thank you for ordering!`;
 
+
     const whatsappURL =
       `https://wa.me/${whatsappNumber}?text=`+
       encodeURIComponent(message);
 
 
-    /* RESET */
+    /* =====================================
+       RESET
+    ===================================== */
 
     cart = [];
 
@@ -2706,7 +2849,9 @@ async function(){
     customerLng = null;
 
 
-    /* OPEN WHATSAPP */
+    /* =====================================
+       OPEN WHATSAPP
+    ===================================== */
 
     window.open(
       whatsappURL,
@@ -2714,7 +2859,9 @@ async function(){
     );
 
 
-    /* AUTO TRACK */
+    /* =====================================
+       AUTO TRACK
+    ===================================== */
 
     document.getElementById(
       "trackInput"
@@ -2723,9 +2870,13 @@ async function(){
 
     startTracking();
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Order creation error:",
+      error
+    );
 
     alert(
       "Order could not be placed. Please try again."
@@ -2769,7 +2920,9 @@ function(){
   }
 
 
-  /* STOP OLD LISTENER */
+  /* =====================================
+     STOP OLD LISTENER
+  ===================================== */
 
   if(trackingUnsubscribe){
 
@@ -2780,25 +2933,84 @@ function(){
 
   }
 
+
   result.innerHTML =
     `<div class="empty">
       Tracking order...
     </div>`;
 
 
-  const orderRef =
+  /*
+    IMPORTANT:
+
+    Customer now enters:
+
+    TQF2026-90001
+
+    But Firebase orders are stored
+    using Firebase push keys.
+
+    Therefore we cannot directly use:
+
+    orders/TQF2026-90001
+
+    Instead we listen to all orders and
+    find the matching orderId.
+  */
+
+
+  const ordersRef =
     ref(
       db,
-      "orders/"+orderId
+      "orders"
     );
 
 
   trackingUnsubscribe =
     onValue(
-      orderRef,
+      ordersRef,
       snapshot => {
 
-        if(!snapshot.exists()){
+        const orders =
+          snapshot.val() || {};
+
+        let foundKey = null;
+
+        let foundOrder = null;
+
+
+        Object.keys(orders)
+          .some(
+            key => {
+
+              const order =
+                orders[key] || {};
+
+              if(
+                String(
+                  order.orderId || ""
+                )
+                .toUpperCase() ===
+                orderId.toUpperCase()
+              ){
+
+                foundKey =
+                  key;
+
+                foundOrder =
+                  order;
+
+                return true;
+
+              }
+
+              return false;
+
+            }
+          );
+
+
+        if(!foundOrder){
 
           result.innerHTML =
             `<div class="empty">
@@ -2806,14 +3018,13 @@ function(){
             </div>`;
 
           return;
+
         }
 
-        const order =
-          snapshot.val();
 
         renderTrackOrder(
           orderId,
-          order
+          foundOrder
         );
 
       },
@@ -2877,7 +3088,7 @@ function renderTrackOrder(
         </div>
 
         <div class="current-status">
-          🔴 CANCELLED
+          🔴 ORDER CANCELLED
         </div>
 
         <div class="cancelled">
@@ -2900,10 +3111,10 @@ function renderTrackOrder(
   const statusMap = {
 
     received:
-      "📥 ORDER RECEIVED",
+      "🟠 ORDER RECEIVED",
 
     processing:
-      "⚙️ PROCESSING",
+      "🟡 PROCESSING",
 
     preparing:
       "👨‍🍳 PREPARING",
@@ -2919,7 +3130,7 @@ function renderTrackOrder(
 
   const statusText =
     statusMap[status] ||
-    "📥 ORDER RECEIVED";
+    "🟠 ORDER RECEIVED";
 
 
   /* =====================================
@@ -2930,12 +3141,12 @@ function renderTrackOrder(
 
     {
       key:"received",
-      label:"📥 ORDER RECEIVED"
+      label:"🟠 ORDER RECEIVED"
     },
 
     {
       key:"processing",
-      label:"⚙️ PROCESSING"
+      label:"🟡 PROCESSING"
     },
 
     {
@@ -2968,6 +3179,7 @@ function renderTrackOrder(
 
         let cls = "";
 
+
         if(index < currentIndex){
 
           cls =
@@ -2979,6 +3191,7 @@ function renderTrackOrder(
             "active";
 
         }
+
 
         return `
 
@@ -3084,35 +3297,95 @@ async function(orderId){
 
   try{
 
+    /*
+      Find the Firebase order key
+      using the customer Order ID.
+    */
+
+    const ordersSnapshot =
+      await new Promise(
+        (resolve,reject) => {
+
+          onValue(
+            ref(db,"orders"),
+            resolve,
+            reject,
+            {
+              onlyOnce:true
+            }
+          );
+
+        }
+      );
+
+
+    const orders =
+      ordersSnapshot.val() || {};
+
+    let firebaseKey = null;
+
+
+    Object.keys(orders)
+      .some(
+        key => {
+
+          const order =
+            orders[key] || {};
+
+          if(
+            String(
+              order.orderId || ""
+            )
+            .toUpperCase() ===
+            String(orderId)
+              .toUpperCase()
+          ){
+
+            firebaseKey =
+              key;
+
+            return true;
+
+          }
+
+          return false;
+
+        }
+      );
+
+
+    if(!firebaseKey){
+
+      throw new Error(
+        "Order not found."
+      );
+
+    }
+
+
     const orderRef =
       ref(
         db,
-        "orders/"+orderId
+        "orders/"+firebaseKey
       );
 
 
     /*
-      Read current order through
-      the existing live listener state.
-      Only move it to delivered when
-      customer is currently seeing the
-      OUT FOR DELIVERY state.
+      Move order to delivered.
+
+      Admin listener will automatically
+      move this order into DELIVERED folder.
     */
 
     await update(
       orderRef,
       {
         status:"delivered",
-        updatedAt:Date.now()
+        updatedAt:Date.now(),
+        deliveredAt:Date.now()
       }
     );
 
-
-    /*
-      The Firebase onValue listener will
-      automatically refresh the tracking
-      timeline to DELIVERED.
-    */
 
   }catch(error){
 
@@ -3154,7 +3427,9 @@ function normalizeStatus(status){
     ).toLowerCase();
 
 
-  /* RECEIVED */
+  /* =====================================
+     RECEIVED
+  ===================================== */
 
   if(
     status === "new" ||
@@ -3168,7 +3443,9 @@ function normalizeStatus(status){
   }
 
 
-  /* PROCESSING */
+  /* =====================================
+     PROCESSING
+  ===================================== */
 
   if(
     status === "processing" ||
@@ -3180,7 +3457,9 @@ function normalizeStatus(status){
   }
 
 
-  /* PREPARING */
+  /* =====================================
+     PREPARING
+  ===================================== */
 
   if(
     status === "preparing" ||
@@ -3193,7 +3472,9 @@ function normalizeStatus(status){
   }
 
 
-  /* OUT FOR DELIVERY */
+  /* =====================================
+     OUT FOR DELIVERY
+  ===================================== */
 
   if(
     status === "out_for_delivery" ||
@@ -3206,7 +3487,9 @@ function normalizeStatus(status){
   }
 
 
-  /* DELIVERED */
+  /* =====================================
+     DELIVERED
+  ===================================== */
 
   if(
     status === "delivered" ||
@@ -3219,7 +3502,9 @@ function normalizeStatus(status){
   }
 
 
-  /* CANCELLED */
+  /* =====================================
+     CANCELLED
+  ===================================== */
 
   if(
     status === "cancelled" ||
