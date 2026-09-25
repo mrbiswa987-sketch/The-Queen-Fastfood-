@@ -11,7 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
 
 body{
   background:#070707;
@@ -565,10 +569,119 @@ footer a{
   }
 }
 
+
+/* =====================================================
+   DELIVERY SUCCESS ANIMATION
+===================================================== */
+
+.delivery-success-message{
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  background:rgba(0,0,0,.94);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+
+.delivery-success-content{
+  position:relative;
+  z-index:3;
+  padding:25px;
+}
+
+.delivery-success-icon{
+  font-size:75px;
+  margin-bottom:15px;
+  animation:successPop .55s ease;
+}
+
+.delivery-success-message h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(38px,7vw,65px);
+  color:#f59b23;
+  animation:successPop .55s ease;
+}
+
+.delivery-success-message p{
+  color:#aaa;
+  margin-top:12px;
+  font-size:18px;
+  animation:successFade .5s ease;
+}
+
+.flower-petal{
+  position:fixed;
+  top:-80px;
+  z-index:2;
+  pointer-events:none;
+  animation:petalFall linear forwards;
+}
+
+@keyframes petalFall{
+
+  0%{
+    transform:
+      translateY(-80px)
+      rotate(0deg);
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+      translateY(110vh)
+      translateX(var(--drift))
+      rotate(720deg);
+    opacity:0;
+  }
+
+}
+
+@keyframes successPop{
+
+  0%{
+    transform:scale(.5);
+    opacity:0;
+  }
+
+  70%{
+    transform:scale(1.08);
+  }
+
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}
+
+@keyframes successFade{
+
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+
 @media(max-width:900px){
+
   .menu-grid{
     grid-template-columns:repeat(2,1fr);
   }
+
 }
 
 @media(max-width:600px){
@@ -601,6 +714,7 @@ footer a{
     width:94%;
     max-height:88vh;
   }
+
 }
 </style>
 </head>
@@ -608,41 +722,106 @@ footer a{
 <body>
 
 <div id="websiteModeScreen" class="website-mode hidden">
+
   <div class="website-mode-inner">
-    <div id="websiteModeIcon" class="website-mode-icon">🔧</div>
-    <h1 id="websiteModeTitle">Updating</h1>
+
+    <div
+      id="websiteModeIcon"
+      class="website-mode-icon"
+    >
+      🔧
+    </div>
+
+    <h1 id="websiteModeTitle">
+      Updating
+    </h1>
+
     <p id="websiteModeMessage">
       The website is currently being updated.
       Please try again later.
     </p>
+
   </div>
+
 </div>
+
 
 <div id="thankYouOverlay" class="thankyou hidden">
+
   <div>
-    <div class="flower">🌸</div>
-    <h1>Thank You!</h1>
-    <p style="color:#aaa;margin-top:10px">
+
+    <div class="flower">
+      🌸
+    </div>
+
+    <h1>
+      Thank You!
+    </h1>
+
+    <p
+      style="color:#aaa;margin-top:10px"
+    >
       Your order has been placed successfully.
     </p>
+
   </div>
+
 </div>
 
+
+<!-- DELIVERY SUCCESS OVERLAY -->
+
+<div
+  id="deliverySuccessOverlay"
+  class="delivery-success-message hidden"
+>
+
+  <div id="flowerContainer"></div>
+
+  <div class="delivery-success-content">
+
+    <div
+      id="deliverySuccessIcon"
+      class="delivery-success-icon"
+    >
+      🎉
+    </div>
+
+    <h1 id="deliverySuccessTitle">
+      Order Delivered Successfully!
+    </h1>
+
+    <p id="deliverySuccessMessage">
+      Thank you for choosing The Queen Fast Food ❤️
+    </p>
+
+  </div>
+
+</div>
+
+
 <header>
+
   <div class="nav">
 
     <div class="logo">
       The Queen <span>Fast Food</span>
     </div>
 
-    <button id="topCart" class="cart-top">
+    <button
+      id="topCart"
+      class="cart-top"
+    >
       🛒 Cart <b id="cartCount">0</b>
     </button>
 
   </div>
+
 </header>
 
+
 <main id="mainWebsite">
+
 
 <section class="hero">
 
@@ -667,12 +846,17 @@ footer a{
 
   </div>
 
-  <div style="margin-top:10px;color:#777;font-size:13px">
+  <div
+    style="margin-top:10px;color:#777;font-size:13px"
+  >
     Order Time:
-    <span id="orderTimeValue">--</span>
+    <span id="orderTimeValue">
+      --
+    </span>
   </div>
 
 </section>
+
 
 <section class="section">
 
@@ -680,9 +864,13 @@ footer a{
     Our Menu
   </h2>
 
-  <div id="menuGrid" class="menu-grid"></div>
+  <div
+    id="menuGrid"
+    class="menu-grid"
+  ></div>
 
 </section>
+
 
 <section class="section">
 
@@ -714,7 +902,9 @@ footer a{
 
 </section>
 
+
 </main>
+
 
 <footer>
 
@@ -738,6 +928,7 @@ footer a{
   </p>
 
 </footer>
+
 
 <div
   id="cartOverlay"
@@ -790,6 +981,7 @@ footer a{
 
 </div>
 
+
 <div
   id="checkoutOverlay"
   class="overlay hidden"
@@ -812,6 +1004,7 @@ footer a{
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -824,6 +1017,7 @@ footer a{
       >
 
     </div>
+
 
     <div class="form-group">
 
@@ -840,6 +1034,7 @@ footer a{
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -852,6 +1047,7 @@ footer a{
       ></textarea>
 
     </div>
+
 
     <div class="form-group">
 
@@ -882,10 +1078,12 @@ footer a{
 
     </div>
 
+
     <div
       id="orderSummary"
       class="summary"
     ></div>
+
 
     <div class="form-group">
 
@@ -920,6 +1118,7 @@ footer a{
 
     </div>
 
+
     <button
       id="placeOrderButton"
       class="primary"
@@ -932,12 +1131,14 @@ footer a{
 
 </div>
 
+
 <script type="module">
 
 import {
   initializeApp
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
   getDatabase,
@@ -950,6 +1151,7 @@ import {
   equalTo
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 
 import {
   getAuth,
@@ -993,11 +1195,14 @@ const firebaseConfig = {
 
 };
 
+
 const app =
   initializeApp(firebaseConfig);
 
+
 const db =
   getDatabase(app);
+
 
 const auth =
   getAuth(app);
@@ -1075,14 +1280,18 @@ const DEFAULT_MENU = [
 
 ];
 
+
 const RESTAURANT_LAT =
   20.216780359694468;
+
 
 const RESTAURANT_LNG =
   86.36464363454978;
 
+
 const DEFAULT_DELIVERY_RATE =
   6;
+
 
 const WHATSAPP_DEFAULT =
   "9090220791";
@@ -1129,11 +1338,13 @@ function waitForAuthState(){
 
   }
 
+
   if(authReadyPromise){
 
     return authReadyPromise;
 
   }
+
 
   authReadyPromise =
     new Promise(resolve=>{
@@ -1159,6 +1370,7 @@ function waitForAuthState(){
 
     });
 
+
   return authReadyPromise;
 
 }
@@ -1166,21 +1378,11 @@ function waitForAuthState(){
 
 /* =====================================================
    START CUSTOMER AUTH
-   IMPORTANT FIX:
-   Browser local persistence
 ===================================================== */
 
 async function startCustomerAuth(){
 
   try{
-
-    /*
-      Firebase Anonymous Auth UID ku
-      browser re permanently-ish persist kariba.
-
-      Browser close/reopen pare madhya
-      same anonymous UID use haba.
-    */
 
     await setPersistence(
       auth,
@@ -1230,7 +1432,9 @@ async function startCustomerAuth(){
       error
     );
 
+
     currentUser = null;
+
 
     alert(
 
@@ -1254,6 +1458,7 @@ async function startCustomerAuth(){
 
     );
 
+
     throw error;
 
   }
@@ -1274,10 +1479,12 @@ onAuthStateChanged(
       currentUser =
         user;
 
+
       console.log(
         "Auth state ready:",
         user.uid
       );
+
 
       validateCheckout();
 
@@ -1305,11 +1512,13 @@ function loadSettings(){
       shopSettings =
         snapshot.val() || {};
 
+
       renderWebsiteMode();
 
       renderShopStatus();
 
       renderMenu();
+
 
       if(
         !document
@@ -1352,11 +1561,13 @@ function renderWebsiteMode(){
       "websiteModeScreen"
     );
 
+
   const mode =
     String(
       shopSettings.websiteMode ||
       "normal"
     ).toLowerCase();
+
 
   if(mode === "normal"){
 
@@ -1368,19 +1579,23 @@ function renderWebsiteMode(){
 
   }
 
+
   screen.classList.remove(
     "hidden"
   );
+
 
   const icon =
     document.getElementById(
       "websiteModeIcon"
     );
 
+
   const title =
     document.getElementById(
       "websiteModeTitle"
     );
+
 
   const message =
     document.getElementById(
@@ -1393,8 +1608,10 @@ function renderWebsiteMode(){
     icon.textContent =
       "🛠️";
 
+
     title.textContent =
       "Website Closed";
+
 
     message.textContent =
       shopSettings.websiteMessage ||
@@ -1407,8 +1624,10 @@ function renderWebsiteMode(){
     icon.textContent =
       "🔧";
 
+
     title.textContent =
       "Updating";
+
 
     message.textContent =
       shopSettings.websiteMessage ||
@@ -2526,6 +2745,7 @@ async function placeOrder(){
       button.disabled =
         true;
 
+
       button.textContent =
         "Connecting...";
 
@@ -3128,11 +3348,6 @@ async function trackOrder(){
 
 
   try{
-
-    /*
-      Always make sure the SAME
-      persistent anonymous user is ready.
-    */
 
     await startCustomerAuth();
 
@@ -3793,9 +4008,13 @@ async function customerConfirmDelivered(
     );
 
 
-    alert(
-      "🎉 Order marked as delivered."
-    );
+    /*
+      Firebase status update successful.
+      No alert here.
+      Live onValue() will update the order.
+    */
+
+    showDeliverySuccess();
 
   }
 
@@ -3820,6 +4039,233 @@ async function customerConfirmDelivered(
     );
 
   }
+
+}
+
+
+/* =====================================================
+   DELIVERY SUCCESS ANIMATION
+===================================================== */
+
+function showDeliverySuccess(){
+
+  const overlay =
+    document.getElementById(
+      "deliverySuccessOverlay"
+    );
+
+
+  const title =
+    document.getElementById(
+      "deliverySuccessTitle"
+    );
+
+
+  const message =
+    document.getElementById(
+      "deliverySuccessMessage"
+    );
+
+
+  const icon =
+    document.getElementById(
+      "deliverySuccessIcon"
+    );
+
+
+  const flowerContainer =
+    document.getElementById(
+      "flowerContainer"
+    );
+
+
+  overlay.classList.remove(
+    "hidden"
+  );
+
+
+  /*
+    FIRST MESSAGE
+  */
+
+  icon.textContent =
+    "🎉";
+
+
+  title.textContent =
+    "Order Delivered Successfully!";
+
+
+  message.textContent =
+    "";
+
+
+  /*
+    FLOWERS
+  */
+
+  flowerContainer.innerHTML =
+    "";
+
+
+  const flowers = [
+
+    "🌸",
+    "🌺",
+    "🌷",
+    "🌼",
+    "💮",
+    "🌹"
+
+  ];
+
+
+  for(
+    let i = 0;
+    i < 35;
+    i++
+  ){
+
+    const petal =
+      document.createElement(
+        "div"
+      );
+
+
+    petal.className =
+      "flower-petal";
+
+
+    petal.textContent =
+      flowers[
+        Math.floor(
+          Math.random() *
+          flowers.length
+        )
+      ];
+
+
+    petal.style.left =
+      Math.random() * 100 +
+      "%";
+
+
+    petal.style.fontSize =
+      (
+        18 +
+        Math.random() * 22
+      ) +
+      "px";
+
+
+    petal.style.animationDuration =
+      (
+        2 +
+        Math.random() * 2.5
+      ) +
+      "s";
+
+
+    petal.style.animationDelay =
+      Math.random() * .8 +
+      "s";
+
+
+    petal.style.setProperty(
+      "--drift",
+      (
+        -100 +
+        Math.random() * 200
+      ) +
+      "px"
+    );
+
+
+    flowerContainer.appendChild(
+      petal
+    );
+
+  }
+
+
+  /*
+    AFTER EXACTLY 1 SECOND
+  */
+
+  setTimeout(
+    ()=>{
+
+      icon.textContent =
+        "🌸";
+
+
+      title.textContent =
+        "Thank You!";
+
+
+      message.textContent =
+        "Thank you for choosing The Queen Fast Food ❤️";
+
+    },
+    1000
+  );
+
+
+  /*
+    AFTER 3.5 SECONDS
+    CLOSE SUCCESS SCREEN
+  */
+
+  setTimeout(
+    ()=>{
+
+      overlay.classList.add(
+        "hidden"
+      );
+
+
+      flowerContainer.innerHTML =
+        "";
+
+
+      const lastOrderId =
+        localStorage.getItem(
+          "lastOrderId"
+        );
+
+
+      if(lastOrderId){
+
+        document.getElementById(
+          "trackInput"
+        ).value =
+          lastOrderId;
+
+
+        /*
+          Live tracking already connected.
+          This refreshes the displayed
+          delivered order.
+        */
+
+        trackOrder();
+
+
+        document.getElementById(
+          "trackResult"
+        ).scrollIntoView({
+
+          behavior:"smooth",
+
+          block:"center"
+
+        });
+
+      }
+
+    },
+    3500
+  );
 
 }
 
@@ -3934,11 +4380,6 @@ document.getElementById(
 (async function(){
 
   try{
-
-    /*
-      IMPORTANT:
-      First establish persistent anonymous auth.
-    */
 
     await startCustomerAuth();
 
