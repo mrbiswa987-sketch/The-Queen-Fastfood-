@@ -59,10 +59,7 @@ a{
   --green:#20d878;
 }
 
-
-/* =========================
-   HEADER
-========================= */
+/* ================= HEADER ================= */
 
 header{
   position:sticky;
@@ -82,7 +79,6 @@ header{
   display:flex;
   align-items:center;
   justify-content:center;
-
   position:relative;
 }
 
@@ -95,7 +91,6 @@ header{
 .brand-crown{
   width:42px;
   height:42px;
-
   border:1px solid rgba(255,122,0,.45);
   border-radius:50%;
 
@@ -106,8 +101,7 @@ header{
   color:var(--orange);
   font-size:22px;
 
-  box-shadow:
-    0 0 25px rgba(255,122,0,.10);
+  box-shadow:0 0 25px rgba(255,122,0,.10);
 }
 
 .brand-name{
@@ -170,10 +164,7 @@ header{
   font-weight:800;
 }
 
-
-/* =========================
-   CART BLINK
-========================= */
+/* ================= CART BLINK ================= */
 
 .cart-top-btn.cart-blink{
   animation:cartBlink .75s ease;
@@ -210,10 +201,7 @@ header{
   }
 }
 
-
-/* =========================
-   HERO
-========================= */
+/* ================= HERO ================= */
 
 .hero{
   position:relative;
@@ -225,28 +213,110 @@ header{
   padding:80px 20px 65px;
   min-height:480px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  text-align:center !important;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+
+  width:480px;
+  height:480px;
+
+  right:-160px;
+  top:-100px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,122,0,.16),
+      rgba(255,122,0,.04) 42%,
+      transparent 70%
+    );
+}
+
+.hero::after{
+  content:"♛";
+
+  position:absolute;
+
+  right:30px;
+  top:20px;
+
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:280px;
+  line-height:1;
+
+  color:rgba(255,122,0,.035);
+
+  transform:rotate(-8deg);
+
+  pointer-events:none;
 }
 
 .hero-content{
   position:relative;
   z-index:2;
-  max-width:720px;
+
   width:100%;
+  max-width:850px;
+
+  margin:0 auto !important;
+
+  text-align:center !important;
+}
+
+.hero-small{
+  color:var(--orange);
+  font-size:12px;
+  letter-spacing:4px;
+  font-weight:700;
+  margin-bottom:13px;
+
+  text-align:center !important;
+}
+
+.hero-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(52px,8vw,92px);
+  line-height:.86;
+  letter-spacing:1px;
+  font-weight:700;
+
+  text-align:center !important;
+}
+
+.hero-title span{
+  color:var(--orange);
+}
+
+.hero-tagline{
+  margin-top:22px;
+  color:#d4d4d4;
+  font-size:17px;
+  letter-spacing:.5px;
+
+  text-align:center !important;
 }
 
 .hero-buttons{
   margin-top:30px;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+
   gap:12px;
   flex-wrap:wrap;
 }
+
 .primary-btn,
 .secondary-btn{
   border:none;
@@ -255,7 +325,6 @@ header{
   padding:13px 20px;
 
   font-weight:700;
-
   transition:.25s;
 }
 
@@ -279,15 +348,15 @@ header{
   border-color:var(--orange);
 }
 
-
-/* =========================
-   SHOP STATUS
-========================= */
+/* ================= STATUS ================= */
 
 .status-wrap{
   max-width:1250px;
   margin:0 auto 25px;
   padding:0 20px;
+
+  display:flex;
+  justify-content:center;
 }
 
 .shop-status{
@@ -322,10 +391,7 @@ header{
   box-shadow:0 0 12px rgba(255,65,65,.5);
 }
 
-
-/* =========================
-   SECTION
-========================= */
+/* ================= SECTION ================= */
 
 .section{
   max-width:1250px;
@@ -335,6 +401,7 @@ header{
 
 .section-heading{
   margin-bottom:25px;
+  text-align:center;
 }
 
 .section-kicker{
@@ -358,15 +425,12 @@ header{
   font-size:13px;
 }
 
-
-/* =========================
-   MENU
-========================= */
+/* ================= MENU ================= */
 
 .menu-grid{
   display:grid;
   grid-template-columns:
-    repeat(auto-fill,minmax(230px,1fr));
+    repeat(3,minmax(0,1fr));
 
   gap:18px;
 }
@@ -393,8 +457,7 @@ header{
 .food-card:hover{
   transform:translateY(-4px);
 
-  border-color:
-    rgba(255,122,0,.35);
+  border-color:rgba(255,122,0,.35);
 
   box-shadow:
     0 14px 35px rgba(0,0,0,.35);
@@ -485,10 +548,7 @@ header{
   color:#ff6767 !important;
 }
 
-
-/* =========================
-   ADD BUTTON BLINK
-========================= */
+/* ================= ADD BLINK ================= */
 
 .add-to-cart-blink{
   animation:addBlink .75s ease;
@@ -496,9 +556,7 @@ header{
 
 @keyframes addBlink{
 
-  0%{
-    transform:scale(1);
-  }
+  0%{transform:scale(1)}
 
   20%{
     transform:scale(1.08);
@@ -507,9 +565,7 @@ header{
       0 0 25px rgba(255,122,0,.4);
   }
 
-  45%{
-    transform:scale(1);
-  }
+  45%{transform:scale(1)}
 
   65%{
     transform:scale(1.08);
@@ -525,10 +581,7 @@ header{
 
 }
 
-
-/* =========================
-   TRACK ORDER
-========================= */
+/* ================= TRACK ================= */
 
 .track-section{
   padding-top:30px;
@@ -537,6 +590,7 @@ header{
 
 .track-box{
   max-width:650px;
+  margin:auto;
 
   background:#101010;
 
@@ -554,7 +608,6 @@ header{
 
 .track-input{
   flex:1;
-
   min-width:0;
 
   border:1px solid #292929;
@@ -599,8 +652,7 @@ header{
   margin-top:15px;
 
   display:grid;
-  grid-template-columns:
-    repeat(5,1fr);
+  grid-template-columns:repeat(5,1fr);
 
   gap:7px;
 }
@@ -624,23 +676,20 @@ header{
   border:1px solid rgba(255,122,0,.3);
 }
 
-
-/* =========================
-   CART OVERLAY
-========================= */
+/* ================= CART OVERLAY ================= */
 
 .cart-overlay{
   position:fixed;
   inset:0;
 
-  z-index:1900;
+  z-index:1999;
 
   background:rgba(0,0,0,.72);
 
   opacity:0;
   pointer-events:none;
 
-  transition:.25s ease;
+  transition:.25s;
 }
 
 .cart-overlay.show{
@@ -648,10 +697,7 @@ header{
   pointer-events:auto;
 }
 
-
-/* =========================
-   CART DRAWER - CENTER
-========================= */
+/* ================= CART CENTER MODAL ================= */
 
 .cart-drawer{
   position:fixed;
@@ -659,57 +705,48 @@ header{
   top:50%;
   left:50%;
 
-  width:min(420px,94vw);
-  height:min(720px,90vh);
+  width:min(390px,92vw);
+  height:min(650px,88vh);
 
   z-index:2000;
 
   background:#0d0d0d;
 
-  border:1px solid rgba(255,122,0,.22);
+  border:1px solid rgba(255,122,0,.25);
 
   border-radius:20px;
 
   display:flex;
   flex-direction:column;
 
-  overflow:hidden;
+  transform:
+    translate(-50%,-46%)
+    scale(.94);
 
   opacity:0;
   visibility:hidden;
 
-  transform:
-    translate(-50%,-50%)
-    scale(.94);
-
-  transition:
-    opacity:.25s ease,
-    transform:.25s ease,
-    visibility:.25s ease;
+  transition:.28s ease;
 
   box-shadow:
-    0 25px 80px rgba(0,0,0,.65),
-    0 0 40px rgba(255,122,0,.08);
+    0 25px 90px rgba(0,0,0,.7),
+    0 0 35px rgba(255,122,0,.08);
 }
 
+.cart-drawer.open,
 .cart-drawer.show{
-  opacity:1;
-  visibility:visible;
-
   transform:
     translate(-50%,-50%)
     scale(1);
+
+  opacity:1;
+  visibility:visible;
 }
 
-
-/* =========================
-   CART HEADER
-========================= */
-
 .cart-header{
-  min-height:72px;
+  min-height:70px;
 
-  padding:15px 18px;
+  padding:14px 16px;
 
   display:flex;
   align-items:center;
@@ -720,14 +757,14 @@ header{
 
 .cart-title{
   font-family:"Cormorant Garamond",serif;
-  font-size:30px;
+  font-size:29px;
   font-weight:700;
 }
 
 .order-label{
   color:var(--orange);
   font-family:Inter,sans-serif;
-  font-size:10px;
+  font-size:9px;
   letter-spacing:2px;
   text-transform:uppercase;
   margin-bottom:2px;
@@ -742,9 +779,9 @@ header{
 
   border-radius:10px;
 
-  padding:8px 13px;
+  padding:8px 12px;
 
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
 }
 
@@ -753,15 +790,10 @@ header{
   color:var(--orange);
 }
 
-
-/* =========================
-   CART BODY
-========================= */
-
 .cart-body{
   flex:1;
   overflow:auto;
-  padding:17px;
+  padding:15px;
 }
 
 .empty-cart{
@@ -781,7 +813,7 @@ header{
 .cart-item{
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:10px;
 
   padding:11px 0;
 
@@ -789,8 +821,8 @@ header{
 }
 
 .cart-item-image{
-  width:55px;
-  height:55px;
+  width:52px;
+  height:52px;
 
   flex-shrink:0;
 
@@ -836,12 +868,12 @@ header{
 .qty-control{
   display:flex;
   align-items:center;
-  gap:7px;
+  gap:6px;
 }
 
 .qty-btn{
-  width:26px;
-  height:26px;
+  width:25px;
+  height:25px;
 
   border:1px solid #333;
 
@@ -857,17 +889,14 @@ header{
   font-size:12px;
 }
 
-
-/* =========================
-   CART FOOTER
-========================= */
-
 .cart-footer{
-  padding:17px;
+  padding:15px;
 
   border-top:1px solid rgba(255,255,255,.08);
 
   background:#0b0b0b;
+
+  border-radius:0 0 20px 20px;
 }
 
 .total-row{
@@ -875,18 +904,18 @@ header{
   align-items:center;
   justify-content:space-between;
 
-  margin-bottom:9px;
+  margin-bottom:8px;
 
-  font-size:13px;
+  font-size:12px;
 }
 
 .total-row.grand{
-  padding-top:10px;
-  margin-top:8px;
+  padding-top:9px;
+  margin-top:7px;
 
   border-top:1px dashed #333;
 
-  font-size:17px;
+  font-size:16px;
   font-weight:800;
 }
 
@@ -897,28 +926,22 @@ header{
 .checkout-btn{
   width:100%;
 
-  margin-top:14px;
+  margin-top:12px;
 
   border:none;
 
   background:var(--orange);
   color:#080808;
 
-  padding:14px;
+  padding:12px;
 
-  border-radius:12px;
+  border-radius:11px;
 
+  font-size:13px;
   font-weight:900;
 }
 
-.checkout-btn:hover{
-  box-shadow:0 8px 25px rgba(255,122,0,.2);
-}
-
-
-/* =========================
-   CHECKOUT MODAL
-========================= */
+/* ================= CHECKOUT ================= */
 
 .checkout-overlay{
   position:fixed;
@@ -941,7 +964,7 @@ header{
 }
 
 .checkout-modal{
-  width:min(430px,94vw);
+  width:min(400px,92vw);
   max-height:88vh;
 
   overflow:auto;
@@ -950,7 +973,7 @@ header{
 
   border:1px solid rgba(255,122,0,.28);
 
-  border-radius:20px;
+  border-radius:18px;
 
   box-shadow:
     0 25px 80px rgba(0,0,0,.6),
@@ -972,7 +995,7 @@ header{
 }
 
 .checkout-header{
-  padding:16px 18px;
+  padding:14px 16px;
 
   border-bottom:1px solid rgba(255,255,255,.07);
 
@@ -983,28 +1006,28 @@ header{
 
 .checkout-title{
   font-family:"Cormorant Garamond",serif;
-  font-size:29px;
+  font-size:27px;
   font-weight:700;
 }
 
 .checkout-close{
-  width:34px;
-  height:34px;
+  width:32px;
+  height:32px;
 
   border:1px solid #333;
 
   background:#171717;
   color:#fff;
 
-  border-radius:9px;
+  border-radius:8px;
 }
 
 .checkout-body{
-  padding:17px;
+  padding:16px;
 }
 
 .form-group{
-  margin-bottom:13px;
+  margin-bottom:12px;
 }
 
 .form-label{
@@ -1029,13 +1052,13 @@ header{
 
   border-radius:10px;
 
-  padding:11px 12px;
+  padding:10px 11px;
 
   outline:none;
 }
 
 .form-textarea{
-  min-height:75px;
+  min-height:70px;
   resize:vertical;
 }
 
@@ -1048,7 +1071,7 @@ header{
 .location-btn{
   width:100%;
 
-  margin-top:7px;
+  margin-top:6px;
 
   border:1px dashed rgba(255,122,0,.35);
 
@@ -1058,7 +1081,7 @@ header{
 
   border-radius:10px;
 
-  padding:10px;
+  padding:9px;
 
   font-size:12px;
   font-weight:700;
@@ -1075,9 +1098,9 @@ header{
 }
 
 .checkout-summary{
-  margin-top:15px;
+  margin-top:14px;
 
-  padding:13px;
+  padding:12px;
 
   border-radius:12px;
 
@@ -1089,7 +1112,7 @@ header{
 .place-order-btn{
   width:100%;
 
-  margin-top:14px;
+  margin-top:13px;
 
   border:none;
 
@@ -1099,15 +1122,12 @@ header{
 
   border-radius:11px;
 
-  padding:13px;
+  padding:12px;
 
   font-weight:900;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
+/* ================= FOOTER ================= */
 
 footer{
   position:relative;
@@ -1225,10 +1245,7 @@ footer{
   font-size:11px;
 }
 
-
-/* =========================
-   TOAST
-========================= */
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
@@ -1264,10 +1281,7 @@ footer{
   transform:translate(-50%,0);
 }
 
-
-/* =========================
-   LOADING
-========================= */
+/* ================= LOADING ================= */
 
 .loading{
   padding:45px 20px;
@@ -1275,6 +1289,8 @@ footer{
   text-align:center;
 
   color:#777;
+
+  grid-column:1/-1;
 }
 
 .spinner{
@@ -1297,18 +1313,13 @@ footer{
   }
 }
 
+/* ================= MOBILE ================= */
 
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
+@media(max-width:700px){
 
   .navbar{
     min-height:67px;
     padding:10px 13px;
-
-    justify-content:center;
   }
 
   .brand-name{
@@ -1338,7 +1349,22 @@ footer{
 
   .hero{
     padding:60px 18px 45px;
+
     min-height:410px;
+
+    justify-content:center !important;
+    text-align:center !important;
+  }
+
+  .hero-content{
+    margin:0 auto !important;
+    text-align:center !important;
+  }
+
+  .hero-small,
+  .hero-title,
+  .hero-tagline{
+    text-align:center !important;
   }
 
   .hero-title{
@@ -1351,6 +1377,10 @@ footer{
     top:50px;
   }
 
+  .hero-buttons{
+    justify-content:center !important;
+  }
+
   .section{
     padding:30px 14px;
   }
@@ -1360,9 +1390,7 @@ footer{
   }
 
   .menu-grid{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:11px;
   }
 
@@ -1397,8 +1425,7 @@ footer{
   }
 
   .track-status{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .footer-brand{
@@ -1407,11 +1434,6 @@ footer{
 
   .footer-inner{
     padding-top:42px;
-  }
-
-  .cart-drawer{
-    width:94vw;
-    height:88vh;
   }
 
 }
@@ -1429,15 +1451,11 @@ footer{
 }
 
 </style>
-
 </head>
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header>
 
@@ -1463,16 +1481,13 @@ footer{
 
     </a>
 
-
     <button
       class="cart-top-btn"
       id="cartTopBtn"
       onclick="openCart()"
     >
 
-      <span class="cart-icon">
-        🛒
-      </span>
+      <span class="cart-icon">🛒</span>
 
       <span class="cart-label">
         Your Cart
@@ -1492,9 +1507,7 @@ footer{
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <main id="home">
 
@@ -1558,9 +1571,7 @@ footer{
   </div>
 
 
-  <!-- =========================
-       MENU
-  ========================= -->
+  <!-- MENU -->
 
   <section
     class="section"
@@ -1583,7 +1594,6 @@ footer{
 
     </div>
 
-
     <div
       id="menuGrid"
       class="menu-grid"
@@ -1602,9 +1612,7 @@ footer{
   </section>
 
 
-  <!-- =========================
-       TRACK ORDER
-  ========================= -->
+  <!-- TRACK ORDER -->
 
   <section
     class="section track-section"
@@ -1627,7 +1635,6 @@ footer{
 
     </div>
 
-
     <div class="track-box">
 
       <div class="track-row">
@@ -1647,14 +1654,12 @@ footer{
 
       </div>
 
-
       <div
         id="trackResult"
         class="track-result"
       >
 
         <div id="trackOrderInfo"></div>
-
 
         <div
           class="track-status"
@@ -1707,9 +1712,7 @@ footer{
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -1736,7 +1739,6 @@ footer{
         📞 97768 56111
       </a>
 
-
       <a
         href="https://www.google.com/maps/search/?api=1&query=The+Queen+Fast+Food+Ibrisingh+Tirtol+Jagatsinghpur+Odisha"
         target="_blank"
@@ -1757,9 +1759,7 @@ footer{
 </footer>
 
 
-<!-- =========================
-     CART OVERLAY
-========================= -->
+<!-- CART OVERLAY -->
 
 <div
   class="cart-overlay"
@@ -1768,9 +1768,7 @@ footer{
 ></div>
 
 
-<!-- =========================
-     CART
-========================= -->
+<!-- CART -->
 
 <aside
   class="cart-drawer"
@@ -1821,7 +1819,6 @@ footer{
 
     </div>
 
-
     <div class="total-row">
 
       <span>
@@ -1833,7 +1830,6 @@ footer{
       </span>
 
     </div>
-
 
     <div class="total-row grand">
 
@@ -1850,7 +1846,6 @@ footer{
 
     </div>
 
-
     <button
       class="checkout-btn"
       onclick="openCheckout()"
@@ -1863,9 +1858,7 @@ footer{
 </aside>
 
 
-<!-- =========================
-     CHECKOUT
-========================= -->
+<!-- CHECKOUT -->
 
 <div
   class="checkout-overlay"
@@ -1889,7 +1882,6 @@ footer{
 
     </div>
 
-
     <div class="checkout-body">
 
       <div class="form-group">
@@ -1905,7 +1897,6 @@ footer{
         >
 
       </div>
-
 
       <div class="form-group">
 
@@ -1923,7 +1914,6 @@ footer{
 
       </div>
 
-
       <div class="form-group">
 
         <label class="form-label">
@@ -1938,7 +1928,6 @@ footer{
 
       </div>
 
-
       <button
         class="location-btn"
         onclick="useCurrentLocation()"
@@ -1946,14 +1935,12 @@ footer{
         📍 Use My Current Location
       </button>
 
-
       <div
         class="location-info"
         id="locationInfo"
       >
         Location selected
       </div>
-
 
       <div
         class="form-group"
@@ -1981,7 +1968,6 @@ footer{
 
       </div>
 
-
       <div class="checkout-summary">
 
         <div class="total-row">
@@ -1996,7 +1982,6 @@ footer{
 
         </div>
 
-
         <div class="total-row">
 
           <span>
@@ -2009,7 +1994,6 @@ footer{
 
         </div>
 
-
         <div class="total-row">
 
           <span>
@@ -2021,7 +2005,6 @@ footer{
           </span>
 
         </div>
-
 
         <div class="total-row grand">
 
@@ -2039,7 +2022,6 @@ footer{
         </div>
 
       </div>
-
 
       <button
         class="place-order-btn"
@@ -2063,10 +2045,6 @@ footer{
 ></div>
 
 
-<!-- =========================
-     FIREBASE
-========================= -->
-
 <script type="module">
 
 import {
@@ -2089,9 +2067,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
 
@@ -2132,9 +2108,11 @@ const auth =
   getAuth(app);
 
 
-/* =========================
-   ONLY 6 DEFAULT ITEMS
-========================= */
+/* ================= DEFAULT MENU ================= */
+
+/*
+  ONLY FIRST 6 ITEMS SHOWN
+*/
 
 const defaultMenu = [
 
@@ -2177,32 +2155,21 @@ const defaultMenu = [
 ];
 
 
-/* =========================
-   GLOBAL DATA
-========================= */
-
 let menu = [];
-
 let cart = [];
-
 let currentUser = null;
-
 let shopSettings = {};
 
 let customerLat = null;
-
 let customerLng = null;
 
 let deliveryDistance = 0;
-
 let deliveryCharge = 0;
 
 let currentOrderListener = null;
 
 
-/* =========================
-   RESTAURANT LOCATION
-========================= */
+/* ================= LOCATION ================= */
 
 const RESTAURANT_LAT =
   20.216780359694468;
@@ -2210,38 +2177,25 @@ const RESTAURANT_LAT =
 const RESTAURANT_LNG =
   86.36464363454978;
 
-const DELIVERY_RATE =
-  6;
+const DELIVERY_RATE = 6;
 
 
-/* =========================
-   AUTH
-========================= */
+/* ================= AUTH ================= */
 
 signInAnonymously(auth)
-  .catch(error => {
-
-    console.error(
-      "Anonymous auth error:",
-      error
-    );
-
-  });
-
+.catch(error=>{
+  console.error("Anonymous auth error:",error);
+});
 
 onAuthStateChanged(
   auth,
-  user => {
-
-    currentUser = user;
-
+  user=>{
+    currentUser=user;
   }
 );
 
 
-/* =========================
-   ESCAPE HTML
-========================= */
+/* ================= ESCAPE ================= */
 
 function escapeHTML(value){
 
@@ -2255,69 +2209,53 @@ function escapeHTML(value){
 }
 
 
-/* =========================
-   TOAST
-========================= */
+/* ================= TOAST ================= */
 
-window.showToast =
-function(message){
+window.showToast=function(message){
 
-  const toast =
+  const toast=
     document.getElementById("toast");
 
-  toast.textContent =
-    message;
+  toast.textContent=message;
 
   toast.classList.add("show");
 
-  clearTimeout(
-    window.__toastTimer
-  );
+  clearTimeout(window.__toastTimer);
 
-  window.__toastTimer =
+  window.__toastTimer=
     setTimeout(()=>{
-
       toast.classList.remove("show");
-
     },2200);
 
 };
 
 
-/* =========================
-   LOAD SETTINGS
-========================= */
+/* ================= SETTINGS ================= */
 
 async function loadSettings(){
 
   try{
 
-    const snapshot =
+    const snapshot=
       await get(
         ref(db,"settings")
       );
 
-    if(snapshot.exists()){
-
-      shopSettings =
-        snapshot.val() || {};
-
-    }else{
-
-      shopSettings = {};
-
-    }
+    shopSettings=
+      snapshot.exists()
+      ? snapshot.val() || {}
+      : {};
 
     loadShopStatus();
-
     loadMenu();
 
   }catch(error){
 
     console.error(error);
 
-    loadShopStatus();
+    shopSettings={};
 
+    loadShopStatus();
     loadMenu();
 
   }
@@ -2325,99 +2263,87 @@ async function loadSettings(){
 }
 
 
-/* =========================
-   SHOP STATUS
-========================= */
+/* ================= SHOP STATUS ================= */
 
 function loadShopStatus(){
 
-  const dot =
+  const dot=
     document.getElementById("statusDot");
 
-  const text =
+  const text=
     document.getElementById("shopStatusText");
 
-
-  let isOpen =
+  let isOpen=
     shopSettings.shopOpen;
-
 
   if(typeof isOpen !== "boolean"){
 
-    const now =
-      new Date();
+    const now=new Date();
 
-    const currentMinutes =
-      now.getHours()*60 +
+    const currentMinutes=
+      now.getHours()*60+
       now.getMinutes();
-
 
     if(
       shopSettings.openTime &&
       shopSettings.closeTime
     ){
 
-      const openParts =
-        String(
-          shopSettings.openTime
-        ).split(":");
+      const openParts=
+        String(shopSettings.openTime)
+        .split(":");
 
-      const closeParts =
-        String(
-          shopSettings.closeTime
-        ).split(":");
+      const closeParts=
+        String(shopSettings.closeTime)
+        .split(":");
 
+      const openMinutes=
+        Number(openParts[0])*60+
+        Number(openParts[1]||0);
 
-      const openMinutes =
-        Number(openParts[0])*60 +
-        Number(openParts[1] || 0);
+      const closeMinutes=
+        Number(closeParts[0])*60+
+        Number(closeParts[1]||0);
 
-      const closeMinutes =
-        Number(closeParts[0])*60 +
-        Number(closeParts[1] || 0);
+      if(openMinutes<=closeMinutes){
 
-
-      if(openMinutes <= closeMinutes){
-
-        isOpen =
-          currentMinutes >= openMinutes &&
-          currentMinutes < closeMinutes;
+        isOpen=
+          currentMinutes>=openMinutes &&
+          currentMinutes<closeMinutes;
 
       }else{
 
-        isOpen =
-          currentMinutes >= openMinutes ||
-          currentMinutes < closeMinutes;
+        isOpen=
+          currentMinutes>=openMinutes ||
+          currentMinutes<closeMinutes;
 
       }
 
     }else{
 
-      isOpen = true;
+      isOpen=true;
 
     }
 
   }
-
 
   dot.classList.remove(
     "open",
     "closed"
   );
 
-
   if(isOpen){
 
     dot.classList.add("open");
 
-    text.textContent =
+    text.textContent=
       "Shop is Open";
 
   }else{
 
     dot.classList.add("closed");
 
-    text.textContent =
+    text.textContent=
       "Shop is Closed";
 
   }
@@ -2425,38 +2351,31 @@ function loadShopStatus(){
 }
 
 
-/* =========================
-   LOAD MENU
-========================= */
+/* ================= MENU ================= */
 
 async function loadMenu(){
 
-  const grid =
-    document.getElementById("menuGrid");
-
-
   try{
 
-    const menuSettings =
+    const menuSettings=
       shopSettings.menu || {};
 
-
     /*
-      ONLY FIRST 6 DEFAULT ITEMS
+      IMPORTANT:
+      Only first 6 default items.
+      Admin saved items are still respected
+      for these 6 items.
     */
 
-    menu =
-      defaultMenu.map(item => {
+    menu=
+      defaultMenu.map(item=>{
 
-        const saved =
-          menuSettings[item.id] ||
-          {};
-
+        const saved=
+          menuSettings[item.id] || {};
 
         return {
 
           ...item,
-
           ...saved,
 
           id:item.id,
@@ -2483,24 +2402,16 @@ async function loadMenu(){
 
       });
 
-
-    /*
-      DO NOT ADD EXTRA ITEMS
-    */
-
     renderMenu();
 
   }catch(error){
 
     console.error(error);
 
-    menu =
-      defaultMenu.map(item => ({
-
+    menu=
+      defaultMenu.map(item=>({
         ...item,
-
         available:true
-
       }));
 
     renderMenu();
@@ -2510,65 +2421,59 @@ async function loadMenu(){
 }
 
 
-/* =========================
-   RENDER MENU
-========================= */
+/* ================= RENDER MENU ================= */
 
 function renderMenu(){
 
-  const grid =
+  const grid=
     document.getElementById("menuGrid");
-
 
   if(!menu.length){
 
-    grid.innerHTML = `
+    grid.innerHTML=`
       <div class="loading">
         No food items found.
       </div>
     `;
 
     return;
-
   }
 
+  grid.innerHTML=
+    menu.map(item=>{
 
-  grid.innerHTML =
-    menu.map(item => {
-
-      const imageHTML =
+      const imageHTML=
         item.image
-          ? `
-            <img
-              src="${escapeHTML(item.image)}"
-              alt="${escapeHTML(item.name)}"
-              loading="lazy"
-              onerror="
-                this.style.display='none';
-                this.nextElementSibling.style.display='flex';
-              "
-            >
+        ?
+        `
+        <img
+          src="${escapeHTML(item.image)}"
+          alt="${escapeHTML(item.name)}"
+          loading="lazy"
+          onerror="
+            this.style.display='none';
+            this.nextElementSibling.style.display='flex';
+          "
+        >
 
-            <div
-              class="food-placeholder"
-              style="display:none"
-            >
-              🍽️
-            </div>
-          `
-          :
-          `
-            <div class="food-placeholder">
-              🍽️
-            </div>
-          `;
+        <div
+          class="food-placeholder"
+          style="display:none"
+        >
+          🍽️
+        </div>
+        `
+        :
+        `
+        <div class="food-placeholder">
+          🍽️
+        </div>
+        `;
 
+      const available=
+        item.available!==false;
 
-      const available =
-        item.available !== false;
-
-
-      return `
+      return`
 
         <div class="food-card">
 
@@ -2578,20 +2483,17 @@ function renderMenu(){
 
           </div>
 
-
           <div class="food-info">
 
             <div class="food-name">
               ${escapeHTML(item.name)}
             </div>
 
-
             <div class="food-bottom">
 
               <div class="food-price">
                 ₹${Number(item.price).toFixed(0)}
               </div>
-
 
               ${
                 available
@@ -2628,44 +2530,32 @@ function renderMenu(){
 }
 
 
-/* =========================
-   ADD TO CART
-========================= */
+/* ================= ADD TO CART ================= */
 
-window.addToCart =
-function(id,button){
+window.addToCart=function(id,button){
 
-  const item =
-    menu.find(
-      x => x.id === id
-    );
-
+  const item=
+    menu.find(x=>x.id===id);
 
   if(!item){
     return;
   }
 
-
-  if(item.available === false){
+  if(item.available===false){
 
     showToast(
       "This item is currently out of stock."
     );
 
     return;
-
   }
 
-
-  const existing =
-    cart.find(
-      x => x.id === id
-    );
-
+  const existing=
+    cart.find(x=>x.id===id);
 
   if(existing){
 
-    existing.qty += 1;
+    existing.qty+=1;
 
   }else{
 
@@ -2677,7 +2567,7 @@ function(id,button){
 
       price:Number(item.price),
 
-      image:item.image || "",
+      image:item.image||"",
 
       qty:1
 
@@ -2685,9 +2575,10 @@ function(id,button){
 
   }
 
-
   updateCart();
 
+
+  /* ADD BUTTON BLINK */
 
   if(button){
 
@@ -2705,7 +2596,7 @@ function(id,button){
       button.__blinkTimer
     );
 
-    button.__blinkTimer =
+    button.__blinkTimer=
       setTimeout(()=>{
 
         button.classList.remove(
@@ -2717,11 +2608,12 @@ function(id,button){
   }
 
 
-  const cartButton =
+  /* CART BUTTON BLINK */
+
+  const cartButton=
     document.getElementById(
       "cartTopBtn"
     );
-
 
   if(cartButton){
 
@@ -2739,7 +2631,7 @@ function(id,button){
       cartButton.__blinkTimer
     );
 
-    cartButton.__blinkTimer =
+    cartButton.__blinkTimer=
       setTimeout(()=>{
 
         cartButton.classList.remove(
@@ -2750,7 +2642,6 @@ function(id,button){
 
   }
 
-
   showToast(
     `${item.name} added to cart`
   );
@@ -2758,35 +2649,30 @@ function(id,button){
 };
 
 
-/* =========================
-   UPDATE CART
-========================= */
+/* ================= UPDATE CART ================= */
 
 function updateCart(){
 
-  const count =
+  const count=
     cart.reduce(
-      (sum,item) =>
-        sum + item.qty,
+      (sum,item)=>
+        sum+item.qty,
       0
     );
 
-
   document.getElementById(
     "cartCount"
-  ).textContent =
-    count;
+  ).textContent=count;
 
 
-  const body =
+  const body=
     document.getElementById(
       "cartBody"
     );
 
-
   if(!cart.length){
 
-    body.innerHTML = `
+    body.innerHTML=`
 
       <div class="empty-cart">
 
@@ -2808,148 +2694,125 @@ function updateCart(){
 
   }else{
 
-    body.innerHTML =
-      cart.map(item => {
+    body.innerHTML=
+      cart.map(item=>`
 
-        return `
+        <div class="cart-item">
 
-          <div class="cart-item">
+          <div class="cart-item-image">
 
-            <div class="cart-item-image">
+            ${
+              item.image
+              ?
+              `
+              <img
+                src="${escapeHTML(item.image)}"
+                alt=""
+              >
+              `
+              :
+              `🍽️`
+            }
 
-              ${
-                item.image
-                ?
-                `
-                <img
-                  src="${escapeHTML(item.image)}"
-                  alt=""
-                >
-                `
-                :
-                `
-                🍽️
-                `
-              }
+          </div>
 
+          <div class="cart-item-info">
+
+            <div class="cart-item-name">
+              ${escapeHTML(item.name)}
             </div>
 
-
-            <div class="cart-item-info">
-
-              <div class="cart-item-name">
-                ${escapeHTML(item.name)}
-              </div>
-
-              <div class="cart-item-price">
-                ₹${item.price} × ${item.qty}
-              </div>
-
-            </div>
-
-
-            <div class="qty-control">
-
-              <button
-                class="qty-btn"
-                onclick="changeQty('${escapeHTML(item.id)}',-1)"
-              >
-                −
-              </button>
-
-              <span class="qty-value">
-                ${item.qty}
-              </span>
-
-              <button
-                class="qty-btn"
-                onclick="changeQty('${escapeHTML(item.id)}',1)"
-              >
-                +
-              </button>
-
+            <div class="cart-item-price">
+              ₹${item.price} × ${item.qty}
             </div>
 
           </div>
 
-        `;
+          <div class="qty-control">
 
-      }).join("");
+            <button
+              class="qty-btn"
+              onclick="changeQty('${escapeHTML(item.id)}',-1)"
+            >
+              −
+            </button>
+
+            <span class="qty-value">
+              ${item.qty}
+            </span>
+
+            <button
+              class="qty-btn"
+              onclick="changeQty('${escapeHTML(item.id)}',1)"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("");
 
   }
 
-
-  const subtotal =
+  const subtotal=
     getSubtotal();
-
 
   document.getElementById(
     "cartSubtotal"
-  ).textContent =
+  ).textContent=
     `₹${subtotal}`;
-
 
   document.getElementById(
     "cartDelivery"
-  ).textContent =
+  ).textContent=
     `₹${deliveryCharge}`;
-
 
   document.getElementById(
     "cartTotal"
-  ).textContent =
-    `₹${subtotal + deliveryCharge}`;
+  ).textContent=
+    `₹${subtotal+deliveryCharge}`;
 
 }
 
 
-/* =========================
-   CHANGE QTY
-========================= */
+/* ================= QTY ================= */
 
-window.changeQty =
-function(id,change){
+window.changeQty=function(id,change){
 
-  const item =
-    cart.find(
-      x => x.id === id
-    );
-
+  const item=
+    cart.find(x=>x.id===id);
 
   if(!item){
     return;
   }
 
+  item.qty+=change;
 
-  item.qty += change;
+  if(item.qty<=0){
 
-
-  if(item.qty <= 0){
-
-    cart =
+    cart=
       cart.filter(
-        x => x.id !== id
+        x=>x.id!==id
       );
 
   }
-
 
   updateCart();
 
 };
 
 
-/* =========================
-   SUBTOTAL
-========================= */
+/* ================= SUBTOTAL ================= */
 
 function getSubtotal(){
 
   return Math.round(
     cart.reduce(
-      (sum,item) =>
-        sum +
-        Number(item.price) *
+      (sum,item)=>
+        sum+
+        Number(item.price)*
         Number(item.qty),
       0
     )
@@ -2958,12 +2821,9 @@ function getSubtotal(){
 }
 
 
-/* =========================
-   OPEN CART
-========================= */
+/* ================= OPEN CART ================= */
 
-window.openCart =
-function(){
+window.openCart=function(){
 
   updateCart();
 
@@ -2978,12 +2838,9 @@ function(){
 };
 
 
-/* =========================
-   CLOSE CART
-========================= */
+/* ================= CLOSE CART ================= */
 
-window.closeCart =
-function(){
+window.closeCart=function(){
 
   document
     .getElementById("cartOverlay")
@@ -2996,12 +2853,9 @@ function(){
 };
 
 
-/* =========================
-   CHECKOUT
-========================= */
+/* ================= CHECKOUT ================= */
 
-window.openCheckout =
-function(){
+window.openCheckout=function(){
 
   if(!cart.length){
 
@@ -3010,41 +2864,33 @@ function(){
     );
 
     return;
-
   }
-
 
   document
     .getElementById("checkoutOverlay")
     .classList.add("show");
 
-
   document.getElementById(
     "checkoutSubtotal"
-  ).textContent =
+  ).textContent=
     `₹${getSubtotal()}`;
-
 
   document.getElementById(
     "checkoutDelivery"
-  ).textContent =
+  ).textContent=
     `₹${deliveryCharge}`;
-
 
   document.getElementById(
     "checkoutTotal"
-  ).textContent =
+  ).textContent=
     `₹${getSubtotal()+deliveryCharge}`;
 
 };
 
 
-/* =========================
-   CLOSE CHECKOUT
-========================= */
+/* ================= CLOSE CHECKOUT ================= */
 
-window.closeCheckout =
-function(){
+window.closeCheckout=function(){
 
   document
     .getElementById("checkoutOverlay")
@@ -3053,12 +2899,9 @@ function(){
 };
 
 
-/* =========================
-   CURRENT LOCATION
-========================= */
+/* ================= CURRENT LOCATION ================= */
 
-window.useCurrentLocation =
-function(){
+window.useCurrentLocation=function(){
 
   if(!navigator.geolocation){
 
@@ -3070,40 +2913,34 @@ function(){
 
   }
 
-
   showToast(
     "Getting your location..."
   );
 
-
   navigator.geolocation.getCurrentPosition(
 
-    async position => {
+    async position=>{
 
-      customerLat =
+      customerLat=
         position.coords.latitude;
 
-      customerLng =
+      customerLng=
         position.coords.longitude;
 
+      document.getElementById(
+        "locationInfo"
+      ).style.display="block";
 
       document.getElementById(
         "locationInfo"
-      ).style.display =
-        "block";
-
-
-      document.getElementById(
-        "locationInfo"
-      ).textContent =
+      ).textContent=
         "✓ Current location selected";
-
 
       await calculateDelivery();
 
     },
 
-    error => {
+    error=>{
 
       console.error(error);
 
@@ -3124,75 +2961,59 @@ function(){
 };
 
 
-/* =========================
-   DISTANCE
-========================= */
+/* ================= DISTANCE ================= */
 
 async function calculateDelivery(){
 
   if(
-    customerLat === null ||
-    customerLng === null
+    customerLat===null ||
+    customerLng===null
   ){
-
     return;
-
   }
-
 
   try{
 
-    const url =
-      `https://router.project-osrm.org/route/v1/driving/` +
-      `${RESTAURANT_LNG},${RESTAURANT_LAT};` +
-      `${customerLng},${customerLat}` +
+    const url=
+      `https://router.project-osrm.org/route/v1/driving/`+
+      `${RESTAURANT_LNG},${RESTAURANT_LAT};`+
+      `${customerLng},${customerLat}`+
       `?overview=false`;
 
-
-    const response =
+    const response=
       await fetch(url);
 
-
-    const data =
+    const data=
       await response.json();
 
-
     if(
-      data.code !== "Ok" ||
+      data.code!=="Ok" ||
       !data.routes ||
       !data.routes.length
     ){
-
       throw new Error(
         "Route not found"
       );
-
     }
 
-
-    const meters =
+    const meters=
       data.routes[0].distance;
 
+    deliveryDistance=
+      meters/1000;
 
-    deliveryDistance =
-      meters / 1000;
-
-
-    deliveryCharge =
+    deliveryCharge=
       Math.ceil(
         deliveryDistance
-      ) * DELIVERY_RATE;
-
+      )*DELIVERY_RATE;
 
     updateDeliveryUI();
-
 
   }catch(error){
 
     console.error(error);
 
-
-    const distance =
+    const distance=
       calculateStraightDistance(
         RESTAURANT_LAT,
         RESTAURANT_LNG,
@@ -3200,15 +3021,12 @@ async function calculateDelivery(){
         customerLng
       );
 
-
-    deliveryDistance =
+    deliveryDistance=
       distance;
 
-
-    deliveryCharge =
-      Math.ceil(distance) *
+    deliveryCharge=
+      Math.ceil(distance)*
       DELIVERY_RATE;
-
 
     updateDeliveryUI();
 
@@ -3217,9 +3035,7 @@ async function calculateDelivery(){
 }
 
 
-/* =========================
-   STRAIGHT DISTANCE
-========================= */
+/* ================= STRAIGHT DISTANCE ================= */
 
 function calculateStraightDistance(
   lat1,
@@ -3228,93 +3044,78 @@ function calculateStraightDistance(
   lon2
 ){
 
-  const R =
-    6371;
+  const R=6371;
 
-
-  const dLat =
-    (lat2-lat1) *
+  const dLat=
+    (lat2-lat1)*
     Math.PI/180;
 
-
-  const dLon =
-    (lon2-lon1) *
+  const dLon=
+    (lon2-lon1)*
     Math.PI/180;
 
-
-  const a =
-    Math.sin(dLat/2) *
-    Math.sin(dLat/2) +
+  const a=
+    Math.sin(dLat/2)*
+    Math.sin(dLat/2)+
 
     Math.cos(
       lat1*Math.PI/180
-    ) *
+    )*
 
     Math.cos(
       lat2*Math.PI/180
-    ) *
+    )*
 
-    Math.sin(dLon/2) *
+    Math.sin(dLon/2)*
     Math.sin(dLon/2);
 
-
-  const c =
-    2 *
+  const c=
+    2*
     Math.atan2(
       Math.sqrt(a),
       Math.sqrt(1-a)
     );
-
 
   return R*c;
 
 }
 
 
-/* =========================
-   UPDATE DELIVERY UI
-========================= */
+/* ================= DELIVERY UI ================= */
 
 function updateDeliveryUI(){
 
   document.getElementById(
     "cartDelivery"
-  ).textContent =
+  ).textContent=
     `₹${deliveryCharge}`;
-
 
   document.getElementById(
     "cartTotal"
-  ).textContent =
+  ).textContent=
     `₹${getSubtotal()+deliveryCharge}`;
-
 
   document.getElementById(
     "checkoutDistance"
-  ).textContent =
+  ).textContent=
     `${deliveryDistance.toFixed(1)} km`;
-
 
   document.getElementById(
     "checkoutDelivery"
-  ).textContent =
+  ).textContent=
     `₹${deliveryCharge}`;
-
 
   document.getElementById(
     "checkoutTotal"
-  ).textContent =
+  ).textContent=
     `₹${getSubtotal()+deliveryCharge}`;
 
 }
 
 
-/* =========================
-   PLACE ORDER
-========================= */
+/* ================= PLACE ORDER ================= */
 
-window.placeOrder =
-async function(){
+window.placeOrder=async function(){
 
   if(!cart.length){
 
@@ -3326,33 +3127,28 @@ async function(){
 
   }
 
-
-  const name =
+  const name=
     document
       .getElementById("customerName")
       .value
       .trim();
 
-
-  const phone =
+  const phone=
     document
       .getElementById("customerPhone")
       .value
       .trim();
 
-
-  const address =
+  const address=
     document
       .getElementById("customerAddress")
       .value
       .trim();
 
-
-  const payment =
+  const payment=
     document
       .getElementById("paymentMethod")
       .value;
-
 
   if(!name){
 
@@ -3364,7 +3160,6 @@ async function(){
 
   }
 
-
   if(!/^[0-9]{10}$/.test(phone)){
 
     showToast(
@@ -3374,7 +3169,6 @@ async function(){
     return;
 
   }
-
 
   if(!address){
 
@@ -3386,17 +3180,15 @@ async function(){
 
   }
 
-
   if(
-    customerLat === null ||
-    customerLng === null
+    customerLat===null ||
+    customerLng===null
   ){
 
-    const proceed =
+    const proceed=
       confirm(
         "Current location is not selected. Continue without GPS location?"
       );
-
 
     if(!proceed){
       return;
@@ -3404,10 +3196,9 @@ async function(){
 
   }
 
-
   if(
-    customerLat !== null &&
-    customerLng !== null &&
+    customerLat!==null &&
+    customerLng!==null &&
     !deliveryDistance
   ){
 
@@ -3415,18 +3206,15 @@ async function(){
 
   }
 
-
-  const subtotal =
+  const subtotal=
     getSubtotal();
 
-
-  const total =
-    subtotal +
+  const total=
+    subtotal+
     deliveryCharge;
 
-
-  const orderItems =
-    cart.map(item => ({
+  const orderItems=
+    cart.map(item=>({
 
       id:item.id,
 
@@ -3436,22 +3224,19 @@ async function(){
 
       qty:item.qty,
 
-      image:item.image || ""
+      image:item.image||""
 
     }));
 
-
-  const orderRef =
+  const orderRef=
     push(
       ref(db,"orders")
     );
 
-
-  const orderId =
+  const orderId=
     orderRef.key;
 
-
-  const orderData = {
+  const orderData={
 
     orderId,
 
@@ -3489,14 +3274,12 @@ async function(){
 
   };
 
-
   try{
 
     await set(
       orderRef,
       orderData
     );
-
 
     if(currentUser){
 
@@ -3510,135 +3293,125 @@ async function(){
 
     }
 
-
-    const mapsLink =
-      customerLat !== null &&
-      customerLng !== null
+    const mapsLink=
+      customerLat!==null &&
+      customerLng!==null
       ?
       `https://www.google.com/maps?q=${customerLat},${customerLng}`
       :
       "Location not provided";
 
 
-    let message = "";
+    /*
+      WHATSAPP MESSAGE
+      Sentence wise + bold + emoji
+    */
 
+    let message="";
 
-    message +=
+    message+=
       `*👑 THE QUEEN FAST FOOD*%0A`;
 
-    message +=
+    message+=
       `*🧾 NEW ORDER*%0A%0A`;
 
-    message +=
+    message+=
       `*🆔 Order ID:* ${orderId}%0A`;
 
-    message +=
+    message+=
       `*👤 Customer:* ${name}%0A`;
 
-    message +=
+    message+=
       `*📞 Phone:* ${phone}%0A%0A`;
 
-
-    message +=
+    message+=
       `*🍽️ ORDER ITEMS*%0A`;
-
 
     orderItems.forEach(
       (item,index)=>{
 
-        message +=
+        message+=
           `${index+1}. *${item.name}* × ${item.qty} = ₹${item.price*item.qty}%0A`;
 
       }
     );
 
+    message+=`%0A`;
 
-    message += `%0A`;
-
-    message +=
+    message+=
       `*💰 Subtotal:* ₹${subtotal}%0A`;
 
-    message +=
+    message+=
       `*📍 Distance:* ${deliveryDistance.toFixed(1)} km%0A`;
 
-    message +=
+    message+=
       `*🚚 Delivery:* ₹${deliveryCharge}%0A`;
 
-    message +=
+    message+=
       `*💵 TOTAL:* ₹${total}%0A%0A`;
 
-
-    message +=
+    message+=
       `*🏠 DELIVERY ADDRESS*%0A${address}%0A%0A`;
 
-
-    message +=
+    message+=
       `*💳 Payment:* ${payment}%0A%0A`;
 
-
-    message +=
+    message+=
       `*📍 CUSTOMER LOCATION*%0A${mapsLink}%0A%0A`;
 
-
-    message +=
+    message+=
       `*🙏 Thank you for ordering from The Queen Fast Food!*`;
 
 
     /*
-      WHATSAPP ONLY
+      DEMO WHATSAPP NUMBER
       9090220791
     */
 
-    const whatsappNumber =
+    const whatsappNumber=
       "919090220791";
 
-
-    const whatsappURL =
+    const whatsappURL=
       `https://wa.me/${whatsappNumber}?text=${message}`;
 
 
-    cart = [];
+    /* CLEAR CART */
 
-    deliveryDistance = 0;
+    cart=[];
 
-    deliveryCharge = 0;
+    deliveryDistance=0;
+    deliveryCharge=0;
 
-    customerLat = null;
-
-    customerLng = null;
-
+    customerLat=null;
+    customerLng=null;
 
     updateCart();
 
-
     closeCheckout();
-
     closeCart();
 
 
     document.getElementById(
       "customerName"
-    ).value = "";
+    ).value="";
 
     document.getElementById(
       "customerPhone"
-    ).value = "";
+    ).value="";
 
     document.getElementById(
       "customerAddress"
-    ).value = "";
-
+    ).value="";
 
     document.getElementById(
       "locationInfo"
-    ).style.display = "none";
+    ).style.display="none";
 
 
     window.open(
       whatsappURL,
       "_blank"
     );
-
 
     showToast(
       `Order ${orderId} created successfully.`
@@ -3658,19 +3431,15 @@ async function(){
 };
 
 
-/* =========================
-   TRACK ORDER
-========================= */
+/* ================= TRACK ORDER ================= */
 
-window.trackOrder =
-async function(){
+window.trackOrder=async function(){
 
-  const orderId =
+  const orderId=
     document
       .getElementById("trackOrderId")
       .value
       .trim();
-
 
   if(!orderId){
 
@@ -3682,17 +3451,15 @@ async function(){
 
   }
 
-
   try{
 
-    const snapshot =
+    const snapshot=
       await get(
         ref(
           db,
           `orders/${orderId}`
         )
       );
-
 
     if(!snapshot.exists()){
 
@@ -3708,28 +3475,24 @@ async function(){
 
     }
 
-
     showTrackResult(
       snapshot.val()
     );
 
-
     if(currentOrderListener){
 
       currentOrderListener();
-
-      currentOrderListener = null;
+      currentOrderListener=null;
 
     }
 
-
-    currentOrderListener =
+    currentOrderListener=
       onValue(
         ref(
           db,
           `orders/${orderId}`
         ),
-        snap => {
+        snap=>{
 
           if(snap.exists()){
 
@@ -3741,7 +3504,6 @@ async function(){
 
         }
       );
-
 
   }catch(error){
 
@@ -3756,33 +3518,27 @@ async function(){
 };
 
 
-/* =========================
-   SHOW TRACK RESULT
-========================= */
+/* ================= SHOW TRACK ================= */
 
 function showTrackResult(order){
 
-  const result =
+  const result=
     document.getElementById(
       "trackResult"
     );
 
-
-  const info =
+  const info=
     document.getElementById(
       "trackOrderInfo"
     );
 
-
   result.classList.add("show");
 
-
-  const status =
-    order.status ||
+  const status=
+    order.status||
     "received";
 
-
-  const statusNames = {
+  const statusNames={
 
     received:"Order Received",
 
@@ -3796,8 +3552,7 @@ function showTrackResult(order){
 
   };
 
-
-  info.innerHTML = `
+  info.innerHTML=`
 
     <div style="
       padding:14px;
@@ -3821,7 +3576,7 @@ function showTrackResult(order){
         font-weight:800;
       ">
         ${escapeHTML(
-          statusNames[status] ||
+          statusNames[status]||
           status
         )}
       </div>
@@ -3831,8 +3586,9 @@ function showTrackResult(order){
         color:#777;
         font-size:11px;
       ">
-        Order ID: ${escapeHTML(
-          order.orderId || ""
+        Order ID:
+        ${escapeHTML(
+          order.orderId||""
         )}
       </div>
 
@@ -3840,8 +3596,7 @@ function showTrackResult(order){
 
   `;
 
-
-  const orderSteps = [
+  const orderSteps=[
     "received",
     "confirmed",
     "making",
@@ -3849,30 +3604,26 @@ function showTrackResult(order){
     "delivered"
   ];
 
-
-  const currentIndex =
+  const currentIndex=
     orderSteps.indexOf(status);
-
 
   document
     .querySelectorAll(
       ".track-step"
     )
-    .forEach(step => {
+    .forEach(step=>{
 
-      const stepStatus =
+      const stepStatus=
         step.dataset.status;
 
-
-      const stepIndex =
+      const stepIndex=
         orderSteps.indexOf(
           stepStatus
         );
 
-
       step.classList.toggle(
         "active",
-        stepIndex <= currentIndex
+        stepIndex<=currentIndex
       );
 
     });
@@ -3880,9 +3631,7 @@ function showTrackResult(order){
 }
 
 
-/* =========================
-   CHECKOUT ESCAPE
-========================= */
+/* ================= CHECKOUT ESCAPE ================= */
 
 document
   .getElementById(
@@ -3890,10 +3639,10 @@ document
   )
   .addEventListener(
     "click",
-    event => {
+    event=>{
 
       if(
-        event.target.id ===
+        event.target.id===
         "checkoutOverlay"
       ){
 
@@ -3905,18 +3654,14 @@ document
   );
 
 
-/* =========================
-   INITIAL LOAD
-========================= */
+/* ================= INITIAL ================= */
 
 loadSettings();
 
 updateCart();
 
 
-/* =========================
-   REFRESH SHOP STATUS
-========================= */
+/* ================= STATUS REFRESH ================= */
 
 setInterval(
   loadShopStatus,
