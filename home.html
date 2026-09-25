@@ -86,19 +86,13 @@ button{
 .website-mode-icon{
   width:70px;
   height:70px;
-
   margin:0 auto 20px;
-
   border-radius:50%;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   background:rgba(255,122,0,.10);
-
   border:1px solid rgba(255,122,0,.25);
-
   font-size:30px;
 }
 
@@ -842,6 +836,127 @@ header{
   color:#fff;
 }
 
+
+/* =========================================
+   PAYMENT METHOD
+========================================= */
+
+.payment-section{
+  background:#0b0b0b;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:9px;
+  padding:11px;
+  margin-bottom:10px;
+}
+
+.payment-title{
+  color:#aaa;
+  font-size:9px;
+  font-weight:800;
+  margin-bottom:8px;
+  letter-spacing:.4px;
+}
+
+.payment-options{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.payment-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px;
+  border:1px solid #292929;
+  background:#111;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.payment-option:hover{
+  border-color:rgba(255,122,0,.35);
+}
+
+.payment-option input{
+  width:15px;
+  height:15px;
+  accent-color:var(--orange);
+  cursor:pointer;
+}
+
+.payment-option span{
+  color:#ddd;
+  font-size:10px;
+  font-weight:700;
+}
+
+.payment-empty{
+  color:#ff5c5c;
+  font-size:10px;
+  line-height:1.5;
+}
+
+
+/* =========================================
+   COMPLETE ORDER TOTAL BOX
+========================================= */
+
+.order-summary{
+  background:#0b0b0b;
+  border:1px solid rgba(255,122,0,.16);
+  border-radius:10px;
+  padding:11px;
+  margin-bottom:10px;
+}
+
+.order-summary-title{
+  color:#aaa;
+  font-size:9px;
+  font-weight:800;
+  margin-bottom:8px;
+  letter-spacing:.5px;
+}
+
+.summary-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#999;
+  font-size:10px;
+  margin-bottom:6px;
+}
+
+.summary-row strong{
+  color:#fff;
+}
+
+.summary-row.delivery-row strong{
+  color:#fff;
+}
+
+.summary-total{
+  border-top:1px solid #292929;
+  margin-top:8px;
+  padding-top:9px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:14px;
+  font-weight:800;
+}
+
+.summary-total span:last-child{
+  color:var(--orange);
+  font-size:17px;
+}
+
+
+/* =========================================
+   CHECKOUT ACTIONS
+========================================= */
+
 .checkout-actions{
   display:flex;
   gap:7px;
@@ -865,6 +980,12 @@ header{
   background:var(--green);
   color:#000;
   border:0;
+}
+
+.place-order:disabled{
+  background:#333;
+  color:#777;
+  cursor:not-allowed;
 }
 
 
@@ -985,31 +1106,26 @@ footer{
      WEBSITE MODE SCREEN
 ========================================= -->
 
-<div
-  id="websiteModeScreen"
->
+<div id="websiteModeScreen">
 
   <div class="website-mode-box">
 
     <div
       id="websiteModeIcon"
-      class="website-mode-icon"
-    >
+      class="website-mode-icon">
       🔧
     </div>
 
     <div
       id="websiteModeTitle"
-      class="website-mode-title"
-    >
+      class="website-mode-title">
       We’re Improving
       <span>Your Experience</span>
     </div>
 
     <div
       id="websiteModeMessage"
-      class="website-mode-message"
-    >
+      class="website-mode-message">
       We’re making a few improvements
       to make your experience better.
       Please check back shortly.
@@ -1081,8 +1197,8 @@ footer{
 
   <div
     id="shopDot"
-    class="shop-dot open"
-  ></div>
+    class="shop-dot open">
+  </div>
 
   <span id="shopStatusText">
     SHOP OPEN
@@ -1095,12 +1211,14 @@ footer{
 
 <div
   id="orderTimeText"
-  class="order-time"
->
+  class="order-time">
+
   ORDER BETWEEN
+
   <span id="orderTimeValue">
     12:00 PM – 9:30 PM
   </span>
+
 </div>
 
 
@@ -1216,7 +1334,9 @@ footer{
 </div>
 
 
-<!-- CHECKOUT -->
+<!-- =========================================
+     CHECKOUT
+========================================= -->
 
 <div
   id="checkoutOverlay"
@@ -1287,6 +1407,78 @@ footer{
     </div>
 
 
+    <!-- PAYMENT METHOD -->
+
+    <div
+      id="paymentSection"
+      class="payment-section">
+
+      <div class="payment-title">
+        💳 SELECT PAYMENT METHOD
+      </div>
+
+      <div
+        id="paymentOptions"
+        class="payment-options">
+
+        <div class="payment-empty">
+          Loading payment methods...
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- COMPLETE ORDER TOTAL -->
+
+    <div
+      id="orderSummary"
+      class="order-summary">
+
+      <div class="order-summary-title">
+        🧾 ORDER SUMMARY
+      </div>
+
+      <div class="summary-row">
+
+        <span>
+          Subtotal
+        </span>
+
+        <strong id="checkoutSubtotal">
+          ₹0
+        </strong>
+
+      </div>
+
+      <div class="summary-row delivery-row">
+
+        <span>
+          Delivery Charge
+        </span>
+
+        <strong id="checkoutDelivery">
+          ₹0
+        </strong>
+
+      </div>
+
+      <div class="summary-total">
+
+        <span>
+          TOTAL AMOUNT
+        </span>
+
+        <span id="checkoutGrandTotal">
+          ₹0
+        </span>
+
+      </div>
+
+    </div>
+
+
     <div class="checkout-actions">
 
       <button
@@ -1298,6 +1490,7 @@ footer{
       </button>
 
       <button
+        id="placeOrderButton"
         class="place-order"
         onclick="placeOrder()">
 
@@ -1323,6 +1516,7 @@ footer{
   <div class="footer-text">
 
     📍
+
     <a
       href="https://www.google.com/maps/search/?api=1&query=Ibrisingh+Tirtol+Jagatsinghpur+Odisha"
       target="_blank">
@@ -1482,6 +1676,18 @@ let deliveryDistance = 0;
 let deliveryCharge = 0;
 
 let trackingUnsubscribe = null;
+
+
+/* =========================================
+   PAYMENT SETTINGS
+========================================= */
+
+let paymentMethods = {
+  cod:true,
+  online:true
+};
+
+let selectedPaymentMethod = "";
 
 
 /* =========================================
@@ -1694,6 +1900,26 @@ onValue(
     shopSettings =
       snapshot.val() || {};
 
+
+    /* =====================================
+       PAYMENT METHODS FROM ADMIN
+    ===================================== */
+
+    const savedPaymentMethods =
+      shopSettings.paymentMethods || {};
+
+
+    paymentMethods = {
+
+      cod:
+        savedPaymentMethods.cod !== false,
+
+      online:
+        savedPaymentMethods.online !== false
+
+    };
+
+
     renderWebsiteMode(
       shopSettings
     );
@@ -1704,6 +1930,10 @@ onValue(
 
     loadMenu();
 
+    renderPaymentMethods();
+
+    updateCheckoutSummary();
+
   },
   error => {
 
@@ -1712,23 +1942,50 @@ onValue(
       error
     );
 
+
     renderWebsiteMode({
       websiteMode:"normal"
     });
 
+
     shopSettings = {
+
       openingTime:"12:00",
+
       closingTime:"21:30",
+
       openTime:"12:00",
+
       closeTime:"21:30",
-      statusOverride:"auto"
+
+      statusOverride:"auto",
+
+      paymentMethods:{
+        cod:true,
+        online:true
+      }
+
     };
+
+
+    paymentMethods = {
+
+      cod:true,
+
+      online:true
+
+    };
+
 
     renderOrderTime();
 
     renderShopStatus();
 
     loadMenu();
+
+    renderPaymentMethods();
+
+    updateCheckoutSummary();
 
   }
 );
@@ -2021,6 +2278,10 @@ function renderMenu(){
       "menuGrid"
     );
 
+  if(!grid){
+    return;
+  }
+
   grid.innerHTML =
     menu.map(
       item => {
@@ -2265,6 +2526,274 @@ function updateCart(){
   ).textContent =
     count;
 
+  updateCheckoutSummary();
+
+}
+
+
+/* =========================================
+   CALCULATE SUBTOTAL
+========================================= */
+
+function getCartSubtotal(){
+
+  let subtotal = 0;
+
+  cart.forEach(
+    item => {
+
+      subtotal +=
+        Number(item.price || 0) *
+        Number(item.quantity || 0);
+
+    }
+  );
+
+  return subtotal;
+
+}
+
+
+/* =========================================
+   CHECKOUT TOTAL
+========================================= */
+
+function updateCheckoutSummary(){
+
+  const subtotal =
+    getCartSubtotal();
+
+  const grandTotal =
+    subtotal +
+    Number(deliveryCharge || 0);
+
+
+  const subtotalElement =
+    document.getElementById(
+      "checkoutSubtotal"
+    );
+
+  const deliveryElement =
+    document.getElementById(
+      "checkoutDelivery"
+    );
+
+  const totalElement =
+    document.getElementById(
+      "checkoutGrandTotal"
+    );
+
+
+  if(subtotalElement){
+
+    subtotalElement.textContent =
+      "₹"+subtotal;
+
+  }
+
+
+  if(deliveryElement){
+
+    deliveryElement.textContent =
+      "₹"+Number(
+        deliveryCharge || 0
+      );
+
+  }
+
+
+  if(totalElement){
+
+    totalElement.textContent =
+      "₹"+grandTotal;
+
+  }
+
+}
+
+
+/* =========================================
+   PAYMENT METHODS
+========================================= */
+
+function renderPaymentMethods(){
+
+  const container =
+    document.getElementById(
+      "paymentOptions"
+    );
+
+  if(!container){
+    return;
+  }
+
+
+  const options = [];
+
+
+  if(paymentMethods.cod){
+
+    options.push({
+
+      id:"cod",
+
+      label:"💵 Cash on Delivery"
+
+    });
+
+  }
+
+
+  if(paymentMethods.online){
+
+    options.push({
+
+      id:"online",
+
+      label:"💳 Online Payment"
+
+    });
+
+  }
+
+
+  if(!options.length){
+
+    selectedPaymentMethod = "";
+
+    container.innerHTML = `
+
+      <div class="payment-empty">
+
+        No payment method is currently available.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  /*
+    If previous selected method is
+    not available anymore, select
+    the first available method.
+  */
+
+  const stillAvailable =
+    options.some(
+      option =>
+        option.id ===
+        selectedPaymentMethod
+    );
+
+
+  if(!stillAvailable){
+
+    selectedPaymentMethod =
+      options[0].id;
+
+  }
+
+
+  container.innerHTML =
+    options.map(
+      option => `
+
+        <label class="payment-option">
+
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="${option.id}"
+            ${selectedPaymentMethod === option.id ? "checked" : ""}
+            onchange="selectPaymentMethod(this.value)">
+
+          <span>
+            ${option.label}
+          </span>
+
+        </label>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================
+   SELECT PAYMENT METHOD
+========================================= */
+
+window.selectPaymentMethod =
+function(method){
+
+  if(
+    method !== "cod" &&
+    method !== "online"
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    method === "cod" &&
+    !paymentMethods.cod
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    method === "online" &&
+    !paymentMethods.online
+  ){
+
+    return;
+
+  }
+
+
+  selectedPaymentMethod =
+    method;
+
+};
+
+
+/* =========================================
+   PAYMENT METHOD TEXT
+========================================= */
+
+function getPaymentMethodText(){
+
+  if(
+    selectedPaymentMethod ===
+    "cod"
+  ){
+
+    return "Cash on Delivery";
+
+  }
+
+
+  if(
+    selectedPaymentMethod ===
+    "online"
+  ){
+
+    return "Online Payment";
+
+  }
+
+
+  return "";
+
 }
 
 
@@ -2349,6 +2878,12 @@ function(){
 
     return;
   }
+
+
+  renderPaymentMethods();
+
+  updateCheckoutSummary();
+
 
   document.getElementById(
     "checkoutOverlay"
@@ -2477,6 +3012,9 @@ function(){
 
       `;
 
+
+      updateCheckoutSummary();
+
     },
 
     error => {
@@ -2485,6 +3023,8 @@ function(){
 
       info.innerHTML =
         "Location permission denied. Please enter your address.";
+
+      updateCheckoutSummary();
 
     },
 
@@ -2563,6 +3103,7 @@ async function(){
     return;
   }
 
+
   if(!shopOpen){
 
     alert(
@@ -2571,6 +3112,7 @@ async function(){
 
     return;
   }
+
 
   const name =
     document.getElementById(
@@ -2587,6 +3129,7 @@ async function(){
       "customerAddress"
     ).value.trim();
 
+
   if(!name){
 
     alert(
@@ -2595,6 +3138,7 @@ async function(){
 
     return;
   }
+
 
   if(!phone){
 
@@ -2605,6 +3149,7 @@ async function(){
     return;
   }
 
+
   if(!address){
 
     alert(
@@ -2613,6 +3158,48 @@ async function(){
 
     return;
   }
+
+
+  /* =====================================
+     CHECK PAYMENT METHOD
+  ===================================== */
+
+  if(
+    !paymentMethods.cod &&
+    !paymentMethods.online
+  ){
+
+    alert(
+      "No payment method is currently available."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !selectedPaymentMethod ||
+    (
+      selectedPaymentMethod === "cod" &&
+      !paymentMethods.cod
+    ) ||
+    (
+      selectedPaymentMethod === "online" &&
+      !paymentMethods.online
+    )
+  ){
+
+    renderPaymentMethods();
+
+    alert(
+      "Please select a payment method."
+    );
+
+    return;
+
+  }
+
 
   let subtotal = 0;
 
@@ -2626,9 +3213,14 @@ async function(){
     }
   );
 
+
   const grandTotal =
     subtotal +
     deliveryCharge;
+
+
+  const paymentMethod =
+    getPaymentMethodText();
 
 
   /* =====================================
@@ -2639,22 +3231,6 @@ async function(){
     push(
       ref(db,"orders")
     );
-
-
-  /*
-    IMPORTANT:
-
-    Firebase key and customer Order ID
-    are now different.
-
-    Firebase key:
-    - hidden database key
-
-    Customer Order ID:
-    - TQF2026-90001
-    - TQF2026-90002
-    - TQF2026-90003
-  */
 
 
   let orderId = "";
@@ -2686,6 +3262,9 @@ async function(){
       phone:phone,
 
       address:address,
+
+      paymentMethod:
+        paymentMethod,
 
       items:
         cart.map(
@@ -2755,23 +3334,34 @@ async function(){
       String(savedNumber)
         .replace(/\D/g,"");
 
+
     let message =
       `*🍽️ THE QUEEN FAST FOOD*\n\n`;
+
 
     message +=
       `*🧾 ORDER ID: ${orderId}*\n\n`;
 
+
     message +=
       `*👤 Customer:* ${name}\n`;
+
 
     message +=
       `*📞 Phone:* ${phone}\n`;
 
+
     message +=
-      `*📍 Address:* ${address}\n\n`;
+      `*📍 Address:* ${address}\n`;
+
+
+    message +=
+      `*💳 Payment:* ${paymentMethod}\n\n`;
+
 
     message +=
       `*🛒 ORDER ITEMS*\n`;
+
 
     cart.forEach(
       item => {
@@ -2782,14 +3372,18 @@ async function(){
       }
     );
 
+
     message +=
       `\n*💰 Subtotal: ₹${subtotal}*\n`;
+
 
     message +=
       `*🚚 Delivery: ₹${deliveryCharge}*\n`;
 
+
     message +=
       `*💵 TOTAL: ₹${grandTotal}*\n\n`;
+
 
     if(
       customerLat !== null &&
@@ -2799,13 +3393,16 @@ async function(){
       message +=
         `*📍 Customer Location:*\n`;
 
+
       message +=
         `https://www.google.com/maps?q=${customerLat},${customerLng}\n\n`;
 
     }
 
+
     message +=
       `*📦 ORDER RECEIVED*\n`;
+
 
     message +=
       `🙏 Thank you for ordering!`;
@@ -2828,17 +3425,21 @@ async function(){
 
     closeCart();
 
+
     document.getElementById(
       "customerName"
     ).value = "";
+
 
     document.getElementById(
       "customerPhone"
     ).value = "";
 
+
     document.getElementById(
       "customerAddress"
     ).value = "";
+
 
     deliveryDistance = 0;
 
@@ -2847,6 +3448,27 @@ async function(){
     customerLat = null;
 
     customerLng = null;
+
+
+    selectedPaymentMethod = "";
+
+
+    const deliveryInfo =
+      document.getElementById(
+        "deliveryInfo"
+      );
+
+    if(deliveryInfo){
+
+      deliveryInfo.innerHTML =
+        "Delivery charge will be calculated automatically.";
+
+    }
+
+
+    updateCheckoutSummary();
+
+    renderPaymentMethods();
 
 
     /* =====================================
@@ -2938,25 +3560,6 @@ function(){
     `<div class="empty">
       Tracking order...
     </div>`;
-
-
-  /*
-    IMPORTANT:
-
-    Customer now enters:
-
-    TQF2026-90001
-
-    But Firebase orders are stored
-    using Firebase push keys.
-
-    Therefore we cannot directly use:
-
-    orders/TQF2026-90001
-
-    Instead we listen to all orders and
-    find the matching orderId.
-  */
 
 
   const ordersRef =
@@ -3297,11 +3900,6 @@ async function(orderId){
 
   try{
 
-    /*
-      Find the Firebase order key
-      using the customer Order ID.
-    */
-
     const ordersSnapshot =
       await new Promise(
         (resolve,reject) => {
@@ -3370,13 +3968,6 @@ async function(orderId){
       );
 
 
-    /*
-      Move order to delivered.
-
-      Admin listener will automatically
-      move this order into DELIVERED folder.
-    */
-
     await update(
       orderRef,
       {
@@ -3427,10 +4018,6 @@ function normalizeStatus(status){
     ).toLowerCase();
 
 
-  /* =====================================
-     RECEIVED
-  ===================================== */
-
   if(
     status === "new" ||
     status === "placed" ||
@@ -3443,10 +4030,6 @@ function normalizeStatus(status){
   }
 
 
-  /* =====================================
-     PROCESSING
-  ===================================== */
-
   if(
     status === "processing" ||
     status === "confirmed"
@@ -3456,10 +4039,6 @@ function normalizeStatus(status){
 
   }
 
-
-  /* =====================================
-     PREPARING
-  ===================================== */
 
   if(
     status === "preparing" ||
@@ -3472,10 +4051,6 @@ function normalizeStatus(status){
   }
 
 
-  /* =====================================
-     OUT FOR DELIVERY
-  ===================================== */
-
   if(
     status === "out_for_delivery" ||
     status === "out-for-delivery" ||
@@ -3487,10 +4062,6 @@ function normalizeStatus(status){
   }
 
 
-  /* =====================================
-     DELIVERED
-  ===================================== */
-
   if(
     status === "delivered" ||
     status === "completed" ||
@@ -3501,10 +4072,6 @@ function normalizeStatus(status){
 
   }
 
-
-  /* =====================================
-     CANCELLED
-  ===================================== */
 
   if(
     status === "cancelled" ||
