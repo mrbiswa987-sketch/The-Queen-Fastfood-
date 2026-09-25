@@ -18,14 +18,28 @@
   padding:0;
 }
 
+:root{
+  --orange:#ff7a00;
+  --orange2:#ff941f;
+  --black:#070707;
+  --card:#101010;
+  --card2:#151515;
+  --border:rgba(255,122,0,.20);
+  --muted:#999;
+  --green:#25d366;
+  --red:#ff4d4d;
+  --blue:#4d9cff;
+}
+
 body{
-  font-family:Inter,Arial,sans-serif;
   background:#070707;
   color:#fff;
+  font-family:Inter,Arial,sans-serif;
   min-height:100vh;
 }
 
-button,input,select{
+button,
+input{
   font-family:inherit;
 }
 
@@ -33,29 +47,111 @@ button{
   cursor:pointer;
 }
 
-:root{
-  --orange:#ff7a00;
-  --orange2:#ff941f;
-  --black:#070707;
-  --card:#111;
-  --card2:#151515;
-  --border:rgba(255,122,0,.20);
-  --muted:#9a9a9a;
-  --green:#25d366;
-  --red:#ff4d4d;
+.hidden{
+  display:none!important;
 }
+
+/* ================= LOGIN ================= */
+
+.login-wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:#070707;
+}
+
+.login-box{
+  width:min(390px,94vw);
+  background:#101010;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 25px 80px rgba(0,0,0,.6);
+}
+
+.login-title{
+  text-align:center;
+  font-family:"Cormorant Garamond",serif;
+  font-size:38px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.login-title span{
+  color:var(--orange);
+}
+
+.login-sub{
+  text-align:center;
+  color:#777;
+  font-size:10px;
+  letter-spacing:1px;
+  margin:3px 0 22px;
+}
+
+.field{
+  margin-bottom:12px;
+}
+
+.field label{
+  display:block;
+  color:#888;
+  font-size:10px;
+  margin-bottom:6px;
+}
+
+.field input{
+  width:100%;
+  height:43px;
+  background:#080808;
+  border:1px solid rgba(255,255,255,.10);
+  color:#fff;
+  border-radius:9px;
+  outline:none;
+  padding:0 12px;
+}
+
+.field input:focus{
+  border-color:var(--orange);
+}
+
+.login-btn{
+  width:100%;
+  height:43px;
+  border:0;
+  border-radius:9px;
+  background:var(--orange);
+  color:#000;
+  font-weight:800;
+}
+
+.login-btn:hover{
+  background:var(--orange2);
+}
+
+.login-error{
+  min-height:18px;
+  margin-top:9px;
+  text-align:center;
+  color:#ff6262;
+  font-size:11px;
+}
+
+/* ================= HEADER ================= */
 
 .header{
   height:68px;
-  border-bottom:1px solid rgba(255,255,255,.07);
+  position:sticky;
+  top:0;
+  z-index:100;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 22px;
-  position:sticky;
-  top:0;
-  z-index:100;
   background:rgba(7,7,7,.96);
+  border-bottom:1px solid rgba(255,255,255,.07);
   backdrop-filter:blur(12px);
 }
 
@@ -71,125 +167,31 @@ button{
 }
 
 .admin-badge{
-  font-size:11px;
-  color:#aaa;
-  border:1px solid rgba(255,122,0,.25);
   padding:7px 10px;
   border-radius:20px;
+  border:1px solid rgba(255,122,0,.25);
+  color:#aaa;
+  font-size:9px;
+  letter-spacing:.5px;
 }
+
+/* ================= CONTAINER ================= */
 
 .container{
   width:min(1050px,94%);
   margin:20px auto 40px;
 }
 
-.login-wrap{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.login-box{
-  width:min(390px,100%);
-  background:#101010;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 25px 70px rgba(0,0,0,.5);
-}
-
-.login-title{
-  font-family:"Cormorant Garamond",serif;
-  font-size:34px;
-  text-align:center;
-  margin-bottom:4px;
-}
-
-.login-title span{
-  color:var(--orange);
-}
-
-.login-sub{
-  text-align:center;
-  color:#888;
-  font-size:12px;
-  margin-bottom:22px;
-}
-
-.field{
-  margin-bottom:12px;
-}
-
-.field label{
-  display:block;
-  font-size:11px;
-  color:#999;
-  margin-bottom:6px;
-}
-
-.field input,
-.settings-input,
-.price-input,
-.status-select{
-  width:100%;
-  height:42px;
-  border:1px solid rgba(255,255,255,.10);
-  background:#080808;
-  color:#fff;
-  outline:none;
-  border-radius:10px;
-  padding:0 12px;
-}
-
-.field input:focus,
-.settings-input:focus,
-.price-input:focus{
-  border-color:var(--orange);
-}
-
-.login-btn,
-.primary-btn{
-  width:100%;
-  height:43px;
-  border:0;
-  border-radius:10px;
-  background:var(--orange);
-  color:#000;
-  font-weight:800;
-  margin-top:5px;
-}
-
-.login-btn:hover,
-.primary-btn:hover{
-  background:var(--orange2);
-}
-
-.error{
-  color:#ff6b6b;
-  font-size:12px;
-  min-height:18px;
-  margin-top:9px;
-  text-align:center;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* TOP */
 .top-row{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
 .page-title{
   font-family:"Cormorant Garamond",serif;
-  font-size:32px;
+  font-size:34px;
   font-weight:700;
 }
 
@@ -199,138 +201,138 @@ button{
 
 .logout-btn{
   background:#151515;
-  border:1px solid rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.10);
   color:#ddd;
-  border-radius:9px;
+  border-radius:8px;
   padding:9px 13px;
-  font-size:11px;
+  font-size:10px;
 }
 
-/* SHOP STATUS */
+/* ================= SHOP ================= */
+
 .shop-control{
-  background:#111;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:13px 15px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:14px;
+  background:#101010;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:12px 14px;
+  margin-bottom:12px;
 }
 
 .shop-left{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
 }
 
 .shop-dot{
   width:10px;
   height:10px;
   border-radius:50%;
-  background:#555;
 }
 
 .shop-dot.open{
-  background:#25d366;
-  box-shadow:0 0 12px rgba(37,211,102,.7);
+  background:var(--green);
+  box-shadow:0 0 12px rgba(37,211,102,.65);
 }
 
 .shop-dot.closed{
-  background:#ff4d4d;
-  box-shadow:0 0 12px rgba(255,77,77,.5);
+  background:var(--red);
+  box-shadow:0 0 12px rgba(255,77,77,.55);
 }
 
 .shop-name{
-  font-size:13px;
-  font-weight:700;
+  font-size:12px;
+  font-weight:800;
 }
 
 .shop-state{
-  font-size:10px;
-  color:#999;
+  color:#777;
+  font-size:9px;
   margin-top:2px;
 }
 
 .toggle{
-  width:58px;
-  height:30px;
+  width:55px;
+  height:29px;
   border-radius:20px;
   background:#292929;
   border:1px solid #444;
   position:relative;
-  transition:.2s;
 }
 
-.toggle::after{
+.toggle:after{
   content:"";
   position:absolute;
-  width:22px;
-  height:22px;
   top:3px;
   left:3px;
-  background:#888;
+  width:21px;
+  height:21px;
   border-radius:50%;
+  background:#777;
   transition:.2s;
 }
 
 .toggle.on{
-  background:rgba(37,211,102,.18);
-  border-color:#25d366;
+  background:rgba(37,211,102,.15);
+  border-color:var(--green);
 }
 
-.toggle.on::after{
-  left:31px;
-  background:#25d366;
+.toggle.on:after{
+  left:29px;
+  background:var(--green);
 }
 
-/* STATS */
+/* ================= STATS ================= */
+
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:14px;
+  gap:9px;
+  margin-bottom:13px;
 }
 
 .stat{
   background:#101010;
   border:1px solid rgba(255,255,255,.07);
-  border-radius:13px;
-  padding:13px;
+  border-radius:12px;
+  padding:12px;
 }
 
 .stat-label{
-  color:#888;
-  font-size:10px;
+  color:#777;
+  font-size:9px;
   text-transform:uppercase;
-  letter-spacing:.7px;
 }
 
 .stat-value{
-  font-size:23px;
+  font-size:22px;
   font-weight:800;
   margin-top:4px;
 }
 
-.stat-value.orange{
+.orange{
   color:var(--orange);
 }
 
-/* SECTIONS */
+/* ================= SECTION ================= */
+
 .section{
   background:#101010;
   border:1px solid rgba(255,255,255,.07);
-  border-radius:15px;
-  margin-bottom:14px;
+  border-radius:14px;
+  margin-bottom:13px;
   overflow:hidden;
 }
 
 .section-head{
-  min-height:50px;
+  min-height:48px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:11px 15px;
+  padding:10px 14px;
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
@@ -345,30 +347,31 @@ button{
 }
 
 .count{
-  min-width:24px;
-  height:22px;
+  min-width:23px;
+  height:21px;
   padding:0 7px;
   border-radius:20px;
-  background:rgba(255,122,0,.12);
-  color:var(--orange);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:10px;
+  background:rgba(255,122,0,.12);
+  color:var(--orange);
+  font-size:9px;
   font-weight:800;
 }
 
 .section-body{
-  padding:10px;
+  padding:9px;
 }
 
-/* ORDER CARD */
+/* ================= ORDERS ================= */
+
 .order-card{
   background:#0b0b0b;
   border:1px solid rgba(255,255,255,.06);
-  border-radius:11px;
-  padding:12px;
-  margin-bottom:8px;
+  border-radius:10px;
+  padding:11px;
+  margin-bottom:7px;
 }
 
 .order-card:last-child{
@@ -377,89 +380,87 @@ button{
 
 .order-top{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
-  gap:10px;
+  align-items:flex-start;
+  gap:8px;
 }
 
 .order-id{
-  font-size:13px;
+  font-size:12px;
   font-weight:800;
-  color:#fff;
 }
 
 .order-date{
-  font-size:9px;
-  color:#777;
+  color:#666;
+  font-size:8px;
   margin-top:3px;
 }
 
 .status-pill{
-  font-size:9px;
-  font-weight:800;
-  border-radius:20px;
   padding:5px 8px;
-  text-transform:uppercase;
+  border-radius:20px;
+  font-size:8px;
+  font-weight:800;
 }
 
 .status-received{
-  background:rgba(255,122,0,.14);
   color:#ff9b3d;
+  background:rgba(255,122,0,.13);
 }
 
 .status-processing{
-  background:rgba(255,190,60,.13);
-  color:#ffca55;
+  color:#ffcb55;
+  background:rgba(255,203,85,.12);
 }
 
 .status-delivery{
-  background:rgba(65,150,255,.13);
-  color:#66aaff;
+  color:#69aaff;
+  background:rgba(77,156,255,.12);
 }
 
 .status-delivered{
-  background:rgba(37,211,102,.13);
   color:#50e58a;
+  background:rgba(37,211,102,.12);
 }
 
 .status-cancelled{
-  background:rgba(255,77,77,.13);
-  color:#ff6d6d;
+  color:#ff6b6b;
+  background:rgba(255,77,77,.12);
 }
 
 .customer-info{
-  margin-top:9px;
-  font-size:11px;
   color:#aaa;
+  font-size:10px;
   line-height:1.55;
+  margin-top:8px;
 }
 
 .customer-info strong{
-  color:#eee;
+  color:#fff;
 }
 
 .order-items{
-  margin-top:8px;
-  padding-top:8px;
+  margin-top:7px;
+  padding-top:7px;
   border-top:1px solid rgba(255,255,255,.05);
 }
 
 .order-item{
   display:flex;
   justify-content:space-between;
-  gap:10px;
-  color:#bbb;
-  font-size:10px;
+  gap:8px;
+  color:#aaa;
+  font-size:9px;
   padding:2px 0;
 }
 
 .order-total{
   display:flex;
   justify-content:space-between;
-  margin-top:8px;
-  padding-top:8px;
+  margin-top:7px;
+  padding-top:7px;
   border-top:1px solid rgba(255,255,255,.05);
-  font-size:13px;
+  font-size:12px;
   font-weight:800;
 }
 
@@ -469,68 +470,64 @@ button{
 
 .order-actions{
   display:flex;
-  gap:6px;
   flex-wrap:wrap;
-  margin-top:10px;
+  gap:5px;
+  margin-top:9px;
 }
 
 .action-btn{
   border:1px solid rgba(255,255,255,.10);
   background:#171717;
   color:#ddd;
-  border-radius:7px;
+  border-radius:6px;
   padding:7px 9px;
-  font-size:9px;
+  font-size:8px;
   font-weight:800;
-}
-
-.action-btn:hover{
-  border-color:var(--orange);
-  color:var(--orange);
 }
 
 .action-btn.orange{
   background:var(--orange);
-  color:#000;
   border-color:var(--orange);
+  color:#000;
+}
+
+.action-btn.blue{
+  background:rgba(77,156,255,.12);
+  border-color:rgba(77,156,255,.25);
+  color:#69aaff;
 }
 
 .action-btn.green{
   background:rgba(37,211,102,.12);
-  color:#45df80;
   border-color:rgba(37,211,102,.25);
-}
-
-.action-btn.blue{
-  background:rgba(65,150,255,.12);
-  color:#66aaff;
-  border-color:rgba(65,150,255,.25);
+  color:#50e58a;
 }
 
 .action-btn.red{
   background:rgba(255,77,77,.10);
-  color:#ff6b6b;
   border-color:rgba(255,77,77,.20);
+  color:#ff6b6b;
 }
 
 .empty{
-  padding:22px 10px;
   text-align:center;
   color:#666;
-  font-size:11px;
+  font-size:10px;
+  padding:22px 10px;
 }
 
-/* FOOD */
+/* ================= FOOD ================= */
+
 .food-row{
   display:grid;
-  grid-template-columns:minmax(150px,1fr) 90px 110px auto;
+  grid-template-columns:minmax(150px,1fr) 85px 110px auto;
   align-items:center;
   gap:8px;
-  padding:8px;
   background:#0b0b0b;
   border:1px solid rgba(255,255,255,.05);
-  border-radius:9px;
-  margin-bottom:6px;
+  border-radius:8px;
+  padding:7px;
+  margin-bottom:5px;
 }
 
 .food-row:last-child{
@@ -538,126 +535,135 @@ button{
 }
 
 .food-name{
-  font-size:11px;
+  font-size:10px;
   font-weight:700;
 }
 
 .price-input{
-  height:32px;
+  width:100%;
+  height:31px;
+  background:#080808;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:7px;
+  color:#fff;
+  outline:none;
   padding:0 8px;
-  font-size:11px;
+  font-size:10px;
 }
 
 .availability{
   display:flex;
   align-items:center;
   gap:6px;
-  font-size:9px;
-  color:#999;
+  color:#888;
+  font-size:8px;
 }
 
 .mini-toggle{
-  width:42px;
-  height:23px;
+  width:40px;
+  height:22px;
   border-radius:20px;
-  background:#2b2b2b;
-  position:relative;
+  background:#292929;
   border:1px solid #444;
-  cursor:pointer;
+  position:relative;
 }
 
-.mini-toggle::after{
+.mini-toggle:after{
   content:"";
   position:absolute;
-  width:17px;
-  height:17px;
-  left:2px;
+  width:16px;
+  height:16px;
   top:2px;
-  border-radius:50%;
+  left:2px;
   background:#777;
+  border-radius:50%;
   transition:.18s;
 }
 
 .mini-toggle.on{
-  background:rgba(37,211,102,.16);
-  border-color:#25d366;
+  background:rgba(37,211,102,.15);
+  border-color:var(--green);
 }
 
-.mini-toggle.on::after{
-  left:21px;
-  background:#25d366;
+.mini-toggle.on:after{
+  left:20px;
+  background:var(--green);
 }
 
 .save-food{
-  height:32px;
+  height:31px;
   padding:0 10px;
   border:0;
-  border-radius:7px;
+  border-radius:6px;
   background:var(--orange);
   color:#000;
-  font-size:9px;
+  font-size:8px;
   font-weight:800;
 }
 
-/* SETTINGS */
-.settings-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
+/* ================= SETTINGS ================= */
 
 .settings-box{
   background:#0b0b0b;
   border:1px solid rgba(255,255,255,.06);
-  border-radius:10px;
-  padding:11px;
-}
-
-.settings-box.full{
-  grid-column:1/-1;
+  border-radius:9px;
+  padding:10px;
 }
 
 .settings-label{
+  color:#777;
+  font-size:9px;
+  margin-bottom:6px;
+}
+
+.settings-input{
+  width:100%;
+  height:39px;
+  background:#080808;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:8px;
+  color:#fff;
+  outline:none;
+  padding:0 10px;
   font-size:10px;
-  color:#888;
-  margin-bottom:7px;
 }
 
 .save-settings{
   width:100%;
   height:38px;
+  margin-top:8px;
   border:0;
   border-radius:8px;
   background:var(--orange);
   color:#000;
   font-weight:800;
-  font-size:10px;
+  font-size:9px;
 }
 
-/* SALES */
+/* ================= SALES ================= */
+
 .sales-folder{
   background:#0b0b0b;
   border:1px solid rgba(255,255,255,.06);
-  border-radius:10px;
-  margin-bottom:7px;
-  overflow:hidden;
+  border-radius:9px;
+  margin-bottom:6px;
+  padding:10px;
 }
 
 .sales-folder-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:11px;
 }
 
 .sales-date{
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
 }
 
 .sales-info{
-  font-size:9px;
-  color:#888;
+  color:#777;
+  font-size:8px;
   margin-top:3px;
 }
 
@@ -667,29 +673,34 @@ button{
   font-weight:800;
 }
 
+/* ================= TOAST ================= */
+
 .toast{
   position:fixed;
-  right:18px;
-  bottom:18px;
+  right:15px;
+  bottom:15px;
   z-index:9999;
   background:#171717;
   border:1px solid var(--orange);
   color:#fff;
-  padding:11px 14px;
-  border-radius:10px;
-  font-size:11px;
-  transform:translateY(80px);
+  padding:10px 13px;
+  border-radius:9px;
+  font-size:10px;
   opacity:0;
+  transform:translateY(60px);
   pointer-events:none;
   transition:.25s;
 }
 
 .toast.show{
-  transform:translateY(0);
   opacity:1;
+  transform:translateY(0);
 }
 
+/* ================= MOBILE ================= */
+
 @media(max-width:750px){
+
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
@@ -707,22 +718,20 @@ button{
     grid-row:2;
   }
 
-  .settings-grid{
-    grid-template-columns:1fr;
-  }
-
-  .settings-box.full{
-    grid-column:auto;
-  }
 }
 
 @media(max-width:500px){
+
   .header{
     padding:0 13px;
   }
 
   .brand{
-    font-size:21px;
+    font-size:20px;
+  }
+
+  .admin-badge{
+    display:none;
   }
 
   .container{
@@ -730,32 +739,18 @@ button{
     margin-top:13px;
   }
 
-  .top-row{
-    margin-bottom:12px;
-  }
-
   .page-title{
     font-size:28px;
   }
 
-  .stats{
-    gap:7px;
-  }
-
-  .stat{
-    padding:10px;
-  }
-
-  .stat-value{
-    font-size:20px;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- ================= LOGIN ================= -->
+
 <div id="loginScreen" class="login-wrap">
 
   <div class="login-box">
@@ -769,285 +764,395 @@ button{
     </div>
 
     <div class="field">
+
       <label>ADMIN EMAIL</label>
-      <input id="email" type="email" placeholder="Admin email">
+
+      <input
+        id="email"
+        type="email"
+        placeholder="Enter admin email">
+
     </div>
 
     <div class="field">
+
       <label>PASSWORD</label>
-      <input id="password" type="password" placeholder="Password">
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter password">
+
     </div>
 
-    <button class="login-btn" onclick="loginAdmin()">
+    <button
+      class="login-btn"
+      onclick="loginAdmin()">
+
       LOGIN
+
     </button>
 
-    <div id="loginError" class="error"></div>
+    <div
+      id="loginError"
+      class="login-error">
+    </div>
 
   </div>
 
 </div>
 
 
-<!-- ADMIN -->
+<!-- ================= ADMIN ================= -->
+
 <div id="adminScreen" class="hidden">
 
-  <header class="header">
+<header class="header">
 
-    <div class="brand">
-      THE <span>QUEEN</span> FAST FOOD
+  <div class="brand">
+    THE <span>QUEEN</span> FAST FOOD
+  </div>
+
+  <div class="admin-badge">
+    ADMIN PANEL
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <div class="top-row">
+
+    <div class="page-title">
+      Admin <span>Dashboard</span>
     </div>
 
-    <div class="admin-badge">
-      ADMIN PANEL
-    </div>
+    <button
+      class="logout-btn"
+      onclick="logoutAdmin()">
 
-  </header>
+      LOGOUT
 
-  <main class="container">
+    </button>
 
-    <div class="top-row">
+  </div>
 
-      <div class="page-title">
-        Admin <span>Dashboard</span>
+
+  <!-- SHOP -->
+
+  <div class="shop-control">
+
+    <div class="shop-left">
+
+      <div
+        id="shopDot"
+        class="shop-dot">
       </div>
 
-      <button class="logout-btn" onclick="logoutAdmin()">
-        LOGOUT
-      </button>
+      <div>
+
+        <div class="shop-name">
+          Shop Status
+        </div>
+
+        <div
+          id="shopState"
+          class="shop-state">
+
+          Loading...
+
+        </div>
+
+      </div>
 
     </div>
 
+    <button
+      id="shopToggle"
+      class="toggle"
+      onclick="toggleShop()">
+    </button>
 
-    <!-- SHOP -->
-    <div class="shop-control">
+  </div>
 
-      <div class="shop-left">
 
-        <div id="shopDot" class="shop-dot"></div>
+  <!-- STATS -->
 
-        <div>
-          <div class="shop-name">
-            Shop Status
-          </div>
+  <div class="stats">
 
-          <div id="shopState" class="shop-state">
-            Loading...
-          </div>
+    <div class="stat">
+
+      <div class="stat-label">
+        New Orders
+      </div>
+
+      <div
+        id="newCount"
+        class="stat-value orange">
+        0
+      </div>
+
+    </div>
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Processing
+      </div>
+
+      <div
+        id="processingCount"
+        class="stat-value">
+        0
+      </div>
+
+    </div>
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Delivery
+      </div>
+
+      <div
+        id="deliveryCount"
+        class="stat-value">
+        0
+      </div>
+
+    </div>
+
+    <div class="stat">
+
+      <div class="stat-label">
+        Sales
+      </div>
+
+      <div
+        id="salesTotal"
+        class="stat-value orange">
+        ₹0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NEW ORDERS -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        New <span>Orders</span>
+      </div>
+
+      <div
+        id="newBadge"
+        class="count">
+        0
+      </div>
+
+    </div>
+
+    <div
+      id="newOrders"
+      class="section-body">
+    </div>
+
+  </section>
+
+
+  <!-- PENDING -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Pending <span>Orders</span>
+      </div>
+
+      <div
+        id="pendingBadge"
+        class="count">
+        0
+      </div>
+
+    </div>
+
+    <div
+      id="pendingOrders"
+      class="section-body">
+    </div>
+
+  </section>
+
+
+  <!-- CLOSED -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Closed <span>Orders</span>
+      </div>
+
+      <div
+        id="closedBadge"
+        class="count">
+        0
+      </div>
+
+    </div>
+
+    <div
+      id="closedOrders"
+      class="section-body">
+    </div>
+
+  </section>
+
+
+  <!-- FOOD ITEMS -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Food <span>Items</span>
+      </div>
+
+    </div>
+
+    <div
+      id="foodItems"
+      class="section-body">
+    </div>
+
+  </section>
+
+
+  <!-- SETTINGS -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Admin <span>Settings</span>
+      </div>
+
+    </div>
+
+    <div class="section-body">
+
+      <div class="settings-box">
+
+        <div class="settings-label">
+          WHATSAPP ORDER NUMBER
         </div>
+
+        <input
+          id="whatsappNumber"
+          class="settings-input"
+          placeholder="9090220791">
+
+        <button
+          class="save-settings"
+          onclick="saveWhatsApp()">
+
+          SAVE WHATSAPP NUMBER
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SALES -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Online <span>Sales</span>
+      </div>
+
+    </div>
+
+    <div
+      id="salesHistory"
+      class="section-body">
+    </div>
+
+  </section>
+
+
+  <!-- TRACK -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Track <span>Order</span>
+      </div>
+
+    </div>
+
+    <div class="section-body">
+
+      <div class="field">
+
+        <label>
+          ORDER ID
+        </label>
+
+        <input
+          id="adminTrackId"
+          class="settings-input"
+          placeholder="QF123456">
 
       </div>
 
       <button
-        id="shopToggle"
-        class="toggle"
-        onclick="toggleShop()">
+        class="save-settings"
+        onclick="trackAdminOrder()">
+
+        TRACK ORDER
+
       </button>
 
-    </div>
-
-
-    <!-- STATS -->
-    <div class="stats">
-
-      <div class="stat">
-        <div class="stat-label">New Orders</div>
-        <div id="newCount" class="stat-value orange">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">Processing</div>
-        <div id="processingCount" class="stat-value">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">Delivery</div>
-        <div id="deliveryCount" class="stat-value">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">Sales</div>
-        <div id="salesTotal" class="stat-value orange">₹0</div>
-      </div>
+      <div id="adminTrackResult"></div>
 
     </div>
 
+  </section>
 
-    <!-- NEW ORDERS -->
-    <section class="section">
-
-      <div class="section-head">
-
-        <div class="section-title">
-          New <span>Orders</span>
-        </div>
-
-        <div id="newBadge" class="count">0</div>
-
-      </div>
-
-      <div id="newOrders" class="section-body"></div>
-
-    </section>
-
-
-    <!-- PROCESSING -->
-    <section class="section">
-
-      <div class="section-head">
-
-        <div class="section-title">
-          Pending <span>Orders</span>
-        </div>
-
-        <div id="pendingBadge" class="count">0</div>
-
-      </div>
-
-      <div id="pendingOrders" class="section-body"></div>
-
-    </section>
-
-
-    <!-- CLOSED -->
-    <section class="section">
-
-      <div class="section-head">
-
-        <div class="section-title">
-          Closed <span>Orders</span>
-        </div>
-
-        <div id="closedBadge" class="count">0</div>
-
-      </div>
-
-      <div id="closedOrders" class="section-body"></div>
-
-    </section>
-
-
-    <!-- FOOD ITEMS -->
-    <section class="section">
-
-      <div class="section-head">
-
-        <div class="section-title">
-          Food <span>Items</span>
-        </div>
-
-      </div>
-
-      <div id="foodItems" class="section-body"></div>
-
-    </section>
-
-
-    <!-- SETTINGS -->
-    <section class="section">
-
-      <div class="section-head">
-
-        <div class="section-title">
-          Admin <span>Settings</span>
-        </div>
-
-      </div>
-
-      <div class="section-body">
-
-        <div class="settings-grid">
-
-          <div class="settings-box full">
-
-            <div class="settings-label">
-              WHATSAPP ORDER NUMBER
-            </div>
-
-            <input
-              id="whatsappNumber"
-              class="settings-input"
-              placeholder="9090220791">
-
-          </div>
-
-          <div class="settings-box full">
-
-            <button
-              class="save-settings"
-              onclick="saveWhatsApp()">
-              SAVE WHATSAPP NUMBER
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SALES HISTORY -->
-    <section class="section">
-
-      <div class="section-head">
-
-        <div class="section-title">
-          Online <span>Sales</span>
-        </div>
-
-      </div>
-
-      <div id="salesHistory" class="section-body"></div>
-
-    </section>
-
-
-    <!-- TRACK -->
-    <section class="section">
-
-      <div class="section-head">
-
-        <div class="section-title">
-          Track <span>Order</span>
-        </div>
-
-      </div>
-
-      <div class="section-body">
-
-        <div class="field">
-
-          <label>ORDER ID</label>
-
-          <input
-            id="adminTrackId"
-            class="settings-input"
-            placeholder="Example: QF123456">
-
-        </div>
-
-        <button
-          class="primary-btn"
-          onclick="trackAdminOrder()">
-          TRACK ORDER
-        </button>
-
-        <div id="adminTrackResult"></div>
-
-      </div>
-
-    </section>
-
-  </main>
+</main>
 
 </div>
 
-<div id="toast" class="toast"></div>
+
+<div
+  id="toast"
+  class="toast">
+</div>
 
 
 <script type="module">
+
+/* ================= FIREBASE ================= */
 
 import {
   initializeApp
@@ -1072,32 +1177,46 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* FIREBASE */
-
 const firebaseConfig = {
-  apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain:"the-queen-fast-food.firebaseapp.com",
-  databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId:"the-queen-fast-food",
-  storageBucket:"the-queen-fast-food.firebasestorage.app",
-  messagingSenderId:"435721389652",
-  appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId:"G-Q1YCK636KJ"
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
 };
 
-const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
-const db = getDatabase(app);
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getDatabase(app);
 
 
-/* ADMIN UID */
-
-const ADMIN_UID =
-"eWlMt1dG2pUOxsTo0NaXgY1avn33";
-
-
-/* MENU */
+/* ================= MENU ================= */
 
 const defaultMenu = [
 
@@ -1152,88 +1271,105 @@ const defaultMenu = [
 ];
 
 
-/* DATA */
+/* ================= VARIABLES ================= */
 
 let shopOpen = true;
+
 let shopSettings = {};
-let allOrders = {};
+
 let menuSettings = {};
 
-let settingsLoaded = false;
-let ordersLoaded = false;
+let allOrders = {};
 
 
-/* LOGIN PERSISTENCE */
+/* ================= AUTH PERSISTENCE ================= */
 
-await setPersistence(
+/*
+  IMPORTANT:
+  No hardcoded UID check here.
+  So Firebase login successful hele
+  admin logout heba nahi.
+*/
+
+try{
+
+  await setPersistence(
+    auth,
+    browserLocalPersistence
+  );
+
+}catch(error){
+
+  console.error(
+    "Persistence error:",
+    error
+  );
+
+}
+
+
+/* ================= AUTH STATE ================= */
+
+onAuthStateChanged(
   auth,
-  browserLocalPersistence
+  user => {
+
+    if(user){
+
+      console.log(
+        "Admin logged in:",
+        user.uid
+      );
+
+      showAdmin();
+
+      loadSettings();
+
+      loadOrders();
+
+    }else{
+
+      showLogin();
+
+    }
+
+  }
 );
 
 
-/* ELEMENTS */
+/* ================= LOGIN ================= */
 
-const loginScreen =
-  document.getElementById("loginScreen");
-
-const adminScreen =
-  document.getElementById("adminScreen");
-
-
-/* LOGIN STATE */
-
-onAuthStateChanged(auth, async user => {
-
-  if(!user){
-
-    showLogin();
-
-    return;
-  }
-
-  console.log("Admin UID:",user.uid);
-
-  if(user.uid !== ADMIN_UID){
-
-    document.getElementById("loginError").textContent =
-      "This account is not authorized as admin.";
-
-    await signOut(auth);
-
-    showLogin();
-
-    return;
-  }
-
-  showAdmin();
-
-  loadEverything();
-
-});
-
-
-/* LOGIN */
-
-window.loginAdmin = async function(){
+window.loginAdmin =
+async function(){
 
   const email =
-    document.getElementById("email").value.trim();
+    document
+      .getElementById("email")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("password").value;
+    document
+      .getElementById("password")
+      .value;
 
   const error =
-    document.getElementById("loginError");
+    document
+      .getElementById("loginError");
+
 
   error.textContent = "";
+
 
   if(!email || !password){
 
     error.textContent =
-      "Enter admin email and password.";
+      "Enter email and password.";
 
     return;
+
   }
+
 
   try{
 
@@ -1243,64 +1379,107 @@ window.loginAdmin = async function(){
       password
     );
 
+    /*
+      onAuthStateChanged()
+      automatically opens dashboard.
+    */
+
   }catch(err){
 
-    console.error(err);
+    console.error(
+      "Login error:",
+      err
+    );
 
-    error.textContent =
-      "Invalid admin email or password.";
+
+    if(err.code ===
+       "auth/invalid-credential"){
+
+      error.textContent =
+        "Invalid email or password.";
+
+    }else if(
+      err.code ===
+      "auth/invalid-email"
+    ){
+
+      error.textContent =
+        "Invalid email.";
+
+    }else if(
+      err.code ===
+      "auth/too-many-requests"
+    ){
+
+      error.textContent =
+        "Too many attempts. Try later.";
+
+    }else{
+
+      error.textContent =
+        err.message ||
+        "Login failed.";
+
+    }
 
   }
 
 };
 
 
-/* LOGOUT */
+/* ================= LOGOUT ================= */
 
-window.logoutAdmin = async function(){
+window.logoutAdmin =
+async function(){
 
-  await signOut(auth);
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(error);
+
+  }
 
 };
 
 
-/* SCREENS */
+/* ================= SCREEN ================= */
 
 function showLogin(){
 
-  loginScreen.classList.remove("hidden");
+  document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
 
-  adminScreen.classList.add("hidden");
+  document
+    .getElementById("adminScreen")
+    .classList.add("hidden");
 
 }
 
 
 function showAdmin(){
 
-  loginScreen.classList.add("hidden");
+  document
+    .getElementById("loginScreen")
+    .classList.add("hidden");
 
-  adminScreen.classList.remove("hidden");
-
-}
-
-
-/* LOAD */
-
-function loadEverything(){
-
-  loadSettings();
-
-  loadOrders();
+  document
+    .getElementById("adminScreen")
+    .classList.remove("hidden");
 
 }
 
 
-/* SETTINGS REALTIME */
+/* ================= SETTINGS ================= */
 
 function loadSettings(){
 
   onValue(
     ref(db,"settings"),
+
     snapshot => {
 
       shopSettings =
@@ -1312,19 +1491,22 @@ function loadSettings(){
       shopOpen =
         shopSettings.shopOpen !== false;
 
+
       renderShop();
 
       renderFood();
 
-      document.getElementById("whatsappNumber").value =
+
+      document
+        .getElementById(
+          "whatsappNumber"
+        )
+        .value =
         shopSettings.whatsappNumber ||
         "9090220791";
 
-      settingsLoaded = true;
-
-      updateDashboard();
-
     },
+
     error => {
 
       console.error(
@@ -1337,23 +1519,23 @@ function loadSettings(){
       );
 
     }
+
   );
 
 }
 
 
-/* ORDERS REALTIME */
+/* ================= ORDERS ================= */
 
 function loadOrders(){
 
   onValue(
     ref(db,"orders"),
+
     snapshot => {
 
       allOrders =
         snapshot.val() || {};
-
-      ordersLoaded = true;
 
       renderOrders();
 
@@ -1362,6 +1544,7 @@ function loadOrders(){
       renderSales();
 
     },
+
     error => {
 
       console.error(
@@ -1374,23 +1557,30 @@ function loadOrders(){
       );
 
     }
+
   );
 
 }
 
 
-/* SHOP */
+/* ================= SHOP ================= */
 
 function renderShop(){
 
   const dot =
-    document.getElementById("shopDot");
+    document.getElementById(
+      "shopDot"
+    );
 
   const state =
-    document.getElementById("shopState");
+    document.getElementById(
+      "shopState"
+    );
 
   const toggle =
-    document.getElementById("shopToggle");
+    document.getElementById(
+      "shopToggle"
+    );
 
 
   if(shopOpen){
@@ -1418,84 +1608,129 @@ function renderShop(){
 }
 
 
-/* TOGGLE SHOP */
+/* ================= TOGGLE SHOP ================= */
 
-window.toggleShop = async function(){
+window.toggleShop =
+async function(){
 
-  shopOpen = !shopOpen;
+  const newValue =
+    !shopOpen;
 
-  await set(
-    ref(db,"settings/shopOpen"),
-    shopOpen
-  );
 
-  showToast(
-    shopOpen
-      ? "Shop Open"
-      : "Shop Closed"
-  );
+  try{
+
+    await set(
+      ref(db,"settings/shopOpen"),
+      newValue
+    );
+
+    shopOpen =
+      newValue;
+
+
+    showToast(
+      newValue
+        ? "SHOP OPEN"
+        : "SHOP CLOSED"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Could not change shop status"
+    );
+
+  }
 
 };
 
 
-/* NORMALIZE STATUS */
+/* ================= STATUS ================= */
 
 function normalizeStatus(order){
 
   let status =
-    String(order.status || "received")
-      .toLowerCase();
+    String(
+      order.status ||
+      "received"
+    ).toLowerCase();
 
-  if(status === "new" ||
-     status === "placed" ||
-     status === "pending" ||
-     status === "received"){
+
+  if(
+    status === "new" ||
+    status === "placed" ||
+    status === "pending" ||
+    status === "received"
+  ){
 
     return "received";
+
   }
 
-  if(status === "processing" ||
-     status === "confirmed" ||
-     status === "preparing" ||
-     status === "ready"){
+
+  if(
+    status === "processing" ||
+    status === "confirmed" ||
+    status === "preparing" ||
+    status === "ready"
+  ){
 
     return "processing";
+
   }
 
-  if(status === "out_for_delivery" ||
-     status === "out-for-delivery" ||
-     status === "delivery"){
+
+  if(
+    status === "out_for_delivery" ||
+    status === "out-for-delivery" ||
+    status === "delivery"
+  ){
 
     return "out_for_delivery";
+
   }
 
-  if(status === "delivered" ||
-     status === "completed" ||
-     status === "closed"){
+
+  if(
+    status === "delivered" ||
+    status === "completed" ||
+    status === "closed"
+  ){
 
     return "delivered";
+
   }
 
-  if(status === "cancelled" ||
-     status === "canceled"){
+
+  if(
+    status === "cancelled" ||
+    status === "canceled"
+  ){
 
     return "cancelled";
+
   }
+
 
   return "received";
 
 }
 
 
-/* ORDER ARRAY */
+/* ================= ORDER ARRAY ================= */
 
 function getOrderArray(){
 
-  return Object.entries(allOrders)
-    .map(([id,order]) => ({
-      id,
-      ...(order || {})
-    }))
+  return Object
+    .entries(allOrders)
+    .map(
+      ([id,order]) => ({
+        id,
+        ...(order || {})
+      })
+    )
     .sort(
       (a,b) =>
         Number(b.createdAt || 0) -
@@ -1505,30 +1740,51 @@ function getOrderArray(){
 }
 
 
-/* RENDER ORDERS */
+/* ================= RENDER ORDERS ================= */
 
 function renderOrders(){
 
   const orders =
     getOrderArray();
 
+
   const newOrders =
     orders.filter(
-      o => normalizeStatus(o) === "received"
+      order =>
+        normalizeStatus(order) ===
+        "received"
     );
+
 
   const pendingOrders =
     orders.filter(
-      o =>
-        normalizeStatus(o) === "processing" ||
-        normalizeStatus(o) === "out_for_delivery"
+      order => {
+
+        const status =
+          normalizeStatus(order);
+
+        return (
+          status === "processing" ||
+          status === "out_for_delivery"
+        );
+
+      }
     );
+
 
   const closedOrders =
     orders.filter(
-      o =>
-        normalizeStatus(o) === "delivered" ||
-        normalizeStatus(o) === "cancelled"
+      order => {
+
+        const status =
+          normalizeStatus(order);
+
+        return (
+          status === "delivered" ||
+          status === "cancelled"
+        );
+
+      }
     );
 
 
@@ -1548,24 +1804,38 @@ function renderOrders(){
   );
 
 
-  document.getElementById("newBadge").textContent =
+  document
+    .getElementById("newBadge")
+    .textContent =
     newOrders.length;
 
-  document.getElementById("pendingBadge").textContent =
+
+  document
+    .getElementById("pendingBadge")
+    .textContent =
     pendingOrders.length;
 
-  document.getElementById("closedBadge").textContent =
+
+  document
+    .getElementById("closedBadge")
+    .textContent =
     closedOrders.length;
 
 }
 
 
-/* ORDER BOX */
+/* ================= ORDER BOX ================= */
 
-function renderOrderBox(elementId,orders){
+function renderOrderBox(
+  elementId,
+  orders
+){
 
   const box =
-    document.getElementById(elementId);
+    document.getElementById(
+      elementId
+    );
+
 
   if(!orders.length){
 
@@ -1575,28 +1845,34 @@ function renderOrderBox(elementId,orders){
       </div>`;
 
     return;
+
   }
+
 
   box.innerHTML =
     orders
-      .map(renderOrderCard)
+      .map(
+        renderOrderCard
+      )
       .join("");
 
 }
 
 
-/* ORDER CARD */
+/* ================= ORDER CARD ================= */
 
 function renderOrderCard(order){
 
   const status =
     normalizeStatus(order);
 
+
   let statusText =
     "ORDER RECEIVED";
 
   let statusClass =
     "status-received";
+
 
   if(status === "processing"){
 
@@ -1608,6 +1884,7 @@ function renderOrderCard(order){
 
   }
 
+
   if(status === "out_for_delivery"){
 
     statusText =
@@ -1618,6 +1895,7 @@ function renderOrderCard(order){
 
   }
 
+
   if(status === "delivered"){
 
     statusText =
@@ -1627,6 +1905,7 @@ function renderOrderCard(order){
       "status-delivered";
 
   }
+
 
   if(status === "cancelled"){
 
@@ -1641,9 +1920,9 @@ function renderOrderCard(order){
 
   const date =
     order.createdAt
-      ? new Date(order.createdAt).toLocaleString(
-          "en-IN"
-        )
+      ? new Date(
+          order.createdAt
+        ).toLocaleString("en-IN")
       : "-";
 
 
@@ -1668,7 +1947,9 @@ function renderOrderCard(order){
   const items =
     Array.isArray(order.items)
       ? order.items
-      : Object.values(order.items || {});
+      : Object.values(
+          order.items || {}
+        );
 
 
   const itemHTML =
@@ -1678,6 +1959,7 @@ function renderOrderCard(order){
         item.name ||
         "Food Item";
 
+
       const qty =
         Number(
           item.quantity ||
@@ -1685,17 +1967,29 @@ function renderOrderCard(order){
           1
         );
 
+
       const price =
         Number(
           item.price ||
           0
         );
 
+
       return `
+
         <div class="order-item">
-          <span>${escapeHTML(name)} × ${qty}</span>
-          <span>₹${price * qty}</span>
+
+          <span>
+            ${escapeHTML(name)}
+            × ${qty}
+          </span>
+
+          <span>
+            ₹${price * qty}
+          </span>
+
         </div>
+
       `;
 
     }).join("");
@@ -1711,11 +2005,13 @@ function renderOrderCard(order){
 
 
   return `
+
     <div class="order-card">
 
       <div class="order-top">
 
         <div>
+
           <div class="order-id">
             #${escapeHTML(order.id)}
           </div>
@@ -1723,10 +2019,14 @@ function renderOrderCard(order){
           <div class="order-date">
             ${escapeHTML(date)}
           </div>
+
         </div>
 
-        <div class="status-pill ${statusClass}">
+        <div
+          class="status-pill ${statusClass}">
+
           ${statusText}
+
         </div>
 
       </div>
@@ -1734,118 +2034,169 @@ function renderOrderCard(order){
 
       <div class="customer-info">
 
-        <strong>${escapeHTML(customer)}</strong>
+        <strong>
+          ${escapeHTML(customer)}
+        </strong>
 
-        ${phone
-          ? `<br>📞 ${escapeHTML(phone)}`
-          : ""}
+        ${
+          phone
+            ? `<br>📞 ${escapeHTML(phone)}`
+            : ""
+        }
 
-        <br>📍 ${escapeHTML(address)}
+        <br>
+        📍 ${escapeHTML(address)}
 
       </div>
 
 
       <div class="order-items">
 
-        ${itemHTML || `
-          <div class="order-item">
-            <span>Order items</span>
-            <span>-</span>
-          </div>
-        `}
+        ${
+          itemHTML ||
+          `<div class="order-item">
+             <span>Order items</span>
+             <span>-</span>
+           </div>`
+        }
 
       </div>
 
 
       <div class="order-total">
 
-        <span>TOTAL</span>
+        <span>
+          TOTAL
+        </span>
 
-        <span>₹${total}</span>
+        <span>
+          ₹${total}
+        </span>
 
       </div>
 
 
-      ${renderActionButtons(order.id,status)}
+      ${renderActionButtons(
+        order.id,
+        status
+      )}
 
     </div>
+
   `;
 
 }
 
 
-/* ACTION BUTTONS */
+/* ================= ACTION BUTTONS ================= */
 
-function renderActionButtons(orderId,status){
+function renderActionButtons(
+  orderId,
+  status
+){
 
-  let html = `
-    <div class="order-actions">
-  `;
+  let html =
+    `<div class="order-actions">`;
 
 
   if(status === "received"){
 
     html += `
+
       <button
         class="action-btn orange"
-        onclick="changeStatus('${orderId}','processing')">
-        PROCESSING
-      </button>
-    `;
+        onclick="changeStatus(
+          '${orderId}',
+          'processing'
+        )">
 
-    html += `
+        PROCESSING
+
+      </button>
+
       <button
         class="action-btn red"
-        onclick="changeStatus('${orderId}','cancelled')">
+        onclick="changeStatus(
+          '${orderId}',
+          'cancelled'
+        )">
+
         CANCEL
+
       </button>
+
     `;
 
   }
 
 
-  else if(status === "processing"){
+  if(status === "processing"){
 
     html += `
+
       <button
         class="action-btn blue"
-        onclick="changeStatus('${orderId}','out_for_delivery')">
-        OUT FOR DELIVERY
-      </button>
-    `;
+        onclick="changeStatus(
+          '${orderId}',
+          'out_for_delivery'
+        )">
 
-    html += `
+        OUT FOR DELIVERY
+
+      </button>
+
       <button
         class="action-btn red"
-        onclick="changeStatus('${orderId}','cancelled')">
+        onclick="changeStatus(
+          '${orderId}',
+          'cancelled'
+        )">
+
         CANCEL
+
       </button>
+
     `;
 
   }
 
 
-  else if(status === "out_for_delivery"){
+  if(status === "out_for_delivery"){
 
     html += `
+
       <button
         class="action-btn green"
-        onclick="changeStatus('${orderId}','delivered')">
+        onclick="changeStatus(
+          '${orderId}',
+          'delivered'
+        )">
+
         DELIVERED
+
       </button>
+
     `;
 
   }
 
 
   html += `
-      <button
-        class="action-btn"
-        onclick="trackOrderFromCard('${orderId}')">
-        TRACK
-      </button>
-    </div>
+
+    <button
+      class="action-btn"
+      onclick="trackOrderFromCard(
+        '${orderId}'
+      )">
+
+      TRACK
+
+    </button>
+
   `;
+
+
+  html += `</div>`;
 
 
   return html;
@@ -1853,9 +2204,10 @@ function renderActionButtons(orderId,status){
 }
 
 
-/* CHANGE ORDER STATUS */
+/* ================= CHANGE STATUS ================= */
 
-window.changeStatus = async function(
+window.changeStatus =
+async function(
   orderId,
   newStatus
 ){
@@ -1863,29 +2215,61 @@ window.changeStatus = async function(
   try{
 
     await update(
-      ref(db,"orders/"+orderId),
+      ref(
+        db,
+        "orders/"+orderId
+      ),
       {
         status:newStatus,
         updatedAt:Date.now()
       }
     );
 
+
+    let message =
+      "Order updated";
+
+
+    if(newStatus === "processing"){
+
+      message =
+        "ORDER → PROCESSING";
+
+    }
+
+
+    if(newStatus === "out_for_delivery"){
+
+      message =
+        "ORDER → OUT FOR DELIVERY";
+
+    }
+
+
+    if(newStatus === "delivered"){
+
+      message =
+        "ORDER → DELIVERED";
+
+    }
+
+
+    if(newStatus === "cancelled"){
+
+      message =
+        "ORDER → CANCELLED";
+
+    }
+
+
+    showToast(message);
+
+  }catch(error){
+
+    console.error(error);
+
     showToast(
-      newStatus === "processing"
-        ? "Order → Processing"
-        : newStatus === "out_for_delivery"
-        ? "Order → Out For Delivery"
-        : newStatus === "delivered"
-        ? "Order → Delivered"
-        : "Order → Cancelled"
-    );
-
-  }catch(err){
-
-    console.error(err);
-
-    showToast(
-      "Could not update order"
+      "Order update failed"
     );
 
   }
@@ -1893,90 +2277,121 @@ window.changeStatus = async function(
 };
 
 
-/* FOOD ITEMS */
+/* ================= FOOD ================= */
 
 function renderFood(){
 
   const box =
-    document.getElementById("foodItems");
+    document.getElementById(
+      "foodItems"
+    );
+
 
   box.innerHTML =
-    defaultMenu.map(item => {
+    defaultMenu
+      .map(item => {
 
-      const saved =
-        menuSettings[item.id] || {};
-
-      const price =
-        Number(
-          saved.price ??
-          item.price
-        );
-
-      const available =
-        saved.available !== false;
+        const saved =
+          menuSettings[item.id] ||
+          {};
 
 
-      return `
-        <div class="food-row">
+        const price =
+          Number(
+            saved.price ??
+            item.price
+          );
 
-          <div class="food-name">
-            ${escapeHTML(item.name)}
-          </div>
 
-          <input
-            id="price_${item.id}"
-            class="price-input"
-            type="number"
-            value="${price}"
-            min="0">
+        const available =
+          saved.available !== false;
 
-          <div class="availability">
+
+        return `
+
+          <div class="food-row">
+
+            <div class="food-name">
+              ${escapeHTML(item.name)}
+            </div>
+
+            <input
+              id="price_${item.id}"
+              class="price-input"
+              type="number"
+              min="0"
+              value="${price}">
+
+            <div class="availability">
+
+              <button
+                id="toggle_${item.id}"
+                class="mini-toggle ${
+                  available ? "on" : ""
+                }"
+                onclick="toggleFood(
+                  '${item.id}'
+                )">
+              </button>
+
+              <span
+                id="availability_${item.id}">
+
+                ${
+                  available
+                    ? "Available"
+                    : "Out of Stock"
+                }
+
+              </span>
+
+            </div>
 
             <button
-              id="toggle_${item.id}"
-              class="mini-toggle ${available ? "on" : ""}"
-              onclick="toggleFood('${item.id}')">
-            </button>
+              class="save-food"
+              onclick="saveFood(
+                '${item.id}'
+              )">
 
-            <span id="availability_${item.id}">
-              ${available ? "Available" : "Out of Stock"}
-            </span>
+              SAVE
+
+            </button>
 
           </div>
 
-          <button
-            class="save-food"
-            onclick="saveFood('${item.id}')">
-            SAVE
-          </button>
+        `;
 
-        </div>
-      `;
-
-    }).join("");
+      })
+      .join("");
 
 }
 
 
-/* FOOD TOGGLE LOCAL */
+/* ================= FOOD TOGGLE ================= */
 
-window.toggleFood = function(id){
-
-  const current =
-    menuSettings[id]?.available !== false;
+window.toggleFood =
+function(id){
 
   if(!menuSettings[id]){
+
     menuSettings[id] = {};
+
   }
+
+
+  const current =
+    menuSettings[id].available !== false;
+
 
   menuSettings[id].available =
     !current;
 
 
-  const btn =
+  const button =
     document.getElementById(
       "toggle_"+id
     );
+
 
   const label =
     document.getElementById(
@@ -1984,16 +2399,18 @@ window.toggleFood = function(id){
     );
 
 
-  if(menuSettings[id].available){
+  if(
+    menuSettings[id].available
+  ){
 
-    btn.classList.add("on");
+    button.classList.add("on");
 
     label.textContent =
       "Available";
 
   }else{
 
-    btn.classList.remove("on");
+    button.classList.remove("on");
 
     label.textContent =
       "Out of Stock";
@@ -2003,31 +2420,37 @@ window.toggleFood = function(id){
 };
 
 
-/* SAVE FOOD */
+/* ================= SAVE FOOD ================= */
 
-window.saveFood = async function(id){
-
-  const priceInput =
-    document.getElementById(
-      "price_"+id
-    );
+window.saveFood =
+async function(id){
 
   const price =
-    Number(priceInput.value);
+    Number(
+      document.getElementById(
+        "price_"+id
+      ).value
+    );
 
 
-  if(price < 0 || Number.isNaN(price)){
+  if(
+    Number.isNaN(price) ||
+    price < 0
+  ){
 
     showToast(
-      "Enter valid price"
+      "Invalid price"
     );
 
     return;
+
   }
 
 
   if(!menuSettings[id]){
+
     menuSettings[id] = {};
+
   }
 
 
@@ -2035,30 +2458,50 @@ window.saveFood = async function(id){
     menuSettings[id].available !== false;
 
 
-  await update(
-    ref(db,"settings/menu/"+id),
-    {
-      price:price,
-      available:available
-    }
-  );
+  try{
+
+    await update(
+      ref(
+        db,
+        "settings/menu/"+id
+      ),
+      {
+        price:price,
+        available:available
+      }
+    );
 
 
-  showToast(
-    "Food item saved"
-  );
+    showToast(
+      "Food item saved"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Food save failed"
+    );
+
+  }
 
 };
 
 
-/* WHATSAPP */
+/* ================= WHATSAPP ================= */
 
-window.saveWhatsApp = async function(){
+window.saveWhatsApp =
+async function(){
 
-  const number =
+  const input =
     document.getElementById(
       "whatsappNumber"
-    ).value
+    );
+
+
+  const number =
+    input.value
       .replace(/\D/g,"");
 
 
@@ -2069,40 +2512,54 @@ window.saveWhatsApp = async function(){
     );
 
     return;
+
   }
 
 
-  await set(
-    ref(db,"settings/whatsappNumber"),
-    number
-  );
+  try{
+
+    await set(
+      ref(
+        db,
+        "settings/whatsappNumber"
+      ),
+      number
+    );
 
 
-  showToast(
-    "WhatsApp number saved"
-  );
+    showToast(
+      "WhatsApp number saved"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Could not save number"
+    );
+
+  }
 
 };
 
 
-/* SALES */
+/* ================= SALES ================= */
 
 function renderSales(){
 
   const orders =
     getOrderArray();
 
-  const delivered =
-    orders.filter(
-      o =>
-        normalizeStatus(o) === "delivered"
-    );
-
 
   const folders = {};
 
 
-  delivered.forEach(order => {
+  orders.forEach(order => {
+
+    const status =
+      normalizeStatus(order);
+
 
     const date =
       order.createdAt
@@ -2122,10 +2579,15 @@ function renderSales(){
     if(!folders[date]){
 
       folders[date] = {
+
         orders:0,
+
         sales:0,
+
         delivered:0,
+
         cancelled:0
+
       };
 
     }
@@ -2133,56 +2595,29 @@ function renderSales(){
 
     folders[date].orders++;
 
-    folders[date].delivered++;
 
-    folders[date].sales +=
-      Number(
-        order.total ||
-        order.grandTotal ||
-        order.amount ||
-        0
-      );
+    if(status === "delivered"){
 
-  });
+      folders[date].delivered++;
 
+      folders[date].sales +=
+        Number(
+          order.total ||
+          order.grandTotal ||
+          order.amount ||
+          0
+        );
 
-  orders
-    .filter(
-      o =>
-        normalizeStatus(o) === "cancelled"
-    )
-    .forEach(order => {
-
-      const date =
-        order.createdAt
-          ? new Date(
-              order.createdAt
-            ).toLocaleDateString(
-              "en-IN",
-              {
-                day:"2-digit",
-                month:"long",
-                year:"numeric"
-              }
-            )
-          : "Unknown Date";
+    }
 
 
-      if(!folders[date]){
-
-        folders[date] = {
-          orders:0,
-          sales:0,
-          delivered:0,
-          cancelled:0
-        };
-
-      }
-
+    if(status === "cancelled"){
 
       folders[date].cancelled++;
 
-    });
+    }
+
+  });
 
 
   const dates =
@@ -2210,6 +2645,7 @@ function renderSales(){
       </div>`;
 
     return;
+
   }
 
 
@@ -2221,6 +2657,7 @@ function renderSales(){
 
 
       return `
+
         <div class="sales-folder">
 
           <div class="sales-folder-head">
@@ -2232,11 +2669,17 @@ function renderSales(){
               </div>
 
               <div class="sales-info">
+
                 Orders: ${d.orders}
+
                 &nbsp; • &nbsp;
+
                 Delivered: ${d.delivered}
+
                 &nbsp; • &nbsp;
+
                 Cancelled: ${d.cancelled}
+
               </div>
 
             </div>
@@ -2248,15 +2691,15 @@ function renderSales(){
           </div>
 
         </div>
+
       `;
 
     }).join("");
 
-
 }
 
 
-/* DASHBOARD */
+/* ================= DASHBOARD ================= */
 
 function updateDashboard(){
 
@@ -2266,74 +2709,86 @@ function updateDashboard(){
 
   const received =
     orders.filter(
-      o =>
-        normalizeStatus(o) === "received"
+      order =>
+        normalizeStatus(order) ===
+        "received"
     ).length;
 
 
   const processing =
     orders.filter(
-      o =>
-        normalizeStatus(o) === "processing"
+      order =>
+        normalizeStatus(order) ===
+        "processing"
     ).length;
 
 
   const delivery =
     orders.filter(
-      o =>
-        normalizeStatus(o) === "out_for_delivery"
+      order =>
+        normalizeStatus(order) ===
+        "out_for_delivery"
     ).length;
 
 
   const sales =
     orders
       .filter(
-        o =>
-          normalizeStatus(o) === "delivered"
+        order =>
+          normalizeStatus(order) ===
+          "delivered"
       )
       .reduce(
-        (sum,o) =>
+        (sum,order) =>
           sum +
           Number(
-            o.total ||
-            o.grandTotal ||
-            o.amount ||
+            order.total ||
+            order.grandTotal ||
+            order.amount ||
             0
           ),
         0
       );
 
 
-  document.getElementById("newCount")
+  document
+    .getElementById("newCount")
     .textContent =
     received;
 
 
-  document.getElementById("processingCount")
+  document
+    .getElementById("processingCount")
     .textContent =
     processing;
 
 
-  document.getElementById("deliveryCount")
+  document
+    .getElementById("deliveryCount")
     .textContent =
     delivery;
 
 
-  document.getElementById("salesTotal")
+  document
+    .getElementById("salesTotal")
     .textContent =
     "₹"+sales;
 
 }
 
 
-/* TRACK ADMIN */
+/* ================= ADMIN TRACK ================= */
 
-window.trackAdminOrder = async function(){
+window.trackAdminOrder =
+async function(){
 
   const id =
-    document.getElementById(
-      "adminTrackId"
-    ).value.trim();
+    document
+      .getElementById(
+        "adminTrackId"
+      )
+      .value
+      .trim();
 
 
   if(!id){
@@ -2343,50 +2798,58 @@ window.trackAdminOrder = async function(){
     );
 
     return;
+
   }
 
 
-  const snapshot =
-    await get(
-      ref(db,"orders/"+id)
-    );
+  try{
+
+    const snapshot =
+      await get(
+        ref(
+          db,
+          "orders/"+id
+        )
+      );
 
 
-  const box =
-    document.getElementById(
-      "adminTrackResult"
-    );
+    const box =
+      document.getElementById(
+        "adminTrackResult"
+      );
 
 
-  if(!snapshot.exists()){
+    if(!snapshot.exists()){
 
-    box.innerHTML =
-      `<div class="empty">
-        Order not found
-      </div>`;
+      box.innerHTML =
+        `<div class="empty">
+          Order not found
+        </div>`;
 
-    return;
-  }
+      return;
 
-
-  const order =
-    snapshot.val();
+    }
 
 
-  const status =
-    normalizeStatus(order);
+    const order =
+      snapshot.val();
 
 
-  box.innerHTML =
-    `
-      <div style="
-        margin-top:12px;
-        background:#0b0b0b;
-        border:1px solid rgba(255,255,255,.06);
-        border-radius:10px;
-        padding:12px;
-        font-size:11px;
-      ">
+    const status =
+      normalizeStatus(order);
+
+
+    box.innerHTML = `
+
+      <div
+        style="
+          margin-top:10px;
+          background:#0b0b0b;
+          border:1px solid rgba(255,255,255,.06);
+          border-radius:9px;
+          padding:11px;
+          font-size:10px;
+        ">
 
         <strong>
           #${escapeHTML(id)}
@@ -2394,55 +2857,83 @@ window.trackAdminOrder = async function(){
 
         <br><br>
 
-        Current Status:
-        <strong style="color:var(--orange)">
-          ${status.replaceAll("_"," ").toUpperCase()}
+        CURRENT STATUS:
+
+        <strong
+          style="color:var(--orange)">
+
+          ${status
+            .replaceAll("_"," ")
+            .toUpperCase()}
+
         </strong>
 
       </div>
+
     `;
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Track failed"
+    );
+
+  }
 
 };
 
 
-/* TRACK FROM CARD */
+/* ================= TRACK FROM CARD ================= */
 
-window.trackOrderFromCard = function(id){
+window.trackOrderFromCard =
+function(id){
 
-  document.getElementById(
-    "adminTrackId"
-  ).value = id;
+  document
+    .getElementById(
+      "adminTrackId"
+    )
+    .value =
+    id;
 
-  document.getElementById(
-    "adminTrackId"
-  ).scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
+
+  document
+    .getElementById(
+      "adminTrackId"
+    )
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
 
   setTimeout(
-    () => trackAdminOrder(),
+    () =>
+      trackAdminOrder(),
     300
   );
 
 };
 
 
-/* ESCAPE */
+/* ================= ESCAPE ================= */
 
 function escapeHTML(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
 
-/* TOAST */
+/* ================= TOAST ================= */
 
 function showToast(message){
 
@@ -2451,14 +2942,24 @@ function showToast(message){
       "toast"
     );
 
+
   toast.textContent =
     message;
 
-  toast.classList.add("show");
+
+  toast.classList.add(
+    "show"
+  );
+
 
   setTimeout(
-    () =>
-      toast.classList.remove("show"),
+    () => {
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },
     2200
   );
 
