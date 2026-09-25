@@ -109,7 +109,10 @@ header{
   overflow:hidden;
   transition:.25s;
 }
-.card:hover{transform:translateY(-3px);border-color:#f59b23}
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#f59b23;
+}
 .card-img{
   height:210px;
   background:#191919;
@@ -197,7 +200,10 @@ header{
   gap:10px;
   flex-wrap:wrap;
 }
-.order-id{color:#f59b23;font-weight:800}
+.order-id{
+  color:#f59b23;
+  font-weight:800;
+}
 .order-status{
   padding:6px 10px;
   border-radius:20px;
@@ -231,7 +237,10 @@ footer{
   text-align:center;
   color:#777;
 }
-footer a{color:#f59b23;text-decoration:none}
+footer a{
+  color:#f59b23;
+  text-decoration:none;
+}
 
 .overlay{
   position:fixed;
@@ -271,11 +280,16 @@ footer a{color:#f59b23;text-decoration:none}
   border-bottom:1px solid #292929;
   padding:15px 0;
 }
-.cart-item small{color:#aaa}
+.cart-item small{
+  color:#aaa;
+  display:block;
+  margin-top:5px;
+}
 .qty{
   display:flex;
   align-items:center;
   gap:8px;
+  margin-top:7px;
 }
 .qty button{
   width:30px;
@@ -313,6 +327,7 @@ footer a{color:#f59b23;text-decoration:none}
 .primary:disabled{
   background:#444;
   color:#888;
+  cursor:not-allowed;
 }
 
 .modal{
@@ -345,7 +360,10 @@ footer a{color:#f59b23;text-decoration:none}
   border-radius:10px;
   padding:13px;
 }
-.form-group textarea{min-height:90px;resize:vertical}
+.form-group textarea{
+  min-height:90px;
+  resize:vertical;
+}
 .location-row{
   display:flex;
   gap:8px;
@@ -368,6 +386,7 @@ footer a{color:#f59b23;text-decoration:none}
 .summary-row{
   display:flex;
   justify-content:space-between;
+  gap:15px;
   margin:7px 0;
 }
 .payment-options{
@@ -378,6 +397,7 @@ footer a{color:#f59b23;text-decoration:none}
 .payment-option{
   border:1px solid #333;
   background:#151515;
+  color:#fff;
   border-radius:12px;
   padding:14px;
   text-align:center;
@@ -413,7 +433,10 @@ footer a{color:#f59b23;text-decoration:none}
   font-size:50px;
   margin:15px 0;
 }
-.website-mode p{color:#aaa;line-height:1.7}
+.website-mode p{
+  color:#aaa;
+  line-height:1.7;
+}
 
 .thankyou{
   position:fixed;
@@ -435,15 +458,35 @@ footer a{color:#f59b23;text-decoration:none}
 }
 
 @media(max-width:900px){
-  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .menu-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
+
 @media(max-width:600px){
-  .hero{padding-top:50px}
-  .menu-grid{grid-template-columns:1fr}
-  .track-row{flex-direction:column}
-  .timeline{overflow:auto}
-  .step{min-width:70px}
-  .payment-options{grid-template-columns:1fr}
+  .hero{
+    padding-top:50px;
+  }
+
+  .menu-grid{
+    grid-template-columns:1fr;
+  }
+
+  .track-row{
+    flex-direction:column;
+  }
+
+  .timeline{
+    overflow:auto;
+  }
+
+  .step{
+    min-width:70px;
+  }
+
+  .payment-options{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -454,7 +497,9 @@ footer a{color:#f59b23;text-decoration:none}
   <div class="website-mode-inner">
     <div id="websiteModeIcon" class="website-mode-icon">🔧</div>
     <h1 id="websiteModeTitle">Updating</h1>
-    <p id="websiteModeMessage">The website is currently being updated. Please try again later.</p>
+    <p id="websiteModeMessage">
+      The website is currently being updated. Please try again later.
+    </p>
   </div>
 </div>
 
@@ -462,13 +507,18 @@ footer a{color:#f59b23;text-decoration:none}
   <div>
     <div class="flower">🌸</div>
     <h1>Thank You!</h1>
-    <p style="color:#aaa;margin-top:10px">Your order has been placed successfully.</p>
+    <p style="color:#aaa;margin-top:10px">
+      Your order has been placed successfully.
+    </p>
   </div>
 </div>
 
 <header>
   <div class="nav">
-    <div class="logo">The Queen <span>Fast Food</span></div>
+    <div class="logo">
+      The Queen <span>Fast Food</span>
+    </div>
+
     <button id="topCart" class="cart-top">
       🛒 Cart <b id="cartCount">0</b>
     </button>
@@ -478,123 +528,271 @@ footer a{color:#f59b23;text-decoration:none}
 <main id="mainWebsite">
 
 <section class="hero">
-  <h1>Choose. <span>Add.</span> Enjoy.</h1>
-  <p>Fresh food • Fast service • Easy ordering</p>
+
+  <h1>
+    Choose. <span>Add.</span> Enjoy.
+  </h1>
+
+  <p>
+    Fresh food • Fast service • Easy ordering
+  </p>
 
   <div class="status">
     <span id="shopDot" class="dot"></span>
-    <span id="shopStatusText">Checking shop status...</span>
+    <span id="shopStatusText">
+      Checking shop status...
+    </span>
   </div>
 
   <div style="margin-top:10px;color:#777;font-size:13px">
-    Order Time: <span id="orderTimeValue">--</span>
+    Order Time:
+    <span id="orderTimeValue">--</span>
   </div>
+
 </section>
 
 <section class="section">
-  <h2 class="section-title">Our Menu</h2>
+
+  <h2 class="section-title">
+    Our Menu
+  </h2>
+
   <div id="menuGrid" class="menu-grid"></div>
+
 </section>
 
 <section class="section">
-  <h2 class="section-title">Track Your Order</h2>
+
+  <h2 class="section-title">
+    Track Your Order
+  </h2>
 
   <div class="track-box">
+
     <div class="track-row">
-      <input id="trackInput" placeholder="Enter your Order ID">
-      <button id="trackButton">Track</button>
+
+      <input
+        id="trackInput"
+        placeholder="Enter your Order ID"
+      >
+
+      <button id="trackButton">
+        Track
+      </button>
+
     </div>
 
     <div id="trackResult" class="track-result"></div>
+
   </div>
+
 </section>
 
 </main>
 
 <footer>
-  <p>The Queen Fast Food</p>
-  <p style="margin-top:8px">Ibrisingh, Tirtol, Jagatsinghpur, Odisha</p>
+
+  <p>
+    The Queen Fast Food
+  </p>
+
   <p style="margin-top:8px">
-    <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ibrisingh+Tirtol+Jagatsinghpur+Odisha">
+    Ibrisingh, Tirtol, Jagatsinghpur, Odisha
+  </p>
+
+  <p style="margin-top:8px">
+
+    <a
+      target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query=Ibrisingh+Tirtol+Jagatsinghpur+Odisha"
+    >
       View Location
     </a>
+
   </p>
+
 </footer>
 
+
 <!-- CART -->
+
 <div id="cartOverlay" class="overlay hidden">
+
   <div class="drawer">
+
     <div class="drawer-head">
+
       <h2>Your Cart</h2>
-      <button id="closeCart" class="close">×</button>
+
+      <button
+        id="closeCart"
+        class="close"
+      >
+        ×
+      </button>
+
     </div>
 
     <div id="cartBody"></div>
 
     <div class="cart-bottom">
+
       <div class="total-row total">
+
         <span>Total</span>
-        <span>₹<span id="cartTotal">0</span></span>
+
+        <span>
+          ₹<span id="cartTotal">0</span>
+        </span>
+
       </div>
-      <button id="checkoutButton" class="primary">Proceed to Checkout</button>
+
+      <button
+        id="checkoutButton"
+        class="primary"
+      >
+        Proceed to Checkout
+      </button>
+
     </div>
+
   </div>
+
 </div>
 
+
 <!-- CHECKOUT -->
+
 <div id="checkoutOverlay" class="overlay hidden">
+
   <div class="modal">
 
     <div class="drawer-head">
+
       <h2>Checkout</h2>
-      <button id="closeCheckout" class="close">×</button>
+
+      <button
+        id="closeCheckout"
+        class="close"
+      >
+        ×
+      </button>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Name</label>
-      <input id="customerName" placeholder="Your name">
+
+      <input
+        id="customerName"
+        placeholder="Your name"
+      >
+
     </div>
 
+
     <div class="form-group">
+
       <label>Phone</label>
-      <input id="customerPhone" type="tel" placeholder="10 digit mobile number">
+
+      <input
+        id="customerPhone"
+        type="tel"
+        placeholder="10 digit mobile number"
+      >
+
     </div>
 
+
     <div class="form-group">
+
       <label>Delivery Address</label>
-      <textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea>
+
+      <textarea
+        id="customerAddress"
+        placeholder="Enter complete delivery address"
+      ></textarea>
+
     </div>
 
+
     <div class="form-group">
+
       <label>Your Location</label>
+
       <div class="location-row">
-        <input id="locationDisplay" readonly placeholder="Location not selected">
-        <button id="locationButton">Use Location</button>
+
+        <input
+          id="locationDisplay"
+          readonly
+          placeholder="Location not selected"
+        >
+
+        <button id="locationButton">
+          Use Location
+        </button>
+
       </div>
-      <div id="deliveryInfo" style="color:#aaa;font-size:12px;margin-top:8px">
+
+      <div
+        id="deliveryInfo"
+        style="color:#aaa;font-size:12px;margin-top:8px"
+      >
         Location is required for delivery charge.
       </div>
+
     </div>
+
 
     <div id="orderSummary" class="summary"></div>
 
+
     <div class="form-group">
+
       <label>Payment Method</label>
+
       <div class="payment-options">
-        <button id="codButton" class="payment-option active">Cash on Delivery</button>
-        <button id="onlineButton" class="payment-option">Online Payment</button>
+
+        <button
+          id="codButton"
+          class="payment-option active"
+        >
+          Cash on Delivery
+        </button>
+
+        <button
+          id="onlineButton"
+          class="payment-option"
+        >
+          Online Payment
+        </button>
+
       </div>
-      <div id="paymentWarning" class="warning hidden">
+
+      <div
+        id="paymentWarning"
+        class="warning hidden"
+      >
         Online payment is currently selected.
       </div>
+
     </div>
 
-    <button id="placeOrderButton" class="primary" disabled>
+
+    <button
+      id="placeOrderButton"
+      class="primary"
+      disabled
+    >
       Place Order
     </button>
 
   </div>
+
 </div>
+
 
 <script type="module">
 
@@ -607,40 +805,66 @@ import {
   onValue,
   push,
   set,
-  update,
   query,
   orderByChild,
   equalTo
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import {
   getAuth,
   signInAnonymously,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain: "the-queen-fast-food.firebaseapp.com",
-  databaseURL: "https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId: "the-queen-fast-food",
-  storageBucket: "the-queen-fast-food.firebasestorage.app",
-  messagingSenderId: "435721389652",
-  appId: "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId: "G-Q1YCK636KJ"
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
 };
 
+
 const app = initializeApp(firebaseConfig);
+
 const db = getDatabase(app);
+
 const auth = getAuth(app);
 
 
-/* -------------------------
-   DEFAULT SETTINGS
-------------------------- */
+/* =====================================================
+   DEFAULT MENU
+===================================================== */
 
 const DEFAULT_MENU = [
+
   {
     id:"veg_chowmin",
     name:"Veg Chowmin",
@@ -648,6 +872,7 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   },
+
   {
     id:"veg_roll",
     name:"Veg Roll",
@@ -655,6 +880,7 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   },
+
   {
     id:"chicken_chowmin",
     name:"Chicken Chowmin",
@@ -662,6 +888,7 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   },
+
   {
     id:"chicken_roll",
     name:"Chicken Roll",
@@ -669,6 +896,7 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   },
+
   {
     id:"chicken_pakoda",
     name:"Chicken Pakoda",
@@ -676,6 +904,7 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   },
+
   {
     id:"chilli_chicken",
     name:"Chilli Chicken",
@@ -683,6 +912,7 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   },
+
   {
     id:"veg_biriyani",
     name:"Veg Biriyani",
@@ -690,6 +920,7 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   },
+
   {
     id:"chicken_dum_biriyani",
     name:"Chicken Dum Biriyani",
@@ -697,116 +928,275 @@ const DEFAULT_MENU = [
     image:"",
     available:true
   }
+
 ];
 
-const RESTAURANT_LAT = 20.216780359694468;
-const RESTAURANT_LNG = 86.36464363454978;
+
+const RESTAURANT_LAT =
+  20.216780359694468;
+
+const RESTAURANT_LNG =
+  86.36464363454978;
+
 const DEFAULT_DELIVERY_RATE = 6;
-const WHATSAPP_DEFAULT = "9090220791";
+
+const WHATSAPP_DEFAULT =
+  "9090220791";
+
 
 let currentUser = null;
+
 let shopSettings = {};
+
 let cart = [];
+
 let deliveryDistance = null;
+
 let customerLat = null;
+
 let customerLng = null;
+
 let selectedPaymentMethod = "COD";
 
 
-/* -------------------------
+/* =====================================================
    AUTH
-------------------------- */
+   IMPORTANT FIX:
+   Wait until anonymous authentication is actually ready.
+===================================================== */
+
+let authReadyPromise = null;
+
+
+function waitForAuthState(){
+
+  if(auth.currentUser){
+
+    currentUser = auth.currentUser;
+
+    return Promise.resolve(currentUser);
+
+  }
+
+
+  if(authReadyPromise){
+
+    return authReadyPromise;
+
+  }
+
+
+  authReadyPromise =
+    new Promise(resolve=>{
+
+      const unsubscribe =
+        onAuthStateChanged(
+          auth,
+          user=>{
+
+            if(user){
+
+              currentUser = user;
+
+              unsubscribe();
+
+              resolve(user);
+
+            }
+
+          }
+        );
+
+    });
+
+
+  return authReadyPromise;
+
+}
+
 
 async function startCustomerAuth(){
 
   try{
 
     if(auth.currentUser){
-      currentUser = auth.currentUser;
-      return;
+
+      currentUser =
+        auth.currentUser;
+
+      return currentUser;
+
     }
 
-    const result = await signInAnonymously(auth);
-    currentUser = result.user;
+
+    const result =
+      await signInAnonymously(auth);
+
+
+    currentUser =
+      result.user;
+
+
+    console.log(
+      "Customer authenticated:",
+      currentUser.uid
+    );
+
+
+    return currentUser;
+
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "AUTH ERROR:",
+      error
+    );
+
+
+    currentUser = null;
+
 
     alert(
-      "Unable to connect securely to the ordering system. Please refresh the page."
+      "Secure connection failed.\n\n" +
+      "Code: " +
+      (error.code || "unknown") +
+      "\n\n" +
+      "Message: " +
+      (error.message || "Authentication failed.")
     );
+
+
+    throw error;
 
   }
 
 }
 
-onAuthStateChanged(auth,user=>{
-  if(user){
-    currentUser = user;
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    if(user){
+
+      currentUser = user;
+
+      console.log(
+        "Auth state ready:",
+        user.uid
+      );
+
+    }
+
   }
-});
+);
 
 
-/* -------------------------
+/* =====================================================
    SETTINGS
-------------------------- */
+===================================================== */
 
 function loadSettings(){
 
-  onValue(ref(db,"settings"),snapshot=>{
+  onValue(
 
-    shopSettings = snapshot.val() || {};
+    ref(db,"settings"),
 
-    renderWebsiteMode();
-    renderShopStatus();
-    renderMenu();
+    snapshot=>{
 
-  },error=>{
+      shopSettings =
+        snapshot.val() || {};
 
-    console.error(error);
+      renderWebsiteMode();
 
-  });
+      renderShopStatus();
+
+      renderMenu();
+
+    },
+
+    error=>{
+
+      console.error(
+        "SETTINGS ERROR:",
+        error
+      );
+
+    }
+
+  );
 
 }
 
 
-/* -------------------------
+/* =====================================================
    WEBSITE MODE
-------------------------- */
+===================================================== */
 
 function renderWebsiteMode(){
 
-  const screen = document.getElementById("websiteModeScreen");
+  const screen =
+    document.getElementById(
+      "websiteModeScreen"
+    );
+
 
   const mode =
-    String(shopSettings.websiteMode || "normal").toLowerCase();
+    String(
+      shopSettings.websiteMode ||
+      "normal"
+    ).toLowerCase();
+
 
   if(mode === "normal"){
 
     screen.classList.add("hidden");
+
     return;
 
   }
 
+
   screen.classList.remove("hidden");
 
-  const icon = document.getElementById("websiteModeIcon");
-  const title = document.getElementById("websiteModeTitle");
-  const message = document.getElementById("websiteModeMessage");
+
+  const icon =
+    document.getElementById(
+      "websiteModeIcon"
+    );
+
+  const title =
+    document.getElementById(
+      "websiteModeTitle"
+    );
+
+  const message =
+    document.getElementById(
+      "websiteModeMessage"
+    );
+
 
   if(mode === "maintenance"){
 
     icon.textContent = "🛠️";
-    title.textContent = "Website Closed";
+
+    title.textContent =
+      "Website Closed";
+
     message.textContent =
       shopSettings.websiteMessage ||
       "The Queen Fast Food website is temporarily unavailable.";
 
-  }else{
+  }
+
+  else{
 
     icon.textContent = "🔧";
-    title.textContent = "Updating";
+
+    title.textContent =
+      "Updating";
+
     message.textContent =
       shopSettings.websiteMessage ||
       "The website is currently being updated. Please try again later.";
@@ -816,65 +1206,118 @@ function renderWebsiteMode(){
 }
 
 
-/* -------------------------
+/* =====================================================
    SHOP STATUS
-------------------------- */
+===================================================== */
 
 function isShopOpen(){
 
   const override =
-    String(shopSettings.statusOverride || "auto").toLowerCase();
+    String(
+      shopSettings.statusOverride ||
+      "auto"
+    ).toLowerCase();
 
-  if(override === "open") return true;
-  if(override === "closed") return false;
 
-  const now = new Date();
+  if(override === "open")
+    return true;
+
+
+  if(override === "closed")
+    return false;
+
+
+  const now =
+    new Date();
+
 
   const openTime =
-    shopSettings.openTime || "12:00";
+    shopSettings.openTime ||
+    "12:00";
+
 
   const closeTime =
-    shopSettings.closeTime || "23:00";
+    shopSettings.closeTime ||
+    "23:00";
 
-  const [oh,om] = openTime.split(":").map(Number);
-  const [ch,cm] = closeTime.split(":").map(Number);
+
+  const [oh,om] =
+    openTime
+      .split(":")
+      .map(Number);
+
+
+  const [ch,cm] =
+    closeTime
+      .split(":")
+      .map(Number);
+
 
   const current =
-    now.getHours()*60 + now.getMinutes();
+    now.getHours()*60 +
+    now.getMinutes();
+
 
   const open =
     oh*60 + om;
 
+
   const close =
     ch*60 + cm;
 
+
   if(close > open){
 
-    return current >= open && current < close;
+    return (
+      current >= open &&
+      current < close
+    );
 
   }
 
-  return current >= open || current < close;
+
+  return (
+    current >= open ||
+    current < close
+  );
 
 }
 
 
 function renderShopStatus(){
 
-  const open = isShopOpen();
+  const open =
+    isShopOpen();
 
-  const dot = document.getElementById("shopDot");
-  const text = document.getElementById("shopStatusText");
 
-  dot.className = "dot " + (open ? "open" : "closed");
+  const dot =
+    document.getElementById(
+      "shopDot"
+    );
+
+
+  const text =
+    document.getElementById(
+      "shopStatusText"
+    );
+
+
+  dot.className =
+    "dot " +
+    (open ? "open" : "closed");
+
 
   text.textContent =
     open
       ? "The Queen Fast Food is Open"
       : "The Queen Fast Food is Closed Today. Sorry for your order.";
 
+
   const orderTime =
-    document.getElementById("orderTimeValue");
+    document.getElementById(
+      "orderTimeValue"
+    );
+
 
   orderTime.textContent =
     open
@@ -884,35 +1327,48 @@ function renderShopStatus(){
 }
 
 
-/* -------------------------
+/* =====================================================
    MENU
-------------------------- */
+===================================================== */
 
 function getMenu(){
 
-  return DEFAULT_MENU.map(defaultItem=>{
+  return DEFAULT_MENU.map(
+    defaultItem=>{
 
-    const serverItem =
-      shopSettings.menu &&
-      shopSettings.menu[defaultItem.id]
-        ? shopSettings.menu[defaultItem.id]
-        : {};
+      const serverItem =
+        shopSettings.menu &&
+        shopSettings.menu[
+          defaultItem.id
+        ]
+          ? shopSettings.menu[
+              defaultItem.id
+            ]
+          : {};
 
-    return {
-      ...defaultItem,
-      ...serverItem,
-      price:Number(
-        serverItem.price !== undefined
-          ? serverItem.price
-          : defaultItem.price
-      ),
-      available:
-        serverItem.available !== undefined
-          ? serverItem.available !== false
-          : defaultItem.available
-    };
 
-  });
+      return {
+
+        ...defaultItem,
+
+        ...serverItem,
+
+        price:
+          Number(
+            serverItem.price !== undefined
+              ? serverItem.price
+              : defaultItem.price
+          ),
+
+        available:
+          serverItem.available !== undefined
+            ? serverItem.available !== false
+            : defaultItem.available
+
+      };
+
+    }
+  );
 
 }
 
@@ -920,52 +1376,84 @@ function getMenu(){
 function renderMenu(){
 
   const grid =
-    document.getElementById("menuGrid");
+    document.getElementById(
+      "menuGrid"
+    );
+
 
   grid.innerHTML = "";
+
 
   getMenu().forEach(item=>{
 
     const card =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
+
 
     card.className = "card";
 
+
     const image =
       item.image
+
         ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">`
+
         : `<div style="font-size:55px">🍽️</div>`;
+
 
     const unavailable =
       !item.available;
 
+
     const closed =
       !isShopOpen();
+
 
     const disabled =
       unavailable || closed;
 
-    let buttonText = "Add to Cart";
+
+    let buttonText =
+      "Add to Cart";
+
 
     if(unavailable){
-      buttonText = "OUT OF STOCK";
-    }else if(closed){
-      buttonText = "SHOP CLOSED";
+
+      buttonText =
+        "OUT OF STOCK";
+
     }
 
+    else if(closed){
+
+      buttonText =
+        "SHOP CLOSED";
+
+    }
+
+
     card.innerHTML = `
-      <div class="card-img">${image}</div>
+
+      <div class="card-img">
+        ${image}
+      </div>
 
       <div class="card-content">
 
-        <h3>${escapeHtml(item.name)}</h3>
+        <h3>
+          ${escapeHtml(item.name)}
+        </h3>
 
-        <div class="price">₹${item.price}</div>
+        <div class="price">
+          ₹${item.price}
+        </div>
 
         ${
           unavailable
-          ? `<div class="stock">OUT OF STOCK</div>`
-          : ""
+            ? `<div class="stock">OUT OF STOCK</div>`
+            : ""
         }
 
         <button
@@ -976,20 +1464,29 @@ function renderMenu(){
         </button>
 
       </div>
+
     `;
 
+
     const btn =
-      card.querySelector("button");
+      card.querySelector(
+        "button"
+      );
+
 
     if(!disabled){
 
-      btn.addEventListener("click",()=>{
+      btn.addEventListener(
+        "click",
+        ()=>{
 
-        addToCart(item);
+          addToCart(item);
 
-      });
+        }
+      );
 
     }
+
 
     grid.appendChild(card);
 
@@ -998,9 +1495,9 @@ function renderMenu(){
 }
 
 
-/* -------------------------
+/* =====================================================
    CART
-------------------------- */
+===================================================== */
 
 function addToCart(item){
 
@@ -1014,39 +1511,59 @@ function addToCart(item){
 
   }
 
+
   const existing =
-    cart.find(x=>x.id === item.id);
+    cart.find(
+      x=>x.id === item.id
+    );
+
 
   if(existing){
 
     existing.quantity++;
 
-  }else{
+  }
+
+  else{
 
     cart.push({
+
       id:item.id,
+
       name:item.name,
+
       price:item.price,
+
       quantity:1
+
     });
 
   }
 
+
   renderCart();
 
+
   const top =
-    document.getElementById("topCart");
+    document.getElementById(
+      "topCart"
+    );
+
 
   top.animate(
+
     [
       {transform:"scale(1)"},
       {transform:"scale(1.12)"},
       {transform:"scale(1)"}
     ],
+
     {
       duration:350
     }
+
   );
+
 
   openCart();
 
@@ -1056,126 +1573,195 @@ function addToCart(item){
 function renderCart(){
 
   const body =
-    document.getElementById("cartBody");
+    document.getElementById(
+      "cartBody"
+    );
+
 
   const count =
     cart.reduce(
-      (sum,item)=>sum+item.quantity,
+      (sum,item)=>
+        sum + item.quantity,
       0
     );
 
-  document.getElementById("cartCount")
-    .textContent = count;
+
+  document.getElementById(
+    "cartCount"
+  ).textContent = count;
+
 
   if(cart.length === 0){
 
     body.innerHTML =
-      `<p style="color:#777;text-align:center;padding:30px 0">
-        Your cart is empty.
-      </p>`;
+      `
+        <p style="color:#777;text-align:center;padding:30px 0">
+          Your cart is empty.
+        </p>
+      `;
 
-    document.getElementById("cartTotal")
-      .textContent = "0";
+
+    document.getElementById(
+      "cartTotal"
+    ).textContent = "0";
+
 
     return;
 
   }
 
+
   let subtotal = 0;
 
+
   body.innerHTML = "";
+
 
   cart.forEach(item=>{
 
     const line =
-      item.price * item.quantity;
+      item.price *
+      item.quantity;
+
 
     subtotal += line;
 
-    const div =
-      document.createElement("div");
 
-    div.className = "cart-item";
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.className =
+      "cart-item";
+
 
     div.innerHTML = `
+
       <div>
-        <b>${escapeHtml(item.name)}</b>
-        <small>₹${item.price} × ${item.quantity}</small>
+
+        <b>
+          ${escapeHtml(item.name)}
+        </b>
+
+        <small>
+          ₹${item.price} × ${item.quantity}
+        </small>
+
       </div>
 
       <div style="text-align:right">
-        <b>₹${line}</b>
+
+        <b>
+          ₹${line}
+        </b>
 
         <div class="qty">
-          <button data-action="minus">−</button>
-          <span>${item.quantity}</span>
-          <button data-action="plus">+</button>
+
+          <button data-action="minus">
+            −
+          </button>
+
+          <span>
+            ${item.quantity}
+          </span>
+
+          <button data-action="plus">
+            +
+          </button>
+
         </div>
+
       </div>
+
     `;
 
-    div.querySelector("[data-action=minus]")
-      .onclick = ()=>{
 
-        item.quantity--;
+    div.querySelector(
+      "[data-action=minus]"
+    ).onclick = ()=>{
 
-        if(item.quantity <= 0){
+      item.quantity--;
 
-          cart =
-            cart.filter(x=>x.id !== item.id);
 
-        }
+      if(item.quantity <= 0){
 
-        renderCart();
+        cart =
+          cart.filter(
+            x=>x.id !== item.id
+          );
 
-      };
+      }
 
-    div.querySelector("[data-action=plus]")
-      .onclick = ()=>{
 
-        item.quantity++;
-        renderCart();
+      renderCart();
 
-      };
+    };
+
+
+    div.querySelector(
+      "[data-action=plus]"
+    ).onclick = ()=>{
+
+      item.quantity++;
+
+      renderCart();
+
+    };
+
 
     body.appendChild(div);
 
   });
 
-  document.getElementById("cartTotal")
-    .textContent = subtotal;
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    subtotal;
 
 }
 
 
 function openCart(){
 
-  document.getElementById("cartOverlay")
-    .classList.remove("hidden");
+  document.getElementById(
+    "cartOverlay"
+  ).classList.remove(
+    "hidden"
+  );
 
 }
 
 
 function closeCart(){
 
-  document.getElementById("cartOverlay")
-    .classList.add("hidden");
+  document.getElementById(
+    "cartOverlay"
+  ).classList.add(
+    "hidden"
+  );
 
 }
 
 
-/* -------------------------
+/* =====================================================
    CHECKOUT
-------------------------- */
+===================================================== */
 
 function openCheckout(){
 
   if(cart.length === 0){
 
-    alert("Your cart is empty.");
+    alert(
+      "Your cart is empty."
+    );
+
     return;
 
   }
+
 
   if(!isShopOpen()){
 
@@ -1187,10 +1773,16 @@ function openCheckout(){
 
   }
 
+
   closeCart();
 
-  document.getElementById("checkoutOverlay")
-    .classList.remove("hidden");
+
+  document.getElementById(
+    "checkoutOverlay"
+  ).classList.remove(
+    "hidden"
+  );
+
 
   renderOrderSummary();
 
@@ -1199,8 +1791,11 @@ function openCheckout(){
 
 function closeCheckout(){
 
-  document.getElementById("checkoutOverlay")
-    .classList.add("hidden");
+  document.getElementById(
+    "checkoutOverlay"
+  ).classList.add(
+    "hidden"
+  );
 
 }
 
@@ -1211,24 +1806,36 @@ function renderOrderSummary(){
 
   let html = "";
 
+
   cart.forEach(item=>{
 
     const total =
-      item.price * item.quantity;
+      item.price *
+      item.quantity;
+
 
     subtotal += total;
 
+
     html += `
+
       <div class="summary-row">
+
         <span>
           ${escapeHtml(item.name)}
           × ${item.quantity}
         </span>
-        <span>₹${total}</span>
+
+        <span>
+          ₹${total}
+        </span>
+
       </div>
+
     `;
 
   });
+
 
   const rate =
     Number(
@@ -1236,152 +1843,246 @@ function renderOrderSummary(){
       DEFAULT_DELIVERY_RATE
     );
 
+
   let delivery = 0;
+
 
   if(deliveryDistance !== null){
 
     delivery =
       Math.ceil(
-        deliveryDistance * rate
+        deliveryDistance *
+        rate
       );
 
   }
 
+
   const grand =
-    subtotal + delivery;
+    subtotal +
+    delivery;
+
 
   html += `
+
     <hr style="border-color:#292929;margin:12px 0">
 
     <div class="summary-row">
-      <span>Item Total</span>
-      <b>₹${subtotal}</b>
+
+      <span>
+        Item Total
+      </span>
+
+      <b>
+        ₹${subtotal}
+      </b>
+
     </div>
+
 
     <div class="summary-row">
+
       <span>
+
         Delivery
+
         ${
           deliveryDistance !== null
-          ? `(${deliveryDistance.toFixed(2)} km)`
-          : ""
+            ? `(${deliveryDistance.toFixed(2)} km)`
+            : ""
         }
+
       </span>
-      <b>₹${delivery}</b>
+
+      <b>
+        ₹${delivery}
+      </b>
+
     </div>
+
 
     <div class="summary-row total">
-      <span>Total</span>
-      <span>₹${grand}</span>
+
+      <span>
+        Total
+      </span>
+
+      <span>
+        ₹${grand}
+      </span>
+
     </div>
+
   `;
 
-  document.getElementById("orderSummary")
-    .innerHTML = html;
+
+  document.getElementById(
+    "orderSummary"
+  ).innerHTML = html;
+
 
   validateCheckout();
 
 }
 
 
-/* -------------------------
+/* =====================================================
    LOCATION
-------------------------- */
+===================================================== */
 
-document.getElementById("locationButton")
-.addEventListener("click",()=>{
+document.getElementById(
+  "locationButton"
+).addEventListener(
+  "click",
+  ()=>{
 
-  if(!navigator.geolocation){
+    if(!navigator.geolocation){
 
-    alert("Location is not supported by this browser.");
-    return;
+      alert(
+        "Location is not supported by this browser."
+      );
 
-  }
+      return;
 
-  const button =
-    document.getElementById("locationButton");
+    }
 
-  button.textContent = "Getting...";
 
-  navigator.geolocation.getCurrentPosition(
+    const button =
+      document.getElementById(
+        "locationButton"
+      );
 
-    async position=>{
 
-      customerLat =
-        position.coords.latitude;
+    button.textContent =
+      "Getting...";
 
-      customerLng =
-        position.coords.longitude;
 
-      const distance =
-        haversine(
-          RESTAURANT_LAT,
-          RESTAURANT_LNG,
-          customerLat,
-          customerLng
-        );
+    navigator.geolocation.getCurrentPosition(
 
-      deliveryDistance =
-        Number(distance.toFixed(2));
+      position=>{
 
-      document.getElementById("locationDisplay")
-        .value =
-        `${deliveryDistance.toFixed(2)} km away`;
+        customerLat =
+          position.coords.latitude;
 
-      document.getElementById("deliveryInfo")
-        .textContent =
-        `Delivery charge: ₹${Math.ceil(
-          deliveryDistance *
+
+        customerLng =
+          position.coords.longitude;
+
+
+        const distance =
+          haversine(
+
+            RESTAURANT_LAT,
+            RESTAURANT_LNG,
+
+            customerLat,
+            customerLng
+
+          );
+
+
+        deliveryDistance =
+          Number(
+            distance.toFixed(2)
+          );
+
+
+        document.getElementById(
+          "locationDisplay"
+        ).value =
+          `${deliveryDistance.toFixed(2)} km away`;
+
+
+        const rate =
           Number(
             shopSettings.deliveryRate ||
             DEFAULT_DELIVERY_RATE
-          )
-        )}`;
-
-      button.textContent = "Location Ready";
-
-      renderOrderSummary();
-
-    },
-
-    error=>{
-
-      console.error(error);
-
-      button.textContent = "Use Location";
-
-      alert(
-        "Please allow location access to calculate delivery charge."
-      );
-
-    },
-
-    {
-      enableHighAccuracy:true,
-      timeout:10000,
-      maximumAge:0
-    }
-
-  );
-
-});
+          );
 
 
-function haversine(lat1,lon1,lat2,lon2){
+        document.getElementById(
+          "deliveryInfo"
+        ).textContent =
+          `Delivery charge: ₹${Math.ceil(
+            deliveryDistance * rate
+          )}`;
+
+
+        button.textContent =
+          "Location Ready";
+
+
+        renderOrderSummary();
+
+      },
+
+
+      error=>{
+
+        console.error(
+          "LOCATION ERROR:",
+          error
+        );
+
+
+        button.textContent =
+          "Use Location";
+
+
+        alert(
+          "Please allow location access to calculate delivery charge."
+        );
+
+      },
+
+
+      {
+        enableHighAccuracy:true,
+        timeout:10000,
+        maximumAge:0
+      }
+
+    );
+
+  }
+);
+
+
+function haversine(
+  lat1,
+  lon1,
+  lat2,
+  lon2
+){
 
   const R = 6371;
 
+
   const dLat =
-    (lat2-lat1)*Math.PI/180;
+    (lat2-lat1) *
+    Math.PI / 180;
+
 
   const dLon =
-    (lon2-lon1)*Math.PI/180;
+    (lon2-lon1) *
+    Math.PI / 180;
+
 
   const a =
     Math.sin(dLat/2)**2 +
-    Math.cos(lat1*Math.PI/180) *
-    Math.cos(lat2*Math.PI/180) *
-    Math.sin(dLon/2)**2;
+
+    Math.cos(
+      lat1*Math.PI/180
+    ) *
+
+    Math.cos(
+      lat2*Math.PI/180
+    ) *
+
+    Math.sin(
+      dLon/2
+    )**2;
+
 
   return R * 2 *
     Math.atan2(
@@ -1392,75 +2093,126 @@ function haversine(lat1,lon1,lat2,lon2){
 }
 
 
-/* -------------------------
+/* =====================================================
    PAYMENT
-------------------------- */
+===================================================== */
 
-document.getElementById("codButton")
-.addEventListener("click",()=>{
+document.getElementById(
+  "codButton"
+).addEventListener(
+  "click",
+  ()=>{
 
-  selectedPaymentMethod = "COD";
-
-  document.getElementById("codButton")
-    .classList.add("active");
-
-  document.getElementById("onlineButton")
-    .classList.remove("active");
-
-  document.getElementById("paymentWarning")
-    .classList.add("hidden");
-
-});
+    selectedPaymentMethod =
+      "COD";
 
 
-document.getElementById("onlineButton")
-.addEventListener("click",()=>{
-
-  selectedPaymentMethod = "ONLINE";
-
-  document.getElementById("onlineButton")
-    .classList.add("active");
-
-  document.getElementById("codButton")
-    .classList.remove("active");
-
-  document.getElementById("paymentWarning")
-    .classList.remove("hidden");
-
-});
+    document.getElementById(
+      "codButton"
+    ).classList.add(
+      "active"
+    );
 
 
-/* -------------------------
+    document.getElementById(
+      "onlineButton"
+    ).classList.remove(
+      "active"
+    );
+
+
+    document.getElementById(
+      "paymentWarning"
+    ).classList.add(
+      "hidden"
+    );
+
+  }
+);
+
+
+document.getElementById(
+  "onlineButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    selectedPaymentMethod =
+      "ONLINE";
+
+
+    document.getElementById(
+      "onlineButton"
+    ).classList.add(
+      "active"
+    );
+
+
+    document.getElementById(
+      "codButton"
+    ).classList.remove(
+      "active"
+    );
+
+
+    document.getElementById(
+      "paymentWarning"
+    ).classList.remove(
+      "hidden"
+    );
+
+  }
+);
+
+
+/* =====================================================
    VALIDATION
-------------------------- */
+===================================================== */
 
 function validateCheckout(){
 
   const name =
-    document.getElementById("customerName")
-      .value.trim();
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
 
   const phone =
-    document.getElementById("customerPhone")
-      .value.trim();
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
 
   const address =
-    document.getElementById("customerAddress")
-      .value.trim();
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
 
   const validPhone =
-    /^[6-9]\d{9}$/.test(phone);
+    /^[6-9]\d{9}$/.test(
+      phone
+    );
+
 
   const valid =
     name.length >= 2 &&
-    validPhone &&
-    address.length >= 5 &&
-    deliveryDistance !== null &&
-    cart.length > 0 &&
-    currentUser;
 
-  document.getElementById("placeOrderButton")
-    .disabled = !valid;
+    validPhone &&
+
+    address.length >= 5 &&
+
+    deliveryDistance !== null &&
+
+    cart.length > 0 &&
+
+    !!currentUser;
+
+
+  document.getElementById(
+    "placeOrderButton"
+  ).disabled =
+    !valid;
 
 }
 
@@ -1471,80 +2223,215 @@ function validateCheckout(){
   "customerAddress"
 ].forEach(id=>{
 
-  document.getElementById(id)
-    .addEventListener("input",validateCheckout);
+  document.getElementById(
+    id
+  ).addEventListener(
+    "input",
+    validateCheckout
+  );
 
 });
 
 
-/* -------------------------
+/* =====================================================
    PLACE ORDER
-------------------------- */
+   FIXED AUTH + BETTER ERROR
+===================================================== */
 
-document.getElementById("placeOrderButton")
-.addEventListener("click",placeOrder);
+document.getElementById(
+  "placeOrderButton"
+).addEventListener(
+  "click",
+  placeOrder
+);
 
 
 async function placeOrder(){
 
-  if(!currentUser){
-
-    alert("Secure connection is not ready. Please wait.");
-    return;
-
-  }
-
-  if(!isShopOpen()){
-
-    alert(
-      "The Queen Fast Food is Closed Today. Sorry for your order."
+  const button =
+    document.getElementById(
+      "placeOrderButton"
     );
 
-    return;
-
-  }
-
-  validateCheckout();
-
-  if(
-    document.getElementById("placeOrderButton")
-      .disabled
-  ){
-
-    alert("Please complete all required details.");
-    return;
-
-  }
-
-  const button =
-    document.getElementById("placeOrderButton");
-
-  button.disabled = true;
-  button.textContent = "Placing Order...";
 
   try{
 
-    /*
-      IMPORTANT:
-      No shared orderSerial transaction here.
-      Firebase push() creates a unique database key.
-    */
+    /* -----------------------------------------
+       Make absolutely sure customer is logged in
+    ----------------------------------------- */
+
+    let user =
+      auth.currentUser;
+
+
+    if(!user){
+
+      button.disabled = true;
+
+      button.textContent =
+        "Connecting...";
+
+
+      user =
+        await startCustomerAuth();
+
+    }
+
+
+    if(!user){
+
+      throw new Error(
+        "Customer authentication failed."
+      );
+
+    }
+
+
+    /* Always use the current authenticated user */
+
+    currentUser =
+      user;
+
+
+    console.log(
+      "ORDER USER UID:",
+      currentUser.uid
+    );
+
+
+    /* -----------------------------------------
+       Shop check
+    ----------------------------------------- */
+
+    if(!isShopOpen()){
+
+      alert(
+        "The Queen Fast Food is Closed Today. Sorry for your order."
+      );
+
+      return;
+
+    }
+
+
+    /* -----------------------------------------
+       Validation
+    ----------------------------------------- */
+
+    validateCheckout();
+
+
+    if(
+      button.disabled &&
+      !currentUser
+    ){
+
+      alert(
+        "Please complete all required details."
+      );
+
+      return;
+
+    }
+
+
+    const name =
+      document.getElementById(
+        "customerName"
+      ).value.trim();
+
+
+    const phone =
+      document.getElementById(
+        "customerPhone"
+      ).value.trim();
+
+
+    const address =
+      document.getElementById(
+        "customerAddress"
+      ).value.trim();
+
+
+    const validPhone =
+      /^[6-9]\d{9}$/.test(
+        phone
+      );
+
+
+    if(
+
+      name.length < 2 ||
+
+      !validPhone ||
+
+      address.length < 5 ||
+
+      deliveryDistance === null ||
+
+      cart.length === 0
+
+    ){
+
+      alert(
+        "Please complete all required details."
+      );
+
+      return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+      "Placing Order...";
+
+
+    /* -----------------------------------------
+       Create Firebase order key
+    ----------------------------------------- */
 
     const orderRef =
-      push(ref(db,"orders"));
+      push(
+        ref(db,"orders")
+      );
+
 
     const firebaseKey =
       orderRef.key;
 
+
+    if(!firebaseKey){
+
+      throw new Error(
+        "Firebase could not create order key."
+      );
+
+    }
+
+
     const orderId =
-      createOrderId(firebaseKey);
+      createOrderId(
+        firebaseKey
+      );
+
+
+    /* -----------------------------------------
+       Calculate totals
+    ----------------------------------------- */
 
     let subtotal = 0;
 
+
     cart.forEach(item=>{
+
       subtotal +=
-        item.price * item.quantity;
+        Number(item.price) *
+        Number(item.quantity);
+
     });
+
 
     const rate =
       Number(
@@ -1552,63 +2439,86 @@ async function placeOrder(){
         DEFAULT_DELIVERY_RATE
       );
 
+
     const deliveryCharge =
       Math.ceil(
-        deliveryDistance * rate
+        Number(deliveryDistance) *
+        rate
       );
 
+
     const grandTotal =
-      subtotal + deliveryCharge;
+      subtotal +
+      deliveryCharge;
 
-    const name =
-      document.getElementById("customerName")
-        .value.trim();
 
-    const phone =
-      document.getElementById("customerPhone")
-        .value.trim();
+    const now =
+      Date.now();
 
-    const address =
-      document.getElementById("customerAddress")
-        .value.trim();
 
-    const now = Date.now();
+    /* -----------------------------------------
+       IMPORTANT:
+       ownerUid = authenticated anonymous UID
+    ----------------------------------------- */
 
     const orderData = {
 
-      ownerUid: currentUser.uid,
+      ownerUid:
+        currentUser.uid,
 
-      orderId: orderId,
+      orderId:
+        orderId,
 
-      firebaseOrderKey: firebaseKey,
+      firebaseOrderKey:
+        firebaseKey,
 
-      customerName: name,
+      customerName:
+        name,
 
-      phone: phone,
+      phone:
+        phone,
 
-      address: address,
+      address:
+        address,
 
       paymentMethod:
         selectedPaymentMethod,
 
       items:
         cart.map(item=>({
-          id:item.id,
-          name:item.name,
-          price:Number(item.price),
-          quantity:Number(item.quantity)
+
+          id:
+            item.id,
+
+          name:
+            item.name,
+
+          price:
+            Number(item.price),
+
+          quantity:
+            Number(item.quantity)
+
         })),
 
-      subtotal:Number(subtotal),
+      subtotal:
+        Number(subtotal),
 
       deliveryDistance:
-        Number(deliveryDistance.toFixed(2)),
+        Number(
+          Number(deliveryDistance)
+            .toFixed(2)
+        ),
 
       deliveryCharge:
-        Number(deliveryCharge),
+        Number(
+          deliveryCharge
+        ),
 
       total:
-        Number(grandTotal),
+        Number(
+          grandTotal
+        ),
 
       customerLat:
         Number(customerLat),
@@ -1616,117 +2526,246 @@ async function placeOrder(){
       customerLng:
         Number(customerLng),
 
-      status:"received",
+      status:
+        "received",
 
-      createdAt:now,
+      createdAt:
+        now,
 
-      updatedAt:now
+      updatedAt:
+        now
 
     };
 
-    await set(orderRef,orderData);
+
+    console.log(
+      "ORDER DATA:",
+      orderData
+    );
+
+
+    /* -----------------------------------------
+       FIREBASE WRITE
+    ----------------------------------------- */
+
+    await set(
+      orderRef,
+      orderData
+    );
+
+
+    console.log(
+      "ORDER SAVED SUCCESSFULLY:",
+      firebaseKey
+    );
+
+
+    /* -----------------------------------------
+       Save locally
+    ----------------------------------------- */
 
     localStorage.setItem(
       "lastOrderId",
       orderId
     );
 
+
     localStorage.setItem(
       "lastOrderFirebaseKey",
       firebaseKey
     );
 
+
+    /* -----------------------------------------
+       WhatsApp
+    ----------------------------------------- */
+
     const whatsapp =
       normalizeWhatsApp(
+
         shopSettings.whatsappNumber ||
         WHATSAPP_DEFAULT
+
       );
 
+
     const message =
-      buildWhatsAppMessage(orderData);
+      buildWhatsAppMessage(
+        orderData
+      );
+
 
     window.open(
+
       `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`,
+
       "_blank"
+
     );
+
+
+    /* -----------------------------------------
+       Clear cart
+    ----------------------------------------- */
 
     cart = [];
 
+
     renderCart();
+
 
     closeCheckout();
 
-    document.getElementById("thankYouOverlay")
-      .classList.remove("hidden");
+
+    document.getElementById(
+      "thankYouOverlay"
+    ).classList.remove(
+      "hidden"
+    );
+
 
     setTimeout(()=>{
 
-      document.getElementById("thankYouOverlay")
-        .classList.add("hidden");
+      document.getElementById(
+        "thankYouOverlay"
+      ).classList.add(
+        "hidden"
+      );
 
-      document.getElementById("trackInput")
-        .value = orderId;
+
+      document.getElementById(
+        "trackInput"
+      ).value =
+        orderId;
+
 
       trackOrder();
 
+
       window.scrollTo({
-        top:document.body.scrollHeight,
-        behavior:"smooth"
+
+        top:
+          document.body.scrollHeight,
+
+        behavior:
+          "smooth"
+
       });
 
     },1800);
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "ORDER ERROR:",
+      error
+    );
+
+
+    /*
+      IMPORTANT:
+      Now exact Firebase error will be visible.
+    */
+
+    const code =
+      error &&
+      error.code
+        ? error.code
+        : "unknown";
+
+
+    const message =
+      error &&
+      error.message
+        ? error.message
+        : String(error);
+
 
     alert(
-      "Order could not be placed. Please try again."
+
+      "Order could not be placed.\n\n" +
+
+      "Error Code: " +
+      code +
+
+      "\n\n" +
+
+      "Message: " +
+      message
+
     );
+
 
   }finally{
 
-    button.disabled = false;
-    button.textContent = "Place Order";
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "Place Order";
 
   }
 
 }
 
 
-/*
-  Push keys are generated server-side by Firebase.
-  Display ID is derived from that unique key.
-*/
+/* =====================================================
+   ORDER ID
+===================================================== */
+
 function createOrderId(key){
 
   const clean =
     String(key || "")
-      .replace(/[^A-Za-z0-9]/g,"")
+      .replace(
+        /[^A-Za-z0-9]/g,
+        ""
+      )
       .toUpperCase();
 
-  return "TQF2026-" +
-    clean.slice(-8);
+
+  return (
+    "TQF2026-" +
+    clean.slice(-8)
+  );
 
 }
 
 
-function normalizeWhatsApp(number){
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function normalizeWhatsApp(
+  number
+){
 
   let n =
     String(number)
-      .replace(/\D/g,"");
+      .replace(
+        /\D/g,
+        ""
+      );
+
 
   if(n.length === 10){
-    n = "91" + n;
+
+    n =
+      "91" + n;
+
   }
+
 
   return n;
 
 }
 
 
-function buildWhatsAppMessage(order){
+function buildWhatsAppMessage(
+  order
+){
 
   let text =
 `*The Queen Fast Food - New Order*
@@ -1739,12 +2778,14 @@ Address: ${order.address}
 
 Items:`;
 
+
   order.items.forEach(item=>{
 
     text +=
 `\n${item.name} × ${item.quantity} = ₹${item.price * item.quantity}`;
 
   });
+
 
   text +=
 `\n\nItem Total: ₹${order.subtotal}
@@ -1753,28 +2794,37 @@ Total: ₹${order.total}
 
 Payment: ${order.paymentMethod}`;
 
+
   return text;
 
 }
 
 
-/* -------------------------
-   SECURE TRACKING
-------------------------- */
+/* =====================================================
+   TRACK ORDER
+===================================================== */
 
-document.getElementById("trackButton")
-.addEventListener("click",trackOrder);
+document.getElementById(
+  "trackButton"
+).addEventListener(
+  "click",
+  trackOrder
+);
 
 
 async function trackOrder(){
 
   const input =
-    document.getElementById("trackInput")
-      .value.trim()
-      .toUpperCase();
+    document.getElementById(
+      "trackInput"
+    ).value.trim().toUpperCase();
+
 
   const result =
-    document.getElementById("trackResult");
+    document.getElementById(
+      "trackResult"
+    );
+
 
   if(!input){
 
@@ -1785,221 +2835,384 @@ async function trackOrder(){
 
   }
 
-  if(!currentUser){
-
-    result.innerHTML =
-      `<p style="color:#aaa">Connecting securely...</p>`;
-
-    await startCustomerAuth();
-
-  }
 
   try{
 
-    /*
-      IMPORTANT:
-      This query downloads ONLY this anonymous user's orders.
-      It does NOT read /orders globally.
-    */
+    if(!auth.currentUser){
+
+      result.innerHTML =
+        `<p style="color:#aaa">Connecting securely...</p>`;
+
+      await startCustomerAuth();
+
+    }
+
+
+    currentUser =
+      auth.currentUser;
+
+
+    if(!currentUser){
+
+      throw new Error(
+        "Customer authentication is not ready."
+      );
+
+    }
+
 
     const ordersQuery =
       query(
+
         ref(db,"orders"),
-        orderByChild("ownerUid"),
-        equalTo(currentUser.uid)
+
+        orderByChild(
+          "ownerUid"
+        ),
+
+        equalTo(
+          currentUser.uid
+        )
+
       );
 
+
     onValue(
+
       ordersQuery,
+
       snapshot=>{
 
         let found = null;
 
-        snapshot.forEach(child=>{
 
-          const order =
-            child.val();
+        snapshot.forEach(
+          child=>{
 
-          if(
-            String(order.orderId || "")
-              .toUpperCase() === input
-          ){
+            const order =
+              child.val();
 
-            found = {
-              ...order,
-              firebaseKey:child.key
-            };
+
+            if(
+
+              String(
+                order.orderId || ""
+              ).toUpperCase() ===
+              input
+
+            ){
+
+              found = {
+
+                ...order,
+
+                firebaseKey:
+                  child.key
+
+              };
+
+            }
 
           }
+        );
 
-        });
 
         if(!found){
 
           result.innerHTML =
-            `<p style="color:#888">
-              Order not found in your orders.
-            </p>`;
+            `
+              <p style="color:#888">
+                Order not found in your orders.
+              </p>
+            `;
 
           return;
 
         }
 
-        renderTrackedOrder(found);
+
+        renderTrackedOrder(
+          found
+        );
 
       },
+
+
       error=>{
 
-        console.error(error);
+        console.error(
+          "TRACK ERROR:",
+          error
+        );
+
 
         result.innerHTML =
-          `<p style="color:#ff625b">
-            Unable to track order. Please try again.
-          </p>`;
+          `
+            <p style="color:#ff625b">
+              Unable to track order.
+              Please try again.
+            </p>
+          `;
 
       },
+
+
       {
         onlyOnce:true
       }
+
     );
+
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "TRACK ERROR:",
+      error
+    );
+
 
     result.innerHTML =
-      `<p style="color:#ff625b">
-        Unable to track order.
-      </p>`;
+      `
+        <p style="color:#ff625b">
+          Unable to track order.
+        </p>
+      `;
 
   }
 
 }
 
 
-function renderTrackedOrder(order){
+/* =====================================================
+   TRACKED ORDER UI
+===================================================== */
+
+function renderTrackedOrder(
+  order
+){
 
   const result =
-    document.getElementById("trackResult");
+    document.getElementById(
+      "trackResult"
+    );
+
 
   const status =
-    String(order.status || "received")
-      .toLowerCase();
+    String(
+      order.status ||
+      "received"
+    ).toLowerCase();
+
 
   const steps = [
+
     ["received","Received"],
+
     ["confirmed","Confirmed"],
+
     ["preparing","Preparing"],
+
     ["out_for_delivery","Out for Delivery"],
+
     ["delivered","Delivered"]
+
   ];
+
 
   const currentIndex =
     steps.findIndex(
       x=>x[0] === status
     );
 
+
   let timeline = "";
 
-  steps.forEach((step,index)=>{
 
-    const active =
-      currentIndex >= index;
+  steps.forEach(
+    (step,index)=>{
 
-    timeline += `
-      <div class="step ${active ? "active" : ""}">
-        <div class="step-line"></div>
-        ${step[1]}
-      </div>
-    `;
+      const active =
+        currentIndex >= index;
 
-  });
+
+      timeline += `
+
+        <div class="step ${active ? "active" : ""}">
+
+          <div class="step-line"></div>
+
+          ${step[1]}
+
+        </div>
+
+      `;
+
+    }
+  );
+
 
   let items = "";
 
-  (order.items || []).forEach(item=>{
 
-    items += `
-      <div class="summary-row">
-        <span>
-          ${escapeHtml(item.name)} × ${item.quantity}
-        </span>
-        <span>₹${item.price * item.quantity}</span>
-      </div>
-    `;
+  (order.items || [])
+    .forEach(item=>{
 
-  });
+      items += `
+
+        <div class="summary-row">
+
+          <span>
+            ${escapeHtml(item.name)}
+            × ${item.quantity}
+          </span>
+
+          <span>
+            ₹${item.price * item.quantity}
+          </span>
+
+        </div>
+
+      `;
+
+    });
+
 
   const canConfirm =
-    status === "out_for_delivery";
+    status ===
+    "out_for_delivery";
+
 
   result.innerHTML = `
+
     <div class="order-card">
 
       <div class="order-head">
 
         <div>
+
           <div class="order-id">
-            ${escapeHtml(order.orderId)}
+
+            ${escapeHtml(
+              order.orderId
+            )}
+
           </div>
 
           <small style="color:#777">
-            ${new Date(order.createdAt || Date.now()).toLocaleString()}
+
+            ${new Date(
+              order.createdAt ||
+              Date.now()
+            ).toLocaleString()}
+
           </small>
+
         </div>
+
 
         <div class="order-status">
-          ${escapeHtml(formatStatus(status))}
+
+          ${escapeHtml(
+            formatStatus(status)
+          )}
+
         </div>
 
       </div>
 
+
       <div class="timeline">
+
         ${timeline}
+
       </div>
+
 
       <div style="margin-top:20px">
+
         ${items}
+
       </div>
 
-      <hr style="border-color:#292929;margin:15px 0">
+
+      <hr
+        style="border-color:#292929;margin:15px 0"
+      >
+
 
       <div class="summary-row">
-        <span>Item Total</span>
-        <b>₹${order.subtotal || 0}</b>
+
+        <span>
+          Item Total
+        </span>
+
+        <b>
+          ₹${order.subtotal || 0}
+        </b>
+
       </div>
 
+
       <div class="summary-row">
-        <span>Delivery</span>
-        <b>₹${order.deliveryCharge || 0}</b>
+
+        <span>
+          Delivery
+        </span>
+
+        <b>
+          ₹${order.deliveryCharge || 0}
+        </b>
+
       </div>
+
 
       <div class="summary-row total">
-        <span>Total</span>
-        <span>₹${order.total || 0}</span>
+
+        <span>
+          Total
+        </span>
+
+        <span>
+          ₹${order.total || 0}
+        </span>
+
       </div>
+
 
       ${
         canConfirm
-        ? `
-          <button
-            id="deliveredButton"
-            class="primary"
-          >
-            Confirm Delivered
-          </button>
-        `
-        : ""
+
+          ? `
+
+            <button
+              id="deliveredButton"
+              class="primary"
+            >
+              Confirm Delivered
+            </button>
+
+          `
+
+          : ""
       }
 
     </div>
+
   `;
+
 
   if(canConfirm){
 
-    document.getElementById("deliveredButton")
-      .onclick = ()=>{
-        customerConfirmDelivered(order);
+    document.getElementById(
+      "deliveredButton"
+    ).onclick =
+      ()=>{
+
+        customerConfirmDelivered(
+          order
+        );
+
       };
 
   }
@@ -2007,23 +3220,42 @@ function renderTrackedOrder(order){
 }
 
 
-async function customerConfirmDelivered(order){
+/* =====================================================
+   CUSTOMER CONFIRM DELIVERY
+===================================================== */
 
-  if(!currentUser){
+async function customerConfirmDelivered(
+  order
+){
 
-    alert("Secure connection is not ready.");
+  if(!auth.currentUser){
+
+    alert(
+      "Secure connection is not ready."
+    );
+
     return;
 
   }
+
+
+  currentUser =
+    auth.currentUser;
+
 
   if(
-    order.ownerUid !== currentUser.uid
+    order.ownerUid !==
+    currentUser.uid
   ){
 
-    alert("This order does not belong to you.");
+    alert(
+      "This order does not belong to you."
+    );
+
     return;
 
   }
+
 
   if(
     String(order.status).toLowerCase() !==
@@ -2034,31 +3266,44 @@ async function customerConfirmDelivered(order){
 
   }
 
+
   try{
 
-    /*
-      Only the /status child is customer-writable
-      under the Firebase Rules.
-    */
-
     await set(
+
       ref(
         db,
         `orders/${order.firebaseKey}/status`
       ),
+
       "delivered"
+
     );
 
-    alert("Order marked as delivered.");
+
+    alert(
+      "Order marked as delivered."
+    );
+
 
     trackOrder();
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "DELIVERY CONFIRM ERROR:",
+      error
+    );
+
 
     alert(
-      "Could not confirm delivery."
+
+      "Could not confirm delivery.\n\n" +
+
+      (error.message ||
+        error)
+
     );
 
   }
@@ -2066,73 +3311,154 @@ async function customerConfirmDelivered(order){
 }
 
 
-/* -------------------------
+/* =====================================================
    HELPERS
-------------------------- */
+===================================================== */
 
-function formatStatus(status){
+function formatStatus(
+  status
+){
 
   const map = {
 
-    received:"Received",
-    confirmed:"Confirmed",
-    preparing:"Preparing",
-    out_for_delivery:"Out for Delivery",
-    delivered:"Delivered",
-    cancelled:"Cancelled"
+    received:
+      "Received",
+
+    confirmed:
+      "Confirmed",
+
+    preparing:
+      "Preparing",
+
+    out_for_delivery:
+      "Out for Delivery",
+
+    delivered:
+      "Delivered",
+
+    cancelled:
+      "Cancelled"
 
   };
 
-  return map[status] || status;
+
+  return (
+    map[status] ||
+    status
+  );
 
 }
 
 
-function escapeHtml(value){
+function escapeHtml(
+  value
+){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-/* -------------------------
+/* =====================================================
    BUTTONS
-------------------------- */
+===================================================== */
 
-document.getElementById("topCart")
-  .onclick = openCart;
-
-document.getElementById("closeCart")
-  .onclick = closeCart;
-
-document.getElementById("checkoutButton")
-  .onclick = openCheckout;
-
-document.getElementById("closeCheckout")
-  .onclick = closeCheckout;
+document.getElementById(
+  "topCart"
+).onclick =
+  openCart;
 
 
-/* -------------------------
+document.getElementById(
+  "closeCart"
+).onclick =
+  closeCart;
+
+
+document.getElementById(
+  "checkoutButton"
+).onclick =
+  openCheckout;
+
+
+document.getElementById(
+  "closeCheckout"
+).onclick =
+  closeCheckout;
+
+
+/* =====================================================
    START
-------------------------- */
+===================================================== */
 
 (async function(){
 
-  await startCustomerAuth();
+  try{
 
-  loadSettings();
+    /*
+      IMPORTANT:
+      Authentication must finish before
+      customer can place an order.
+    */
 
-  renderCart();
+    await startCustomerAuth();
 
-  setInterval(
-    renderShopStatus,
-    30000
-  );
+
+    console.log(
+      "CUSTOMER READY:",
+      auth.currentUser
+        ? auth.currentUser.uid
+        : "NO USER"
+    );
+
+
+    loadSettings();
+
+
+    renderCart();
+
+
+    setInterval(
+      renderShopStatus,
+      30000
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "STARTUP ERROR:",
+      error
+    );
+
+  }
 
 })();
 
