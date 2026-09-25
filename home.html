@@ -466,6 +466,33 @@ header{
 }
 
 
+/* DELIVERED BUTTON */
+
+.delivered-confirm-btn{
+  width:100%;
+  height:43px;
+  margin-top:18px;
+  border:0;
+  border-radius:9px;
+  background:var(--green);
+  color:#000;
+  font-size:11px;
+  font-weight:800;
+  box-shadow:
+    0 0 18px rgba(37,211,102,.15);
+}
+
+.delivered-confirm-btn:active{
+  transform:scale(.98);
+}
+
+.delivered-confirm-btn:disabled{
+  background:#333;
+  color:#777;
+  cursor:not-allowed;
+}
+
+
 /* TIMELINE */
 
 .timeline{
@@ -1301,7 +1328,8 @@ import {
   ref,
   onValue,
   push,
-  set
+  set,
+  update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
@@ -1486,8 +1514,6 @@ function renderWebsiteMode(settings){
     );
 
 
-  /* NORMAL */
-
   if(mode === "normal"){
 
     screen.style.display =
@@ -1500,8 +1526,6 @@ function renderWebsiteMode(settings){
 
   }
 
-
-  /* UPDATING */
 
   if(mode === "updating"){
 
@@ -1527,8 +1551,6 @@ function renderWebsiteMode(settings){
   }
 
 
-  /* MAINTENANCE */
-
   if(mode === "maintenance"){
 
     icon.textContent =
@@ -1553,8 +1575,6 @@ function renderWebsiteMode(settings){
   }
 
 
-  /* UNKNOWN MODE = NORMAL */
-
   screen.style.display =
     "none";
 
@@ -1575,48 +1595,13 @@ onValue(
     shopSettings =
       snapshot.val() || {};
 
-
-    /*
-      WEBSITE MODE
-      This runs every time admin
-      changes the setting.
-    */
-
     renderWebsiteMode(
       shopSettings
     );
 
-
-    /*
-      SHOP STATUS
-
-      IMPORTANT:
-      Admin controls the shop using:
-
-      settings/statusOverride
-
-      auto   = time based
-      open   = force open
-      closed = force closed
-
-      Do NOT use old shopOpen
-      setting here.
-    */
-
     renderShopStatus();
 
-
-    /*
-      ORDER TIME
-      ADMIN CONTROLLED
-    */
-
     renderOrderTime();
-
-
-    /*
-      MENU
-    */
 
     loadMenu();
 
@@ -1628,21 +1613,9 @@ onValue(
       error
     );
 
-
-    /*
-      If Firebase settings cannot
-      be read, keep normal website.
-    */
-
     renderWebsiteMode({
       websiteMode:"normal"
     });
-
-
-    /*
-      Default order time
-      if settings cannot be read.
-    */
 
     shopSettings = {
       openingTime:"12:00",
@@ -1651,7 +1624,6 @@ onValue(
       closeTime:"21:30",
       statusOverride:"auto"
     };
-
 
     renderOrderTime();
 
@@ -1665,7 +1637,6 @@ onValue(
 
 /* =========================================
    ORDER TIME
-   ADMIN CONTROLLED
 ========================================= */
 
 function renderOrderTime(){
@@ -1675,35 +1646,19 @@ function renderOrderTime(){
       "orderTimeValue"
     );
 
-
   if(!timeValue){
     return;
   }
-
-
-  /*
-    Admin current code uses:
-
-    openingTime
-    closingTime
-
-    Older settings may use:
-
-    openTime
-    closeTime
-  */
 
   const openTime =
     shopSettings.openingTime ||
     shopSettings.openTime ||
     "12:00";
 
-
   const closeTime =
     shopSettings.closingTime ||
     shopSettings.closeTime ||
     "21:30";
-
 
   timeValue.textContent =
     `${formatTime(openTime)} – ${formatTime(closeTime)}`;
@@ -1721,28 +1676,22 @@ function formatTime(time){
     return "";
   }
 
-
   const parts =
     String(time).split(":");
-
 
   let hour =
     Number(parts[0]);
 
-
   const minute =
     parts[1] || "00";
-
 
   const ampm =
     hour >= 12
       ? "PM"
       : "AM";
 
-
   hour =
     hour % 12 || 12;
-
 
   return `${hour}:${minute} ${ampm}`;
 
@@ -1758,14 +1707,12 @@ function loadMenu(){
   const menuSettings =
     shopSettings.menu || {};
 
-
   menu =
     defaultMenu.map(
       item => {
 
         const saved =
           menuSettings[item.id] || {};
-
 
         return {
 
@@ -1797,7 +1744,6 @@ function loadMenu(){
       }
     );
 
-
   renderMenu();
 
 }
@@ -1819,19 +1765,9 @@ function renderShopStatus(){
       "shopStatusText"
     );
 
-
   if(!dot || !text){
     return;
   }
-
-
-  /*
-    ADMIN OVERRIDE
-
-    open   = FORCE OPEN
-    closed = FORCE CLOSED
-    auto   = use opening/closing time
-  */
 
   const override =
     String(
@@ -1839,10 +1775,6 @@ function renderShopStatus(){
       "auto"
     ).toLowerCase();
 
-
-  /* =====================================
-     FORCE OPEN
-  ===================================== */
 
   if(override === "open"){
 
@@ -1861,10 +1793,6 @@ function renderShopStatus(){
   }
 
 
-  /* =====================================
-     FORCE CLOSED
-  ===================================== */
-
   if(override === "closed"){
 
     shopOpen = false;
@@ -1882,58 +1810,39 @@ function renderShopStatus(){
   }
 
 
-  /* =====================================
-     AUTO TIME MODE
-  ===================================== */
-
   const openTime =
     shopSettings.openingTime ||
     shopSettings.openTime ||
     "12:00";
-
 
   const closeTime =
     shopSettings.closingTime ||
     shopSettings.closeTime ||
     "23:00";
 
-
   const now =
     new Date();
-
 
   const currentMinutes =
     now.getHours() * 60 +
     now.getMinutes();
 
-
   const openParts =
     String(openTime).split(":");
 
-
   const closeParts =
     String(closeTime).split(":");
-
 
   const openMinutes =
     Number(openParts[0]) * 60 +
     Number(openParts[1] || 0);
 
-
   const closeMinutes =
     Number(closeParts[0]) * 60 +
     Number(closeParts[1] || 0);
 
-
   let isOpen = false;
 
-
-  /*
-    NORMAL SAME-DAY TIME
-
-    Example:
-    12:00 → 23:00
-  */
 
   if(openMinutes < closeMinutes){
 
@@ -1941,40 +1850,20 @@ function renderShopStatus(){
       currentMinutes >= openMinutes &&
       currentMinutes < closeMinutes;
 
-  }
-
-
-  /*
-    OVERNIGHT TIME
-
-    Example:
-    18:00 → 02:00
-  */
-
-  else if(openMinutes > closeMinutes){
+  }else if(openMinutes > closeMinutes){
 
     isOpen =
       currentMinutes >= openMinutes ||
       currentMinutes < closeMinutes;
 
-  }
-
-
-  /*
-    SAME OPEN/CLOSE TIME
-    Treat as CLOSED.
-  */
-
-  else{
+  }else{
 
     isOpen = false;
 
   }
 
-
   shopOpen =
     isOpen;
-
 
   if(shopOpen){
 
@@ -1994,7 +1883,6 @@ function renderShopStatus(){
 
   }
 
-
   renderMenu();
 
 }
@@ -2003,12 +1891,6 @@ function renderShopStatus(){
 /* =========================================
    AUTO SHOP STATUS CHECK
 ========================================= */
-
-/*
-  This keeps AUTO mode correct even when
-  customer keeps the page open while the
-  opening/closing time changes.
-*/
 
 setInterval(
   () => {
@@ -2040,7 +1922,6 @@ function renderMenu(){
       "menuGrid"
     );
 
-
   grid.innerHTML =
     menu.map(
       item => {
@@ -2048,7 +1929,6 @@ function renderMenu(){
         const disabled =
           !shopOpen ||
           item.available === false;
-
 
         return `
 
@@ -2116,12 +1996,10 @@ function(id,button){
     return;
   }
 
-
   const item =
     menu.find(
       x => x.id === id
     );
-
 
   if(
     !item ||
@@ -2135,12 +2013,10 @@ function(id,button){
     return;
   }
 
-
   const existing =
     cart.find(
       x => x.id === id
     );
-
 
   if(existing){
 
@@ -2162,11 +2038,9 @@ function(id,button){
 
   }
 
-
   button.classList.add(
     "blink"
   );
-
 
   setTimeout(
     () =>
@@ -2176,17 +2050,14 @@ function(id,button){
     1000
   );
 
-
   const topCart =
     document.getElementById(
       "topCart"
     );
 
-
   topCart.classList.add(
     "blink"
   );
-
 
   setTimeout(
     () =>
@@ -2195,7 +2066,6 @@ function(id,button){
       ),
     1200
   );
-
 
   updateCart();
 
@@ -2213,9 +2083,7 @@ function updateCart(){
       "cartBody"
     );
 
-
   let total = 0;
-
 
   if(!cart.length){
 
@@ -2234,9 +2102,7 @@ function updateCart(){
             item.price *
             item.quantity;
 
-
           total += itemTotal;
-
 
           return `
 
@@ -2253,7 +2119,6 @@ function updateCart(){
                 </div>
 
               </div>
-
 
               <div class="qty-control">
 
@@ -2284,12 +2149,10 @@ function updateCart(){
 
   }
 
-
   document.getElementById(
     "cartTotal"
   ).textContent =
     "₹"+total;
-
 
   const count =
     cart.reduce(
@@ -2297,7 +2160,6 @@ function updateCart(){
         sum + item.quantity,
       0
     );
-
 
   document.getElementById(
     "cartCount"
@@ -2318,10 +2180,8 @@ function(index,value){
     return;
   }
 
-
   cart[index].quantity +=
     value;
-
 
   if(cart[index].quantity <= 0){
 
@@ -2331,7 +2191,6 @@ function(index,value){
     );
 
   }
-
 
   updateCart();
 
@@ -2392,7 +2251,6 @@ function(){
     return;
   }
 
-
   document.getElementById(
     "checkoutOverlay"
   ).classList.add("show");
@@ -2426,16 +2284,13 @@ function(){
     return;
   }
 
-
   const info =
     document.getElementById(
       "deliveryInfo"
     );
 
-
   info.innerHTML =
     "Getting your location...";
-
 
   navigator.geolocation.getCurrentPosition(
 
@@ -2447,7 +2302,6 @@ function(){
       customerLng =
         position.coords.longitude;
 
-
       try{
 
         const url =
@@ -2456,14 +2310,11 @@ function(){
           `${customerLng},${customerLat}`+
           `?overview=false`;
 
-
         const response =
           await fetch(url);
 
-
         const data =
           await response.json();
-
 
         if(
           data.code === "Ok" &&
@@ -2499,25 +2350,17 @@ function(){
 
       }
 
-
-      /*
-        Delivery rate now comes
-        from Admin settings.
-      */
-
       const deliveryRate =
         Number(
           shopSettings.deliveryRate ??
           DEFAULT_DELIVERY_RATE
         );
 
-
       deliveryCharge =
         Math.ceil(
           deliveryDistance *
           deliveryRate
         );
-
 
       info.innerHTML = `
 
@@ -2578,7 +2421,6 @@ function haversineDistance(
     (lon2-lon1) *
     Math.PI / 180;
 
-
   const a =
     Math.sin(dLat/2) *
     Math.sin(dLat/2) +
@@ -2594,14 +2436,12 @@ function haversineDistance(
     Math.sin(dLon/2) *
     Math.sin(dLon/2);
 
-
   const c =
     2 *
     Math.atan2(
       Math.sqrt(a),
       Math.sqrt(1-a)
     );
-
 
   return R*c;
 
@@ -2624,13 +2464,6 @@ async function(){
     return;
   }
 
-
-  /*
-    Prevent ordering if admin
-    closes shop while customer
-    still has the page open.
-  */
-
   if(!shopOpen){
 
     alert(
@@ -2640,24 +2473,20 @@ async function(){
     return;
   }
 
-
   const name =
     document.getElementById(
       "customerName"
     ).value.trim();
-
 
   const phone =
     document.getElementById(
       "customerPhone"
     ).value.trim();
 
-
   const address =
     document.getElementById(
       "customerAddress"
     ).value.trim();
-
 
   if(!name){
 
@@ -2668,7 +2497,6 @@ async function(){
     return;
   }
 
-
   if(!phone){
 
     alert(
@@ -2677,7 +2505,6 @@ async function(){
 
     return;
   }
-
 
   if(!address){
 
@@ -2688,9 +2515,7 @@ async function(){
     return;
   }
 
-
   let subtotal = 0;
-
 
   cart.forEach(
     item => {
@@ -2702,21 +2527,17 @@ async function(){
     }
   );
 
-
   const grandTotal =
     subtotal +
     deliveryCharge;
-
 
   const orderRef =
     push(
       ref(db,"orders")
     );
 
-
   const orderId =
     orderRef.key;
-
 
   const orderData = {
 
@@ -2790,19 +2611,15 @@ async function(){
       shopSettings.whatsappNumber ||
       "9090220791";
 
-
     const whatsappNumber =
       String(savedNumber)
         .replace(/\D/g,"");
 
-
     let message =
       `*🍽️ THE QUEEN FAST FOOD*\n\n`;
 
-
     message +=
       `*🧾 ORDER ID: ${orderId}*\n\n`;
-
 
     message +=
       `*👤 Customer:* ${name}\n`;
@@ -2813,10 +2630,8 @@ async function(){
     message +=
       `*📍 Address:* ${address}\n\n`;
 
-
     message +=
       `*🛒 ORDER ITEMS*\n`;
-
 
     cart.forEach(
       item => {
@@ -2827,7 +2642,6 @@ async function(){
       }
     );
 
-
     message +=
       `\n*💰 Subtotal: ₹${subtotal}*\n`;
 
@@ -2836,7 +2650,6 @@ async function(){
 
     message +=
       `*💵 TOTAL: ₹${grandTotal}*\n\n`;
-
 
     if(
       customerLat !== null &&
@@ -2851,13 +2664,11 @@ async function(){
 
     }
 
-
     message +=
       `*📦 ORDER RECEIVED*\n`;
 
     message +=
       `🙏 Thank you for ordering!`;
-
 
     const whatsappURL =
       `https://wa.me/${whatsappNumber}?text=`+
@@ -2874,7 +2685,6 @@ async function(){
 
     closeCart();
 
-
     document.getElementById(
       "customerName"
     ).value = "";
@@ -2886,7 +2696,6 @@ async function(){
     document.getElementById(
       "customerAddress"
     ).value = "";
-
 
     deliveryDistance = 0;
 
@@ -2911,7 +2720,6 @@ async function(){
       "trackInput"
     ).value =
       orderId;
-
 
     startTracking();
 
@@ -2940,18 +2748,15 @@ function(){
       "trackInput"
     );
 
-
   const orderId =
     input.value
       .trim()
       .replace(/\s/g,"");
 
-
   const result =
     document.getElementById(
       "trackResult"
     );
-
 
   if(!orderId){
 
@@ -2974,7 +2779,6 @@ function(){
       null;
 
   }
-
 
   result.innerHTML =
     `<div class="empty">
@@ -3004,10 +2808,8 @@ function(){
           return;
         }
 
-
         const order =
           snapshot.val();
-
 
         renderTrackOrder(
           orderId,
@@ -3046,45 +2848,19 @@ function renderTrackOrder(
       "trackResult"
     );
 
-
   const status =
     normalizeStatus(
       order.status
     );
-
 
   const name =
     order.customerName ||
     "Customer";
 
 
-  let statusText =
-    "ORDER RECEIVED";
-
-
-  if(status === "processing"){
-
-    statusText =
-      "PROCESSING";
-
-  }
-
-
-  if(status === "out_for_delivery"){
-
-    statusText =
-      "OUT FOR DELIVERY";
-
-  }
-
-
-  if(status === "delivered"){
-
-    statusText =
-      "DELIVERED";
-
-  }
-
+  /* =====================================
+     CANCELLED
+  ===================================== */
 
   if(status === "cancelled"){
 
@@ -3101,7 +2877,7 @@ function renderTrackOrder(
         </div>
 
         <div class="current-status">
-          CURRENT STATUS
+          🔴 CANCELLED
         </div>
 
         <div class="cancelled">
@@ -3117,26 +2893,64 @@ function renderTrackOrder(
   }
 
 
+  /* =====================================
+     STATUS TEXT
+  ===================================== */
+
+  const statusMap = {
+
+    received:
+      "📥 ORDER RECEIVED",
+
+    processing:
+      "⚙️ PROCESSING",
+
+    preparing:
+      "👨‍🍳 PREPARING",
+
+    out_for_delivery:
+      "🏍️🧑 OUT FOR DELIVERY",
+
+    delivered:
+      "🟢 DELIVERED"
+
+  };
+
+
+  const statusText =
+    statusMap[status] ||
+    "📥 ORDER RECEIVED";
+
+
+  /* =====================================
+     UNIQUE TIMELINE
+  ===================================== */
+
   const steps = [
 
     {
       key:"received",
-      label:"ORDER RECEIVED"
+      label:"📥 ORDER RECEIVED"
     },
 
     {
       key:"processing",
-      label:"PROCESSING"
+      label:"⚙️ PROCESSING"
+    },
+
+    {
+      key:"preparing",
+      label:"👨‍🍳 PREPARING"
     },
 
     {
       key:"out_for_delivery",
-      label:"OUT FOR DELIVERY"
+      label:"🏍️🧑 OUT FOR DELIVERY"
     },
 
     {
       key:"delivered",
-      label:"DELIVERED"
+      label:"🟢 DELIVERED"
     }
 
   ];
@@ -3154,7 +2968,6 @@ function renderTrackOrder(
 
         let cls = "";
 
-
         if(index < currentIndex){
 
           cls =
@@ -3166,7 +2979,6 @@ function renderTrackOrder(
             "active";
 
         }
-
 
         return `
 
@@ -3184,6 +2996,31 @@ function renderTrackOrder(
 
       }
     ).join("");
+
+
+  /* =====================================
+     CUSTOMER DELIVERED BUTTON
+  ===================================== */
+
+  let deliveredButton = "";
+
+
+  if(status === "out_for_delivery"){
+
+    deliveredButton = `
+
+      <button
+        id="deliveredConfirmBtn"
+        class="delivered-confirm-btn"
+        onclick="customerConfirmDelivered('${escapeHTML(orderId)}')">
+
+        🟢 ORDER DELIVERED
+
+      </button>
+
+    `;
+
+  }
 
 
   result.innerHTML = `
@@ -3208,11 +3045,100 @@ function renderTrackOrder(
 
       </div>
 
+      ${deliveredButton}
+
     </div>
 
   `;
 
 }
+
+
+/* =========================================
+   CUSTOMER CONFIRM DELIVERED
+========================================= */
+
+window.customerConfirmDelivered =
+async function(orderId){
+
+  if(!orderId){
+    return;
+  }
+
+
+  const button =
+    document.getElementById(
+      "deliveredConfirmBtn"
+    );
+
+
+  if(button){
+
+    button.disabled = true;
+
+    button.textContent =
+      "UPDATING...";
+
+  }
+
+
+  try{
+
+    const orderRef =
+      ref(
+        db,
+        "orders/"+orderId
+      );
+
+
+    /*
+      Read current order through
+      the existing live listener state.
+      Only move it to delivered when
+      customer is currently seeing the
+      OUT FOR DELIVERY state.
+    */
+
+    await update(
+      orderRef,
+      {
+        status:"delivered",
+        updatedAt:Date.now()
+      }
+    );
+
+
+    /*
+      The Firebase onValue listener will
+      automatically refresh the tracking
+      timeline to DELIVERED.
+    */
+
+  }catch(error){
+
+    console.error(
+      "Delivered confirmation error:",
+      error
+    );
+
+
+    alert(
+      "Could not confirm delivery. Please try again."
+    );
+
+
+    if(button){
+
+      button.disabled = false;
+
+      button.textContent =
+        "🟢 ORDER DELIVERED";
+
+    }
+
+  }
+
+};
 
 
 /* =========================================
@@ -3228,6 +3154,8 @@ function normalizeStatus(status){
     ).toLowerCase();
 
 
+  /* RECEIVED */
+
   if(
     status === "new" ||
     status === "placed" ||
@@ -3240,17 +3168,32 @@ function normalizeStatus(status){
   }
 
 
+  /* PROCESSING */
+
   if(
     status === "processing" ||
-    status === "confirmed" ||
-    status === "preparing" ||
-    status === "ready"
+    status === "confirmed"
   ){
 
     return "processing";
 
   }
 
+
+  /* PREPARING */
+
+  if(
+    status === "preparing" ||
+    status === "making" ||
+    status === "ready"
+  ){
+
+    return "preparing";
+
+  }
+
+
+  /* OUT FOR DELIVERY */
 
   if(
     status === "out_for_delivery" ||
@@ -3263,6 +3206,8 @@ function normalizeStatus(status){
   }
 
 
+  /* DELIVERED */
+
   if(
     status === "delivered" ||
     status === "completed" ||
@@ -3273,6 +3218,8 @@ function normalizeStatus(status){
 
   }
 
+
+  /* CANCELLED */
 
   if(
     status === "cancelled" ||
