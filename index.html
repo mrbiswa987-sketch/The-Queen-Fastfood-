@@ -16,9 +16,10 @@ function validateCheckout(){
     name.length >= 2 &&
     validPhone &&
     address.length >= 5 &&
-    deliveryDistance !== null &&
     cart.length > 0;
 
-  document.getElementById("placeOrderButton").disabled =
-    !valid;
+  const button =
+    document.getElementById("placeOrderButton");
+
+  button.disabled = !valid;
 }
