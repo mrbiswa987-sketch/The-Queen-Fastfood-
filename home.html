@@ -14,7 +14,7 @@
 *{
   box-sizing:border-box;
   margin:0;
-  padding:0
+  padding:0;
 }
 
 body{
@@ -76,7 +76,10 @@ body::after{
   }
 }
 
-button,input,textarea,select{
+button,
+input,
+textarea,
+select{
   font:inherit;
 }
 
@@ -87,6 +90,7 @@ button{
 .hidden{
   display:none!important;
 }
+
 
 /* =====================================================
    HEADER
@@ -151,6 +155,7 @@ header{
 .logout-top:hover{
   background:#281010;
 }
+
 
 /* =====================================================
    CUSTOMER LOGIN
@@ -244,6 +249,7 @@ header{
   font-size:11px;
   margin-right:3px;
 }
+
 
 /* =====================================================
    HERO
@@ -344,6 +350,7 @@ header{
   font-size:12px;
 }
 
+
 /* =====================================================
    MENU
 ===================================================== */
@@ -432,6 +439,7 @@ header{
   margin-top:6px;
   font-weight:700;
 }
+
 
 /* =====================================================
    TRACK
@@ -528,6 +536,7 @@ header{
   background:#f59b23;
 }
 
+
 /* =====================================================
    FOOTER
 ===================================================== */
@@ -543,6 +552,7 @@ footer a{
   color:#f59b23;
   text-decoration:none;
 }
+
 
 /* =====================================================
    OVERLAYS
@@ -688,7 +698,8 @@ footer a{
 }
 
 .form-group input:focus,
-.form-group textarea:focus{
+.form-group textarea:focus,
+.form-group select:focus{
   outline:none;
   border-color:#f59b23;
 }
@@ -726,23 +737,44 @@ footer a{
   width:100%;
 }
 
+
+/* =====================================================
+   SMALL DIFFERENT LOCATION BOX
+===================================================== */
+
+#differentLocationBox{
+  margin-top:8px;
+}
+
 .google-location-box{
-  margin-top:12px;
-  padding:14px;
+  margin-top:8px;
+  padding:10px;
   background:#080808;
   border:1px solid #333;
-  border-radius:12px;
+  border-radius:10px;
+}
+
+.google-location-instruction{
+  color:#aaa;
+  font-size:11px;
+  line-height:1.45;
+  margin-bottom:8px;
+}
+
+.google-location-instruction strong{
+  color:#f59b23;
 }
 
 .google-location-open{
   width:100%;
-  padding:12px;
-  border:0;
-  border-radius:10px;
-  background:#f59b23;
-  color:#000;
+  padding:9px 10px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#151515;
+  color:#f59b23;
+  font-size:12px;
   font-weight:800;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .google-location-input{
@@ -750,9 +782,10 @@ footer a{
   background:#101010;
   color:#fff;
   border:1px solid #444;
-  border-radius:10px;
-  padding:13px;
+  border-radius:8px;
+  padding:10px;
   outline:none;
+  font-size:12px;
 }
 
 .google-location-input:focus{
@@ -761,65 +794,37 @@ footer a{
 
 .google-location-confirm{
   width:100%;
-  padding:12px;
+  padding:9px 10px;
   border:1px solid #f59b23;
-  border-radius:10px;
+  border-radius:8px;
   background:#191919;
   color:#f59b23;
+  font-size:12px;
   font-weight:800;
-  margin-top:9px;
+  margin-top:8px;
 }
 
 .google-location-status{
-  color:#999;
-  font-size:11px;
-  line-height:1.5;
-  margin-top:9px;
+  color:#777;
+  font-size:10px;
+  line-height:1.45;
+  margin-top:7px;
 }
+
 
 /* =====================================================
-   NEW DELIVERY MAP
+   DELIVERY LIMIT
 ===================================================== */
-
-.map-wrapper{
-  display:block;
-  margin-top:12px;
-  background:#080808;
-  border:1px solid #333;
-  border-radius:12px;
-  overflow:hidden;
-}
-
-#locationMap{
-  width:100%;
-  height:280px;
-  display:block;
-  border:0;
-  background:#151515;
-}
-
-.map-info{
-  padding:10px 12px;
-  color:#999;
-  font-size:11px;
-  line-height:1.6;
-  border-top:1px solid #292929;
-}
-
-.map-distance{
-  color:#f59b23;
-  font-weight:800;
-}
 
 .delivery-limit{
   margin-top:9px;
-  padding:10px 12px;
-  border-radius:9px;
+  padding:9px 10px;
+  border-radius:8px;
   background:#171717;
   border:1px solid #333;
   color:#aaa;
-  font-size:12px;
-  line-height:1.5;
+  font-size:11px;
+  line-height:1.45;
   text-align:center;
 }
 
@@ -829,42 +834,26 @@ footer a{
 
 .delivery-inside{
   margin-top:9px;
-  padding:11px;
+  padding:10px;
   border-radius:9px;
   background:#102615;
   border:1px solid #204b2a;
   color:#30d158;
-  font-size:12px;
+  font-size:11px;
   line-height:1.5;
   font-weight:700;
 }
 
 .delivery-outside{
   margin-top:9px;
-  padding:11px;
+  padding:10px;
   border-radius:9px;
   background:#301010;
   border:1px solid #552020;
   color:#ff625b;
-  font-size:12px;
+  font-size:11px;
   line-height:1.5;
   font-weight:700;
-}
-
-/* =====================================================
-   MAP SEARCH
-===================================================== */
-
-.map-search{
-  display:none;
-}
-
-.map-search-results{
-  display:none;
-}
-
-.map-search-result{
-  display:none;
 }
 
 .location-hint{
@@ -918,6 +907,7 @@ footer a{
   font-size:13px;
 }
 
+
 /* =====================================================
    WEBSITE MODE
 ===================================================== */
@@ -953,6 +943,7 @@ footer a{
   line-height:1.7;
 }
 
+
 /* =====================================================
    THANK YOU
 ===================================================== */
@@ -981,6 +972,7 @@ footer a{
     transform:scale(1.1) rotate(5deg)
   }
 }
+
 
 /* =====================================================
    DELIVERY SUCCESS
@@ -1060,6 +1052,7 @@ footer a{
     opacity:1;
   }
 }
+
 
 /* =====================================================
    MOBILE
@@ -1155,15 +1148,12 @@ footer a{
     padding:24px 18px;
   }
 
-  #locationMap{
-    height:240px;
-  }
-
 }
 </style>
 </head>
 
 <body>
+
 
 <!-- =====================================================
      CUSTOMER LOGIN
@@ -1225,6 +1215,7 @@ footer a{
 
 </div>
 
+
 <!-- =====================================================
      WEBSITE MODE
 ===================================================== -->
@@ -1250,6 +1241,7 @@ footer a{
 
 </div>
 
+
 <!-- =====================================================
      THANK YOU
 ===================================================== -->
@@ -1273,6 +1265,7 @@ footer a{
   </div>
 
 </div>
+
 
 <!-- =====================================================
      DELIVERY SUCCESS
@@ -1305,6 +1298,7 @@ footer a{
   </div>
 
 </div>
+
 
 <!-- =====================================================
      HEADER
@@ -1345,6 +1339,7 @@ footer a{
   </div>
 
 </header>
+
 
 <!-- =====================================================
      MAIN
@@ -1405,6 +1400,7 @@ footer a{
 
   </section>
 
+
   <section class="section">
 
     <h2 class="section-title">
@@ -1417,6 +1413,7 @@ footer a{
     ></div>
 
   </section>
+
 
   <section class="section">
 
@@ -1450,6 +1447,7 @@ footer a{
 
 </main>
 
+
 <footer>
 
   <p>
@@ -1472,6 +1470,7 @@ footer a{
   </p>
 
 </footer>
+
 
 <!-- =====================================================
      CART
@@ -1528,6 +1527,7 @@ footer a{
 
 </div>
 
+
 <!-- =====================================================
      CHECKOUT
 ===================================================== -->
@@ -1554,6 +1554,7 @@ footer a{
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -1567,6 +1568,7 @@ footer a{
       >
 
     </div>
+
 
     <div class="form-group">
 
@@ -1585,6 +1587,7 @@ footer a{
 
     </div>
 
+
     <div class="form-group">
 
       <label>
@@ -1598,13 +1601,17 @@ footer a{
 
     </div>
 
-    <!-- LOCATION -->
+
+    <!-- =================================================
+         DELIVERY LOCATION
+    ================================================== -->
 
     <div class="form-group">
 
       <label>
         Delivery Location
       </label>
+
 
       <div class="location-buttons">
 
@@ -1624,6 +1631,7 @@ footer a{
 
       </div>
 
+
       <div
         class="location-display"
         id="locationDisplayBox"
@@ -1637,12 +1645,25 @@ footer a{
 
       </div>
 
+
+      <!-- ===============================================
+           THIS BOX IS HIDDEN BY DEFAULT
+      ================================================ -->
+
       <div
         id="differentLocationBox"
         class="hidden"
       >
 
         <div class="google-location-box">
+
+          <div class="google-location-instruction">
+
+            📍 <strong>Select your address on Google Maps and copy the link.</strong>
+            Paste it here.
+
+          </div>
+
 
           <button
             id="openGoogleMapsButton"
@@ -1652,13 +1673,15 @@ footer a{
             🗺️ Open Google Maps
           </button>
 
+
           <input
             id="googleMapsLocationInput"
             class="google-location-input"
             type="text"
-            placeholder="Paste Google Maps location link here"
+            placeholder="Paste Google Maps link here"
             autocomplete="off"
           >
+
 
           <button
             id="confirmGoogleLocationButton"
@@ -1668,64 +1691,30 @@ footer a{
             📍 Confirm Location
           </button>
 
+
           <div
             id="googleLocationStatus"
             class="google-location-status"
           >
-            Open Google Maps → select your exact delivery point →
-            Share → Copy link → come back and paste the link here.
+            Select your exact address on Google Maps → Share →
+            Copy link → paste the link here.
+
           </div>
 
         </div>
 
       </div>
 
-      <!-- 20 KM DELIVERY INFORMATION -->
+
+      <!-- 20 KM INFORMATION -->
 
       <div class="delivery-limit">
+
         📦 <strong>Delivery available within 20 km</strong><br>
         from The Queen Fast Food
-      </div>
-
-      <!-- SATELLITE MAP -->
-
-      <div
-        id="mapWrapper"
-        class="map-wrapper"
-      >
-
-        <iframe
-          id="locationMap"
-          title="The Queen Fast Food Delivery Location"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-
-        <div class="map-info">
-
-          🛰️ Satellite Map
-
-          <br>
-
-          📍 Restaurant →
-          <span
-            id="mapDistance"
-            class="map-distance"
-          >
-            Select location
-          </span>
-
-          <br>
-
-          🏠
-          <span id="mapPlaceName">
-            Delivery location not selected
-          </span>
-
-        </div>
 
       </div>
+
 
       <div
         id="deliveryInsideMessage"
@@ -1735,6 +1724,7 @@ footer a{
         You can place your order.
       </div>
 
+
       <div
         id="deliveryOutsideMessage"
         class="delivery-outside hidden"
@@ -1742,6 +1732,7 @@ footer a{
         ❌ This location is outside our 20 km delivery area.
         Please select a location within 20 km of The Queen Fast Food.
       </div>
+
 
       <div
         id="deliveryInfo"
@@ -1752,10 +1743,20 @@ footer a{
 
     </div>
 
+
+    <!-- =================================================
+         ORDER SUMMARY
+    ================================================== -->
+
     <div
       id="orderSummary"
       class="summary"
     ></div>
+
+
+    <!-- =================================================
+         PAYMENT
+    ================================================== -->
 
     <div class="form-group">
 
@@ -1783,6 +1784,7 @@ footer a{
 
       </div>
 
+
       <div
         id="paymentWarning"
         class="warning hidden"
@@ -1791,6 +1793,7 @@ footer a{
       </div>
 
     </div>
+
 
     <button
       id="placeOrderButton"
@@ -1803,6 +1806,7 @@ footer a{
   </div>
 
 </div>
+
 
 <script type="module">
 
@@ -1863,7 +1867,9 @@ const firebaseConfig = {
 
   measurementId:
     "G-Q1YCK636KJ"
+
 };
+
 
 const app =
   initializeApp(firebaseConfig);
@@ -2017,7 +2023,7 @@ let authReadyPromise = null;
 
 
 /* =====================================================
-   CUSTOMER PROFILE FUNCTIONS
+   CUSTOMER PROFILE
 ===================================================== */
 
 function loadCustomerProfile(){
@@ -2037,6 +2043,7 @@ function loadCustomerProfile(){
       };
 
       return false;
+
     }
 
     const data =
@@ -2053,6 +2060,7 @@ function loadCustomerProfile(){
       );
 
       return false;
+
     }
 
     const name =
@@ -2071,6 +2079,7 @@ function loadCustomerProfile(){
       );
 
       return false;
+
     }
 
     customerProfile = {
@@ -2093,7 +2102,9 @@ function loadCustomerProfile(){
     );
 
     return false;
+
   }
+
 }
 
 
@@ -2143,6 +2154,7 @@ function updateCustomerUI(){
     welcome.textContent = "";
 
   }
+
 }
 
 
@@ -2173,6 +2185,7 @@ function fillCheckoutCustomer(){
   }
 
   validateCheckout();
+
 }
 
 
@@ -2245,6 +2258,7 @@ function customerLogin(){
     nameInput.focus();
 
     return;
+
   }
 
   if(
@@ -2257,6 +2271,7 @@ function customerLogin(){
     phoneInput.focus();
 
     return;
+
   }
 
   saveCustomerProfile(
@@ -3359,6 +3374,12 @@ document.getElementById(
       "active"
     );
 
+    /*
+      Box is hidden by default.
+      It becomes visible ONLY after
+      Choose Different Location is clicked.
+    */
+
     document.getElementById(
       "differentLocationBox"
     ).classList.remove(
@@ -3373,7 +3394,7 @@ document.getElementById(
     if(!selectedGoogleMapsLink){
 
       status.textContent =
-        "Open Google Maps → select your exact delivery point → Share → Copy link → come back and paste the link here.";
+        "Select your address on Google Maps → Share → Copy link → paste it here.";
 
     }
 
@@ -3537,7 +3558,6 @@ async function confirmGoogleMapsLocation(){
     locationWithinDeliveryArea =
       false;
 
-
     selectedLocationText =
       "Google Maps location link";
 
@@ -3555,7 +3575,7 @@ async function confirmGoogleMapsLocation(){
 
 
     status.innerHTML =
-      "⚠️ Link saved, but coordinates could not be detected. Please use Google Maps → Share → Copy link and paste the complete location link.";
+      "⚠️ Link saved, but exact coordinates could not be detected. Please use Google Maps → Share → Copy link and paste the complete location link.";
 
   }
 
@@ -3797,12 +3817,6 @@ function updateLocationDisplay(){
     );
 
 
-  const mapDistance =
-    document.getElementById(
-      "mapDistance"
-    );
-
-
   const insideMessage =
     document.getElementById(
       "deliveryInsideMessage"
@@ -3813,14 +3827,6 @@ function updateLocationDisplay(){
     document.getElementById(
       "deliveryOutsideMessage"
     );
-
-
-  if(mapDistance){
-
-    mapDistance.textContent =
-      `${deliveryDistance.toFixed(2)} km`;
-
-  }
 
 
   if(locationWithinDeliveryArea){
@@ -3853,56 +3859,7 @@ function updateLocationDisplay(){
   }
 
 
-  updateSatelliteMap();
-
   validateCheckout();
-
-}
-
-
-/* =====================================================
-   SATELLITE MAP
-===================================================== */
-
-function updateSatelliteMap(){
-
-  if(
-    customerLat === null ||
-    customerLng === null
-  ){
-
-    return;
-
-  }
-
-
-  const mapFrame =
-    document.getElementById(
-      "locationMap"
-    );
-
-
-  if(!mapFrame){
-    return;
-  }
-
-
-  /*
-    Google Maps satellite view.
-    The map opens directly around
-    the selected customer location.
-  */
-
-  const googleSatelliteUrl =
-    "https://www.google.com/maps?q=" +
-    encodeURIComponent(
-      `${customerLat},${customerLng}`
-    ) +
-    "&t=k&z=15";
-
-
-  mapFrame.src =
-    googleSatelliteUrl;
 
 }
 
@@ -3916,20 +3873,7 @@ async function reverseGeocodeLocation(
   lng
 ){
 
-  const placeName =
-    document.getElementById(
-      "mapPlaceName"
-    );
-
   try{
-
-    if(placeName){
-
-      placeName.textContent =
-        "Finding place name...";
-
-    }
-
 
     const url =
       "https://nominatim.openstreetmap.org/reverse" +
@@ -4011,14 +3955,6 @@ async function reverseGeocodeLocation(
       finalName;
 
 
-    if(placeName){
-
-      placeName.textContent =
-        finalName;
-
-    }
-
-
     document.getElementById(
       "locationDisplay"
     ).value =
@@ -4042,12 +3978,10 @@ async function reverseGeocodeLocation(
       fallback;
 
 
-    if(placeName){
-
-      placeName.textContent =
-        fallback;
-
-    }
+    document.getElementById(
+      "locationDisplay"
+    ).value =
+      `${fallback} • ${deliveryDistance.toFixed(2)} km away`;
 
   }
 
@@ -4074,10 +4008,12 @@ document.getElementById(
 
     }
 
+
     const button =
       document.getElementById(
         "currentLocationButton"
       );
+
 
     button.textContent =
       "Getting...";
@@ -4122,6 +4058,11 @@ document.getElementById(
         );
 
 
+        /*
+          When current location is selected,
+          hide the different-location box.
+        */
+
         document.getElementById(
           "differentLocationBox"
         ).classList.add(
@@ -4138,8 +4079,8 @@ document.getElementById(
           position.coords.longitude
         );
 
-
       },
+
 
       error=>{
 
@@ -4156,6 +4097,7 @@ document.getElementById(
         );
 
       },
+
 
       {
         enableHighAccuracy:true,
@@ -4232,9 +4174,7 @@ function setSelectedLocation(
 
   updateLocationDisplay();
 
-
   renderOrderSummary();
-
 
   validateCheckout();
 
@@ -4411,6 +4351,7 @@ function validateCheckout(){
       "customerAddress"
     );
 
+
   if(
     !nameInput ||
     !phoneInput ||
@@ -4437,12 +4378,6 @@ function validateCheckout(){
       phone
     );
 
-
-  /*
-    IMPORTANT:
-    Order is allowed only when
-    customer is within 20 km.
-  */
 
   const validDistance =
     deliveryDistance !== null &&
@@ -4568,9 +4503,7 @@ async function placeOrder(){
     }
 
 
-    /*
-      FINAL 20 KM SECURITY CHECK
-    */
+    /* FINAL 20 KM SECURITY CHECK */
 
     if(
       deliveryDistance === null ||
@@ -4641,9 +4574,7 @@ async function placeOrder(){
       );
 
 
-    if(
-      name.length < 2
-    ){
+    if(name.length < 2){
 
       alert(
         "Please enter a valid name."
@@ -4826,6 +4757,16 @@ async function placeOrder(){
       Date.now();
 
 
+    /*
+      COMPLETE ORDER DATA
+
+      Items + customer address +
+      exact Google Maps link +
+      latitude + longitude +
+      place name + distance +
+      delivery charge + total
+    */
+
     const orderData = {
 
       ownerUid:
@@ -4920,9 +4861,7 @@ async function placeOrder(){
     };
 
 
-    /*
-      SAVE ORDER TO FIREBASE
-    */
+    /* SAVE ORDER */
 
     await set(
       orderRef,
@@ -5639,11 +5578,13 @@ function renderTrackedOrder(
 
       </div>
 
+
       <div class="timeline">
 
         ${timeline}
 
       </div>
+
 
       <div style="margin-top:20px">
 
@@ -5660,12 +5601,14 @@ function renderTrackedOrder(
 
       </div>
 
+
       <hr
         style="
           border-color:#292929;
           margin:15px 0
         "
       >
+
 
       <div class="summary-row">
 
@@ -5679,6 +5622,7 @@ function renderTrackedOrder(
 
       </div>
 
+
       <div class="summary-row">
 
         <span>
@@ -5691,6 +5635,7 @@ function renderTrackedOrder(
 
       </div>
 
+
       <div class="summary-row total">
 
         <span>
@@ -5702,6 +5647,7 @@ function renderTrackedOrder(
         </span>
 
       </div>
+
 
       ${
         canConfirm
@@ -5717,6 +5663,7 @@ function renderTrackedOrder(
           `
           : ""
       }
+
 
       ${
         status === "delivered"
@@ -5739,6 +5686,7 @@ function renderTrackedOrder(
           `
           : ""
       }
+
 
       ${
         status === "cancelled"
