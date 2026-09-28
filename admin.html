@@ -177,6 +177,12 @@ textarea{
   color:#c99cff;
 }
 
+.btn-orange{
+  background:#3b240d;
+  border:1px solid #8b5a19;
+  color:#ffbd55;
+}
+
 .admin{
   display:none;
 }
@@ -211,6 +217,37 @@ textarea{
 
 .brand span{
   color:var(--gold2);
+}
+
+/* =========================
+   ADMIN ID WARNING
+========================= */
+
+.admin-id-box{
+  margin:0 0 13px;
+  background:#111;
+  border:1px solid #3a321b;
+  border-radius:11px;
+  padding:11px 13px;
+  text-align:left;
+}
+
+.admin-id-title{
+  color:var(--gold2);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.4px;
+}
+
+.admin-id-warning{
+  margin-top:4px;
+  color:#777;
+  font-size:8px;
+  line-height:1.45;
+}
+
+.admin-id-warning strong{
+  color:#ffb0b0;
 }
 
 /* =========================
@@ -346,6 +383,7 @@ textarea{
   background:#111;
   border-radius:10px;
   padding:11px;
+  position:relative;
 }
 
 .folder-stat:hover{
@@ -370,6 +408,45 @@ textarea{
   color:#666;
   font-size:8px;
   margin-top:5px;
+}
+
+/* NEW ORDER DOT */
+
+.new-order-dot{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#ffd43b;
+  box-shadow:
+    0 0 5px rgba(255,212,59,.55),
+    0 0 10px rgba(255,212,59,.2);
+}
+
+.new-order-dot.alert{
+  background:#39d353;
+  animation:newOrderDotBlink .7s infinite;
+}
+
+@keyframes newOrderDotBlink{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+    background:#39d353;
+    box-shadow:
+      0 0 5px rgba(57,211,83,.7),
+      0 0 12px rgba(57,211,83,.5);
+  }
+  50%{
+    opacity:.25;
+    transform:scale(.72);
+    background:#39d353;
+    box-shadow:
+      0 0 16px rgba(57,211,83,1),
+      0 0 35px rgba(57,211,83,.75);
+  }
 }
 
 .new-stat{
@@ -421,7 +498,6 @@ textarea{
   display:grid;
   grid-template-columns:
     minmax(0,1.2fr)
-    minmax(0,1fr)
     minmax(0,1fr)
     minmax(0,1fr);
   gap:10px;
@@ -599,6 +675,33 @@ textarea{
 }
 
 /* =========================
+   ORDER DETAILS + OFFER
+========================= */
+
+.details-offer-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+  align-items:stretch;
+}
+
+.order-details-box,
+.offer-side{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:11px;
+  padding:12px;
+  min-width:0;
+}
+
+.order-details-box h2{
+  color:var(--gold2);
+  font-size:12px;
+  margin-bottom:9px;
+}
+
+/* =========================
    OFFER CONTROL
 ========================= */
 
@@ -704,23 +807,32 @@ textarea{
   margin-bottom:10px;
 }
 
+/* 4 BOXES IN ONE LINE */
+
 .menu-list{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:7px 15px;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
 }
 
 .menu-item{
   display:block;
-  padding:8px 0;
-  border-bottom:1px solid #222;
+  padding:10px;
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:10px;
+  min-width:0;
+}
+
+.menu-item:hover{
+  border-color:#4a4a4a;
 }
 
 .menu-top{
   display:grid;
-  grid-template-columns:1fr auto;
+  grid-template-columns:1fr;
   align-items:center;
-  gap:8px;
+  gap:7px;
 }
 
 .menu-name{
@@ -733,6 +845,7 @@ textarea{
   font-size:8px;
   color:#555;
   margin-top:2px;
+  overflow-wrap:anywhere;
 }
 
 .menu-price-area{
@@ -761,6 +874,7 @@ textarea{
   padding:7px 9px;
   font-weight:700;
   font-size:9px;
+  width:100%;
 }
 
 .stock-select.available{
@@ -776,13 +890,13 @@ textarea{
 .image-area{
   margin-top:7px;
   display:grid;
-  grid-template-columns:72px 1fr auto;
+  grid-template-columns:65px 1fr;
   gap:6px;
   align-items:center;
 }
 
 .image-preview{
-  width:72px;
+  width:65px;
   height:48px;
   object-fit:cover;
   border-radius:6px;
@@ -809,6 +923,7 @@ textarea{
   padding:6px 7px;
   font-size:9px;
   white-space:nowrap;
+  grid-column:2;
 }
 
 /* =========================
@@ -865,31 +980,20 @@ textarea{
   overflow:auto;
 }
 
+/* NEW ORDER FULL WIDTH */
+
+.new-order-row{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+
 .empty{
   padding:20px;
   text-align:center;
   color:#666;
   font-size:10px;
-}
-
-/* IMPORTANT:
-   OFFER + NEW ORDER SAME LINE
-*/
-
-.offer-new-order-row{
-  display:grid;
-  grid-template-columns:minmax(280px,.8fr) minmax(0,2.2fr);
-  gap:10px;
-  margin-bottom:12px;
-  align-items:start;
-}
-
-.offer-new-order-row .offer-side{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:11px;
-  padding:12px;
-  min-width:0;
 }
 
 /* =========================
@@ -1285,6 +1389,14 @@ textarea{
    MOBILE
 ========================= */
 
+@media(max-width:1100px){
+
+  .menu-list{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+}
+
 @media(max-width:1000px){
 
   .control-grid{
@@ -1295,8 +1407,12 @@ textarea{
     grid-template-columns:repeat(3,1fr);
   }
 
-  .offer-new-order-row{
-    grid-template-columns:1fr;
+  .details-offer-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .menu-list{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
 }
@@ -1312,6 +1428,10 @@ textarea{
   }
 
   .control-grid{
+    grid-template-columns:1fr;
+  }
+
+  .details-offer-row{
     grid-template-columns:1fr;
   }
 
@@ -1454,6 +1574,10 @@ textarea{
   </div>
 
 
+  <!-- =========================
+       NEW ORDER NOTIFICATION
+  ========================= -->
+
   <div class="notification-wrap">
 
     <button
@@ -1498,6 +1622,26 @@ textarea{
 
 
     <!-- =========================
+         ADMIN ID
+    ========================= -->
+
+    <div class="admin-id-box">
+
+      <div class="admin-id-title">
+        👑 THE QUEEN FAST FOOD ADMIN ID
+      </div>
+
+      <div class="admin-id-warning">
+        ⚠️ <strong>STRICT WARNING:</strong>
+        This Admin ID is only for the Owner and Web Developer.
+        No other person is authorised to use this Admin ID.
+        Unauthorised use is strictly prohibited.
+      </div>
+
+    </div>
+
+
+    <!-- =========================
          TOP FIVE FOLDERS
     ========================= -->
 
@@ -1508,49 +1652,88 @@ textarea{
         class="folder-stat new-stat"
         onclick="selectFolder('new')"
       >
+
+        <span
+          id="newOrderDot"
+          class="new-order-dot"
+        ></span>
+
         <small>🆕 NEW ORDERS</small>
+
         <strong id="newCount">0</strong>
-        <span>New orders received</span>
+
+        <span>
+          New orders received
+        </span>
+
       </button>
+
 
       <button
         id="folderPending"
         class="folder-stat pending-stat"
         onclick="selectFolder('pending')"
       >
+
         <small>⏳ PENDING</small>
+
         <strong id="pendingCount">0</strong>
-        <span>Processing / Making</span>
+
+        <span>
+          Processing / Making
+        </span>
+
       </button>
+
 
       <button
         id="folderDelivery"
         class="folder-stat delivery-stat"
         onclick="selectFolder('delivery')"
       >
+
         <small>🏍️ DELIVERY</small>
+
         <strong id="deliveryCount">0</strong>
-        <span>Out for delivery</span>
+
+        <span>
+          Out for delivery
+        </span>
+
       </button>
+
 
       <button
         id="folderComplete"
         class="folder-stat complete-stat"
         onclick="selectFolder('complete')"
       >
+
         <small>✅ COMPLETE</small>
+
         <strong id="completeCount">0</strong>
-        <span>Delivered orders</span>
+
+        <span>
+          Delivered orders
+        </span>
+
       </button>
+
 
       <button
         id="folderCancelled"
         class="folder-stat cancelled-stat"
         onclick="selectFolder('cancelled')"
       >
+
         <small>❌ CANCELLED</small>
+
         <strong id="cancelledCount">0</strong>
-        <span>Cancelled orders</span>
+
+        <span>
+          Cancelled orders
+        </span>
+
       </button>
 
     </div>
@@ -1742,11 +1925,63 @@ textarea{
       </div>
 
 
-      <!-- ORDER MANAGEMENT CONTROL -->
+      <!-- PAYMENT METHOD -->
 
       <div class="control-box">
 
-        <h2>📦 Order Management</h2>
+        <h2>💳 Payment Method Control</h2>
+
+        <div class="payment-row">
+
+          <span>
+            💵 Cash on Delivery
+          </span>
+
+          <button
+            id="codSwitch"
+            class="switch on"
+            onclick="togglePayment('cod')"
+          ></button>
+
+        </div>
+
+        <div class="payment-row">
+
+          <span>
+            💳 Online Payment
+          </span>
+
+          <button
+            id="onlineSwitch"
+            class="switch on"
+            onclick="togglePayment('online')"
+          ></button>
+
+        </div>
+
+        <div class="notice">
+          Only enabled payment methods will appear on the customer checkout.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         ORDER DETAILS + OFFER
+    ========================= -->
+
+    <div class="details-offer-row">
+
+
+      <!-- ORDER MANAGEMENT DETAILS -->
+
+      <div class="order-details-box">
+
+        <h2>
+          📦 Order Management Details
+        </h2>
 
         <div class="notice">
           Click a folder above or below to open its orders.
@@ -1799,42 +2034,160 @@ textarea{
       </div>
 
 
-      <!-- PAYMENT METHOD -->
+      <!-- OFFER CONTROL -->
 
-      <div class="control-box">
+      <div class="offer-side">
 
-        <h2>💳 Payment Method Control</h2>
+        <div class="offer-control-title">
+          🎁 Offer Control
+        </div>
 
-        <div class="payment-row">
+        <div class="offer-status-row">
 
-          <span>
-            💵 Cash on Delivery
-          </span>
+          <div>
+
+            <div
+              id="offerStatusText"
+              class="offer-status-text on"
+            >
+              Offer is ON
+            </div>
+
+            <div
+              style="
+                color:#666;
+                font-size:8px;
+                margin-top:2px;
+              "
+            >
+              Customer website offer
+            </div>
+
+          </div>
 
           <button
-            id="codSwitch"
-            class="switch on"
-            onclick="togglePayment('cod')"
+            id="offerSwitch"
+            class="offer-switch on"
+            onclick="toggleOffer()"
           ></button>
 
         </div>
 
-        <div class="payment-row">
 
-          <span>
-            💳 Online Payment
-          </span>
+        <div class="offer-control-grid">
 
-          <button
-            id="onlineSwitch"
-            class="switch on"
-            onclick="togglePayment('online')"
-          ></button>
+          <div>
 
-        </div>
+            <label
+              style="
+                display:block;
+                color:#777;
+                font-size:8px;
+                margin-bottom:4px;
+              "
+            >
+              Offer Title
+            </label>
 
-        <div class="notice">
-          Only enabled payment methods will appear on the customer checkout.
+            <input
+              id="offerTitle"
+              placeholder="SPECIAL OFFER"
+            >
+
+          </div>
+
+          <div>
+
+            <label
+              style="
+                display:block;
+                color:#777;
+                font-size:8px;
+                margin-bottom:4px;
+              "
+            >
+              Offer Price
+            </label>
+
+            <input
+              id="offerPrice"
+              placeholder="₹149"
+            >
+
+          </div>
+
+          <div class="offer-full">
+
+            <label
+              style="
+                display:block;
+                color:#777;
+                font-size:8px;
+                margin-bottom:4px;
+              "
+            >
+              Offer Description
+            </label>
+
+            <textarea
+              id="offerText"
+              placeholder="Burger + Fries + Cold Drink"
+            ></textarea>
+
+          </div>
+
+          <div>
+
+            <label
+              style="
+                display:block;
+                color:#777;
+                font-size:8px;
+                margin-bottom:4px;
+              "
+            >
+              Button Text
+            </label>
+
+            <input
+              id="offerButton"
+              placeholder="ORDER NOW"
+            >
+
+          </div>
+
+          <div>
+
+            <label
+              style="
+                display:block;
+                color:#777;
+                font-size:8px;
+                margin-bottom:4px;
+              "
+            >
+              Image URL
+            </label>
+
+            <input
+              id="offerImage"
+              placeholder="https://..."
+            >
+
+          </div>
+
+          <div class="offer-full">
+
+            <button
+              class="btn btn-gold"
+              style="width:100%"
+              onclick="saveOffer()"
+            >
+              Save Offer
+            </button>
+
+          </div>
+
         </div>
 
       </div>
@@ -1843,25 +2196,7 @@ textarea{
 
 
     <!-- =========================
-         MENU CONTROL
-    ========================= -->
-
-    <div class="menu-section">
-
-      <h2>
-        🍽️ Menu Price / Image / Stock Control
-      </h2>
-
-      <div
-        id="menuList"
-        class="menu-list"
-      ></div>
-
-    </div>
-
-
-    <!-- =========================
-         ORDER MANAGEMENT
+         NEW ORDER
     ========================= -->
 
     <div id="orderManagement">
@@ -1871,173 +2206,7 @@ textarea{
       </div>
 
 
-      <!-- ==================================================
-           OFFER CONTROL + NEW ORDER SAME LINE
-      ================================================== -->
-
-      <div class="offer-new-order-row">
-
-
-        <!-- OFFER CONTROL LEFT -->
-
-        <div class="offer-side">
-
-          <div class="offer-control-title">
-            🎁 Offer Control
-          </div>
-
-          <div class="offer-status-row">
-
-            <div>
-
-              <div
-                id="offerStatusText"
-                class="offer-status-text on"
-              >
-                Offer is ON
-              </div>
-
-              <div
-                style="
-                  color:#666;
-                  font-size:8px;
-                  margin-top:2px;
-                "
-              >
-                Customer website offer
-              </div>
-
-            </div>
-
-            <button
-              id="offerSwitch"
-              class="offer-switch on"
-              onclick="toggleOffer()"
-            ></button>
-
-          </div>
-
-
-          <div class="offer-control-grid">
-
-            <div>
-
-              <label
-                style="
-                  display:block;
-                  color:#777;
-                  font-size:8px;
-                  margin-bottom:4px;
-                "
-              >
-                Offer Title
-              </label>
-
-              <input
-                id="offerTitle"
-                placeholder="SPECIAL OFFER"
-              >
-
-            </div>
-
-            <div>
-
-              <label
-                style="
-                  display:block;
-                  color:#777;
-                  font-size:8px;
-                  margin-bottom:4px;
-                "
-              >
-                Offer Price
-              </label>
-
-              <input
-                id="offerPrice"
-                placeholder="₹149"
-              >
-
-            </div>
-
-            <div class="offer-full">
-
-              <label
-                style="
-                  display:block;
-                  color:#777;
-                  font-size:8px;
-                  margin-bottom:4px;
-                "
-              >
-                Offer Description
-              </label>
-
-              <textarea
-                id="offerText"
-                placeholder="Burger + Fries + Cold Drink"
-              ></textarea>
-
-            </div>
-
-            <div>
-
-              <label
-                style="
-                  display:block;
-                  color:#777;
-                  font-size:8px;
-                  margin-bottom:4px;
-                "
-              >
-                Button Text
-              </label>
-
-              <input
-                id="offerButton"
-                placeholder="ORDER NOW"
-              >
-
-            </div>
-
-            <div>
-
-              <label
-                style="
-                  display:block;
-                  color:#777;
-                  font-size:8px;
-                  margin-bottom:4px;
-                "
-              >
-                Image URL
-              </label>
-
-              <input
-                id="offerImage"
-                placeholder="https://..."
-              >
-
-            </div>
-
-            <div class="offer-full">
-
-              <button
-                class="btn btn-gold"
-                style="width:100%"
-                onclick="saveOffer()"
-              >
-                Save Offer
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- NEW ORDER RIGHT -->
+      <div class="new-order-row">
 
         <div
           id="newOrderColumn"
@@ -2246,6 +2415,24 @@ textarea{
           No ratings yet.
         </div>
       </div>
+
+    </div>
+
+
+    <!-- =========================
+         MENU CONTROL - BOTTOM
+    ========================= -->
+
+    <div class="menu-section">
+
+      <h2>
+        🍽️ Menu Price / Image / Stock Control
+      </h2>
+
+      <div
+        id="menuList"
+        class="menu-list"
+      ></div>
 
     </div>
 
@@ -3983,6 +4170,10 @@ function startNotificationEffects(
   const folder =
     $("folderNew");
 
+  const dot =
+    $("newOrderDot");
+
+
   if(button){
     button.classList.add(
       "blink"
@@ -3992,6 +4183,12 @@ function startNotificationEffects(
   if(folder){
     folder.classList.add(
       "new-summary-alert"
+    );
+  }
+
+  if(dot){
+    dot.classList.add(
+      "alert"
     );
   }
 
@@ -4018,6 +4215,11 @@ function stopNotificationEffects(){
   $("folderNew")
     ?.classList.remove(
       "new-summary-alert"
+    );
+
+  $("newOrderDot")
+    ?.classList.remove(
+      "alert"
     );
 
 }
@@ -4201,7 +4403,7 @@ function(folder){
       .scrollIntoView({
         behavior:"smooth",
         block:"start"
-      });
+      );
 
   }
 
@@ -4233,7 +4435,7 @@ function(folder){
       .scrollIntoView({
         behavior:"smooth",
         block:"start"
-      });
+      );
 
   }
 
