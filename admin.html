@@ -1712,29 +1712,34 @@ textarea{
 
     <div class="details-offer-row">
 
-      <div class="order-details-box">
+      <!-- ACTIVE ORDERS NOW INSIDE THIS BOX -->
 
-        <h2>
-          📦 Order Management Details
-        </h2>
+      <div
+        id="orderManagement"
+        class="order-details-box"
+      >
 
-        <div class="notice">
-          All active customer orders are shown here.
+        <div class="active-order-head">
+
+          <strong>
+            📦 Active Orders
+          </strong>
+
+          <span id="activeOrderCount">
+            0
+          </span>
+
         </div>
 
         <div
-          id="orderManagementSummary"
-          style="
-            background:#171717;
-            border:1px solid #292929;
-            border-radius:8px;
-            padding:9px;
-            color:#777;
-            font-size:9px;
-            line-height:1.5;
-          "
+          id="activeOrdersList"
+          class="active-orders-list"
         >
-          Active customer orders will appear in the Order Management Details section below.
+
+          <div class="empty">
+            No active customer orders.
+          </div>
+
         </div>
 
       </div>
@@ -1851,38 +1856,6 @@ textarea{
 
           </div>
 
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- ACTIVE ORDERS ONLY -->
-
-    <div
-      id="orderManagement"
-      class="active-order-management"
-    >
-
-      <div class="active-order-head">
-
-        <strong>
-          📦 Order Management Details — Active Orders
-        </strong>
-
-        <span id="activeOrderCount">
-          0
-        </span>
-
-      </div>
-
-      <div
-        id="activeOrdersList"
-        class="active-orders-list"
-      >
-
-        <div class="empty">
-          No active customer orders.
         </div>
 
       </div>
