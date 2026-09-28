@@ -11,9 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-<!-- STATIC LEAFLET -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
@@ -693,9 +692,10 @@ footer a{
   padding:13px;
 }
 
-.form-group input[readonly]{
-  color:#aaa;
-  border-color:#292929;
+.form-group input:focus,
+.form-group textarea:focus{
+  outline:none;
+  border-color:#f59b23;
 }
 
 .form-group textarea{
@@ -746,7 +746,7 @@ footer a{
 }
 
 /* =====================================================
-   NEW MAP SEARCH RESULT UI
+   MAP SEARCH
 ===================================================== */
 
 .map-search{
@@ -1017,9 +1017,11 @@ footer a{
 ===================================================== */
 
 @media(max-width:900px){
+
   .menu-grid{
     grid-template-columns:repeat(2,1fr);
   }
+
 }
 
 @media(max-width:600px){
@@ -1107,6 +1109,7 @@ footer a{
   .customer-login-box{
     padding:24px 18px;
   }
+
 }
 </style>
 </head>
@@ -1511,7 +1514,7 @@ footer a{
       <input
         id="customerName"
         placeholder="Your name"
-        readonly
+        autocomplete="name"
       >
 
     </div>
@@ -1526,8 +1529,9 @@ footer a{
         id="customerPhone"
         type="tel"
         maxlength="10"
+        inputmode="numeric"
         placeholder="10 digit mobile number"
-        readonly
+        autocomplete="tel"
       >
 
     </div>
@@ -1606,7 +1610,6 @@ footer a{
 
         </div>
 
-        <!-- SEARCH RESULTS -->
         <div
           id="mapSearchResults"
           class="map-search-results hidden"
@@ -1651,6 +1654,7 @@ footer a{
         <button
           id="codButton"
           class="payment-option active"
+          type="button"
         >
           💵 Cash on Delivery
         </button>
@@ -1658,6 +1662,7 @@ footer a{
         <button
           id="onlineButton"
           class="payment-option"
+          type="button"
         >
           💳 Online Payment
         </button>
@@ -2321,6 +2326,8 @@ async function startCustomerAuth(){
       currentUser =
         auth.currentUser;
 
+      validateCheckout();
+
       return currentUser;
 
     }
@@ -2332,6 +2339,8 @@ async function startCustomerAuth(){
 
     currentUser =
       result.user;
+
+    validateCheckout();
 
     return currentUser;
 
@@ -3064,6 +3073,8 @@ function openCheckout(){
 
   renderOrderSummary();
 
+  validateCheckout();
+
 }
 
 
@@ -3205,7 +3216,7 @@ function renderOrderSummary(){
 
 /* =====================================================
    MAP
-   ONLY MAP SYSTEM CHANGED
+   PROPER STREET MAP + LABELS
 ===================================================== */
 
 function initializeLocationMap(){
@@ -3255,7 +3266,11 @@ function initializeLocationMap(){
         dragging:true,
         touchZoom:true,
         boxZoom:true,
-        keyboard:true
+        keyboard:true,
+        zoomSnap:1,
+        zoomDelta:1,
+        minZoom:5,
+        maxZoom:19
       }
     ).setView(
       [
@@ -3267,19 +3282,20 @@ function initializeLocationMap(){
 
 
   /*
-    Detailed street map.
-    Labels / village names come from
-    the map tile provider.
+    OpenStreetMap standard map.
+    This gives roads, village names,
+    locality names and normal map labels.
   */
 
   L.tileLayer(
-    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
-      minZoom:3,
+      minZoom:5,
       maxZoom:19,
       maxNativeZoom:19,
+      subdomains:["a","b","c"],
       attribution:
-        "Tiles © Esri — Source: Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCAN, Esri Japan, METI, Esri China, Esri Korea, Esri (Thailand), TomTom, © OpenStreetMap contributors"
+        '&copy; OpenStreetMap contributors'
     }
   ).addTo(
     locationMap
@@ -3287,9 +3303,7 @@ function initializeLocationMap(){
 
 
   /*
-    Map click = exact point.
-    Then reverse geocode to get the
-    nearest village/place name.
+    Exact map click.
   */
 
   locationMap.on(
@@ -3320,11 +3334,6 @@ function initializeLocationMap(){
     }
   );
 
-
-  /*
-    When map is zoomed/resized,
-    refresh Leaflet rendering.
-  */
 
   locationMap.on(
     "zoomend",
@@ -3673,7 +3682,6 @@ function setSelectedLocation(
 
 /* =====================================================
    REVERSE GEOCODE
-   Exact selected map point -> place name
 ===================================================== */
 
 async function reverseGeocodeLocation(
@@ -3951,11 +3959,8 @@ async function searchDifferentLocation(){
 
     initializeLocationMap();
 
-
     /*
-      Searching inside Odisha first.
-      limit 10 gives customer multiple
-      matching village/place results.
+      Search Odisha first.
     */
 
     const query =
@@ -4020,10 +4025,6 @@ async function searchDifferentLocation(){
     }
 
 
-    /*
-      Remove duplicate coordinates.
-    */
-
     const uniqueResults = [];
 
     const seen = new Set();
@@ -4052,17 +4053,17 @@ async function searchDifferentLocation(){
 
 
     uniqueResults.forEach(
-      (result,index)=>{
+      result=>{
 
-        const button =
+        const resultButton =
           document.createElement(
             "button"
           );
 
-        button.type =
+        resultButton.type =
           "button";
 
-        button.className =
+        resultButton.className =
           "map-search-result";
 
 
@@ -4077,7 +4078,7 @@ async function searchDifferentLocation(){
           "Location";
 
 
-        button.innerHTML = `
+        resultButton.innerHTML = `
 
           <div class="map-search-result-title">
 
@@ -4094,7 +4095,7 @@ async function searchDifferentLocation(){
         `;
 
 
-        button.addEventListener(
+        resultButton.addEventListener(
           "click",
           ()=>{
 
@@ -4107,7 +4108,7 @@ async function searchDifferentLocation(){
 
 
         resultsBox.appendChild(
-          button
+          resultButton
         );
 
       }
@@ -4238,21 +4239,12 @@ async function selectSearchResult(
   );
 
 
-  /*
-    Exact searched coordinates
-    are selected here.
-  */
-
   setSelectedLocation(
     lat,
     lng,
     placeName
   );
 
-
-  /*
-    Full address from search result.
-  */
 
   const fullName =
     result.display_name ||
@@ -4306,22 +4298,11 @@ async function selectSearchResult(
   }
 
 
-  /*
-    Reverse geocode once more so
-    village / hamlet / district data
-    is as accurate as possible.
-  */
-
   await reverseGeocodeLocation(
     lat,
     lng
   );
 
-
-  /*
-    Keep exact searched point after
-    reverse geocoding.
-  */
 
   if(locationMap){
 
@@ -4334,6 +4315,13 @@ async function selectSearchResult(
       {
         animate:true
       }
+    );
+
+    setTimeout(
+      ()=>{
+        locationMap.invalidateSize(true);
+      },
+      200
     );
 
   }
@@ -4560,26 +4548,84 @@ document.getElementById(
 
 
 /* =====================================================
+   CHECKOUT NAME + PHONE
+   EDITABLE
+===================================================== */
+
+document.getElementById(
+  "customerName"
+).addEventListener(
+  "input",
+  ()=>{
+    validateCheckout();
+  }
+);
+
+
+document.getElementById(
+  "customerPhone"
+).addEventListener(
+  "input",
+  event=>{
+
+    event.target.value =
+      event.target.value
+        .replace(/\D/g,"")
+        .slice(0,10);
+
+    validateCheckout();
+
+  }
+);
+
+
+/* =====================================================
    VALIDATION
 ===================================================== */
 
 function validateCheckout(){
 
-  const name =
-    customerProfile.name.trim();
+  const nameInput =
+    document.getElementById(
+      "customerName"
+    );
 
-  const phone =
-    customerProfile.phone.trim();
+  const phoneInput =
+    document.getElementById(
+      "customerPhone"
+    );
 
-  const address =
+  const addressInput =
     document.getElementById(
       "customerAddress"
-    ).value.trim();
+    );
+
+  if(
+    !nameInput ||
+    !phoneInput ||
+    !addressInput
+  ){
+
+    return false;
+
+  }
+
+
+  const name =
+    nameInput.value.trim();
+
+  const phone =
+    phoneInput.value.trim();
+
+  const address =
+    addressInput.value.trim();
+
 
   const validPhone =
     /^[6-9]\d{9}$/.test(
       phone
     );
+
 
   const valid =
     name.length >= 2 &&
@@ -4596,12 +4642,27 @@ function validateCheckout(){
 
     cart.length > 0 &&
 
-    !!currentUser;
+    !!(
+      currentUser ||
+      auth.currentUser
+    );
 
-  document.getElementById(
-    "placeOrderButton"
-  ).disabled =
-    !valid;
+
+  const button =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+
+  if(button){
+
+    button.disabled =
+      !valid;
+
+  }
+
+
+  return valid;
 
 }
 
@@ -4633,10 +4694,18 @@ async function placeOrder(){
       "placeOrderButton"
     );
 
+
   try{
 
+    /*
+      Make sure Firebase Anonymous Auth
+      is ready before validation/order.
+    */
+
     let user =
-      auth.currentUser;
+      auth.currentUser ||
+      currentUser;
+
 
     if(!user){
 
@@ -4651,6 +4720,7 @@ async function placeOrder(){
 
     }
 
+
     if(!user){
 
       throw new Error(
@@ -4659,8 +4729,10 @@ async function placeOrder(){
 
     }
 
+
     currentUser =
       user;
+
 
     if(!isShopOpen()){
 
@@ -4672,53 +4744,131 @@ async function placeOrder(){
 
     }
 
+
+    /*
+      IMPORTANT:
+      Use checkout Name + Phone,
+      NOT only login profile.
+    */
+
     const name =
-      customerProfile.name.trim();
+      document.getElementById(
+        "customerName"
+      ).value.trim();
+
 
     const phone =
-      customerProfile.phone.trim();
+      document.getElementById(
+        "customerPhone"
+      ).value.trim();
+
 
     const address =
       document.getElementById(
         "customerAddress"
       ).value.trim();
 
+
     const validPhone =
       /^[6-9]\d{9}$/.test(
         phone
       );
 
+
     if(
-
-      name.length < 2 ||
-
-      !validPhone ||
-
-      address.length < 5 ||
-
-      deliveryDistance === null ||
-
-      customerLat === null ||
-
-      customerLng === null ||
-
-      cart.length === 0
-
+      name.length < 2
     ){
 
       alert(
-        "Please complete all required details and select a delivery location."
+        "Please enter a valid name."
+      );
+
+      document.getElementById(
+        "customerName"
+      ).focus();
+
+      return;
+
+    }
+
+
+    if(!validPhone){
+
+      alert(
+        "Please enter a valid 10 digit mobile number."
+      );
+
+      document.getElementById(
+        "customerPhone"
+      ).focus();
+
+      return;
+
+    }
+
+
+    if(address.length < 5){
+
+      alert(
+        "Please enter your complete delivery address."
+      );
+
+      document.getElementById(
+        "customerAddress"
+      ).focus();
+
+      return;
+
+    }
+
+
+    if(
+      deliveryDistance === null ||
+      customerLat === null ||
+      customerLng === null
+    ){
+
+      alert(
+        "Please select your delivery location."
       );
 
       return;
 
     }
 
+
+    if(cart.length === 0){
+
+      alert(
+        "Your cart is empty."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Final validation before Firebase.
+    */
+
+    if(!validateCheckout()){
+
+      alert(
+        "Please complete all required checkout details."
+      );
+
+      return;
+
+    }
+
+
     button.disabled =
       true;
 
     button.textContent =
       "Placing Order...";
+
 
     const orderRef =
       push(
@@ -4728,8 +4878,10 @@ async function placeOrder(){
         )
       );
 
+
     const firebaseKey =
       orderRef.key;
+
 
     if(!firebaseKey){
 
@@ -4739,12 +4891,15 @@ async function placeOrder(){
 
     }
 
+
     const orderId =
       createOrderId(
         firebaseKey
       );
 
+
     let subtotal = 0;
+
 
     cart.forEach(
       item=>{
@@ -4756,11 +4911,13 @@ async function placeOrder(){
       }
     );
 
+
     const rate =
       Number(
         shopSettings.deliveryRate ||
         DEFAULT_DELIVERY_RATE
       );
+
 
     const deliveryCharge =
       Math.ceil(
@@ -4768,15 +4925,19 @@ async function placeOrder(){
         rate
       );
 
+
     const grandTotal =
       subtotal +
       deliveryCharge;
 
+
     const now =
       Date.now();
 
+
     const locationUrl =
       `https://www.google.com/maps?q=${customerLat},${customerLng}`;
+
 
     const orderData = {
 
@@ -4868,10 +5029,16 @@ async function placeOrder(){
 
     };
 
+
+    /*
+      SAVE ORDER TO FIREBASE
+    */
+
     await set(
       orderRef,
       orderData
     );
+
 
     localStorage.setItem(
       "lastOrderId",
@@ -4883,24 +5050,46 @@ async function placeOrder(){
       firebaseKey
     );
 
+
     const whatsapp =
       normalizeWhatsApp(
         shopSettings.whatsappNumber ||
         WHATSAPP_DEFAULT
       );
 
+
     const message =
       buildWhatsAppMessage(
         orderData
       );
 
+
     const whatsappUrl =
       `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
 
-    window.open(
-      whatsappUrl,
-      "_blank"
-    );
+
+    /*
+      Open WhatsApp after successful
+      Firebase order save.
+    */
+
+    try{
+
+      window.open(
+        whatsappUrl,
+        "_blank"
+      );
+
+    }
+    catch(whatsappError){
+
+      console.warn(
+        "WHATSAPP OPEN ERROR:",
+        whatsappError
+      );
+
+    }
+
 
     cart = [];
 
@@ -4908,11 +5097,13 @@ async function placeOrder(){
 
     closeCheckout();
 
+
     document.getElementById(
       "thankYouOverlay"
     ).classList.remove(
       "hidden"
     );
+
 
     setTimeout(
       ()=>{
@@ -4944,6 +5135,7 @@ async function placeOrder(){
       1800
     );
 
+
   }
   catch(error){
 
@@ -4952,17 +5144,20 @@ async function placeOrder(){
       error
     );
 
+
     const code =
       error &&
       error.code
         ? error.code
         : "unknown";
 
+
     const message =
       error &&
       error.message
         ? error.message
         : String(error);
+
 
     alert(
       "Order could not be placed.\n\n" +
@@ -4971,6 +5166,7 @@ async function placeOrder(){
       "\n\nMessage: " +
       message
     );
+
 
   }
   finally{
@@ -5067,6 +5263,7 @@ function buildWhatsAppMessage(
 🍴 *ORDER ITEMS*
 `;
 
+
   order.items.forEach(
     (item,index)=>{
 
@@ -5079,6 +5276,7 @@ Price: *₹${item.price * item.quantity}*
 
     }
   );
+
 
   text +=
 `━━━━━━━━━━━━━━━━━━
@@ -5149,10 +5347,12 @@ async function trackOrder(){
       .trim()
       .toUpperCase();
 
+
   const result =
     document.getElementById(
       "trackResult"
     );
+
 
   if(!input){
 
@@ -5178,12 +5378,14 @@ async function trackOrder(){
 
   }
 
+
   try{
 
     await startCustomerAuth();
 
     currentUser =
       auth.currentUser;
+
 
     if(!currentUser){
 
@@ -5192,6 +5394,7 @@ async function trackOrder(){
       );
 
     }
+
 
     if(trackingUnsubscribe){
 
@@ -5202,8 +5405,10 @@ async function trackOrder(){
 
     }
 
+
     trackingOrderId =
       input;
+
 
     const ordersQuery =
       query(
@@ -5223,6 +5428,7 @@ async function trackOrder(){
 
       );
 
+
     trackingUnsubscribe =
       onValue(
 
@@ -5233,11 +5439,13 @@ async function trackOrder(){
           let found =
             null;
 
+
           snapshot.forEach(
             child=>{
 
               const order =
                 child.val();
+
 
               if(
 
@@ -5262,6 +5470,7 @@ async function trackOrder(){
 
             }
           );
+
 
           if(!found){
 
@@ -5293,11 +5502,13 @@ async function trackOrder(){
 
           }
 
+
           renderTrackedOrder(
             found
           );
 
         },
+
 
         error=>{
 
@@ -5305,6 +5516,7 @@ async function trackOrder(){
             "TRACK ERROR:",
             error
           );
+
 
           result.innerHTML = `
 
@@ -5326,6 +5538,7 @@ async function trackOrder(){
       "TRACK ERROR:",
       error
     );
+
 
     result.innerHTML = `
 
@@ -5353,11 +5566,13 @@ function renderTrackedOrder(
       "trackResult"
     );
 
+
   const status =
     String(
       order.status ||
       "received"
     ).toLowerCase();
+
 
   const steps = [
 
@@ -5393,18 +5608,22 @@ function renderTrackedOrder(
 
   ];
 
+
   const currentIndex =
     steps.findIndex(
       x=>x[0] === status
     );
 
+
   let timeline = "";
+
 
   steps.forEach(
     (step,index)=>{
 
       const active =
         currentIndex >= index;
+
 
       timeline += `
 
@@ -5433,7 +5652,9 @@ function renderTrackedOrder(
     }
   );
 
+
   let items = "";
+
 
   (
     order.items ||
@@ -5471,9 +5692,11 @@ function renderTrackedOrder(
     }
   );
 
+
   const canConfirm =
     status ===
     "out_for_delivery";
+
 
   result.innerHTML = `
 
@@ -5657,12 +5880,14 @@ function renderTrackedOrder(
 
   `;
 
+
   if(canConfirm){
 
     const deliveredButton =
       document.getElementById(
         "deliveredButton"
       );
+
 
     if(deliveredButton){
 
@@ -5706,6 +5931,7 @@ function getStatusEmoji(
 
   };
 
+
   return (
     map[status] ||
     "📌"
@@ -5732,8 +5958,10 @@ async function customerConfirmDelivered(
 
   }
 
+
   currentUser =
     auth.currentUser;
+
 
   if(
     order.ownerUid !==
@@ -5748,6 +5976,7 @@ async function customerConfirmDelivered(
 
   }
 
+
   if(
     String(
       order.status
@@ -5758,6 +5987,7 @@ async function customerConfirmDelivered(
     return;
 
   }
+
 
   try{
 
@@ -5772,6 +6002,7 @@ async function customerConfirmDelivered(
 
     );
 
+
     showDeliverySuccess();
 
   }
@@ -5781,6 +6012,7 @@ async function customerConfirmDelivered(
       "DELIVERY CONFIRM ERROR:",
       error
     );
+
 
     alert(
       "Could not confirm delivery.\n\n" +
@@ -5806,41 +6038,51 @@ function showDeliverySuccess(){
       "deliverySuccessOverlay"
     );
 
+
   const title =
     document.getElementById(
       "deliverySuccessTitle"
     );
+
 
   const message =
     document.getElementById(
       "deliverySuccessMessage"
     );
 
+
   const icon =
     document.getElementById(
       "deliverySuccessIcon"
     );
+
 
   const flowerContainer =
     document.getElementById(
       "flowerContainer"
     );
 
+
   overlay.classList.remove(
     "hidden"
   );
 
+
   icon.textContent =
     "🎉";
+
 
   title.textContent =
     "Order Delivered Successfully!";
 
+
   message.textContent =
     "";
 
+
   flowerContainer.innerHTML =
     "";
+
 
   const flowers = [
     "🌸",
@@ -5850,6 +6092,7 @@ function showDeliverySuccess(){
     "💮",
     "🌹"
   ];
+
 
   for(
     let i = 0;
@@ -5862,8 +6105,10 @@ function showDeliverySuccess(){
         "div"
       );
 
+
     petal.className =
       "flower-petal";
+
 
     petal.textContent =
       flowers[
@@ -5873,9 +6118,11 @@ function showDeliverySuccess(){
         )
       ];
 
+
     petal.style.left =
       Math.random() * 100 +
       "%";
+
 
     petal.style.fontSize =
       (
@@ -5884,6 +6131,7 @@ function showDeliverySuccess(){
       ) +
       "px";
 
+
     petal.style.animationDuration =
       (
         2 +
@@ -5891,9 +6139,11 @@ function showDeliverySuccess(){
       ) +
       "s";
 
+
     petal.style.animationDelay =
       Math.random() * .8 +
       "s";
+
 
     petal.style.setProperty(
       "--drift",
@@ -5904,11 +6154,13 @@ function showDeliverySuccess(){
       "px"
     );
 
+
     flowerContainer.appendChild(
       petal
     );
 
   }
+
 
   setTimeout(
     ()=>{
@@ -5916,8 +6168,10 @@ function showDeliverySuccess(){
       icon.textContent =
         "🌸";
 
+
       title.textContent =
         "Thank You!";
+
 
       message.textContent =
         "Thank you for choosing The Queen Fast Food ❤️";
@@ -5926,6 +6180,7 @@ function showDeliverySuccess(){
     1000
   );
 
+
   setTimeout(
     ()=>{
 
@@ -5933,13 +6188,16 @@ function showDeliverySuccess(){
         "hidden"
       );
 
+
       flowerContainer.innerHTML =
         "";
+
 
       const lastOrderId =
         localStorage.getItem(
           "lastOrderId"
         );
+
 
       if(lastOrderId){
 
@@ -5948,7 +6206,9 @@ function showDeliverySuccess(){
         ).value =
           lastOrderId;
 
+
         trackOrder();
+
 
         document.getElementById(
           "trackResult"
@@ -5993,6 +6253,7 @@ function formatStatus(
     cancelled:"Cancelled"
 
   };
+
 
   return (
     map[status] ||
@@ -6077,9 +6338,12 @@ document.getElementById(
     const loggedIn =
       loadCustomerProfile();
 
+
     updateCustomerUI();
 
+
     fillCheckoutCustomer();
+
 
     if(!loggedIn){
 
@@ -6087,21 +6351,35 @@ document.getElementById(
 
     }
 
+
     await startCustomerAuth();
+
+
+    /*
+      Auth is ready.
+      Re-check Place Order state.
+    */
+
+    validateCheckout();
+
 
     loadSettings();
 
+
     renderCart();
+
 
     setInterval(
       renderShopStatus,
       30000
     );
 
+
     const lastOrderId =
       localStorage.getItem(
         "lastOrderId"
       );
+
 
     if(lastOrderId){
 
