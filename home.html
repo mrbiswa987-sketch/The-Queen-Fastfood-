@@ -1437,7 +1437,7 @@ footer a{
 
     <a
       target="_blank"
-      href="https://www.google.com/maps/search/?api=1&query=20.218327627254418,86.36231263747356"
+      href="https://www.google.com/maps/search/?api=1&query=20.21680076286578,86.36464502294459"
     >
       View Location
     </a>
@@ -1905,14 +1905,19 @@ const DEFAULT_MENU = [
 ===================================================== */
 
 /*
-   IMPORTANT:
-   Exact Queen Fast Food coordinate supplied by user.
+   EXACT QUEEN FAST FOOD LOCATION
+   Supplied by user.
+
+   All distance calculations,
+   delivery charges and 20 km delivery
+   radius are calculated from this point.
 */
+
 const RESTAURANT_LAT =
-  20.218327627254418;
+  20.21680076286578;
 
 const RESTAURANT_LNG =
-  86.36231263747356;
+  86.36464502294459;
 
 const DEFAULT_DELIVERY_RATE =
   6;
@@ -3338,7 +3343,7 @@ document.getElementById(
     const googleMapsUrl =
       "https://www.google.com/maps/search/?api=1&query=" +
       encodeURIComponent(
-        "20.218327627254418,86.36231263747356"
+        "20.21680076286578,86.36464502294459"
       );
 
     window.open(
@@ -3362,12 +3367,6 @@ document.getElementById(
 
     const value =
       event.target.value.trim();
-
-    /*
-      Do NOT immediately reject the link.
-      The user can paste different Google Maps
-      URL formats and then press Confirm.
-    */
 
     selectedGoogleMapsLink =
       value;
@@ -3418,24 +3417,11 @@ async function confirmGoogleMapsLocation(){
   }
 
 
-  /*
-    First try to extract coordinates.
-    This is intentionally done BEFORE the
-    normal URL check so Google Maps formats
-    containing coordinates are accepted.
-  */
-
   const coordinates =
     extractCoordinatesFromGoogleMapsLink(
       link
     );
 
-
-  /*
-    If coordinates are present, accept the
-    Google Maps URL even when its exact URL
-    format is different.
-  */
 
   if(
     !coordinates &&
@@ -3451,15 +3437,6 @@ async function confirmGoogleMapsLocation(){
 
   }
 
-
-  /*
-    Short links such as maps.app.goo.gl may
-    not expose their final coordinates to
-    browser JavaScript. They are still valid
-    Google Maps links, but exact distance
-    cannot be calculated unless coordinates
-    are available.
-  */
 
   selectedGoogleMapsLink =
     link;
@@ -3566,10 +3543,6 @@ function isGoogleMapsLink(
     raw.toLowerCase();
 
 
-  /*
-    Accepted Google Maps domains.
-  */
-
   const googleMapsDomain =
     (
       value.includes("google.com/maps") ||
@@ -3584,12 +3557,6 @@ function isGoogleMapsLink(
     return true;
   }
 
-
-  /*
-    Also accept Google Maps URLs that may have
-    been copied with unusual capitalization or
-    query formatting.
-  */
 
   try{
 
@@ -3642,20 +3609,8 @@ function isGoogleMapsLink(
   }
   catch(error){
 
-    /*
-      If URL parsing fails, coordinate
-      extraction below can still identify
-      a valid Google Maps coordinate string.
-    */
-
   }
 
-
-  /*
-    Coordinate-only Google Maps location:
-    Example:
-    20.218327627254418,86.36231263747356
-  */
 
   const coordinates =
     extractCoordinatesFromGoogleMapsLink(
@@ -3684,10 +3639,6 @@ function extractCoordinatesFromGoogleMapsLink(
     return null;
   }
 
-
-  /*
-    Helper used by every pattern.
-  */
 
   function makeCoordinates(
     latValue,
@@ -3772,8 +3723,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   /* ---------------------------------------------------
      4. /@LAT,LNG
-     Example:
-     https://www.google.com/maps/@20.218327,86.362312,18z
   --------------------------------------------------- */
 
   match =
@@ -3849,8 +3798,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   /* ---------------------------------------------------
      7. DATA / COORDINATE PAIR ANYWHERE
-     Example:
-     https://www.google.com/maps/search/?api=1&query=20.218327,86.362312
   --------------------------------------------------- */
 
   match =
@@ -3900,26 +3847,25 @@ function extractCoordinatesFromGoogleMapsLink(
 
 
   /*
-    9. Exact user restaurant coordinate pasted
-       directly.
+    9. EXACT QUEEN FAST FOOD COORDINATE
   */
 
   if(
     value.includes(
-      "20.218327627254418"
+      "20.21680076286578"
     ) &&
     value.includes(
-      "86.36231263747356"
+      "86.36464502294459"
     )
   ){
 
     return {
 
       lat:
-        20.218327627254418,
+        20.21680076286578,
 
       lng:
-        86.36231263747356
+        86.36464502294459
 
     };
 
