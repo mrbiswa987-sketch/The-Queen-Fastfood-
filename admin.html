@@ -410,8 +410,6 @@ textarea{
   margin-top:5px;
 }
 
-/* NEW ORDER DOT */
-
 .new-order-dot{
   position:absolute;
   top:10px;
@@ -468,8 +466,6 @@ textarea{
 .cancelled-stat{
   border-color:rgba(255,77,77,.35);
 }
-
-/* NEW ORDER ALERT */
 
 .new-summary-alert{
   border-color:#39d353!important;
@@ -701,10 +697,6 @@ textarea{
   margin-bottom:9px;
 }
 
-/* =========================
-   OFFER CONTROL
-========================= */
-
 .offer-control-title{
   color:var(--gold2);
   font-size:12px;
@@ -806,8 +798,6 @@ textarea{
   font-size:12px;
   margin-bottom:10px;
 }
-
-/* 4 BOXES IN ONE LINE */
 
 .menu-list{
   display:grid;
@@ -980,8 +970,6 @@ textarea{
   overflow:auto;
 }
 
-/* NEW ORDER FULL WIDTH */
-
 .new-order-row{
   display:grid;
   grid-template-columns:1fr;
@@ -995,10 +983,6 @@ textarea{
   color:#666;
   font-size:10px;
 }
-
-/* =========================
-   ORDERS BELOW NEW
-========================= */
 
 .orders-two-column{
   display:grid;
@@ -1493,10 +1477,6 @@ textarea{
 
 <body>
 
-<!-- =========================
-     LOGIN
-========================= -->
-
 <div class="login-screen" id="loginScreen">
 
   <div class="login-box">
@@ -1509,20 +1489,12 @@ textarea{
 
     <div class="field">
       <label>Admin Email</label>
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Enter admin email"
-      >
+      <input id="loginEmail" type="email" placeholder="Enter admin email">
     </div>
 
     <div class="field">
       <label>Password</label>
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Enter password"
-      >
+      <input id="loginPassword" type="password" placeholder="Enter password">
     </div>
 
     <button
@@ -1535,22 +1507,12 @@ textarea{
 
     <div
       id="loginMessage"
-      style="
-        margin-top:10px;
-        color:#ff7777;
-        font-size:10px;
-        text-align:center;
-      "
+      style="margin-top:10px;color:#ff7777;font-size:10px;text-align:center;"
     ></div>
 
   </div>
 
 </div>
-
-
-<!-- =========================
-     ADMIN
-========================= -->
 
 <div class="admin" id="adminPanel">
 
@@ -1573,11 +1535,6 @@ textarea{
 
   </div>
 
-
-  <!-- =========================
-       NEW ORDER NOTIFICATION
-  ========================= -->
-
   <div class="notification-wrap">
 
     <button
@@ -1589,10 +1546,7 @@ textarea{
       <span id="notificationBadge">0</span>
     </button>
 
-    <div
-      id="notificationPanel"
-      class="notification-panel"
-    >
+    <div id="notificationPanel" class="notification-panel">
 
       <div class="notification-title">
 
@@ -1617,13 +1571,7 @@ textarea{
 
   </div>
 
-
   <div class="dashboard">
-
-
-    <!-- =========================
-         ADMIN ID
-    ========================= -->
 
     <div class="admin-id-box">
 
@@ -1640,11 +1588,6 @@ textarea{
 
     </div>
 
-
-    <!-- =========================
-         TOP FIVE FOLDERS
-    ========================= -->
-
     <div class="grid">
 
       <button
@@ -1653,10 +1596,7 @@ textarea{
         onclick="selectFolder('new')"
       >
 
-        <span
-          id="newOrderDot"
-          class="new-order-dot"
-        ></span>
+        <span id="newOrderDot" class="new-order-dot"></span>
 
         <small>🆕 NEW ORDERS</small>
 
@@ -1667,7 +1607,6 @@ textarea{
         </span>
 
       </button>
-
 
       <button
         id="folderPending"
@@ -1685,7 +1624,6 @@ textarea{
 
       </button>
 
-
       <button
         id="folderDelivery"
         class="folder-stat delivery-stat"
@@ -1702,7 +1640,6 @@ textarea{
 
       </button>
 
-
       <button
         id="folderComplete"
         class="folder-stat complete-stat"
@@ -1718,7 +1655,6 @@ textarea{
         </span>
 
       </button>
-
 
       <button
         id="folderCancelled"
@@ -1738,15 +1674,7 @@ textarea{
 
     </div>
 
-
-    <!-- =========================
-         CONTROL BOXES
-    ========================= -->
-
     <div class="control-grid">
-
-
-      <!-- SHOP CONTROL -->
 
       <div class="control-box">
 
@@ -1754,15 +1682,9 @@ textarea{
 
         <div class="shop-status">
 
-          <span
-            id="shopLight"
-            class="shop-light"
-          ></span>
+          <span id="shopLight" class="shop-light"></span>
 
-          <span
-            id="shopStatusText"
-            class="shop-status-text"
-          >
+          <span id="shopStatusText" class="shop-status-text">
             CHECKING...
           </span>
 
@@ -1803,10 +1725,7 @@ textarea{
 
         </div>
 
-        <div
-          class="field"
-          style="margin-top:9px"
-        >
+        <div class="field" style="margin-top:9px">
 
           <label>Opening Time</label>
 
@@ -1850,9 +1769,6 @@ textarea{
 
       </div>
 
-
-      <!-- WEBSITE CONTROL -->
-
       <div class="control-box">
 
         <h2>🌐 Website Control</h2>
@@ -1863,17 +1779,9 @@ textarea{
 
           <select id="websiteMode">
 
-            <option value="normal">
-              Normal
-            </option>
-
-            <option value="updating">
-              Updating
-            </option>
-
-            <option value="maintenance">
-              Maintenance
-            </option>
+            <option value="normal">Normal</option>
+            <option value="updating">Updating</option>
+            <option value="maintenance">Maintenance</option>
 
           </select>
 
@@ -1899,10 +1807,7 @@ textarea{
           Update Website
         </button>
 
-        <div
-          class="field"
-          style="margin-top:10px"
-        >
+        <div class="field" style="margin-top:10px">
 
           <label>WhatsApp Number</label>
 
@@ -1923,9 +1828,6 @@ textarea{
         </button>
 
       </div>
-
-
-      <!-- PAYMENT METHOD -->
 
       <div class="control-box">
 
@@ -1967,15 +1869,7 @@ textarea{
 
     </div>
 
-
-    <!-- =========================
-         ORDER DETAILS + OFFER
-    ========================= -->
-
     <div class="details-offer-row">
-
-
-      <!-- ORDER MANAGEMENT DETAILS -->
 
       <div class="order-details-box">
 
@@ -2033,9 +1927,6 @@ textarea{
 
       </div>
 
-
-      <!-- OFFER CONTROL -->
-
       <div class="offer-side">
 
         <div class="offer-control-title">
@@ -2054,11 +1945,7 @@ textarea{
             </div>
 
             <div
-              style="
-                color:#666;
-                font-size:8px;
-                margin-top:2px;
-              "
+              style="color:#666;font-size:8px;margin-top:2px;"
             >
               Customer website offer
             </div>
@@ -2073,19 +1960,11 @@ textarea{
 
         </div>
 
-
         <div class="offer-control-grid">
 
           <div>
 
-            <label
-              style="
-                display:block;
-                color:#777;
-                font-size:8px;
-                margin-bottom:4px;
-              "
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Offer Title
             </label>
 
@@ -2098,14 +1977,7 @@ textarea{
 
           <div>
 
-            <label
-              style="
-                display:block;
-                color:#777;
-                font-size:8px;
-                margin-bottom:4px;
-              "
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Offer Price
             </label>
 
@@ -2118,14 +1990,7 @@ textarea{
 
           <div class="offer-full">
 
-            <label
-              style="
-                display:block;
-                color:#777;
-                font-size:8px;
-                margin-bottom:4px;
-              "
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Offer Description
             </label>
 
@@ -2138,14 +2003,7 @@ textarea{
 
           <div>
 
-            <label
-              style="
-                display:block;
-                color:#777;
-                font-size:8px;
-                margin-bottom:4px;
-              "
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Button Text
             </label>
 
@@ -2158,14 +2016,7 @@ textarea{
 
           <div>
 
-            <label
-              style="
-                display:block;
-                color:#777;
-                font-size:8px;
-                margin-bottom:4px;
-              "
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Image URL
             </label>
 
@@ -2194,17 +2045,11 @@ textarea{
 
     </div>
 
-
-    <!-- =========================
-         NEW ORDER
-    ========================= -->
-
     <div id="orderManagement">
 
       <div class="section-title">
         📦 Order Management
       </div>
-
 
       <div class="new-order-row">
 
@@ -2238,13 +2083,7 @@ textarea{
 
       </div>
 
-
-      <!-- =========================
-           PENDING + DELIVERY
-      ========================= -->
-
       <div class="orders-two-column">
-
 
         <div
           id="pendingOrderColumn"
@@ -2273,7 +2112,6 @@ textarea{
           </div>
 
         </div>
-
 
         <div
           id="deliveryOrderColumn"
@@ -2304,11 +2142,6 @@ textarea{
         </div>
 
       </div>
-
-
-      <!-- =========================
-           COMPLETE
-      ========================= -->
 
       <div
         id="completeFolderArea"
@@ -2345,11 +2178,6 @@ textarea{
         </div>
 
       </div>
-
-
-      <!-- =========================
-           CANCELLED
-      ========================= -->
 
       <div
         id="cancelledFolderArea"
@@ -2389,11 +2217,6 @@ textarea{
 
     </div>
 
-
-    <!-- =========================
-         RATINGS
-    ========================= -->
-
     <div
       class="menu-section"
       style="margin-top:12px"
@@ -2418,11 +2241,6 @@ textarea{
 
     </div>
 
-
-    <!-- =========================
-         MENU CONTROL - BOTTOM
-    ========================= -->
-
     <div class="menu-section">
 
       <h2>
@@ -2436,15 +2254,9 @@ textarea{
 
     </div>
 
-
   </div>
 
 </div>
-
-
-<!-- =========================
-     MODAL
-========================= -->
 
 <div
   id="completeModal"
@@ -2474,7 +2286,6 @@ textarea{
 
 </div>
 
-
 <div
   id="cancelledModal"
   class="modal"
@@ -2503,16 +2314,10 @@ textarea{
 
 </div>
 
-
 <div
   id="toast"
   class="toast"
 ></div>
-
-
-<!-- =========================
-     FIREBASE
-========================= -->
 
 <script type="module">
 
@@ -2581,17 +2386,9 @@ const auth =
   getAuth(app);
 
 
-/* =========================
-   ADMIN UID
-========================= */
-
 const ADMIN_UID =
   "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
-
-/* =========================
-   GLOBALS
-========================= */
 
 let settings = {};
 let orders = {};
@@ -3198,7 +2995,12 @@ function renderOverrideButtons(
 }
 
 
-async function saveShopSettings(){
+/* =========================
+   SHOP SETTINGS
+========================= */
+
+window.saveShopSettings =
+async function(){
 
   try{
 
@@ -3256,7 +3058,7 @@ async function saveShopSettings(){
 
   }
 
-}
+};
 
 
 /* =========================
@@ -4403,7 +4205,7 @@ function(folder){
       .scrollIntoView({
         behavior:"smooth",
         block:"start"
-      );
+      });
 
   }
 
@@ -4435,7 +4237,7 @@ function(folder){
       .scrollIntoView({
         behavior:"smooth",
         block:"start"
-      );
+      });
 
   }
 
@@ -5317,6 +5119,10 @@ async function(
     }
 
 
+    /* =========================
+       COMPLETE / DELIVERED
+    ========================= */
+
     if(status === "delivered"){
 
       updates[
@@ -5344,6 +5150,10 @@ async function(
     }
 
 
+    /* =========================
+       CANCELLED
+    ========================= */
+
     if(status === "cancelled"){
 
       updates[
@@ -5370,6 +5180,10 @@ async function(
 
     }
 
+
+    /* =========================
+       ACTIVE ORDERS
+    ========================= */
 
     if(
       status !== "delivered" &&
