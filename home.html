@@ -10,6 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- MAP -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 <style>
 *{
   box-sizing:border-box;
@@ -23,10 +29,6 @@ body{
   font-family:Inter,sans-serif;
   overflow-x:hidden;
 }
-
-/* =====================================================
-   QUEEN BACKGROUND WATERMARK + GIMBAL LIGHT
-===================================================== */
 
 body::before{
   content:"♛";
@@ -147,8 +149,7 @@ header{
   line-height:.95;
   font-weight:800;
   letter-spacing:1px;
-  text-shadow:
-    0 0 18px rgba(245,155,35,.15);
+  text-shadow:0 0 18px rgba(245,155,35,.15);
 }
 
 .hero h1 .welcome{
@@ -160,9 +161,6 @@ header{
   letter-spacing:5px;
   text-transform:uppercase;
   margin-bottom:12px;
-  text-shadow:
-    0 0 12px rgba(255,255,255,.18),
-    0 0 25px rgba(245,155,35,.12);
 }
 
 .hero h1 .queen-title{
@@ -171,9 +169,6 @@ header{
   font-family:"Playfair Display","Cormorant Garamond",serif;
   font-weight:800;
   letter-spacing:2px;
-  text-shadow:
-    0 0 15px rgba(245,155,35,.28),
-    0 0 35px rgba(245,155,35,.13);
 }
 
 .hero p{
@@ -213,23 +208,6 @@ header{
   font-size:13px;
   font-weight:700;
   letter-spacing:.7px;
-  text-shadow:
-    0 0 8px rgba(245,155,35,.55),
-    0 0 18px rgba(245,155,35,.25);
-  animation:orderTimeGlow 2.2s ease-in-out infinite alternate;
-}
-
-@keyframes orderTimeGlow{
-  from{
-    text-shadow:
-      0 0 6px rgba(245,155,35,.35),
-      0 0 12px rgba(245,155,35,.12);
-  }
-  to{
-    text-shadow:
-      0 0 10px rgba(245,155,35,.75),
-      0 0 24px rgba(245,155,35,.3);
-  }
 }
 
 .brand-message{
@@ -584,18 +562,71 @@ footer a{
   resize:vertical;
 }
 
-.location-row{
-  display:flex;
+.location-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:8px;
 }
 
-.location-row button{
-  white-space:nowrap;
-  background:#222;
+.location-buttons button{
+  padding:12px 8px;
+  background:#191919;
   color:#f59b23;
   border:1px solid #444;
   border-radius:10px;
-  padding:0 12px;
+  font-weight:700;
+}
+
+.location-buttons button.active{
+  border-color:#f59b23;
+  background:#251b0d;
+}
+
+.location-display{
+  margin-top:10px;
+}
+
+.location-display input{
+  width:100%;
+}
+
+.map-wrapper{
+  margin-top:12px;
+  border:1px solid #333;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+#locationMap{
+  width:100%;
+  height:280px;
+  background:#151515;
+}
+
+.map-search{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.map-search input{
+  flex:1;
+}
+
+.map-search button{
+  padding:0 13px;
+  background:#f59b23;
+  color:#000;
+  border:0;
+  border-radius:10px;
+  font-weight:800;
+}
+
+.location-hint{
+  color:#888;
+  font-size:11px;
+  line-height:1.5;
+  margin-top:8px;
 }
 
 .summary{
@@ -690,17 +721,9 @@ footer a{
 }
 
 @keyframes flower{
-  from{
-    transform:scale(.9) rotate(-5deg);
-  }
-  to{
-    transform:scale(1.1) rotate(5deg);
-  }
+  from{transform:scale(.9) rotate(-5deg)}
+  to{transform:scale(1.1) rotate(5deg)}
 }
-
-/* =====================================================
-   DELIVERY SUCCESS ANIMATION
-===================================================== */
 
 .delivery-success-message{
   position:fixed;
@@ -730,14 +753,12 @@ footer a{
   font-family:"Cormorant Garamond",serif;
   font-size:clamp(38px,7vw,65px);
   color:#f59b23;
-  animation:successPop .55s ease;
 }
 
 .delivery-success-message p{
   color:#aaa;
   margin-top:12px;
   font-size:18px;
-  animation:successFade .5s ease;
 }
 
 .flower-petal{
@@ -749,18 +770,11 @@ footer a{
 }
 
 @keyframes petalFall{
-
   0%{
-    transform:
-      translateY(-80px)
-      rotate(0deg);
+    transform:translateY(-80px) rotate(0deg);
     opacity:0;
   }
-
-  10%{
-    opacity:1;
-  }
-
+  10%{opacity:1}
   100%{
     transform:
       translateY(110vh)
@@ -768,47 +782,18 @@ footer a{
       rotate(720deg);
     opacity:0;
   }
-
 }
 
 @keyframes successPop{
-
-  0%{
-    transform:scale(.5);
-    opacity:0;
-  }
-
-  70%{
-    transform:scale(1.08);
-  }
-
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
-
-}
-
-@keyframes successFade{
-
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
+  0%{transform:scale(.5);opacity:0}
+  70%{transform:scale(1.08)}
+  100%{transform:scale(1);opacity:1}
 }
 
 @media(max-width:900px){
-
   .menu-grid{
     grid-template-columns:repeat(2,1fr);
   }
-
 }
 
 @media(max-width:600px){
@@ -841,7 +826,8 @@ footer a{
     min-width:70px;
   }
 
-  .payment-options{
+  .payment-options,
+  .location-buttons{
     grid-template-columns:1fr;
   }
 
@@ -859,6 +845,10 @@ footer a{
     height:430px;
   }
 
+  #locationMap{
+    height:240px;
+  }
+
 }
 </style>
 </head>
@@ -866,159 +856,85 @@ footer a{
 <body>
 
 <div id="websiteModeScreen" class="website-mode hidden">
-
   <div class="website-mode-inner">
-
-    <div id="websiteModeIcon" class="website-mode-icon">
-      🔧
-    </div>
-
-    <h1 id="websiteModeTitle">
-      Updating
-    </h1>
-
+    <div id="websiteModeIcon" class="website-mode-icon">🔧</div>
+    <h1 id="websiteModeTitle">Updating</h1>
     <p id="websiteModeMessage">
       The website is currently being updated.
       Please try again later.
     </p>
-
   </div>
-
 </div>
 
-
 <div id="thankYouOverlay" class="thankyou hidden">
-
   <div>
-
-    <div class="flower">
-      🌸
-    </div>
-
-    <h1>
-      Thank You!
-    </h1>
-
+    <div class="flower">🌸</div>
+    <h1>Thank You!</h1>
     <p style="color:#aaa;margin-top:10px">
       Your order has been placed successfully.
     </p>
-
   </div>
-
 </div>
 
-
-<div
-  id="deliverySuccessOverlay"
-  class="delivery-success-message hidden"
->
-
+<div id="deliverySuccessOverlay" class="delivery-success-message hidden">
   <div id="flowerContainer"></div>
 
   <div class="delivery-success-content">
-
-    <div
-      id="deliverySuccessIcon"
-      class="delivery-success-icon"
-    >
-      🎉
-    </div>
-
+    <div id="deliverySuccessIcon" class="delivery-success-icon">🎉</div>
     <h1 id="deliverySuccessTitle">
       Order Delivered Successfully!
     </h1>
-
     <p id="deliverySuccessMessage">
       Thank you for choosing The Queen Fast Food ❤️
     </p>
-
   </div>
-
 </div>
 
-
 <header>
-
   <div class="nav">
-
     <div class="logo">
       GOOD FOOD &amp; GOOD MOOD
     </div>
 
-    <button
-      id="topCart"
-      class="cart-top"
-    >
+    <button id="topCart" class="cart-top">
       🛒 Cart <b id="cartCount">0</b>
     </button>
-
   </div>
-
 </header>
 
-
 <main id="mainWebsite">
-
 
 <section class="hero">
 
   <h1>
-
-    <span class="welcome">
-      WELCOME TO
-    </span>
-
-    <span class="queen-title">
-      THE QUEEN FAST FOOD
-    </span>
-
+    <span class="welcome">WELCOME TO</span>
+    <span class="queen-title">THE QUEEN FAST FOOD</span>
   </h1>
-
 
   <p>
     Fresh food • Fast service • Easy ordering
   </p>
 
-
   <div class="brand-message">
-
-    <strong>
-      GOOD FOOD &amp; GOOD MOOD
-    </strong>
-
+    <strong>GOOD FOOD &amp; GOOD MOOD</strong>
     <span>
       Delicious food, great taste — right here at Ibrisingh Bazar.
     </span>
-
   </div>
 
-
   <div class="status">
-
-    <span
-      id="shopDot"
-      class="dot"
-    ></span>
-
+    <span id="shopDot" class="dot"></span>
     <span id="shopStatusText">
       Checking shop status...
     </span>
-
   </div>
 
-
-  <div
-    id="orderTimeBox"
-    class="order-time"
-  >
+  <div id="orderTimeBox" class="order-time">
     Order Time:
-    <span id="orderTimeValue">
-      --
-    </span>
+    <span id="orderTimeValue">--</span>
   </div>
 
 </section>
-
 
 <section class="section">
 
@@ -1026,13 +942,9 @@ footer a{
     Our Menu
   </h2>
 
-  <div
-    id="menuGrid"
-    class="menu-grid"
-  ></div>
+  <div id="menuGrid" class="menu-grid"></div>
 
 </section>
-
 
 <section class="section">
 
@@ -1055,18 +967,13 @@ footer a{
 
     </div>
 
-    <div
-      id="trackResult"
-      class="track-result"
-    ></div>
+    <div id="trackResult" class="track-result"></div>
 
   </div>
 
 </section>
 
-
 </main>
-
 
 <footer>
 
@@ -1079,36 +986,25 @@ footer a{
   </p>
 
   <p style="margin-top:8px">
-
     <a
       target="_blank"
       href="https://www.google.com/maps/search/?api=1&query=Ibrisingh+Tirtol+Jagatsinghpur+Odisha"
     >
       View Location
     </a>
-
   </p>
 
 </footer>
 
-
-<div
-  id="cartOverlay"
-  class="overlay hidden"
->
+<div id="cartOverlay" class="overlay hidden">
 
   <div class="drawer">
 
     <div class="drawer-head">
 
-      <h2>
-        Your Cart
-      </h2>
+      <h2>Your Cart</h2>
 
-      <button
-        id="closeCart"
-        class="close"
-      >
+      <button id="closeCart" class="close">
         ×
       </button>
 
@@ -1119,21 +1015,11 @@ footer a{
     <div class="cart-bottom">
 
       <div class="total-row total">
-
-        <span>
-          Total
-        </span>
-
-        <span>
-          ₹<span id="cartTotal">0</span>
-        </span>
-
+        <span>Total</span>
+        <span>₹<span id="cartTotal">0</span></span>
       </div>
 
-      <button
-        id="checkoutButton"
-        class="primary"
-      >
+      <button id="checkoutButton" class="primary">
         Proceed to Checkout
       </button>
 
@@ -1143,35 +1029,23 @@ footer a{
 
 </div>
 
-
-<div
-  id="checkoutOverlay"
-  class="overlay hidden"
->
+<div id="checkoutOverlay" class="overlay hidden">
 
   <div class="modal">
 
     <div class="drawer-head">
 
-      <h2>
-        Checkout
-      </h2>
+      <h2>Checkout</h2>
 
-      <button
-        id="closeCheckout"
-        class="close"
-      >
+      <button id="closeCheckout" class="close">
         ×
       </button>
 
     </div>
 
-
     <div class="form-group">
 
-      <label>
-        Name
-      </label>
+      <label>Name</label>
 
       <input
         id="customerName"
@@ -1180,12 +1054,9 @@ footer a{
 
     </div>
 
-
     <div class="form-group">
 
-      <label>
-        Phone
-      </label>
+      <label>Phone</label>
 
       <input
         id="customerPhone"
@@ -1196,12 +1067,9 @@ footer a{
 
     </div>
 
-
     <div class="form-group">
 
-      <label>
-        Delivery Address
-      </label>
+      <label>Delivery Address</label>
 
       <textarea
         id="customerAddress"
@@ -1210,24 +1078,79 @@ footer a{
 
     </div>
 
+    <!-- =================================================
+         NEW LOCATION SYSTEM
+    ================================================== -->
 
     <div class="form-group">
 
       <label>
-        Your Location
+        Delivery Location
       </label>
 
-      <div class="location-row">
+      <div class="location-buttons">
+
+        <button
+          id="currentLocationButton"
+          type="button"
+        >
+          📍 Use Current Location
+        </button>
+
+        <button
+          id="differentLocationButton"
+          type="button"
+        >
+          🗺️ Choose Different Location
+        </button>
+
+      </div>
+
+      <div
+        class="location-display"
+        id="locationDisplayBox"
+      >
 
         <input
           id="locationDisplay"
           readonly
-          placeholder="Location not selected"
+          placeholder="No delivery location selected"
         >
 
-        <button id="locationButton">
-          Use Location
-        </button>
+      </div>
+
+      <div
+        id="differentLocationBox"
+        class="hidden"
+      >
+
+        <div class="map-search">
+
+          <input
+            id="mapSearchInput"
+            placeholder="Search delivery location"
+          >
+
+          <button
+            id="mapSearchButton"
+            type="button"
+          >
+            Search
+          </button>
+
+        </div>
+
+        <div class="map-wrapper">
+
+          <div id="locationMap"></div>
+
+        </div>
+
+        <div class="location-hint">
+          Search your area or tap on the map to select the
+          exact delivery location. You can move the marker
+          to the required place.
+        </div>
 
       </div>
 
@@ -1235,17 +1158,12 @@ footer a{
         id="deliveryInfo"
         style="color:#aaa;font-size:12px;margin-top:8px"
       >
-        Location is required for delivery charge.
+        Select your delivery location to calculate delivery charge.
       </div>
 
     </div>
 
-
-    <div
-      id="orderSummary"
-      class="summary"
-    ></div>
-
+    <div id="orderSummary" class="summary"></div>
 
     <div class="form-group">
 
@@ -1280,7 +1198,6 @@ footer a{
 
     </div>
 
-
     <button
       id="placeOrderButton"
       class="primary"
@@ -1293,14 +1210,12 @@ footer a{
 
 </div>
 
-
 <script type="module">
 
 import {
   initializeApp
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 
 import {
   getDatabase,
@@ -1314,7 +1229,6 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-
 import {
   getAuth,
   signInAnonymously,
@@ -1323,6 +1237,20 @@ import {
   browserLocalPersistence
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* =====================================================
+   LEAFLET
+===================================================== */
+
+const leafletScript =
+  document.createElement("script");
+
+leafletScript.src =
+  "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+
+document.head.appendChild(
+  leafletScript
+);
 
 
 /* =====================================================
@@ -1357,14 +1285,11 @@ const firebaseConfig = {
 
 };
 
-
 const app =
   initializeApp(firebaseConfig);
 
-
 const db =
   getDatabase(app);
-
 
 const auth =
   getAuth(app);
@@ -1442,50 +1367,46 @@ const DEFAULT_MENU = [
 
 ];
 
-
 const RESTAURANT_LAT =
   20.216780359694468;
-
 
 const RESTAURANT_LNG =
   86.36464363454978;
 
-
 const DEFAULT_DELIVERY_RATE =
   6;
-
 
 const WHATSAPP_DEFAULT =
   "9090220791";
 
 
 let currentUser = null;
-
 let shopSettings = {};
-
 let cart = [];
 
 let deliveryDistance = null;
 
 let customerLat = null;
-
 let customerLng = null;
 
-let selectedPaymentMethod =
-  "COD";
+let selectedLocationType = null;
+let selectedLocationText = "";
 
+let selectedPaymentMethod = "COD";
 
 let trackingUnsubscribe = null;
-
 let trackingOrderId = "";
+
+let locationMap = null;
+let locationMarker = null;
+let mapReady = false;
+
+let authReadyPromise = null;
 
 
 /* =====================================================
    AUTH
 ===================================================== */
-
-let authReadyPromise = null;
-
 
 function waitForAuthState(){
 
@@ -1500,13 +1421,11 @@ function waitForAuthState(){
 
   }
 
-
   if(authReadyPromise){
 
     return authReadyPromise;
 
   }
-
 
   authReadyPromise =
     new Promise(resolve=>{
@@ -1532,15 +1451,10 @@ function waitForAuthState(){
 
     });
 
-
   return authReadyPromise;
 
 }
 
-
-/* =====================================================
-   START CUSTOMER AUTH
-===================================================== */
 
 async function startCustomerAuth(){
 
@@ -1551,37 +1465,22 @@ async function startCustomerAuth(){
       browserLocalPersistence
     );
 
-
     if(auth.currentUser){
 
       currentUser =
         auth.currentUser;
 
-      console.log(
-        "Existing customer UID:",
-        currentUser.uid
-      );
-
       return currentUser;
 
     }
-
 
     const result =
       await signInAnonymously(
         auth
       );
 
-
     currentUser =
       result.user;
-
-
-    console.log(
-      "New customer UID:",
-      currentUser.uid
-    );
-
 
     return currentUser;
 
@@ -1594,24 +1493,19 @@ async function startCustomerAuth(){
       error
     );
 
-
     currentUser = null;
-
 
     alert(
 
       "Secure connection failed.\n\n" +
 
       "Code: " +
-
       (
         error.code ||
         "unknown"
       ) +
 
-      "\n\n" +
-
-      "Message: " +
+      "\n\nMessage: " +
 
       (
         error.message ||
@@ -1620,17 +1514,12 @@ async function startCustomerAuth(){
 
     );
 
-
     throw error;
 
   }
 
 }
 
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
 
 onAuthStateChanged(
   auth,
@@ -1640,13 +1529,6 @@ onAuthStateChanged(
 
       currentUser =
         user;
-
-
-      console.log(
-        "Auth state ready:",
-        user.uid
-      );
-
 
       validateCheckout();
 
@@ -1674,13 +1556,11 @@ function loadSettings(){
       shopSettings =
         snapshot.val() || {};
 
-
       renderWebsiteMode();
 
       renderShopStatus();
 
       renderMenu();
-
 
       if(
         !document
@@ -1723,13 +1603,11 @@ function renderWebsiteMode(){
       "websiteModeScreen"
     );
 
-
   const mode =
     String(
       shopSettings.websiteMode ||
       "normal"
     ).toLowerCase();
-
 
   if(mode === "normal"){
 
@@ -1741,39 +1619,32 @@ function renderWebsiteMode(){
 
   }
 
-
   screen.classList.remove(
     "hidden"
   );
-
 
   const icon =
     document.getElementById(
       "websiteModeIcon"
     );
 
-
   const title =
     document.getElementById(
       "websiteModeTitle"
     );
-
 
   const message =
     document.getElementById(
       "websiteModeMessage"
     );
 
-
   if(mode === "maintenance"){
 
     icon.textContent =
       "🛠️";
 
-
     title.textContent =
       "Website Closed";
-
 
     message.textContent =
       shopSettings.websiteMessage ||
@@ -1786,10 +1657,8 @@ function renderWebsiteMode(){
     icon.textContent =
       "🔧";
 
-
     title.textContent =
       "Updating";
-
 
     message.textContent =
       shopSettings.websiteMessage ||
@@ -1812,63 +1681,44 @@ function isShopOpen(){
       "auto"
     ).toLowerCase();
 
-
-  if(
-    override === "open"
-  ){
-
+  if(override === "open"){
     return true;
-
   }
 
-
-  if(
-    override === "closed"
-  ){
-
+  if(override === "closed"){
     return false;
-
   }
-
 
   const now =
     new Date();
-
 
   const openTime =
     shopSettings.openTime ||
     "12:00";
 
-
   const closeTime =
     shopSettings.closeTime ||
     "23:00";
-
 
   const [oh,om] =
     openTime
       .split(":")
       .map(Number);
 
-
   const [ch,cm] =
     closeTime
       .split(":")
       .map(Number);
 
-
   const current =
     now.getHours()*60 +
     now.getMinutes();
 
-
   const open =
     oh*60 + om;
 
-
   const close =
     ch*60 + cm;
-
 
   if(close > open){
 
@@ -1879,7 +1729,6 @@ function isShopOpen(){
 
   }
 
-
   return (
     current >= open ||
     current < close
@@ -1888,27 +1737,20 @@ function isShopOpen(){
 }
 
 
-/* =====================================================
-   SHOP STATUS RENDER
-===================================================== */
-
 function renderShopStatus(){
 
   const open =
     isShopOpen();
-
 
   const dot =
     document.getElementById(
       "shopDot"
     );
 
-
   const text =
     document.getElementById(
       "shopStatusText"
     );
-
 
   dot.className =
     "dot " +
@@ -1918,28 +1760,23 @@ function renderShopStatus(){
         : "closed"
     );
 
-
   text.textContent =
     open
       ? "YOUR ORDER IS JUST A CLICK AWAY"
       : "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW";
-
 
   const orderTime =
     document.getElementById(
       "orderTimeValue"
     );
 
-
   const openTime =
     shopSettings.openTime ||
     "12:00";
 
-
   const closeTime =
     shopSettings.closeTime ||
     "23:00";
-
 
   orderTime.textContent =
     `${openTime} - ${closeTime}`;
@@ -1965,7 +1802,6 @@ function getMenu(){
               defaultItem.id
             ]
           : {};
-
 
       return {
 
@@ -2000,9 +1836,7 @@ function renderMenu(){
       "menuGrid"
     );
 
-
   grid.innerHTML = "";
-
 
   getMenu().forEach(
     item=>{
@@ -2012,10 +1846,8 @@ function renderMenu(){
           "div"
         );
 
-
       card.className =
         "card";
-
 
       const image =
         item.image
@@ -2024,23 +1856,18 @@ function renderMenu(){
 
           : `<div style="font-size:55px">🍽️</div>`;
 
-
       const unavailable =
         !item.available;
 
-
       const closed =
         !isShopOpen();
-
 
       const disabled =
         unavailable ||
         closed;
 
-
       let buttonText =
         "Add to Cart";
-
 
       if(unavailable){
 
@@ -2055,7 +1882,6 @@ function renderMenu(){
           "SHOP CLOSED";
 
       }
-
 
       card.innerHTML = `
 
@@ -2089,26 +1915,21 @@ function renderMenu(){
 
       `;
 
-
       const btn =
         card.querySelector(
           "button"
         );
-
 
       if(!disabled){
 
         btn.addEventListener(
           "click",
           ()=>{
-
             addToCart(item);
-
           }
         );
 
       }
-
 
       grid.appendChild(card);
 
@@ -2134,12 +1955,10 @@ function addToCart(item){
 
   }
 
-
   const existing =
     cart.find(
       x=>x.id === item.id
     );
-
 
   if(existing){
 
@@ -2152,43 +1971,27 @@ function addToCart(item){
     cart.push({
 
       id:item.id,
-
       name:item.name,
-
       price:item.price,
-
       quantity:1
 
     });
 
   }
 
-
   renderCart();
-
 
   const top =
     document.getElementById(
       "topCart"
     );
 
-
   top.animate(
 
     [
-
-      {
-        transform:"scale(1)"
-      },
-
-      {
-        transform:"scale(1.12)"
-      },
-
-      {
-        transform:"scale(1)"
-      }
-
+      {transform:"scale(1)"},
+      {transform:"scale(1.12)"},
+      {transform:"scale(1)"}
     ],
 
     {
@@ -2200,17 +2003,12 @@ function addToCart(item){
 }
 
 
-/* =====================================================
-   RENDER CART
-===================================================== */
-
 function renderCart(){
 
   const body =
     document.getElementById(
       "cartBody"
     );
-
 
   const count =
     cart.reduce(
@@ -2219,12 +2017,10 @@ function renderCart(){
       0
     );
 
-
   document.getElementById(
     "cartCount"
   ).textContent =
     count;
-
 
   if(cart.length === 0){
 
@@ -2234,23 +2030,18 @@ function renderCart(){
         Your cart is empty.
       </p>`;
 
-
     document.getElementById(
       "cartTotal"
     ).textContent =
       "0";
 
-
     return;
 
   }
 
-
   let subtotal = 0;
 
-
   body.innerHTML = "";
-
 
   cart.forEach(
     item=>{
@@ -2259,19 +2050,15 @@ function renderCart(){
         item.price *
         item.quantity;
 
-
       subtotal += line;
-
 
       const div =
         document.createElement(
           "div"
         );
 
-
       div.className =
         "cart-item";
-
 
       div.innerHTML = `
 
@@ -2313,14 +2100,12 @@ function renderCart(){
 
       `;
 
-
       div.querySelector(
         "[data-action=minus]"
       ).onclick =
         ()=>{
 
           item.quantity--;
-
 
           if(item.quantity <= 0){
 
@@ -2331,11 +2116,9 @@ function renderCart(){
 
           }
 
-
           renderCart();
 
         };
-
 
       div.querySelector(
         "[data-action=plus]"
@@ -2348,12 +2131,10 @@ function renderCart(){
 
         };
 
-
       body.appendChild(div);
 
     }
   );
-
 
   document.getElementById(
     "cartTotal"
@@ -2401,7 +2182,6 @@ function openCheckout(){
 
   }
 
-
   if(!isShopOpen()){
 
     alert(
@@ -2412,16 +2192,13 @@ function openCheckout(){
 
   }
 
-
   closeCart();
-
 
   document.getElementById(
     "checkoutOverlay"
   ).classList.remove(
     "hidden"
   );
-
 
   renderOrderSummary();
 
@@ -2439,12 +2216,14 @@ function closeCheckout(){
 }
 
 
+/* =====================================================
+   ORDER SUMMARY
+===================================================== */
+
 function renderOrderSummary(){
 
   let subtotal = 0;
-
   let html = "";
-
 
   cart.forEach(
     item=>{
@@ -2453,9 +2232,7 @@ function renderOrderSummary(){
         item.price *
         item.quantity;
 
-
       subtotal += total;
-
 
       html += `
 
@@ -2477,16 +2254,13 @@ function renderOrderSummary(){
     }
   );
 
-
   const rate =
     Number(
       shopSettings.deliveryRate ||
       DEFAULT_DELIVERY_RATE
     );
 
-
   let delivery = 0;
-
 
   if(
     deliveryDistance !== null
@@ -2500,11 +2274,9 @@ function renderOrderSummary(){
 
   }
 
-
   const grand =
     subtotal +
     delivery;
-
 
   html += `
 
@@ -2527,15 +2299,12 @@ function renderOrderSummary(){
     <div class="summary-row">
 
       <span>
-
         Delivery
-
         ${
           deliveryDistance !== null
             ? `(${deliveryDistance.toFixed(2)} km)`
             : ""
         }
-
       </span>
 
       <b>
@@ -2558,12 +2327,10 @@ function renderOrderSummary(){
 
   `;
 
-
   document.getElementById(
     "orderSummary"
   ).innerHTML =
     html;
-
 
   validateCheckout();
 
@@ -2571,11 +2338,123 @@ function renderOrderSummary(){
 
 
 /* =====================================================
-   LOCATION
+   MAP INITIALIZATION
+===================================================== */
+
+function initializeLocationMap(){
+
+  if(mapReady){
+    return;
+  }
+
+  if(
+    typeof L === "undefined"
+  ){
+
+    setTimeout(
+      initializeLocationMap,
+      300
+    );
+
+    return;
+
+  }
+
+  locationMap =
+    L.map(
+      "locationMap"
+    ).setView(
+      [
+        RESTAURANT_LAT,
+        RESTAURANT_LNG
+      ],
+      13
+    );
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      maxZoom:19,
+      attribution:"© OpenStreetMap contributors"
+    }
+  ).addTo(
+    locationMap
+  );
+
+  locationMap.on(
+    "click",
+    event=>{
+
+      setSelectedLocation(
+        event.latlng.lat,
+        event.latlng.lng,
+        "Selected map location"
+      );
+
+    }
+  );
+
+  mapReady = true;
+
+}
+
+
+/* =====================================================
+   DIFFERENT LOCATION BUTTON
 ===================================================== */
 
 document.getElementById(
-  "locationButton"
+  "differentLocationButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    selectedLocationType =
+      "different";
+
+    document.getElementById(
+      "differentLocationButton"
+    ).classList.add(
+      "active"
+    );
+
+    document.getElementById(
+      "currentLocationButton"
+    ).classList.remove(
+      "active"
+    );
+
+    document.getElementById(
+      "differentLocationBox"
+    ).classList.remove(
+      "hidden"
+    );
+
+    setTimeout(
+      ()=>{
+
+        initializeLocationMap();
+
+        if(locationMap){
+
+          locationMap.invalidateSize();
+
+        }
+
+      },
+      100
+    );
+
+  }
+);
+
+
+/* =====================================================
+   CURRENT LOCATION BUTTON
+===================================================== */
+
+document.getElementById(
+  "currentLocationButton"
 ).addEventListener(
   "click",
   ()=>{
@@ -2590,76 +2469,53 @@ document.getElementById(
 
     }
 
-
     const button =
       document.getElementById(
-        "locationButton"
+        "currentLocationButton"
       );
-
 
     button.textContent =
       "Getting...";
-
 
     navigator.geolocation.getCurrentPosition(
 
       position=>{
 
-        customerLat =
-          position.coords.latitude;
+        setSelectedLocation(
 
+          position.coords.latitude,
 
-        customerLng =
-          position.coords.longitude;
+          position.coords.longitude,
 
+          "Current location"
 
-        const distance =
-          haversine(
+        );
 
-            RESTAURANT_LAT,
-            RESTAURANT_LNG,
-
-            customerLat,
-            customerLng
-
-          );
-
-
-        deliveryDistance =
-          Number(
-            distance.toFixed(2)
-          );
-
+        selectedLocationType =
+          "current";
 
         document.getElementById(
-          "locationDisplay"
-        ).value =
-          `${deliveryDistance.toFixed(2)} km away`;
-
-
-        const rate =
-          Number(
-            shopSettings.deliveryRate ||
-            DEFAULT_DELIVERY_RATE
-          );
-
+          "currentLocationButton"
+        ).classList.add(
+          "active"
+        );
 
         document.getElementById(
-          "deliveryInfo"
-        ).textContent =
-          `📍 Delivery charge: ₹${Math.ceil(
-            deliveryDistance * rate
-          )}`;
+          "differentLocationButton"
+        ).classList.remove(
+          "active"
+        );
 
+        document.getElementById(
+          "differentLocationBox"
+        ).classList.add(
+          "hidden"
+        );
 
         button.textContent =
           "Location Ready ✓";
 
-
-        renderOrderSummary();
-
       },
-
 
       error=>{
 
@@ -2668,17 +2524,14 @@ document.getElementById(
           error
         );
 
-
         button.textContent =
-          "Use Location";
-
+          "📍 Use Current Location";
 
         alert(
-          "Please allow location access to calculate delivery charge."
+          "Current location could not be accessed. You can use 'Choose Different Location' instead."
         );
 
       },
-
 
       {
         enableHighAccuracy:true,
@@ -2692,6 +2545,299 @@ document.getElementById(
 );
 
 
+/* =====================================================
+   SET SELECTED LOCATION
+===================================================== */
+
+function setSelectedLocation(
+  lat,
+  lng,
+  label
+){
+
+  customerLat =
+    Number(lat);
+
+  customerLng =
+    Number(lng);
+
+  selectedLocationText =
+    label || "Selected location";
+
+  const distance =
+    haversine(
+
+      RESTAURANT_LAT,
+      RESTAURANT_LNG,
+
+      customerLat,
+      customerLng
+
+    );
+
+  deliveryDistance =
+    Number(
+      distance.toFixed(2)
+    );
+
+  const rate =
+    Number(
+      shopSettings.deliveryRate ||
+      DEFAULT_DELIVERY_RATE
+    );
+
+  const deliveryCharge =
+    Math.ceil(
+      deliveryDistance *
+      rate
+    );
+
+  document.getElementById(
+    "locationDisplay"
+  ).value =
+    `${selectedLocationText} • ${deliveryDistance.toFixed(2)} km away`;
+
+  document.getElementById(
+    "deliveryInfo"
+  ).textContent =
+    `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
+
+  if(locationMap){
+
+    if(locationMarker){
+
+      locationMarker.setLatLng([
+        customerLat,
+        customerLng
+      ]);
+
+    }
+
+    else{
+
+      locationMarker =
+        L.marker([
+          customerLat,
+          customerLng
+        ],{
+          draggable:true
+        }).addTo(
+          locationMap
+        );
+
+      locationMarker.on(
+        "dragend",
+        event=>{
+
+          const pos =
+            event.target.getLatLng();
+
+          setSelectedLocation(
+            pos.lat,
+            pos.lng,
+            "Selected map location"
+          );
+
+        }
+      );
+
+    }
+
+    locationMap.setView(
+      [
+        customerLat,
+        customerLng
+      ],
+      16
+    );
+
+  }
+
+  renderOrderSummary();
+
+}
+
+
+/* =====================================================
+   SEARCH DIFFERENT LOCATION
+===================================================== */
+
+document.getElementById(
+  "mapSearchButton"
+).addEventListener(
+  "click",
+  searchDifferentLocation
+);
+
+document.getElementById(
+  "mapSearchInput"
+).addEventListener(
+  "keydown",
+  event=>{
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      searchDifferentLocation();
+
+    }
+
+  }
+);
+
+
+async function searchDifferentLocation(){
+
+  const input =
+    document.getElementById(
+      "mapSearchInput"
+    ).value.trim();
+
+  if(!input){
+
+    alert(
+      "Please enter a location to search."
+    );
+
+    return;
+
+  }
+
+  const button =
+    document.getElementById(
+      "mapSearchButton"
+    );
+
+  button.textContent =
+    "Searching...";
+
+  try{
+
+    initializeLocationMap();
+
+    const query =
+      encodeURIComponent(
+        input + ", Odisha, India"
+      );
+
+    const response =
+      await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${query}`,
+        {
+          headers:{
+            "Accept":"application/json"
+          }
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Location search failed."
+      );
+
+    }
+
+    const results =
+      await response.json();
+
+    if(
+      !results ||
+      results.length === 0
+    ){
+
+      alert(
+        "Location not found. Please try another place or tap directly on the map."
+      );
+
+      return;
+
+    }
+
+    const result =
+      results[0];
+
+    const lat =
+      Number(result.lat);
+
+    const lng =
+      Number(result.lon);
+
+    setSelectedLocation(
+
+      lat,
+
+      lng,
+
+      result.display_name
+        ? shortenLocationName(
+            result.display_name
+          )
+        : "Selected location"
+
+    );
+
+    selectedLocationType =
+      "different";
+
+    document.getElementById(
+      "differentLocationButton"
+    ).classList.add(
+      "active"
+    );
+
+    document.getElementById(
+      "currentLocationButton"
+    ).classList.remove(
+      "active"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "LOCATION SEARCH ERROR:",
+      error
+    );
+
+    alert(
+      "Unable to search location right now. Please try again or select the location directly on the map."
+    );
+
+  }
+
+  finally{
+
+    button.textContent =
+      "Search";
+
+  }
+
+}
+
+
+function shortenLocationName(
+  text
+){
+
+  const parts =
+    String(text)
+      .split(",");
+
+  return parts
+    .slice(0,4)
+    .join(",")
+    .trim();
+
+}
+
+
+/* =====================================================
+   HAVERSINE
+===================================================== */
+
 function haversine(
   lat1,
   lon1,
@@ -2702,18 +2848,15 @@ function haversine(
   const R =
     6371;
 
-
   const dLat =
     (lat2-lat1) *
     Math.PI /
     180;
 
-
   const dLon =
     (lon2-lon1) *
     Math.PI /
     180;
-
 
   const a =
     Math.sin(dLat/2)**2 +
@@ -2729,7 +2872,6 @@ function haversine(
     Math.sin(
       dLon/2
     )**2;
-
 
   return R * 2 *
     Math.atan2(
@@ -2753,13 +2895,11 @@ document.getElementById(
     selectedPaymentMethod =
       "COD";
 
-
     document.getElementById(
       "codButton"
     ).classList.add(
       "active"
     );
-
 
     document.getElementById(
       "onlineButton"
@@ -2767,13 +2907,11 @@ document.getElementById(
       "active"
     );
 
-
     document.getElementById(
       "paymentWarning"
     ).classList.add(
       "hidden"
     );
-
 
     validateCheckout();
 
@@ -2790,13 +2928,11 @@ document.getElementById(
     selectedPaymentMethod =
       "ONLINE";
 
-
     document.getElementById(
       "onlineButton"
     ).classList.add(
       "active"
     );
-
 
     document.getElementById(
       "codButton"
@@ -2804,13 +2940,11 @@ document.getElementById(
       "active"
     );
 
-
     document.getElementById(
       "paymentWarning"
     ).classList.remove(
       "hidden"
     );
-
 
     validateCheckout();
 
@@ -2829,24 +2963,20 @@ function validateCheckout(){
       "customerName"
     ).value.trim();
 
-
   const phone =
     document.getElementById(
       "customerPhone"
     ).value.trim();
-
 
   const address =
     document.getElementById(
       "customerAddress"
     ).value.trim();
 
-
   const validPhone =
     /^[6-9]\d{9}$/.test(
       phone
     );
-
 
   const valid =
     name.length >= 2 &&
@@ -2857,10 +2987,13 @@ function validateCheckout(){
 
     deliveryDistance !== null &&
 
+    customerLat !== null &&
+
+    customerLng !== null &&
+
     cart.length > 0 &&
 
     !!currentUser;
-
 
   document.getElementById(
     "placeOrderButton"
@@ -2907,28 +3040,23 @@ async function placeOrder(){
       "placeOrderButton"
     );
 
-
   try{
 
     let user =
       auth.currentUser;
-
 
     if(!user){
 
       button.disabled =
         true;
 
-
       button.textContent =
         "Connecting...";
-
 
       user =
         await startCustomerAuth();
 
     }
-
 
     if(!user){
 
@@ -2938,16 +3066,8 @@ async function placeOrder(){
 
     }
 
-
     currentUser =
       user;
-
-
-    console.log(
-      "ORDER USER UID:",
-      currentUser.uid
-    );
-
 
     if(!isShopOpen()){
 
@@ -2959,30 +3079,25 @@ async function placeOrder(){
 
     }
 
-
     const name =
       document.getElementById(
         "customerName"
       ).value.trim();
-
 
     const phone =
       document.getElementById(
         "customerPhone"
       ).value.trim();
 
-
     const address =
       document.getElementById(
         "customerAddress"
       ).value.trim();
 
-
     const validPhone =
       /^[6-9]\d{9}$/.test(
         phone
       );
-
 
     if(
 
@@ -2994,26 +3109,27 @@ async function placeOrder(){
 
       deliveryDistance === null ||
 
+      customerLat === null ||
+
+      customerLng === null ||
+
       cart.length === 0
 
     ){
 
       alert(
-        "Please complete all required details."
+        "Please complete all required details and select a delivery location."
       );
 
       return;
 
     }
 
-
     button.disabled =
       true;
 
-
     button.textContent =
       "Placing Order...";
-
 
     const orderRef =
       push(
@@ -3023,10 +3139,8 @@ async function placeOrder(){
         )
       );
 
-
     const firebaseKey =
       orderRef.key;
-
 
     if(!firebaseKey){
 
@@ -3036,15 +3150,12 @@ async function placeOrder(){
 
     }
 
-
     const orderId =
       createOrderId(
         firebaseKey
       );
 
-
     let subtotal = 0;
-
 
     cart.forEach(
       item=>{
@@ -3056,13 +3167,11 @@ async function placeOrder(){
       }
     );
 
-
     const rate =
       Number(
         shopSettings.deliveryRate ||
         DEFAULT_DELIVERY_RATE
       );
-
 
     const deliveryCharge =
       Math.ceil(
@@ -3070,19 +3179,15 @@ async function placeOrder(){
         rate
       );
 
-
     const grandTotal =
       subtotal +
       deliveryCharge;
 
-
     const now =
       Date.now();
 
-
     const locationUrl =
       `https://www.google.com/maps?q=${customerLat},${customerLng}`;
-
 
     const orderData = {
 
@@ -3155,6 +3260,12 @@ async function placeOrder(){
       customerLocation:
         locationUrl,
 
+      customerLocationType:
+        selectedLocationType || "selected",
+
+      customerLocationName:
+        selectedLocationText || "Selected delivery location",
+
       status:
         "received",
 
@@ -3166,36 +3277,20 @@ async function placeOrder(){
 
     };
 
-
-    console.log(
-      "ORDER DATA:",
-      orderData
-    );
-
-
     await set(
       orderRef,
       orderData
     );
-
-
-    console.log(
-      "ORDER SAVED SUCCESSFULLY:",
-      firebaseKey
-    );
-
 
     localStorage.setItem(
       "lastOrderId",
       orderId
     );
 
-
     localStorage.setItem(
       "lastOrderFirebaseKey",
       firebaseKey
     );
-
 
     const whatsapp =
       normalizeWhatsApp(
@@ -3205,38 +3300,30 @@ async function placeOrder(){
 
       );
 
-
     const message =
       buildWhatsAppMessage(
         orderData
       );
 
-
     const whatsappUrl =
       `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
-
 
     window.open(
       whatsappUrl,
       "_blank"
     );
 
-
     cart = [];
-
 
     renderCart();
 
-
     closeCheckout();
-
 
     document.getElementById(
       "thankYouOverlay"
     ).classList.remove(
       "hidden"
     );
-
 
     setTimeout(
       ()=>{
@@ -3247,15 +3334,12 @@ async function placeOrder(){
           "hidden"
         );
 
-
         document.getElementById(
           "trackInput"
         ).value =
           orderId;
 
-
         trackOrder();
-
 
         window.scrollTo({
 
@@ -3273,7 +3357,6 @@ async function placeOrder(){
 
   }
 
-
   catch(error){
 
     console.error(
@@ -3281,20 +3364,17 @@ async function placeOrder(){
       error
     );
 
-
     const code =
       error &&
       error.code
         ? error.code
         : "unknown";
 
-
     const message =
       error &&
       error.message
         ? error.message
         : String(error);
-
 
     alert(
 
@@ -3303,15 +3383,12 @@ async function placeOrder(){
       "Error Code: " +
       code +
 
-      "\n\n" +
-
-      "Message: " +
+      "\n\nMessage: " +
       message
 
     );
 
   }
-
 
   finally{
 
@@ -3320,6 +3397,8 @@ async function placeOrder(){
 
     button.textContent =
       "Place Order";
+
+    validateCheckout();
 
   }
 
@@ -3344,7 +3423,6 @@ function createOrderId(
     )
     .toUpperCase();
 
-
   return (
     "TQF2026-" +
     clean.slice(-8)
@@ -3368,14 +3446,12 @@ function normalizeWhatsApp(
         ""
       );
 
-
   if(n.length === 10){
 
     n =
       "91" + n;
 
   }
-
 
   return n;
 
@@ -3389,6 +3465,11 @@ function normalizeWhatsApp(
 function buildWhatsAppMessage(
   order
 ){
+
+  let locationType =
+    order.customerLocationType === "current"
+      ? "📍 Current Location"
+      : "🗺️ Selected Delivery Location";
 
   let text =
 
@@ -3412,7 +3493,6 @@ function buildWhatsAppMessage(
 
 `;
 
-
   order.items.forEach(
     (item,index)=>{
 
@@ -3426,7 +3506,6 @@ function buildWhatsAppMessage(
 
     }
   );
-
 
   text +=
 
@@ -3442,12 +3521,22 @@ function buildWhatsAppMessage(
 
 💰 *GRAND TOTAL:* ₹${order.total}
 
-💳 *Payment:* ${order.paymentMethod === "COD" ? "💵 Cash on Delivery" : "💳 Online Payment"}
+💳 *Payment:* ${
+  order.paymentMethod === "COD"
+    ? "💵 Cash on Delivery"
+    : "💳 Online Payment"
+}
 
 ━━━━━━━━━━━━━━━━━━
 
-📍 *CUSTOMER CURRENT LOCATION*
+${locationType}
 
+📌 *Location:* ${
+  order.customerLocationName ||
+  "Selected delivery location"
+}
+
+🗺️ *Google Maps Location:*
 ${order.customerLocation}
 
 ━━━━━━━━━━━━━━━━━━
@@ -3459,7 +3548,6 @@ ${order.customerLocation}
 🙏 *Thank you for ordering from The Queen Fast Food!* ❤️
 
 🍴 *Fresh Food • Fast Service • Easy Ordering*`;
-
 
   return text;
 
@@ -3487,12 +3575,10 @@ async function trackOrder(){
       .trim()
       .toUpperCase();
 
-
   const result =
     document.getElementById(
       "trackResult"
     );
-
 
   if(!input){
 
@@ -3505,30 +3591,24 @@ async function trackOrder(){
 
     }
 
-
     trackingOrderId =
       "";
-
 
     result.innerHTML =
       `<p style="color:#888">
         Enter an Order ID.
       </p>`;
 
-
     return;
 
   }
-
 
   try{
 
     await startCustomerAuth();
 
-
     currentUser =
       auth.currentUser;
-
 
     if(!currentUser){
 
@@ -3537,13 +3617,6 @@ async function trackOrder(){
       );
 
     }
-
-
-    console.log(
-      "TRACKING UID:",
-      currentUser.uid
-    );
-
 
     if(trackingUnsubscribe){
 
@@ -3554,10 +3627,8 @@ async function trackOrder(){
 
     }
 
-
     trackingOrderId =
       input;
-
 
     const ordersQuery =
       query(
@@ -3577,7 +3648,6 @@ async function trackOrder(){
 
       );
 
-
     trackingUnsubscribe =
       onValue(
 
@@ -3588,13 +3658,11 @@ async function trackOrder(){
           let found =
             null;
 
-
           snapshot.forEach(
             child=>{
 
               const order =
                 child.val();
-
 
               if(
 
@@ -3619,7 +3687,6 @@ async function trackOrder(){
 
             }
           );
-
 
           if(!found){
 
@@ -3651,13 +3718,11 @@ async function trackOrder(){
 
           }
 
-
           renderTrackedOrder(
             found
           );
 
         },
-
 
         error=>{
 
@@ -3665,7 +3730,6 @@ async function trackOrder(){
             "TRACK ERROR:",
             error
           );
-
 
           result.innerHTML =
 
@@ -3682,14 +3746,12 @@ async function trackOrder(){
 
   }
 
-
   catch(error){
 
     console.error(
       "TRACK ERROR:",
       error
     );
-
 
     result.innerHTML =
 
@@ -3717,13 +3779,11 @@ function renderTrackedOrder(
       "trackResult"
     );
 
-
   const status =
     String(
       order.status ||
       "received"
     ).toLowerCase();
-
 
   const steps = [
 
@@ -3759,23 +3819,19 @@ function renderTrackedOrder(
 
   ];
 
-
   const currentIndex =
     steps.findIndex(
       x=>x[0] === status
     );
 
-
   let timeline =
     "";
-
 
   steps.forEach(
     (step,index)=>{
 
       const active =
         currentIndex >= index;
-
 
       timeline += `
 
@@ -3804,10 +3860,8 @@ function renderTrackedOrder(
     }
   );
 
-
   let items =
     "";
-
 
   (
     order.items ||
@@ -3845,11 +3899,9 @@ function renderTrackedOrder(
     }
   );
 
-
   const canConfirm =
     status ===
     "out_for_delivery";
-
 
   result.innerHTML = `
 
@@ -3886,7 +3938,6 @@ function renderTrackedOrder(
 
         </div>
 
-
         <div class="order-status">
 
           ${
@@ -3907,17 +3958,11 @@ function renderTrackedOrder(
 
       </div>
 
-
       <div class="timeline">
-
         ${timeline}
-
       </div>
 
-
-      <div
-        style="margin-top:20px"
-      >
+      <div style="margin-top:20px">
 
         <h3
           style="
@@ -3932,14 +3977,12 @@ function renderTrackedOrder(
 
       </div>
 
-
       <hr
         style="
           border-color:#292929;
           margin:15px 0
         "
       >
-
 
       <div class="summary-row">
 
@@ -3953,7 +3996,6 @@ function renderTrackedOrder(
 
       </div>
 
-
       <div class="summary-row">
 
         <span>
@@ -3966,10 +4008,7 @@ function renderTrackedOrder(
 
       </div>
 
-
-      <div
-        class="summary-row total"
-      >
+      <div class="summary-row total">
 
         <span>
           💰 Total
@@ -3980,7 +4019,6 @@ function renderTrackedOrder(
         </span>
 
       </div>
-
 
       ${
         canConfirm
@@ -3998,7 +4036,6 @@ function renderTrackedOrder(
 
           : ""
       }
-
 
       ${
         status === "delivered"
@@ -4023,7 +4060,6 @@ function renderTrackedOrder(
 
           : ""
       }
-
 
       ${
         status === "cancelled"
@@ -4053,14 +4089,12 @@ function renderTrackedOrder(
 
   `;
 
-
   if(canConfirm){
 
     const deliveredButton =
       document.getElementById(
         "deliveredButton"
       );
-
 
     if(deliveredButton){
 
@@ -4090,26 +4124,14 @@ function getStatusEmoji(
 
   const map = {
 
-    received:
-      "📥",
-
-    confirmed:
-      "✅",
-
-    preparing:
-      "👨‍🍳",
-
-    out_for_delivery:
-      "🛵",
-
-    delivered:
-      "🎉",
-
-    cancelled:
-      "❌"
+    received:"📥",
+    confirmed:"✅",
+    preparing:"👨‍🍳",
+    out_for_delivery:"🛵",
+    delivered:"🎉",
+    cancelled:"❌"
 
   };
-
 
   return (
     map[status] ||
@@ -4137,10 +4159,8 @@ async function customerConfirmDelivered(
 
   }
 
-
   currentUser =
     auth.currentUser;
-
 
   if(
     order.ownerUid !==
@@ -4155,7 +4175,6 @@ async function customerConfirmDelivered(
 
   }
 
-
   if(
     String(
       order.status
@@ -4166,7 +4185,6 @@ async function customerConfirmDelivered(
     return;
 
   }
-
 
   try{
 
@@ -4181,11 +4199,9 @@ async function customerConfirmDelivered(
 
     );
 
-
     showDeliverySuccess();
 
   }
-
 
   catch(error){
 
@@ -4193,7 +4209,6 @@ async function customerConfirmDelivered(
       "DELIVERY CONFIRM ERROR:",
       error
     );
-
 
     alert(
 
@@ -4212,7 +4227,7 @@ async function customerConfirmDelivered(
 
 
 /* =====================================================
-   DELIVERY SUCCESS ANIMATION
+   DELIVERY SUCCESS
 ===================================================== */
 
 function showDeliverySuccess(){
@@ -4222,63 +4237,50 @@ function showDeliverySuccess(){
       "deliverySuccessOverlay"
     );
 
-
   const title =
     document.getElementById(
       "deliverySuccessTitle"
     );
-
 
   const message =
     document.getElementById(
       "deliverySuccessMessage"
     );
 
-
   const icon =
     document.getElementById(
       "deliverySuccessIcon"
     );
-
 
   const flowerContainer =
     document.getElementById(
       "flowerContainer"
     );
 
-
   overlay.classList.remove(
     "hidden"
   );
 
-
   icon.textContent =
     "🎉";
-
 
   title.textContent =
     "Order Delivered Successfully!";
 
-
   message.textContent =
     "";
-
 
   flowerContainer.innerHTML =
     "";
 
-
   const flowers = [
-
     "🌸",
     "🌺",
     "🌷",
     "🌼",
     "💮",
     "🌹"
-
   ];
-
 
   for(
     let i = 0;
@@ -4291,10 +4293,8 @@ function showDeliverySuccess(){
         "div"
       );
 
-
     petal.className =
       "flower-petal";
-
 
     petal.textContent =
       flowers[
@@ -4304,11 +4304,9 @@ function showDeliverySuccess(){
         )
       ];
 
-
     petal.style.left =
       Math.random() * 100 +
       "%";
-
 
     petal.style.fontSize =
       (
@@ -4317,7 +4315,6 @@ function showDeliverySuccess(){
       ) +
       "px";
 
-
     petal.style.animationDuration =
       (
         2 +
@@ -4325,11 +4322,9 @@ function showDeliverySuccess(){
       ) +
       "s";
 
-
     petal.style.animationDelay =
       Math.random() * .8 +
       "s";
-
 
     petal.style.setProperty(
       "--drift",
@@ -4340,13 +4335,11 @@ function showDeliverySuccess(){
       "px"
     );
 
-
     flowerContainer.appendChild(
       petal
     );
 
   }
-
 
   setTimeout(
     ()=>{
@@ -4354,10 +4347,8 @@ function showDeliverySuccess(){
       icon.textContent =
         "🌸";
 
-
       title.textContent =
         "Thank You!";
-
 
       message.textContent =
         "Thank you for choosing The Queen Fast Food ❤️";
@@ -4366,7 +4357,6 @@ function showDeliverySuccess(){
     1000
   );
 
-
   setTimeout(
     ()=>{
 
@@ -4374,16 +4364,13 @@ function showDeliverySuccess(){
         "hidden"
       );
 
-
       flowerContainer.innerHTML =
         "";
-
 
       const lastOrderId =
         localStorage.getItem(
           "lastOrderId"
         );
-
 
       if(lastOrderId){
 
@@ -4392,9 +4379,7 @@ function showDeliverySuccess(){
         ).value =
           lastOrderId;
 
-
         trackOrder();
-
 
         document.getElementById(
           "trackResult"
@@ -4425,26 +4410,14 @@ function formatStatus(
 
   const map = {
 
-    received:
-      "Received",
-
-    confirmed:
-      "Confirmed",
-
-    preparing:
-      "Preparing",
-
-    out_for_delivery:
-      "Out for Delivery",
-
-    delivered:
-      "Delivered",
-
-    cancelled:
-      "Cancelled"
+    received:"Received",
+    confirmed:"Confirmed",
+    preparing:"Preparing",
+    out_for_delivery:"Out for Delivery",
+    delivered:"Delivered",
+    cancelled:"Cancelled"
 
   };
-
 
   return (
     map[status] ||
@@ -4499,18 +4472,15 @@ document.getElementById(
 ).onclick =
   openCart;
 
-
 document.getElementById(
   "closeCart"
 ).onclick =
   closeCart;
 
-
 document.getElementById(
   "checkoutButton"
 ).onclick =
   openCheckout;
-
 
 document.getElementById(
   "closeCheckout"
@@ -4528,32 +4498,19 @@ document.getElementById(
 
     await startCustomerAuth();
 
-
-    console.log(
-      "CUSTOMER READY:",
-      auth.currentUser
-        ? auth.currentUser.uid
-        : "NO USER"
-    );
-
-
     loadSettings();
 
-
     renderCart();
-
 
     setInterval(
       renderShopStatus,
       30000
     );
 
-
     const lastOrderId =
       localStorage.getItem(
         "lastOrderId"
       );
-
 
     if(lastOrderId){
 
@@ -4565,7 +4522,6 @@ document.getElementById(
     }
 
   }
-
 
   catch(error){
 
