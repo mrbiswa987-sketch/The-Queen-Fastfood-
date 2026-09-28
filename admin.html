@@ -630,14 +630,7 @@ header{
   display:block;
 }
 
-.folder-empty{
-  color:#666;
-  text-align:center;
-  padding:30px 10px;
-  font-size:12px;
-}
-
-/* NEW ORDER GREEN GIMBAL BLINK */
+/* NEW ORDER GREEN BLINK */
 
 .order-column.new-order-alert{
   border-color:#39d353;
@@ -686,6 +679,13 @@ header{
     opacity:1;
     transform:scale(1.008);
   }
+}
+
+.folder-empty{
+  color:#666;
+  text-align:center;
+  padding:30px 10px;
+  font-size:12px;
 }
 
 .order{
@@ -834,7 +834,7 @@ header{
   color:#f59b23;
 }
 
-/* COMPLETE FOLDER */
+/* COMPLETE */
 
 .complete-folder{
   margin-top:10px;
@@ -888,7 +888,7 @@ header{
   color:#000;
 }
 
-/* COMPLETE MODAL */
+/* MODAL */
 
 .complete-modal{
   position:fixed;
@@ -1130,6 +1130,8 @@ header{
 
 <body>
 
+<!-- LOGIN -->
+
 <div id="loginScreen" class="login">
 
   <div class="login-box">
@@ -1171,6 +1173,8 @@ header{
 
 </div>
 
+
+<!-- ADMIN APP -->
 
 <div id="adminApp" class="hidden">
 
@@ -1263,19 +1267,28 @@ header{
     class="box folder-box"
     data-folder="new"
   >
+
     <h2>
       New Orders
+
       <span
         id="newFolderLight"
         class="new-folder-light"
       ></span>
+
     </h2>
 
-    <div id="newCount" class="big">0</div>
+    <div
+      id="newCount"
+      class="big"
+    >
+      0
+    </div>
 
     <div class="folder-hint">
       Click to open
     </div>
+
   </div>
 
 
@@ -1284,13 +1297,22 @@ header{
     class="box folder-box"
     data-folder="pending"
   >
-    <h2>Pending</h2>
 
-    <div id="pendingCount" class="big">0</div>
+    <h2>
+      Pending
+    </h2>
+
+    <div
+      id="pendingCount"
+      class="big"
+    >
+      0
+    </div>
 
     <div class="folder-hint">
       Click to open
     </div>
+
   </div>
 
 
@@ -1299,13 +1321,22 @@ header{
     class="box folder-box"
     data-folder="delivery"
   >
-    <h2>Delivery</h2>
 
-    <div id="deliveryCount" class="big">0</div>
+    <h2>
+      Delivery
+    </h2>
+
+    <div
+      id="deliveryCount"
+      class="big"
+    >
+      0
+    </div>
 
     <div class="folder-hint">
       Click to open
     </div>
+
   </div>
 
 
@@ -1314,13 +1345,22 @@ header{
     class="box folder-box"
     data-folder="complete"
   >
-    <h2>Complete</h2>
 
-    <div id="completeCount" class="big">0</div>
+    <h2>
+      Complete
+    </h2>
+
+    <div
+      id="completeCount"
+      class="big"
+    >
+      0
+    </div>
 
     <div class="folder-hint">
       Click to open
     </div>
+
   </div>
 
 </div>
@@ -1410,9 +1450,11 @@ header{
 
         <div class="complete-folder-title">
           Complete Orders
+
           <span id="folderCompleteCount">
             (0)
           </span>
+
         </div>
 
         <div class="complete-folder-sub">
@@ -1439,7 +1481,9 @@ header{
 
 <div class="section box">
 
-  <h2>Shop Control</h2>
+  <h2>
+    Shop Control
+  </h2>
 
   <div class="status-buttons">
 
@@ -1458,34 +1502,49 @@ header{
   </div>
 
   <div class="shop-current">
+
     Current:
-    <b id="currentShopStatus">--</b>
+    <b id="currentShopStatus">
+      --
+    </b>
+
   </div>
 
   <div class="shop-settings-grid">
 
     <div>
-      <label>Open Time</label>
+
+      <label>
+        Open Time
+      </label>
 
       <input
         id="openTime"
         type="time"
         value="12:00"
       >
+
     </div>
 
     <div>
-      <label>Close Time</label>
+
+      <label>
+        Close Time
+      </label>
 
       <input
         id="closeTime"
         type="time"
         value="23:00"
       >
+
     </div>
 
     <div>
-      <label>Delivery ₹ / KM</label>
+
+      <label>
+        Delivery ₹ / KM
+      </label>
 
       <input
         id="deliveryRate"
@@ -1493,15 +1552,20 @@ header{
         value="6"
         min="0"
       >
+
     </div>
 
     <div>
-      <label>WhatsApp</label>
+
+      <label>
+        WhatsApp
+      </label>
 
       <input
         id="whatsapp"
         placeholder="9090220791"
       >
+
     </div>
 
   </div>
@@ -1588,7 +1652,9 @@ header{
 
 <div class="section box">
 
-  <h2>Website Control</h2>
+  <h2>
+    Website Control
+  </h2>
 
   <div class="website-control">
 
@@ -1629,7 +1695,9 @@ header{
 
 <div class="section">
 
-  <h2>Menu Control</h2>
+  <h2>
+    Menu Control
+  </h2>
 
   <div
     id="menuList"
@@ -1656,10 +1724,13 @@ header{
     <div class="complete-modal-head">
 
       <h2>
+
         📁 Complete Orders
+
         <span id="modalCompleteCount">
           (0)
         </span>
+
       </h2>
 
       <button
@@ -1705,6 +1776,10 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+
+/* =========================================
+   FIREBASE
+========================================= */
 
 const firebaseConfig = {
 
@@ -1757,24 +1832,19 @@ let orders = {};
 let authReady = false;
 let dataLoaded = false;
 
-
-/* =========================================
-   FOLDER
-========================================= */
-
 let selectedFolder = null;
 
 
 /* =========================================
-   PAYMENT SETTINGS
+   PAYMENT
 ========================================= */
 
-let codEnabled = false;
-let onlineEnabled = false;
+let codEnabled = true;
+let onlineEnabled = true;
 
 
 /* =========================================
-   NEW ORDER NOTIFICATION
+   NOTIFICATION
 ========================================= */
 
 let notificationAudioContext = null;
@@ -1866,7 +1936,6 @@ function playBellDing(){
 
       const oscillator =
         ctx.createOscillator();
-
 
       const gain =
         ctx.createGain();
@@ -2200,7 +2269,10 @@ document.getElementById(
 
   catch(error){
 
-    console.error(error);
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
 
     msg.textContent =
       "Login failed. Check your admin credentials.";
@@ -2485,7 +2557,7 @@ function renderNotifications(
 
 
 /* =========================================
-   TOP FOLDER CLICK
+   FOLDER CLICK
 ========================================= */
 
 document.querySelectorAll(
@@ -3678,10 +3750,12 @@ function renderOrders(){
     `(${buckets.delivery.length})`;
 
 
+  /* FIXED LINE */
+
   document.getElementById(
     "folderCompleteCount"
   ).textContent =
-    `(${buckets.complete.length)`;
+    `(${buckets.complete.length})`;
 
 
   document.getElementById(
@@ -3690,7 +3764,7 @@ function renderOrders(){
     `(${buckets.complete.length})`;
 
 
-  /* Green light on New Orders */
+  /* GREEN LIGHT */
 
   document.getElementById(
     "newFolderLight"
@@ -3704,11 +3778,6 @@ function renderOrders(){
     buckets.new
   );
 
-
-  /*
-    If a folder was already selected,
-    keep showing that folder.
-  */
 
   if(selectedFolder){
 
@@ -3964,7 +4033,7 @@ function createOrderCard(
     ).toLowerCase();
 
 
-  /* PAYMENT METHOD */
+  /* PAYMENT */
 
   const rawPayment =
     String(
@@ -4432,7 +4501,7 @@ function createOrderCard(
   `;
 
 
-  /* GOOGLE MAP BUTTON */
+  /* GOOGLE MAP */
 
   const mapButton =
     div.querySelector(
@@ -4466,7 +4535,7 @@ function createOrderCard(
   }
 
 
-  /* ACTION BUTTONS */
+  /* ACTIONS */
 
   div.querySelectorAll(
     "[data-action]"
@@ -4574,7 +4643,7 @@ function createOrderCard(
 
 
 /* =========================================
-   CHANGE ORDER STATUS
+   CHANGE STATUS
 ========================================= */
 
 async function changeOrderStatus(
@@ -4686,7 +4755,7 @@ async function moveOrderToComplete(
 
 
 /* =========================================
-   REMOVE ORDER
+   REMOVE
 ========================================= */
 
 async function removeOrder(
@@ -4739,7 +4808,7 @@ async function removeOrder(
 
 
 /* =========================================
-   COMPLETE FOLDER MODAL
+   COMPLETE MODAL
 ========================================= */
 
 const completeModal =
