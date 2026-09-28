@@ -445,18 +445,28 @@ header{
    TRACK
 ===================================================== */
 
+.track-section{
+  padding-top:15px!important;
+  padding-bottom:35px!important;
+}
+
+.track-section .section-title{
+  font-size:34px;
+  margin-bottom:16px;
+}
+
 .track-box{
-  max-width:650px;
+  max-width:520px;
   margin:auto;
   background:#101010;
   border:1px solid #292929;
-  padding:22px;
-  border-radius:18px;
+  padding:14px;
+  border-radius:15px;
 }
 
 .track-row{
   display:flex;
-  gap:10px;
+  gap:8px;
 }
 
 .track-row input{
@@ -464,20 +474,22 @@ header{
   background:#080808;
   color:#fff;
   border:1px solid #333;
-  padding:13px;
-  border-radius:10px;
+  padding:10px 12px;
+  border-radius:9px;
+  font-size:13px;
 }
 
 .track-row button{
   background:#f59b23;
   border:0;
-  padding:13px 18px;
-  border-radius:10px;
+  padding:10px 15px;
+  border-radius:9px;
   font-weight:800;
+  font-size:13px;
 }
 
 .track-result{
-  margin-top:18px;
+  margin-top:12px;
 }
 
 .order-card{
@@ -534,6 +546,124 @@ header{
 
 .step.active .step-line{
   background:#f59b23;
+}
+
+
+/* =====================================================
+   IMPORTANT NOTICES
+===================================================== */
+
+.important-notices{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 20px 55px;
+}
+
+.important-notices-title{
+  text-align:center;
+  font-family:"Cormorant Garamond",serif;
+  font-size:38px;
+  color:#f59b23;
+  margin-bottom:8px;
+}
+
+.important-notices-subtitle{
+  text-align:center;
+  color:#777;
+  font-size:11px;
+  letter-spacing:1px;
+  margin-bottom:25px;
+  text-transform:uppercase;
+}
+
+.notice-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.notice-card{
+  position:relative;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245,155,35,.055),
+      rgba(16,16,16,.98) 48%,
+      rgba(245,155,35,.025)
+    );
+  border:1px solid #2c2c2c;
+  border-radius:17px;
+  padding:21px;
+  overflow:hidden;
+  transition:.25s;
+}
+
+.notice-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:3px;
+  height:100%;
+  background:linear-gradient(
+    to bottom,
+    #f59b23,
+    rgba(245,155,35,.15)
+  );
+}
+
+.notice-card:hover{
+  border-color:#5a401d;
+  transform:translateY(-2px);
+}
+
+.notice-label{
+  color:#f59b23;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.notice-card h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:25px;
+  color:#fff;
+  margin-bottom:8px;
+}
+
+.notice-card p{
+  color:#999;
+  font-size:12px;
+  line-height:1.65;
+}
+
+.notice-contact{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-top:12px;
+  padding:8px 11px;
+  border-radius:9px;
+  background:#171717;
+  border:1px solid #333;
+  color:#f59b23;
+  font-size:12px;
+  font-weight:800;
+}
+
+.notice-delivery{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245,155,35,.075),
+      rgba(16,16,16,.98) 50%
+    );
+}
+
+.notice-heart{
+  color:#ff625b;
 }
 
 
@@ -1064,6 +1194,10 @@ footer a{
     grid-template-columns:repeat(2,1fr);
   }
 
+  .notice-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 
 @media(max-width:600px){
@@ -1146,6 +1280,19 @@ footer a{
 
   .customer-login-box{
     padding:24px 18px;
+  }
+
+  .important-notices{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .important-notices-title{
+    font-size:34px;
+  }
+
+  .notice-card{
+    padding:18px;
   }
 
 }
@@ -1390,7 +1537,7 @@ footer a{
   </section>
 
 
-  <section class="section">
+  <section class="section track-section">
 
     <h2 class="section-title">
       Track Your Order
@@ -1415,6 +1562,122 @@ footer a{
         id="trackResult"
         class="track-result"
       ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       IMPORTANT NOTICES
+  ================================================== -->
+
+  <section class="important-notices">
+
+    <h2 class="important-notices-title">
+      Important Notices
+    </h2>
+
+    <div class="important-notices-subtitle">
+      A few things we’d like you to know
+    </div>
+
+
+    <div class="notice-grid">
+
+
+      <!-- NOTICE 1 -->
+
+      <div class="notice-card">
+
+        <div class="notice-label">
+          ORDER
+        </div>
+
+        <h3>
+          Please Don’t Skip WhatsApp
+        </h3>
+
+        <p>
+          After placing your order, WhatsApp will open automatically.
+          Please do not skip this step. As we are newly launching our
+          website, WhatsApp helps us confirm your order if you experience
+          any issue with the website.
+        </p>
+
+      </div>
+
+
+      <!-- NOTICE 2 -->
+
+      <div class="notice-card">
+
+        <div class="notice-label">
+          ANY QUERIES
+        </div>
+
+        <h3>
+          We’re Here to Help
+        </h3>
+
+        <p>
+          Facing any issue with our website or your order?
+          Feel free to contact us directly.
+        </p>
+
+        <div class="notice-contact">
+          📞 Silu — 97768 56111
+        </div>
+
+      </div>
+
+
+      <!-- NOTICE 3 -->
+
+      <div class="notice-card">
+
+        <div class="notice-label">
+          FOR ADVANCE ORDERS
+        </div>
+
+        <h3>
+          Planning a Party or Event?
+        </h3>
+
+        <p>
+          Need food for a party, function, or special occasion?
+          You can place your order in advance by contacting us.
+        </p>
+
+        <div class="notice-contact">
+          📞 Silu — 97768 56111
+        </div>
+
+      </div>
+
+
+      <!-- NOTICE 4 -->
+
+      <div class="notice-card notice-delivery">
+
+        <div class="notice-label">
+          DELIVERY
+        </div>
+
+        <h3>
+          A Little Patience, A Lot of Care
+          <span class="notice-heart">❤️</span>
+        </h3>
+
+        <p>
+          We are newly starting our delivery service in the village area.
+          If there is any delay or inconvenience, we kindly request your
+          cooperation. With your support, we’ll do our best to reach you
+          as quickly as possible.
+        </p>
+
+      </div>
+
 
     </div>
 
@@ -3670,11 +3933,6 @@ function extractCoordinatesFromGoogleMapsLink(
   }
 
 
-  /* ---------------------------------------------------
-     1. ?q=LAT,LNG
-     2. &q=LAT,LNG
-  --------------------------------------------------- */
-
   let match =
     value.match(
       /[?&](?:q|query)=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/i
@@ -3695,10 +3953,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   }
 
-
-  /* ---------------------------------------------------
-     3. ?ll=LAT,LNG
-  --------------------------------------------------- */
 
   match =
     value.match(
@@ -3721,10 +3975,6 @@ function extractCoordinatesFromGoogleMapsLink(
   }
 
 
-  /* ---------------------------------------------------
-     4. /@LAT,LNG
-  --------------------------------------------------- */
-
   match =
     value.match(
       /@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
@@ -3745,10 +3995,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   }
 
-
-  /* ---------------------------------------------------
-     5. /place/LAT,LNG
-  --------------------------------------------------- */
 
   match =
     value.match(
@@ -3771,10 +4017,6 @@ function extractCoordinatesFromGoogleMapsLink(
   }
 
 
-  /* ---------------------------------------------------
-     6. /search/LAT,LNG
-  --------------------------------------------------- */
-
   match =
     value.match(
       /\/search\/(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
@@ -3795,10 +4037,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   }
 
-
-  /* ---------------------------------------------------
-     7. DATA / COORDINATE PAIR ANYWHERE
-  --------------------------------------------------- */
 
   match =
     value.match(
@@ -3821,10 +4059,6 @@ function extractCoordinatesFromGoogleMapsLink(
   }
 
 
-  /* ---------------------------------------------------
-     8. Coordinate pair separated by space
-  --------------------------------------------------- */
-
   match =
     value.match(
       /(-?\d{1,3}\.\d{4,})\s+(-?\d{1,3}\.\d{4,})/
@@ -3845,10 +4079,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   }
 
-
-  /*
-    9. EXACT QUEEN FAST FOOD COORDINATE
-  */
 
   if(
     value.includes(
