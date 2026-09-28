@@ -777,14 +777,78 @@ footer a{
   margin-top:9px;
 }
 
+/* =====================================================
+   NEW DELIVERY MAP
+===================================================== */
+
 .map-wrapper{
-  display:none;
+  display:block;
+  margin-top:12px;
+  background:#080808;
+  border:1px solid #333;
+  border-radius:12px;
+  overflow:hidden;
 }
 
 #locationMap{
   width:100%;
   height:280px;
+  display:block;
+  border:0;
   background:#151515;
+}
+
+.map-info{
+  padding:10px 12px;
+  color:#999;
+  font-size:11px;
+  line-height:1.6;
+  border-top:1px solid #292929;
+}
+
+.map-distance{
+  color:#f59b23;
+  font-weight:800;
+}
+
+.delivery-limit{
+  margin-top:9px;
+  padding:10px 12px;
+  border-radius:9px;
+  background:#171717;
+  border:1px solid #333;
+  color:#aaa;
+  font-size:12px;
+  line-height:1.5;
+  text-align:center;
+}
+
+.delivery-limit strong{
+  color:#f59b23;
+}
+
+.delivery-inside{
+  margin-top:9px;
+  padding:11px;
+  border-radius:9px;
+  background:#102615;
+  border:1px solid #204b2a;
+  color:#30d158;
+  font-size:12px;
+  line-height:1.5;
+  font-weight:700;
+}
+
+.delivery-outside{
+  margin-top:9px;
+  padding:11px;
+  border-radius:9px;
+  background:#301010;
+  border:1px solid #552020;
+  color:#ff625b;
+  font-size:12px;
+  line-height:1.5;
+  font-weight:700;
 }
 
 /* =====================================================
@@ -1089,6 +1153,10 @@ footer a{
 
   .customer-login-box{
     padding:24px 18px;
+  }
+
+  #locationMap{
+    height:240px;
   }
 
 }
@@ -1612,6 +1680,69 @@ footer a{
 
       </div>
 
+      <!-- 20 KM DELIVERY INFORMATION -->
+
+      <div class="delivery-limit">
+        📦 <strong>Delivery available within 20 km</strong><br>
+        from The Queen Fast Food
+      </div>
+
+      <!-- SATELLITE MAP -->
+
+      <div
+        id="mapWrapper"
+        class="map-wrapper"
+      >
+
+        <iframe
+          id="locationMap"
+          title="The Queen Fast Food Delivery Location"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+
+        <div class="map-info">
+
+          🛰️ Satellite Map
+
+          <br>
+
+          📍 Restaurant →
+          <span
+            id="mapDistance"
+            class="map-distance"
+          >
+            Select location
+          </span>
+
+          <br>
+
+          🏠
+          <span id="mapPlaceName">
+            Delivery location not selected
+          </span>
+
+        </div>
+
+      </div>
+
+      <div
+        id="deliveryInsideMessage"
+        class="delivery-inside hidden"
+      >
+        ✅ This location is within our 20 km delivery area.
+        You can place your order.
+      </div>
+
+      <div
+        id="deliveryOutsideMessage"
+        class="delivery-outside hidden"
+      >
+        ❌ This location is outside our 20 km delivery area.
+        Please select a location within 20 km of The Queen Fast Food.
+      </div>
+
       <div
         id="deliveryInfo"
         style="color:#aaa;font-size:12px;margin-top:8px"
@@ -1830,6 +1961,10 @@ const DEFAULT_MENU = [
 ];
 
 
+/* =====================================================
+   RESTAURANT / DELIVERY SETTINGS
+===================================================== */
+
 const RESTAURANT_LAT =
   20.216780359694468;
 
@@ -1838,6 +1973,9 @@ const RESTAURANT_LNG =
 
 const DEFAULT_DELIVERY_RATE =
   6;
+
+const MAX_DELIVERY_DISTANCE =
+  20;
 
 const WHATSAPP_DEFAULT =
   "9090220791";
@@ -1867,6 +2005,9 @@ let selectedGoogleMapsLink = "";
 
 let selectedPaymentMethod =
   "COD";
+
+let locationWithinDeliveryArea =
+  false;
 
 let trackingUnsubscribe = null;
 
@@ -3195,7 +3336,6 @@ function renderOrderSummary(){
 
 /* =====================================================
    DIFFERENT LOCATION
-   GOOGLE MAPS
 ===================================================== */
 
 document.getElementById(
@@ -3297,7 +3437,7 @@ document.getElementById(
 );
 
 
-function confirmGoogleMapsLocation(){
+async function confirmGoogleMapsLocation(){
 
   const input =
     document.getElementById(
@@ -3380,6 +3520,11 @@ function confirmGoogleMapsLocation(){
       "✅ Exact Google Maps location added successfully.";
 
 
+    reverseGeocodeLocation(
+      customerLat,
+      customerLng
+    );
+
   }
   else{
 
@@ -3388,6 +3533,9 @@ function confirmGoogleMapsLocation(){
     customerLng = null;
 
     deliveryDistance = null;
+
+    locationWithinDeliveryArea =
+      false;
 
 
     selectedLocationText =
@@ -3455,11 +3603,6 @@ function extractCoordinatesFromGoogleMapsLink(
       .trim();
 
 
-  /*
-    Format:
-    ?q=20.2167,86.3646
-  */
-
   let match =
     value.match(
       /[?&](?:q|query|ll)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
@@ -3490,11 +3633,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   }
 
-
-  /*
-    Format:
-    /@20.2167,86.3646,17z
-  */
 
   match =
     value.match(
@@ -3527,11 +3665,6 @@ function extractCoordinatesFromGoogleMapsLink(
   }
 
 
-  /*
-    Format:
-    /place/20.2167,86.3646
-  */
-
   match =
     value.match(
       /(?:place\/|search\/)(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
@@ -3562,11 +3695,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   }
 
-
-  /*
-    Sometimes coordinates are written
-    directly in the URL.
-  */
 
   match =
     value.match(
@@ -3629,12 +3757,18 @@ function updateLocationDisplay(){
 
   if(
     customerLat === null ||
-    customerLng === null
+    customerLng === null ||
+    deliveryDistance === null
   ){
 
     return;
 
   }
+
+
+  locationWithinDeliveryArea =
+    deliveryDistance <=
+    MAX_DELIVERY_DISTANCE;
 
 
   const rate =
@@ -3654,13 +3788,268 @@ function updateLocationDisplay(){
   document.getElementById(
     "locationDisplay"
   ).value =
-    `Google Maps location • ${deliveryDistance.toFixed(2)} km away`;
+    `${selectedLocationText || "Selected location"} • ${deliveryDistance.toFixed(2)} km away`;
 
 
-  document.getElementById(
-    "deliveryInfo"
-  ).textContent =
-    `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
+  const deliveryInfo =
+    document.getElementById(
+      "deliveryInfo"
+    );
+
+
+  const mapDistance =
+    document.getElementById(
+      "mapDistance"
+    );
+
+
+  const insideMessage =
+    document.getElementById(
+      "deliveryInsideMessage"
+    );
+
+
+  const outsideMessage =
+    document.getElementById(
+      "deliveryOutsideMessage"
+    );
+
+
+  if(mapDistance){
+
+    mapDistance.textContent =
+      `${deliveryDistance.toFixed(2)} km`;
+
+  }
+
+
+  if(locationWithinDeliveryArea){
+
+    deliveryInfo.innerHTML =
+      `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
+
+    insideMessage.classList.remove(
+      "hidden"
+    );
+
+    outsideMessage.classList.add(
+      "hidden"
+    );
+
+  }
+  else{
+
+    deliveryInfo.innerHTML =
+      `❌ This location is ${deliveryDistance.toFixed(2)} km away — outside our 20 km delivery area.`;
+
+    insideMessage.classList.add(
+      "hidden"
+    );
+
+    outsideMessage.classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  updateSatelliteMap();
+
+  validateCheckout();
+
+}
+
+
+/* =====================================================
+   SATELLITE MAP
+===================================================== */
+
+function updateSatelliteMap(){
+
+  if(
+    customerLat === null ||
+    customerLng === null
+  ){
+
+    return;
+
+  }
+
+
+  const mapFrame =
+    document.getElementById(
+      "locationMap"
+    );
+
+
+  if(!mapFrame){
+    return;
+  }
+
+
+  /*
+    Google Maps satellite view.
+    The map opens directly around
+    the selected customer location.
+  */
+
+  const googleSatelliteUrl =
+    "https://www.google.com/maps?q=" +
+    encodeURIComponent(
+      `${customerLat},${customerLng}`
+    ) +
+    "&t=k&z=15";
+
+
+  mapFrame.src =
+    googleSatelliteUrl;
+
+}
+
+
+/* =====================================================
+   REVERSE GEOCODING / PLACE NAME
+===================================================== */
+
+async function reverseGeocodeLocation(
+  lat,
+  lng
+){
+
+  const placeName =
+    document.getElementById(
+      "mapPlaceName"
+    );
+
+  try{
+
+    if(placeName){
+
+      placeName.textContent =
+        "Finding place name...";
+
+    }
+
+
+    const url =
+      "https://nominatim.openstreetmap.org/reverse" +
+      "?format=jsonv2" +
+      "&lat=" +
+      encodeURIComponent(lat) +
+      "&lon=" +
+      encodeURIComponent(lng) +
+      "&zoom=18" +
+      "&addressdetails=1";
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          headers:{
+            "Accept":
+              "application/json"
+          }
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Reverse geocoding failed."
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const address =
+      data.address || {};
+
+
+    const parts = [
+
+      address.road,
+
+      address.neighbourhood,
+
+      address.suburb,
+
+      address.village,
+
+      address.town,
+
+      address.city,
+
+      address.district,
+
+      address.state
+
+    ].filter(
+      Boolean
+    );
+
+
+    const uniqueParts =
+      [...new Set(parts)];
+
+
+    const finalName =
+      uniqueParts.length
+        ? uniqueParts.join(", ")
+        : (
+            data.display_name ||
+            `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+          );
+
+
+    selectedLocationText =
+      finalName;
+
+
+    if(placeName){
+
+      placeName.textContent =
+        finalName;
+
+    }
+
+
+    document.getElementById(
+      "locationDisplay"
+    ).value =
+      `${finalName} • ${deliveryDistance.toFixed(2)} km away`;
+
+
+  }
+  catch(error){
+
+    console.warn(
+      "PLACE NAME ERROR:",
+      error
+    );
+
+
+    const fallback =
+      `Selected location (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+
+
+    selectedLocationText =
+      fallback;
+
+
+    if(placeName){
+
+      placeName.textContent =
+        fallback;
+
+    }
+
+  }
 
 }
 
@@ -3693,6 +4082,7 @@ document.getElementById(
     button.textContent =
       "Getting...";
 
+
     navigator.geolocation.getCurrentPosition(
 
       position=>{
@@ -3703,16 +4093,20 @@ document.getElementById(
           "Current location"
         );
 
+
         selectedLocationType =
           "current";
 
+
         selectedGoogleMapsLink =
           `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+
 
         document.getElementById(
           "googleMapsLocationInput"
         ).value =
           selectedGoogleMapsLink;
+
 
         document.getElementById(
           "currentLocationButton"
@@ -3720,11 +4114,13 @@ document.getElementById(
           "active"
         );
 
+
         document.getElementById(
           "differentLocationButton"
         ).classList.remove(
           "active"
         );
+
 
         document.getElementById(
           "differentLocationBox"
@@ -3732,8 +4128,16 @@ document.getElementById(
           "hidden"
         );
 
+
         button.textContent =
           "Location Ready ✓";
+
+
+        reverseGeocodeLocation(
+          position.coords.latitude,
+          position.coords.longitude
+        );
+
 
       },
 
@@ -3785,6 +4189,7 @@ function setSelectedLocation(
     label ||
     "Selected location";
 
+
   const distance =
     haversine(
       RESTAURANT_LAT,
@@ -3793,10 +4198,17 @@ function setSelectedLocation(
       customerLng
     );
 
+
   deliveryDistance =
     Number(
       distance.toFixed(2)
     );
+
+
+  locationWithinDeliveryArea =
+    deliveryDistance <=
+    MAX_DELIVERY_DISTANCE;
+
 
   const rate =
     Number(
@@ -3804,24 +4216,27 @@ function setSelectedLocation(
       DEFAULT_DELIVERY_RATE
     );
 
+
   const deliveryCharge =
     Math.ceil(
       deliveryDistance *
       rate
     );
 
+
   document.getElementById(
     "locationDisplay"
   ).value =
     `${selectedLocationText} • ${deliveryDistance.toFixed(2)} km away`;
 
-  document.getElementById(
-    "deliveryInfo"
-  ).textContent =
-    `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
+
+  updateLocationDisplay();
 
 
   renderOrderSummary();
+
+
+  validateCheckout();
 
 }
 
@@ -4023,6 +4438,25 @@ function validateCheckout(){
     );
 
 
+  /*
+    IMPORTANT:
+    Order is allowed only when
+    customer is within 20 km.
+  */
+
+  const validDistance =
+    deliveryDistance !== null &&
+
+    customerLat !== null &&
+
+    customerLng !== null &&
+
+    locationWithinDeliveryArea === true &&
+
+    deliveryDistance <=
+      MAX_DELIVERY_DISTANCE;
+
+
   const valid =
     name.length >= 2 &&
 
@@ -4032,11 +4466,7 @@ function validateCheckout(){
 
     selectedGoogleMapsLink.length > 0 &&
 
-    deliveryDistance !== null &&
-
-    customerLat !== null &&
-
-    customerLng !== null &&
+    validDistance &&
 
     cart.length > 0 &&
 
@@ -4138,6 +4568,55 @@ async function placeOrder(){
     }
 
 
+    /*
+      FINAL 20 KM SECURITY CHECK
+    */
+
+    if(
+      deliveryDistance === null ||
+      customerLat === null ||
+      customerLng === null
+    ){
+
+      alert(
+        "Please select your exact delivery location."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      deliveryDistance >
+      MAX_DELIVERY_DISTANCE
+    ){
+
+      alert(
+        "❌ Delivery is available only within 20 km of The Queen Fast Food.\n\n" +
+        "Your location is " +
+        deliveryDistance.toFixed(2) +
+        " km away."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      !locationWithinDeliveryArea
+    ){
+
+      alert(
+        "❌ This location is outside our 20 km delivery area."
+      );
+
+      return;
+
+    }
+
+
     const name =
       document.getElementById(
         "customerName"
@@ -4232,6 +4711,20 @@ async function placeOrder(){
 
       alert(
         "Please confirm a Google Maps location containing exact coordinates."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      deliveryDistance >
+      MAX_DELIVERY_DISTANCE
+    ){
+
+      alert(
+        "❌ Delivery is available only within 20 km."
       );
 
       return;
