@@ -603,27 +603,6 @@ textarea{
   background:#29220b;
 }
 
-.quick-folder-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:4px;
-}
-
-.quick-folder{
-  border:1px solid #333;
-  background:#171717;
-  color:#aaa;
-  border-radius:7px;
-  padding:7px 3px;
-  font-size:8px;
-  font-weight:900;
-}
-
-.quick-folder:hover{
-  border-color:var(--gold);
-  color:var(--gold2);
-}
-
 .payment-row{
   display:flex;
   gap:7px;
@@ -917,24 +896,18 @@ textarea{
 }
 
 /* =========================
-   GENERAL ORDER SECTION
+   ACTIVE ORDER MANAGEMENT
 ========================= */
 
-.section-title{
-  color:var(--gold2);
-  font-size:13px;
-  margin-bottom:10px;
-}
-
-.order-column{
+.active-order-management{
   background:#0f0f0f;
   border:1px solid #292929;
   border-radius:11px;
   overflow:hidden;
-  min-width:0;
+  margin-bottom:12px;
 }
 
-.order-column-head{
+.active-order-head{
   padding:10px 12px;
   display:flex;
   align-items:center;
@@ -944,13 +917,13 @@ textarea{
   border-bottom:1px solid #292929;
 }
 
-.order-column-head strong{
+.active-order-head strong{
   font-size:11px;
 }
 
-.order-column-head span{
-  min-width:26px;
-  height:26px;
+.active-order-head span{
+  min-width:28px;
+  height:28px;
   padding:0 7px;
   border-radius:50%;
   display:flex;
@@ -962,33 +935,12 @@ textarea{
   font-weight:900;
 }
 
-.order-list{
+.active-orders-list{
   padding:8px;
   display:grid;
   gap:7px;
   max-height:650px;
   overflow:auto;
-}
-
-.new-order-row{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:10px;
-  margin-bottom:12px;
-}
-
-.empty{
-  padding:20px;
-  text-align:center;
-  color:#666;
-  font-size:10px;
-}
-
-.orders-two-column{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:12px;
 }
 
 /* =========================
@@ -1186,86 +1138,6 @@ textarea{
 }
 
 /* =========================
-   COMPLETE / CANCELLED
-========================= */
-
-.folder-area{
-  background:#0f0f0f;
-  border-radius:11px;
-  overflow:hidden;
-  margin-bottom:12px;
-}
-
-.folder-head{
-  min-height:48px;
-  padding:9px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  border-bottom:1px solid #292929;
-  background:#151515;
-}
-
-.folder-head strong{
-  display:block;
-  font-size:11px;
-}
-
-.folder-head small{
-  display:block;
-  color:#666;
-  font-size:8px;
-  margin-top:3px;
-}
-
-.folder-head>span{
-  min-width:28px;
-  height:28px;
-  padding:0 7px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#222;
-  color:#fff;
-  font-weight:900;
-  font-size:10px;
-}
-
-.complete-area{
-  border:1px solid #245b38;
-}
-
-.complete-area .folder-head{
-  border-bottom-color:#245b38;
-}
-
-.complete-area .folder-head>span{
-  color:#69ed91;
-  background:#12351f;
-}
-
-.cancelled-area{
-  border:1px solid #5a2424;
-}
-
-.cancelled-area .folder-head{
-  border-bottom-color:#5a2424;
-}
-
-.cancelled-area .folder-head>span{
-  color:#ff8888;
-  background:#351414;
-}
-
-.folder-content{
-  padding:8px;
-  max-height:650px;
-  overflow:auto;
-}
-
-/* =========================
    MODAL
 ========================= */
 
@@ -1398,16 +1270,8 @@ textarea{
     grid-template-columns:1fr;
   }
 
-  .orders-two-column{
-    grid-template-columns:1fr;
-  }
-
   .order-info{
     grid-template-columns:1fr 1fr;
-  }
-
-  .quick-folder-grid{
-    grid-template-columns:repeat(5,1fr);
   }
 
   .image-area{
@@ -1562,6 +1426,8 @@ textarea{
       </div>
 
     </div>
+
+    <!-- TOP 5 FOLDERS - SAME -->
 
     <div class="grid">
 
@@ -1853,51 +1719,22 @@ textarea{
         </h2>
 
         <div class="notice">
-          Click a folder above or below to open its orders.
+          All active customer orders are shown here.
         </div>
 
-        <div class="quick-folder-grid">
-
-          <button
-            class="quick-folder"
-            onclick="selectFolder('new')"
-          >
-            NEW<br>
-            <span id="quickNew">0</span>
-          </button>
-
-          <button
-            class="quick-folder"
-            onclick="selectFolder('pending')"
-          >
-            PENDING<br>
-            <span id="quickPending">0</span>
-          </button>
-
-          <button
-            class="quick-folder"
-            onclick="selectFolder('delivery')"
-          >
-            DELIVERY<br>
-            <span id="quickDelivery">0</span>
-          </button>
-
-          <button
-            class="quick-folder"
-            onclick="selectFolder('complete')"
-          >
-            COMPLETE<br>
-            <span id="quickComplete">0</span>
-          </button>
-
-          <button
-            class="quick-folder"
-            onclick="selectFolder('cancelled')"
-          >
-            CANCEL<br>
-            <span id="quickCancelled">0</span>
-          </button>
-
+        <div
+          id="orderManagementSummary"
+          style="
+            background:#171717;
+            border:1px solid #292929;
+            border-radius:8px;
+            padding:9px;
+            color:#777;
+            font-size:9px;
+            line-height:1.5;
+          "
+        >
+          Active customer orders will appear in the Order Management Details section below.
         </div>
 
       </div>
@@ -2020,168 +1857,32 @@ textarea{
 
     </div>
 
-    <div id="orderManagement">
+    <!-- ACTIVE ORDERS ONLY -->
 
-      <div class="new-order-row">
+    <div
+      id="orderManagement"
+      class="active-order-management"
+    >
 
-        <div
-          id="newOrderColumn"
-          class="order-column hidden"
-        >
+      <div class="active-order-head">
 
-          <div class="order-column-head">
+        <strong>
+          📦 Order Management Details — Active Orders
+        </strong>
 
-            <strong>
-              🆕 New Order — Customer Details
-            </strong>
-
-            <span id="newFolderCount">
-              0
-            </span>
-
-          </div>
-
-          <div
-            id="newOrdersList"
-            class="order-list"
-          >
-            <div class="empty">
-              No new orders.
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="orders-two-column">
-
-        <div
-          id="pendingOrderColumn"
-          class="order-column hidden"
-        >
-
-          <div class="order-column-head">
-
-            <strong>
-              ⏳ Pending Orders
-            </strong>
-
-            <span id="pendingFolderCount">
-              0
-            </span>
-
-          </div>
-
-          <div
-            id="pendingOrdersList"
-            class="order-list"
-          >
-            <div class="empty">
-              No pending orders.
-            </div>
-          </div>
-
-        </div>
-
-        <div
-          id="deliveryOrderColumn"
-          class="order-column hidden"
-        >
-
-          <div class="order-column-head">
-
-            <strong>
-              🏍️ Out for Delivery
-            </strong>
-
-            <span id="deliveryFolderCount">
-              0
-            </span>
-
-          </div>
-
-          <div
-            id="deliveryOrdersList"
-            class="order-list"
-          >
-            <div class="empty">
-              No delivery orders.
-            </div>
-          </div>
-
-        </div>
+        <span id="activeOrderCount">
+          0
+        </span>
 
       </div>
 
       <div
-        id="completeFolderArea"
-        class="folder-area complete-area hidden"
+        id="activeOrdersList"
+        class="active-orders-list"
       >
 
-        <div class="folder-head">
-
-          <div>
-
-            <strong>
-              ✅ Complete Orders
-            </strong>
-
-            <small>
-              Delivered orders
-            </small>
-
-          </div>
-
-          <span id="completeModalCount">
-            0
-          </span>
-
-        </div>
-
-        <div
-          id="completeOrdersList"
-          class="folder-content"
-        >
-          <div class="empty">
-            No completed orders.
-          </div>
-        </div>
-
-      </div>
-
-      <div
-        id="cancelledFolderArea"
-        class="folder-area cancelled-area hidden"
-      >
-
-        <div class="folder-head">
-
-          <div>
-
-            <strong>
-              ❌ Cancelled Orders
-            </strong>
-
-            <small>
-              Cancelled orders
-            </small>
-
-          </div>
-
-          <span id="cancelledModalCount">
-            0
-          </span>
-
-        </div>
-
-        <div
-          id="cancelledOrdersList"
-          class="folder-content"
-        >
-          <div class="empty">
-            No cancelled orders.
-          </div>
+        <div class="empty">
+          No active customer orders.
         </div>
 
       </div>
@@ -2204,6 +1905,8 @@ textarea{
   </div>
 
 </div>
+
+<!-- COMPLETE MODAL -->
 
 <div
   id="completeModal"
@@ -2232,6 +1935,8 @@ textarea{
   </div>
 
 </div>
+
+<!-- CANCELLED MODAL -->
 
 <div
   id="cancelledModal"
@@ -2276,8 +1981,7 @@ import {
   getDatabase,
   ref,
   onValue,
-  update,
-  set
+  update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import {
@@ -3813,6 +3517,7 @@ function detectNewOrders(
 
     ids.forEach(
       id=>{
+
         const order =
           newOrders[id];
 
@@ -3822,8 +3527,11 @@ function detectNewOrders(
             order.status
           ) === "received"
         ){
+
           knownNewOrderIds.add(id);
+
         }
+
       }
     );
 
@@ -4070,103 +3778,55 @@ function(folder){
     folder;
 
 
-  [
-    "newOrderColumn",
-    "pendingOrderColumn",
-    "deliveryOrderColumn",
-    "completeFolderArea",
-    "cancelledFolderArea"
-  ].forEach(
-    id=>{
-
-      const el =
-        $(id);
-
-      if(el){
-        el.classList.add(
-          "hidden"
-        );
-      }
-
-    }
-  );
-
-
-  if(folder === "new"){
-
-    $("newOrderColumn")
-      .classList.remove(
-        "hidden"
-      );
-
-    stopNotificationEffects();
-
-    $("newOrderColumn")
-      .scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-
-  }
-
-
-  if(folder === "pending"){
-
-    $("pendingOrderColumn")
-      .classList.remove(
-        "hidden"
-      );
-
-    $("pendingOrderColumn")
-      .scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-
-  }
-
-
-  if(folder === "delivery"){
-
-    $("deliveryOrderColumn")
-      .classList.remove(
-        "hidden"
-      );
-
-    $("deliveryOrderColumn")
-      .scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-
-  }
-
+  /* =========================
+     COMPLETE / CANCEL
+     OPEN ONLY IN MODAL
+  ========================= */
 
   if(folder === "complete"){
 
-    $("completeFolderArea")
-      .classList.remove(
-        "hidden"
-      );
+    stopNotificationEffects();
 
-    $("completeFolderArea")
-      .scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
+    renderCompleteModal();
+
+    openModal(
+      "completeModal"
+    );
+
+    return;
 
   }
 
 
   if(folder === "cancelled"){
 
-    $("cancelledFolderArea")
-      .classList.remove(
-        "hidden"
-      );
+    renderCancelledModal();
 
-    $("cancelledFolderArea")
-      .scrollIntoView({
+    openModal(
+      "cancelledModal"
+    );
+
+    return;
+
+  }
+
+
+  /* =========================
+     NEW / PENDING / DELIVERY
+     SHOW ACTIVE MANAGEMENT
+     ONLY
+  ========================= */
+
+  if(
+    folder === "new" ||
+    folder === "pending" ||
+    folder === "delivery"
+  ){
+
+    stopNotificationEffects();
+
+    $("orderManagement")
+      ?.scrollIntoView({
         behavior:"smooth",
         block:"start"
       });
@@ -4182,15 +3842,9 @@ function(folder){
 
 function renderOrders(){
 
-  const buckets = {
-
-    new:[],
-    pending:[],
-    delivery:[],
-    complete:[],
-    cancelled:[]
-
-  };
+  const active = [];
+  const complete = [];
+  const cancelled = [];
 
 
   Object.entries(orders)
@@ -4203,43 +3857,11 @@ function renderOrders(){
           );
 
 
-        if(status === "received"){
-
-          buckets.new.push([
-            key,
-            order
-          ]);
-
-        }
-
-        else if(
-          status === "processing" ||
-          status === "making"
-        ){
-
-          buckets.pending.push([
-            key,
-            order
-          ]);
-
-        }
-
-        else if(
-          status === "out_for_delivery"
-        ){
-
-          buckets.delivery.push([
-            key,
-            order
-          ]);
-
-        }
-
-        else if(
+        if(
           status === "delivered"
         ){
 
-          buckets.complete.push([
+          complete.push([
             key,
             order
           ]);
@@ -4250,7 +3872,16 @@ function renderOrders(){
           status === "cancelled"
         ){
 
-          buckets.cancelled.push([
+          cancelled.push([
+            key,
+            order
+          ]);
+
+        }
+
+        else{
+
+          active.push([
             key,
             order
           ]);
@@ -4261,126 +3892,85 @@ function renderOrders(){
     );
 
 
-  Object.values(buckets)
-    .forEach(
-      list=>{
+  const sortOrders =
+    list=>{
 
-        list.sort(
-          (a,b)=>{
+      list.sort(
+        (a,b)=>{
 
-            return Number(
-              b[1].createdAt || 0
-            ) -
-            Number(
-              a[1].createdAt || 0
-            );
+          return Number(
+            b[1].createdAt || 0
+          ) -
+          Number(
+            a[1].createdAt || 0
+          );
 
-          }
-        );
+        }
+      );
 
-      }
-    );
+    };
+
+
+  sortOrders(active);
+  sortOrders(complete);
+  sortOrders(cancelled);
 
 
   updateFolderCounts(
-    buckets
+    active,
+    complete,
+    cancelled
   );
 
 
-  $("newOrdersList").innerHTML =
-    buckets.new.length
-      ? buckets.new
+  $("activeOrdersList").innerHTML =
+    active.length
+      ? active
           .map(
             ([key,order])=>
               createOrderCard(
                 key,
                 order,
-                true
+                normalizeStatus(order.status) === "received"
               )
           )
           .join("")
       : `<div class="empty">
-          No new orders.
+          No active customer orders.
          </div>`;
 
 
-  $("pendingOrdersList").innerHTML =
-    buckets.pending.length
-      ? buckets.pending
-          .map(
-            ([key,order])=>
-              createOrderCard(
-                key,
-                order,
-                false
-              )
-          )
-          .join("")
-      : `<div class="empty">
-          No pending orders.
-         </div>`;
+  $("activeOrderCount").textContent =
+    active.length;
 
 
-  $("deliveryOrdersList").innerHTML =
-    buckets.delivery.length
-      ? buckets.delivery
-          .map(
-            ([key,order])=>
-              createOrderCard(
-                key,
-                order,
-                false
-              )
-          )
-          .join("")
-      : `<div class="empty">
-          No delivery orders.
-         </div>`;
+  renderCompleteModal(
+    complete
+  );
+
+  renderCancelledModal(
+    cancelled
+  );
 
 
-  $("completeOrdersList").innerHTML =
-    buckets.complete.length
-      ? buckets.complete
-          .map(
-            ([key,order])=>
-              createOrderCard(
-                key,
-                order,
-                false
-              )
-          )
-          .join("")
-      : `<div class="empty">
-          No completed orders.
-         </div>`;
+  if(
+    notificationActive &&
+    active.some(
+      ([,order])=>
+        normalizeStatus(
+          order.status
+        ) === "received"
+    )
+  ){
 
+    $("activeOrdersList")
+      .classList.add("new-active-alert");
 
-  $("cancelledOrdersList").innerHTML =
-    buckets.cancelled.length
-      ? buckets.cancelled
-          .map(
-            ([key,order])=>
-              createOrderCard(
-                key,
-                order,
-                false
-              )
-          )
-          .join("")
-      : `<div class="empty">
-          No cancelled orders.
-         </div>`;
+  }else{
 
+    $("activeOrdersList")
+      .classList.remove("new-active-alert");
 
-  $("completeModalList").innerHTML =
-    $("completeOrdersList").innerHTML;
-
-  $("cancelledModalList").innerHTML =
-    $("cancelledOrdersList").innerHTML;
-
-
-  if(selectedFolder){
-    restoreSelectedFolder();
   }
 
 }
@@ -4391,25 +3981,51 @@ function renderOrders(){
 ========================= */
 
 function updateFolderCounts(
-  buckets
+  active,
+  complete,
+  cancelled
 ){
 
   const values = {
 
     new:
-      buckets.new.length,
+      active.filter(
+        ([,order])=>
+          normalizeStatus(
+            order.status
+          ) === "received"
+      ).length,
 
     pending:
-      buckets.pending.length,
+      active.filter(
+        ([,order])=>{
+
+          const status =
+            normalizeStatus(
+              order.status
+            );
+
+          return (
+            status === "processing" ||
+            status === "making"
+          );
+
+        }
+      ).length,
 
     delivery:
-      buckets.delivery.length,
+      active.filter(
+        ([,order])=>
+          normalizeStatus(
+            order.status
+          ) === "out_for_delivery"
+      ).length,
 
     complete:
-      buckets.complete.length,
+      complete.length,
 
     cancelled:
-      buckets.cancelled.length
+      cancelled.length
 
   };
 
@@ -4430,35 +4046,10 @@ function updateFolderCounts(
     values.cancelled;
 
 
-  $("quickNew").textContent =
-    values.new;
-
-  $("quickPending").textContent =
-    values.pending;
-
-  $("quickDelivery").textContent =
-    values.delivery;
-
-  $("quickComplete").textContent =
+  $("completeModalList").dataset.count =
     values.complete;
 
-  $("quickCancelled").textContent =
-    values.cancelled;
-
-
-  $("newFolderCount").textContent =
-    values.new;
-
-  $("pendingFolderCount").textContent =
-    values.pending;
-
-  $("deliveryFolderCount").textContent =
-    values.delivery;
-
-  $("completeModalCount").textContent =
-    values.complete;
-
-  $("cancelledModalCount").textContent =
+  $("cancelledModalList").dataset.count =
     values.cancelled;
 
 
@@ -4475,45 +4066,114 @@ function updateFolderCounts(
 }
 
 
-function restoreSelectedFolder(){
+/* =========================
+   COMPLETE MODAL
+========================= */
 
-  const folder =
-    selectedFolder;
+function renderCompleteModal(
+  listOverride = null
+){
 
-  [
-    "newOrderColumn",
-    "pendingOrderColumn",
-    "deliveryOrderColumn",
-    "completeFolderArea",
-    "cancelledFolderArea"
-  ].forEach(
-    id=>{
-      $(id)?.classList.add(
-        "hidden"
-      );
-    }
+  let list =
+    listOverride;
+
+
+  if(!list){
+
+    list =
+      Object.entries(orders)
+        .filter(
+          ([,order])=>
+            normalizeStatus(
+              order.status
+            ) === "delivered"
+        );
+
+  }
+
+
+  list.sort(
+    (a,b)=>
+      Number(
+        b[1].createdAt || 0
+      ) -
+      Number(
+        a[1].createdAt || 0
+      )
   );
 
 
-  if(folder === "new")
-    $("newOrderColumn")
-      ?.classList.remove("hidden");
+  $("completeModalList").innerHTML =
+    list.length
+      ? list
+          .map(
+            ([key,order])=>
+              createOrderCard(
+                key,
+                order,
+                false
+              )
+          )
+          .join("")
+      : `<div class="empty">
+          No completed orders.
+         </div>`;
 
-  if(folder === "pending")
-    $("pendingOrderColumn")
-      ?.classList.remove("hidden");
+}
 
-  if(folder === "delivery")
-    $("deliveryOrderColumn")
-      ?.classList.remove("hidden");
 
-  if(folder === "complete")
-    $("completeFolderArea")
-      ?.classList.remove("hidden");
+/* =========================
+   CANCELLED MODAL
+========================= */
 
-  if(folder === "cancelled")
-    $("cancelledFolderArea")
-      ?.classList.remove("hidden");
+function renderCancelledModal(
+  listOverride = null
+){
+
+  let list =
+    listOverride;
+
+
+  if(!list){
+
+    list =
+      Object.entries(orders)
+        .filter(
+          ([,order])=>
+            normalizeStatus(
+              order.status
+            ) === "cancelled"
+        );
+
+  }
+
+
+  list.sort(
+    (a,b)=>
+      Number(
+        b[1].createdAt || 0
+      ) -
+      Number(
+        a[1].createdAt || 0
+      )
+  );
+
+
+  $("cancelledModalList").innerHTML =
+    list.length
+      ? list
+          .map(
+            ([key,order])=>
+              createOrderCard(
+                key,
+                order,
+                false
+              )
+          )
+          .join("")
+      : `<div class="empty">
+          No cancelled orders.
+         </div>`;
 
 }
 
@@ -4674,19 +4334,37 @@ function createOrderCard(
   }
 
 
+  /*
+     IMPORTANT:
+     OUT FOR DELIVERY HAS NO ADMIN
+     COMPLETE BUTTON.
+
+     Customer delivery confirmation
+     will change the Firebase order
+     status to delivered.
+
+     Then renderOrders() automatically
+     moves it to Complete.
+  */
+
+
   else if(status === "out_for_delivery"){
 
     actionHtml = `
 
-      <div class="status-buttons">
-
-        <button
-          class="btn btn-green"
-          onclick="updateOrderStatus('${key}','delivered')"
-        >
-          ✓ MOVE TO COMPLETE
-        </button>
-
+      <div
+        style="
+          margin-top:7px;
+          padding:7px 8px;
+          border-radius:7px;
+          background:#211235;
+          border:1px solid #6639a0;
+          color:#c394ff;
+          font-size:8px;
+          font-weight:900;
+        "
+      >
+        🏍️ OUT FOR DELIVERY — WAITING FOR CUSTOMER DELIVERY CONFIRMATION
       </div>
 
     `;
@@ -5338,12 +5016,17 @@ function(key){
 
   closeNotifications();
 
+  stopNotificationEffects();
+
   selectedFolder =
     "new";
 
-  selectFolder(
-    "new"
-  );
+  $("orderManagement")
+    ?.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
 
   setTimeout(
     ()=>{
