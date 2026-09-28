@@ -173,8 +173,6 @@ header{
   background:#383838;
 }
 
-/* BELL VIBRATION */
-
 .notification-button.notification-active{
   animation:
     bellVibrate .16s linear infinite,
@@ -191,8 +189,7 @@ header{
 
 @keyframes bellGlow{
   0%,100%{
-    box-shadow:
-      0 0 0 rgba(57,211,83,0);
+    box-shadow:0 0 0 rgba(57,211,83,0);
   }
 
   50%{
@@ -354,6 +351,66 @@ header{
   font-weight:800;
 }
 
+.folder-box{
+  cursor:pointer;
+  transition:.2s ease;
+  position:relative;
+  user-select:none;
+}
+
+.folder-box:hover{
+  border-color:#f59b23;
+  transform:translateY(-1px);
+}
+
+.folder-box.selected{
+  border-color:#f59b23;
+  box-shadow:
+    0 0 12px rgba(245,155,35,.18);
+}
+
+.folder-box .folder-hint{
+  color:#666;
+  font-size:9px;
+  margin-top:5px;
+}
+
+.new-folder-light{
+  width:10px;
+  height:10px;
+  display:inline-block;
+  border-radius:50%;
+  background:#39d353;
+  margin-left:6px;
+  vertical-align:middle;
+  box-shadow:0 0 8px rgba(57,211,83,.8);
+}
+
+.new-folder-light.blink{
+  animation:
+    folderGreenBlink .75s ease-in-out infinite;
+}
+
+@keyframes folderGreenBlink{
+  0%,100%{
+    opacity:.35;
+    transform:scale(.85);
+    box-shadow:
+      0 0 3px rgba(57,211,83,.3);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.25);
+    box-shadow:
+      0 0 8px rgba(57,211,83,.95),
+      0 0 20px rgba(57,211,83,.65),
+      0 0 35px rgba(57,211,83,.25);
+  }
+}
+
+/* SECTION */
+
 .section{
   margin-top:14px;
 }
@@ -405,6 +462,82 @@ header{
 
 .save-btn{
   margin-top:3px;
+}
+
+/* PAYMENT */
+
+.payment-settings{
+  margin-top:12px;
+  padding:12px;
+  background:#0c0c0c;
+  border:1px solid #292929;
+  border-radius:10px;
+}
+
+.payment-settings-title{
+  color:#f59b23;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:9px;
+}
+
+.payment-toggle-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.payment-toggle{
+  background:#171717;
+  border:1px solid #303030;
+  color:#fff;
+  padding:10px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  cursor:pointer;
+}
+
+.payment-toggle.active{
+  border-color:#39d353;
+  box-shadow:0 0 10px rgba(57,211,83,.12);
+}
+
+.payment-toggle.off{
+  border-color:#4a2929;
+}
+
+.payment-toggle-name{
+  font-weight:800;
+  font-size:12px;
+}
+
+.payment-toggle-status{
+  font-size:10px;
+  font-weight:900;
+}
+
+.payment-toggle.active .payment-toggle-status{
+  color:#39d353;
+}
+
+.payment-toggle.off .payment-toggle-status{
+  color:#ff625b;
+}
+
+.payment-save-row{
+  margin-top:9px;
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+
+.payment-note{
+  color:#777;
+  font-size:10px;
+  line-height:1.4;
 }
 
 /* WEBSITE */
@@ -474,10 +607,7 @@ header{
 /* ORDERS */
 
 .orders{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  align-items:start;
+  display:block;
 }
 
 .order-column{
@@ -487,6 +617,24 @@ header{
   min-height:180px;
   padding:9px;
   overflow:hidden;
+}
+
+.order-column h3{
+  padding:5px 4px 8px;
+  color:#f59b23;
+  font-size:14px;
+  border-bottom:1px solid #222;
+}
+
+.order-column.selected-folder{
+  display:block;
+}
+
+.folder-empty{
+  color:#666;
+  text-align:center;
+  padding:30px 10px;
+  font-size:12px;
 }
 
 /* NEW ORDER GREEN GIMBAL BLINK */
@@ -538,13 +686,6 @@ header{
     opacity:1;
     transform:scale(1.008);
   }
-}
-
-.order-column h3{
-  padding:5px 4px 8px;
-  color:#f59b23;
-  font-size:14px;
-  border-bottom:1px solid #222;
 }
 
 .order{
@@ -619,6 +760,78 @@ header{
   font-size:11px;
   line-height:1.35;
   word-break:break-word;
+}
+
+.location-box{
+  margin-top:8px;
+  padding:8px;
+  background:#0d0d0d;
+  border:1px solid #292929;
+  border-radius:8px;
+}
+
+.location-title{
+  color:#f59b23;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:4px;
+}
+
+.location-text{
+  color:#aaa;
+  font-size:10px;
+  line-height:1.4;
+  word-break:break-word;
+}
+
+.location-meta{
+  margin-top:4px;
+  color:#888;
+  font-size:10px;
+}
+
+.location-button{
+  margin-top:7px;
+  width:100%;
+  background:#292929;
+  color:#fff;
+  padding:7px;
+  font-size:10px;
+}
+
+.location-button:hover{
+  background:#f59b23;
+  color:#000;
+}
+
+.payment-box{
+  margin-top:7px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:7px 8px;
+  border-radius:7px;
+  background:#101010;
+  border:1px solid #292929;
+  font-size:10px;
+}
+
+.payment-label{
+  color:#888;
+}
+
+.payment-value{
+  color:#fff;
+  font-weight:900;
+}
+
+.payment-value.cod{
+  color:#39d353;
+}
+
+.payment-value.online{
+  color:#f59b23;
 }
 
 /* COMPLETE FOLDER */
@@ -749,10 +962,6 @@ header{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .orders{
-    grid-template-columns:repeat(3,1fr);
-  }
-
   .complete-orders-grid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -764,10 +973,6 @@ header{
 }
 
 @media(max-width:800px){
-
-  .orders{
-    grid-template-columns:1fr;
-  }
 
   .complete-orders-grid{
     grid-template-columns:repeat(2,1fr);
@@ -824,10 +1029,6 @@ header{
     grid-template-columns:1fr;
   }
 
-  .orders{
-    grid-template-columns:1fr;
-  }
-
   .complete-orders-grid{
     grid-template-columns:1fr 1fr;
   }
@@ -864,6 +1065,10 @@ header{
   }
 
   .shop-settings-grid{
+    grid-template-columns:1fr;
+  }
+
+  .payment-toggle-grid{
     grid-template-columns:1fr;
   }
 
@@ -1049,30 +1254,188 @@ header{
 </div>
 
 
+<!-- TOP 4 FOLDER BOXES -->
+
 <div class="grid">
 
-  <div class="box">
-    <h2>New Orders</h2>
+  <div
+    id="folderNew"
+    class="box folder-box"
+    data-folder="new"
+  >
+    <h2>
+      New Orders
+      <span
+        id="newFolderLight"
+        class="new-folder-light"
+      ></span>
+    </h2>
+
     <div id="newCount" class="big">0</div>
+
+    <div class="folder-hint">
+      Click to open
+    </div>
   </div>
 
-  <div class="box">
+
+  <div
+    id="folderPending"
+    class="box folder-box"
+    data-folder="pending"
+  >
     <h2>Pending</h2>
+
     <div id="pendingCount" class="big">0</div>
+
+    <div class="folder-hint">
+      Click to open
+    </div>
   </div>
 
-  <div class="box">
+
+  <div
+    id="folderDelivery"
+    class="box folder-box"
+    data-folder="delivery"
+  >
     <h2>Delivery</h2>
+
     <div id="deliveryCount" class="big">0</div>
+
+    <div class="folder-hint">
+      Click to open
+    </div>
   </div>
 
-  <div class="box">
+
+  <div
+    id="folderComplete"
+    class="box folder-box"
+    data-folder="complete"
+  >
     <h2>Complete</h2>
+
     <div id="completeCount" class="big">0</div>
+
+    <div class="folder-hint">
+      Click to open
+    </div>
   </div>
 
 </div>
 
+
+<!-- ORDER MANAGEMENT -->
+
+<div
+  id="orderManagement"
+  class="section"
+>
+
+  <h2>
+    Order Management
+  </h2>
+
+
+  <div class="orders">
+
+    <!-- NEW -->
+
+    <div
+      id="newOrderColumn"
+      class="order-column hidden"
+    >
+
+      <h3>
+        NEW
+        <span id="boxNewCount">(0)</span>
+      </h3>
+
+      <div id="newOrders"></div>
+
+    </div>
+
+
+    <!-- PENDING -->
+
+    <div
+      id="pendingOrderColumn"
+      class="order-column hidden"
+    >
+
+      <h3>
+        PENDING
+        <span id="boxPendingCount">(0)</span>
+      </h3>
+
+      <div id="pendingOrders"></div>
+
+    </div>
+
+
+    <!-- DELIVERY -->
+
+    <div
+      id="deliveryOrderColumn"
+      class="order-column hidden"
+    >
+
+      <h3>
+        DELIVERY
+        <span id="boxDeliveryCount">(0)</span>
+      </h3>
+
+      <div id="deliveryOrders"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- COMPLETE -->
+
+  <div
+    id="completeFolderArea"
+    class="complete-folder hidden"
+  >
+
+    <div class="complete-folder-left">
+
+      <div class="complete-folder-icon">
+        📁
+      </div>
+
+      <div>
+
+        <div class="complete-folder-title">
+          Complete Orders
+          <span id="folderCompleteCount">
+            (0)
+          </span>
+        </div>
+
+        <div class="complete-folder-sub">
+          Delivered and cancelled orders
+        </div>
+
+      </div>
+
+    </div>
+
+    <button
+      id="openCompleteButton"
+      class="complete-folder-button"
+    >
+      Open Folder
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- SHOP CONTROL -->
 
 <div class="section box">
 
@@ -1150,8 +1513,78 @@ header{
     Save Shop Settings
   </button>
 
+
+  <!-- PAYMENT CONTROL -->
+
+  <div class="payment-settings">
+
+    <div class="payment-settings-title">
+      💳 Payment Method Control
+    </div>
+
+    <div class="payment-toggle-grid">
+
+      <div
+        id="codToggle"
+        class="payment-toggle"
+      >
+
+        <div class="payment-toggle-name">
+          Cash on Delivery
+        </div>
+
+        <div
+          id="codStatus"
+          class="payment-toggle-status"
+        >
+          OFF
+        </div>
+
+      </div>
+
+
+      <div
+        id="onlineToggle"
+        class="payment-toggle"
+      >
+
+        <div class="payment-toggle-name">
+          Online Payment
+        </div>
+
+        <div
+          id="onlineStatus"
+          class="payment-toggle-status"
+        >
+          OFF
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="payment-save-row">
+
+      <button
+        id="savePaymentButton"
+        class="primary"
+      >
+        Save Payment Settings
+      </button>
+
+      <div class="payment-note">
+        Customer checkout will show only the payment methods enabled here.
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
+
+<!-- WEBSITE CONTROL -->
 
 <div class="section box">
 
@@ -1192,6 +1625,8 @@ header{
 </div>
 
 
+<!-- MENU -->
+
 <div class="section">
 
   <h2>Menu Control</h2>
@@ -1204,96 +1639,12 @@ header{
 </div>
 
 
-<div class="section">
-
-  <h2>Order Management</h2>
-
-  <div class="orders">
-
-    <!-- NEW ORDER BOX -->
-
-    <div
-      id="newOrderColumn"
-      class="order-column"
-    >
-
-      <h3>
-        NEW
-        <span id="boxNewCount">(0)</span>
-      </h3>
-
-      <div id="newOrders"></div>
-
-    </div>
-
-
-    <div class="order-column">
-
-      <h3>
-        PENDING
-        <span id="boxPendingCount">(0)</span>
-      </h3>
-
-      <div id="pendingOrders"></div>
-
-    </div>
-
-
-    <div class="order-column">
-
-      <h3>
-        DELIVERY
-        <span id="boxDeliveryCount">(0)</span>
-      </h3>
-
-      <div id="deliveryOrders"></div>
-
-    </div>
-
-  </div>
-
-
-  <div class="complete-folder">
-
-    <div class="complete-folder-left">
-
-      <div class="complete-folder-icon">
-        📁
-      </div>
-
-      <div>
-
-        <div class="complete-folder-title">
-          Complete Orders
-          <span id="folderCompleteCount">
-            (0)
-          </span>
-        </div>
-
-        <div class="complete-folder-sub">
-          Completed and cancelled orders
-        </div>
-
-      </div>
-
-    </div>
-
-    <button
-      id="openCompleteButton"
-      class="complete-folder-button"
-    >
-      Open Folder
-    </button>
-
-  </div>
-
-</div>
-
-
 </div>
 
 </div>
 
+
+<!-- COMPLETE MODAL -->
 
 <div
   id="completeModal"
@@ -1404,10 +1755,26 @@ let settings = {};
 let orders = {};
 
 let authReady = false;
+let dataLoaded = false;
 
 
 /* =========================================
-   NEW ORDER NOTIFICATION SYSTEM
+   FOLDER
+========================================= */
+
+let selectedFolder = null;
+
+
+/* =========================================
+   PAYMENT SETTINGS
+========================================= */
+
+let codEnabled = false;
+let onlineEnabled = false;
+
+
+/* =========================================
+   NEW ORDER NOTIFICATION
 ========================================= */
 
 let notificationAudioContext = null;
@@ -1416,11 +1783,6 @@ let notificationActive = false;
 let notificationAcknowledged = false;
 let lastNewOrderSignature = "";
 
-
-/*
-  Create a clean bell-style DING sound
-  using Web Audio API.
-*/
 
 function getNotificationAudioContext(){
 
@@ -1464,10 +1826,6 @@ function playBellDing(){
   const now =
     ctx.currentTime;
 
-
-  /*
-    Main bell tone
-  */
 
   const master =
     ctx.createGain();
@@ -1673,16 +2031,8 @@ function startNotificationEffects(){
   }
 
 
-  /*
-    First DING immediately
-  */
-
   playBellDing();
 
-
-  /*
-    Then DING... DING repeatedly
-  */
 
   notificationTimer =
     setInterval(
@@ -1700,83 +2050,9 @@ function startNotificationEffects(){
 }
 
 
-/*
-  Clicking the NEW ORDER box acknowledges
-  the notification.
-*/
-
-document.getElementById(
-  "newOrderColumn"
-).addEventListener(
-  "click",
-  event=>{
-
-    /*
-      Do not acknowledge when there are
-      no new orders.
-    */
-
-    const newOrders =
-      Object.values(
-        orders || {}
-      ).filter(
-        order=>
-          order &&
-          String(
-            order.status ||
-            "received"
-          ).toLowerCase() ===
-          "received"
-      );
-
-
-    if(newOrders.length === 0)
-      return;
-
-
-    stopNotificationEffects();
-
-  }
-);
-
-
-/*
-  Clicking notification bell itself also
-  stops the alert because it opens the
-  new-order notification panel.
-*/
-
-document.getElementById(
-  "notificationButton"
-).addEventListener(
-  "click",
-  ()=>{
-
-    const newOrders =
-      Object.values(
-        orders || {}
-      ).filter(
-        order=>
-          order &&
-          String(
-            order.status ||
-            "received"
-          ).toLowerCase() ===
-          "received"
-      );
-
-
-    if(newOrders.length > 0){
-
-      stopNotificationEffects();
-
-    }
-
-  }
-);
-
-
-/* MENU */
+/* =========================================
+   MENU
+========================================= */
 
 const MENU = [
 
@@ -1831,7 +2107,9 @@ const MENU = [
 ];
 
 
-/* AUTH PERSISTENCE */
+/* =========================================
+   AUTH
+========================================= */
 
 async function prepareAuth(){
 
@@ -1862,8 +2140,6 @@ async function prepareAuth(){
 
 await prepareAuth();
 
-
-/* LOGIN */
 
 document.getElementById(
   "loginButton"
@@ -2038,7 +2314,9 @@ document.getElementById(
 };
 
 
-/* NOTIFICATION */
+/* =========================================
+   NOTIFICATION PANEL
+========================================= */
 
 const notificationButton =
   document.getElementById(
@@ -2052,7 +2330,8 @@ const notificationPanel =
   );
 
 
-notificationButton.onclick =
+notificationButton.addEventListener(
+  "click",
   event=>{
 
     event.stopPropagation();
@@ -2061,7 +2340,8 @@ notificationButton.onclick =
       "hidden"
     );
 
-  };
+  }
+);
 
 
 document.addEventListener(
@@ -2189,13 +2469,7 @@ function renderNotifications(
           "hidden"
         );
 
-
-        document.getElementById(
-          "newOrders"
-        ).scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
+        selectFolder("new");
 
       };
 
@@ -2210,10 +2484,137 @@ function renderNotifications(
 }
 
 
-/* LOAD DATA */
+/* =========================================
+   TOP FOLDER CLICK
+========================================= */
 
-let dataLoaded = false;
+document.querySelectorAll(
+  ".folder-box"
+).forEach(
+  box=>{
 
+    box.addEventListener(
+      "click",
+      ()=>{
+
+        selectFolder(
+          box.dataset.folder
+        );
+
+      }
+    );
+
+  }
+);
+
+
+function selectFolder(
+  folder
+){
+
+  selectedFolder =
+    folder;
+
+
+  document.querySelectorAll(
+    ".folder-box"
+  ).forEach(
+    box=>{
+
+      box.classList.toggle(
+        "selected",
+        box.dataset.folder === folder
+      );
+
+    }
+  );
+
+
+  document.getElementById(
+    "newOrderColumn"
+  ).classList.add(
+    "hidden"
+  );
+
+
+  document.getElementById(
+    "pendingOrderColumn"
+  ).classList.add(
+    "hidden"
+  );
+
+
+  document.getElementById(
+    "deliveryOrderColumn"
+  ).classList.add(
+    "hidden"
+  );
+
+
+  document.getElementById(
+    "completeFolderArea"
+  ).classList.add(
+    "hidden"
+  );
+
+
+  if(folder === "new"){
+
+    document.getElementById(
+      "newOrderColumn"
+    ).classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  if(folder === "pending"){
+
+    document.getElementById(
+      "pendingOrderColumn"
+    ).classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  if(folder === "delivery"){
+
+    document.getElementById(
+      "deliveryOrderColumn"
+    ).classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  if(folder === "complete"){
+
+    document.getElementById(
+      "completeFolderArea"
+    ).classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  document.getElementById(
+    "orderManagement"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================
+   LOAD DATA
+========================================= */
 
 function loadData(){
 
@@ -2286,7 +2687,9 @@ function loadData(){
 }
 
 
-/* SETTINGS */
+/* =========================================
+   SETTINGS
+========================================= */
 
 function renderSettings(){
 
@@ -2332,6 +2735,17 @@ function renderSettings(){
     "";
 
 
+  codEnabled =
+    settings.codEnabled !== false;
+
+
+  onlineEnabled =
+    settings.onlinePaymentEnabled !== false;
+
+
+  renderPaymentSettings();
+
+
   const override =
     String(
       settings.statusOverride ||
@@ -2368,7 +2782,134 @@ function renderSettings(){
 }
 
 
-/* SHOP */
+/* =========================================
+   PAYMENT
+========================================= */
+
+const codToggle =
+  document.getElementById(
+    "codToggle"
+  );
+
+
+const onlineToggle =
+  document.getElementById(
+    "onlineToggle"
+  );
+
+
+codToggle.onclick =
+  ()=>{
+
+    codEnabled =
+      !codEnabled;
+
+    renderPaymentSettings();
+
+  };
+
+
+onlineToggle.onclick =
+  ()=>{
+
+    onlineEnabled =
+      !onlineEnabled;
+
+    renderPaymentSettings();
+
+  };
+
+
+function renderPaymentSettings(){
+
+  codToggle.classList.toggle(
+    "active",
+    codEnabled
+  );
+
+  codToggle.classList.toggle(
+    "off",
+    !codEnabled
+  );
+
+
+  onlineToggle.classList.toggle(
+    "active",
+    onlineEnabled
+  );
+
+  onlineToggle.classList.toggle(
+    "off",
+    !onlineEnabled
+  );
+
+
+  document.getElementById(
+    "codStatus"
+  ).textContent =
+    codEnabled
+      ? "ON"
+      : "OFF";
+
+
+  document.getElementById(
+    "onlineStatus"
+  ).textContent =
+    onlineEnabled
+      ? "ON"
+      : "OFF";
+
+}
+
+
+document.getElementById(
+  "savePaymentButton"
+).onclick = async()=>{
+
+  try{
+
+    await update(
+
+      ref(
+        db,
+        "settings"
+      ),
+
+      {
+
+        codEnabled:
+          codEnabled,
+
+        onlinePaymentEnabled:
+          onlineEnabled
+
+      }
+
+    );
+
+
+    alert(
+      "Payment settings saved."
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Could not save payment settings."
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   SHOP
+========================================= */
 
 document.getElementById(
   "autoButton"
@@ -2594,7 +3135,9 @@ function isOpenByTime(){
 }
 
 
-/* WEBSITE */
+/* =========================================
+   WEBSITE
+========================================= */
 
 document.getElementById(
   "saveWebsiteButton"
@@ -2645,7 +3188,9 @@ document.getElementById(
 };
 
 
-/* MENU */
+/* =========================================
+   MENU
+========================================= */
 
 function renderMenu(){
 
@@ -2900,7 +3445,9 @@ function renderMenu(){
 }
 
 
-/* ORDERS */
+/* =========================================
+   ORDERS
+========================================= */
 
 function renderOrders(){
 
@@ -2934,6 +3481,8 @@ function renderOrders(){
         ).toLowerCase();
 
 
+      /* NEW */
+
       if(
         status ===
         "received"
@@ -2945,13 +3494,18 @@ function renderOrders(){
 
       }
 
+
+      /* PENDING */
+
       else if(
 
-        status ===
-          "confirmed" ||
+        status === "confirmed" ||
 
-        status ===
-          "preparing"
+        status === "processing" ||
+
+        status === "preparing" ||
+
+        status === "making"
 
       ){
 
@@ -2960,6 +3514,9 @@ function renderOrders(){
         );
 
       }
+
+
+      /* DELIVERY */
 
       else if(
         status ===
@@ -2971,6 +3528,9 @@ function renderOrders(){
         );
 
       }
+
+
+      /* COMPLETE */
 
       else if(
 
@@ -3010,15 +3570,6 @@ function renderOrders(){
     }
   );
 
-
-  /*
-    Detect a genuinely new NEW-order set.
-
-    Existing orders remain acknowledged after
-    the NEW box is clicked. A newly arriving
-    order changes the signature and starts the
-    notification again.
-  */
 
   const currentSignature =
     buckets.new
@@ -3130,7 +3681,7 @@ function renderOrders(){
   document.getElementById(
     "folderCompleteCount"
   ).textContent =
-    `(${buckets.complete.length})`;
+    `(${buckets.complete.length)`;
 
 
   document.getElementById(
@@ -3139,14 +3690,101 @@ function renderOrders(){
     `(${buckets.complete.length})`;
 
 
+  /* Green light on New Orders */
+
+  document.getElementById(
+    "newFolderLight"
+  ).classList.toggle(
+    "blink",
+    buckets.new.length > 0
+  );
+
+
   renderNotifications(
     buckets.new
   );
 
+
+  /*
+    If a folder was already selected,
+    keep showing that folder.
+  */
+
+  if(selectedFolder){
+
+    const activeBox =
+      document.querySelector(
+        `.folder-box[data-folder="${selectedFolder}"]`
+      );
+
+
+    if(activeBox){
+
+      document.querySelectorAll(
+        ".folder-box"
+      ).forEach(
+        box=>{
+
+          box.classList.toggle(
+            "selected",
+            box.dataset.folder ===
+            selectedFolder
+          );
+
+        }
+      );
+
+
+      if(selectedFolder === "new"){
+
+        document.getElementById(
+          "newOrderColumn"
+        ).classList.remove(
+          "hidden"
+        );
+
+      }
+
+      else if(selectedFolder === "pending"){
+
+        document.getElementById(
+          "pendingOrderColumn"
+        ).classList.remove(
+          "hidden"
+        );
+
+      }
+
+      else if(selectedFolder === "delivery"){
+
+        document.getElementById(
+          "deliveryOrderColumn"
+        ).classList.remove(
+          "hidden"
+        );
+
+      }
+
+      else if(selectedFolder === "complete"){
+
+        document.getElementById(
+          "completeFolderArea"
+        ).classList.remove(
+          "hidden"
+        );
+
+      }
+
+    }
+
+  }
+
 }
 
 
-/* NORMAL ORDER BUCKET */
+/* =========================================
+   NORMAL BUCKET
+========================================= */
 
 function renderBucket(
   id,
@@ -3161,6 +3799,19 @@ function renderBucket(
 
   container.innerHTML =
     "";
+
+
+  if(list.length === 0){
+
+    container.innerHTML = `
+      <div class="folder-empty">
+        No orders in this folder.
+      </div>
+    `;
+
+    return;
+
+  }
 
 
   list.forEach(
@@ -3182,7 +3833,9 @@ function renderBucket(
 }
 
 
-/* COMPLETE ORDER BUCKET */
+/* =========================================
+   COMPLETE
+========================================= */
 
 function renderCompleteBucket(
   list
@@ -3230,7 +3883,9 @@ function renderCompleteBucket(
 }
 
 
-/* ORDER CARD */
+/* =========================================
+   ORDER CARD
+========================================= */
 
 function createOrderCard(
   order
@@ -3309,6 +3964,202 @@ function createOrderCard(
     ).toLowerCase();
 
 
+  /* PAYMENT METHOD */
+
+  const rawPayment =
+    String(
+      order.paymentMethod ||
+      order.payment ||
+      order.paymentType ||
+      ""
+    ).toLowerCase();
+
+
+  let paymentText =
+    "Not specified";
+
+
+  let paymentClass =
+    "";
+
+
+  if(
+    rawPayment.includes("cod") ||
+    rawPayment.includes("cash")
+  ){
+
+    paymentText =
+      "Cash on Delivery";
+
+    paymentClass =
+      "cod";
+
+  }
+
+  else if(
+    rawPayment.includes("online") ||
+    rawPayment.includes("upi") ||
+    rawPayment.includes("razorpay") ||
+    rawPayment.includes("card")
+  ){
+
+    paymentText =
+      "Online Payment";
+
+    paymentClass =
+      "online";
+
+  }
+
+
+  /* LOCATION */
+
+  const locationName =
+    order.locationName ||
+    order.location ||
+    order.deliveryLocation ||
+    order.address ||
+    "Location not provided";
+
+
+  const latitude =
+    Number(
+      order.customerLat ??
+      order.latitude ??
+      order.lat ??
+      NaN
+    );
+
+
+  const longitude =
+    Number(
+      order.customerLng ??
+      order.longitude ??
+      order.lng ??
+      order.lon ??
+      NaN
+    );
+
+
+  const distance =
+    order.distance !== undefined &&
+    order.distance !== null &&
+    order.distance !== ""
+      ? Number(order.distance)
+      : null;
+
+
+  const deliveryCharge =
+    order.deliveryCharge !== undefined &&
+    order.deliveryCharge !== null &&
+    order.deliveryCharge !== ""
+      ? Number(order.deliveryCharge)
+      : null;
+
+
+  const mapsUrl =
+    order.mapsUrl ||
+    order.googleMapsUrl ||
+    (
+      Number.isFinite(latitude) &&
+      Number.isFinite(longitude)
+        ? `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`
+        : ""
+    );
+
+
+  let locationHtml = `
+
+    <div class="location-box">
+
+      <div class="location-title">
+        📍 CUSTOMER DELIVERY LOCATION
+      </div>
+
+      <div class="location-text">
+        ${escapeHtml(
+          locationName
+        )}
+      </div>
+
+  `;
+
+
+  if(
+    Number.isFinite(latitude) &&
+    Number.isFinite(longitude)
+  ){
+
+    locationHtml += `
+
+      <div class="location-meta">
+        Coordinates:
+        ${latitude.toFixed(6)},
+        ${longitude.toFixed(6)}
+      </div>
+
+    `;
+
+  }
+
+
+  if(
+    distance !== null &&
+    Number.isFinite(distance)
+  ){
+
+    locationHtml += `
+
+      <div class="location-meta">
+        Distance:
+        ${distance.toFixed(2)} km
+      </div>
+
+    `;
+
+  }
+
+
+  if(
+    deliveryCharge !== null &&
+    Number.isFinite(deliveryCharge)
+  ){
+
+    locationHtml += `
+
+      <div class="location-meta">
+        Delivery Charge:
+        ₹${deliveryCharge.toFixed(2)}
+      </div>
+
+    `;
+
+  }
+
+
+  if(mapsUrl){
+
+    locationHtml += `
+
+      <button
+        class="location-button"
+        data-maps-url="${escapeHtml(
+          mapsUrl
+        )}"
+      >
+        📍 Open Customer Location in Google Maps
+      </button>
+
+    `;
+
+  }
+
+
+  locationHtml += `
+    </div>
+  `;
+
+
   div.innerHTML = `
 
     <div class="order-id">
@@ -3364,6 +4215,26 @@ function createOrderCard(
     </div>
 
 
+    ${locationHtml}
+
+
+    <div class="payment-box">
+
+      <span class="payment-label">
+        Payment Method
+      </span>
+
+      <span
+        class="payment-value ${paymentClass}"
+      >
+        ${escapeHtml(
+          paymentText
+        )}
+      </span>
+
+    </div>
+
+
     <div style="margin-top:8px">
 
       ${items}
@@ -3380,6 +4251,44 @@ function createOrderCard(
 
 
     <div class="item-line">
+
+      <b>
+        Item Total
+      </b>
+
+      <b
+        style="color:#f59b23"
+      >
+        ₹${Number(
+          order.itemTotal ??
+          order.subtotal ??
+          order.itemsTotal ??
+          0
+        )}
+      </b>
+
+    </div>
+
+
+    <div class="item-line">
+
+      <span>
+        Delivery
+      </span>
+
+      <span>
+        ₹${Number(
+          order.deliveryCharge || 0
+        )}
+      </span>
+
+    </div>
+
+
+    <div
+      class="item-line"
+      style="margin-top:7px"
+    >
 
       <b>
         Total
@@ -3424,7 +4333,8 @@ function createOrderCard(
 
 
     ${
-      status === "confirmed"
+      status === "confirmed" ||
+      status === "processing"
 
       ? `
 
@@ -3446,7 +4356,8 @@ function createOrderCard(
 
 
     ${
-      status === "preparing"
+      status === "preparing" ||
+      status === "making"
 
       ? `
 
@@ -3521,6 +4432,42 @@ function createOrderCard(
   `;
 
 
+  /* GOOGLE MAP BUTTON */
+
+  const mapButton =
+    div.querySelector(
+      ".location-button"
+    );
+
+
+  if(mapButton){
+
+    mapButton.onclick =
+      event=>{
+
+        event.stopPropagation();
+
+        const url =
+          mapButton.dataset.mapsUrl;
+
+
+        if(url){
+
+          window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+          );
+
+        }
+
+      };
+
+  }
+
+
+  /* ACTION BUTTONS */
+
   div.querySelectorAll(
     "[data-action]"
   ).forEach(
@@ -3528,12 +4475,6 @@ function createOrderCard(
 
       button.onclick =
         async event=>{
-
-          /*
-            Stop the click from bubbling to the
-            NEW ORDER box until the actual action
-            has been processed.
-          */
 
           event.stopPropagation();
 
@@ -3553,7 +4494,7 @@ function createOrderCard(
 
             await changeOrderStatus(
               order,
-              "confirmed"
+              "processing"
             );
 
           }
@@ -3579,7 +4520,7 @@ function createOrderCard(
 
             await changeOrderStatus(
               order,
-              "preparing"
+              "making"
             );
 
           }
@@ -3632,7 +4573,9 @@ function createOrderCard(
 }
 
 
-/* CHANGE ORDER STATUS */
+/* =========================================
+   CHANGE ORDER STATUS
+========================================= */
 
 async function changeOrderStatus(
   order,
@@ -3679,7 +4622,9 @@ async function changeOrderStatus(
 }
 
 
-/* MOVE DELIVERY -> COMPLETE */
+/* =========================================
+   DELIVERY -> COMPLETE
+========================================= */
 
 async function moveOrderToComplete(
   order
@@ -3740,7 +4685,9 @@ async function moveOrderToComplete(
 }
 
 
-/* REMOVE ORDER */
+/* =========================================
+   REMOVE ORDER
+========================================= */
 
 async function removeOrder(
   order
@@ -3791,7 +4738,9 @@ async function removeOrder(
 }
 
 
-/* COMPLETE FOLDER */
+/* =========================================
+   COMPLETE FOLDER MODAL
+========================================= */
 
 const completeModal =
   document.getElementById(
@@ -3860,7 +4809,9 @@ document.addEventListener(
 );
 
 
-/* HELPERS */
+/* =========================================
+   HELPERS
+========================================= */
 
 function formatStatus(
   status
@@ -3874,8 +4825,14 @@ function formatStatus(
     confirmed:
       "Confirmed",
 
+    processing:
+      "Processing",
+
     preparing:
       "Preparing",
+
+    making:
+      "Making",
 
     out_for_delivery:
       "Out for Delivery",
