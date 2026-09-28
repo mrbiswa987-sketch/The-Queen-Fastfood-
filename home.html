@@ -114,6 +114,32 @@ header{
   justify-content:space-between;
 }
 
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.menu-button{
+  width:38px;
+  height:38px;
+  border:1px solid #333;
+  background:#111;
+  color:#f59b23;
+  border-radius:10px;
+  font-size:22px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+
+.menu-button:hover{
+  border-color:#f59b23;
+  background:#181818;
+}
+
 .logo{
   font-family:"Cormorant Garamond",serif;
   font-size:30px;
@@ -154,6 +180,161 @@ header{
 
 .logout-top:hover{
   background:#281010;
+}
+
+
+/* =====================================================
+   CUSTOMER MENU
+===================================================== */
+
+.customer-menu-overlay{
+  position:fixed;
+  inset:0;
+  z-index:12000;
+  background:rgba(0,0,0,.58);
+}
+
+.customer-menu-box{
+  position:absolute;
+  top:70px;
+  left:20px;
+  width:220px;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.65);
+}
+
+.customer-menu-item{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#fff;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.customer-menu-item:hover{
+  background:#191919;
+  color:#f59b23;
+}
+
+
+/* =====================================================
+   ORDER HISTORY
+===================================================== */
+
+.order-history-overlay{
+  position:fixed;
+  inset:0;
+  z-index:13000;
+  background:rgba(0,0,0,.78);
+}
+
+.order-history-modal{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(560px,94%);
+  max-height:88vh;
+  overflow:auto;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:18px;
+  padding:18px;
+}
+
+.order-history-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.order-history-head h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:29px;
+  color:#f59b23;
+}
+
+.order-history-user{
+  color:#777;
+  font-size:10px;
+  margin-bottom:12px;
+}
+
+.order-history-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.history-card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:10px 11px;
+}
+
+.history-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.history-order-id{
+  color:#f59b23;
+  font-size:11px;
+  font-weight:800;
+}
+
+.history-status{
+  font-size:9px;
+  font-weight:800;
+  padding:4px 7px;
+  border-radius:12px;
+  background:#292929;
+}
+
+.history-date{
+  color:#666;
+  font-size:9px;
+  margin-top:4px;
+}
+
+.history-items{
+  color:#aaa;
+  font-size:10px;
+  line-height:1.5;
+  margin-top:6px;
+}
+
+.history-total{
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  margin-top:6px;
+}
+
+.history-empty{
+  text-align:center;
+  padding:30px 15px;
+  color:#777;
+  font-size:12px;
+}
+
+.history-loading{
+  text-align:center;
+  padding:25px;
+  color:#777;
+  font-size:11px;
 }
 
 
@@ -446,27 +627,28 @@ header{
 ===================================================== */
 
 .track-section{
-  padding-top:15px!important;
-  padding-bottom:35px!important;
+  padding-top:10px!important;
+  padding-bottom:28px!important;
+  text-align:center;
 }
 
 .track-section .section-title{
-  font-size:34px;
-  margin-bottom:16px;
+  font-size:30px;
+  margin-bottom:12px;
 }
 
 .track-box{
-  max-width:520px;
-  margin:auto;
+  max-width:430px;
+  margin:0 auto;
   background:#101010;
   border:1px solid #292929;
-  padding:14px;
-  border-radius:15px;
+  padding:11px;
+  border-radius:13px;
 }
 
 .track-row{
   display:flex;
-  gap:8px;
+  gap:7px;
 }
 
 .track-row input{
@@ -474,22 +656,22 @@ header{
   background:#080808;
   color:#fff;
   border:1px solid #333;
-  padding:10px 12px;
-  border-radius:9px;
-  font-size:13px;
+  padding:9px 11px;
+  border-radius:8px;
+  font-size:12px;
 }
 
 .track-row button{
   background:#f59b23;
   border:0;
-  padding:10px 15px;
-  border-radius:9px;
+  padding:9px 13px;
+  border-radius:8px;
   font-weight:800;
-  font-size:13px;
+  font-size:12px;
 }
 
 .track-result{
-  margin-top:12px;
+  margin-top:10px;
 }
 
 .order-card{
@@ -497,6 +679,7 @@ header{
   border:1px solid #292929;
   border-radius:15px;
   padding:18px;
+  text-align:left;
 }
 
 .order-head{
@@ -556,30 +739,30 @@ header{
 .important-notices{
   max-width:1200px;
   margin:0 auto;
-  padding:20px 20px 55px;
+  padding:16px 20px 45px;
 }
 
 .important-notices-title{
-  text-align:center;
+  text-align:left;
   font-family:"Cormorant Garamond",serif;
-  font-size:38px;
+  font-size:32px;
   color:#f59b23;
-  margin-bottom:8px;
+  margin-bottom:5px;
 }
 
 .important-notices-subtitle{
-  text-align:center;
+  text-align:left;
   color:#777;
-  font-size:11px;
+  font-size:10px;
   letter-spacing:1px;
-  margin-bottom:25px;
+  margin-bottom:15px;
   text-transform:uppercase;
 }
 
 .notice-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
 
 .notice-card{
@@ -592,10 +775,11 @@ header{
       rgba(245,155,35,.025)
     );
   border:1px solid #2c2c2c;
-  border-radius:17px;
-  padding:21px;
+  border-radius:13px;
+  padding:13px;
   overflow:hidden;
   transition:.25s;
+  min-width:0;
 }
 
 .notice-card::before{
@@ -619,37 +803,38 @@ header{
 
 .notice-label{
   color:#f59b23;
-  font-size:10px;
+  font-size:8px;
   font-weight:800;
-  letter-spacing:1.7px;
+  letter-spacing:1.3px;
   text-transform:uppercase;
-  margin-bottom:7px;
+  margin-bottom:5px;
 }
 
 .notice-card h3{
   font-family:"Cormorant Garamond",serif;
-  font-size:25px;
+  font-size:19px;
+  line-height:1.1;
   color:#fff;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 
 .notice-card p{
   color:#999;
-  font-size:12px;
-  line-height:1.65;
+  font-size:9.5px;
+  line-height:1.5;
 }
 
 .notice-contact{
   display:inline-flex;
   align-items:center;
-  gap:7px;
-  margin-top:12px;
-  padding:8px 11px;
-  border-radius:9px;
+  gap:5px;
+  margin-top:8px;
+  padding:6px 8px;
+  border-radius:7px;
   background:#171717;
   border:1px solid #333;
   color:#f59b23;
-  font-size:12px;
+  font-size:9px;
   font-weight:800;
 }
 
@@ -1195,7 +1380,13 @@ footer a{
   }
 
   .notice-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(4,minmax(190px,1fr));
+    overflow-x:auto;
+    padding-bottom:5px;
+  }
+
+  .notice-card{
+    min-width:190px;
   }
 
 }
@@ -1204,6 +1395,16 @@ footer a{
 
   .nav{
     padding:12px 10px;
+  }
+
+  .nav-left{
+    gap:7px;
+  }
+
+  .menu-button{
+    width:34px;
+    height:34px;
+    font-size:20px;
   }
 
   .logo{
@@ -1223,6 +1424,12 @@ footer a{
 
   .customer-welcome{
     display:none;
+  }
+
+  .customer-menu-box{
+    top:60px;
+    left:10px;
+    width:205px;
   }
 
   .hero{
@@ -1288,11 +1495,16 @@ footer a{
   }
 
   .important-notices-title{
-    font-size:34px;
+    font-size:30px;
   }
 
   .notice-card{
-    padding:18px;
+    padding:12px;
+  }
+
+  .order-history-modal{
+    width:94%;
+    padding:14px;
   }
 
 }
@@ -1300,6 +1512,81 @@ footer a{
 </head>
 
 <body>
+
+
+<!-- =====================================================
+     CUSTOMER MENU
+===================================================== -->
+
+<div
+  id="customerMenuOverlay"
+  class="customer-menu-overlay hidden"
+>
+
+  <div
+    id="customerMenuBox"
+    class="customer-menu-box"
+  >
+
+    <button
+      id="myOrdersButton"
+      class="customer-menu-item"
+    >
+      📦 My Orders
+    </button>
+
+    <button
+      id="orderHistoryButton"
+      class="customer-menu-item"
+    >
+      🕐 Order History
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ORDER HISTORY
+===================================================== -->
+
+<div
+  id="orderHistoryOverlay"
+  class="order-history-overlay hidden"
+>
+
+  <div class="order-history-modal">
+
+    <div class="order-history-head">
+
+      <h2>
+        My Orders
+      </h2>
+
+      <button
+        id="closeOrderHistory"
+        class="close"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="orderHistoryUser"
+      class="order-history-user"
+    ></div>
+
+    <div
+      id="orderHistoryList"
+      class="order-history-list"
+    ></div>
+
+  </div>
+
+</div>
+
 
 <div id="customerLoginOverlay" class="customer-login-overlay hidden">
 
@@ -1434,8 +1721,21 @@ footer a{
 
   <div class="nav">
 
-    <div class="logo">
-      GOOD FOOD &amp; GOOD MOOD
+    <div class="nav-left">
+
+      <button
+        id="customerMenuButton"
+        class="menu-button"
+        title="Options"
+        aria-label="Options"
+      >
+        ☰
+      </button>
+
+      <div class="logo">
+        GOOD FOOD &amp; GOOD MOOD
+      </div>
+
     </div>
 
     <div class="nav-actions">
@@ -2167,15 +2467,6 @@ const DEFAULT_MENU = [
    RESTAURANT / DELIVERY SETTINGS
 ===================================================== */
 
-/*
-   EXACT QUEEN FAST FOOD LOCATION
-   Supplied by user.
-
-   All distance calculations,
-   delivery charges and 20 km delivery
-   radius are calculated from this point.
-*/
-
 const RESTAURANT_LAT =
   20.21680076286578;
 
@@ -2516,10 +2807,466 @@ window.logoutCustomer =
       "customerPhone"
     ).value = "";
 
+    closeCustomerMenu();
+
     showCustomerLogin();
 
   };
 
+
+/* =====================================================
+   CUSTOMER MENU
+===================================================== */
+
+function openCustomerMenu(){
+
+  document.getElementById(
+    "customerMenuOverlay"
+  ).classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function closeCustomerMenu(){
+
+  document.getElementById(
+    "customerMenuOverlay"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+document.getElementById(
+  "customerMenuButton"
+).addEventListener(
+  "click",
+  event=>{
+
+    event.stopPropagation();
+
+    const menu =
+      document.getElementById(
+        "customerMenuOverlay"
+      );
+
+    if(
+      menu.classList.contains(
+        "hidden"
+      )
+    ){
+
+      openCustomerMenu();
+
+    }
+    else{
+
+      closeCustomerMenu();
+
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "customerMenuOverlay"
+).addEventListener(
+  "click",
+  event=>{
+
+    if(
+      event.target ===
+      document.getElementById(
+        "customerMenuOverlay"
+      )
+    ){
+
+      closeCustomerMenu();
+
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "myOrdersButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    closeCustomerMenu();
+
+    openOrderHistory();
+
+  }
+);
+
+
+document.getElementById(
+  "orderHistoryButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    closeCustomerMenu();
+
+    openOrderHistory();
+
+  }
+);
+
+
+/* =====================================================
+   ORDER HISTORY
+===================================================== */
+
+function openOrderHistory(){
+
+  const overlay =
+    document.getElementById(
+      "orderHistoryOverlay"
+    );
+
+  overlay.classList.remove(
+    "hidden"
+  );
+
+  loadOrderHistory();
+
+}
+
+
+function closeOrderHistory(){
+
+  document.getElementById(
+    "orderHistoryOverlay"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+document.getElementById(
+  "closeOrderHistory"
+).addEventListener(
+  "click",
+  closeOrderHistory
+);
+
+
+document.getElementById(
+  "orderHistoryOverlay"
+).addEventListener(
+  "click",
+  event=>{
+
+    if(
+      event.target ===
+      document.getElementById(
+        "orderHistoryOverlay"
+      )
+    ){
+
+      closeOrderHistory();
+
+    }
+
+  }
+);
+
+
+function loadOrderHistory(){
+
+  const list =
+    document.getElementById(
+      "orderHistoryList"
+    );
+
+  const userText =
+    document.getElementById(
+      "orderHistoryUser"
+    );
+
+  if(
+    !customerProfile.phone
+  ){
+
+    userText.textContent =
+      "Please login to view your orders.";
+
+    list.innerHTML = `
+      <div class="history-empty">
+        No customer profile found.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  userText.textContent =
+    `${customerProfile.name} • ${customerProfile.phone}`;
+
+
+  list.innerHTML = `
+    <div class="history-loading">
+      Loading your orders...
+    </div>
+  `;
+
+
+  const ordersQuery =
+    query(
+
+      ref(
+        db,
+        "orders"
+      ),
+
+      orderByChild(
+        "phone"
+      ),
+
+      equalTo(
+        customerProfile.phone
+      )
+
+    );
+
+
+  onValue(
+
+    ordersQuery,
+
+    snapshot=>{
+
+      const orders = [];
+
+      snapshot.forEach(
+        child=>{
+
+          const order =
+            child.val();
+
+          orders.push({
+
+            ...order,
+
+            firebaseKey:
+              child.key
+
+          });
+
+        }
+      );
+
+
+      orders.sort(
+        (a,b)=>
+          Number(
+            b.createdAt || 0
+          ) -
+          Number(
+            a.createdAt || 0
+          )
+      );
+
+
+      renderOrderHistory(
+        orders
+      );
+
+    },
+
+    error=>{
+
+      console.error(
+        "ORDER HISTORY ERROR:",
+        error
+      );
+
+      list.innerHTML = `
+        <div class="history-empty">
+          ❌ Unable to load your order history.
+        </div>
+      `;
+
+    },
+
+    {
+      onlyOnce:true
+    }
+
+  );
+
+}
+
+
+function renderOrderHistory(
+  orders
+){
+
+  const list =
+    document.getElementById(
+      "orderHistoryList"
+    );
+
+
+  if(
+    !orders.length
+  ){
+
+    list.innerHTML = `
+      <div class="history-empty">
+        📦<br>
+        <div style="margin-top:7px">
+          No order history yet.
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  orders.forEach(
+    order=>{
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+      card.className =
+        "history-card";
+
+
+      const status =
+        String(
+          order.status ||
+          "received"
+        ).toLowerCase();
+
+
+      const itemsText =
+        (
+          order.items ||
+          []
+        )
+        .map(
+          item=>
+            `${escapeHtml(item.name)} × ${item.quantity}`
+        )
+        .join(
+          " • "
+        );
+
+
+      const created =
+        order.createdAt
+          ? new Date(
+              order.createdAt
+            ).toLocaleString(
+              "en-IN"
+            )
+          : "--";
+
+
+      card.innerHTML = `
+
+        <div class="history-card-head">
+
+          <div class="history-order-id">
+            ${escapeHtml(
+              order.orderId ||
+              "Order"
+            )}
+          </div>
+
+          <div class="history-status">
+            ${getStatusEmoji(status)}
+            ${escapeHtml(
+              formatStatus(status)
+            )}
+          </div>
+
+        </div>
+
+        <div class="history-date">
+          🕐 ${escapeHtml(created)}
+        </div>
+
+        <div class="history-items">
+          ${itemsText || "No items"}
+        </div>
+
+        <div class="history-total">
+          Total: ₹${Number(
+            order.total || 0
+          )}
+        </div>
+
+      `;
+
+
+      card.addEventListener(
+        "click",
+        ()=>{
+
+          closeOrderHistory();
+
+          document.getElementById(
+            "trackInput"
+          ).value =
+            order.orderId || "";
+
+          trackOrder();
+
+          setTimeout(
+            ()=>{
+
+              document.getElementById(
+                "trackResult"
+              ).scrollIntoView({
+
+                behavior:"smooth",
+
+                block:"center"
+
+              });
+
+            },
+            300
+          );
+
+        }
+      );
+
+
+      list.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LOGIN EVENTS
+===================================================== */
 
 document.getElementById(
   "customerLoginButton"
@@ -2585,7 +3332,9 @@ document.getElementById(
 ).addEventListener(
   "click",
   ()=>{
+
     window.logoutCustomer();
+
   }
 );
 
@@ -3585,7 +4334,7 @@ document.getElementById(
     if(!selectedGoogleMapsLink){
 
       status.textContent =
-        "Select your address on Google Maps → Share → Copy link → paste it here.";
+        "Select your address on Google Maps → Share → Copy link → paste the link here.";
 
     }
 
@@ -4075,6 +4824,7 @@ function extractCoordinatesFromGoogleMapsLink(
 
     if(result){
       return result;
+
     }
 
   }
@@ -4658,7 +5408,9 @@ document.getElementById(
 ).addEventListener(
   "input",
   ()=>{
+
     validateCheckout();
+
   }
 );
 
