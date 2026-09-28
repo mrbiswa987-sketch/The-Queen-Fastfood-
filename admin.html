@@ -20,6 +20,7 @@
   --blue:#4da6ff;
   --orange:#ff9f43;
   --purple:#a970ff;
+  --lightgreen:#8ff0ad;
 }
 
 *{
@@ -828,6 +829,10 @@ textarea{
   padding:6px!important;
   text-align:center;
   font-size:11px!important;
+
+  /* ONLY CHANGE:
+     ITEM PRICE TEXT = LIGHT GREEN */
+  color:#8ff0ad!important;
 }
 
 .menu-save{
@@ -1427,8 +1432,6 @@ textarea{
 
     </div>
 
-    <!-- TOP 5 FOLDERS - SAME -->
-
     <div class="grid">
 
       <button
@@ -1712,8 +1715,6 @@ textarea{
 
     <div class="details-offer-row">
 
-      <!-- ACTIVE ORDERS NOW INSIDE THIS BOX -->
-
       <div
         id="orderManagement"
         class="order-details-box"
@@ -1879,8 +1880,6 @@ textarea{
 
 </div>
 
-<!-- COMPLETE MODAL -->
-
 <div
   id="completeModal"
   class="modal"
@@ -1908,8 +1907,6 @@ textarea{
   </div>
 
 </div>
-
-<!-- CANCELLED MODAL -->
 
 <div
   id="cancelledModal"
@@ -1966,10 +1963,6 @@ import {
   browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-
-/* =========================
-   FIREBASE CONFIG
-========================= */
 
 const firebaseConfig = {
 
@@ -2040,10 +2033,6 @@ let newOrdersInitialized = false;
 
 let notificationActive = false;
 
-
-/* =========================
-   HELPERS
-========================= */
 
 function $(id){
   return document.getElementById(id);
@@ -2122,10 +2111,6 @@ function showToast(message){
 
 }
 
-
-/* =========================
-   AUTH
-========================= */
 
 setPersistence(
   auth,
@@ -2245,10 +2230,6 @@ onAuthStateChanged(
 );
 
 
-/* =========================
-   LOAD DATA
-========================= */
-
 function loadData(){
 
   onValue(
@@ -2300,10 +2281,6 @@ function loadData(){
 }
 
 
-/* =========================
-   SETTINGS
-========================= */
-
 function renderSettings(){
 
   const shop =
@@ -2314,6 +2291,7 @@ function renderSettings(){
 
   const offer =
     settings.offer || {};
+
 
   $("openingTime").value =
     shop.openingTime ||
@@ -2403,10 +2381,6 @@ function renderSettings(){
 
 }
 
-
-/* =========================
-   SHOP STATUS
-========================= */
 
 function getShopOpen(){
 
@@ -2518,10 +2492,6 @@ setInterval(
 );
 
 
-/* =========================
-   SHOP OVERRIDE
-========================= */
-
 window.setShopOverride =
 async function(mode){
 
@@ -2604,10 +2574,6 @@ function renderOverrideButtons(
 }
 
 
-/* =========================
-   SHOP SETTINGS
-========================= */
-
 window.saveShopSettings =
 async function(){
 
@@ -2670,10 +2636,6 @@ async function(){
 };
 
 
-/* =========================
-   WEBSITE
-========================= */
-
 window.saveWebsiteSettings =
 async function(){
 
@@ -2724,10 +2686,6 @@ async function(){
 };
 
 
-/* =========================
-   WHATSAPP
-========================= */
-
 window.saveWhatsApp =
 async function(){
 
@@ -2773,10 +2731,6 @@ async function(){
 
 };
 
-
-/* =========================
-   PAYMENT
-========================= */
 
 window.togglePayment =
 async function(type){
@@ -2845,10 +2799,6 @@ function renderPaymentControls(){
 
 }
 
-
-/* =========================
-   OFFER CONTROL
-========================= */
 
 function renderOfferControls(){
 
@@ -2997,10 +2947,6 @@ async function(){
 
 };
 
-
-/* =========================
-   MENU
-========================= */
 
 const defaultMenu = {
 
@@ -3375,10 +3321,6 @@ async function(id){
 };
 
 
-/* =========================
-   STATUS
-========================= */
-
 function normalizeStatus(value){
 
   const v =
@@ -3474,10 +3416,6 @@ function statusLabel(status){
 }
 
 
-/* =========================
-   NEW ORDER DETECTION
-========================= */
-
 function detectNewOrders(
   newOrders
 ){
@@ -3570,10 +3508,6 @@ function detectNewOrders(
 
 }
 
-
-/* =========================
-   NEW ORDER SOUND + BLINK
-========================= */
 
 function startNotificationEffects(
   count
@@ -3740,21 +3674,12 @@ function playNewOrderSound(){
 }
 
 
-/* =========================
-   FOLDER SELECT
-========================= */
-
 window.selectFolder =
 function(folder){
 
   selectedFolder =
     folder;
 
-
-  /* =========================
-     COMPLETE / CANCEL
-     OPEN ONLY IN MODAL
-  ========================= */
 
   if(folder === "complete"){
 
@@ -3784,12 +3709,6 @@ function(folder){
   }
 
 
-  /* =========================
-     NEW / PENDING / DELIVERY
-     SHOW ACTIVE MANAGEMENT
-     ONLY
-  ========================= */
-
   if(
     folder === "new" ||
     folder === "pending" ||
@@ -3808,10 +3727,6 @@ function(folder){
 
 };
 
-
-/* =========================
-   RENDER ORDERS
-========================= */
 
 function renderOrders(){
 
@@ -3949,10 +3864,6 @@ function renderOrders(){
 }
 
 
-/* =========================
-   COUNTS
-========================= */
-
 function updateFolderCounts(
   active,
   complete,
@@ -4039,10 +3950,6 @@ function updateFolderCounts(
 }
 
 
-/* =========================
-   COMPLETE MODAL
-========================= */
-
 function renderCompleteModal(
   listOverride = null
 ){
@@ -4095,10 +4002,6 @@ function renderCompleteModal(
 }
 
 
-/* =========================
-   CANCELLED MODAL
-========================= */
-
 function renderCancelledModal(
   listOverride = null
 ){
@@ -4150,10 +4053,6 @@ function renderCancelledModal(
 
 }
 
-
-/* =========================
-   ORDER CARD
-========================= */
 
 function createOrderCard(
   key,
@@ -4305,20 +4204,6 @@ function createOrderCard(
     `;
 
   }
-
-
-  /*
-     IMPORTANT:
-     OUT FOR DELIVERY HAS NO ADMIN
-     COMPLETE BUTTON.
-
-     Customer delivery confirmation
-     will change the Firebase order
-     status to delivered.
-
-     Then renderOrders() automatically
-     moves it to Complete.
-  */
 
 
   else if(status === "out_for_delivery"){
@@ -4664,10 +4549,87 @@ async function(
     }
 
 
+    /*
+      ADMIN NEVER SETS DELIVERED.
+
+      Delivered must come only from
+      customer delivery confirmation.
+    */
+
+    if(
+      String(newStatus)
+        .trim()
+        .toLowerCase() ===
+      "delivered"
+    ){
+
+      showToast(
+        "Delivered status can only be confirmed by the customer."
+      );
+
+      return;
+
+    }
+
+
     const status =
       normalizeStatus(
         newStatus
       );
+
+
+    /*
+      Extra protection:
+      Admin can only move an order through
+      the normal delivery flow.
+    */
+
+    const currentStatus =
+      normalizeStatus(
+        order.status
+      );
+
+
+    const allowedTransitions = {
+
+      received:[
+        "processing",
+        "cancelled"
+      ],
+
+      processing:[
+        "making",
+        "cancelled"
+      ],
+
+      making:[
+        "out_for_delivery",
+        "cancelled"
+      ],
+
+      out_for_delivery:[],
+
+      delivered:[],
+
+      cancelled:[]
+
+    };
+
+
+    if(
+      !allowedTransitions[
+        currentStatus
+      ]?.includes(status)
+    ){
+
+      showToast(
+        `Cannot change ${statusLabel(currentStatus)} to ${statusLabel(status)}.`
+      );
+
+      return;
+
+    }
+
 
     const now =
       Date.now();
@@ -4687,6 +4649,20 @@ async function(
       now;
 
 
+    /*
+      IMPORTANT:
+      Customer tracking receives the EXACT
+      admin status here.
+
+      So:
+      RECEIVED -> RECEIVED
+      PROCESSING -> PROCESSING
+      MAKING -> MAKING
+      OUT FOR DELIVERY -> OUT FOR DELIVERY
+
+      It will NOT become DELIVERED.
+    */
+
     if(order.ownerUid){
 
       updates[
@@ -4701,41 +4677,6 @@ async function(
 
     }
 
-
-    /* =========================
-       COMPLETE / DELIVERED
-    ========================= */
-
-    if(status === "delivered"){
-
-      updates[
-        `deliveredOrders/${key}`
-      ] = {
-
-        ...order,
-
-        status:
-          "delivered",
-
-        deliveredAt:
-          now,
-
-        updatedAt:
-          now
-
-      };
-
-      updates[
-        `cancelledOrders/${key}`
-      ] =
-        null;
-
-    }
-
-
-    /* =========================
-       CANCELLED
-    ========================= */
 
     if(status === "cancelled"){
 
@@ -4764,12 +4705,7 @@ async function(
     }
 
 
-    /* =========================
-       ACTIVE ORDERS
-    ========================= */
-
     if(
-      status !== "delivered" &&
       status !== "cancelled"
     ){
 
@@ -4817,10 +4753,6 @@ async function(
 };
 
 
-/* =========================
-   REMOVE ORDER
-========================= */
-
 window.removeOrder =
 async function(key){
 
@@ -4863,10 +4795,6 @@ async function(key){
 
 };
 
-
-/* =========================
-   NOTIFICATIONS
-========================= */
 
 window.toggleNotifications =
 function(){
@@ -5025,10 +4953,6 @@ function(key){
 };
 
 
-/* =========================
-   MODAL
-========================= */
-
 window.closeModal =
 function(id){
 
@@ -5050,10 +4974,6 @@ function(id){
 
 };
 
-
-/* =========================
-   INITIAL
-========================= */
 
 window.addEventListener(
   "click",
