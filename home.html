@@ -10,11 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <style>
 *{
   box-sizing:border-box;
@@ -731,12 +726,59 @@ footer a{
   width:100%;
 }
 
-.map-wrapper{
+.google-location-box{
   margin-top:12px;
+  padding:14px;
+  background:#080808;
   border:1px solid #333;
   border-radius:12px;
-  overflow:hidden;
-  background:#151515;
+}
+
+.google-location-open{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:10px;
+  background:#f59b23;
+  color:#000;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.google-location-input{
+  width:100%;
+  background:#101010;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:10px;
+  padding:13px;
+  outline:none;
+}
+
+.google-location-input:focus{
+  border-color:#f59b23;
+}
+
+.google-location-confirm{
+  width:100%;
+  padding:12px;
+  border:1px solid #f59b23;
+  border-radius:10px;
+  background:#191919;
+  color:#f59b23;
+  font-weight:800;
+  margin-top:9px;
+}
+
+.google-location-status{
+  color:#999;
+  font-size:11px;
+  line-height:1.5;
+  margin-top:9px;
+}
+
+.map-wrapper{
+  display:none;
 }
 
 #locationMap{
@@ -750,72 +792,15 @@ footer a{
 ===================================================== */
 
 .map-search{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
-}
-
-.map-search input{
-  flex:1;
-}
-
-.map-search button{
-  padding:0 13px;
-  background:#f59b23;
-  color:#000;
-  border:0;
-  border-radius:10px;
-  font-weight:800;
+  display:none;
 }
 
 .map-search-results{
-  margin-top:8px;
-  border:1px solid #333;
-  border-radius:10px;
-  overflow:hidden;
-  background:#0d0d0d;
-  max-height:190px;
-  overflow-y:auto;
+  display:none;
 }
 
 .map-search-result{
-  width:100%;
-  display:block;
-  text-align:left;
-  padding:11px 12px;
-  background:#101010;
-  color:#fff;
-  border:0;
-  border-bottom:1px solid #292929;
-  cursor:pointer;
-}
-
-.map-search-result:last-child{
-  border-bottom:0;
-}
-
-.map-search-result:hover{
-  background:#21190d;
-}
-
-.map-search-result-title{
-  color:#f59b23;
-  font-weight:800;
-  font-size:13px;
-}
-
-.map-search-result-address{
-  color:#aaa;
-  font-size:11px;
-  line-height:1.4;
-  margin-top:3px;
-}
-
-.map-search-loading{
-  padding:12px;
-  color:#aaa;
-  text-align:center;
-  font-size:12px;
+  display:none;
 }
 
 .location-hint{
@@ -1094,10 +1079,6 @@ footer a{
   body::after{
     width:430px;
     height:430px;
-  }
-
-  #locationMap{
-    height:240px;
   }
 
   .modal{
@@ -1593,38 +1574,40 @@ footer a{
         class="hidden"
       >
 
-        <div class="map-search">
+        <div class="google-location-box">
+
+          <button
+            id="openGoogleMapsButton"
+            class="google-location-open"
+            type="button"
+          >
+            🗺️ Open Google Maps
+          </button>
 
           <input
-            id="mapSearchInput"
-            placeholder="Search village / place / area"
+            id="googleMapsLocationInput"
+            class="google-location-input"
+            type="text"
+            placeholder="Paste Google Maps location link here"
             autocomplete="off"
           >
 
           <button
-            id="mapSearchButton"
+            id="confirmGoogleLocationButton"
+            class="google-location-confirm"
             type="button"
           >
-            Search
+            📍 Confirm Location
           </button>
 
-        </div>
+          <div
+            id="googleLocationStatus"
+            class="google-location-status"
+          >
+            Open Google Maps → select your exact delivery point →
+            Share → Copy link → come back and paste the link here.
+          </div>
 
-        <div
-          id="mapSearchResults"
-          class="map-search-results hidden"
-        ></div>
-
-        <div class="map-wrapper">
-
-          <div id="locationMap"></div>
-
-        </div>
-
-        <div class="location-hint">
-          Search your village or place and select the correct result.
-          The exact location will be pointed on the map. You can also
-          tap on the map or move the marker to the required place.
         </div>
 
       </div>
@@ -1880,18 +1863,14 @@ let selectedLocationType = null;
 
 let selectedLocationText = "";
 
+let selectedGoogleMapsLink = "";
+
 let selectedPaymentMethod =
   "COD";
 
 let trackingUnsubscribe = null;
 
 let trackingOrderId = "";
-
-let locationMap = null;
-
-let locationMarker = null;
-
-let mapReady = false;
 
 let authReadyPromise = null;
 
@@ -3215,181 +3194,8 @@ function renderOrderSummary(){
 
 
 /* =====================================================
-   MAP
-   PROPER STREET MAP + LABELS
-===================================================== */
-
-function initializeLocationMap(){
-
-  if(
-    typeof L === "undefined"
-  ){
-
-    setTimeout(
-      initializeLocationMap,
-      300
-    );
-
-    return;
-
-  }
-
-  const mapElement =
-    document.getElementById(
-      "locationMap"
-    );
-
-  if(!mapElement){
-    return;
-  }
-
-  if(locationMap){
-
-    setTimeout(
-      ()=>{
-        locationMap.invalidateSize(true);
-      },
-      150
-    );
-
-    return;
-
-  }
-
-  locationMap =
-    L.map(
-      "locationMap",
-      {
-        zoomControl:true,
-        scrollWheelZoom:true,
-        doubleClickZoom:true,
-        dragging:true,
-        touchZoom:true,
-        boxZoom:true,
-        keyboard:true,
-        zoomSnap:1,
-        zoomDelta:1,
-        minZoom:5,
-        maxZoom:19
-      }
-    ).setView(
-      [
-        RESTAURANT_LAT,
-        RESTAURANT_LNG
-      ],
-      14
-    );
-
-
-  /*
-    OpenStreetMap standard map.
-    This gives roads, village names,
-    locality names and normal map labels.
-  */
-
-  L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      minZoom:5,
-      maxZoom:19,
-      maxNativeZoom:19,
-      subdomains:["a","b","c"],
-      attribution:
-        '&copy; OpenStreetMap contributors'
-    }
-  ).addTo(
-    locationMap
-  );
-
-
-  /*
-    Exact map click.
-  */
-
-  locationMap.on(
-    "click",
-    async event=>{
-
-      const lat =
-        Number(
-          event.latlng.lat
-        );
-
-      const lng =
-        Number(
-          event.latlng.lng
-        );
-
-      setSelectedLocation(
-        lat,
-        lng,
-        "Selected map location"
-      );
-
-      await reverseGeocodeLocation(
-        lat,
-        lng
-      );
-
-    }
-  );
-
-
-  locationMap.on(
-    "zoomend",
-    ()=>{
-      setTimeout(
-        ()=>{
-          locationMap.invalidateSize(true);
-        },
-        100
-      );
-    }
-  );
-
-
-  locationMap.on(
-    "moveend",
-    ()=>{
-      setTimeout(
-        ()=>{
-          locationMap.invalidateSize(true);
-        },
-        100
-      );
-    }
-  );
-
-
-  mapReady = true;
-
-
-  setTimeout(
-    ()=>{
-      locationMap.invalidateSize(true);
-    },
-    100
-  );
-
-  setTimeout(
-    ()=>{
-      locationMap.invalidateSize(true);
-    },
-    400
-  );
-
-  setTimeout(
-    ()=>{
-      locationMap.invalidateSize(true);
-    },
-    800
-  );
-
-}
-
-
-/* =====================================================
    DIFFERENT LOCATION
+   GOOGLE MAPS
 ===================================================== */
 
 document.getElementById(
@@ -3419,23 +3225,444 @@ document.getElementById(
       "hidden"
     );
 
-    setTimeout(
-      ()=>{
+    const status =
+      document.getElementById(
+        "googleLocationStatus"
+      );
 
-        initializeLocationMap();
+    if(!selectedGoogleMapsLink){
 
-        if(locationMap){
+      status.textContent =
+        "Open Google Maps → select your exact delivery point → Share → Copy link → come back and paste the link here.";
 
-          locationMap.invalidateSize(true);
+    }
 
-        }
+  }
+);
 
-      },
-      100
+
+/* =====================================================
+   OPEN GOOGLE MAPS
+===================================================== */
+
+document.getElementById(
+  "openGoogleMapsButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    const googleMapsUrl =
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(
+        "The Queen Fast Food, Ibrisingh, Tirtol, Jagatsinghpur, Odisha"
+      );
+
+    window.open(
+      googleMapsUrl,
+      "_blank"
     );
 
   }
 );
+
+
+/* =====================================================
+   GOOGLE MAPS LOCATION INPUT
+===================================================== */
+
+document.getElementById(
+  "googleMapsLocationInput"
+).addEventListener(
+  "input",
+  event=>{
+
+    selectedGoogleMapsLink =
+      event.target.value.trim();
+
+    validateCheckout();
+
+  }
+);
+
+
+/* =====================================================
+   CONFIRM GOOGLE MAPS LOCATION
+===================================================== */
+
+document.getElementById(
+  "confirmGoogleLocationButton"
+).addEventListener(
+  "click",
+  confirmGoogleMapsLocation
+);
+
+
+function confirmGoogleMapsLocation(){
+
+  const input =
+    document.getElementById(
+      "googleMapsLocationInput"
+    );
+
+  const status =
+    document.getElementById(
+      "googleLocationStatus"
+    );
+
+  const link =
+    input.value.trim();
+
+  if(!link){
+
+    status.textContent =
+      "❌ Please paste your Google Maps location link.";
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  if(!isGoogleMapsLink(link)){
+
+    status.textContent =
+      "❌ Please paste a valid Google Maps location link.";
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  selectedGoogleMapsLink =
+    link;
+
+  selectedLocationType =
+    "different";
+
+
+  const coordinates =
+    extractCoordinatesFromGoogleMapsLink(
+      link
+    );
+
+
+  if(coordinates){
+
+    customerLat =
+      coordinates.lat;
+
+    customerLng =
+      coordinates.lng;
+
+
+    deliveryDistance =
+      Number(
+        haversine(
+          RESTAURANT_LAT,
+          RESTAURANT_LNG,
+          customerLat,
+          customerLng
+        ).toFixed(2)
+      );
+
+
+    selectedLocationText =
+      "Google Maps selected location";
+
+
+    updateLocationDisplay();
+
+
+    status.innerHTML =
+      "✅ Exact Google Maps location added successfully.";
+
+
+  }
+  else{
+
+    customerLat = null;
+
+    customerLng = null;
+
+    deliveryDistance = null;
+
+
+    selectedLocationText =
+      "Google Maps location link";
+
+
+    document.getElementById(
+      "locationDisplay"
+    ).value =
+      "Google Maps location link added";
+
+
+    document.getElementById(
+      "deliveryInfo"
+    ).textContent =
+      "⚠️ Location link saved, but exact coordinates could not be read. Please use a full Google Maps link containing the location coordinates.";
+
+
+    status.innerHTML =
+      "⚠️ Link saved, but coordinates could not be detected. Please use Google Maps → Share → Copy link and paste the complete location link.";
+
+  }
+
+
+  renderOrderSummary();
+
+  validateCheckout();
+
+}
+
+
+/* =====================================================
+   GOOGLE MAPS LINK CHECK
+===================================================== */
+
+function isGoogleMapsLink(
+  link
+){
+
+  const value =
+    String(link || "")
+      .trim()
+      .toLowerCase();
+
+  return (
+    value.includes("google.com/maps") ||
+    value.includes("maps.google.com") ||
+    value.includes("maps.app.goo.gl") ||
+    value.includes("goo.gl/maps")
+  );
+
+}
+
+
+/* =====================================================
+   EXTRACT GOOGLE MAPS COORDINATES
+===================================================== */
+
+function extractCoordinatesFromGoogleMapsLink(
+  link
+){
+
+  const value =
+    String(link || "")
+      .trim();
+
+
+  /*
+    Format:
+    ?q=20.2167,86.3646
+  */
+
+  let match =
+    value.match(
+      /[?&](?:q|query|ll)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const lat =
+      Number(match[1]);
+
+    const lng =
+      Number(match[2]);
+
+    if(
+      validCoordinates(
+        lat,
+        lng
+      )
+    ){
+
+      return {
+        lat,
+        lng
+      };
+
+    }
+
+  }
+
+
+  /*
+    Format:
+    /@20.2167,86.3646,17z
+  */
+
+  match =
+    value.match(
+      /@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const lat =
+      Number(match[1]);
+
+    const lng =
+      Number(match[2]);
+
+    if(
+      validCoordinates(
+        lat,
+        lng
+      )
+    ){
+
+      return {
+        lat,
+        lng
+      };
+
+    }
+
+  }
+
+
+  /*
+    Format:
+    /place/20.2167,86.3646
+  */
+
+  match =
+    value.match(
+      /(?:place\/|search\/)(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const lat =
+      Number(match[1]);
+
+    const lng =
+      Number(match[2]);
+
+    if(
+      validCoordinates(
+        lat,
+        lng
+      )
+    ){
+
+      return {
+        lat,
+        lng
+      };
+
+    }
+
+  }
+
+
+  /*
+    Sometimes coordinates are written
+    directly in the URL.
+  */
+
+  match =
+    value.match(
+      /(-?\d{1,3}\.\d{4,})[,\s]+(-?\d{1,3}\.\d{4,})/
+    );
+
+
+  if(match){
+
+    const lat =
+      Number(match[1]);
+
+    const lng =
+      Number(match[2]);
+
+    if(
+      validCoordinates(
+        lat,
+        lng
+      )
+    ){
+
+      return {
+        lat,
+        lng
+      };
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+function validCoordinates(
+  lat,
+  lng
+){
+
+  return (
+    Number.isFinite(lat) &&
+    Number.isFinite(lng) &&
+    lat >= -90 &&
+    lat <= 90 &&
+    lng >= -180 &&
+    lng <= 180
+  );
+
+}
+
+
+/* =====================================================
+   UPDATE LOCATION DISPLAY
+===================================================== */
+
+function updateLocationDisplay(){
+
+  if(
+    customerLat === null ||
+    customerLng === null
+  ){
+
+    return;
+
+  }
+
+
+  const rate =
+    Number(
+      shopSettings.deliveryRate ||
+      DEFAULT_DELIVERY_RATE
+    );
+
+
+  const deliveryCharge =
+    Math.ceil(
+      deliveryDistance *
+      rate
+    );
+
+
+  document.getElementById(
+    "locationDisplay"
+  ).value =
+    `Google Maps location • ${deliveryDistance.toFixed(2)} km away`;
+
+
+  document.getElementById(
+    "deliveryInfo"
+  ).textContent =
+    `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
+
+}
 
 
 /* =====================================================
@@ -3478,6 +3705,14 @@ document.getElementById(
 
         selectedLocationType =
           "current";
+
+        selectedGoogleMapsLink =
+          `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+
+        document.getElementById(
+          "googleMapsLocationInput"
+        ).value =
+          selectedGoogleMapsLink;
 
         document.getElementById(
           "currentLocationButton"
@@ -3586,845 +3821,7 @@ function setSelectedLocation(
     `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
 
 
-  if(locationMap){
-
-    if(locationMarker){
-
-      locationMarker.setLatLng(
-        [
-          customerLat,
-          customerLng
-        ]
-      );
-
-    }
-    else{
-
-      locationMarker =
-        L.marker(
-          [
-            customerLat,
-            customerLng
-          ],
-          {
-            draggable:true
-          }
-        ).addTo(
-          locationMap
-        );
-
-
-      locationMarker.on(
-        "dragend",
-        async event=>{
-
-          const pos =
-            event.target.getLatLng();
-
-          setSelectedLocation(
-            pos.lat,
-            pos.lng,
-            "Selected map location"
-          );
-
-          await reverseGeocodeLocation(
-            pos.lat,
-            pos.lng
-          );
-
-        }
-      );
-
-    }
-
-
-    locationMarker.bindPopup(
-      `
-        <div style="min-width:180px">
-          <b>${escapeHtml(
-            selectedLocationText
-          )}</b>
-          <br>
-          <small>
-            ${customerLat.toFixed(6)},
-            ${customerLng.toFixed(6)}
-          </small>
-        </div>
-      `
-    );
-
-
-    locationMap.setView(
-      [
-        customerLat,
-        customerLng
-      ],
-      17,
-      {
-        animate:true
-      }
-    );
-
-
-    setTimeout(
-      ()=>{
-        locationMap.invalidateSize(true);
-      },
-      200
-    );
-
-  }
-
   renderOrderSummary();
-
-}
-
-
-/* =====================================================
-   REVERSE GEOCODE
-===================================================== */
-
-async function reverseGeocodeLocation(
-  lat,
-  lng
-){
-
-  try{
-
-    const url =
-      "https://nominatim.openstreetmap.org/reverse" +
-      "?format=json" +
-      "&lat=" +
-      encodeURIComponent(lat) +
-      "&lon=" +
-      encodeURIComponent(lng) +
-      "&zoom=18" +
-      "&addressdetails=1";
-
-    const response =
-      await fetch(
-        url,
-        {
-          headers:{
-            "Accept":
-              "application/json",
-            "Accept-Language":
-              "en"
-          }
-        }
-      );
-
-    if(!response.ok){
-      return;
-    }
-
-    const data =
-      await response.json();
-
-    if(!data){
-      return;
-    }
-
-    const address =
-      data.address || {};
-
-    const placeName =
-      getBestPlaceName(
-        address,
-        data.display_name
-      );
-
-    if(placeName){
-
-      selectedLocationText =
-        placeName;
-
-      document.getElementById(
-        "locationDisplay"
-      ).value =
-        `${placeName} • ${deliveryDistance.toFixed(2)} km away`;
-
-      if(locationMarker){
-
-        locationMarker.bindPopup(
-          `
-            <div style="min-width:200px">
-              <b style="color:#d97706">
-                ${escapeHtml(placeName)}
-              </b>
-              <br>
-              <small>
-                ${
-                  escapeHtml(
-                    data.display_name ||
-                    ""
-                  )
-                }
-              </small>
-              <br><br>
-              <small>
-                ${lat.toFixed(6)},
-                ${lng.toFixed(6)}
-              </small>
-            </div>
-          `
-        ).openPopup();
-
-      }
-
-    }
-
-  }
-  catch(error){
-
-    console.error(
-      "REVERSE GEOCODE ERROR:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   BEST PLACE NAME
-===================================================== */
-
-function getBestPlaceName(
-  address,
-  fallback
-){
-
-  const village =
-    address.village ||
-    address.hamlet ||
-    address.locality ||
-    address.suburb ||
-    address.neighbourhood ||
-    address.town ||
-    address.city ||
-    address.municipality;
-
-  const district =
-    address.county ||
-    address.district ||
-    address.state_district;
-
-  const state =
-    address.state;
-
-  const parts = [];
-
-  if(village){
-    parts.push(village);
-  }
-
-  if(district && district !== village){
-    parts.push(district);
-  }
-
-  if(state && state !== district){
-    parts.push(state);
-  }
-
-  if(parts.length){
-    return parts.join(", ");
-  }
-
-  if(fallback){
-
-    return shortenLocationName(
-      fallback
-    );
-
-  }
-
-  return "Selected delivery location";
-
-}
-
-
-/* =====================================================
-   LOCATION SEARCH
-===================================================== */
-
-document.getElementById(
-  "mapSearchButton"
-).addEventListener(
-  "click",
-  searchDifferentLocation
-);
-
-
-document.getElementById(
-  "mapSearchInput"
-).addEventListener(
-  "keydown",
-  event=>{
-
-    if(event.key === "Enter"){
-
-      event.preventDefault();
-
-      searchDifferentLocation();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   SEARCH RESULT CLOSE
-===================================================== */
-
-document.addEventListener(
-  "click",
-  event=>{
-
-    const resultsBox =
-      document.getElementById(
-        "mapSearchResults"
-      );
-
-    const input =
-      document.getElementById(
-        "mapSearchInput"
-      );
-
-    if(
-      resultsBox &&
-      input &&
-      !resultsBox.contains(event.target) &&
-      event.target !== input
-    ){
-
-      resultsBox.classList.add(
-        "hidden"
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   MAIN SEARCH
-===================================================== */
-
-async function searchDifferentLocation(){
-
-  const input =
-    document.getElementById(
-      "mapSearchInput"
-    ).value.trim();
-
-  if(!input){
-
-    alert(
-      "Please enter a village or place name."
-    );
-
-    return;
-
-  }
-
-  const button =
-    document.getElementById(
-      "mapSearchButton"
-    );
-
-  const resultsBox =
-    document.getElementById(
-      "mapSearchResults"
-    );
-
-  button.textContent =
-    "Searching...";
-
-  resultsBox.classList.remove(
-    "hidden"
-  );
-
-  resultsBox.innerHTML = `
-    <div class="map-search-loading">
-      🔎 Finding exact village / place...
-    </div>
-  `;
-
-
-  try{
-
-    initializeLocationMap();
-
-    /*
-      Search Odisha first.
-    */
-
-    const query =
-      encodeURIComponent(
-        input +
-        ", Odisha, India"
-      );
-
-    const url =
-      "https://nominatim.openstreetmap.org/search" +
-      "?format=json" +
-      "&addressdetails=1" +
-      "&namedetails=1" +
-      "&limit=10" +
-      "&countrycodes=in" +
-      "&q=" +
-      query;
-
-
-    const response =
-      await fetch(
-        url,
-        {
-          headers:{
-            "Accept":
-              "application/json",
-            "Accept-Language":
-              "en"
-          }
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Location search failed."
-      );
-
-    }
-
-
-    const results =
-      await response.json();
-
-
-    if(
-      !results ||
-      results.length === 0
-    ){
-
-      resultsBox.innerHTML = `
-        <div class="map-search-loading">
-          ❌ Location not found.<br>
-          Try village name, market name,
-          pincode or nearby town.
-        </div>
-      `;
-
-      return;
-
-    }
-
-
-    const uniqueResults = [];
-
-    const seen = new Set();
-
-    results.forEach(
-      result=>{
-
-        const key =
-          `${result.lat},${result.lon}`;
-
-        if(!seen.has(key)){
-
-          seen.add(key);
-
-          uniqueResults.push(
-            result
-          );
-
-        }
-
-      }
-    );
-
-
-    resultsBox.innerHTML = "";
-
-
-    uniqueResults.forEach(
-      result=>{
-
-        const resultButton =
-          document.createElement(
-            "button"
-          );
-
-        resultButton.type =
-          "button";
-
-        resultButton.className =
-          "map-search-result";
-
-
-        const place =
-          getSearchResultTitle(
-            result
-          );
-
-
-        const address =
-          result.display_name ||
-          "Location";
-
-
-        resultButton.innerHTML = `
-
-          <div class="map-search-result-title">
-
-            📍 ${escapeHtml(place)}
-
-          </div>
-
-          <div class="map-search-result-address">
-
-            ${escapeHtml(address)}
-
-          </div>
-
-        `;
-
-
-        resultButton.addEventListener(
-          "click",
-          ()=>{
-
-            selectSearchResult(
-              result
-            );
-
-          }
-        );
-
-
-        resultsBox.appendChild(
-          resultButton
-        );
-
-      }
-    );
-
-
-  }
-  catch(error){
-
-    console.error(
-      "LOCATION SEARCH ERROR:",
-      error
-    );
-
-    resultsBox.innerHTML = `
-      <div class="map-search-loading">
-        ❌ Unable to search location right now.
-        Please try again.
-      </div>
-    `;
-
-  }
-  finally{
-
-    button.textContent =
-      "Search";
-
-  }
-
-}
-
-
-/* =====================================================
-   SEARCH RESULT TITLE
-===================================================== */
-
-function getSearchResultTitle(
-  result
-){
-
-  const address =
-    result.address || {};
-
-  return (
-    address.village ||
-    address.hamlet ||
-    address.locality ||
-    address.suburb ||
-    address.neighbourhood ||
-    address.town ||
-    address.city ||
-    address.municipality ||
-    address.county ||
-    result.name ||
-    "Selected place"
-  );
-
-}
-
-
-/* =====================================================
-   SELECT SEARCH RESULT
-===================================================== */
-
-async function selectSearchResult(
-  result
-){
-
-  const lat =
-    Number(
-      result.lat
-    );
-
-  const lng =
-    Number(
-      result.lon
-    );
-
-
-  if(
-    !Number.isFinite(lat) ||
-    !Number.isFinite(lng)
-  ){
-
-    return;
-
-  }
-
-
-  const placeName =
-    getSearchResultTitle(
-      result
-    );
-
-
-  selectedLocationType =
-    "different";
-
-
-  document.getElementById(
-    "differentLocationButton"
-  ).classList.add(
-    "active"
-  );
-
-
-  document.getElementById(
-    "currentLocationButton"
-  ).classList.remove(
-    "active"
-  );
-
-
-  document.getElementById(
-    "differentLocationBox"
-  ).classList.remove(
-    "hidden"
-  );
-
-
-  const resultsBox =
-    document.getElementById(
-      "mapSearchResults"
-    );
-
-  resultsBox.classList.add(
-    "hidden"
-  );
-
-
-  setSelectedLocation(
-    lat,
-    lng,
-    placeName
-  );
-
-
-  const fullName =
-    result.display_name ||
-    placeName;
-
-
-  selectedLocationText =
-    buildCleanLocationName(
-      result
-    );
-
-
-  document.getElementById(
-    "locationDisplay"
-  ).value =
-    `${selectedLocationText} • ${deliveryDistance.toFixed(2)} km away`;
-
-
-  if(locationMarker){
-
-    locationMarker.bindPopup(
-      `
-        <div style="min-width:220px">
-
-          <b style="color:#d97706;font-size:14px">
-            📍 ${escapeHtml(
-              selectedLocationText
-            )}
-          </b>
-
-          <br><br>
-
-          <small>
-            ${escapeHtml(
-              fullName
-            )}
-          </small>
-
-          <br><br>
-
-          <small>
-            Exact point:
-            ${lat.toFixed(6)},
-            ${lng.toFixed(6)}
-          </small>
-
-        </div>
-      `
-    ).openPopup();
-
-  }
-
-
-  await reverseGeocodeLocation(
-    lat,
-    lng
-  );
-
-
-  if(locationMap){
-
-    locationMap.setView(
-      [
-        lat,
-        lng
-      ],
-      17,
-      {
-        animate:true
-      }
-    );
-
-    setTimeout(
-      ()=>{
-        locationMap.invalidateSize(true);
-      },
-      200
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   CLEAN SEARCH LOCATION NAME
-===================================================== */
-
-function buildCleanLocationName(
-  result
-){
-
-  const address =
-    result.address || {};
-
-  const parts = [];
-
-  const village =
-    address.village ||
-    address.hamlet ||
-    address.locality ||
-    address.suburb ||
-    address.neighbourhood ||
-    address.town ||
-    address.city ||
-    result.name;
-
-
-  const district =
-    address.county ||
-    address.district ||
-    address.state_district;
-
-
-  const state =
-    address.state;
-
-
-  if(village){
-
-    parts.push(
-      village
-    );
-
-  }
-
-
-  if(
-    district &&
-    district !== village
-  ){
-
-    parts.push(
-      district
-    );
-
-  }
-
-
-  if(
-    state &&
-    state !== district
-  ){
-
-    parts.push(
-      state
-    );
-
-  }
-
-
-  if(parts.length){
-
-    return parts.join(
-      ", "
-    );
-
-  }
-
-
-  return shortenLocationName(
-    result.display_name ||
-    "Selected delivery location"
-  );
-
-}
-
-
-function shortenLocationName(
-  text
-){
-
-  const parts =
-    String(text)
-      .split(",");
-
-  return parts
-    .slice(0,4)
-    .join(",")
-    .trim();
 
 }
 
@@ -4549,7 +3946,6 @@ document.getElementById(
 
 /* =====================================================
    CHECKOUT NAME + PHONE
-   EDITABLE
 ===================================================== */
 
 document.getElementById(
@@ -4634,6 +4030,8 @@ function validateCheckout(){
 
     address.length >= 5 &&
 
+    selectedGoogleMapsLink.length > 0 &&
+
     deliveryDistance !== null &&
 
     customerLat !== null &&
@@ -4697,11 +4095,6 @@ async function placeOrder(){
 
   try{
 
-    /*
-      Make sure Firebase Anonymous Auth
-      is ready before validation/order.
-    */
-
     let user =
       auth.currentUser ||
       currentUser;
@@ -4744,12 +4137,6 @@ async function placeOrder(){
 
     }
 
-
-    /*
-      IMPORTANT:
-      Use checkout Name + Phone,
-      NOT only login profile.
-    */
 
     const name =
       document.getElementById(
@@ -4822,6 +4209,21 @@ async function placeOrder(){
     }
 
 
+    if(!selectedGoogleMapsLink){
+
+      alert(
+        "Please add your Google Maps delivery location."
+      );
+
+      document.getElementById(
+        "differentLocationButton"
+      ).click();
+
+      return;
+
+    }
+
+
     if(
       deliveryDistance === null ||
       customerLat === null ||
@@ -4829,7 +4231,7 @@ async function placeOrder(){
     ){
 
       alert(
-        "Please select your delivery location."
+        "Please confirm a Google Maps location containing exact coordinates."
       );
 
       return;
@@ -4847,10 +4249,6 @@ async function placeOrder(){
 
     }
 
-
-    /*
-      Final validation before Firebase.
-    */
 
     if(!validateCheckout()){
 
@@ -4935,10 +4333,6 @@ async function placeOrder(){
       Date.now();
 
 
-    const locationUrl =
-      `https://www.google.com/maps?q=${customerLat},${customerLng}`;
-
-
     const orderData = {
 
       ownerUid:
@@ -5008,15 +4402,18 @@ async function placeOrder(){
         Number(customerLng),
 
       customerLocation:
-        locationUrl,
+        selectedGoogleMapsLink,
 
       customerLocationType:
         selectedLocationType ||
-        "selected",
+        "different",
 
       customerLocationName:
         selectedLocationText ||
-        "Selected delivery location",
+        "Google Maps selected delivery location",
+
+      customerGoogleMapsLink:
+        selectedGoogleMapsLink,
 
       status:
         "received",
@@ -5067,11 +4464,6 @@ async function placeOrder(){
     const whatsappUrl =
       `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
 
-
-    /*
-      Open WhatsApp after successful
-      Firebase order save.
-    */
 
     try{
 
@@ -5244,7 +4636,7 @@ function buildWhatsAppMessage(
   let locationType =
     order.customerLocationType === "current"
       ? "📍 Current Location"
-      : "🗺️ Selected Delivery Location";
+      : "🗺️ Google Maps Delivery Location";
 
   let text =
 `🍽️ *THE QUEEN FAST FOOD*
@@ -5257,7 +4649,8 @@ function buildWhatsAppMessage(
 
 📞 *Phone:* ${order.phone}
 
-🏠 *Address:* ${order.address}
+🏠 *Delivery Address:*
+${order.address}
 
 ━━━━━━━━━━━━━━━━━━
 🍴 *ORDER ITEMS*
@@ -5302,10 +4695,10 @@ ${locationType}
 
 📌 *Location:* ${
   order.customerLocationName ||
-  "Selected delivery location"
+  "Google Maps selected delivery location"
 }
 
-🗺️ *Google Maps Location:*
+🗺️ *EXACT GOOGLE MAPS LOCATION:*
 ${order.customerLocation}
 
 ━━━━━━━━━━━━━━━━━━
@@ -6354,11 +5747,6 @@ document.getElementById(
 
     await startCustomerAuth();
 
-
-    /*
-      Auth is ready.
-      Re-check Place Order state.
-    */
 
     validateCheckout();
 
