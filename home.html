@@ -13,6 +13,9 @@
 <link rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
+<!-- STATIC LEAFLET -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <style>
 *{
   box-sizing:border-box;
@@ -733,6 +736,7 @@ footer a{
   border:1px solid #333;
   border-radius:12px;
   overflow:hidden;
+  background:#151515;
 }
 
 #locationMap{
@@ -740,6 +744,10 @@ footer a{
   height:280px;
   background:#151515;
 }
+
+/* =====================================================
+   NEW MAP SEARCH RESULT UI
+===================================================== */
 
 .map-search{
   display:flex;
@@ -758,6 +766,56 @@ footer a{
   border:0;
   border-radius:10px;
   font-weight:800;
+}
+
+.map-search-results{
+  margin-top:8px;
+  border:1px solid #333;
+  border-radius:10px;
+  overflow:hidden;
+  background:#0d0d0d;
+  max-height:190px;
+  overflow-y:auto;
+}
+
+.map-search-result{
+  width:100%;
+  display:block;
+  text-align:left;
+  padding:11px 12px;
+  background:#101010;
+  color:#fff;
+  border:0;
+  border-bottom:1px solid #292929;
+  cursor:pointer;
+}
+
+.map-search-result:last-child{
+  border-bottom:0;
+}
+
+.map-search-result:hover{
+  background:#21190d;
+}
+
+.map-search-result-title{
+  color:#f59b23;
+  font-weight:800;
+  font-size:13px;
+}
+
+.map-search-result-address{
+  color:#aaa;
+  font-size:11px;
+  line-height:1.4;
+  margin-top:3px;
+}
+
+.map-search-loading{
+  padding:12px;
+  color:#aaa;
+  text-align:center;
+  font-size:12px;
 }
 
 .location-hint{
@@ -955,7 +1013,7 @@ footer a{
 }
 
 /* =====================================================
-   MOBILE - ONLY NECESSARY RESPONSIVE FIXES
+   MOBILE
 ===================================================== */
 
 @media(max-width:900px){
@@ -1295,8 +1353,6 @@ footer a{
 
   </section>
 
-  <!-- MENU -->
-
   <section class="section">
 
     <h2 class="section-title">
@@ -1309,8 +1365,6 @@ footer a{
     ></div>
 
   </section>
-
-  <!-- TRACK -->
 
   <section class="section">
 
@@ -1343,10 +1397,6 @@ footer a{
   </section>
 
 </main>
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
 
 <footer>
 
@@ -1543,7 +1593,8 @@ footer a{
 
           <input
             id="mapSearchInput"
-            placeholder="Search delivery location"
+            placeholder="Search village / place / area"
+            autocomplete="off"
           >
 
           <button
@@ -1555,6 +1606,12 @@ footer a{
 
         </div>
 
+        <!-- SEARCH RESULTS -->
+        <div
+          id="mapSearchResults"
+          class="map-search-results hidden"
+        ></div>
+
         <div class="map-wrapper">
 
           <div id="locationMap"></div>
@@ -1562,9 +1619,9 @@ footer a{
         </div>
 
         <div class="location-hint">
-          Search your area or tap on the map to select the
-          exact delivery location. You can move the marker
-          to the required place.
+          Search your village or place and select the correct result.
+          The exact location will be pointed on the map. You can also
+          tap on the map or move the marker to the required place.
         </div>
 
       </div>
@@ -1578,14 +1635,10 @@ footer a{
 
     </div>
 
-    <!-- SUMMARY -->
-
     <div
       id="orderSummary"
       class="summary"
     ></div>
-
-    <!-- PAYMENT -->
 
     <div class="form-group">
 
@@ -1660,21 +1713,6 @@ import {
   setPersistence,
   browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-/* =====================================================
-   LEAFLET
-===================================================== */
-
-const leafletScript =
-  document.createElement("script");
-
-leafletScript.src =
-  "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-
-document.head.appendChild(
-  leafletScript
-);
 
 
 /* =====================================================
@@ -3167,13 +3205,10 @@ function renderOrderSummary(){
 
 /* =====================================================
    MAP
+   ONLY MAP SYSTEM CHANGED
 ===================================================== */
 
 function initializeLocationMap(){
-
-  if(mapReady){
-    return;
-  }
 
   if(
     typeof L === "undefined"
@@ -3188,41 +3223,158 @@ function initializeLocationMap(){
 
   }
 
+  const mapElement =
+    document.getElementById(
+      "locationMap"
+    );
+
+  if(!mapElement){
+    return;
+  }
+
+  if(locationMap){
+
+    setTimeout(
+      ()=>{
+        locationMap.invalidateSize(true);
+      },
+      150
+    );
+
+    return;
+
+  }
+
   locationMap =
     L.map(
-      "locationMap"
+      "locationMap",
+      {
+        zoomControl:true,
+        scrollWheelZoom:true,
+        doubleClickZoom:true,
+        dragging:true,
+        touchZoom:true,
+        boxZoom:true,
+        keyboard:true
+      }
     ).setView(
       [
         RESTAURANT_LAT,
         RESTAURANT_LNG
       ],
-      13
+      14
     );
 
+
+  /*
+    Detailed street map.
+    Labels / village names come from
+    the map tile provider.
+  */
+
   L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
     {
+      minZoom:3,
       maxZoom:19,
-      attribution:"© OpenStreetMap contributors"
+      maxNativeZoom:19,
+      attribution:
+        "Tiles © Esri — Source: Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCAN, Esri Japan, METI, Esri China, Esri Korea, Esri (Thailand), TomTom, © OpenStreetMap contributors"
     }
   ).addTo(
     locationMap
   );
 
+
+  /*
+    Map click = exact point.
+    Then reverse geocode to get the
+    nearest village/place name.
+  */
+
   locationMap.on(
     "click",
-    event=>{
+    async event=>{
+
+      const lat =
+        Number(
+          event.latlng.lat
+        );
+
+      const lng =
+        Number(
+          event.latlng.lng
+        );
 
       setSelectedLocation(
-        event.latlng.lat,
-        event.latlng.lng,
+        lat,
+        lng,
         "Selected map location"
+      );
+
+      await reverseGeocodeLocation(
+        lat,
+        lng
       );
 
     }
   );
 
+
+  /*
+    When map is zoomed/resized,
+    refresh Leaflet rendering.
+  */
+
+  locationMap.on(
+    "zoomend",
+    ()=>{
+      setTimeout(
+        ()=>{
+          locationMap.invalidateSize(true);
+        },
+        100
+      );
+    }
+  );
+
+
+  locationMap.on(
+    "moveend",
+    ()=>{
+      setTimeout(
+        ()=>{
+          locationMap.invalidateSize(true);
+        },
+        100
+      );
+    }
+  );
+
+
   mapReady = true;
+
+
+  setTimeout(
+    ()=>{
+      locationMap.invalidateSize(true);
+    },
+    100
+  );
+
+  setTimeout(
+    ()=>{
+      locationMap.invalidateSize(true);
+    },
+    400
+  );
+
+  setTimeout(
+    ()=>{
+      locationMap.invalidateSize(true);
+    },
+    800
+  );
 
 }
 
@@ -3265,7 +3417,7 @@ document.getElementById(
 
         if(locationMap){
 
-          locationMap.invalidateSize();
+          locationMap.invalidateSize(true);
 
         }
 
@@ -3424,6 +3576,7 @@ function setSelectedLocation(
   ).textContent =
     `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
 
+
   if(locationMap){
 
     if(locationMarker){
@@ -3451,9 +3604,10 @@ function setSelectedLocation(
           locationMap
         );
 
+
       locationMarker.on(
         "dragend",
-        event=>{
+        async event=>{
 
           const pos =
             event.target.getLatLng();
@@ -3464,22 +3618,221 @@ function setSelectedLocation(
             "Selected map location"
           );
 
+          await reverseGeocodeLocation(
+            pos.lat,
+            pos.lng
+          );
+
         }
       );
 
     }
+
+
+    locationMarker.bindPopup(
+      `
+        <div style="min-width:180px">
+          <b>${escapeHtml(
+            selectedLocationText
+          )}</b>
+          <br>
+          <small>
+            ${customerLat.toFixed(6)},
+            ${customerLng.toFixed(6)}
+          </small>
+        </div>
+      `
+    );
+
 
     locationMap.setView(
       [
         customerLat,
         customerLng
       ],
-      16
+      17,
+      {
+        animate:true
+      }
+    );
+
+
+    setTimeout(
+      ()=>{
+        locationMap.invalidateSize(true);
+      },
+      200
     );
 
   }
 
   renderOrderSummary();
+
+}
+
+
+/* =====================================================
+   REVERSE GEOCODE
+   Exact selected map point -> place name
+===================================================== */
+
+async function reverseGeocodeLocation(
+  lat,
+  lng
+){
+
+  try{
+
+    const url =
+      "https://nominatim.openstreetmap.org/reverse" +
+      "?format=json" +
+      "&lat=" +
+      encodeURIComponent(lat) +
+      "&lon=" +
+      encodeURIComponent(lng) +
+      "&zoom=18" +
+      "&addressdetails=1";
+
+    const response =
+      await fetch(
+        url,
+        {
+          headers:{
+            "Accept":
+              "application/json",
+            "Accept-Language":
+              "en"
+          }
+        }
+      );
+
+    if(!response.ok){
+      return;
+    }
+
+    const data =
+      await response.json();
+
+    if(!data){
+      return;
+    }
+
+    const address =
+      data.address || {};
+
+    const placeName =
+      getBestPlaceName(
+        address,
+        data.display_name
+      );
+
+    if(placeName){
+
+      selectedLocationText =
+        placeName;
+
+      document.getElementById(
+        "locationDisplay"
+      ).value =
+        `${placeName} • ${deliveryDistance.toFixed(2)} km away`;
+
+      if(locationMarker){
+
+        locationMarker.bindPopup(
+          `
+            <div style="min-width:200px">
+              <b style="color:#d97706">
+                ${escapeHtml(placeName)}
+              </b>
+              <br>
+              <small>
+                ${
+                  escapeHtml(
+                    data.display_name ||
+                    ""
+                  )
+                }
+              </small>
+              <br><br>
+              <small>
+                ${lat.toFixed(6)},
+                ${lng.toFixed(6)}
+              </small>
+            </div>
+          `
+        ).openPopup();
+
+      }
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "REVERSE GEOCODE ERROR:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   BEST PLACE NAME
+===================================================== */
+
+function getBestPlaceName(
+  address,
+  fallback
+){
+
+  const village =
+    address.village ||
+    address.hamlet ||
+    address.locality ||
+    address.suburb ||
+    address.neighbourhood ||
+    address.town ||
+    address.city ||
+    address.municipality;
+
+  const district =
+    address.county ||
+    address.district ||
+    address.state_district;
+
+  const state =
+    address.state;
+
+  const parts = [];
+
+  if(village){
+    parts.push(village);
+  }
+
+  if(district && district !== village){
+    parts.push(district);
+  }
+
+  if(state && state !== district){
+    parts.push(state);
+  }
+
+  if(parts.length){
+    return parts.join(", ");
+  }
+
+  if(fallback){
+
+    return shortenLocationName(
+      fallback
+    );
+
+  }
+
+  return "Selected delivery location";
 
 }
 
@@ -3514,6 +3867,45 @@ document.getElementById(
 );
 
 
+/* =====================================================
+   SEARCH RESULT CLOSE
+===================================================== */
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    const resultsBox =
+      document.getElementById(
+        "mapSearchResults"
+      );
+
+    const input =
+      document.getElementById(
+        "mapSearchInput"
+      );
+
+    if(
+      resultsBox &&
+      input &&
+      !resultsBox.contains(event.target) &&
+      event.target !== input
+    ){
+
+      resultsBox.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   MAIN SEARCH
+===================================================== */
+
 async function searchDifferentLocation(){
 
   const input =
@@ -3524,7 +3916,7 @@ async function searchDifferentLocation(){
   if(!input){
 
     alert(
-      "Please enter a location to search."
+      "Please enter a village or place name."
     );
 
     return;
@@ -3536,12 +3928,35 @@ async function searchDifferentLocation(){
       "mapSearchButton"
     );
 
+  const resultsBox =
+    document.getElementById(
+      "mapSearchResults"
+    );
+
   button.textContent =
     "Searching...";
+
+  resultsBox.classList.remove(
+    "hidden"
+  );
+
+  resultsBox.innerHTML = `
+    <div class="map-search-loading">
+      🔎 Finding exact village / place...
+    </div>
+  `;
+
 
   try{
 
     initializeLocationMap();
+
+
+    /*
+      Searching inside Odisha first.
+      limit 10 gives customer multiple
+      matching village/place results.
+    */
 
     const query =
       encodeURIComponent(
@@ -3549,16 +3964,30 @@ async function searchDifferentLocation(){
         ", Odisha, India"
       );
 
+    const url =
+      "https://nominatim.openstreetmap.org/search" +
+      "?format=json" +
+      "&addressdetails=1" +
+      "&namedetails=1" +
+      "&limit=10" +
+      "&countrycodes=in" +
+      "&q=" +
+      query;
+
+
     const response =
       await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${query}`,
+        url,
         {
           headers:{
             "Accept":
-              "application/json"
+              "application/json",
+            "Accept-Language":
+              "en"
           }
         }
       );
+
 
     if(!response.ok){
 
@@ -3568,55 +3997,122 @@ async function searchDifferentLocation(){
 
     }
 
+
     const results =
       await response.json();
+
 
     if(
       !results ||
       results.length === 0
     ){
 
-      alert(
-        "Location not found. Please try another place or tap directly on the map."
-      );
+      resultsBox.innerHTML = `
+        <div class="map-search-loading">
+          ❌ Location not found.<br>
+          Try village name, market name,
+          pincode or nearby town.
+        </div>
+      `;
 
       return;
 
     }
 
-    const result =
-      results[0];
 
-    const lat =
-      Number(result.lat);
+    /*
+      Remove duplicate coordinates.
+    */
 
-    const lng =
-      Number(result.lon);
+    const uniqueResults = [];
 
-    setSelectedLocation(
-      lat,
-      lng,
-      result.display_name
-        ? shortenLocationName(
-            result.display_name
-          )
-        : "Selected location"
+    const seen = new Set();
+
+    results.forEach(
+      result=>{
+
+        const key =
+          `${result.lat},${result.lon}`;
+
+        if(!seen.has(key)){
+
+          seen.add(key);
+
+          uniqueResults.push(
+            result
+          );
+
+        }
+
+      }
     );
 
-    selectedLocationType =
-      "different";
 
-    document.getElementById(
-      "differentLocationButton"
-    ).classList.add(
-      "active"
+    resultsBox.innerHTML = "";
+
+
+    uniqueResults.forEach(
+      (result,index)=>{
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.type =
+          "button";
+
+        button.className =
+          "map-search-result";
+
+
+        const place =
+          getSearchResultTitle(
+            result
+          );
+
+
+        const address =
+          result.display_name ||
+          "Location";
+
+
+        button.innerHTML = `
+
+          <div class="map-search-result-title">
+
+            📍 ${escapeHtml(place)}
+
+          </div>
+
+          <div class="map-search-result-address">
+
+            ${escapeHtml(address)}
+
+          </div>
+
+        `;
+
+
+        button.addEventListener(
+          "click",
+          ()=>{
+
+            selectSearchResult(
+              result
+            );
+
+          }
+        );
+
+
+        resultsBox.appendChild(
+          button
+        );
+
+      }
     );
 
-    document.getElementById(
-      "currentLocationButton"
-    ).classList.remove(
-      "active"
-    );
 
   }
   catch(error){
@@ -3626,9 +4122,12 @@ async function searchDifferentLocation(){
       error
     );
 
-    alert(
-      "Unable to search location right now. Please try again or select the location directly on the map."
-    );
+    resultsBox.innerHTML = `
+      <div class="map-search-loading">
+        ❌ Unable to search location right now.
+        Please try again.
+      </div>
+    `;
 
   }
   finally{
@@ -3637,6 +4136,291 @@ async function searchDifferentLocation(){
       "Search";
 
   }
+
+}
+
+
+/* =====================================================
+   SEARCH RESULT TITLE
+===================================================== */
+
+function getSearchResultTitle(
+  result
+){
+
+  const address =
+    result.address || {};
+
+  return (
+    address.village ||
+    address.hamlet ||
+    address.locality ||
+    address.suburb ||
+    address.neighbourhood ||
+    address.town ||
+    address.city ||
+    address.municipality ||
+    address.county ||
+    result.name ||
+    "Selected place"
+  );
+
+}
+
+
+/* =====================================================
+   SELECT SEARCH RESULT
+===================================================== */
+
+async function selectSearchResult(
+  result
+){
+
+  const lat =
+    Number(
+      result.lat
+    );
+
+  const lng =
+    Number(
+      result.lon
+    );
+
+
+  if(
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lng)
+  ){
+
+    return;
+
+  }
+
+
+  const placeName =
+    getSearchResultTitle(
+      result
+    );
+
+
+  selectedLocationType =
+    "different";
+
+
+  document.getElementById(
+    "differentLocationButton"
+  ).classList.add(
+    "active"
+  );
+
+
+  document.getElementById(
+    "currentLocationButton"
+  ).classList.remove(
+    "active"
+  );
+
+
+  document.getElementById(
+    "differentLocationBox"
+  ).classList.remove(
+    "hidden"
+  );
+
+
+  const resultsBox =
+    document.getElementById(
+      "mapSearchResults"
+    );
+
+  resultsBox.classList.add(
+    "hidden"
+  );
+
+
+  /*
+    Exact searched coordinates
+    are selected here.
+  */
+
+  setSelectedLocation(
+    lat,
+    lng,
+    placeName
+  );
+
+
+  /*
+    Full address from search result.
+  */
+
+  const fullName =
+    result.display_name ||
+    placeName;
+
+
+  selectedLocationText =
+    buildCleanLocationName(
+      result
+    );
+
+
+  document.getElementById(
+    "locationDisplay"
+  ).value =
+    `${selectedLocationText} • ${deliveryDistance.toFixed(2)} km away`;
+
+
+  if(locationMarker){
+
+    locationMarker.bindPopup(
+      `
+        <div style="min-width:220px">
+
+          <b style="color:#d97706;font-size:14px">
+            📍 ${escapeHtml(
+              selectedLocationText
+            )}
+          </b>
+
+          <br><br>
+
+          <small>
+            ${escapeHtml(
+              fullName
+            )}
+          </small>
+
+          <br><br>
+
+          <small>
+            Exact point:
+            ${lat.toFixed(6)},
+            ${lng.toFixed(6)}
+          </small>
+
+        </div>
+      `
+    ).openPopup();
+
+  }
+
+
+  /*
+    Reverse geocode once more so
+    village / hamlet / district data
+    is as accurate as possible.
+  */
+
+  await reverseGeocodeLocation(
+    lat,
+    lng
+  );
+
+
+  /*
+    Keep exact searched point after
+    reverse geocoding.
+  */
+
+  if(locationMap){
+
+    locationMap.setView(
+      [
+        lat,
+        lng
+      ],
+      17,
+      {
+        animate:true
+      }
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CLEAN SEARCH LOCATION NAME
+===================================================== */
+
+function buildCleanLocationName(
+  result
+){
+
+  const address =
+    result.address || {};
+
+  const parts = [];
+
+  const village =
+    address.village ||
+    address.hamlet ||
+    address.locality ||
+    address.suburb ||
+    address.neighbourhood ||
+    address.town ||
+    address.city ||
+    result.name;
+
+
+  const district =
+    address.county ||
+    address.district ||
+    address.state_district;
+
+
+  const state =
+    address.state;
+
+
+  if(village){
+
+    parts.push(
+      village
+    );
+
+  }
+
+
+  if(
+    district &&
+    district !== village
+  ){
+
+    parts.push(
+      district
+    );
+
+  }
+
+
+  if(
+    state &&
+    state !== district
+  ){
+
+    parts.push(
+      state
+    );
+
+  }
+
+
+  if(parts.length){
+
+    return parts.join(
+      ", "
+    );
+
+  }
+
+
+  return shortenLocationName(
+    result.display_name ||
+    "Selected delivery location"
+  );
 
 }
 
@@ -5290,12 +6074,6 @@ document.getElementById(
 
   try{
 
-    /*
-      Load saved customer first.
-      No OTP.
-      No location at login.
-    */
-
     const loggedIn =
       loadCustomerProfile();
 
@@ -5308,11 +6086,6 @@ document.getElementById(
       showCustomerLogin();
 
     }
-
-    /*
-      Firebase anonymous authentication
-      is only used for backend order ownership.
-    */
 
     await startCustomerAuth();
 
