@@ -3,1390 +3,1449 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#080808">
+<meta name="theme-color" content="#070707">
 <title>The Queen Fast Food - Admin</title>
 
 <style>
+:root{
+  --gold:#d4af37;
+  --gold2:#f5d76e;
+  --black:#070707;
+  --card:#111;
+  --border:#292929;
+  --white:#fff;
+  --muted:#888;
+  --green:#25d366;
+  --red:#ff4d4d;
+  --blue:#4da6ff;
+  --orange:#ff9f43;
+  --purple:#a970ff;
+}
+
 *{
   box-sizing:border-box;
   margin:0;
-  padding:0
+  padding:0;
 }
 
 body{
-  background:#080808;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#070707;
   color:#fff;
-  font-family:Arial,sans-serif;
-  font-size:14px
+  font-size:13px;
 }
 
-button,input,select,textarea{
-  font:inherit
+button,input,textarea,select{
+  font:inherit;
 }
 
 button{
-  cursor:pointer
+  cursor:pointer;
 }
 
 .hidden{
-  display:none!important
+  display:none!important;
 }
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
-.login{
+.login-screen{
   min-height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
-  padding:15px
+  align-items:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at center,rgba(212,175,55,.1),transparent 45%),
+    #050505;
 }
 
 .login-box{
-  width:min(430px,100%);
+  width:min(390px,100%);
   background:#111;
-  border:1px solid #292929;
-  border-radius:16px;
-  padding:30px;
-  box-shadow:0 20px 55px rgba(0,0,0,.45)
-}
-
-.admin-login-title{
-  text-align:center;
-  color:#f59b23;
-  font-size:26px;
-  font-weight:900;
-  letter-spacing:1.8px;
-  line-height:1.25;
-  margin-bottom:24px;
-  text-transform:uppercase;
-  text-shadow:0 0 14px rgba(245,155,35,.2);
-  font-family:Georgia,"Times New Roman",serif
-}
-
-.login-box p{
-  color:#aaa;
-  margin-bottom:18px;
-  font-size:14px;
-  text-align:center;
-  font-weight:700
-}
-
-input,select,textarea{
-  width:100%;
-  padding:11px 12px;
-  margin-bottom:11px;
-  border-radius:8px;
   border:1px solid #333;
-  background:#080808;
-  color:#fff;
-  font-size:14px
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.logo-icon{
+  font-size:44px;
+}
+
+.logo h1{
+  font-size:21px;
+  color:var(--gold2);
+  margin-top:4px;
+}
+
+.logo p{
+  color:#666;
+  font-size:9px;
+  letter-spacing:2px;
+  margin-top:5px;
+}
+
+.field{
+  margin-bottom:10px;
+}
+
+.field label{
+  display:block;
+  color:#999;
+  font-size:10px;
+  margin-bottom:5px;
+  letter-spacing:.3px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  padding:9px 10px;
+  border-radius:8px;
+  border:1px solid #303030;
+  background:#171717;
+  color:white;
+  outline:none;
+  font-size:12px;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:var(--gold);
 }
 
 textarea{
+  min-height:70px;
   resize:vertical;
-  min-height:72px;
-  line-height:1.4
 }
 
-button{
+.btn{
   border:0;
-  border-radius:8px;
-  padding:10px 13px;
-  font-weight:700;
-  font-size:13px
+  border-radius:7px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:800;
+  transition:.18s;
 }
 
-.primary{
-  background:#f59b23;
-  color:#000
+.btn:hover{
+  transform:translateY(-1px);
 }
 
-.danger{
-  background:#b3261e;
-  color:#fff
+.btn-gold{
+  background:var(--gold);
+  color:#000;
 }
 
-.green{
-  background:#208b45;
-  color:#fff
+.btn-dark{
+  background:#191919;
+  border:1px solid #3b3b3b;
+  color:#fff;
 }
 
-.gray{
-  background:#292929;
-  color:#fff
+.btn-red{
+  background:#351414;
+  border:1px solid #702525;
+  color:#ff8888;
 }
 
-.message{
-  margin-top:10px;
-  color:#ff625b;
-  font-size:13px;
-  text-align:center
+.btn-green{
+  background:#12351f;
+  border:1px solid #1e6b39;
+  color:#69ed91;
 }
 
-/* HEADER */
+.btn-blue{
+  background:#10253c;
+  border:1px solid #285b8d;
+  color:#73baff;
+}
 
-header{
-  background:#101010;
-  border-bottom:1px solid #292929;
+.btn-purple{
+  background:#24153c;
+  border:1px solid #6639a0;
+  color:#c99cff;
+}
+
+.admin{
+  display:none;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
   position:sticky;
   top:0;
-  z-index:50
+  z-index:100;
+  background:rgba(7,7,7,.97);
+  border-bottom:1px solid #222;
+  padding:9px 16px;
+  backdrop-filter:blur(12px);
 }
 
-.nav{
-  max-width:1250px;
+.topbar-inner{
+  max-width:1450px;
   margin:auto;
-  padding:10px 15px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px
+  gap:10px;
 }
 
-.nav h1{
-  color:#f59b23;
-  font-size:20px
+.brand{
+  font-size:13px;
+  font-weight:900;
 }
 
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:9px
+.brand span{
+  color:var(--gold2);
 }
 
-/* NOTIFICATION */
+/* =========================
+   NOTIFICATION
+========================= */
 
 .notification-wrap{
-  position:relative
+  position:fixed;
+  top:8px;
+  right:16px;
+  z-index:500;
 }
 
-.notification-button{
-  width:38px;
-  height:38px;
-  padding:0;
-  border-radius:50%;
-  background:#292929;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  position:relative;
-  transition:.2s ease
+.notification-btn{
+  border:1px solid #6b581c;
+  background:#17130a;
+  color:#f5d76e;
+  border-radius:8px;
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:900;
 }
 
-.notification-button:hover{
-  background:#383838
-}
-
-.notification-button.notification-active{
-  animation:
-    bellVibrate .16s linear infinite,
-    bellGlow 1s ease-in-out infinite
-}
-
-@keyframes bellVibrate{
-  0%{transform:rotate(0)}
-  25%{transform:rotate(-13deg)}
-  50%{transform:rotate(13deg)}
-  75%{transform:rotate(-9deg)}
-  100%{transform:rotate(0)}
-}
-
-@keyframes bellGlow{
-  0%,100%{
-    box-shadow:0 0 0 rgba(57,211,83,0)
-  }
-  50%{
-    box-shadow:
-      0 0 12px rgba(57,211,83,.75),
-      0 0 28px rgba(57,211,83,.35)
-  }
-}
-
-.notification-badge{
-  position:absolute;
-  top:-4px;
-  right:-4px;
+.notification-btn span{
+  display:inline-flex;
   min-width:18px;
   height:18px;
   padding:0 5px;
-  border-radius:20px;
-  background:#f59b23;
-  color:#000;
-  font-size:10px;
-  font-weight:900;
-  display:flex;
   align-items:center;
   justify-content:center;
-  border:2px solid #101010
+  margin-left:4px;
+  border-radius:10px;
+  background:#ff4d4d;
+  color:#fff;
+  font-size:9px;
+}
+
+.notification-btn.blink{
+  animation:notificationBlink .7s infinite;
+}
+
+@keyframes notificationBlink{
+  0%,100%{
+    box-shadow:0 0 4px rgba(57,211,83,.3);
+    border-color:#287d42;
+  }
+  50%{
+    box-shadow:
+      0 0 15px rgba(57,211,83,.9),
+      0 0 35px rgba(57,211,83,.4);
+    border-color:#39d353;
+  }
 }
 
 .notification-panel{
   position:absolute;
-  top:46px;
+  top:38px;
   right:0;
-  width:290px;
+  width:min(360px,92vw);
   background:#111;
-  border:1px solid #333;
-  border-radius:11px;
-  padding:10px;
-  box-shadow:0 15px 35px rgba(0,0,0,.5);
-  z-index:100
+  border:1px solid #3b321a;
+  border-radius:10px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  display:none;
+  overflow:hidden;
 }
 
-.notification-panel h3{
-  color:#f59b23;
-  font-size:13px;
-  margin-bottom:8px
+.notification-panel.show{
+  display:block;
+}
+
+.notification-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:9px;
+  border-bottom:1px solid #292929;
+  color:#f5d76e;
 }
 
 .notification-item{
   padding:9px;
-  background:#171717;
-  border:1px solid #292929;
-  border-radius:8px;
-  margin-top:6px;
-  cursor:pointer
+  border-bottom:1px solid #222;
+  cursor:pointer;
 }
 
 .notification-item:hover{
-  border-color:#f59b23
+  background:#181818;
 }
 
-.notification-item b{
-  font-size:12px
+.notification-item strong{
+  display:block;
+  color:#f5d76e;
+  font-size:10px;
 }
 
 .notification-item small{
   display:block;
-  color:#888;
-  margin-top:3px;
-  font-size:10px
-}
-
-.no-notification{
   color:#777;
-  font-size:11px;
-  padding:8px 2px
+  margin-top:3px;
+  font-size:8px;
 }
 
-/* CONTAINER */
+/* =========================
+   DASHBOARD
+========================= */
 
-.container{
-  max-width:1250px;
+.dashboard{
+  max-width:1450px;
   margin:auto;
-  padding:15px
+  padding:17px 16px 45px;
 }
 
-.dashboard-heading{
-  text-align:center;
-  margin:4px 0 18px;
-  padding:18px 15px 16px;
-  background:#101010;
-  border:1px solid #292929;
-  border-radius:14px
-}
-
-.dashboard-heading h2{
-  color:#f59b23;
-  font-size:30px;
-  font-weight:900;
-  letter-spacing:2.5px;
-  line-height:1.2;
-  text-transform:uppercase;
-  font-family:Georgia,"Times New Roman",serif;
-  text-shadow:0 0 18px rgba(245,155,35,.22)
-}
-
-.dashboard-warning{
-  margin:11px auto 0;
-  max-width:720px;
-  background:#241a08;
-  border:1px solid #f59b23;
-  border-radius:9px;
-  padding:10px 13px;
-  color:#d6d6d6;
-  font-size:11px;
-  line-height:1.5
-}
-
-.dashboard-warning strong{
-  display:block;
-  color:#f59b23;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.7px;
-  margin-bottom:4px
-}
-
-.dashboard-warning b{
-  color:#fff
-}
-
-/* TOP FOLDERS */
+/* =========================
+   TOP FOLDERS
+========================= */
 
 .grid{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:10px
+  gap:9px;
+  margin-bottom:14px;
 }
 
-.box{
-  background:#111;
+.folder-stat{
+  width:100%;
+  text-align:left;
   border:1px solid #292929;
-  border-radius:11px;
-  padding:13px
-}
-
-.box h2{
-  font-size:14px;
-  margin-bottom:8px
-}
-
-.big{
-  font-size:24px;
-  color:#f59b23;
-  font-weight:800
-}
-
-.folder-box{
   cursor:pointer;
-  transition:.2s ease;
-  position:relative;
-  user-select:none
+  color:#fff;
+  transition:.2s;
+  background:#111;
+  border-radius:10px;
+  padding:11px;
 }
 
-.folder-box:hover{
-  border-color:#f59b23;
-  transform:translateY(-1px)
+.folder-stat:hover{
+  transform:translateY(-2px);
+  border-color:#555;
 }
 
-.folder-box.selected{
-  border-color:#f59b23;
-  box-shadow:0 0 12px rgba(245,155,35,.18)
-}
-
-.folder-box .folder-hint{
-  color:#666;
+.folder-stat small{
+  color:#777;
   font-size:9px;
-  margin-top:5px
 }
 
-/* NEW ORDER LIGHT */
-
-.new-folder-light{
-  width:10px;
-  height:10px;
-  display:inline-block;
-  border-radius:50%;
-  background:#ffd400;
-  margin-left:6px;
-  vertical-align:middle;
-  box-shadow:0 0 7px rgba(255,212,0,.7)
+.folder-stat strong{
+  display:block;
+  font-size:22px;
+  color:var(--gold2);
+  margin-top:2px;
 }
 
-.new-folder-light.blink{
-  background:#39d353;
-  box-shadow:
-    0 0 8px rgba(57,211,83,.9),
-    0 0 20px rgba(57,211,83,.55);
-  animation:folderGreenBlink .75s ease-in-out infinite
+.folder-stat span{
+  display:block;
+  color:#666;
+  font-size:8px;
+  margin-top:5px;
 }
 
-@keyframes folderGreenBlink{
+.new-stat{
+  border-color:rgba(212,175,55,.35);
+}
+
+.pending-stat{
+  border-color:rgba(255,159,67,.35);
+}
+
+.delivery-stat{
+  border-color:rgba(169,112,255,.35);
+}
+
+.complete-stat{
+  border-color:rgba(37,211,102,.35);
+}
+
+.cancelled-stat{
+  border-color:rgba(255,77,77,.35);
+}
+
+/* NEW ORDER ALERT */
+
+.new-summary-alert{
+  border-color:#39d353!important;
+  animation:newSummaryBlink 1.05s ease-in-out infinite;
+}
+
+@keyframes newSummaryBlink{
   0%,100%{
-    opacity:.35;
-    transform:scale(.85);
-    box-shadow:0 0 3px rgba(57,211,83,.3)
+    border-color:#208b45;
+    box-shadow:0 0 5px rgba(57,211,83,.25);
   }
-
   50%{
-    opacity:1;
-    transform:scale(1.25);
+    border-color:#39d353;
     box-shadow:
-      0 0 8px rgba(57,211,83,.95),
-      0 0 20px rgba(57,211,83,.65),
-      0 0 35px rgba(57,211,83,.25)
+      0 0 14px rgba(57,211,83,.8),
+      0 0 35px rgba(57,211,83,.42),
+      0 0 70px rgba(57,211,83,.18);
   }
 }
 
-/* CONTROL GRID */
+/* =========================
+   CONTROL GRID
+========================= */
 
 .control-grid{
   display:grid;
   grid-template-columns:
-    repeat(5,minmax(0,1fr));
-  gap:9px;
-  margin-top:14px;
-  align-items:start
+    minmax(0,1.2fr)
+    minmax(0,1fr)
+    minmax(0,1fr)
+    minmax(0,1fr);
+  gap:10px;
+  margin-bottom:12px;
 }
 
 .control-box{
-  margin-top:0!important;
-  padding:10px;
-  min-width:0
+  background:#111;
+  border:1px solid #292929;
+  border-radius:11px;
+  padding:12px;
+  min-width:0;
 }
 
 .control-box h2{
   font-size:12px;
-  margin-bottom:7px;
-  color:#fff
+  margin-bottom:9px;
+  color:var(--gold2);
 }
 
-.control-box input,
-.control-box select,
-.control-box textarea{
-  padding:7px 8px;
-  font-size:10px;
-  margin-bottom:0
-}
-
-.control-box button{
-  padding:7px 8px;
-  font-size:9px
-}
-
-/* SHOP */
-
-.status-buttons{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:4px
-}
-
-.status-buttons button{
-  background:#292929;
-  color:#fff;
-  padding:6px 2px;
-  font-size:8px
-}
-
-.status-buttons button.active{
-  background:#f59b23;
-  color:#000
-}
-
-.shop-current{
-  margin-top:6px;
-  color:#aaa;
-  font-size:9px
-}
-
-.shop-current b{
-  color:#f59b23
-}
-
-.shop-settings-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:5px;
-  margin-top:7px
-}
-
-.shop-settings-grid label{
-  display:block;
-  color:#999;
-  font-size:8px;
-  margin-bottom:2px
-}
-
-.save-btn{
-  margin-top:6px;
-  width:100%
-}
-
-/* PAYMENT */
-
-.payment-settings{
-  margin-top:0;
-  padding:0;
-  background:transparent;
-  border:0;
-  border-radius:0
-}
-
-.payment-settings-title{
-  color:#f59b23;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:7px
-}
-
-.payment-toggle-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:5px
-}
-
-.payment-toggle{
-  background:#171717;
-  border:1px solid #303030;
-  color:#fff;
-  padding:7px;
+.notice{
+  background:#19170c;
+  border:1px solid #55450e;
+  color:#d9bd55;
   border-radius:7px;
+  padding:8px 9px;
+  font-size:10px;
+  margin-bottom:10px;
+  line-height:1.45;
+}
+
+.success{
+  color:#6bea91;
+}
+
+.danger{
+  color:#ff7777;
+}
+
+.shop-status{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  gap:7px;
+  margin-bottom:9px;
+  padding:8px 10px;
+  border-radius:8px;
+  background:#121212;
+  border:1px solid #282828;
+}
+
+.shop-light{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#25d366;
+  box-shadow:0 0 8px #25d366;
+}
+
+.shop-light.closed{
+  background:#ff3030;
+  box-shadow:0 0 10px #ff3030;
+  animation:redBlink .8s infinite;
+}
+
+.shop-status-text{
+  font-size:10px;
+  font-weight:900;
+}
+
+.shop-status-text.closed{
+  color:#ff5c5c;
+}
+
+@keyframes redBlink{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+  }
+  50%{
+    opacity:.25;
+    transform:scale(.75);
+  }
+}
+
+.override-buttons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
   gap:5px;
-  cursor:pointer
+  margin-top:8px;
 }
 
-.payment-toggle.active{
-  border-color:#39d353;
-  box-shadow:0 0 10px rgba(57,211,83,.12)
-}
-
-.payment-toggle.off{
-  border-color:#4a2929
-}
-
-.payment-toggle-name{
-  font-weight:800;
-  font-size:9px
-}
-
-.payment-toggle-status{
+.override-btn{
+  padding:7px 4px;
+  border-radius:7px;
+  border:1px solid #333;
+  background:#171717;
+  color:#aaa;
   font-size:8px;
-  font-weight:900
+  font-weight:900;
 }
 
-.payment-toggle.active .payment-toggle-status{
-  color:#39d353
+.override-btn.active-auto,
+.override-btn.active-open,
+.override-btn.active-closed{
+  border-color:var(--gold);
+  color:var(--gold2);
+  background:#29220b;
 }
 
-.payment-toggle.off .payment-toggle-status{
-  color:#ff625b
-}
-
-.payment-save-row{
-  margin-top:6px;
-  display:flex;
-  flex-direction:column;
+.quick-folder-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
   gap:4px;
-  align-items:stretch
 }
 
-.payment-save-row button{
-  width:100%
+.quick-folder{
+  border:1px solid #333;
+  background:#171717;
+  color:#aaa;
+  border-radius:7px;
+  padding:7px 3px;
+  font-size:8px;
+  font-weight:900;
 }
 
-.payment-note{
-  color:#777;
-  font-size:7px;
-  line-height:1.3
+.quick-folder:hover{
+  border-color:var(--gold);
+  color:var(--gold2);
 }
 
-/* WEBSITE */
-
-.website-control{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:6px
-}
-
-.website-control button{
-  width:100%
-}
-
-/* ORDER MANAGEMENT CONTROL */
-
-.order-control-summary{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:4px
-}
-
-.order-control-item{
+.payment-row{
+  display:flex;
+  gap:7px;
+  align-items:center;
+  justify-content:space-between;
   background:#171717;
   border:1px solid #292929;
-  border-radius:6px;
-  padding:5px;
-  cursor:pointer;
-  transition:.2s
+  border-radius:8px;
+  padding:8px;
+  margin-bottom:6px;
 }
 
-.order-control-item:hover{
-  border-color:#f59b23;
-  transform:translateY(-1px)
+.payment-row span{
+  font-size:9px;
+  color:#ddd;
 }
 
-.order-control-item span{
-  display:block;
-  color:#888;
-  font-size:7px;
-  margin-bottom:1px
+.switch{
+  width:42px;
+  height:22px;
+  border-radius:30px;
+  background:#444;
+  position:relative;
+  border:0;
 }
 
-.order-control-item b{
-  color:#f59b23;
-  font-size:12px
+.switch:after{
+  content:"";
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#fff;
+  top:3px;
+  left:3px;
+  transition:.2s;
 }
 
-/* OFFER CONTROL */
+.switch.on{
+  background:var(--green);
+}
+
+.switch.on:after{
+  left:23px;
+}
+
+/* =========================
+   OFFER CONTROL
+========================= */
 
 .offer-control-title{
-  color:#f59b23;
+  color:var(--gold2);
   font-size:12px;
   font-weight:900;
-  margin-bottom:6px
+  margin-bottom:8px;
 }
 
 .offer-status-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:6px;
+  gap:8px;
+  padding:8px;
   background:#171717;
   border:1px solid #292929;
-  border-radius:7px;
-  padding:6px 7px;
-  margin-bottom:6px
+  border-radius:8px;
+  margin-bottom:8px;
 }
 
-.offer-status-label{
+.offer-status-text{
   font-size:9px;
-  font-weight:800
+  color:#aaa;
+}
+
+.offer-status-text.on{
+  color:#69ed91;
 }
 
 .offer-switch{
-  position:relative;
-  width:34px;
-  height:18px;
+  width:42px;
+  height:22px;
+  border-radius:30px;
   background:#444;
-  border-radius:20px;
-  cursor:pointer;
-  transition:.2s
+  border:0;
+  position:relative;
 }
 
-.offer-switch::after{
+.offer-switch:after{
   content:"";
   position:absolute;
-  width:14px;
-  height:14px;
-  top:2px;
-  left:2px;
+  width:16px;
+  height:16px;
+  background:#fff;
   border-radius:50%;
-  background:#aaa;
-  transition:.2s
+  top:3px;
+  left:3px;
+  transition:.2s;
 }
 
-.offer-switch.active{
-  background:#208b45
+.offer-switch.on{
+  background:#25d366;
 }
 
-.offer-switch.active::after{
-  left:18px;
-  background:#fff
-}
-
-.offer-label{
-  display:block;
-  color:#888;
-  font-size:8px;
-  margin-bottom:2px;
-  margin-top:5px
+.offer-switch.on:after{
+  left:23px;
 }
 
 .offer-control-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:5px
+  gap:6px;
 }
 
-.offer-control-grid input{
-  min-width:0
-}
-
-.offer-save{
+.offer-control-grid input,
+.offer-control-grid textarea{
   width:100%;
-  margin-top:6px
+  background:#171717;
+  border:1px solid #303030;
+  color:#fff;
+  border-radius:7px;
+  padding:7px;
+  outline:none;
+  font-size:9px;
 }
 
-.offer-preview-note{
-  color:#777;
-  font-size:7px;
-  line-height:1.25;
-  margin-top:5px
+.offer-control-grid textarea{
+  min-height:55px;
+  resize:vertical;
 }
 
-/* SECTION */
-
-.section{
-  margin-top:14px
+.offer-full{
+  grid-column:1/-1;
 }
 
-.section > h2{
-  font-size:18px;
-  margin-bottom:10px
-}
+/* =========================
+   MENU
+========================= */
 
-/* MENU */
-
-.menu-list{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px
-}
-
-.menu-item{
+.menu-section{
   background:#111;
   border:1px solid #292929;
   border-radius:11px;
-  padding:12px
+  padding:12px;
+  margin-bottom:12px;
 }
 
-.menu-item-head{
-  display:flex;
-  justify-content:space-between;
+.menu-section h2{
+  color:var(--gold2);
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.menu-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px 15px;
+}
+
+.menu-item{
+  display:block;
+  padding:8px 0;
+  border-bottom:1px solid #222;
+}
+
+.menu-top{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
   gap:8px;
-  align-items:flex-start
 }
 
-.menu-item-head b{
-  font-size:13px
+.menu-name{
+  font-size:11px;
+  font-weight:800;
+  color:#eee;
 }
 
-.available{
-  color:#39d353;
-  font-size:11px
+.menu-id{
+  font-size:8px;
+  color:#555;
+  margin-top:2px;
 }
 
-.unavailable{
-  color:#ff625b;
-  font-size:11px
+.menu-price-area{
+  display:flex;
+  align-items:center;
+  gap:5px;
 }
 
-.menu-item .menu-price,
-.menu-item .menu-image{
-  margin-top:8px;
-  margin-bottom:0
+.menu-price-input{
+  width:68px!important;
+  padding:6px!important;
+  text-align:center;
+  font-size:11px!important;
 }
 
-.menu-item .toggle-stock,
-.menu-item .save-menu{
+.menu-save{
+  padding:6px 8px;
+  font-size:9px;
+}
+
+.stock-select{
+  background:#171717;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:8px;
+  padding:7px 9px;
+  font-weight:700;
+  font-size:9px;
+}
+
+.stock-select.available{
+  border-color:rgba(37,211,102,.55);
+  color:#58dd8d;
+}
+
+.stock-select.out{
+  border-color:rgba(255,77,77,.55);
+  color:#ff7777;
+}
+
+.image-area{
   margin-top:7px;
-  width:100%;
-  padding:8px;
-  font-size:12px
+  display:grid;
+  grid-template-columns:72px 1fr auto;
+  gap:6px;
+  align-items:center;
 }
 
-/* ORDERS */
+.image-preview{
+  width:72px;
+  height:48px;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid #333;
+  background:#181818;
+}
 
-.orders{
-  display:block
+.image-url{
+  min-width:0;
+}
+
+.image-url input{
+  width:100%;
+  padding:7px 8px;
+  border-radius:6px;
+  border:1px solid #303030;
+  background:#171717;
+  color:#fff;
+  font-size:9px;
+  outline:none;
+}
+
+.image-save{
+  padding:6px 7px;
+  font-size:9px;
+  white-space:nowrap;
+}
+
+/* =========================
+   GENERAL ORDER SECTION
+========================= */
+
+.section-title{
+  color:var(--gold2);
+  font-size:13px;
+  margin-bottom:10px;
 }
 
 .order-column{
   background:#0f0f0f;
   border:1px solid #292929;
   border-radius:11px;
-  min-height:130px;
-  padding:7px;
-  overflow:hidden
+  overflow:hidden;
+  min-width:0;
 }
 
-.order-column h3{
-  padding:4px 3px 7px;
-  color:#f59b23;
-  font-size:13px;
-  border-bottom:1px solid #222
+.order-column-head{
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  background:#151515;
+  border-bottom:1px solid #292929;
 }
 
-.order-column.new-order-alert{
-  border-color:#39d353;
-  animation:newOrderBlink 1.05s ease-in-out infinite;
-  position:relative
+.order-column-head strong{
+  font-size:11px;
 }
 
-.order-column.new-order-alert::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:13px;
-  pointer-events:none;
-  box-shadow:
-    0 0 10px rgba(57,211,83,.8),
-    0 0 25px rgba(57,211,83,.55),
-    0 0 55px rgba(57,211,83,.28);
-  animation:newOrderLight 1.05s ease-in-out infinite
+.order-column-head span{
+  min-width:26px;
+  height:26px;
+  padding:0 7px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#29220b;
+  color:#ffd85a;
+  font-size:9px;
+  font-weight:900;
+}
+
+.order-list{
+  padding:8px;
+  display:grid;
+  gap:7px;
+  max-height:650px;
+  overflow:auto;
+}
+
+.empty{
+  padding:20px;
+  text-align:center;
+  color:#666;
+  font-size:10px;
+}
+
+/* IMPORTANT:
+   OFFER + NEW ORDER SAME LINE
+*/
+
+.offer-new-order-row{
+  display:grid;
+  grid-template-columns:minmax(280px,.8fr) minmax(0,2.2fr);
+  gap:10px;
+  margin-bottom:12px;
+  align-items:start;
+}
+
+.offer-new-order-row .offer-side{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:11px;
+  padding:12px;
+  min-width:0;
+}
+
+/* =========================
+   ORDERS BELOW NEW
+========================= */
+
+.orders-two-column{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+/* =========================
+   ORDER CARD
+========================= */
+
+.order{
+  background:#161616;
+  border:1px solid #292929;
+  border-radius:9px;
+  padding:10px;
+  position:relative;
+  overflow:hidden;
+}
+
+.order.new-order{
+  border:1px solid #d4af37;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212,175,55,.15),
+      rgba(37,211,102,.05),
+      #161616
+    );
+}
+
+.order.new-order.new-arrival{
+  animation:newOrderBlink .9s infinite;
 }
 
 @keyframes newOrderBlink{
   0%,100%{
-    border-color:#208b45;
-    box-shadow:0 0 5px rgba(57,211,83,.25)
-  }
-
-  50%{
-    border-color:#39d353;
+    border-color:#d4af37;
     box-shadow:
-      0 0 14px rgba(57,211,83,.8),
-      0 0 35px rgba(57,211,83,.42),
-      0 0 70px rgba(57,211,83,.18)
+      0 0 0 1px rgba(212,175,55,.12),
+      0 0 8px rgba(212,175,55,.15);
   }
-}
-
-@keyframes newOrderLight{
-  0%,100%{
-    opacity:.35;
-    transform:scale(.995)
-  }
-
   50%{
-    opacity:1;
-    transform:scale(1.008)
+    border-color:#fff0a0;
+    box-shadow:
+      0 0 0 2px rgba(245,215,110,.55),
+      0 0 25px rgba(245,215,110,.65),
+      0 0 50px rgba(212,175,55,.25);
   }
 }
 
-.folder-empty{
-  color:#666;
-  text-align:center;
-  padding:22px 8px;
-  font-size:11px
+.order.new-order:before{
+  content:"NEW ORDER";
+  position:absolute;
+  top:0;
+  right:0;
+  background:linear-gradient(135deg,#d4af37,#f5d76e);
+  color:#000;
+  font-size:8px;
+  font-weight:900;
+  padding:4px 7px;
+  border-bottom-left-radius:7px;
 }
 
-/* COMPACT ORDER CARD */
-
-.order{
-  background:#171717;
-  border:1px solid #303030;
-  border-radius:8px;
-  padding:7px;
-  margin-top:6px;
-  overflow:hidden
-}
-
-.order.new{
-  border-color:#f59b23
+.order-head{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
 .order-id{
-  color:#f59b23;
-  font-weight:800;
-  font-size:11px;
-  word-break:break-word
-}
-
-.order small{
-  color:#888;
-  font-size:9px
-}
-
-.item-line{
-  display:flex;
-  justify-content:space-between;
-  gap:6px;
-  margin-top:3px;
-  font-size:9px
-}
-
-.item-line span:first-child{
-  min-width:0;
-  word-break:break-word
-}
-
-.item-line span:last-child{
-  white-space:nowrap
-}
-
-.order-actions{
-  display:grid;
-  gap:4px;
-  margin-top:6px
-}
-
-.order-actions.two{
-  grid-template-columns:1fr 1fr
-}
-
-.order-actions button{
-  padding:6px;
-  font-size:9px
-}
-
-.badge{
-  display:inline-block;
-  margin-top:4px;
-  padding:3px 6px;
-  background:#292929;
-  border-radius:20px;
-  font-size:8px
-}
-
-.order-address{
-  margin-top:5px;
-  color:#aaa;
-  font-size:9px;
-  line-height:1.3;
-  word-break:break-word
-}
-
-.location-box{
-  margin-top:6px;
-  padding:6px;
-  background:#0d0d0d;
-  border:1px solid #292929;
-  border-radius:7px
-}
-
-.location-title{
-  color:#f59b23;
-  font-size:9px;
+  color:var(--gold2);
   font-weight:900;
-  margin-bottom:3px
+  font-size:12px;
 }
 
-.location-text{
-  color:#aaa;
+.order-date{
+  color:#777;
   font-size:8px;
-  line-height:1.35;
-  word-break:break-word
+  margin-top:2px;
 }
 
-.location-meta{
-  margin-top:3px;
-  color:#888;
-  font-size:8px
+.status{
+  padding:4px 7px;
+  border-radius:13px;
+  font-size:8px;
+  font-weight:900;
+  background:#242424;
+  height:max-content;
 }
 
-.location-button{
-  margin-top:5px;
-  width:100%;
-  background:#292929;
-  color:#fff;
-  padding:6px;
-  font-size:8px
+.status.received{
+  background:#3a2c05;
+  color:#ffd85a;
 }
 
-.location-button:hover{
-  background:#f59b23;
-  color:#000
+.status.confirmed,
+.status.processing{
+  background:#10253c;
+  color:#73baff;
 }
 
-.payment-box{
-  margin-top:5px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:6px;
-  padding:5px 6px;
-  border-radius:6px;
+.status.preparing,
+.status.making{
+  background:#30210b;
+  color:#ffbd55;
+}
+
+.status.out_for_delivery{
+  background:#211235;
+  color:#c394ff;
+}
+
+.status.delivered{
+  background:#12351f;
+  color:#69ed91;
+}
+
+.status.cancelled{
+  background:#351414;
+  color:#ff8888;
+}
+
+.order-info{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+  margin:8px 0;
+}
+
+.info-box{
   background:#101010;
-  border:1px solid #292929;
-  font-size:8px
+  padding:6px;
+  border-radius:6px;
+  font-size:9px;
+  line-height:1.35;
+  overflow-wrap:anywhere;
 }
 
-.payment-label{
-  color:#888
+.info-box small{
+  color:#666;
+  display:block;
+  margin-bottom:2px;
+  font-size:7px;
 }
 
-.payment-value{
-  color:#fff;
-  font-weight:900
+.order-items{
+  margin:7px 0;
+  border-top:1px solid #292929;
+  border-bottom:1px solid #292929;
+  padding:6px 0;
 }
 
-.payment-value.cod{
-  color:#39d353
-}
-
-.payment-value.online{
-  color:#f59b23
-}
-
-/* FOLDER AREA */
-
-.complete-folder{
-  margin-top:8px;
-  background:#111;
-  border:1px solid #292929;
-  border-radius:9px;
-  padding:8px;
+.order-item{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:8px
+  gap:8px;
+  padding:2px 0;
+  color:#bbb;
+  font-size:9px;
 }
 
-.cancelled-folder{
-  border-color:#4a2929
-}
-
-.complete-folder-left{
+.order-total{
   display:flex;
-  align-items:center;
-  gap:8px
+  justify-content:space-between;
+  font-size:11px;
+  font-weight:900;
 }
 
-.complete-folder-icon{
-  width:34px;
-  height:34px;
-  border-radius:8px;
-  background:#292929;
+.order-total strong{
+  color:var(--gold2);
+}
+
+.status-buttons{
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap;
+  margin-top:7px;
+}
+
+.status-buttons .btn{
+  font-size:8px;
+  padding:5px 7px;
+}
+
+.maps-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:5px;
+  padding:5px 7px;
+  border-radius:6px;
+  background:#10253c;
+  border:1px solid #285b8d;
+  color:#73baff;
+  text-decoration:none;
+  font-size:8px;
+  font-weight:900;
+}
+
+/* =========================
+   COMPLETE / CANCELLED
+========================= */
+
+.folder-area{
+  background:#0f0f0f;
+  border-radius:11px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.folder-head{
+  min-height:48px;
+  padding:9px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #292929;
+  background:#151515;
+}
+
+.folder-head strong{
+  display:block;
+  font-size:11px;
+}
+
+.folder-head small{
+  display:block;
+  color:#666;
+  font-size:8px;
+  margin-top:3px;
+}
+
+.folder-head>span{
+  min-width:28px;
+  height:28px;
+  padding:0 7px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:18px
-}
-
-.complete-folder-title{
-  font-weight:800;
-  font-size:11px
-}
-
-.complete-folder-sub{
-  color:#777;
-  font-size:8px;
-  margin-top:2px
-}
-
-.complete-folder-button{
-  background:#292929;
+  border-radius:50%;
+  background:#222;
   color:#fff;
-  padding:7px 9px;
-  font-size:9px
+  font-weight:900;
+  font-size:10px;
 }
 
-.complete-folder-button:hover{
-  background:#f59b23;
-  color:#000
+.complete-area{
+  border:1px solid #245b38;
 }
 
-.cancelled-folder .complete-folder-button:hover{
-  background:#b3261e;
-  color:#fff
+.complete-area .folder-head{
+  border-bottom-color:#245b38;
 }
 
-/* MODAL */
+.complete-area .folder-head>span{
+  color:#69ed91;
+  background:#12351f;
+}
 
-.complete-modal{
+.cancelled-area{
+  border:1px solid #5a2424;
+}
+
+.cancelled-area .folder-head{
+  border-bottom-color:#5a2424;
+}
+
+.cancelled-area .folder-head>span{
+  color:#ff8888;
+  background:#351414;
+}
+
+.folder-content{
+  padding:8px;
+  max-height:650px;
+  overflow:auto;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.72);
-  z-index:200;
-  display:flex;
+  display:none;
   align-items:center;
   justify-content:center;
-  padding:15px
+  padding:15px;
+  z-index:900;
 }
 
-.complete-modal-box{
-  width:min(1000px,100%);
-  max-height:85vh;
-  overflow:auto;
-  background:#101010;
-  border:1px solid #333;
-  border-radius:14px;
-  padding:12px;
-  box-shadow:0 20px 60px rgba(0,0,0,.7)
-}
-
-.complete-modal-head{
+.modal.show{
   display:flex;
-  align-items:center;
+}
+
+.modal-card{
+  width:min(850px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#111;
+  border:1px solid #333;
+  border-radius:13px;
+  padding:14px;
+}
+
+.modal-head{
+  display:flex;
   justify-content:space-between;
-  gap:10px;
-  margin-bottom:9px;
-  position:sticky;
-  top:0;
-  background:#101010;
-  padding-bottom:7px;
-  z-index:2
+  align-items:center;
+  margin-bottom:10px;
 }
 
-.complete-modal-head h2{
-  color:#f59b23;
-  font-size:16px
+.modal-head h2{
+  color:var(--gold2);
+  font-size:13px;
 }
 
-.cancelled-modal-title{
-  color:#ff625b!important
-}
-
-.close-complete{
-  width:32px;
-  height:32px;
-  padding:0;
+.close{
+  width:30px;
+  height:30px;
   border-radius:50%;
-  background:#292929;
+  border:1px solid #444;
+  background:#181818;
   color:#fff;
-  font-size:17px
+  font-size:17px;
 }
 
-.complete-orders-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px
+/* =========================
+   RATING
+========================= */
+
+.rating{
+  background:#171717;
+  border:1px solid #292929;
+  border-radius:8px;
+  padding:10px;
+  margin-bottom:6px;
 }
 
-.empty-complete{
-  grid-column:1 / -1;
-  text-align:center;
-  color:#777;
-  padding:30px 10px;
-  font-size:11px
+.rating-stars{
+  color:var(--gold);
+  font-size:15px;
+  margin-top:2px;
 }
 
-/* RESPONSIVE */
+.rating-feedback{
+  color:#aaa;
+  margin-top:5px;
+  font-size:10px;
+  line-height:1.45;
+}
 
-@media(max-width:1250px){
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%) translateY(20px);
+  background:#181818;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:8px;
+  padding:9px 13px;
+  font-size:10px;
+  font-weight:800;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:1000px){
 
   .control-grid{
-    grid-template-columns:
-      repeat(3,minmax(0,1fr))
-  }
-}
-
-@media(max-width:1100px){
-
-  .control-grid{
-    grid-template-columns:repeat(2,1fr)
+    grid-template-columns:1fr 1fr;
   }
 
   .grid{
-    grid-template-columns:repeat(3,1fr)
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .menu-list{
-    grid-template-columns:repeat(2,1fr)
+  .offer-new-order-row{
+    grid-template-columns:1fr;
   }
 
-  .complete-orders-grid{
-    grid-template-columns:repeat(2,1fr)
-  }
 }
 
 @media(max-width:700px){
 
-  body{
-    font-size:13px
-  }
-
-  .nav{
-    padding:9px 10px
-  }
-
-  .nav h1{
-    font-size:16px
-  }
-
-  .container{
-    padding:10px
-  }
-
-  .dashboard-heading{
-    margin-top:2px;
-    padding:15px 10px
-  }
-
-  .dashboard-heading h2{
-    font-size:23px;
-    letter-spacing:1.5px
-  }
-
-  .dashboard-warning{
-    font-size:10px
+  .dashboard{
+    padding:12px 9px 35px;
   }
 
   .grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:8px
+    grid-template-columns:1fr 1fr;
   }
 
   .control-grid{
-    grid-template-columns:1fr 1fr;
-    gap:8px
-  }
-
-  .box{
-    padding:9px
-  }
-
-  .big{
-    font-size:21px
+    grid-template-columns:1fr;
   }
 
   .menu-list{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
-  .complete-orders-grid{
-    grid-template-columns:1fr 1fr
+  .orders-two-column{
+    grid-template-columns:1fr;
   }
 
-  .shop-settings-grid{
-    grid-template-columns:1fr 1fr
+  .order-info{
+    grid-template-columns:1fr 1fr;
   }
 
-  .notification-panel{
-    position:fixed;
-    top:58px;
-    right:10px;
-    width:min(290px,calc(100vw - 20px))
+  .quick-folder-grid{
+    grid-template-columns:repeat(5,1fr);
   }
+
+  .image-area{
+    grid-template-columns:65px 1fr;
+  }
+
+  .image-save{
+    grid-column:2;
+  }
+
 }
 
-@media(max-width:500px){
-
-  .control-grid{
-    grid-template-columns:1fr
-  }
+@media(max-width:480px){
 
   .grid{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:1fr 1fr;
   }
 
-  .status-buttons{
-    grid-template-columns:1fr
+  .folder-stat strong{
+    font-size:19px;
   }
 
-  .shop-settings-grid{
-    grid-template-columns:1fr
+  .order-info{
+    grid-template-columns:1fr 1fr;
   }
 
-  .payment-toggle-grid{
-    grid-template-columns:1fr
+  .override-buttons{
+    grid-template-columns:1fr;
   }
 
-  .complete-orders-grid{
-    grid-template-columns:1fr
+  .offer-control-grid{
+    grid-template-columns:1fr;
   }
 
-  .login-box{
-    width:min(100%,400px);
-    padding:24px 20px
+  .offer-full{
+    grid-column:auto;
   }
 
-  .admin-login-title{
-    font-size:22px;
-    letter-spacing:1.2px;
-    margin-bottom:22px
-  }
-
-  .login-box p{
-    font-size:13px
-  }
-
-  .dashboard-heading h2{
-    font-size:20px;
-    letter-spacing:1px
-  }
-
-  .dashboard-warning{
-    font-size:9.5px;
-    padding:9px 10px
-  }
-
-  .nav h1{
-    font-size:15px
-  }
-
-  .nav .danger{
-    padding:7px 9px;
-    font-size:11px
-  }
-
-  .notification-button{
-    width:34px;
-    height:34px;
-    font-size:18px
-  }
-
-  .complete-folder{
-    align-items:flex-start
-  }
-
-  .complete-folder-button{
-    white-space:nowrap
-  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<div id="loginScreen" class="login">
+<div class="login-screen" id="loginScreen">
 
   <div class="login-box">
 
-    <h1 class="admin-login-title">
-      THE QUEEN FAST FOOD ADMIN ID
-    </h1>
+    <div class="logo">
+      <div class="logo-icon">👑</div>
+      <h1>THE QUEEN FAST FOOD</h1>
+      <p>ADMIN PANEL</p>
+    </div>
 
-    <p>Admin Panel</p>
+    <div class="field">
+      <label>Admin Email</label>
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Enter admin email"
+      >
+    </div>
 
-    <input
-      id="email"
-      type="email"
-      placeholder="Admin Email"
-    >
-
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-    >
+    <div class="field">
+      <label>Password</label>
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Enter password"
+      >
+    </div>
 
     <button
-      id="loginButton"
-      class="primary"
+      class="btn btn-gold"
       style="width:100%"
+      onclick="adminLogin()"
     >
-      Login
+      LOGIN
     </button>
 
-    <div id="loginMessage" class="message"></div>
+    <div
+      id="loginMessage"
+      style="
+        margin-top:10px;
+        color:#ff7777;
+        font-size:10px;
+        text-align:center;
+      "
+    ></div>
 
   </div>
 
 </div>
 
 
-<!-- ADMIN APP -->
+<!-- =========================
+     ADMIN
+========================= -->
 
-<div id="adminApp" class="hidden">
+<div class="admin" id="adminPanel">
 
-<header>
+  <div class="topbar">
 
-  <div class="nav">
+    <div class="topbar-inner">
 
-    <h1>Queen Fast Food Admin</h1>
-
-    <div class="nav-right">
-
-      <div class="notification-wrap">
-
-        <button
-          id="notificationButton"
-          class="notification-button"
-          title="New Orders"
-        >
-          🔔
-
-          <span
-            id="notificationBadge"
-            class="notification-badge hidden"
-          >0</span>
-
-        </button>
-
-        <div
-          id="notificationPanel"
-          class="notification-panel hidden"
-        >
-
-          <h3>New Order Notifications</h3>
-
-          <div id="notificationList"></div>
-
-        </div>
-
+      <div class="brand">
+        👑 <span>The Queen Fast Food</span> — Admin
       </div>
 
-      <button id="logoutButton" class="danger">
+      <button
+        class="btn btn-dark"
+        onclick="adminLogout()"
+      >
         Logout
       </button>
 
@@ -1394,1210 +1453,1156 @@ header{
 
   </div>
 
-</header>
 
-
-<div class="container">
-
-<div class="dashboard-heading">
-
-  <h2>THE QUEEN FAST FOOD ADMIN</h2>
-
-  <div class="dashboard-warning">
-
-    <strong>⚠️ AUTHORIZED ACCESS ONLY</strong>
-
-    <span>
-      This Admin ID is strictly reserved for the
-      <b>Owner and Authorized Web Developer.</b>
-      No one else is permitted to use this ID.
-    </span>
-
-  </div>
-
-</div>
-
-
-<!-- ORDER FOLDERS -->
-
-<div class="grid">
-
-  <div
-    id="folderNew"
-    class="box folder-box"
-    data-folder="new"
-  >
-
-    <h2>
-      New Orders
-      <span
-        id="newFolderLight"
-        class="new-folder-light"
-      ></span>
-    </h2>
-
-    <div id="newCount" class="big">0</div>
-
-    <div class="folder-hint">
-      Click to open
-    </div>
-
-  </div>
-
-
-  <div
-    id="folderPending"
-    class="box folder-box"
-    data-folder="pending"
-  >
-
-    <h2>Pending</h2>
-
-    <div id="pendingCount" class="big">0</div>
-
-    <div class="folder-hint">
-      Click to open
-    </div>
-
-  </div>
-
-
-  <div
-    id="folderDelivery"
-    class="box folder-box"
-    data-folder="delivery"
-  >
-
-    <h2>Delivery</h2>
-
-    <div id="deliveryCount" class="big">0</div>
-
-    <div class="folder-hint">
-      Click to open
-    </div>
-
-  </div>
-
-
-  <div
-    id="folderComplete"
-    class="box folder-box"
-    data-folder="complete"
-  >
-
-    <h2>Complete</h2>
-
-    <div id="completeCount" class="big">0</div>
-
-    <div class="folder-hint">
-      Click to open
-    </div>
-
-  </div>
-
-
-  <div
-    id="folderCancelled"
-    class="box folder-box"
-    data-folder="cancelled"
-  >
-
-    <h2>Cancelled</h2>
-
-    <div id="cancelledCount" class="big">0</div>
-
-    <div class="folder-hint">
-      Click to open
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- SMALL CONTROL BOXES -->
-
-<div class="control-grid">
-
-  <!-- SHOP CONTROL -->
-
-  <div class="section box control-box">
-
-    <h2>🛍️ Shop Control</h2>
-
-    <div class="status-buttons">
-
-      <button id="autoButton">AUTO</button>
-
-      <button id="openButton">
-        FORCE OPEN
-      </button>
-
-      <button id="closedButton">
-        FORCE CLOSED
-      </button>
-
-    </div>
-
-    <div class="shop-current">
-      Current:
-      <b id="currentShopStatus">--</b>
-    </div>
-
-    <div class="shop-settings-grid">
-
-      <div>
-        <label>Open Time</label>
-        <input
-          id="openTime"
-          type="time"
-          value="12:00"
-        >
-      </div>
-
-      <div>
-        <label>Close Time</label>
-        <input
-          id="closeTime"
-          type="time"
-          value="23:00"
-        >
-      </div>
-
-      <div>
-        <label>Delivery ₹ / KM</label>
-        <input
-          id="deliveryRate"
-          type="number"
-          value="6"
-          min="0"
-        >
-      </div>
-
-      <div>
-        <label>WhatsApp</label>
-        <input
-          id="whatsapp"
-          placeholder="9090220791"
-        >
-      </div>
-
-    </div>
+  <div class="notification-wrap">
 
     <button
-      id="saveShopButton"
-      class="primary save-btn"
+      id="notificationButton"
+      class="notification-btn"
+      onclick="toggleNotifications()"
     >
-      Save Shop Settings
+      🔔 NEW ORDERS
+      <span id="notificationBadge">0</span>
     </button>
+
+    <div
+      id="notificationPanel"
+      class="notification-panel"
+    >
+
+      <div class="notification-title">
+
+        <strong>
+          🔔 New Order Notifications
+        </strong>
+
+        <button
+          class="btn btn-dark"
+          onclick="closeNotifications()"
+        >
+          Close
+        </button>
+
+      </div>
+
+      <div id="notificationList">
+        No new orders.
+      </div>
+
+    </div>
 
   </div>
 
 
-  <!-- WEBSITE CONTROL -->
+  <div class="dashboard">
 
-  <div class="section box control-box">
 
-    <h2>🌐 Website Control</h2>
+    <!-- =========================
+         TOP FIVE FOLDERS
+    ========================= -->
 
-    <div class="website-control">
-
-      <select id="websiteMode">
-
-        <option value="normal">
-          Normal
-        </option>
-
-        <option value="updating">
-          Updating
-        </option>
-
-        <option value="maintenance">
-          Maintenance
-        </option>
-
-      </select>
-
-      <input
-        id="websiteMessage"
-        placeholder="Website message"
-      >
+    <div class="grid">
 
       <button
-        id="saveWebsiteButton"
-        class="primary"
+        id="folderNew"
+        class="folder-stat new-stat"
+        onclick="selectFolder('new')"
       >
-        Save Website Settings
+        <small>🆕 NEW ORDERS</small>
+        <strong id="newCount">0</strong>
+        <span>New orders received</span>
+      </button>
+
+      <button
+        id="folderPending"
+        class="folder-stat pending-stat"
+        onclick="selectFolder('pending')"
+      >
+        <small>⏳ PENDING</small>
+        <strong id="pendingCount">0</strong>
+        <span>Processing / Making</span>
+      </button>
+
+      <button
+        id="folderDelivery"
+        class="folder-stat delivery-stat"
+        onclick="selectFolder('delivery')"
+      >
+        <small>🏍️ DELIVERY</small>
+        <strong id="deliveryCount">0</strong>
+        <span>Out for delivery</span>
+      </button>
+
+      <button
+        id="folderComplete"
+        class="folder-stat complete-stat"
+        onclick="selectFolder('complete')"
+      >
+        <small>✅ COMPLETE</small>
+        <strong id="completeCount">0</strong>
+        <span>Delivered orders</span>
+      </button>
+
+      <button
+        id="folderCancelled"
+        class="folder-stat cancelled-stat"
+        onclick="selectFolder('cancelled')"
+      >
+        <small>❌ CANCELLED</small>
+        <strong id="cancelledCount">0</strong>
+        <span>Cancelled orders</span>
       </button>
 
     </div>
 
-  </div>
+
+    <!-- =========================
+         CONTROL BOXES
+    ========================= -->
+
+    <div class="control-grid">
 
 
-  <!-- ORDER MANAGEMENT CONTROL -->
+      <!-- SHOP CONTROL -->
 
-  <div class="section box control-box">
+      <div class="control-box">
 
-    <h2>📦 Order Management</h2>
+        <h2>🏪 Shop Control</h2>
 
-    <div class="order-control-summary">
+        <div class="shop-status">
 
-      <div
-        class="order-control-item"
-        data-open-folder="new"
-      >
-        <span>New Orders</span>
-        <b id="controlNewCount">0</b>
-      </div>
+          <span
+            id="shopLight"
+            class="shop-light"
+          ></span>
 
-      <div
-        class="order-control-item"
-        data-open-folder="pending"
-      >
-        <span>Pending</span>
-        <b id="controlPendingCount">0</b>
-      </div>
-
-      <div
-        class="order-control-item"
-        data-open-folder="delivery"
-      >
-        <span>Delivery</span>
-        <b id="controlDeliveryCount">0</b>
-      </div>
-
-      <div
-        class="order-control-item"
-        data-open-folder="complete"
-      >
-        <span>Complete</span>
-        <b id="controlCompleteCount">0</b>
-      </div>
-
-      <div
-        class="order-control-item"
-        data-open-folder="cancelled"
-      >
-        <span>Cancelled</span>
-        <b id="controlCancelledCount">0</b>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- PAYMENT CONTROL -->
-
-  <div class="section box control-box">
-
-    <div class="payment-settings">
-
-      <div class="payment-settings-title">
-        💳 Payment Method
-      </div>
-
-      <div class="payment-toggle-grid">
-
-        <div
-          id="codToggle"
-          class="payment-toggle"
-        >
-
-          <div class="payment-toggle-name">
-            Cash on Delivery
-          </div>
-
-          <div
-            id="codStatus"
-            class="payment-toggle-status"
+          <span
+            id="shopStatusText"
+            class="shop-status-text"
           >
-            OFF
-          </div>
+            CHECKING...
+          </span>
 
         </div>
 
+        <div class="notice">
 
-        <div
-          id="onlineToggle"
-          class="payment-toggle"
-        >
-
-          <div class="payment-toggle-name">
-            Online Payment
-          </div>
-
-          <div
-            id="onlineStatus"
-            class="payment-toggle-status"
-          >
-            OFF
-          </div>
+          <strong>Automatic Schedule:</strong>
+          12:00 PM – 11:00 PM IST
 
         </div>
 
-      </div>
+        <div class="override-buttons">
 
-      <div class="payment-save-row">
+          <button
+            id="overrideAuto"
+            class="override-btn"
+            onclick="setShopOverride('auto')"
+          >
+            🕐 AUTO
+          </button>
+
+          <button
+            id="overrideOpen"
+            class="override-btn"
+            onclick="setShopOverride('open')"
+          >
+            🟢 FORCE OPEN
+          </button>
+
+          <button
+            id="overrideClosed"
+            class="override-btn"
+            onclick="setShopOverride('closed')"
+          >
+            🔴 FORCE CLOSED
+          </button>
+
+        </div>
+
+        <div
+          class="field"
+          style="margin-top:9px"
+        >
+
+          <label>Opening Time</label>
+
+          <input
+            id="openingTime"
+            type="time"
+            value="12:00"
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label>Closing Time</label>
+
+          <input
+            id="closingTime"
+            type="time"
+            value="23:00"
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label>Closed Message</label>
+
+          <textarea
+            id="closedMessage"
+            placeholder="Sorry, we are closed right now."
+          ></textarea>
+
+        </div>
 
         <button
-          id="savePaymentButton"
-          class="primary"
+          class="btn btn-gold"
+          onclick="saveShopSettings()"
         >
-          Save Payment
+          Save Shop Settings
         </button>
 
-        <div class="payment-note">
-          Customer checkout shows only enabled methods.
+      </div>
+
+
+      <!-- WEBSITE CONTROL -->
+
+      <div class="control-box">
+
+        <h2>🌐 Website Control</h2>
+
+        <div class="field">
+
+          <label>Website Mode</label>
+
+          <select id="websiteMode">
+
+            <option value="normal">
+              Normal
+            </option>
+
+            <option value="updating">
+              Updating
+            </option>
+
+            <option value="maintenance">
+              Maintenance
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Update / Maintenance Message
+          </label>
+
+          <textarea
+            id="updateMessage"
+            placeholder="We are making some improvements..."
+          ></textarea>
+
+        </div>
+
+        <button
+          class="btn btn-gold"
+          onclick="saveWebsiteSettings()"
+        >
+          Update Website
+        </button>
+
+        <div
+          class="field"
+          style="margin-top:10px"
+        >
+
+          <label>WhatsApp Number</label>
+
+          <input
+            id="whatsappNumber"
+            type="tel"
+            maxlength="10"
+            placeholder="Enter WhatsApp number"
+          >
+
+        </div>
+
+        <button
+          class="btn btn-gold"
+          onclick="saveWhatsApp()"
+        >
+          Save WhatsApp
+        </button>
+
+      </div>
+
+
+      <!-- ORDER MANAGEMENT CONTROL -->
+
+      <div class="control-box">
+
+        <h2>📦 Order Management</h2>
+
+        <div class="notice">
+          Click a folder above or below to open its orders.
+        </div>
+
+        <div class="quick-folder-grid">
+
+          <button
+            class="quick-folder"
+            onclick="selectFolder('new')"
+          >
+            NEW<br>
+            <span id="quickNew">0</span>
+          </button>
+
+          <button
+            class="quick-folder"
+            onclick="selectFolder('pending')"
+          >
+            PENDING<br>
+            <span id="quickPending">0</span>
+          </button>
+
+          <button
+            class="quick-folder"
+            onclick="selectFolder('delivery')"
+          >
+            DELIVERY<br>
+            <span id="quickDelivery">0</span>
+          </button>
+
+          <button
+            class="quick-folder"
+            onclick="selectFolder('complete')"
+          >
+            COMPLETE<br>
+            <span id="quickComplete">0</span>
+          </button>
+
+          <button
+            class="quick-folder"
+            onclick="selectFolder('cancelled')"
+          >
+            CANCEL<br>
+            <span id="quickCancelled">0</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PAYMENT METHOD -->
+
+      <div class="control-box">
+
+        <h2>💳 Payment Method Control</h2>
+
+        <div class="payment-row">
+
+          <span>
+            💵 Cash on Delivery
+          </span>
+
+          <button
+            id="codSwitch"
+            class="switch on"
+            onclick="togglePayment('cod')"
+          ></button>
+
+        </div>
+
+        <div class="payment-row">
+
+          <span>
+            💳 Online Payment
+          </span>
+
+          <button
+            id="onlineSwitch"
+            class="switch on"
+            onclick="togglePayment('online')"
+          ></button>
+
+        </div>
+
+        <div class="notice">
+          Only enabled payment methods will appear on the customer checkout.
         </div>
 
       </div>
 
     </div>
 
-  </div>
 
+    <!-- =========================
+         MENU CONTROL
+    ========================= -->
 
-  <!-- OFFER CONTROL -->
+    <div class="menu-section">
 
-  <div class="section box control-box">
-
-    <div class="offer-control-title">
-      🔥 Offer Control
-    </div>
-
-    <div class="offer-status-row">
-
-      <span class="offer-status-label">
-        Show Offer to Customers
-      </span>
+      <h2>
+        🍽️ Menu Price / Image / Stock Control
+      </h2>
 
       <div
-        id="offerSwitch"
-        class="offer-switch active"
-        title="Offer ON/OFF"
+        id="menuList"
+        class="menu-list"
       ></div>
 
     </div>
 
 
-    <label class="offer-label">
-      Offer Title
-    </label>
+    <!-- =========================
+         ORDER MANAGEMENT
+    ========================= -->
 
-    <input
-      id="offerTitle"
-      value="🔥 TODAY'S SPECIAL"
-      placeholder="Offer title"
-    >
+    <div id="orderManagement">
 
-
-    <label class="offer-label">
-      Customer Offer Message
-    </label>
-
-    <textarea
-      id="offerMessage"
-      placeholder="Offer message"
-    >🍛 Chicken Biriyani — ₹100 only today!
-🚚 2 plates or more = FREE DELIVERY
-🍜 3 Chowmin + 1 Egg Roll = SPECIAL COMBO
-⏰ Limited Time Offer</textarea>
+      <div class="section-title">
+        📦 Order Management
+      </div>
 
 
-    <div class="offer-control-grid">
+      <!-- ==================================================
+           OFFER CONTROL + NEW ORDER SAME LINE
+      ================================================== -->
 
-      <div>
+      <div class="offer-new-order-row">
 
-        <label class="offer-label">
-          Offer Price ₹
-        </label>
 
-        <input
-          id="offerPrice"
-          type="number"
-          value="100"
-          min="0"
+        <!-- OFFER CONTROL LEFT -->
+
+        <div class="offer-side">
+
+          <div class="offer-control-title">
+            🎁 Offer Control
+          </div>
+
+          <div class="offer-status-row">
+
+            <div>
+
+              <div
+                id="offerStatusText"
+                class="offer-status-text on"
+              >
+                Offer is ON
+              </div>
+
+              <div
+                style="
+                  color:#666;
+                  font-size:8px;
+                  margin-top:2px;
+                "
+              >
+                Customer website offer
+              </div>
+
+            </div>
+
+            <button
+              id="offerSwitch"
+              class="offer-switch on"
+              onclick="toggleOffer()"
+            ></button>
+
+          </div>
+
+
+          <div class="offer-control-grid">
+
+            <div>
+
+              <label
+                style="
+                  display:block;
+                  color:#777;
+                  font-size:8px;
+                  margin-bottom:4px;
+                "
+              >
+                Offer Title
+              </label>
+
+              <input
+                id="offerTitle"
+                placeholder="SPECIAL OFFER"
+              >
+
+            </div>
+
+            <div>
+
+              <label
+                style="
+                  display:block;
+                  color:#777;
+                  font-size:8px;
+                  margin-bottom:4px;
+                "
+              >
+                Offer Price
+              </label>
+
+              <input
+                id="offerPrice"
+                placeholder="₹149"
+              >
+
+            </div>
+
+            <div class="offer-full">
+
+              <label
+                style="
+                  display:block;
+                  color:#777;
+                  font-size:8px;
+                  margin-bottom:4px;
+                "
+              >
+                Offer Description
+              </label>
+
+              <textarea
+                id="offerText"
+                placeholder="Burger + Fries + Cold Drink"
+              ></textarea>
+
+            </div>
+
+            <div>
+
+              <label
+                style="
+                  display:block;
+                  color:#777;
+                  font-size:8px;
+                  margin-bottom:4px;
+                "
+              >
+                Button Text
+              </label>
+
+              <input
+                id="offerButton"
+                placeholder="ORDER NOW"
+              >
+
+            </div>
+
+            <div>
+
+              <label
+                style="
+                  display:block;
+                  color:#777;
+                  font-size:8px;
+                  margin-bottom:4px;
+                "
+              >
+                Image URL
+              </label>
+
+              <input
+                id="offerImage"
+                placeholder="https://..."
+              >
+
+            </div>
+
+            <div class="offer-full">
+
+              <button
+                class="btn btn-gold"
+                style="width:100%"
+                onclick="saveOffer()"
+              >
+                Save Offer
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- NEW ORDER RIGHT -->
+
+        <div
+          id="newOrderColumn"
+          class="order-column hidden"
         >
 
+          <div class="order-column-head">
+
+            <strong>
+              🆕 New Order — Customer Details
+            </strong>
+
+            <span id="newFolderCount">
+              0
+            </span>
+
+          </div>
+
+          <div
+            id="newOrdersList"
+            class="order-list"
+          >
+            <div class="empty">
+              No new orders.
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
 
-      <div>
+      <!-- =========================
+           PENDING + DELIVERY
+      ========================= -->
 
-        <label class="offer-label">
-          Minimum Qty
-        </label>
+      <div class="orders-two-column">
 
-        <input
-          id="offerMinQty"
-          type="number"
-          value="2"
-          min="1"
+
+        <div
+          id="pendingOrderColumn"
+          class="order-column hidden"
         >
 
+          <div class="order-column-head">
+
+            <strong>
+              ⏳ Pending Orders
+            </strong>
+
+            <span id="pendingFolderCount">
+              0
+            </span>
+
+          </div>
+
+          <div
+            id="pendingOrdersList"
+            class="order-list"
+          >
+            <div class="empty">
+              No pending orders.
+            </div>
+          </div>
+
+        </div>
+
+
+        <div
+          id="deliveryOrderColumn"
+          class="order-column hidden"
+        >
+
+          <div class="order-column-head">
+
+            <strong>
+              🏍️ Out for Delivery
+            </strong>
+
+            <span id="deliveryFolderCount">
+              0
+            </span>
+
+          </div>
+
+          <div
+            id="deliveryOrdersList"
+            class="order-list"
+          >
+            <div class="empty">
+              No delivery orders.
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
 
-      <div>
+      <!-- =========================
+           COMPLETE
+      ========================= -->
 
-        <label class="offer-label">
-          Free Delivery
-        </label>
+      <div
+        id="completeFolderArea"
+        class="folder-area complete-area hidden"
+      >
 
-        <select id="offerFreeDelivery">
+        <div class="folder-head">
 
-          <option value="yes">
-            YES
-          </option>
+          <div>
 
-          <option value="no">
-            NO
-          </option>
+            <strong>
+              ✅ Complete Orders
+            </strong>
 
-        </select>
+            <small>
+              Delivered orders
+            </small>
 
-      </div>
+          </div>
 
-
-      <div>
-
-        <label class="offer-label">
-          Offer Type
-        </label>
-
-        <select id="offerType">
-
-          <option value="single">
-            Single Item
-          </option>
-
-          <option value="combo">
-            Combo
-          </option>
-
-        </select>
-
-      </div>
-
-    </div>
-
-
-    <label class="offer-label">
-      Combo / Item Details
-    </label>
-
-    <input
-      id="offerItems"
-      value="Chicken Biriyani"
-      placeholder="Example: 3 Chowmin + 1 Egg Roll"
-    >
-
-
-    <button
-      id="saveOfferButton"
-      class="primary offer-save"
-    >
-      Save Offer
-    </button>
-
-    <div class="offer-preview-note">
-      Customer website will read this offer from Firebase and show it when Offer is ON.
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ORDER MANAGEMENT -->
-
-<div
-  id="orderManagement"
-  class="section"
->
-
-  <h2>Order Management</h2>
-
-  <div class="orders">
-
-    <!-- NEW -->
-
-    <div
-      id="newOrderColumn"
-      class="order-column hidden"
-    >
-
-      <h3>
-        NEW
-        <span id="boxNewCount">(0)</span>
-      </h3>
-
-      <div id="newOrders"></div>
-
-    </div>
-
-
-    <!-- PENDING -->
-
-    <div
-      id="pendingOrderColumn"
-      class="order-column hidden"
-    >
-
-      <h3>
-        PENDING
-        <span id="boxPendingCount">(0)</span>
-      </h3>
-
-      <div id="pendingOrders"></div>
-
-    </div>
-
-
-    <!-- DELIVERY -->
-
-    <div
-      id="deliveryOrderColumn"
-      class="order-column hidden"
-    >
-
-      <h3>
-        DELIVERY
-        <span id="boxDeliveryCount">(0)</span>
-      </h3>
-
-      <div id="deliveryOrders"></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- COMPLETE FOLDER -->
-
-  <div
-    id="completeFolderArea"
-    class="complete-folder hidden"
-  >
-
-    <div class="complete-folder-left">
-
-      <div class="complete-folder-icon">
-        📁
-      </div>
-
-      <div>
-
-        <div class="complete-folder-title">
-          Complete Orders
-          <span id="folderCompleteCount">
-            (0)
+          <span id="completeModalCount">
+            0
           </span>
+
         </div>
 
-        <div class="complete-folder-sub">
-          Delivered orders
+        <div
+          id="completeOrdersList"
+          class="folder-content"
+        >
+          <div class="empty">
+            No completed orders.
+          </div>
         </div>
 
       </div>
 
-    </div>
 
-    <button
-      id="openCompleteButton"
-      class="complete-folder-button"
-    >
-      Open Folder
-    </button>
+      <!-- =========================
+           CANCELLED
+      ========================= -->
 
-  </div>
+      <div
+        id="cancelledFolderArea"
+        class="folder-area cancelled-area hidden"
+      >
 
+        <div class="folder-head">
 
-  <!-- CANCELLED FOLDER -->
+          <div>
 
-  <div
-    id="cancelledFolderArea"
-    class="complete-folder cancelled-folder hidden"
-  >
+            <strong>
+              ❌ Cancelled Orders
+            </strong>
 
-    <div class="complete-folder-left">
+            <small>
+              Cancelled orders
+            </small>
 
-      <div class="complete-folder-icon">
-        ❌
-      </div>
+          </div>
 
-      <div>
-
-        <div class="complete-folder-title">
-          Cancelled Orders
-          <span id="folderCancelledCount">
-            (0)
+          <span id="cancelledModalCount">
+            0
           </span>
+
         </div>
 
-        <div class="complete-folder-sub">
-          Cancelled orders
+        <div
+          id="cancelledOrdersList"
+          class="folder-content"
+        >
+          <div class="empty">
+            No cancelled orders.
+          </div>
         </div>
 
       </div>
 
     </div>
 
-    <button
-      id="openCancelledButton"
-      class="complete-folder-button"
+
+    <!-- =========================
+         RATINGS
+    ========================= -->
+
+    <div
+      class="menu-section"
+      style="margin-top:12px"
     >
-      Open Folder
-    </button>
+
+      <h2>
+        ⭐ Customer Ratings
+      </h2>
+
+      <div
+        id="ratingSummary"
+        class="notice"
+      >
+        Loading ratings...
+      </div>
+
+      <div id="ratings">
+        <div class="empty">
+          No ratings yet.
+        </div>
+      </div>
+
+    </div>
+
 
   </div>
 
 </div>
 
 
-<!-- MENU -->
-
-<div class="section">
-
-  <h2>Menu Control</h2>
-
-  <div
-    id="menuList"
-    class="menu-list"
-  ></div>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- COMPLETE MODAL -->
+<!-- =========================
+     MODAL
+========================= -->
 
 <div
   id="completeModal"
-  class="complete-modal hidden"
+  class="modal"
 >
 
-  <div class="complete-modal-box">
+  <div class="modal-card">
 
-    <div class="complete-modal-head">
+    <div class="modal-head">
 
       <h2>
-        📁 Complete Orders
-        <span id="modalCompleteCount">
-          (0)
-        </span>
+        ✅ Complete Orders
       </h2>
 
       <button
-        id="closeCompleteButton"
-        class="close-complete"
+        class="close"
+        onclick="closeModal('completeModal')"
       >
         ×
       </button>
 
     </div>
 
-    <div
-      id="completeOrders"
-      class="complete-orders-grid"
-    ></div>
+    <div id="completeModalList"></div>
 
   </div>
 
 </div>
 
-
-<!-- CANCELLED MODAL -->
 
 <div
   id="cancelledModal"
-  class="complete-modal hidden"
+  class="modal"
 >
 
-  <div class="complete-modal-box">
+  <div class="modal-card">
 
-    <div class="complete-modal-head">
+    <div class="modal-head">
 
-      <h2 class="cancelled-modal-title">
+      <h2>
         ❌ Cancelled Orders
-        <span id="modalCancelledCount">
-          (0)
-        </span>
       </h2>
 
       <button
-        id="closeCancelledButton"
-        class="close-complete"
+        class="close"
+        onclick="closeModal('cancelledModal')"
       >
         ×
       </button>
 
     </div>
 
-    <div
-      id="cancelledOrders"
-      class="complete-orders-grid"
-    ></div>
+    <div id="cancelledModalList"></div>
 
   </div>
 
 </div>
 
 
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
 <script type="module">
 
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getDatabase,
   ref,
   onValue,
   update,
-  remove
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  set
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import {
   getAuth,
-  signInWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signOut,
   setPersistence,
   browserLocalPersistence
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-/* FIREBASE */
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
-const firebaseConfig={
-  apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
-  authDomain:"the-queen-fast-food.firebaseapp.com",
-  databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
-  projectId:"the-queen-fast-food",
-  storageBucket:"the-queen-fast-food.firebasestorage.app",
-  messagingSenderId:"435721389652",
-  appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
-  measurementId:"G-Q1YCK636KJ"
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
 };
 
-const ADMIN_UID=
+
+const app =
+  initializeApp(firebaseConfig);
+
+const db =
+  getDatabase(app);
+
+const auth =
+  getAuth(app);
+
+
+/* =========================
+   ADMIN UID
+========================= */
+
+const ADMIN_UID =
   "eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
-const app=initializeApp(firebaseConfig);
 
-const db=getDatabase(app);
+/* =========================
+   GLOBALS
+========================= */
 
-const auth=getAuth(app);
+let settings = {};
+let orders = {};
 
+let selectedFolder = null;
 
-let settings={};
-let orders={};
+let codEnabled = true;
+let onlineEnabled = true;
 
-let authReady=false;
-let dataLoaded=false;
-let selectedFolder=null;
+let offerEnabled = true;
 
-let codEnabled=true;
-let onlineEnabled=true;
-
-
-/* OFFER */
-
-let offerEnabled=true;
-
-let offerData={
-  enabled:true,
-  title:"🔥 TODAY'S SPECIAL",
-  message:
-`🍛 Chicken Biriyani — ₹100 only today!
-🚚 2 plates or more = FREE DELIVERY
-🍜 3 Chowmin + 1 Egg Roll = SPECIAL COMBO
-⏰ Limited Time Offer`,
-  price:100,
-  minQty:2,
-  freeDelivery:true,
-  type:"single",
-  items:"Chicken Biriyani"
+let offerData = {
+  title:"SPECIAL OFFER",
+  text:"Burger + Fries + Cold Drink",
+  price:"₹149",
+  button:"ORDER NOW",
+  image:""
 };
 
+let notificationAudioContext = null;
 
-/* NOTIFICATION */
+let knownNewOrderIds = new Set();
 
-let notificationAudioContext=null;
-let notificationTimer=null;
-let notificationActive=false;
+let newOrdersInitialized = false;
 
-let newOrdersInitialized=false;
-let knownNewOrderIds=new Set();
-let newOrderAlertActive=false;
+let notificationActive = false;
 
 
-function getNotificationAudioContext(){
+/* =========================
+   HELPERS
+========================= */
 
-  if(!notificationAudioContext){
-
-    const AudioContextClass=
-      window.AudioContext||
-      window.webkitAudioContext;
-
-    if(!AudioContextClass)return null;
-
-    notificationAudioContext=
-      new AudioContextClass();
-  }
-
-  return notificationAudioContext;
+function $(id){
+  return document.getElementById(id);
 }
 
 
-function playBellDing(){
+function escapeHtml(value){
 
-  const ctx=
-    getNotificationAudioContext();
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
-  if(!ctx)return;
+}
 
-  if(ctx.state==="suspended"){
-    ctx.resume().catch(()=>{});
+
+function formatDate(value){
+
+  if(!value){
+    return "-";
   }
 
-  const now=ctx.currentTime;
+  const date =
+    new Date(Number(value));
 
-  const master=ctx.createGain();
+  if(Number.isNaN(date.getTime())){
+    return "-";
+  }
 
-  master.gain.setValueAtTime(
-    .0001,
-    now
-  );
-
-  master.gain.exponentialRampToValueAtTime(
-    .32,
-    now+.008
-  );
-
-  master.gain.exponentialRampToValueAtTime(
-    .0001,
-    now+.65
-  );
-
-  master.connect(ctx.destination);
-
-
-  [880,1320,1760].forEach(
-    (frequency,index)=>{
-
-      const oscillator=
-        ctx.createOscillator();
-
-      const gain=
-        ctx.createGain();
-
-      oscillator.type=
-        index===0
-          ?"sine"
-          :"triangle";
-
-      oscillator.frequency.setValueAtTime(
-        frequency,
-        now
-      );
-
-      oscillator.detune.setValueAtTime(
-        index===1
-          ?3
-          :index===2
-            ?-4
-            :0,
-        now
-      );
-
-      gain.gain.setValueAtTime(
-        index===0
-          ?.55
-          :index===1
-            ?.22
-            :.12,
-        now
-      );
-
-      gain.gain.exponentialRampToValueAtTime(
-        .0001,
-        now+.65
-      );
-
-      oscillator.connect(gain);
-      gain.connect(master);
-
-      oscillator.start(now);
-      oscillator.stop(now+.68);
+  return date.toLocaleString(
+    "en-IN",
+    {
+      dateStyle:"medium",
+      timeStyle:"short"
     }
   );
+
 }
 
 
-function stopNotificationEffects(){
+function money(value){
 
-  notificationActive=false;
+  return "₹" +
+    Number(value || 0).toLocaleString("en-IN");
 
-  if(notificationTimer){
-
-    clearInterval(
-      notificationTimer
-    );
-
-    notificationTimer=null;
-  }
-
-  const newColumn=
-    document.getElementById(
-      "newOrderColumn"
-    );
-
-  if(newColumn){
-
-    newColumn.classList.remove(
-      "new-order-alert"
-    );
-  }
-
-  const bell=
-    document.getElementById(
-      "notificationButton"
-    );
-
-  if(bell){
-
-    bell.classList.remove(
-      "notification-active"
-    );
-  }
-
-  newOrderAlertActive=false;
-
-  updateNewFolderLight();
 }
 
 
-function startNotificationEffects(){
+function showToast(message){
 
-  if(notificationActive)return;
+  const toast =
+    $("toast");
 
-  notificationActive=true;
-  newOrderAlertActive=true;
-
-  const newColumn=
-    document.getElementById(
-      "newOrderColumn"
-    );
-
-  if(newColumn){
-
-    newColumn.classList.add(
-      "new-order-alert"
-    );
-  }
-
-  const bell=
-    document.getElementById(
-      "notificationButton"
-    );
-
-  if(bell){
-
-    bell.classList.add(
-      "notification-active"
-    );
-  }
-
-  playBellDing();
-
-  notificationTimer=
-    setInterval(
-      ()=>{
-        if(notificationActive){
-          playBellDing();
-        }
-      },
-      1700
-    );
-
-  updateNewFolderLight();
-}
-
-
-function updateNewFolderLight(){
-
-  const light=
-    document.getElementById(
-      "newFolderLight"
-    );
-
-  if(!light)return;
-
-  const hasNewOrders=
-    Object.values(orders||{})
-      .some(
-        order=>
-          order&&
-          String(
-            order.status||"received"
-          ).toLowerCase()==="received"
-      );
-
-  light.classList.toggle(
-    "blink",
-    hasNewOrders&&newOrderAlertActive
-  );
-}
-
-
-/* MENU */
-
-const MENU=[
-  {
-    id:"veg_chowmin",
-    name:"Veg Chowmin",
-    price:50
-  },
-  {
-    id:"veg_roll",
-    name:"Veg Roll",
-    price:50
-  },
-  {
-    id:"chicken_chowmin",
-    name:"Chicken Chowmin",
-    price:65
-  },
-  {
-    id:"chicken_roll",
-    name:"Chicken Roll",
-    price:60
-  },
-  {
-    id:"chicken_pakoda",
-    name:"Chicken Pakoda",
-    price:60
-  },
-  {
-    id:"chilli_chicken",
-    name:"Chilli Chicken",
-    price:120
-  },
-  {
-    id:"veg_biriyani",
-    name:"Veg Biriyani",
-    price:100
-  },
-  {
-    id:"chicken_dum_biriyani",
-    name:"Chicken Dum Biriyani",
-    price:120
-  }
-];
-
-
-/* AUTH */
-
-async function prepareAuth(){
-
-  try{
-
-    await setPersistence(
-      auth,
-      browserLocalPersistence
-    );
-
-    authReady=true;
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Auth persistence error:",
-      error
-    );
-
-    authReady=true;
-  }
-}
-
-
-await prepareAuth();
-
-
-document.getElementById(
-  "loginButton"
-).onclick=async()=>{
-
-  const email=
-    document.getElementById(
-      "email"
-    ).value.trim();
-
-  const password=
-    document.getElementById(
-      "password"
-    ).value;
-
-  const msg=
-    document.getElementById(
-      "loginMessage"
-    );
-
-  msg.textContent="";
-
-
-  if(!email||!password){
-
-    msg.textContent=
-      "Enter email and password.";
-
+  if(!toast){
     return;
   }
 
+  toast.textContent =
+    message;
 
-  const button=
-    document.getElementById(
-      "loginButton"
+  toast.classList.add("show");
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+  window.toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove("show");
+      },
+      2500
     );
 
-  button.disabled=true;
-  button.textContent=
-    "Logging in...";
+}
 
+
+/* =========================
+   AUTH
+========================= */
+
+setPersistence(
+  auth,
+  browserLocalPersistence
+).catch(
+  error=>{
+    console.error(error);
+  }
+);
+
+
+window.adminLogin =
+async function(){
+
+  const email =
+    $("loginEmail").value.trim();
+
+  const password =
+    $("loginPassword").value;
+
+  const message =
+    $("loginMessage");
+
+  message.textContent = "";
+
+  if(!email || !password){
+
+    message.textContent =
+      "Please enter email and password.";
+
+    return;
+
+  }
 
   try{
 
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const credential =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    if(
+      credential.user.uid !==
+      ADMIN_UID
+    ){
+
+      await signOut(auth);
+
+      message.textContent =
+        "This account is not authorised.";
+
+      return;
+
+    }
+
+    message.textContent = "";
+
+  }catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      error.message ||
+      "Login failed.";
 
   }
 
-  catch(error){
+};
 
-    console.error(
-      "LOGIN ERROR:",
-      error
-    );
 
-    msg.textContent=
-      "Login failed. Check your admin credentials.";
+window.adminLogout =
+async function(){
 
-    button.disabled=false;
-    button.textContent=
-      "Login";
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(error);
+
   }
+
 };
 
 
@@ -2606,390 +2611,50 @@ onAuthStateChanged(
   user=>{
 
     if(
-      user&&
-      user.uid===ADMIN_UID
+      user &&
+      user.uid === ADMIN_UID
     ){
 
-      document.getElementById(
-        "loginScreen"
-      ).classList.add(
-        "hidden"
-      );
+      $("loginScreen").style.display =
+        "none";
 
-      document.getElementById(
-        "adminApp"
-      ).classList.remove(
-        "hidden"
-      );
-
-      document.getElementById(
-        "loginMessage"
-      ).textContent="";
-
-      document.getElementById(
-        "loginButton"
-      ).disabled=false;
-
-      document.getElementById(
-        "loginButton"
-      ).textContent=
-        "Login";
+      $("adminPanel").style.display =
+        "block";
 
       loadData();
 
+    }else{
+
+      $("loginScreen").style.display =
+        "flex";
+
+      $("adminPanel").style.display =
+        "none";
+
     }
 
-    else{
-
-      document.getElementById(
-        "loginScreen"
-      ).classList.remove(
-        "hidden"
-      );
-
-      document.getElementById(
-        "adminApp"
-      ).classList.add(
-        "hidden"
-      );
-
-      if(user){
-
-        signOut(auth);
-
-        document.getElementById(
-          "loginMessage"
-        ).textContent=
-          "This account is not an authorized admin.";
-      }
-    }
   }
 );
 
 
-/* LOGOUT */
-
-document.getElementById(
-  "logoutButton"
-).onclick=async()=>{
-
-  stopNotificationEffects();
-
-  try{
-
-    await signOut(auth);
-
-  }
-
-  catch(error){
-
-    console.error(error);
-  }
-};
-
-
-/* NOTIFICATION PANEL */
-
-const notificationButton=
-  document.getElementById(
-    "notificationButton"
-  );
-
-const notificationPanel=
-  document.getElementById(
-    "notificationPanel"
-  );
-
-
-notificationButton.addEventListener(
-  "click",
-  event=>{
-
-    event.stopPropagation();
-
-    notificationPanel.classList.toggle(
-      "hidden"
-    );
-  }
-);
-
-
-document.addEventListener(
-  "click",
-  event=>{
-
-    if(
-      !event.target.closest(
-        ".notification-wrap"
-      )
-    ){
-
-      notificationPanel.classList.add(
-        "hidden"
-      );
-    }
-  }
-);
-
-
-function renderNotifications(
-  newOrders
-){
-
-  const badge=
-    document.getElementById(
-      "notificationBadge"
-    );
-
-  const list=
-    document.getElementById(
-      "notificationList"
-    );
-
-
-  const sorted=
-    [...newOrders].sort(
-      (a,b)=>
-        Number(b.createdAt||0)-
-        Number(a.createdAt||0)
-    );
-
-
-  badge.textContent=
-    sorted.length;
-
-
-  badge.classList.toggle(
-    "hidden",
-    sorted.length===0
-  );
-
-
-  list.innerHTML="";
-
-
-  if(sorted.length===0){
-
-    list.innerHTML=`
-      <div class="no-notification">
-        No new orders.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  sorted.slice(0,10).forEach(
-    order=>{
-
-      const item=
-        document.createElement(
-          "div"
-        );
-
-      item.className=
-        "notification-item";
-
-
-      item.innerHTML=`
-
-        <b>
-          New Order:
-          ${escapeHtml(
-            order.orderId||
-            order.__key
-          )}
-        </b>
-
-        <small>
-          ${escapeHtml(
-            order.customerName||
-            "Customer"
-          )}
-          ·
-          ₹${Number(
-            order.total||0
-          )}
-        </small>
-      `;
-
-
-      item.onclick=()=>{
-
-        stopNotificationEffects();
-
-        notificationPanel.classList.add(
-          "hidden"
-        );
-
-        selectFolder("new");
-      };
-
-
-      list.appendChild(item);
-    }
-  );
-}
-
-
-/* FOLDER CLICK */
-
-document.querySelectorAll(
-  ".folder-box"
-).forEach(
-  box=>{
-
-    box.addEventListener(
-      "click",
-      ()=>{
-
-        selectFolder(
-          box.dataset.folder
-        );
-      }
-    );
-  }
-);
-
-
-/* CONTROL QUICK FOLDER */
-
-document.querySelectorAll(
-  ".order-control-item"
-).forEach(
-  item=>{
-
-    item.addEventListener(
-      "click",
-      ()=>{
-
-        selectFolder(
-          item.dataset.openFolder
-        );
-      }
-    );
-  }
-);
-
-
-function selectFolder(folder){
-
-  selectedFolder=folder;
-
-
-  document.querySelectorAll(
-    ".folder-box"
-  ).forEach(
-    box=>{
-
-      box.classList.toggle(
-        "selected",
-        box.dataset.folder===folder
-      );
-    }
-  );
-
-
-  document.getElementById(
-    "newOrderColumn"
-  ).classList.add("hidden");
-
-  document.getElementById(
-    "pendingOrderColumn"
-  ).classList.add("hidden");
-
-  document.getElementById(
-    "deliveryOrderColumn"
-  ).classList.add("hidden");
-
-  document.getElementById(
-    "completeFolderArea"
-  ).classList.add("hidden");
-
-  document.getElementById(
-    "cancelledFolderArea"
-  ).classList.add("hidden");
-
-
-  /*
-    OPENING NEW FOLDER ACKNOWLEDGES
-    CURRENT NEW ORDER ALERT.
-  */
-
-  if(folder==="new"){
-
-    stopNotificationEffects();
-
-    document.getElementById(
-      "newOrderColumn"
-    ).classList.remove("hidden");
-  }
-
-  else if(folder==="pending"){
-
-    document.getElementById(
-      "pendingOrderColumn"
-    ).classList.remove("hidden");
-  }
-
-  else if(folder==="delivery"){
-
-    document.getElementById(
-      "deliveryOrderColumn"
-    ).classList.remove("hidden");
-  }
-
-  else if(folder==="complete"){
-
-    document.getElementById(
-      "completeFolderArea"
-    ).classList.remove("hidden");
-  }
-
-  else if(folder==="cancelled"){
-
-    document.getElementById(
-      "cancelledFolderArea"
-    ).classList.remove("hidden");
-  }
-
-
-  document.getElementById(
-    "orderManagement"
-  ).scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-}
-
-
-/* LOAD DATA */
+/* =========================
+   LOAD DATA
+========================= */
 
 function loadData(){
-
-  if(dataLoaded)return;
-
-  dataLoaded=true;
-
 
   onValue(
     ref(db,"settings"),
     snapshot=>{
 
-      settings=
-        snapshot.val()||{};
+      settings =
+        snapshot.val() || {};
 
       renderSettings();
-      renderMenu();
 
     },
     error=>{
-
-      console.error(
-        "Settings error:",
-        error
-      );
+      console.error(error);
     }
   );
 
@@ -2998,695 +2663,708 @@ function loadData(){
     ref(db,"orders"),
     snapshot=>{
 
-      orders=
-        snapshot.val()||{};
+      const newData =
+        snapshot.val() || {};
+
+      detectNewOrders(
+        newData
+      );
+
+      orders =
+        newData;
 
       renderOrders();
+
+      renderNotificationList();
 
     },
     error=>{
 
-      console.error(
-        "Orders error:",
-        error
+      console.error(error);
+
+      showToast(
+        "Could not load orders."
       );
+
     }
   );
+
+
+  onValue(
+    ref(db,"ratings"),
+    snapshot=>{
+
+      const ratings =
+        snapshot.val() || {};
+
+      renderRatings(
+        ratings
+      );
+
+    }
+  );
+
 }
 
 
-/* SETTINGS */
+/* =========================
+   SETTINGS
+========================= */
 
 function renderSettings(){
 
-  document.getElementById(
-    "openTime"
-  ).value=
-    settings.openTime||
+  const shop =
+    settings.shop || {};
+
+  const website =
+    settings.website || {};
+
+  const offer =
+    settings.offer || {};
+
+  $("openingTime").value =
+    shop.openingTime ||
+    settings.openingTime ||
     "12:00";
 
+  $("closingTime").value =
+    shop.closingTime ||
+    settings.closingTime ||
+    "23:00";
 
-  document.getElementById(
-    "closeTime"
-  ).value=
-    settings.closeTime||
+  $("closedMessage").value =
+    shop.closedMessage ||
+    settings.closedMessage ||
+    "Sorry, we are closed right now.";
+
+  $("websiteMode").value =
+    website.mode ||
+    settings.websiteMode ||
+    "normal";
+
+  $("updateMessage").value =
+    website.message ||
+    settings.updateMessage ||
+    "";
+
+  $("whatsappNumber").value =
+    settings.whatsappNumber ||
+    "9776856111";
+
+
+  codEnabled =
+    settings.codEnabled !== false;
+
+  onlineEnabled =
+    settings.onlinePaymentEnabled !== false;
+
+  renderPaymentControls();
+
+
+  const override =
+    shop.override ||
+    settings.shopOverride ||
+    "auto";
+
+  renderOverrideButtons(
+    override
+  );
+
+
+  offerEnabled =
+    offer.enabled !== false;
+
+  offerData = {
+
+    title:
+      offer.title ||
+      "SPECIAL OFFER",
+
+    text:
+      offer.text ||
+      "Burger + Fries + Cold Drink",
+
+    price:
+      offer.price ||
+      "₹149",
+
+    button:
+      offer.button ||
+      "ORDER NOW",
+
+    image:
+      offer.image ||
+      ""
+
+  };
+
+  renderOfferControls();
+
+
+  renderMenu(
+    settings.menu || {}
+  );
+
+
+  updateShopStatus();
+
+}
+
+
+/* =========================
+   SHOP STATUS
+========================= */
+
+function getShopOpen(){
+
+  const shop =
+    settings.shop || {};
+
+  const override =
+    shop.override ||
+    settings.shopOverride ||
+    "auto";
+
+  if(override === "open"){
+    return true;
+  }
+
+  if(override === "closed"){
+    return false;
+  }
+
+  const opening =
+    shop.openingTime ||
+    settings.openingTime ||
+    "12:00";
+
+  const closing =
+    shop.closingTime ||
+    settings.closingTime ||
     "23:00";
 
 
-  document.getElementById(
-    "deliveryRate"
-  ).value=
-    settings.deliveryRate??6;
+  const now =
+    new Date();
+
+  const current =
+    now.getHours() * 60 +
+    now.getMinutes();
 
 
-  document.getElementById(
-    "whatsapp"
-  ).value=
-    settings.whatsappNumber||
-    "9090220791";
+  const [oh,om] =
+    opening.split(":").map(Number);
+
+  const [ch,cm] =
+    closing.split(":").map(Number);
+
+  const openMinutes =
+    oh * 60 + om;
+
+  const closeMinutes =
+    ch * 60 + cm;
 
 
-  document.getElementById(
-    "websiteMode"
-  ).value=
-    settings.websiteMode||
-    "normal";
-
-
-  document.getElementById(
-    "websiteMessage"
-  ).value=
-    settings.websiteMessage||
-    "";
-
-
-  codEnabled=
-    settings.codEnabled!==false;
-
-
-  onlineEnabled=
-    settings.onlinePaymentEnabled!==false;
-
-
-  renderPaymentSettings();
-
-
-  const override=
-    String(
-      settings.statusOverride||
-      "auto"
-    ).toLowerCase();
-
-
-  document.getElementById(
-    "autoButton"
-  ).classList.toggle(
-    "active",
-    override==="auto"
+  return (
+    current >= openMinutes &&
+    current < closeMinutes
   );
 
-
-  document.getElementById(
-    "openButton"
-  ).classList.toggle(
-    "active",
-    override==="open"
-  );
-
-
-  document.getElementById(
-    "closedButton"
-  ).classList.toggle(
-    "active",
-    override==="closed"
-  );
-
-
-  updateCurrentShopStatus();
-
-
-  renderOfferSettings();
 }
 
 
-/* PAYMENT */
+function updateShopStatus(){
 
-const codToggle=
-  document.getElementById(
-    "codToggle"
-  );
+  const open =
+    getShopOpen();
 
-const onlineToggle=
-  document.getElementById(
-    "onlineToggle"
-  );
+  const light =
+    $("shopLight");
 
+  const text =
+    $("shopStatusText");
 
-codToggle.onclick=()=>{
+  if(!light || !text){
+    return;
+  }
 
-  codEnabled=!codEnabled;
+  if(open){
 
-  renderPaymentSettings();
-};
+    light.classList.remove(
+      "closed"
+    );
 
+    text.classList.remove(
+      "closed"
+    );
 
-onlineToggle.onclick=()=>{
+    text.textContent =
+      "SHOP IS OPEN";
 
-  onlineEnabled=!onlineEnabled;
+  }else{
 
-  renderPaymentSettings();
-};
+    light.classList.add(
+      "closed"
+    );
 
+    text.classList.add(
+      "closed"
+    );
 
-function renderPaymentSettings(){
+    text.textContent =
+      "SHOP IS CLOSED";
 
-  codToggle.classList.toggle(
-    "active",
-    codEnabled
-  );
+  }
 
-  codToggle.classList.toggle(
-    "off",
-    !codEnabled
-  );
-
-
-  onlineToggle.classList.toggle(
-    "active",
-    onlineEnabled
-  );
-
-  onlineToggle.classList.toggle(
-    "off",
-    !onlineEnabled
-  );
-
-
-  document.getElementById(
-    "codStatus"
-  ).textContent=
-    codEnabled
-      ?"ON"
-      :"OFF";
-
-
-  document.getElementById(
-    "onlineStatus"
-  ).textContent=
-    onlineEnabled
-      ?"ON"
-      :"OFF";
 }
 
 
-document.getElementById(
-  "savePaymentButton"
-).onclick=async()=>{
+setInterval(
+  updateShopStatus,
+  30000
+);
+
+
+/* =========================
+   SHOP OVERRIDE
+========================= */
+
+window.setShopOverride =
+async function(mode){
 
   try{
 
     await update(
       ref(db,"settings"),
       {
-        codEnabled:
-          codEnabled,
-
-        onlinePaymentEnabled:
-          onlineEnabled
+        shopOverride:
+          mode,
+        "shop/override":
+          mode
       }
     );
 
-    alert(
-      "Payment settings saved."
+    showToast(
+      "Shop control updated."
     );
 
-  }
-
-  catch(error){
+  }catch(error){
 
     console.error(error);
 
-    alert(
-      "Could not save payment settings."
+    showToast(
+      error.message ||
+      "Could not update shop."
     );
+
   }
+
 };
 
 
-/* SHOP */
-
-document.getElementById(
-  "autoButton"
-).onclick=
-  ()=>setShopOverride("auto");
-
-
-document.getElementById(
-  "openButton"
-).onclick=
-  ()=>setShopOverride("open");
-
-
-document.getElementById(
-  "closedButton"
-).onclick=
-  ()=>setShopOverride("closed");
-
-
-async function setShopOverride(
-  value
+function renderOverrideButtons(
+  mode
 ){
 
-  try{
+  [
+    "overrideAuto",
+    "overrideOpen",
+    "overrideClosed"
+  ].forEach(
+    id=>{
+      $(id).classList.remove(
+        "active-auto",
+        "active-open",
+        "active-closed"
+      );
+    }
+  );
 
-    await update(
-      ref(db,"settings"),
-      {
-        statusOverride:value
-      }
-    );
+
+  if(mode === "auto"){
+
+    $("overrideAuto")
+      .classList.add(
+        "active-auto"
+      );
 
   }
 
-  catch(error){
+  if(mode === "open"){
 
-    console.error(error);
+    $("overrideOpen")
+      .classList.add(
+        "active-open"
+      );
 
-    alert(
-      "Could not update shop status."
-    );
   }
+
+  if(mode === "closed"){
+
+    $("overrideClosed")
+      .classList.add(
+        "active-closed"
+      );
+
+  }
+
 }
 
 
-document.getElementById(
-  "saveShopButton"
-).onclick=async()=>{
+async function saveShopSettings(){
 
   try{
+
+    const opening =
+      $("openingTime").value ||
+      "12:00";
+
+    const closing =
+      $("closingTime").value ||
+      "23:00";
+
+    const closedMessage =
+      $("closedMessage").value.trim() ||
+      "Sorry, we are closed right now.";
+
 
     await update(
       ref(db,"settings"),
       {
 
-        openTime:
-          document.getElementById(
-            "openTime"
-          ).value||
-          "12:00",
+        openingTime:
+          opening,
 
-        closeTime:
-          document.getElementById(
-            "closeTime"
-          ).value||
-          "23:00",
+        closingTime:
+          closing,
 
-        deliveryRate:
-          Number(
-            document.getElementById(
-              "deliveryRate"
-            ).value||6
-          ),
+        closedMessage:
+          closedMessage,
 
-        whatsappNumber:
-          document.getElementById(
-            "whatsapp"
-          ).value.trim()
+        "shop/openingTime":
+          opening,
+
+        "shop/closingTime":
+          closing,
+
+        "shop/closedMessage":
+          closedMessage
+
       }
     );
 
-    alert(
+
+    showToast(
       "Shop settings saved."
     );
 
-  }
-
-  catch(error){
+  }catch(error){
 
     console.error(error);
 
-    alert(
-      "Could not save settings."
+    showToast(
+      error.message ||
+      "Could not save shop settings."
     );
-  }
-};
-
-
-function updateCurrentShopStatus(){
-
-  const override=
-    String(
-      settings.statusOverride||
-      "auto"
-    ).toLowerCase();
-
-  let text="";
-
-
-  if(override==="open"){
-
-    text="FORCE OPEN";
 
   }
 
-  else if(override==="closed"){
-
-    text="FORCE CLOSED";
-
-  }
-
-  else{
-
-    text=
-      isOpenByTime()
-        ?"AUTO - OPEN"
-        :"AUTO - CLOSED";
-  }
-
-
-  document.getElementById(
-    "currentShopStatus"
-  ).textContent=
-    text;
 }
 
 
-function isOpenByTime(){
+/* =========================
+   WEBSITE
+========================= */
 
-  const now=
-    new Date();
-
-  const open=
-    settings.openTime||
-    "12:00";
-
-  const close=
-    settings.closeTime||
-    "23:00";
-
-
-  const [oh,om]=
-    open.split(":").map(Number);
-
-  const [ch,cm]=
-    close.split(":").map(Number);
-
-
-  const current=
-    now.getHours()*60+
-    now.getMinutes();
-
-  const start=
-    oh*60+om;
-
-  const end=
-    ch*60+cm;
-
-
-  if(end>start){
-
-    return(
-      current>=start&&
-      current<end
-    );
-  }
-
-
-  return(
-    current>=start||
-    current<end
-  );
-}
-
-
-/* WEBSITE */
-
-document.getElementById(
-  "saveWebsiteButton"
-).onclick=async()=>{
+window.saveWebsiteSettings =
+async function(){
 
   try{
+
+    const mode =
+      $("websiteMode").value;
+
+    const message =
+      $("updateMessage").value.trim();
+
 
     await update(
       ref(db,"settings"),
       {
 
         websiteMode:
-          document.getElementById(
-            "websiteMode"
-          ).value,
+          mode,
 
-        websiteMessage:
-          document.getElementById(
-            "websiteMessage"
-          ).value.trim()
+        updateMessage:
+          message,
+
+        "website/mode":
+          mode,
+
+        "website/message":
+          message
+
       }
     );
 
-    alert(
-      "Website settings saved."
+
+    showToast(
+      "Website settings updated."
     );
 
-  }
-
-  catch(error){
+  }catch(error){
 
     console.error(error);
 
-    alert(
-      "Could not save website settings."
+    showToast(
+      error.message ||
+      "Could not update website."
     );
+
   }
+
 };
 
 
-/* OFFER CONTROL */
+/* =========================
+   WHATSAPP
+========================= */
 
-const offerSwitch=
-  document.getElementById(
-    "offerSwitch"
-  );
+window.saveWhatsApp =
+async function(){
 
+  const number =
+    $("whatsappNumber").value
+      .replace(/\D/g,"")
+      .slice(0,10);
 
-offerSwitch.onclick=()=>{
+  if(number.length !== 10){
 
-  offerEnabled=
-    !offerEnabled;
+    showToast(
+      "Enter a valid 10-digit WhatsApp number."
+    );
 
-  renderOfferSwitch();
+    return;
+
+  }
+
+  try{
+
+    await update(
+      ref(db,"settings"),
+      {
+        whatsappNumber:
+          number
+      }
+    );
+
+    showToast(
+      "WhatsApp number saved."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Could not save WhatsApp."
+    );
+
+  }
+
 };
 
 
-function renderOfferSwitch(){
+/* =========================
+   PAYMENT
+========================= */
 
-  offerSwitch.classList.toggle(
-    "active",
+window.togglePayment =
+async function(type){
+
+  try{
+
+    if(type === "cod"){
+
+      codEnabled =
+        !codEnabled;
+
+      await update(
+        ref(db,"settings"),
+        {
+          codEnabled:
+            codEnabled
+        }
+      );
+
+    }
+
+    if(type === "online"){
+
+      onlineEnabled =
+        !onlineEnabled;
+
+      await update(
+        ref(db,"settings"),
+        {
+          onlinePaymentEnabled:
+            onlineEnabled
+        }
+      );
+
+    }
+
+    renderPaymentControls();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Could not update payment."
+    );
+
+  }
+
+};
+
+
+function renderPaymentControls(){
+
+  $("codSwitch")
+    .classList.toggle(
+      "on",
+      codEnabled
+    );
+
+  $("onlineSwitch")
+    .classList.toggle(
+      "on",
+      onlineEnabled
+    );
+
+}
+
+
+/* =========================
+   OFFER CONTROL
+========================= */
+
+function renderOfferControls(){
+
+  const switchEl =
+    $("offerSwitch");
+
+  const status =
+    $("offerStatusText");
+
+  switchEl.classList.toggle(
+    "on",
     offerEnabled
   );
-}
+
+  status.classList.toggle(
+    "on",
+    offerEnabled
+  );
+
+  status.textContent =
+    offerEnabled
+      ? "Offer is ON"
+      : "Offer is OFF";
 
 
-function renderOfferSettings(){
-
-  const savedOffer=
-    settings.offer||
-    {};
-
-
-  offerData={
-    enabled:
-      savedOffer.enabled!==false,
-
-    title:
-      savedOffer.title||
-      "🔥 TODAY'S SPECIAL",
-
-    message:
-      savedOffer.message||
-`🍛 Chicken Biriyani — ₹100 only today!
-🚚 2 plates or more = FREE DELIVERY
-🍜 3 Chowmin + 1 Egg Roll = SPECIAL COMBO
-⏰ Limited Time Offer`,
-
-    price:
-      savedOffer.price!==undefined
-        ?Number(savedOffer.price)
-        :100,
-
-    minQty:
-      savedOffer.minQty!==undefined
-        ?Number(savedOffer.minQty)
-        :2,
-
-    freeDelivery:
-      savedOffer.freeDelivery!==false,
-
-    type:
-      savedOffer.type||
-      "single",
-
-    items:
-      savedOffer.items||
-      "Chicken Biriyani"
-  };
-
-
-  offerEnabled=
-    offerData.enabled;
-
-
-  document.getElementById(
-    "offerTitle"
-  ).value=
+  $("offerTitle").value =
     offerData.title;
 
+  $("offerText").value =
+    offerData.text;
 
-  document.getElementById(
-    "offerMessage"
-  ).value=
-    offerData.message;
-
-
-  document.getElementById(
-    "offerPrice"
-  ).value=
+  $("offerPrice").value =
     offerData.price;
 
+  $("offerButton").value =
+    offerData.button;
 
-  document.getElementById(
-    "offerMinQty"
-  ).value=
-    offerData.minQty;
+  $("offerImage").value =
+    offerData.image;
 
-
-  document.getElementById(
-    "offerFreeDelivery"
-  ).value=
-    offerData.freeDelivery
-      ?"yes"
-      :"no";
-
-
-  document.getElementById(
-    "offerType"
-  ).value=
-    offerData.type;
-
-
-  document.getElementById(
-    "offerItems"
-  ).value=
-    offerData.items;
-
-
-  renderOfferSwitch();
 }
 
 
-document.getElementById(
-  "saveOfferButton"
-).onclick=async()=>{
+window.toggleOffer =
+async function(){
 
-  const title=
-    document.getElementById(
-      "offerTitle"
-    ).value.trim();
+  offerEnabled =
+    !offerEnabled;
 
+  try{
 
-  const message=
-    document.getElementById(
-      "offerMessage"
-    ).value.trim();
-
-
-  const price=
-    Number(
-      document.getElementById(
-        "offerPrice"
-      ).value||0
+    await update(
+      ref(db,"settings"),
+      {
+        "offer/enabled":
+          offerEnabled
+      }
     );
 
+    renderOfferControls();
 
-  const minQty=
-    Number(
-      document.getElementById(
-        "offerMinQty"
-      ).value||1
+    showToast(
+      offerEnabled
+        ? "Offer enabled."
+        : "Offer disabled."
     );
 
+  }catch(error){
 
-  const freeDelivery=
-    document.getElementById(
-      "offerFreeDelivery"
-    ).value==="yes";
+    console.error(error);
 
+    offerEnabled =
+      !offerEnabled;
 
-  const type=
-    document.getElementById(
-      "offerType"
-    ).value;
+    renderOfferControls();
 
-
-  const items=
-    document.getElementById(
-      "offerItems"
-    ).value.trim();
-
-
-  if(!title){
-
-    alert(
-      "Enter offer title."
+    showToast(
+      error.message ||
+      "Could not update offer."
     );
 
-    return;
   }
 
-
-  if(!message){
-
-    alert(
-      "Enter customer offer message."
-    );
-
-    return;
-  }
+};
 
 
-  if(
-    !Number.isFinite(price)||
-    price<0
-  ){
+window.saveOffer =
+async function(){
 
-    alert(
-      "Enter a valid offer price."
-    );
-
-    return;
-  }
-
-
-  if(
-    !Number.isFinite(minQty)||
-    minQty<1
-  ){
-
-    alert(
-      "Enter a valid minimum quantity."
-    );
-
-    return;
-  }
-
-
-  const newOffer={
+  const data = {
 
     enabled:
       offerEnabled,
 
     title:
-      title,
+      $("offerTitle").value.trim() ||
+      "SPECIAL OFFER",
 
-    message:
-      message,
+    text:
+      $("offerText").value.trim() ||
+      "Burger + Fries + Cold Drink",
 
     price:
-      price,
+      $("offerPrice").value.trim() ||
+      "₹149",
 
-    minQty:
-      minQty,
+    button:
+      $("offerButton").value.trim() ||
+      "ORDER NOW",
 
-    freeDelivery:
-      freeDelivery,
+    image:
+      $("offerImage").value.trim() ||
+      ""
 
-    type:
-      type,
-
-    items:
-      items,
-
-    updatedAt:
-      Date.now()
   };
 
 
@@ -3695,1768 +3373,2291 @@ document.getElementById(
     await update(
       ref(db,"settings"),
       {
-        offer:newOffer
+        offer:data
+      }
+    );
+
+    offerData =
+      data;
+
+    renderOfferControls();
+
+    showToast(
+      "Offer saved successfully."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Could not save offer."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   MENU
+========================= */
+
+const defaultMenu = {
+
+  veg_chowmin:{
+    name:"Veg Chowmin",
+    price:50,
+    image:"",
+    stock:true
+  },
+
+  veg_roll:{
+    name:"Veg Roll",
+    price:50,
+    image:"",
+    stock:true
+  },
+
+  manchurian:{
+    name:"Manchurian",
+    price:50,
+    image:"",
+    stock:true
+  },
+
+  paneer_tikka:{
+    name:"Paneer Tikka",
+    price:60,
+    image:"",
+    stock:true
+  },
+
+  paneer_butter_masala:{
+    name:"Paneer Butter Masala",
+    price:130,
+    image:"",
+    stock:true
+  },
+
+  egg_chicken_chowmin:{
+    name:"Egg Chicken Chowmin",
+    price:65,
+    image:"",
+    stock:true
+  },
+
+  egg_chicken_roll:{
+    name:"Egg Chicken Roll",
+    price:60,
+    image:"",
+    stock:true
+  },
+
+  pakoda:{
+    name:"Pakoda",
+    price:60,
+    image:"",
+    stock:true
+  },
+
+  chili_chicken:{
+    name:"Chili Chicken",
+    price:120,
+    image:"",
+    stock:true
+  },
+
+  chicken_garlics:{
+    name:"Chicken Garlics",
+    price:80,
+    image:"",
+    stock:true
+  },
+
+  chicken_biriyani:{
+    name:"Chicken Biriyani",
+    price:120,
+    image:"",
+    stock:true
+  },
+
+  veg_biriyani:{
+    name:"Veg Biriyani",
+    price:100,
+    image:"",
+    stock:true
+  }
+
+};
+
+
+function renderMenu(menu){
+
+  const list =
+    $("menuList");
+
+  const merged = {};
+
+  Object.keys(defaultMenu)
+    .forEach(
+      id=>{
+        merged[id] = {
+          ...defaultMenu[id],
+          ...(menu[id] || {})
+        };
       }
     );
 
 
-    offerData=
-      newOffer;
+  list.innerHTML =
+    Object.entries(merged)
+      .map(
+        ([id,item])=>`
 
+        <div class="menu-item">
 
-    alert(
-      "Offer settings saved."
-    );
+          <div class="menu-top">
 
-  }
+            <div>
 
-  catch(error){
+              <div class="menu-name">
+                ${escapeHtml(item.name)}
+              </div>
 
-    console.error(
-      "Offer save error:",
-      error
-    );
+              <div class="menu-id">
+                ${escapeHtml(id)}
+              </div>
 
-    alert(
-      "Could not save offer settings."
-    );
-  }
-};
+            </div>
 
+            <div class="menu-price-area">
 
-/* MENU */
+              <input
+                id="price-${id}"
+                class="menu-price-input"
+                type="number"
+                min="0"
+                value="${Number(item.price || 0)}"
+              >
 
-function renderMenu(){
+              <button
+                class="btn btn-gold menu-save"
+                onclick="saveMenuPrice('${id}')"
+              >
+                SAVE
+              </button>
 
-  const list=
-    document.getElementById(
-      "menuList"
-    );
-
-  list.innerHTML="";
-
-
-  MENU.forEach(
-    item=>{
-
-      const server=
-        settings.menu&&
-        settings.menu[item.id]
-          ?settings.menu[item.id]
-          :{};
-
-
-      const price=
-        server.price!==undefined
-          ?Number(server.price)
-          :item.price;
-
-
-      const available=
-        server.available!==false;
-
-
-      const div=
-        document.createElement(
-          "div"
-        );
-
-
-      div.className=
-        "menu-item";
-
-
-      div.innerHTML=`
-
-        <div class="menu-item-head">
-
-          <div>
-
-            <b>
-              ${escapeHtml(
-                item.name
-              )}
-            </b>
-
-            <div
-              class="${
-                available
-                  ?"available"
-                  :"unavailable"
-              }"
-              style="margin-top:4px"
-            >
-              ${
-                available
-                  ?"AVAILABLE"
-                  :"OUT OF STOCK"
-              }
             </div>
 
           </div>
 
-          <b>
-            ₹${price}
-          </b>
+
+          <div
+            style="
+              display:flex;
+              gap:6px;
+              align-items:center;
+              margin-top:6px;
+            "
+          >
+
+            <select
+              id="stock-${id}"
+              class="stock-select ${item.stock === false ? "out" : "available"}"
+              onchange="saveMenuStock('${id}',this.value)"
+            >
+
+              <option
+                value="available"
+                ${item.stock !== false ? "selected" : ""}
+              >
+                AVAILABLE
+              </option>
+
+              <option
+                value="out"
+                ${item.stock === false ? "selected" : ""}
+              >
+                OUT OF STOCK
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="image-area">
+
+            <img
+              id="preview-${id}"
+              class="image-preview"
+              src="${escapeHtml(item.image || "")}"
+              onerror="this.style.opacity=.25"
+            >
+
+            <div class="image-url">
+
+              <input
+                id="image-${id}"
+                value="${escapeHtml(item.image || "")}"
+                placeholder="Food image URL"
+              >
+
+            </div>
+
+            <button
+              class="btn btn-dark image-save"
+              onclick="saveMenuImage('${id}')"
+            >
+              IMAGE
+            </button>
+
+          </div>
 
         </div>
 
+      `
+      )
+      .join("");
 
-        <div style="margin-top:8px">
-
-          <input
-            class="menu-price"
-            type="number"
-            min="0"
-            value="${price}"
-          >
-
-          <input
-            class="menu-image"
-            placeholder="Image URL"
-            value="${escapeHtml(
-              server.image||""
-            )}"
-          >
-
-          <button
-            class="${
-              available
-                ?"danger"
-                :"green"
-            } toggle-stock"
-            style="width:100%"
-          >
-            ${
-              available
-                ?"Mark Out of Stock"
-                :"Make Available"
-            }
-          </button>
-
-          <button
-            class="primary save-menu"
-            style="width:100%"
-          >
-            Save Item
-          </button>
-
-        </div>
-      `;
-
-
-      div.querySelector(
-        ".toggle-stock"
-      ).onclick=async()=>{
-
-        try{
-
-          await update(
-            ref(
-              db,
-              `settings/menu/${item.id}`
-            ),
-            {
-              available:
-                !available
-            }
-          );
-
-        }
-
-        catch(error){
-
-          console.error(error);
-
-          alert(
-            "Could not update stock."
-          );
-        }
-      };
-
-
-      div.querySelector(
-        ".save-menu"
-      ).onclick=async()=>{
-
-        const priceInput=
-          div.querySelector(
-            ".menu-price"
-          );
-
-        const imageInput=
-          div.querySelector(
-            ".menu-image"
-          );
-
-
-        const newPrice=
-          Number(
-            priceInput.value
-          );
-
-
-        if(
-          !Number.isFinite(
-            newPrice
-          )||
-          newPrice<0
-        ){
-
-          alert(
-            "Enter a valid price."
-          );
-
-          return;
-        }
-
-
-        try{
-
-          await update(
-            ref(
-              db,
-              `settings/menu/${item.id}`
-            ),
-            {
-              price:
-                newPrice,
-
-              image:
-                imageInput.value.trim()
-            }
-          );
-
-
-          alert(
-            `${item.name} updated.`
-          );
-
-        }
-
-        catch(error){
-
-          console.error(error);
-
-          alert(
-            "Could not save item."
-          );
-        }
-      };
-
-
-      list.appendChild(div);
-    }
-  );
 }
 
 
-/* ORDERS */
+window.saveMenuPrice =
+async function(id){
+
+  const value =
+    Number(
+      $(`price-${id}`).value
+    );
+
+  if(!Number.isFinite(value) || value < 0){
+
+    showToast(
+      "Enter a valid price."
+    );
+
+    return;
+
+  }
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `settings/menu/${id}`
+      ),
+      {
+        price:value
+      }
+    );
+
+    showToast(
+      "Food price updated."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Price update failed."
+    );
+
+  }
+
+};
+
+
+window.saveMenuStock =
+async function(id,value){
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `settings/menu/${id}`
+      ),
+      {
+        stock:
+          value === "available"
+      }
+    );
+
+    const select =
+      $(`stock-${id}`);
+
+    select.classList.toggle(
+      "available",
+      value === "available"
+    );
+
+    select.classList.toggle(
+      "out",
+      value === "out"
+    );
+
+    showToast(
+      value === "available"
+        ? "Item available."
+        : "Item marked out of stock."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Stock update failed."
+    );
+
+  }
+
+};
+
+
+window.saveMenuImage =
+async function(id){
+
+  const input =
+    $(`image-${id}`);
+
+  const image =
+    input.value.trim();
+
+  if(
+    image &&
+    !/^https?:\/\//i.test(image)
+  ){
+
+    showToast(
+      "Image URL must start with http:// or https://"
+    );
+
+    return;
+
+  }
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `settings/menu/${id}`
+      ),
+      {
+        image:image
+      }
+    );
+
+    $(`preview-${id}`).src =
+      image;
+
+    showToast(
+      "Food image updated."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Image update failed."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   STATUS
+========================= */
+
+function normalizeStatus(value){
+
+  const v =
+    String(value || "")
+      .trim()
+      .toLowerCase();
+
+
+  if(
+    !v ||
+    v === "new" ||
+    v === "received"
+  ){
+    return "received";
+  }
+
+
+  if(
+    v === "confirmed" ||
+    v === "processing" ||
+    v === "processed"
+  ){
+    return "processing";
+  }
+
+
+  if(
+    v === "preparing" ||
+    v === "making" ||
+    v === "preparing food"
+  ){
+    return "making";
+  }
+
+
+  if(
+    v === "out for delivery" ||
+    v === "out_for_delivery" ||
+    v === "outfordelivery"
+  ){
+    return "out_for_delivery";
+  }
+
+
+  if(
+    v === "delivered" ||
+    v === "complete" ||
+    v === "completed"
+  ){
+    return "delivered";
+  }
+
+
+  if(
+    v === "cancelled" ||
+    v === "canceled" ||
+    v === "cancel"
+  ){
+    return "cancelled";
+  }
+
+
+  return "received";
+
+}
+
+
+function statusLabel(status){
+
+  const s =
+    normalizeStatus(status);
+
+  if(s === "received")
+    return "RECEIVED";
+
+  if(s === "processing")
+    return "PROCESSING";
+
+  if(s === "making")
+    return "MAKING";
+
+  if(s === "out_for_delivery")
+    return "OUT FOR DELIVERY";
+
+  if(s === "delivered")
+    return "DELIVERED";
+
+  if(s === "cancelled")
+    return "CANCELLED";
+
+  return "RECEIVED";
+
+}
+
+
+/* =========================
+   NEW ORDER DETECTION
+========================= */
+
+function detectNewOrders(
+  newOrders
+){
+
+  const ids =
+    Object.keys(newOrders);
+
+
+  if(!newOrdersInitialized){
+
+    ids.forEach(
+      id=>{
+        const order =
+          newOrders[id];
+
+        if(
+          order &&
+          normalizeStatus(
+            order.status
+          ) === "received"
+        ){
+          knownNewOrderIds.add(id);
+        }
+      }
+    );
+
+    newOrdersInitialized =
+      true;
+
+    return;
+
+  }
+
+
+  const newReceived =
+    ids.filter(
+      id=>{
+
+        const order =
+          newOrders[id];
+
+        return (
+          order &&
+          normalizeStatus(
+            order.status
+          ) === "received" &&
+          !knownNewOrderIds.has(id)
+        );
+
+      }
+    );
+
+
+  ids.forEach(
+    id=>{
+
+      const order =
+        newOrders[id];
+
+      if(
+        order &&
+        normalizeStatus(
+          order.status
+        ) === "received"
+      ){
+
+        knownNewOrderIds.add(id);
+
+      }
+
+    }
+  );
+
+
+  if(!newReceived.length){
+    return;
+  }
+
+
+  notificationActive =
+    true;
+
+  startNotificationEffects(
+    newReceived.length
+  );
+
+}
+
+
+/* =========================
+   NEW ORDER SOUND + BLINK
+========================= */
+
+function startNotificationEffects(
+  count
+){
+
+  const button =
+    $("notificationButton");
+
+  const folder =
+    $("folderNew");
+
+  if(button){
+    button.classList.add(
+      "blink"
+    );
+  }
+
+  if(folder){
+    folder.classList.add(
+      "new-summary-alert"
+    );
+  }
+
+
+  playNewOrderSound();
+
+  showToast(
+    `🔔 ${count} NEW ORDER RECEIVED`
+  );
+
+}
+
+
+function stopNotificationEffects(){
+
+  notificationActive =
+    false;
+
+  $("notificationButton")
+    ?.classList.remove(
+      "blink"
+    );
+
+  $("folderNew")
+    ?.classList.remove(
+      "new-summary-alert"
+    );
+
+}
+
+
+function playNewOrderSound(){
+
+  try{
+
+    if(
+      !notificationAudioContext
+    ){
+
+      notificationAudioContext =
+        new(
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+
+    if(
+      notificationAudioContext.state ===
+      "suspended"
+    ){
+
+      notificationAudioContext.resume();
+
+    }
+
+
+    const now =
+      notificationAudioContext.currentTime;
+
+
+    [0,.18,.36].forEach(
+      (delay,index)=>{
+
+        const oscillator =
+          notificationAudioContext
+            .createOscillator();
+
+        const gain =
+          notificationAudioContext
+            .createGain();
+
+
+        oscillator.type =
+          "sine";
+
+        oscillator.frequency.value =
+          index === 2
+            ? 1100
+            : 850;
+
+
+        gain.gain.setValueAtTime(
+          .0001,
+          now + delay
+        );
+
+        gain.gain
+          .exponentialRampToValueAtTime(
+            .18,
+            now + delay + .02
+          );
+
+        gain.gain
+          .exponentialRampToValueAtTime(
+            .0001,
+            now + delay + .13
+          );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+          notificationAudioContext.destination
+        );
+
+
+        oscillator.start(
+          now + delay
+        );
+
+        oscillator.stop(
+          now + delay + .14
+        );
+
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Notification sound unavailable:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   FOLDER SELECT
+========================= */
+
+window.selectFolder =
+function(folder){
+
+  selectedFolder =
+    folder;
+
+
+  [
+    "newOrderColumn",
+    "pendingOrderColumn",
+    "deliveryOrderColumn",
+    "completeFolderArea",
+    "cancelledFolderArea"
+  ].forEach(
+    id=>{
+
+      const el =
+        $(id);
+
+      if(el){
+        el.classList.add(
+          "hidden"
+        );
+      }
+
+    }
+  );
+
+
+  if(folder === "new"){
+
+    $("newOrderColumn")
+      .classList.remove(
+        "hidden"
+      );
+
+    stopNotificationEffects();
+
+    $("newOrderColumn")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+  }
+
+
+  if(folder === "pending"){
+
+    $("pendingOrderColumn")
+      .classList.remove(
+        "hidden"
+      );
+
+    $("pendingOrderColumn")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+  }
+
+
+  if(folder === "delivery"){
+
+    $("deliveryOrderColumn")
+      .classList.remove(
+        "hidden"
+      );
+
+    $("deliveryOrderColumn")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+  }
+
+
+  if(folder === "complete"){
+
+    $("completeFolderArea")
+      .classList.remove(
+        "hidden"
+      );
+
+    $("completeFolderArea")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+  }
+
+
+  if(folder === "cancelled"){
+
+    $("cancelledFolderArea")
+      .classList.remove(
+        "hidden"
+      );
+
+    $("cancelledFolderArea")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+  }
+
+};
+
+
+/* =========================
+   RENDER ORDERS
+========================= */
 
 function renderOrders(){
 
-  const buckets={
+  const buckets = {
+
     new:[],
     pending:[],
     delivery:[],
     complete:[],
     cancelled:[]
+
   };
 
 
-  Object.entries(
-    orders
-  ).forEach(
-    ([key,order])=>{
+  Object.entries(orders)
+    .forEach(
+      ([key,order])=>{
 
-      if(!order)return;
-
-
-      order.__key=
-        key;
+        const status =
+          normalizeStatus(
+            order.status
+          );
 
 
-      const status=
-        String(
-          order.status||
-          "received"
-        ).toLowerCase();
+        if(status === "received"){
 
+          buckets.new.push([
+            key,
+            order
+          ]);
 
-      if(status==="received"){
+        }
 
-        buckets.new.push(order);
-
-      }
-
-      else if(
-        status==="confirmed"||
-        status==="processing"||
-        status==="preparing"||
-        status==="making"
-      ){
-
-        buckets.pending.push(order);
-
-      }
-
-      else if(
-        status==="out_for_delivery"
-      ){
-
-        buckets.delivery.push(order);
-
-      }
-
-      else if(
-        status==="delivered"
-      ){
-
-        buckets.complete.push(order);
-
-      }
-
-      else if(
-        status==="cancelled"
-      ){
-
-        buckets.cancelled.push(order);
-
-      }
-    }
-  );
-
-
-  Object.values(
-    buckets
-  ).forEach(
-    arr=>{
-
-      arr.sort(
-        (a,b)=>
-          Number(
-            b.createdAt||0
-          )-
-          Number(
-            a.createdAt||0
-          )
-      );
-    }
-  );
-
-
-  /*
-    NEW ORDER DETECTION
-
-    First Firebase load:
-    existing new orders stay yellow.
-
-    Later:
-    newly received order becomes
-    green blinking + sound.
-  */
-
-  const currentNewIds=
-    new Set(
-      buckets.new.map(
-        order=>order.__key
-      )
-    );
-
-
-  if(!newOrdersInitialized){
-
-    knownNewOrderIds=
-      currentNewIds;
-
-    newOrdersInitialized=
-      true;
-
-  }
-
-  else{
-
-    let newOrderArrived=false;
-
-
-    currentNewIds.forEach(
-      id=>{
-
-        if(
-          !knownNewOrderIds.has(id)
+        else if(
+          status === "processing" ||
+          status === "making"
         ){
 
-          newOrderArrived=
-            true;
+          buckets.pending.push([
+            key,
+            order
+          ]);
+
         }
+
+        else if(
+          status === "out_for_delivery"
+        ){
+
+          buckets.delivery.push([
+            key,
+            order
+          ]);
+
+        }
+
+        else if(
+          status === "delivered"
+        ){
+
+          buckets.complete.push([
+            key,
+            order
+          ]);
+
+        }
+
+        else if(
+          status === "cancelled"
+        ){
+
+          buckets.cancelled.push([
+            key,
+            order
+          ]);
+
+        }
+
       }
     );
 
 
-    if(newOrderArrived){
-
-      startNotificationEffects();
-    }
-
-
-    knownNewOrderIds=
-      currentNewIds;
-  }
-
-
-  if(
-    buckets.new.length===0
-  ){
-
-    stopNotificationEffects();
-
-    knownNewOrderIds=
-      new Set();
-  }
-
-
-  renderBucket(
-    "newOrders",
-    buckets.new
-  );
-
-
-  renderBucket(
-    "pendingOrders",
-    buckets.pending
-  );
-
-
-  renderBucket(
-    "deliveryOrders",
-    buckets.delivery
-  );
-
-
-  renderCompleteBucket(
-    buckets.complete
-  );
-
-
-  renderCancelledBucket(
-    buckets.cancelled
-  );
-
-
-  /* TOP COUNTS */
-
-  document.getElementById(
-    "newCount"
-  ).textContent=
-    buckets.new.length;
-
-
-  document.getElementById(
-    "pendingCount"
-  ).textContent=
-    buckets.pending.length;
-
-
-  document.getElementById(
-    "deliveryCount"
-  ).textContent=
-    buckets.delivery.length;
-
-
-  document.getElementById(
-    "completeCount"
-  ).textContent=
-    buckets.complete.length;
-
-
-  document.getElementById(
-    "cancelledCount"
-  ).textContent=
-    buckets.cancelled.length;
-
-
-  /* ORDER COLUMN COUNTS */
-
-  document.getElementById(
-    "boxNewCount"
-  ).textContent=
-    `(${buckets.new.length})`;
-
-
-  document.getElementById(
-    "boxPendingCount"
-  ).textContent=
-    `(${buckets.pending.length})`;
-
-
-  document.getElementById(
-    "boxDeliveryCount"
-  ).textContent=
-    `(${buckets.delivery.length})`;
-
-
-  /* FOLDER COUNTS */
-
-  document.getElementById(
-    "folderCompleteCount"
-  ).textContent=
-    `(${buckets.complete.length})`;
-
-
-  document.getElementById(
-    "folderCancelledCount"
-  ).textContent=
-    `(${buckets.cancelled.length})`;
-
-
-  /* MODAL COUNTS */
-
-  document.getElementById(
-    "modalCompleteCount"
-  ).textContent=
-    `(${buckets.complete.length})`;
-
-
-  document.getElementById(
-    "modalCancelledCount"
-  ).textContent=
-    `(${buckets.cancelled.length})`;
-
-
-  /* CONTROL COUNTS */
-
-  document.getElementById(
-    "controlNewCount"
-  ).textContent=
-    buckets.new.length;
-
-
-  document.getElementById(
-    "controlPendingCount"
-  ).textContent=
-    buckets.pending.length;
-
-
-  document.getElementById(
-    "controlDeliveryCount"
-  ).textContent=
-    buckets.delivery.length;
-
-
-  document.getElementById(
-    "controlCompleteCount"
-  ).textContent=
-    buckets.complete.length;
-
-
-  document.getElementById(
-    "controlCancelledCount"
-  ).textContent=
-    buckets.cancelled.length;
-
-
-  /* NEW FOLDER LIGHT */
-
-  updateNewFolderLight();
-
-
-  renderNotifications(
-    buckets.new
-  );
-
-
-  /*
-    NEW COLUMN GLOW
-    only while alert is active.
-  */
-
-  const newColumn=
-    document.getElementById(
-      "newOrderColumn"
+  Object.values(buckets)
+    .forEach(
+      list=>{
+
+        list.sort(
+          (a,b)=>{
+
+            return Number(
+              b[1].createdAt || 0
+            ) -
+            Number(
+              a[1].createdAt || 0
+            );
+
+          }
+        );
+
+      }
     );
 
 
-  if(newColumn){
-
-    newColumn.classList.toggle(
-      "new-order-alert",
-      newOrderAlertActive&&
-      buckets.new.length>0
-    );
-  }
+  updateFolderCounts(
+    buckets
+  );
 
 
-  /* KEEP SELECTED FOLDER */
+  $("newOrdersList").innerHTML =
+    buckets.new.length
+      ? buckets.new
+          .map(
+            ([key,order])=>
+              createOrderCard(
+                key,
+                order,
+                true
+              )
+          )
+          .join("")
+      : `<div class="empty">
+          No new orders.
+         </div>`;
+
+
+  $("pendingOrdersList").innerHTML =
+    buckets.pending.length
+      ? buckets.pending
+          .map(
+            ([key,order])=>
+              createOrderCard(
+                key,
+                order,
+                false
+              )
+          )
+          .join("")
+      : `<div class="empty">
+          No pending orders.
+         </div>`;
+
+
+  $("deliveryOrdersList").innerHTML =
+    buckets.delivery.length
+      ? buckets.delivery
+          .map(
+            ([key,order])=>
+              createOrderCard(
+                key,
+                order,
+                false
+              )
+          )
+          .join("")
+      : `<div class="empty">
+          No delivery orders.
+         </div>`;
+
+
+  $("completeOrdersList").innerHTML =
+    buckets.complete.length
+      ? buckets.complete
+          .map(
+            ([key,order])=>
+              createOrderCard(
+                key,
+                order,
+                false
+              )
+          )
+          .join("")
+      : `<div class="empty">
+          No completed orders.
+         </div>`;
+
+
+  $("cancelledOrdersList").innerHTML =
+    buckets.cancelled.length
+      ? buckets.cancelled
+          .map(
+            ([key,order])=>
+              createOrderCard(
+                key,
+                order,
+                false
+              )
+          )
+          .join("")
+      : `<div class="empty">
+          No cancelled orders.
+         </div>`;
+
+
+  $("completeModalList").innerHTML =
+    $("completeOrdersList").innerHTML;
+
+  $("cancelledModalList").innerHTML =
+    $("cancelledOrdersList").innerHTML;
+
 
   if(selectedFolder){
-
-    const activeBox=
-      document.querySelector(
-        `.folder-box[data-folder="${selectedFolder}"]`
-      );
-
-
-    if(activeBox){
-
-      document.querySelectorAll(
-        ".folder-box"
-      ).forEach(
-        box=>{
-
-          box.classList.toggle(
-            "selected",
-            box.dataset.folder===
-              selectedFolder
-          );
-        }
-      );
-
-
-      document.getElementById(
-        "newOrderColumn"
-      ).classList.add(
-        "hidden"
-      );
-
-
-      document.getElementById(
-        "pendingOrderColumn"
-      ).classList.add(
-        "hidden"
-      );
-
-
-      document.getElementById(
-        "deliveryOrderColumn"
-      ).classList.add(
-        "hidden"
-      );
-
-
-      document.getElementById(
-        "completeFolderArea"
-      ).classList.add(
-        "hidden"
-      );
-
-
-      document.getElementById(
-        "cancelledFolderArea"
-      ).classList.add(
-        "hidden"
-      );
-
-
-      if(
-        selectedFolder==="new"
-      ){
-
-        document.getElementById(
-          "newOrderColumn"
-        ).classList.remove(
-          "hidden"
-        );
-
-      }
-
-      else if(
-        selectedFolder==="pending"
-      ){
-
-        document.getElementById(
-          "pendingOrderColumn"
-        ).classList.remove(
-          "hidden"
-        );
-
-      }
-
-      else if(
-        selectedFolder==="delivery"
-      ){
-
-        document.getElementById(
-          "deliveryOrderColumn"
-        ).classList.remove(
-          "hidden"
-        );
-
-      }
-
-      else if(
-        selectedFolder==="complete"
-      ){
-
-        document.getElementById(
-          "completeFolderArea"
-        ).classList.remove(
-          "hidden"
-        );
-
-      }
-
-      else if(
-        selectedFolder==="cancelled"
-      ){
-
-        document.getElementById(
-          "cancelledFolderArea"
-        ).classList.remove(
-          "hidden"
-        );
-      }
-    }
+    restoreSelectedFolder();
   }
+
 }
 
 
-/* NORMAL BUCKET */
+/* =========================
+   COUNTS
+========================= */
 
-function renderBucket(
-  id,
-  list
+function updateFolderCounts(
+  buckets
 ){
 
-  const container=
-    document.getElementById(id);
+  const values = {
+
+    new:
+      buckets.new.length,
+
+    pending:
+      buckets.pending.length,
+
+    delivery:
+      buckets.delivery.length,
+
+    complete:
+      buckets.complete.length,
+
+    cancelled:
+      buckets.cancelled.length
+
+  };
 
 
-  container.innerHTML="";
+  $("newCount").textContent =
+    values.new;
+
+  $("pendingCount").textContent =
+    values.pending;
+
+  $("deliveryCount").textContent =
+    values.delivery;
+
+  $("completeCount").textContent =
+    values.complete;
+
+  $("cancelledCount").textContent =
+    values.cancelled;
 
 
-  if(list.length===0){
+  $("quickNew").textContent =
+    values.new;
 
-    container.innerHTML=`
-      <div class="folder-empty">
-        No orders in this folder.
-      </div>
-    `;
+  $("quickPending").textContent =
+    values.pending;
 
-    return;
+  $("quickDelivery").textContent =
+    values.delivery;
+
+  $("quickComplete").textContent =
+    values.complete;
+
+  $("quickCancelled").textContent =
+    values.cancelled;
+
+
+  $("newFolderCount").textContent =
+    values.new;
+
+  $("pendingFolderCount").textContent =
+    values.pending;
+
+  $("deliveryFolderCount").textContent =
+    values.delivery;
+
+  $("completeModalCount").textContent =
+    values.complete;
+
+  $("cancelledModalCount").textContent =
+    values.cancelled;
+
+
+  const badge =
+    $("notificationBadge");
+
+  if(badge){
+
+    badge.textContent =
+      values.new;
+
   }
 
+}
 
-  list.forEach(
-    order=>{
 
-      container.appendChild(
-        createOrderCard(order)
+function restoreSelectedFolder(){
+
+  const folder =
+    selectedFolder;
+
+  [
+    "newOrderColumn",
+    "pendingOrderColumn",
+    "deliveryOrderColumn",
+    "completeFolderArea",
+    "cancelledFolderArea"
+  ].forEach(
+    id=>{
+      $(id)?.classList.add(
+        "hidden"
       );
     }
   );
+
+
+  if(folder === "new")
+    $("newOrderColumn")
+      ?.classList.remove("hidden");
+
+  if(folder === "pending")
+    $("pendingOrderColumn")
+      ?.classList.remove("hidden");
+
+  if(folder === "delivery")
+    $("deliveryOrderColumn")
+      ?.classList.remove("hidden");
+
+  if(folder === "complete")
+    $("completeFolderArea")
+      ?.classList.remove("hidden");
+
+  if(folder === "cancelled")
+    $("cancelledFolderArea")
+      ?.classList.remove("hidden");
+
 }
 
 
-/* COMPLETE */
-
-function renderCompleteBucket(
-  list
-){
-
-  const container=
-    document.getElementById(
-      "completeOrders"
-    );
-
-
-  container.innerHTML="";
-
-
-  if(list.length===0){
-
-    container.innerHTML=`
-      <div class="empty-complete">
-        No complete orders yet.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  list.forEach(
-    order=>{
-
-      container.appendChild(
-        createOrderCard(order)
-      );
-    }
-  );
-}
-
-
-/* CANCELLED */
-
-function renderCancelledBucket(
-  list
-){
-
-  const container=
-    document.getElementById(
-      "cancelledOrders"
-    );
-
-
-  container.innerHTML="";
-
-
-  if(list.length===0){
-
-    container.innerHTML=`
-      <div class="empty-complete">
-        No cancelled orders yet.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  list.forEach(
-    order=>{
-
-      container.appendChild(
-        createOrderCard(order)
-      );
-    }
-  );
-}
-
-
-/* ORDER CARD */
+/* =========================
+   ORDER CARD
+========================= */
 
 function createOrderCard(
-  order
+  key,
+  order,
+  isNew
 ){
 
-  const div=
-    document.createElement(
-      "div"
+  const status =
+    normalizeStatus(
+      order.status
     );
 
+  const statusClass =
+    status;
 
-  div.className=
-    "order "+
-    (
-      String(
-        order.status
-      ).toLowerCase()==="received"
-        ?"new"
-        :""
-    );
-
-
-  let items="";
-
-
-  (order.items||[]).forEach(
-    item=>{
-
-      const itemPrice=
-        Number(
-          item.price||0
+  const itemList =
+    Array.isArray(order.items)
+      ? order.items
+      : Object.values(
+          order.items || {}
         );
 
 
-      const quantity=
-        Number(
-          item.quantity||0
-        );
+  const itemHtml =
+    itemList.length
+      ? itemList.map(
+          item=>`
+
+          <div class="order-item">
+
+            <span>
+              ${escapeHtml(
+                item.name ||
+                item.itemName ||
+                "Item"
+              )}
+              ×
+              ${Number(
+                item.quantity ||
+                item.qty ||
+                1
+              )}
+            </span>
+
+            <strong>
+              ₹${Number(
+                item.total ||
+                (
+                  Number(
+                    item.price || 0
+                  ) *
+                  Number(
+                    item.quantity ||
+                    item.qty ||
+                    1
+                  )
+                )
+              )}
+            </strong>
+
+          </div>
+
+        `
+        ).join("")
+      : `<div class="order-item">
+           <span>No item details</span>
+         </div>`;
 
 
-      items+=`
-
-        <div class="item-line">
-
-          <span>
-            ${escapeHtml(
-              item.name
-            )}
-            × ${quantity}
-          </span>
-
-          <span>
-            ₹${itemPrice*quantity}
-          </span>
-
-        </div>
-      `;
-    }
-  );
+  let actionHtml = "";
 
 
-  const status=
-    String(
-      order.status||""
-    ).toLowerCase();
+  if(status === "received"){
 
+    actionHtml = `
 
-  /* PAYMENT */
+      <div class="status-buttons">
 
-  const rawPayment=
-    String(
-      order.paymentMethod||
-      order.payment||
-      order.paymentType||
-      ""
-    ).toLowerCase();
+        <button
+          class="btn btn-green"
+          onclick="updateOrderStatus('${key}','processing')"
+        >
+          ✓ CONFIRM ORDER
+        </button>
 
+        <button
+          class="btn btn-red"
+          onclick="updateOrderStatus('${key}','cancelled')"
+        >
+          ✕ CANCEL
+        </button>
 
-  let paymentText=
-    "Not specified";
+      </div>
 
-  let paymentClass="";
-
-
-  if(
-    rawPayment.includes("cod")||
-    rawPayment.includes("cash")
-  ){
-
-    paymentText=
-      "Cash on Delivery";
-
-    paymentClass=
-      "cod";
+    `;
 
   }
+
+
+  else if(status === "processing"){
+
+    actionHtml = `
+
+      <div class="status-buttons">
+
+        <button
+          class="btn btn-orange"
+          onclick="updateOrderStatus('${key}','making')"
+        >
+          👨‍🍳 START PREPARING
+        </button>
+
+        <button
+          class="btn btn-red"
+          onclick="updateOrderStatus('${key}','cancelled')"
+        >
+          ✕ CANCEL
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+  else if(status === "making"){
+
+    actionHtml = `
+
+      <div class="status-buttons">
+
+        <button
+          class="btn btn-purple"
+          onclick="updateOrderStatus('${key}','out_for_delivery')"
+        >
+          🏍️ OUT FOR DELIVERY
+        </button>
+
+        <button
+          class="btn btn-red"
+          onclick="updateOrderStatus('${key}','cancelled')"
+        >
+          ✕ CANCEL
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+  else if(status === "out_for_delivery"){
+
+    actionHtml = `
+
+      <div class="status-buttons">
+
+        <button
+          class="btn btn-green"
+          onclick="updateOrderStatus('${key}','delivered')"
+        >
+          ✓ MOVE TO COMPLETE
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
 
   else if(
-    rawPayment.includes("online")||
-    rawPayment.includes("upi")||
-    rawPayment.includes("razorpay")||
-    rawPayment.includes("card")
+    status === "delivered" ||
+    status === "cancelled"
   ){
 
-    paymentText=
-      "Online Payment";
+    actionHtml = `
 
-    paymentClass=
-      "online";
+      <div class="status-buttons">
+
+        <button
+          class="btn btn-dark"
+          onclick="removeOrder('${key}')"
+        >
+          REMOVE ORDER
+        </button>
+
+      </div>
+
+    `;
+
   }
 
 
-  /* LOCATION */
+  const lat =
+    order.latitude ??
+    order.lat ??
+    order.customerLat;
 
-  const locationName=
-    order.locationName||
-    order.location||
-    order.deliveryLocation||
-    order.address||
-    "Location not provided";
-
-
-  const latitude=
-    Number(
-      order.customerLat??
-      order.latitude??
-      order.lat??
-      NaN
-    );
+  const lng =
+    order.longitude ??
+    order.lng ??
+    order.customerLng;
 
 
-  const longitude=
-    Number(
-      order.customerLng??
-      order.longitude??
-      order.lng??
-      order.lon??
-      NaN
-    );
-
-
-  const distance=
-    order.distance!==undefined&&
-    order.distance!==null&&
-    order.distance!==""
-      ?Number(order.distance)
-      :null;
-
-
-  const deliveryCharge=
-    order.deliveryCharge!==undefined&&
-    order.deliveryCharge!==null&&
-    order.deliveryCharge!==""
-      ?Number(order.deliveryCharge)
-      :null;
-
-
-  const mapsUrl=
-    order.mapsUrl||
-    order.googleMapsUrl||
-    (
-      Number.isFinite(latitude)&&
-      Number.isFinite(longitude)
-        ?`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`
-        :""
-    );
-
-
-  let locationHtml=`
-
-    <div class="location-box">
-
-      <div class="location-title">
-        📍 CUSTOMER LOCATION
-      </div>
-
-      <div class="location-text">
-        ${escapeHtml(
-          locationName
-        )}
-      </div>
-  `;
+  let mapsHtml = "";
 
 
   if(
-    Number.isFinite(latitude)&&
-    Number.isFinite(longitude)
+    lat !== undefined &&
+    lng !== undefined &&
+    lat !== "" &&
+    lng !== ""
   ){
 
-    locationHtml+=`
+    mapsHtml = `
 
-      <div class="location-meta">
-        Coordinates:
-        ${latitude.toFixed(6)},
-        ${longitude.toFixed(6)}
-      </div>
-    `;
-  }
-
-
-  if(
-    distance!==null&&
-    Number.isFinite(distance)
-  ){
-
-    locationHtml+=`
-
-      <div class="location-meta">
-        Distance:
-        ${distance.toFixed(2)} km
-      </div>
-    `;
-  }
-
-
-  if(
-    deliveryCharge!==null&&
-    Number.isFinite(deliveryCharge)
-  ){
-
-    locationHtml+=`
-
-      <div class="location-meta">
-        Delivery:
-        ₹${deliveryCharge.toFixed(2)}
-      </div>
-    `;
-  }
-
-
-  if(mapsUrl){
-
-    locationHtml+=`
-
-      <button
-        class="location-button"
-        data-maps-url="${escapeHtml(
-          mapsUrl
-        )}"
+      <a
+        class="maps-btn"
+        target="_blank"
+        rel="noopener"
+        href="https://www.google.com/maps?q=${encodeURIComponent(lat)},${encodeURIComponent(lng)}"
       >
-        📍 Open Google Maps
-      </button>
+        📍 OPEN CUSTOMER LOCATION
+      </a>
+
     `;
+
   }
 
 
-  locationHtml+=
-    `</div>`;
+  const newClass =
+    isNew
+      ? "new-order"
+      : "";
 
 
-  div.innerHTML=`
+  const arrivalClass =
+    isNew &&
+    notificationActive
+      ? "new-arrival"
+      : "";
 
-    <div class="order-id">
-      ${escapeHtml(
-        order.orderId||
-        order.__key
-      )}
-    </div>
 
-    <div class="badge">
-      ${escapeHtml(
-        formatStatus(
-          order.status
-        )
-      )}
-    </div>
-
-    <div style="margin-top:5px">
-
-      <b>
-        ${escapeHtml(
-          order.customerName||
-          ""
-        )}
-      </b>
-
-    </div>
-
-    <small>
-      ${escapeHtml(
-        order.phone||
-        ""
-      )}
-    </small>
-
-    <div class="order-address">
-      ${escapeHtml(
-        order.address||
-        ""
-      )}
-    </div>
-
-    ${locationHtml}
-
-    <div class="payment-box">
-
-      <span class="payment-label">
-        Payment
-      </span>
-
-      <span class="payment-value ${paymentClass}">
-        ${escapeHtml(
-          paymentText
-        )}
-      </span>
-
-    </div>
-
-    <div style="margin-top:6px">
-      ${items}
-    </div>
-
-    <hr
-      style="
-        border-color:#292929;
-        margin:6px 0
-      "
-    >
-
-    <div class="item-line">
-
-      <b>Item Total</b>
-
-      <b style="color:#f59b23">
-        ₹${Number(
-          order.itemTotal??
-          order.subtotal??
-          order.itemsTotal??
-          0
-        )}
-      </b>
-
-    </div>
-
-    <div class="item-line">
-
-      <span>Delivery</span>
-
-      <span>
-        ₹${Number(
-          order.deliveryCharge||0
-        )}
-      </span>
-
-    </div>
+  return `
 
     <div
-      class="item-line"
-      style="margin-top:5px"
+      class="order ${newClass} ${arrivalClass}"
+      data-order-key="${escapeHtml(key)}"
     >
 
-      <b>Total</b>
+      <div class="order-head">
 
-      <b style="color:#f59b23">
-        ₹${order.total||0}
-      </b>
+        <div>
+
+          <div class="order-id">
+
+            #${escapeHtml(
+              order.orderId ||
+              key
+            )}
+
+          </div>
+
+          <div class="order-date">
+
+            ${formatDate(
+              order.createdAt
+            )}
+
+          </div>
+
+        </div>
+
+        <div
+          class="status ${statusClass}"
+        >
+          ${escapeHtml(
+            statusLabel(status)
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="order-info">
+
+        <div class="info-box">
+
+          <small>
+            Customer
+          </small>
+
+          ${escapeHtml(
+            order.customerName ||
+            order.name ||
+            "-"
+          )}
+
+        </div>
+
+
+        <div class="info-box">
+
+          <small>
+            Phone
+          </small>
+
+          ${escapeHtml(
+            order.customerPhone ||
+            order.phone ||
+            "-"
+          )}
+
+        </div>
+
+
+        <div class="info-box">
+
+          <small>
+            Payment
+          </small>
+
+          ${escapeHtml(
+            order.paymentMethod ||
+            "-"
+          )}
+
+        </div>
+
+
+        <div class="info-box">
+
+          <small>
+            Address
+          </small>
+
+          ${escapeHtml(
+            order.address ||
+            order.customerAddress ||
+            "-"
+          )}
+
+        </div>
+
+
+        <div class="info-box">
+
+          <small>
+            Distance
+          </small>
+
+          ${Number(
+            order.distanceKm ||
+            order.distance ||
+            0
+          ).toFixed(2)}
+          KM
+
+        </div>
+
+
+        <div class="info-box">
+
+          <small>
+            Delivery Charge
+          </small>
+
+          ₹${Number(
+            order.deliveryCharge ||
+            0
+          )}
+
+        </div>
+
+      </div>
+
+
+      ${mapsHtml}
+
+
+      <div class="order-items">
+
+        ${itemHtml}
+
+      </div>
+
+
+      <div class="order-total">
+
+        <span>
+          Item Total
+        </span>
+
+        <strong>
+          ₹${Number(
+            order.itemTotal ||
+            order.subtotal ||
+            0
+          )}
+        </strong>
+
+      </div>
+
+
+      <div
+        class="order-total"
+        style="margin-top:3px"
+      >
+
+        <span>
+          Delivery
+        </span>
+
+        <strong>
+          ₹${Number(
+            order.deliveryCharge ||
+            0
+          )}
+        </strong>
+
+      </div>
+
+
+      <div
+        class="order-total"
+        style="
+          margin-top:5px;
+          padding-top:5px;
+          border-top:1px solid #292929;
+        "
+      >
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          ₹${Number(
+            order.total ||
+            (
+              Number(
+                order.itemTotal ||
+                order.subtotal ||
+                0
+              ) +
+              Number(
+                order.deliveryCharge ||
+                0
+              )
+            )
+          )}
+        </strong>
+
+      </div>
+
+
+      ${actionHtml}
 
     </div>
 
-
-    ${
-      status==="received"
-        ?`
-
-          <div class="order-actions">
-
-            <button
-              class="green"
-              data-action="confirm"
-            >
-              Confirm Order
-            </button>
-
-            <button
-              class="danger"
-              data-action="cancel"
-            >
-              Cancel Order
-            </button>
-
-          </div>
-
-        `
-        :""
-    }
-
-
-    ${
-      status==="confirmed"||
-      status==="processing"
-        ?`
-
-          <div class="order-actions">
-
-            <button
-              class="primary"
-              data-action="prepare"
-            >
-              Start Preparing
-            </button>
-
-          </div>
-
-        `
-        :""
-    }
-
-
-    ${
-      status==="preparing"||
-      status==="making"
-        ?`
-
-          <div class="order-actions">
-
-            <button
-              class="primary"
-              data-action="delivery"
-            >
-              Out for Delivery
-            </button>
-
-          </div>
-
-        `
-        :""
-    }
-
-
-    ${
-      status==="out_for_delivery"
-        ?`
-
-          <div class="order-actions two">
-
-            <button
-              class="green"
-              data-action="complete"
-            >
-              Move to Complete
-            </button>
-
-            <button
-              class="danger"
-              data-action="remove"
-            >
-              Remove
-            </button>
-
-          </div>
-
-        `
-        :""
-    }
-
-
-    ${
-      status==="delivered"||
-      status==="cancelled"
-        ?`
-
-          <div class="order-actions">
-
-            <button
-              class="danger"
-              data-action="remove"
-            >
-              Remove Order
-            </button>
-
-          </div>
-
-        `
-        :""
-    }
-
   `;
 
-
-  /* GOOGLE MAP */
-
-  const mapButton=
-    div.querySelector(
-      ".location-button"
-    );
-
-
-  if(mapButton){
-
-    mapButton.onclick=
-      event=>{
-
-        event.stopPropagation();
-
-
-        const url=
-          mapButton.dataset.mapsUrl;
-
-
-        if(url){
-
-          window.open(
-            url,
-            "_blank",
-            "noopener,noreferrer"
-          );
-        }
-      };
-  }
-
-
-  /* ACTIONS */
-
-  div.querySelectorAll(
-    "[data-action]"
-  ).forEach(
-    button=>{
-
-      button.onclick=
-        async event=>{
-
-          event.stopPropagation();
-
-
-          const type=
-            button.dataset.action;
-
-
-          button.disabled=true;
-
-
-          if(type==="confirm"){
-
-            await changeOrderStatus(
-              order,
-              "processing"
-            );
-          }
-
-
-          if(type==="cancel"){
-
-            await changeOrderStatus(
-              order,
-              "cancelled"
-            );
-          }
-
-
-          if(type==="prepare"){
-
-            await changeOrderStatus(
-              order,
-              "making"
-            );
-          }
-
-
-          if(type==="delivery"){
-
-            await changeOrderStatus(
-              order,
-              "out_for_delivery"
-            );
-          }
-
-
-          if(type==="complete"){
-
-            await moveOrderToComplete(
-              order
-            );
-          }
-
-
-          if(type==="remove"){
-
-            await removeOrder(
-              order
-            );
-          }
-        };
-    }
-  );
-
-
-  return div;
 }
 
 
-/* CHANGE STATUS */
+/* =========================
+   UPDATE ORDER
+========================= */
 
-async function changeOrderStatus(
-  order,
-  status
+window.updateOrderStatus =
+async function(
+  key,
+  newStatus
 ){
-
-  if(!order.__key)return;
-
 
   try{
 
-    await update(
-      ref(
-        db,
-        `orders/${order.__key}`
-      ),
-      {
-        status:
-          status,
+    const order =
+      orders[key];
 
-        updatedAt:
-          Date.now()
-      }
-    );
+    if(!order){
 
+      throw new Error(
+        "Order not found."
+      );
 
-    if(status==="cancelled"){
-
-      /*
-        Cancelled order goes directly
-        to Cancelled folder.
-      */
-
-      if(
-        selectedFolder==="new"
-      ){
-
-        stopNotificationEffects();
-      }
     }
 
-  }
 
-  catch(error){
+    const status =
+      normalizeStatus(
+        newStatus
+      );
 
-    console.error(error);
-
-    alert(
-      "Could not update order."
-    );
-  }
-}
+    const now =
+      Date.now();
 
 
-/* DELIVERY -> COMPLETE */
-
-async function moveOrderToComplete(
-  order
-){
-
-  if(!order.__key)return;
+    const updates = {};
 
 
-  const orderId=
-    order.orderId||
-    order.__key;
+    updates[
+      `orders/${key}/status`
+    ] =
+      status;
+
+    updates[
+      `orders/${key}/updatedAt`
+    ] =
+      now;
 
 
-  const ok=
-    confirm(
-      `Move order ${orderId} to Complete?`
-    );
+    if(order.ownerUid){
+
+      updates[
+        `customerOrders/${order.ownerUid}/${key}/status`
+      ] =
+        status;
+
+      updates[
+        `customerOrders/${order.ownerUid}/${key}/updatedAt`
+      ] =
+        now;
+
+    }
 
 
-  if(!ok)return;
+    if(status === "delivered"){
 
+      updates[
+        `deliveredOrders/${key}`
+      ] = {
 
-  try{
+        ...order,
 
-    await update(
-      ref(
-        db,
-        `orders/${order.__key}`
-      ),
-      {
         status:
           "delivered",
 
+        deliveredAt:
+          now,
+
         updatedAt:
-          Date.now()
-      }
+          now
+
+      };
+
+      updates[
+        `cancelledOrders/${key}`
+      ] =
+        null;
+
+    }
+
+
+    if(status === "cancelled"){
+
+      updates[
+        `cancelledOrders/${key}`
+      ] = {
+
+        ...order,
+
+        status:
+          "cancelled",
+
+        cancelledAt:
+          now,
+
+        updatedAt:
+          now
+
+      };
+
+      updates[
+        `deliveredOrders/${key}`
+      ] =
+        null;
+
+    }
+
+
+    if(
+      status !== "delivered" &&
+      status !== "cancelled"
+    ){
+
+      updates[
+        `deliveredOrders/${key}`
+      ] =
+        null;
+
+      updates[
+        `cancelledOrders/${key}`
+      ] =
+        null;
+
+    }
+
+
+    await update(
+      ref(db),
+      updates
     );
 
-  }
 
-  catch(error){
+    showToast(
+      `Order ${statusLabel(status)}.`
+    );
+
+
+    if(status !== "received"){
+
+      closeNotifications();
+
+    }
+
+  }catch(error){
 
     console.error(error);
 
-    alert(
-      "Could not move order to Complete."
+    showToast(
+      error.message ||
+      "Could not update order."
     );
+
   }
-}
+
+};
 
 
-/* REMOVE */
+/* =========================
+   REMOVE ORDER
+========================= */
 
-async function removeOrder(
-  order
-){
-
-  if(!order.__key)return;
-
-
-  const orderId=
-    order.orderId||
-    order.__key;
-
-
-  const ok=
-    confirm(
-      `Are you sure you want to permanently remove order ${orderId}?`
-    );
-
-
-  if(!ok)return;
-
+window.removeOrder =
+async function(key){
 
   try{
 
-    await remove(
-      ref(
-        db,
-        `orders/${order.__key}`
-      )
+    const updates = {
+
+      [`orders/${key}`]:
+        null,
+
+      [`deliveredOrders/${key}`]:
+        null,
+
+      [`cancelledOrders/${key}`]:
+        null
+
+    };
+
+
+    await update(
+      ref(db),
+      updates
     );
 
-  }
 
-  catch(error){
+    showToast(
+      "Order removed."
+    );
+
+  }catch(error){
 
     console.error(error);
 
-    alert(
+    showToast(
+      error.message ||
       "Could not remove order."
     );
+
   }
+
+};
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+window.toggleNotifications =
+function(){
+
+  const panel =
+    $("notificationPanel");
+
+  if(!panel){
+    return;
+  }
+
+  panel.classList.toggle(
+    "show"
+  );
+
+  renderNotificationList();
+
+};
+
+
+window.closeNotifications =
+function(){
+
+  $("notificationPanel")
+    ?.classList.remove(
+      "show"
+    );
+
+};
+
+
+function renderNotificationList(){
+
+  const list =
+    $("notificationList");
+
+  if(!list){
+    return;
+  }
+
+
+  const received =
+    Object.entries(orders)
+      .filter(
+        ([,order])=>
+          normalizeStatus(
+            order.status
+          ) === "received"
+      )
+      .sort(
+        (a,b)=>
+          Number(
+            b[1].createdAt || 0
+          ) -
+          Number(
+            a[1].createdAt || 0
+          )
+      );
+
+
+  if(!received.length){
+
+    list.innerHTML =
+      `<div
+        style="
+          padding:12px;
+          color:#666;
+          font-size:9px;
+        "
+      >
+        No new orders.
+      </div>`;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    received
+      .map(
+        ([key,order])=>`
+
+          <div
+            class="notification-item"
+            onclick="selectNotification('${key}')"
+          >
+
+            <strong>
+              🆕
+              ${escapeHtml(
+                order.orderId ||
+                key
+              )}
+            </strong>
+
+            <small>
+              ${escapeHtml(
+                order.customerName ||
+                "Customer"
+              )}
+              •
+              ₹${Number(
+                order.total ||
+                0
+              )}
+            </small>
+
+          </div>
+
+        `
+      )
+      .join("");
+
 }
 
 
-/* COMPLETE MODAL */
+window.selectNotification =
+function(key){
 
-const completeModal=
-  document.getElementById(
-    "completeModal"
+  closeNotifications();
+
+  selectedFolder =
+    "new";
+
+  selectFolder(
+    "new"
   );
 
+  setTimeout(
+    ()=>{
 
-document.getElementById(
-  "openCompleteButton"
-).onclick=()=>{
+      const card =
+        document.querySelector(
+          `[data-order-key="${CSS.escape(key)}"]`
+        );
 
-  completeModal.classList.remove(
-    "hidden"
+      if(card){
+
+        card.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+      }
+
+    },
+    150
   );
+
 };
 
 
-document.getElementById(
-  "closeCompleteButton"
-).onclick=()=>{
+/* =========================
+   RATINGS
+========================= */
 
-  completeModal.classList.add(
-    "hidden"
+function renderRatings(
+  ratings
+){
+
+  const entries =
+    Object.entries(
+      ratings || {}
+    );
+
+
+  const summary =
+    $("ratingSummary");
+
+  const list =
+    $("ratings");
+
+
+  if(!entries.length){
+
+    summary.textContent =
+      "No ratings yet.";
+
+    list.innerHTML =
+      `<div class="empty">
+        No customer feedback yet.
+      </div>`;
+
+    return;
+
+  }
+
+
+  const total =
+    entries.reduce(
+      (
+        sum,
+        [,rating]
+      )=>
+        sum +
+        Number(
+          rating.rating || 0
+        ),
+      0
+    );
+
+
+  const average =
+    total /
+    entries.length;
+
+
+  summary.innerHTML = `
+
+    <strong
+      style="font-size:11px"
+    >
+      Average Rating:
+      ${average.toFixed(1)}
+      ⭐
+    </strong>
+
+    <br>
+
+    <span
+      style="font-size:9px"
+    >
+      ${entries.length}
+      customer rating(s)
+    </span>
+
+  `;
+
+
+  entries.sort(
+    (a,b)=>
+      Number(
+        b[1].createdAt || 0
+      ) -
+      Number(
+        a[1].createdAt || 0
+      )
   );
+
+
+  list.innerHTML =
+    entries.map(
+      ([key,rating])=>`
+
+        <div class="rating">
+
+          <div
+            style="font-size:10px"
+          >
+
+            <strong>
+              ${escapeHtml(
+                rating.orderId ||
+                key
+              )}
+            </strong>
+
+          </div>
+
+          <div class="rating-stars">
+
+            ${
+              "★".repeat(
+                Math.max(
+                  0,
+                  Math.min(
+                    5,
+                    Number(
+                      rating.rating ||
+                      0
+                    )
+                  )
+                )
+              )
+            }
+
+            <span
+              style="color:#555"
+            >
+
+              ${
+                "★".repeat(
+                  Math.max(
+                    0,
+                    5 -
+                    Math.min(
+                      5,
+                      Number(
+                        rating.rating ||
+                        0
+                      )
+                    )
+                  )
+                )
+              }
+
+            </span>
+
+          </div>
+
+          <div
+            style="
+              font-size:8px;
+              color:#777;
+              margin-top:2px;
+            "
+          >
+            ${formatDate(
+              rating.createdAt
+            )}
+          </div>
+
+          ${
+            rating.feedback
+              ? `
+                <div class="rating-feedback">
+                  ${escapeHtml(
+                    rating.feedback
+                  )}
+                </div>
+              `
+              : ""
+          }
+
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+window.closeModal =
+function(id){
+
+  $(id)
+    ?.classList.remove(
+      "show"
+    );
+
 };
 
 
-completeModal.addEventListener(
+window.openModal =
+function(id){
+
+  $(id)
+    ?.classList.add(
+      "show"
+    );
+
+};
+
+
+/* =========================
+   INITIAL
+========================= */
+
+window.addEventListener(
   "click",
   event=>{
 
-    if(
-      event.target===
-      completeModal
-    ){
+    document
+      .querySelectorAll(
+        ".modal"
+      )
+      .forEach(
+        modal=>{
 
-      completeModal.classList.add(
-        "hidden"
+          if(
+            event.target ===
+            modal
+          ){
+
+            modal.classList.remove(
+              "show"
+            );
+
+          }
+
+        }
       );
-    }
+
   }
 );
-
-
-/* CANCELLED MODAL */
-
-const cancelledModal=
-  document.getElementById(
-    "cancelledModal"
-  );
-
-
-document.getElementById(
-  "openCancelledButton"
-).onclick=()=>{
-
-  cancelledModal.classList.remove(
-    "hidden"
-  );
-};
-
-
-document.getElementById(
-  "closeCancelledButton"
-).onclick=()=>{
-
-  cancelledModal.classList.add(
-    "hidden"
-  );
-};
-
-
-cancelledModal.addEventListener(
-  "click",
-  event=>{
-
-    if(
-      event.target===
-      cancelledModal
-    ){
-
-      cancelledModal.classList.add(
-        "hidden"
-      );
-    }
-  }
-);
-
-
-/* ESCAPE */
-
-document.addEventListener(
-  "keydown",
-  event=>{
-
-    if(
-      event.key==="Escape"
-    ){
-
-      completeModal.classList.add(
-        "hidden"
-      );
-
-      cancelledModal.classList.add(
-        "hidden"
-      );
-    }
-  }
-);
-
-
-/* HELPERS */
-
-function formatStatus(
-  status
-){
-
-  const map={
-
-    received:
-      "Received",
-
-    confirmed:
-      "Confirmed",
-
-    processing:
-      "Processing",
-
-    preparing:
-      "Preparing",
-
-    making:
-      "Making",
-
-    out_for_delivery:
-      "Out for Delivery",
-
-    delivered:
-      "Delivered",
-
-    cancelled:
-      "Cancelled"
-  };
-
-
-  return(
-    map[
-      String(
-        status||""
-      ).toLowerCase()
-    ]||
-    status||
-    ""
-  );
-}
-
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value??""
-  )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-}
 
 </script>
 
