@@ -1317,31 +1317,6 @@ textarea{
 }
 
 /* =========================
-   RATING
-========================= */
-
-.rating{
-  background:#171717;
-  border:1px solid #292929;
-  border-radius:8px;
-  padding:10px;
-  margin-bottom:6px;
-}
-
-.rating-stars{
-  color:var(--gold);
-  font-size:15px;
-  margin-top:2px;
-}
-
-.rating-feedback{
-  color:#aaa;
-  margin-top:5px;
-  font-size:10px;
-  line-height:1.45;
-}
-
-/* =========================
    TOAST
 ========================= */
 
@@ -2047,10 +2022,6 @@ textarea{
 
     <div id="orderManagement">
 
-      <div class="section-title">
-        📦 Order Management
-      </div>
-
       <div class="new-order-row">
 
         <div
@@ -2213,30 +2184,6 @@ textarea{
           </div>
         </div>
 
-      </div>
-
-    </div>
-
-    <div
-      class="menu-section"
-      style="margin-top:12px"
-    >
-
-      <h2>
-        ⭐ Customer Ratings
-      </h2>
-
-      <div
-        id="ratingSummary"
-        class="notice"
-      >
-        Loading ratings...
-      </div>
-
-      <div id="ratings">
-        <div class="empty">
-          No ratings yet.
-        </div>
       </div>
 
     </div>
@@ -2668,21 +2615,6 @@ function loadData(){
 
       showToast(
         "Could not load orders."
-      );
-
-    }
-  );
-
-
-  onValue(
-    ref(db,"ratings"),
-    snapshot=>{
-
-      const ratings =
-        snapshot.val() || {};
-
-      renderRatings(
-        ratings
       );
 
     }
@@ -5435,186 +5367,6 @@ function(key){
   );
 
 };
-
-
-/* =========================
-   RATINGS
-========================= */
-
-function renderRatings(
-  ratings
-){
-
-  const entries =
-    Object.entries(
-      ratings || {}
-    );
-
-
-  const summary =
-    $("ratingSummary");
-
-  const list =
-    $("ratings");
-
-
-  if(!entries.length){
-
-    summary.textContent =
-      "No ratings yet.";
-
-    list.innerHTML =
-      `<div class="empty">
-        No customer feedback yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  const total =
-    entries.reduce(
-      (
-        sum,
-        [,rating]
-      )=>
-        sum +
-        Number(
-          rating.rating || 0
-        ),
-      0
-    );
-
-
-  const average =
-    total /
-    entries.length;
-
-
-  summary.innerHTML = `
-
-    <strong
-      style="font-size:11px"
-    >
-      Average Rating:
-      ${average.toFixed(1)}
-      ⭐
-    </strong>
-
-    <br>
-
-    <span
-      style="font-size:9px"
-    >
-      ${entries.length}
-      customer rating(s)
-    </span>
-
-  `;
-
-
-  entries.sort(
-    (a,b)=>
-      Number(
-        b[1].createdAt || 0
-      ) -
-      Number(
-        a[1].createdAt || 0
-      )
-  );
-
-
-  list.innerHTML =
-    entries.map(
-      ([key,rating])=>`
-
-        <div class="rating">
-
-          <div
-            style="font-size:10px"
-          >
-
-            <strong>
-              ${escapeHtml(
-                rating.orderId ||
-                key
-              )}
-            </strong>
-
-          </div>
-
-          <div class="rating-stars">
-
-            ${
-              "★".repeat(
-                Math.max(
-                  0,
-                  Math.min(
-                    5,
-                    Number(
-                      rating.rating ||
-                      0
-                    )
-                  )
-                )
-              )
-            }
-
-            <span
-              style="color:#555"
-            >
-
-              ${
-                "★".repeat(
-                  Math.max(
-                    0,
-                    5 -
-                    Math.min(
-                      5,
-                      Number(
-                        rating.rating ||
-                        0
-                      )
-                    )
-                  )
-                )
-              }
-
-            </span>
-
-          </div>
-
-          <div
-            style="
-              font-size:8px;
-              color:#777;
-              margin-top:2px;
-            "
-          >
-            ${formatDate(
-              rating.createdAt
-            )}
-          </div>
-
-          ${
-            rating.feedback
-              ? `
-                <div class="rating-feedback">
-                  ${escapeHtml(
-                    rating.feedback
-                  )}
-                </div>
-              `
-              : ""
-          }
-
-        </div>
-
-      `
-    ).join("");
-
-}
 
 
 /* =========================
