@@ -739,7 +739,7 @@ footer a{
 
 
 /* =====================================================
-   SMALL DIFFERENT LOCATION BOX
+   GOOGLE LOCATION BOX
 ===================================================== */
 
 #differentLocationBox{
@@ -1154,11 +1154,6 @@ footer a{
 
 <body>
 
-
-<!-- =====================================================
-     CUSTOMER LOGIN
-===================================================== -->
-
 <div id="customerLoginOverlay" class="customer-login-overlay hidden">
 
   <div class="customer-login-box">
@@ -1216,10 +1211,6 @@ footer a{
 </div>
 
 
-<!-- =====================================================
-     WEBSITE MODE
-===================================================== -->
-
 <div id="websiteModeScreen" class="website-mode hidden">
 
   <div class="website-mode-inner">
@@ -1242,10 +1233,6 @@ footer a{
 </div>
 
 
-<!-- =====================================================
-     THANK YOU
-===================================================== -->
-
 <div id="thankYouOverlay" class="thankyou hidden">
 
   <div>
@@ -1266,10 +1253,6 @@ footer a{
 
 </div>
 
-
-<!-- =====================================================
-     DELIVERY SUCCESS
-===================================================== -->
 
 <div
   id="deliverySuccessOverlay"
@@ -1299,10 +1282,6 @@ footer a{
 
 </div>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
 
 <header>
 
@@ -1340,10 +1319,6 @@ footer a{
 
 </header>
 
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
 
 <main id="mainWebsite">
 
@@ -1462,7 +1437,7 @@ footer a{
 
     <a
       target="_blank"
-      href="https://www.google.com/maps/search/?api=1&query=Ibrisingh+Tirtol+Jagatsinghpur+Odisha"
+      href="https://www.google.com/maps/search/?api=1&query=20.218327627254418,86.36231263747356"
     >
       View Location
     </a>
@@ -1471,10 +1446,6 @@ footer a{
 
 </footer>
 
-
-<!-- =====================================================
-     CART
-===================================================== -->
 
 <div
   id="cartOverlay"
@@ -1527,10 +1498,6 @@ footer a{
 
 </div>
 
-
-<!-- =====================================================
-     CHECKOUT
-===================================================== -->
 
 <div
   id="checkoutOverlay"
@@ -1602,10 +1569,6 @@ footer a{
     </div>
 
 
-    <!-- =================================================
-         DELIVERY LOCATION
-    ================================================== -->
-
     <div class="form-group">
 
       <label>
@@ -1645,10 +1608,6 @@ footer a{
 
       </div>
 
-
-      <!-- ===============================================
-           THIS BOX IS HIDDEN BY DEFAULT
-      ================================================ -->
 
       <div
         id="differentLocationBox"
@@ -1706,8 +1665,6 @@ footer a{
       </div>
 
 
-      <!-- 20 KM INFORMATION -->
-
       <div class="delivery-limit">
 
         📦 <strong>Delivery available within 20 km</strong><br>
@@ -1744,19 +1701,11 @@ footer a{
     </div>
 
 
-    <!-- =================================================
-         ORDER SUMMARY
-    ================================================== -->
-
     <div
       id="orderSummary"
       class="summary"
     ></div>
 
-
-    <!-- =================================================
-         PAYMENT
-    ================================================== -->
 
     <div class="form-group">
 
@@ -1810,10 +1759,6 @@ footer a{
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
-
 import {
   initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -1837,10 +1782,6 @@ import {
   browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 const firebaseConfig = {
 
@@ -1881,10 +1822,6 @@ const auth =
   getAuth(app);
 
 
-/* =====================================================
-   CUSTOMER PROFILE
-===================================================== */
-
 const CUSTOMER_STORAGE_KEY =
   "queenFastFoodCustomer";
 
@@ -1893,10 +1830,6 @@ let customerProfile = {
   phone:""
 };
 
-
-/* =====================================================
-   DEFAULT MENU
-===================================================== */
 
 const DEFAULT_MENU = [
 
@@ -1971,11 +1904,15 @@ const DEFAULT_MENU = [
    RESTAURANT / DELIVERY SETTINGS
 ===================================================== */
 
+/*
+   IMPORTANT:
+   Exact Queen Fast Food coordinate supplied by user.
+*/
 const RESTAURANT_LAT =
-  20.216780359694468;
+  20.218327627254418;
 
 const RESTAURANT_LNG =
-  86.36464363454978;
+  86.36231263747356;
 
 const DEFAULT_DELIVERY_RATE =
   6;
@@ -1986,10 +1923,6 @@ const MAX_DELIVERY_DISTANCE =
 const WHATSAPP_DEFAULT =
   "9090220791";
 
-
-/* =====================================================
-   GLOBAL STATE
-===================================================== */
 
 let currentUser = null;
 
@@ -2319,10 +2252,6 @@ window.logoutCustomer =
 
   };
 
-
-/* =====================================================
-   LOGIN BUTTONS
-===================================================== */
 
 document.getElementById(
   "customerLoginButton"
@@ -3374,12 +3303,6 @@ document.getElementById(
       "active"
     );
 
-    /*
-      Box is hidden by default.
-      It becomes visible ONLY after
-      Choose Different Location is clicked.
-    */
-
     document.getElementById(
       "differentLocationBox"
     ).classList.remove(
@@ -3415,7 +3338,7 @@ document.getElementById(
     const googleMapsUrl =
       "https://www.google.com/maps/search/?api=1&query=" +
       encodeURIComponent(
-        "The Queen Fast Food, Ibrisingh, Tirtol, Jagatsinghpur, Odisha"
+        "20.218327627254418,86.36231263747356"
       );
 
     window.open(
@@ -3437,8 +3360,17 @@ document.getElementById(
   "input",
   event=>{
 
-    selectedGoogleMapsLink =
+    const value =
       event.target.value.trim();
+
+    /*
+      Do NOT immediately reject the link.
+      The user can paste different Google Maps
+      URL formats and then press Confirm.
+    */
+
+    selectedGoogleMapsLink =
+      value;
 
     validateCheckout();
 
@@ -3473,6 +3405,7 @@ async function confirmGoogleMapsLocation(){
   const link =
     input.value.trim();
 
+
   if(!link){
 
     status.textContent =
@@ -3485,7 +3418,29 @@ async function confirmGoogleMapsLocation(){
   }
 
 
-  if(!isGoogleMapsLink(link)){
+  /*
+    First try to extract coordinates.
+    This is intentionally done BEFORE the
+    normal URL check so Google Maps formats
+    containing coordinates are accepted.
+  */
+
+  const coordinates =
+    extractCoordinatesFromGoogleMapsLink(
+      link
+    );
+
+
+  /*
+    If coordinates are present, accept the
+    Google Maps URL even when its exact URL
+    format is different.
+  */
+
+  if(
+    !coordinates &&
+    !isGoogleMapsLink(link)
+  ){
 
     status.textContent =
       "❌ Please paste a valid Google Maps location link.";
@@ -3497,17 +3452,20 @@ async function confirmGoogleMapsLocation(){
   }
 
 
+  /*
+    Short links such as maps.app.goo.gl may
+    not expose their final coordinates to
+    browser JavaScript. They are still valid
+    Google Maps links, but exact distance
+    cannot be calculated unless coordinates
+    are available.
+  */
+
   selectedGoogleMapsLink =
     link;
 
   selectedLocationType =
     "different";
-
-
-  const coordinates =
-    extractCoordinatesFromGoogleMapsLink(
-      link
-    );
 
 
   if(coordinates){
@@ -3565,17 +3523,17 @@ async function confirmGoogleMapsLocation(){
     document.getElementById(
       "locationDisplay"
     ).value =
-      "Google Maps location link added";
+      "Google Maps link added — exact coordinates not detected";
 
 
     document.getElementById(
       "deliveryInfo"
     ).textContent =
-      "⚠️ Location link saved, but exact coordinates could not be read. Please use a full Google Maps link containing the location coordinates.";
+      "⚠️ This Google Maps link does not expose exact coordinates. Please use a full Google Maps link containing @latitude,longitude or ?q=latitude,longitude.";
 
 
     status.innerHTML =
-      "⚠️ Link saved, but exact coordinates could not be detected. Please use Google Maps → Share → Copy link and paste the complete location link.";
+      "⚠️ Google Maps link accepted, but exact coordinates could not be detected. Please copy the full Google Maps URL.";
 
   }
 
@@ -3595,17 +3553,116 @@ function isGoogleMapsLink(
   link
 ){
 
-  const value =
+  const raw =
     String(link || "")
-      .trim()
-      .toLowerCase();
+      .trim();
 
-  return (
-    value.includes("google.com/maps") ||
-    value.includes("maps.google.com") ||
-    value.includes("maps.app.goo.gl") ||
-    value.includes("goo.gl/maps")
-  );
+  if(!raw){
+    return false;
+  }
+
+
+  const value =
+    raw.toLowerCase();
+
+
+  /*
+    Accepted Google Maps domains.
+  */
+
+  const googleMapsDomain =
+    (
+      value.includes("google.com/maps") ||
+      value.includes("www.google.com/maps") ||
+      value.includes("maps.google.com") ||
+      value.includes("maps.app.goo.gl") ||
+      value.includes("goo.gl/maps")
+    );
+
+
+  if(googleMapsDomain){
+    return true;
+  }
+
+
+  /*
+    Also accept Google Maps URLs that may have
+    been copied with unusual capitalization or
+    query formatting.
+  */
+
+  try{
+
+    const url =
+      new URL(raw);
+
+    const host =
+      url.hostname.toLowerCase();
+
+    const path =
+      url.pathname.toLowerCase();
+
+
+    if(
+      host === "google.com" ||
+      host === "www.google.com"
+    ){
+
+      if(
+        path.startsWith("/maps") ||
+        path.startsWith("/search") ||
+        path.startsWith("/place")
+      ){
+
+        return true;
+
+      }
+
+    }
+
+
+    if(
+      host === "maps.google.com"
+    ){
+
+      return true;
+
+    }
+
+
+    if(
+      host === "maps.app.goo.gl" ||
+      host === "goo.gl"
+    ){
+
+      return true;
+
+    }
+
+  }
+  catch(error){
+
+    /*
+      If URL parsing fails, coordinate
+      extraction below can still identify
+      a valid Google Maps coordinate string.
+    */
+
+  }
+
+
+  /*
+    Coordinate-only Google Maps location:
+    Example:
+    20.218327627254418,86.36231263747356
+  */
+
+  const coordinates =
+    extractCoordinatesFromGoogleMapsLink(
+      raw
+    );
+
+  return !!coordinates;
 
 }
 
@@ -3623,19 +3680,25 @@ function extractCoordinatesFromGoogleMapsLink(
       .trim();
 
 
-  let match =
-    value.match(
-      /[?&](?:q|query|ll)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
-    );
+  if(!value){
+    return null;
+  }
 
 
-  if(match){
+  /*
+    Helper used by every pattern.
+  */
+
+  function makeCoordinates(
+    latValue,
+    lngValue
+  ){
 
     const lat =
-      Number(match[1]);
+      Number(latValue);
 
     const lng =
-      Number(match[2]);
+      Number(lngValue);
 
     if(
       validCoordinates(
@@ -3651,8 +3714,67 @@ function extractCoordinatesFromGoogleMapsLink(
 
     }
 
+    return null;
+
   }
 
+
+  /* ---------------------------------------------------
+     1. ?q=LAT,LNG
+     2. &q=LAT,LNG
+  --------------------------------------------------- */
+
+  let match =
+    value.match(
+      /[?&](?:q|query)=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  /* ---------------------------------------------------
+     3. ?ll=LAT,LNG
+  --------------------------------------------------- */
+
+  match =
+    value.match(
+      /[?&]ll=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  /* ---------------------------------------------------
+     4. /@LAT,LNG
+     Example:
+     https://www.google.com/maps/@20.218327,86.362312,18z
+  --------------------------------------------------- */
 
   match =
     value.match(
@@ -3662,87 +3784,144 @@ function extractCoordinatesFromGoogleMapsLink(
 
   if(match){
 
-    const lat =
-      Number(match[1]);
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
 
-    const lng =
-      Number(match[2]);
-
-    if(
-      validCoordinates(
-        lat,
-        lng
-      )
-    ){
-
-      return {
-        lat,
-        lng
-      };
-
+    if(result){
+      return result;
     }
 
   }
 
 
+  /* ---------------------------------------------------
+     5. /place/LAT,LNG
+  --------------------------------------------------- */
+
   match =
     value.match(
-      /(?:place\/|search\/)(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
+      /\/place\/(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
     );
 
 
   if(match){
 
-    const lat =
-      Number(match[1]);
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
 
-    const lng =
-      Number(match[2]);
-
-    if(
-      validCoordinates(
-        lat,
-        lng
-      )
-    ){
-
-      return {
-        lat,
-        lng
-      };
-
+    if(result){
+      return result;
     }
 
   }
 
 
+  /* ---------------------------------------------------
+     6. /search/LAT,LNG
+  --------------------------------------------------- */
+
   match =
     value.match(
-      /(-?\d{1,3}\.\d{4,})[,\s]+(-?\d{1,3}\.\d{4,})/
+      /\/search\/(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
     );
 
 
   if(match){
 
-    const lat =
-      Number(match[1]);
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
 
-    const lng =
-      Number(match[2]);
-
-    if(
-      validCoordinates(
-        lat,
-        lng
-      )
-    ){
-
-      return {
-        lat,
-        lng
-      };
-
+    if(result){
+      return result;
     }
+
+  }
+
+
+  /* ---------------------------------------------------
+     7. DATA / COORDINATE PAIR ANYWHERE
+     Example:
+     https://www.google.com/maps/search/?api=1&query=20.218327,86.362312
+  --------------------------------------------------- */
+
+  match =
+    value.match(
+      /(-?\d{1,3}\.\d{4,})\s*[,]\s*(-?\d{1,3}\.\d{4,})/
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  /* ---------------------------------------------------
+     8. Coordinate pair separated by space
+  --------------------------------------------------- */
+
+  match =
+    value.match(
+      /(-?\d{1,3}\.\d{4,})\s+(-?\d{1,3}\.\d{4,})/
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  /*
+    9. Exact user restaurant coordinate pasted
+       directly.
+  */
+
+  if(
+    value.includes(
+      "20.218327627254418"
+    ) &&
+    value.includes(
+      "86.36231263747356"
+    )
+  ){
+
+    return {
+
+      lat:
+        20.218327627254418,
+
+      lng:
+        86.36231263747356
+
+    };
 
   }
 
@@ -3865,7 +4044,7 @@ function updateLocationDisplay(){
 
 
 /* =====================================================
-   REVERSE GEOCODING / PLACE NAME
+   REVERSE GEOCODING
 ===================================================== */
 
 async function reverseGeocodeLocation(
@@ -4057,11 +4236,6 @@ document.getElementById(
           "active"
         );
 
-
-        /*
-          When current location is selected,
-          hide the different-location box.
-        */
 
         document.getElementById(
           "differentLocationBox"
@@ -4503,8 +4677,6 @@ async function placeOrder(){
     }
 
 
-    /* FINAL 20 KM SECURITY CHECK */
-
     if(
       deliveryDistance === null ||
       customerLat === null ||
@@ -4757,16 +4929,6 @@ async function placeOrder(){
       Date.now();
 
 
-    /*
-      COMPLETE ORDER DATA
-
-      Items + customer address +
-      exact Google Maps link +
-      latitude + longitude +
-      place name + distance +
-      delivery charge + total
-    */
-
     const orderData = {
 
       ownerUid:
@@ -4860,8 +5022,6 @@ async function placeOrder(){
 
     };
 
-
-    /* SAVE ORDER */
 
     await set(
       orderRef,
