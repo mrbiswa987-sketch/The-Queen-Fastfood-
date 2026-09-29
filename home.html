@@ -714,6 +714,7 @@ header{
   text-align:center;
   font-size:10px;
   color:#666;
+  min-width:0;
 }
 
 .step-line{
@@ -721,14 +722,72 @@ header{
   background:#292929;
   margin-bottom:7px;
   border-radius:5px;
+  transition:background .25s ease,box-shadow .25s ease;
+}
+
+.step-icon{
+  line-height:1.2;
+}
+
+.step-label{
+  margin-top:3px;
+  line-height:1.25;
+}
+
+.step.done{
+  color:#f59b23;
+}
+
+.step.done .step-line{
+  background:#f59b23;
+  box-shadow:0 0 8px rgba(245,155,35,.25);
 }
 
 .step.active{
   color:#f59b23;
+  font-weight:800;
+  animation:trackingActiveBlink 1.15s ease-in-out infinite;
 }
 
 .step.active .step-line{
   background:#f59b23;
+  box-shadow:0 0 12px rgba(245,155,35,.65);
+  animation:trackingLineBlink 1.15s ease-in-out infinite;
+}
+
+.step.active .step-icon{
+  animation:trackingIconBlink 1.15s ease-in-out infinite;
+}
+
+@keyframes trackingActiveBlink{
+  0%,100%{
+    opacity:1;
+  }
+  50%{
+    opacity:.48;
+  }
+}
+
+@keyframes trackingLineBlink{
+  0%,100%{
+    opacity:1;
+    box-shadow:0 0 12px rgba(245,155,35,.65);
+  }
+  50%{
+    opacity:.38;
+    box-shadow:0 0 3px rgba(245,155,35,.2);
+  }
+}
+
+@keyframes trackingIconBlink{
+  0%,100%{
+    transform:scale(1);
+    filter:drop-shadow(0 0 4px rgba(245,155,35,.35));
+  }
+  50%{
+    transform:scale(1.14);
+    filter:drop-shadow(0 0 10px rgba(245,155,35,.8));
+  }
 }
 
 
@@ -1868,10 +1927,6 @@ footer a{
   </section>
 
 
-  <!-- =================================================
-       IMPORTANT NOTICES
-  ================================================== -->
-
   <section class="important-notices">
 
     <h2 class="important-notices-title">
@@ -1885,8 +1940,6 @@ footer a{
 
     <div class="notice-grid">
 
-
-      <!-- NOTICE 1 -->
 
       <div class="notice-card">
 
@@ -1907,8 +1960,6 @@ footer a{
 
       </div>
 
-
-      <!-- NOTICE 2 -->
 
       <div class="notice-card">
 
@@ -1932,8 +1983,6 @@ footer a{
       </div>
 
 
-      <!-- NOTICE 3 -->
-
       <div class="notice-card">
 
         <div class="notice-label">
@@ -1955,8 +2004,6 @@ footer a{
 
       </div>
 
-
-      <!-- NOTICE 4 -->
 
       <div class="notice-card notice-delivery">
 
@@ -2677,6 +2724,7 @@ function fillCheckoutCustomer(){
   }
 
   validateCheckout();
+
 
 }
 
@@ -4156,6 +4204,7 @@ function openCheckout(){
 
   validateCheckout();
 
+
 }
 
 
@@ -4291,6 +4340,7 @@ function renderOrderSummary(){
     html;
 
   validateCheckout();
+
 
 }
 
@@ -5065,7 +5115,6 @@ async function reverseGeocodeLocation(
     ).value =
       `${finalName} • ${deliveryDistance.toFixed(2)} km away`;
 
-
   }
   catch(error){
 
@@ -5189,8 +5238,10 @@ document.getElementById(
           error
         );
 
+
         button.textContent =
           "📍 Use Current Location";
+
 
         alert(
           "Current location could not be accessed. You can use 'Choose Different Location' instead."
@@ -5295,15 +5346,18 @@ function haversine(
   const R =
     6371;
 
+
   const dLat =
     (lat2-lat1) *
     Math.PI /
     180;
 
+
   const dLon =
     (lon2-lon1) *
     Math.PI /
     180;
+
 
   const a =
     Math.sin(dLat/2)**2 +
@@ -5319,6 +5373,7 @@ function haversine(
     Math.sin(
       dLon/2
     )**2;
+
 
   return R * 2 *
     Math.atan2(
@@ -5342,11 +5397,13 @@ document.getElementById(
     selectedPaymentMethod =
       "COD";
 
+
     document.getElementById(
       "codButton"
     ).classList.add(
       "active"
     );
+
 
     document.getElementById(
       "onlineButton"
@@ -5354,11 +5411,13 @@ document.getElementById(
       "active"
     );
 
+
     document.getElementById(
       "paymentWarning"
     ).classList.add(
       "hidden"
     );
+
 
     validateCheckout();
 
@@ -5375,11 +5434,13 @@ document.getElementById(
     selectedPaymentMethod =
       "ONLINE";
 
+
     document.getElementById(
       "onlineButton"
     ).classList.add(
       "active"
     );
+
 
     document.getElementById(
       "codButton"
@@ -5387,11 +5448,13 @@ document.getElementById(
       "active"
     );
 
+
     document.getElementById(
       "paymentWarning"
     ).classList.remove(
       "hidden"
     );
+
 
     validateCheckout();
 
@@ -5426,6 +5489,7 @@ document.getElementById(
         .replace(/\D/g,"")
         .slice(0,10);
 
+
     validateCheckout();
 
   }
@@ -5443,10 +5507,12 @@ function validateCheckout(){
       "customerName"
     );
 
+
   const phoneInput =
     document.getElementById(
       "customerPhone"
     );
+
 
   const addressInput =
     document.getElementById(
@@ -5468,8 +5534,10 @@ function validateCheckout(){
   const name =
     nameInput.value.trim();
 
+
   const phone =
     phoneInput.value.trim();
+
 
   const address =
     addressInput.value.trim();
@@ -5574,6 +5642,7 @@ async function placeOrder(){
 
       button.textContent =
         "Connecting...";
+
 
       user =
         await startCustomerAuth();
@@ -5680,9 +5749,11 @@ async function placeOrder(){
         "Please enter a valid name."
       );
 
+
       document.getElementById(
         "customerName"
       ).focus();
+
 
       return;
 
@@ -5695,9 +5766,11 @@ async function placeOrder(){
         "Please enter a valid 10 digit mobile number."
       );
 
+
       document.getElementById(
         "customerPhone"
       ).focus();
+
 
       return;
 
@@ -5710,9 +5783,11 @@ async function placeOrder(){
         "Please enter your complete delivery address."
       );
 
+
       document.getElementById(
         "customerAddress"
       ).focus();
+
 
       return;
 
@@ -5725,9 +5800,11 @@ async function placeOrder(){
         "Please add your Google Maps delivery location."
       );
 
+
       document.getElementById(
         "differentLocationButton"
       ).click();
+
 
       return;
 
@@ -5744,6 +5821,7 @@ async function placeOrder(){
         "Please confirm a Google Maps location containing exact coordinates."
       );
 
+
       return;
 
     }
@@ -5758,6 +5836,7 @@ async function placeOrder(){
         "❌ Delivery is available only within 20 km."
       );
 
+
       return;
 
     }
@@ -5768,6 +5847,7 @@ async function placeOrder(){
       alert(
         "Your cart is empty."
       );
+
 
       return;
 
@@ -5780,6 +5860,7 @@ async function placeOrder(){
         "Please complete all required checkout details."
       );
 
+
       return;
 
     }
@@ -5787,6 +5868,7 @@ async function placeOrder(){
 
     button.disabled =
       true;
+
 
     button.textContent =
       "Placing Order...";
@@ -5962,6 +6044,7 @@ async function placeOrder(){
       orderId
     );
 
+
     localStorage.setItem(
       "lastOrderFirebaseKey",
       firebaseKey
@@ -6005,7 +6088,9 @@ async function placeOrder(){
 
     cart = [];
 
+
     renderCart();
+
 
     closeCheckout();
 
@@ -6026,12 +6111,15 @@ async function placeOrder(){
           "hidden"
         );
 
+
         document.getElementById(
           "trackInput"
         ).value =
           orderId;
 
+
         trackOrder();
+
 
         window.scrollTo({
 
@@ -6042,6 +6130,7 @@ async function placeOrder(){
             "smooth"
 
         });
+
 
       },
       1800
@@ -6079,15 +6168,16 @@ async function placeOrder(){
       message
     );
 
-
   }
   finally{
 
     button.disabled =
       false;
 
+
     button.textContent =
       "Place Order";
+
 
     validateCheckout();
 
@@ -6114,6 +6204,7 @@ function createOrderId(
     )
     .toUpperCase();
 
+
   return (
     "TQF2026-" +
     clean.slice(-8)
@@ -6137,12 +6228,14 @@ function normalizeWhatsApp(
         ""
       );
 
+
   if(n.length === 10){
 
     n =
       "91" + n;
 
   }
+
 
   return n;
 
@@ -6158,19 +6251,27 @@ function buildWhatsAppMessage(
       ? "📍 Current Location"
       : "🗺️ Google Maps Delivery Location";
 
+
   let text =
 `🍽️ *THE QUEEN FAST FOOD*
+
 ━━━━━━━━━━━━━━━━━━
+
 🧾 *NEW ORDER RECEIVED*
+
 
 🔖 *Order ID:* ${order.orderId}
 
+
 👤 *Customer:* ${order.customerName}
+
 
 📞 *Phone:* ${order.phone}
 
+
 🏠 *Delivery Address:*
 ${order.address}
+
 
 ━━━━━━━━━━━━━━━━━━
 🍴 *ORDER ITEMS*
@@ -6182,8 +6283,11 @@ ${order.address}
 
       text +=
 `${index + 1}. 🍽️ *${item.name}*
+
 Qty: *${item.quantity}*
+
 Price: *₹${item.price * item.quantity}*
+
 
 `;
 
@@ -6193,15 +6297,21 @@ Price: *₹${item.price * item.quantity}*
 
   text +=
 `━━━━━━━━━━━━━━━━━━
+
 🧮 *BILL SUMMARY*
+
 
 🛒 *Item Total:* ₹${order.subtotal}
 
+
 📍 *Distance:* ${order.deliveryDistance} km
+
 
 🚚 *Delivery Charge:* ₹${order.deliveryCharge}
 
+
 💰 *GRAND TOTAL:* ₹${order.total}
+
 
 💳 *Payment:* ${
   order.paymentMethod === "COD"
@@ -6209,19 +6319,25 @@ Price: *₹${item.price * item.quantity}*
     : "💳 Online Payment"
 }
 
+
 ━━━━━━━━━━━━━━━━━━
 
+
 ${locationType}
+
 
 📌 *Location:* ${
   order.customerLocationName ||
   "Google Maps selected delivery location"
 }
 
+
 🗺️ *EXACT GOOGLE MAPS LOCATION:*
 ${order.customerLocation}
 
+
 ━━━━━━━━━━━━━━━━━━
+
 
 🕐 *Order Time:* ${
   new Date(
@@ -6229,7 +6345,9 @@ ${order.customerLocation}
   ).toLocaleString("en-IN")
 }
 
+
 🙏 *Thank you for ordering from The Queen Fast Food!* ❤️
+
 
 🍴 *Fresh Food • Fast Service • Easy Ordering*
 `;
@@ -6278,14 +6396,17 @@ async function trackOrder(){
 
     }
 
+
     trackingOrderId =
       "";
+
 
     result.innerHTML = `
       <p style="color:#888">
         Enter an Order ID.
       </p>
     `;
+
 
     return;
 
@@ -6295,6 +6416,7 @@ async function trackOrder(){
   try{
 
     await startCustomerAuth();
+
 
     currentUser =
       auth.currentUser;
@@ -6400,11 +6522,15 @@ async function trackOrder(){
                 🔎
 
                 <p style="margin-top:8px">
+
                   Order not found in your orders.
+
                 </p>
 
                 <small>
+
                   Please check your Order ID.
+
                 </small>
 
               </div>
@@ -6434,8 +6560,11 @@ async function trackOrder(){
           result.innerHTML = `
 
             <p style="color:#ff625b">
+
               ❌ Unable to track order.
+
               Please try again.
+
             </p>
 
           `;
@@ -6456,7 +6585,9 @@ async function trackOrder(){
     result.innerHTML = `
 
       <p style="color:#ff625b">
+
         ❌ Unable to track order.
+
       </p>
 
     `;
@@ -6490,21 +6621,27 @@ function renderTrackedOrder(
   const steps = [
 
     [
+      "placed",
+      "🛒",
+      "Order Placed"
+    ],
+
+    [
       "received",
-      "📥",
-      "Received"
+      "📦",
+      "Order Received"
     ],
 
     [
-      "confirmed",
-      "✅",
-      "Confirmed"
+      "processing",
+      "⚙️",
+      "Processing"
     ],
 
     [
-      "preparing",
+      "making",
       "👨‍🍳",
-      "Preparing"
+      "Making"
     ],
 
     [
@@ -6515,17 +6652,65 @@ function renderTrackedOrder(
 
     [
       "delivered",
-      "🎉",
+      "🏠",
       "Delivered"
     ]
 
   ];
 
 
-  const currentIndex =
-    steps.findIndex(
-      x=>x[0] === status
-    );
+  let currentIndex =
+    0;
+
+
+  if(status === "received"){
+
+    currentIndex =
+      1;
+
+  }
+  else if(
+    status === "confirmed" ||
+    status === "processing"
+  ){
+
+    currentIndex =
+      2;
+
+  }
+  else if(
+    status === "preparing" ||
+    status === "making"
+  ){
+
+    currentIndex =
+      3;
+
+  }
+  else if(
+    status === "out_for_delivery"
+  ){
+
+    currentIndex =
+      4;
+
+  }
+  else if(
+    status === "delivered"
+  ){
+
+    currentIndex =
+      5;
+
+  }
+  else if(
+    status === "cancelled"
+  ){
+
+    currentIndex =
+      -1;
+
+  }
 
 
   let timeline = "";
@@ -6534,27 +6719,43 @@ function renderTrackedOrder(
   steps.forEach(
     (step,index)=>{
 
-      const active =
-        currentIndex >= index;
+      let className =
+        "";
+
+
+      if(
+        status !== "cancelled" &&
+        index < currentIndex
+      ){
+
+        className =
+          "done";
+
+      }
+      else if(
+        status !== "cancelled" &&
+        index === currentIndex
+      ){
+
+        className =
+          "active";
+
+      }
 
 
       timeline += `
 
         <div
-          class="step ${
-            active
-              ? "active"
-              : ""
-          }"
+          class="step ${className}"
         >
 
           <div class="step-line"></div>
 
-          <div>
+          <div class="step-icon">
             ${step[1]}
           </div>
 
-          <div>
+          <div class="step-label">
             ${step[2]}
           </div>
 
@@ -6646,6 +6847,7 @@ function renderTrackedOrder(
 
         </div>
 
+
         <div class="order-status">
 
           ${
@@ -6682,7 +6884,9 @@ function renderTrackedOrder(
             color:#f59b23
           "
         >
+
           🍴 Your Items
+
         </h3>
 
         ${items}
@@ -6701,11 +6905,15 @@ function renderTrackedOrder(
       <div class="summary-row">
 
         <span>
+
           🛒 Item Total
+
         </span>
 
         <b>
+
           ₹${order.subtotal || 0}
+
         </b>
 
       </div>
@@ -6714,11 +6922,15 @@ function renderTrackedOrder(
       <div class="summary-row">
 
         <span>
+
           🚚 Delivery
+
         </span>
 
         <b>
+
           ₹${order.deliveryCharge || 0}
+
         </b>
 
       </div>
@@ -6727,11 +6939,15 @@ function renderTrackedOrder(
       <div class="summary-row total">
 
         <span>
+
           💰 Total
+
         </span>
 
         <span>
+
           ₹${order.total || 0}
+
         </span>
 
       </div>
@@ -6745,7 +6961,9 @@ function renderTrackedOrder(
               id="deliveredButton"
               class="primary"
             >
+
               🎉 Confirm Delivered
+
             </button>
 
           `
@@ -6768,7 +6986,9 @@ function renderTrackedOrder(
                 font-weight:700
               "
             >
+
               🎉 Order Delivered Successfully!
+
             </div>
 
           `
@@ -6791,12 +7011,15 @@ function renderTrackedOrder(
                 font-weight:700
               "
             >
+
               ❌ This order has been cancelled.
+
             </div>
 
           `
           : ""
       }
+
 
     </div>
 
@@ -6839,17 +7062,29 @@ function getStatusEmoji(
 
   const map = {
 
-    received:"📥",
+    received:
+      "📦",
 
-    confirmed:"✅",
+    confirmed:
+      "⚙️",
 
-    preparing:"👨‍🍳",
+    processing:
+      "⚙️",
 
-    out_for_delivery:"🛵",
+    preparing:
+      "👨‍🍳",
 
-    delivered:"🎉",
+    making:
+      "👨‍🍳",
 
-    cancelled:"❌"
+    out_for_delivery:
+      "🛵",
+
+    delivered:
+      "🏠",
+
+    cancelled:
+      "❌"
 
   };
 
@@ -7007,12 +7242,14 @@ function showDeliverySuccess(){
 
 
   const flowers = [
+
     "🌸",
     "🌺",
     "🌷",
     "🌼",
     "💮",
     "🌹"
+
   ];
 
 
@@ -7144,6 +7381,7 @@ function showDeliverySuccess(){
 
       }
 
+
     },
     3500
   );
@@ -7161,18 +7399,29 @@ function formatStatus(
 
   const map = {
 
-    received:"Received",
+    received:
+      "Order Received",
 
-    confirmed:"Confirmed",
+    confirmed:
+      "Processing",
 
-    preparing:"Preparing",
+    processing:
+      "Processing",
+
+    preparing:
+      "Making",
+
+    making:
+      "Making",
 
     out_for_delivery:
       "Out for Delivery",
 
-    delivered:"Delivered",
+    delivered:
+      "Delivered",
 
-    cancelled:"Cancelled"
+    cancelled:
+      "Cancelled"
 
   };
 
@@ -7307,6 +7556,7 @@ document.getElementById(
 
     }
 
+
   }
   catch(error){
 
@@ -7318,6 +7568,7 @@ document.getElementById(
   }
 
 })();
+
 
 </script>
 
