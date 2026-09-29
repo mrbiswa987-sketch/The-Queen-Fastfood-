@@ -8,44 +8,79 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --orange:#ff7a00;
-  --orange2:#ff9d3d;
-  --gold:#d4af37;
-  --black:#070707;
-  --card:#111111;
-  --muted:#9b9b9b;
-  --white:#ffffff;
-  --danger:#ff3b30;
-  --green:#22c55e;
-}
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
+body{
+  background:#070707;
+  color:#fff;
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
 }
 
-body{
-  background:var(--black);
-  color:var(--white);
-  font-family:'Inter',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
+body::before{
+  content:"♛";
+  position:fixed;
+  left:50%;
+  top:52%;
+  transform:translate(-50%,-50%);
+  z-index:-3;
+  font-family:"Times New Roman",serif;
+  font-size:min(62vw,700px);
+  line-height:1;
+  color:rgba(245,155,35,.16);
+  opacity:.40;
+  pointer-events:none;
+  filter:
+    drop-shadow(0 0 22px rgba(245,155,35,.28))
+    drop-shadow(0 0 65px rgba(245,155,35,.14));
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:650px;
+  height:650px;
+  left:50%;
+  top:45%;
+  transform:translate(-50%,-50%);
+  z-index:-2;
+  pointer-events:none;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(245,155,35,.13) 0%,
+      rgba(245,155,35,.07) 22%,
+      rgba(245,155,35,.025) 48%,
+      transparent 72%
+    );
+  filter:blur(12px);
+  animation:gimbalGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes gimbalGlow{
+  from{
+    transform:translate(-50%,-50%) scale(.88);
+    opacity:.65;
+  }
+  to{
+    transform:translate(-50%,-50%) scale(1.12);
+    opacity:1;
+  }
 }
 
 button,
 input,
 textarea,
 select{
-  font-family:inherit;
+  font:inherit;
 }
 
 button{
@@ -56,257 +91,462 @@ button{
   display:none!important;
 }
 
-.container{
-  width:min(1180px,92%);
-  margin:auto;
-}
 
-/* ================= HEADER ================= */
+/* =====================================================
+   HEADER
+===================================================== */
 
 header{
   position:sticky;
   top:0;
-  z-index:1000;
-  background:rgba(7,7,7,.94);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,122,0,.18);
+  z-index:100;
+  background:rgba(7,7,7,.96);
+  border-bottom:1px solid #292929;
+  backdrop-filter:blur(12px);
 }
 
-.navbar{
-  height:76px;
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:16px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:20px;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.menu-button{
+  width:38px;
+  height:38px;
+  border:1px solid #333;
+  background:#111;
+  color:#d4af37;
+  border-radius:10px;
+  font-size:22px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+
+.menu-button:hover{
+  border-color:#d4af37;
+  background:#181818;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#fff;
-  text-decoration:none;
-}
-
-.logo-crown{
-  font-size:28px;
-  filter:drop-shadow(0 0 8px rgba(255,122,0,.45));
-}
-
-.logo-text{
-  font-family:'Cormorant Garamond',serif;
-  font-size:28px;
+  font-family:"Cormorant Garamond",serif;
+  font-size:30px;
   font-weight:700;
-  letter-spacing:.5px;
+  color:#f5f5f5;
 }
 
-.logo-text span{
-  color:var(--orange);
-}
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:28px;
-}
-
-.nav-links a{
-  color:#ddd;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:600;
-  transition:.25s;
-}
-
-.nav-links a:hover{
-  color:var(--orange);
+.logo span{
+  color:#d4af37;
 }
 
 .nav-actions{
   display:flex;
   align-items:center;
-  gap:10px;
-}
-
-.icon-btn{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.12);
-  background:#101010;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-  transition:.25s;
-}
-
-.icon-btn:hover{
-  border-color:var(--orange);
-  color:var(--orange);
-  transform:translateY(-1px);
-}
-
-.cart-count{
-  position:absolute;
-  margin:-30px 0 0 27px;
-  min-width:18px;
-  height:18px;
-  padding:0 5px;
-  border-radius:20px;
-  background:var(--orange);
-  color:#000;
-  font-size:10px;
-  font-weight:800;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-  position:relative;
-  min-height:600px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 80% 30%,rgba(255,122,0,.18),transparent 35%),
-    radial-gradient(circle at 10% 80%,rgba(255,122,0,.08),transparent 35%);
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    90deg,
-    rgba(7,7,7,1) 0%,
-    rgba(7,7,7,.88) 45%,
-    rgba(7,7,7,.45) 100%
-  );
-  pointer-events:none;
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:650px;
-  padding:80px 0;
-}
-
-.hero-badge{
-  display:inline-flex;
-  align-items:center;
   gap:8px;
-  padding:8px 14px;
-  border:1px solid rgba(255,122,0,.35);
-  border-radius:999px;
-  color:var(--orange2);
-  background:rgba(255,122,0,.07);
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  margin-bottom:22px;
 }
 
-.hero h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(58px,8vw,94px);
-  line-height:.9;
-  font-weight:700;
-  letter-spacing:-2px;
-}
-
-.hero h1 span{
-  color:var(--orange);
-}
-
-.hero p{
-  margin-top:24px;
-  color:#bcbcbc;
-  font-size:16px;
-  line-height:1.8;
-  max-width:570px;
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:30px;
-}
-
-.primary-btn,
-.secondary-btn{
-  min-height:48px;
-  padding:0 22px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:800;
-  border:1px solid transparent;
-  transition:.25s;
-}
-
-.primary-btn{
-  background:var(--orange);
-  color:#080808;
-}
-
-.primary-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 30px rgba(255,122,0,.22);
-}
-
-.secondary-btn{
+.cart-top{
+  border:1px solid #d4af37;
   background:#111;
   color:#fff;
-  border-color:#292929;
+  border-radius:12px;
+  padding:10px 15px;
 }
 
-.secondary-btn:hover{
-  border-color:var(--orange);
-  color:var(--orange);
+.cart-top b{
+  color:#d4af37;
 }
 
-/* ================= SECTION ================= */
-
-section{
-  padding:78px 0;
+.logout-top{
+  border:1px solid #ff453a;
+  background:#170909;
+  color:#ff625b;
+  border-radius:12px;
+  padding:10px 13px;
+  font-weight:800;
 }
 
-.section-head{
-  text-align:center;
-  margin-bottom:38px;
+.logout-top:hover{
+  background:#281010;
 }
 
-.section-kicker{
-  color:var(--orange);
-  text-transform:uppercase;
-  letter-spacing:2px;
+
+/* =====================================================
+   CUSTOMER MENU
+===================================================== */
+
+.customer-menu-overlay{
+  position:fixed;
+  inset:0;
+  z-index:12000;
+  background:rgba(0,0,0,.58);
+}
+
+.customer-menu-box{
+  position:absolute;
+  top:70px;
+  left:20px;
+  width:220px;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.65);
+}
+
+.customer-menu-item{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#fff;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.customer-menu-item:hover{
+  background:#191919;
+  color:#d4af37;
+}
+
+
+/* =====================================================
+   ORDER HISTORY
+===================================================== */
+
+.order-history-overlay{
+  position:fixed;
+  inset:0;
+  z-index:13000;
+  background:rgba(0,0,0,.78);
+}
+
+.order-history-modal{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(560px,94%);
+  max-height:88vh;
+  overflow:auto;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:18px;
+  padding:18px;
+}
+
+.order-history-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.order-history-head h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:29px;
+  color:#d4af37;
+}
+
+.order-history-user{
+  color:#777;
+  font-size:10px;
+  margin-bottom:12px;
+}
+
+.order-history-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.history-card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:10px 11px;
+}
+
+.history-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.history-order-id{
+  color:#d4af37;
   font-size:11px;
   font-weight:800;
 }
 
-.section-title{
-  margin-top:8px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:48px;
+.history-status{
+  font-size:9px;
+  font-weight:800;
+  padding:4px 7px;
+  border-radius:12px;
+  background:#292929;
+}
+
+.history-date{
+  color:#666;
+  font-size:9px;
+  margin-top:4px;
+}
+
+.history-items{
+  color:#aaa;
+  font-size:10px;
+  line-height:1.5;
+  margin-top:6px;
+}
+
+.history-total{
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  margin-top:6px;
+}
+
+.history-empty{
+  text-align:center;
+  padding:30px 15px;
+  color:#777;
+  font-size:12px;
+}
+
+.history-loading{
+  text-align:center;
+  padding:25px;
+  color:#777;
+  font-size:11px;
+}
+
+
+/* =====================================================
+   CUSTOMER LOGIN
+===================================================== */
+
+.customer-login-overlay{
+  position:fixed;
+  inset:0;
+  z-index:30000;
+  background:rgba(0,0,0,.92);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.customer-login-box{
+  width:min(420px,94%);
+  background:#101010;
+  border:1px solid #333;
+  border-radius:20px;
+  padding:28px 24px;
+  text-align:center;
+  box-shadow:0 20px 70px rgba(0,0,0,.7);
+}
+
+.customer-login-crown{
+  font-size:55px;
+  margin-bottom:8px;
+}
+
+.customer-login-box h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:38px;
+  color:#d4af37;
+}
+
+.customer-login-box p{
+  color:#999;
+  font-size:13px;
+  margin:8px 0 22px;
+  line-height:1.5;
+}
+
+.customer-login-field{
+  text-align:left;
+  margin-bottom:14px;
+}
+
+.customer-login-field label{
+  display:block;
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.customer-login-field input{
+  width:100%;
+  background:#080808;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:10px;
+  padding:13px;
+  outline:none;
+}
+
+.customer-login-field input:focus{
+  border-color:#d4af37;
+}
+
+.customer-login-button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#d4af37;
+  color:#000;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.customer-login-error{
+  color:#ff625b;
+  font-size:12px;
+  margin-top:10px;
+  min-height:16px;
+}
+
+.customer-welcome{
+  color:#aaa;
+  font-size:11px;
+  margin-right:3px;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 20px 35px;
+  text-align:center;
+  position:relative;
+}
+
+.hero h1{
+  font-family:"Playfair Display","Cormorant Garamond",serif;
+  font-size:clamp(48px,8vw,82px);
+  line-height:.95;
+  font-weight:800;
+  letter-spacing:1px;
+  text-shadow:0 0 18px rgba(245,155,35,.15);
+}
+
+.hero h1 .welcome{
+  display:block;
+  color:#fff;
+  font-family:"Cormorant Garamond",serif;
+  font-size:.46em;
+  font-weight:600;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.hero h1 .queen-title{
+  display:block;
+  color:#d4af37;
+  font-family:"Playfair Display","Cormorant Garamond",serif;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.hero p{
+  color:#aaa;
+  margin-top:18px;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:25px;
+  padding:10px 15px;
+  border:1px solid #303030;
+  border-radius:30px;
+  background:#101010;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#777;
+}
+
+.dot.open{
+  background:#30d158;
+}
+
+.dot.closed{
+  background:#ff453a;
+}
+
+.order-time{
+  margin-top:12px;
+  color:#d4af37;
+  font-size:13px;
   font-weight:700;
+  letter-spacing:.7px;
 }
 
-.section-subtitle{
-  margin:10px auto 0;
-  color:#888;
-  max-width:620px;
-  line-height:1.7;
+.brand-message{
+  max-width:360px;
+  margin:22px auto 0;
+  line-height:1.45;
+}
+
+.brand-message strong{
+  display:block;
+  color:#fff;
   font-size:14px;
+  letter-spacing:1px;
 }
 
-/* ================= MENU ================= */
+.brand-message span{
+  display:block;
+  margin-top:5px;
+  color:#999;
+  font-size:12px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:25px 20px 60px;
+}
+
+.section-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:42px;
+  margin-bottom:25px;
+}
 
 .menu-grid{
   display:grid;
@@ -314,336 +554,6797 @@ section{
   gap:18px;
 }
 
-.menu-card{
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(145deg,#151515,#0d0d0d);
-  border:1px solid #222;
+.card{
+  background:#101010;
+  border:1px solid #292929;
   border-radius:18px;
-  transition:.3s;
+  overflow:hidden;
+  transition:.25s;
 }
 
-.menu-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(255,122,0,.45);
-  box-shadow:0 18px 45px rgba(0,0,0,.3);
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#d4af37;
 }
 
-.menu-image{
-  height:190px;
-  background:#181818;
-  position:relative;
+.card-img{
+  height:210px;
+  background:#191919;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   overflow:hidden;
 }
 
-.menu-image img{
+.card-img img{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
 }
 
-.menu-image.no-image{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#444;
-  font-size:45px;
+.card-content{
+  padding:17px;
 }
 
-.stock-badge{
-  position:absolute;
-  top:10px;
-  right:10px;
-  padding:5px 9px;
-  border-radius:999px;
-  background:rgba(7,7,7,.78);
-  backdrop-filter:blur(8px);
-  font-size:10px;
+.card h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.price{
+  color:#d4af37;
+  font-size:20px;
   font-weight:800;
 }
 
-.stock-badge.available{
-  color:#7df3a3;
-}
-
-.stock-badge.unavailable{
-  color:#ff7070;
-}
-
-.menu-info{
-  padding:16px;
-}
-
-.menu-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:24px;
-  font-weight:700;
-}
-
-.menu-description{
-  color:#777;
-  font-size:12px;
-  line-height:1.6;
-  margin-top:5px;
-  min-height:38px;
-}
-
-.menu-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+.card button{
+  width:100%;
   margin-top:14px;
-}
-
-.menu-price{
-  color:var(--orange2);
-  font-size:19px;
-  font-weight:800;
-}
-
-.add-btn{
+  padding:12px;
   border:0;
-  background:var(--orange);
+  border-radius:11px;
+  background:#d4af37;
   color:#000;
-  padding:9px 14px;
-  border-radius:9px;
-  font-size:12px;
   font-weight:800;
 }
 
-.add-btn:disabled{
-  opacity:.4;
+.card button:disabled{
+  background:#383838;
+  color:#888;
   cursor:not-allowed;
 }
 
-/* ================= OFFER ================= */
-
-.offer-circle{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  width:74px;
-  height:74px;
-  border-radius:50%;
-  z-index:900;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:radial-gradient(circle,#ffb15e,#ff7a00 65%,#b84e00);
-  box-shadow:0 10px 35px rgba(255,122,0,.3);
-  border:2px solid rgba(255,255,255,.2);
-  cursor:pointer;
-  animation:offerPulse 2s infinite;
+.stock{
+  font-size:12px;
+  color:#ff625b;
+  margin-top:6px;
+  font-weight:700;
 }
 
-@keyframes offerPulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.06)}
-}
 
-.offer-circle span{
-  font-size:10px;
-  font-weight:900;
-  color:#080808;
+/* =====================================================
+   TRACK
+===================================================== */
+
+.track-section{
+  padding-top:10px!important;
+  padding-bottom:28px!important;
   text-align:center;
-  line-height:1.05;
 }
 
-/* ================= CART ================= */
+.track-section .section-title{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.track-box{
+  max-width:430px;
+  margin:0 auto;
+  background:#101010;
+  border:1px solid #292929;
+  padding:11px;
+  border-radius:13px;
+}
+
+.track-row{
+  display:flex;
+  gap:7px;
+}
+
+.track-row input{
+  flex:1;
+  background:#080808;
+  color:#fff;
+  border:1px solid #333;
+  padding:9px 11px;
+  border-radius:8px;
+  font-size:12px;
+}
+
+.track-row button{
+  background:#d4af37;
+  border:0;
+  padding:9px 13px;
+  border-radius:8px;
+  font-weight:800;
+  font-size:12px;
+}
+
+.track-result{
+  margin-top:10px;
+}
+
+.order-card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:15px;
+  padding:18px;
+  text-align:left;
+}
+
+.order-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.order-id{
+  color:#d4af37;
+  font-weight:800;
+}
+
+.order-status{
+  padding:6px 10px;
+  border-radius:20px;
+  background:#292929;
+  font-size:12px;
+  font-weight:800;
+}
+
+.timeline{
+  display:flex;
+  justify-content:space-between;
+  margin-top:25px;
+  gap:4px;
+}
+
+.step{
+  flex:1;
+  text-align:center;
+  font-size:10px;
+  color:#666;
+  min-width:0;
+}
+
+.step-line{
+  height:4px;
+  background:#292929;
+  margin-bottom:7px;
+  border-radius:5px;
+  transition:background .25s ease, box-shadow .25s ease;
+}
+
+.step-icon{
+  line-height:1.2;
+}
+
+.step-label{
+  margin-top:3px;
+  line-height:1.25;
+}
+
+.step.done{
+  color:#d4af37;
+}
+
+.step.done .step-line{
+  background:#d4af37;
+  box-shadow:0 0 8px rgba(245,155,35,.25);
+}
+
+.step.active{
+  color:#d4af37;
+  font-weight:800;
+  animation:trackingActiveBlink 1.15s ease-in-out infinite;
+}
+
+.step.active .step-line{
+  background:#d4af37;
+  box-shadow:0 0 12px rgba(245,155,35,.65);
+  animation:trackingLineBlink 1.15s ease-in-out infinite;
+}
+
+.step.active .step-icon{
+  animation:trackingIconBlink 1.15s ease-in-out infinite;
+}
+
+@keyframes trackingActiveBlink{
+  0%,100%{opacity:1;}
+  50%{opacity:.48;}
+}
+
+@keyframes trackingLineBlink{
+  0%,100%{opacity:1;box-shadow:0 0 12px rgba(245,155,35,.65);}
+  50%{opacity:.38;box-shadow:0 0 3px rgba(245,155,35,.2);}
+}
+
+@keyframes trackingIconBlink{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 4px rgba(245,155,35,.35));}
+  50%{transform:scale(1.14);filter:drop-shadow(0 0 10px rgba(245,155,35,.8));}
+}
+
+
+/* =====================================================
+   IMPORTANT NOTICES
+===================================================== */
+
+.important-notices{
+  max-width:1200px;
+  margin:0 auto;
+  padding:16px 20px 45px;
+}
+
+.important-notices-title{
+  text-align:left;
+  font-family:"Cormorant Garamond",serif;
+  font-size:32px;
+  color:#d4af37;
+  margin-bottom:5px;
+}
+
+.important-notices-subtitle{
+  text-align:left;
+  color:#777;
+  font-size:10px;
+  letter-spacing:1px;
+  margin-bottom:15px;
+  text-transform:uppercase;
+}
+
+.notice-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.notice-card{
+  position:relative;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245,155,35,.055),
+      rgba(16,16,16,.98) 48%,
+      rgba(245,155,35,.025)
+    );
+  border:1px solid #2c2c2c;
+  border-radius:13px;
+  padding:13px;
+  overflow:hidden;
+  transition:.25s;
+  min-width:0;
+}
+
+.notice-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:3px;
+  height:100%;
+  background:linear-gradient(
+    to bottom,
+    #d4af37,
+    rgba(245,155,35,.15)
+  );
+}
+
+.notice-card:hover{
+  border-color:#5a401d;
+  transform:translateY(-2px);
+}
+
+.notice-label{
+  color:#d4af37;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+  margin-bottom:5px;
+}
+
+.notice-card h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:19px;
+  line-height:1.1;
+  color:#fff;
+  margin-bottom:6px;
+}
+
+.notice-card p{
+  color:#999;
+  font-size:9.5px;
+  line-height:1.5;
+}
+
+.notice-contact{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:8px;
+  padding:6px 8px;
+  border-radius:7px;
+  background:#171717;
+  border:1px solid #333;
+  color:#d4af37;
+  font-size:9px;
+  font-weight:800;
+}
+
+.notice-delivery{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245,155,35,.075),
+      rgba(16,16,16,.98) 50%
+    );
+}
+
+.notice-heart{
+  color:#ff625b;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+  border-top:1px solid #222;
+  padding:35px 20px;
+  text-align:center;
+  color:#777;
+}
+
+footer a{
+  color:#d4af37;
+  text-decoration:none;
+}
+
+
+/* =====================================================
+   OVERLAYS
+===================================================== */
 
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(5px);
-  z-index:2000;
+  background:rgba(0,0,0,.75);
+  z-index:500;
 }
 
 .drawer{
   position:absolute;
-  right:0;
-  top:0;
-  height:100%;
-  width:min(440px,100%);
-  background:#0c0c0c;
-  border-left:1px solid #262626;
-  display:flex;
-  flex-direction:column;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(440px,94%);
+  max-height:90vh;
+  height:auto;
+  background:#101010;
+  padding:22px;
+  overflow:auto;
+  border:1px solid #292929;
+  border-radius:20px;
 }
 
 .drawer-head{
-  padding:20px;
-  border-bottom:1px solid #222;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
 }
 
-.drawer-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:30px;
-  font-weight:700;
-}
-
-.drawer-body{
-  flex:1;
-  overflow:auto;
-  padding:18px;
+.close{
+  background:#222;
+  color:#fff;
+  border:0;
+  width:38px;
+  height:38px;
+  border-radius:50%;
 }
 
 .cart-item{
   display:flex;
+  justify-content:space-between;
   gap:12px;
-  padding:13px 0;
-  border-bottom:1px solid #1d1d1d;
+  border-bottom:1px solid #292929;
+  padding:15px 0;
 }
 
-.cart-item-image{
-  width:62px;
-  height:62px;
-  border-radius:10px;
-  overflow:hidden;
-  background:#171717;
-  flex:none;
-}
-
-.cart-item-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.cart-item-info{
-  flex:1;
-}
-
-.cart-item-name{
-  font-size:14px;
-  font-weight:700;
-}
-
-.cart-item-price{
-  color:var(--orange2);
-  font-size:13px;
+.cart-item small{
+  color:#aaa;
+  display:block;
   margin-top:5px;
 }
 
-.qty-controls{
+.qty{
   display:flex;
   align-items:center;
   gap:8px;
-  margin-top:8px;
+  margin-top:7px;
 }
 
-.qty-btn{
-  width:25px;
-  height:25px;
-  border:1px solid #333;
-  border-radius:7px;
-  background:#151515;
+.qty button{
+  width:30px;
+  height:30px;
+  border:1px solid #444;
+  background:#191919;
   color:#fff;
+  border-radius:7px;
 }
 
-.cart-footer{
-  padding:18px;
-  border-top:1px solid #222;
+.cart-bottom{
+  margin-top:20px;
+  border-top:1px solid #292929;
+  padding-top:20px;
 }
 
 .total-row{
   display:flex;
   justify-content:space-between;
-  gap:15px;
-  margin-bottom:10px;
+  margin:8px 0;
+}
+
+.total-row.total{
+  font-size:22px;
+  font-weight:800;
+  color:#d4af37;
+}
+
+.primary{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#d4af37;
+  color:#000;
+  font-weight:800;
+  margin-top:15px;
+}
+
+.primary:disabled{
+  background:#444;
+  color:#888;
+  cursor:not-allowed;
+}
+
+.modal{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(600px,94%);
+  max-height:92vh;
+  overflow:auto;
+  background:#101010;
+  border:1px solid #333;
+  border-radius:20px;
+  padding:24px;
+}
+
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-group label{
+  display:block;
   color:#aaa;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  background:#080808;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:10px;
+  padding:13px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  outline:none;
+  border-color:#d4af37;
+}
+
+.form-group textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.location-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.location-buttons button{
+  padding:12px 8px;
+  background:#191919;
+  color:#d4af37;
+  border:1px solid #444;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.location-buttons button.active{
+  border-color:#d4af37;
+  background:#251b0d;
+}
+
+.location-display{
+  margin-top:10px;
+}
+
+.location-display input{
+  width:100%;
+}
+
+
+/* =====================================================
+   GOOGLE LOCATION BOX
+===================================================== */
+
+#differentLocationBox{
+  margin-top:8px;
+}
+
+.google-location-box{
+  margin-top:8px;
+  padding:10px;
+  background:#080808;
+  border:1px solid #333;
+  border-radius:10px;
+}
+
+.google-location-instruction{
+  color:#aaa;
+  font-size:11px;
+  line-height:1.45;
+  margin-bottom:8px;
+}
+
+.google-location-instruction strong{
+  color:#d4af37;
+}
+
+.google-location-open{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #444;
+  border-radius:8px;
+  background:#151515;
+  color:#d4af37;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.google-location-input{
+  width:100%;
+  background:#101010;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:8px;
+  padding:10px;
+  outline:none;
+  font-size:12px;
+}
+
+.google-location-input:focus{
+  border-color:#d4af37;
+}
+
+.google-location-confirm{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #d4af37;
+  border-radius:8px;
+  background:#191919;
+  color:#d4af37;
+  font-size:12px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.google-location-status{
+  color:#777;
+  font-size:10px;
+  line-height:1.45;
+  margin-top:7px;
+}
+
+
+/* =====================================================
+   DELIVERY LIMIT
+===================================================== */
+
+.delivery-limit{
+  margin-top:9px;
+  padding:9px 10px;
+  border-radius:8px;
+  background:#171717;
+  border:1px solid #333;
+  color:#aaa;
+  font-size:11px;
+  line-height:1.45;
+  text-align:center;
+}
+
+.delivery-limit strong{
+  color:#d4af37;
+}
+
+.delivery-inside{
+  margin-top:9px;
+  padding:10px;
+  border-radius:9px;
+  background:#102615;
+  border:1px solid #204b2a;
+  color:#30d158;
+  font-size:11px;
+  line-height:1.5;
+  font-weight:700;
+}
+
+.delivery-outside{
+  margin-top:9px;
+  padding:10px;
+  border-radius:9px;
+  background:#301010;
+  border:1px solid #552020;
+  color:#ff625b;
+  font-size:11px;
+  line-height:1.5;
+  font-weight:700;
+}
+
+.location-hint{
+  color:#888;
+  font-size:11px;
+  line-height:1.5;
+  margin-top:8px;
+}
+
+.summary{
+  background:#080808;
+  border:1px solid #292929;
+  padding:15px;
+  border-radius:12px;
+  margin:18px 0;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin:7px 0;
+}
+
+.payment-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.payment-option{
+  border:1px solid #333;
+  background:#151515;
+  color:#fff;
+  border-radius:12px;
+  padding:14px;
+  text-align:center;
+}
+
+.payment-option.active{
+  border-color:#d4af37;
+  color:#d4af37;
+}
+
+.warning{
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  background:#302000;
+  color:#f5b75b;
   font-size:13px;
 }
 
-.total-row.grand{
-  color:#fff;
+
+/* =====================================================
+   WEBSITE MODE
+===================================================== */
+
+.website-mode{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#070707;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:25px;
+}
+
+.website-mode-inner{
+  max-width:550px;
+}
+
+.website-mode-icon{
+  font-size:60px;
+}
+
+.website-mode h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:50px;
+  margin:15px 0;
+}
+
+.website-mode p{
+  color:#aaa;
+  line-height:1.7;
+}
+
+
+/* =====================================================
+   THANK YOU
+===================================================== */
+
+.thankyou{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  background:rgba(0,0,0,.94);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.flower{
+  font-size:80px;
+  animation:flower 1s infinite alternate;
+}
+
+@keyframes flower{
+  from{
+    transform:scale(.9) rotate(-5deg)
+  }
+  to{
+    transform:scale(1.1) rotate(5deg)
+  }
+}
+
+
+/* =====================================================
+   DELIVERY SUCCESS
+===================================================== */
+
+.delivery-success-message{
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  background:rgba(0,0,0,.94);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+
+.delivery-success-content{
+  position:relative;
+  z-index:3;
+  padding:25px;
+}
+
+.delivery-success-icon{
+  font-size:75px;
+  margin-bottom:15px;
+  animation:successPop .55s ease;
+}
+
+.delivery-success-message h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(38px,7vw,65px);
+  color:#d4af37;
+}
+
+.delivery-success-message p{
+  color:#aaa;
+  margin-top:12px;
   font-size:18px;
-  font-weight:800;
-  padding-top:10px;
-  border-top:1px solid #262626;
 }
 
-.checkout-btn{
-  width:100%;
-  margin-top:14px;
-  height:50px;
-  border:0;
-  border-radius:12px;
-  background:var(--orange);
-  color:#000;
-  font-weight:900;
+.flower-petal{
+  position:fixed;
+  top:-80px;
+  z-index:2;
+  pointer-events:none;
+  animation:petalFall linear forwards;
 }
 
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1000px){
-  .menu-grid{
-    grid-template-columns:repeat(3,1fr);
+@keyframes petalFall{
+  0%{
+    transform:translateY(-80px) rotate(0deg);
+    opacity:0;
   }
-
-  .nav-links{
-    display:none;
+  10%{
+    opacity:1
+  }
+  100%{
+    transform:
+      translateY(110vh)
+      translateX(var(--drift))
+      rotate(720deg);
+    opacity:0;
   }
 }
 
-@media(max-width:720px){
-  .navbar{
-    height:68px;
+@keyframes successPop{
+  0%{
+    transform:scale(.5);
+    opacity:0;
   }
+  70%{
+    transform:scale(1.08)
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
 
-  .logo-text{
-    font-size:23px;
-  }
 
-  .hero{
-    min-height:540px;
-  }
+/* =====================================================
+   MOBILE
+===================================================== */
 
-  .hero h1{
-    font-size:64px;
-  }
-
-  section{
-    padding:58px 0;
-  }
-
-  .section-title{
-    font-size:40px;
-  }
+@media(max-width:900px){
 
   .menu-grid{
     grid-template-columns:repeat(2,1fr);
-    gap:12px;
   }
 
-  .menu-image{
-    height:150px;
+  .notice-grid{
+    grid-template-columns:repeat(4,minmax(190px,1fr));
+    overflow-x:auto;
+    padding-bottom:5px;
   }
 
-  .menu-info{
-    padding:12px;
+  .notice-card{
+    min-width:190px;
   }
 
-  .menu-name{
-    font-size:20px;
-  }
 }
 
-@media(max-width:470px){
+@media(max-width:600px){
+
+  .nav{
+    padding:12px 10px;
+  }
+
+  .nav-left{
+    gap:7px;
+  }
+
+  .menu-button{
+    width:34px;
+    height:34px;
+    font-size:20px;
+  }
+
+  .logo{
+    font-size:22px;
+  }
+
+  .nav-actions{
+    gap:5px;
+  }
+
+  .cart-top,
+  .logout-top{
+    padding:8px 9px;
+    font-size:12px;
+    border-radius:10px;
+  }
+
+  .customer-welcome{
+    display:none;
+  }
+
+  .customer-menu-box{
+    top:60px;
+    left:10px;
+    width:205px;
+  }
+
+  .hero{
+    padding-top:50px;
+  }
+
+  .hero h1 .welcome{
+    letter-spacing:3px;
+  }
+
+  .hero h1 .queen-title{
+    letter-spacing:1px;
+  }
+
   .menu-grid{
     grid-template-columns:1fr;
   }
 
-  .menu-image{
-    height:210px;
+  .track-row{
+    flex-direction:column;
   }
 
-  .hero h1{
-    font-size:56px;
+  .timeline{
+    overflow:auto;
   }
+
+  .step{
+    min-width:70px;
+  }
+
+  .payment-options,
+  .location-buttons{
+    grid-template-columns:1fr;
+  }
+
+  .drawer{
+    width:94%;
+    max-height:88vh;
+  }
+
+  body::before{
+    font-size:90vw;
+  }
+
+  body::after{
+    width:430px;
+    height:430px;
+  }
+
+  .modal{
+    width:94%;
+    max-height:90vh;
+    padding:18px;
+  }
+
+  .customer-login-box{
+    padding:24px 18px;
+  }
+
+  .important-notices{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .important-notices-title{
+    font-size:30px;
+  }
+
+  .notice-card{
+    padding:12px;
+  }
+
+  .order-history-modal{
+    width:94%;
+    padding:14px;
+  }
+
 }
+</style>
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     CUSTOMER MENU
+===================================================== -->
+
+<div
+  id="customerMenuOverlay"
+  class="customer-menu-overlay hidden"
+>
+
+  <div
+    id="customerMenuBox"
+    class="customer-menu-box"
+  >
+
+    <button
+      id="myOrdersButton"
+      class="customer-menu-item"
+    >
+      📦 My Orders
+    </button>
+
+    <button
+      id="orderHistoryButton"
+      class="customer-menu-item"
+    >
+      🕐 Order History
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ORDER HISTORY
+===================================================== -->
+
+<div
+  id="orderHistoryOverlay"
+  class="order-history-overlay hidden"
+>
+
+  <div class="order-history-modal">
+
+    <div class="order-history-head">
+
+      <h2>
+        My Orders
+      </h2>
+
+      <button
+        id="closeOrderHistory"
+        class="close"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="orderHistoryUser"
+      class="order-history-user"
+    ></div>
+
+    <div
+      id="orderHistoryList"
+      class="order-history-list"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<div id="customerLoginOverlay" class="customer-login-overlay hidden">
+
+  <div class="customer-login-box">
+
+    <div class="customer-login-crown">👑</div>
+
+    <h2>Welcome to The Queen</h2>
+
+    <p>
+      Enter your name and mobile number to continue.
+    </p>
+
+    <div class="customer-login-field">
+
+      <label>Name</label>
+
+      <input
+        id="loginCustomerName"
+        type="text"
+        placeholder="Your name"
+        autocomplete="name"
+      >
+
+    </div>
+
+    <div class="customer-login-field">
+
+      <label>Mobile Number</label>
+
+      <input
+        id="loginCustomerPhone"
+        type="tel"
+        maxlength="10"
+        inputmode="numeric"
+        placeholder="10 digit mobile number"
+        autocomplete="tel"
+      >
+
+    </div>
+
+    <button
+      id="customerLoginButton"
+      class="customer-login-button"
+    >
+      Continue
+    </button>
+
+    <div
+      id="customerLoginError"
+      class="customer-login-error"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<div id="websiteModeScreen" class="website-mode hidden">
+
+  <div class="website-mode-inner">
+
+    <div id="websiteModeIcon" class="website-mode-icon">
+      🔧
+    </div>
+
+    <h1 id="websiteModeTitle">
+      Updating
+    </h1>
+
+    <p id="websiteModeMessage">
+      The website is currently being updated.
+      Please try again later.
+    </p>
+
+  </div>
+
+</div>
+
+
+<div id="thankYouOverlay" class="thankyou hidden">
+
+  <div>
+
+    <div class="flower">
+      🌸
+    </div>
+
+    <h1>
+      Thank You!
+    </h1>
+
+    <p style="color:#aaa;margin-top:10px">
+      Your order has been placed successfully.
+    </p>
+
+  </div>
+
+</div>
+
+
+<div
+  id="deliverySuccessOverlay"
+  class="delivery-success-message hidden"
+>
+
+  <div id="flowerContainer"></div>
+
+  <div class="delivery-success-content">
+
+    <div
+      id="deliverySuccessIcon"
+      class="delivery-success-icon"
+    >
+      🎉
+    </div>
+
+    <h1 id="deliverySuccessTitle">
+      Order Delivered Successfully!
+    </h1>
+
+    <p id="deliverySuccessMessage">
+      Thank you for choosing The Queen Fast Food ❤️
+    </p>
+
+  </div>
+
+</div>
+
+
+<header>
+
+  <div class="nav">
+
+    <div class="nav-left">
+
+      <button
+        id="customerMenuButton"
+        class="menu-button"
+        title="Options"
+        aria-label="Options"
+      >
+        ☰
+      </button>
+
+      <div class="logo">
+        GOOD FOOD &amp; GOOD MOOD
+      </div>
+
+    </div>
+
+    <div class="nav-actions">
+
+      <span
+        id="customerWelcome"
+        class="customer-welcome"
+      ></span>
+
+      <button
+        id="topCart"
+        class="cart-top"
+      >
+        🛒 Cart <b id="cartCount">0</b>
+      </button>
+
+      <button
+        id="logoutButton"
+        class="logout-top"
+        title="Logout"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main id="mainWebsite">
+
+  <section class="hero">
+
+    <h1>
+
+      <span class="welcome">
+        WELCOME TO
+      </span>
+
+      <span class="queen-title">
+        THE QUEEN FAST FOOD
+      </span>
+
+    </h1>
+
+    <p>
+      Fresh food • Fast service • Easy ordering
+    </p>
+
+    <div class="brand-message">
+
+      <strong>
+        GOOD FOOD &amp; GOOD MOOD
+      </strong>
+
+      <span>
+        Delicious food, great taste — right here at Ibrisingh Bazar.
+      </span>
+
+    </div>
+
+    <div class="status">
+
+      <span
+        id="shopDot"
+        class="dot"
+      ></span>
+
+      <span id="shopStatusText">
+        Checking shop status...
+      </span>
+
+    </div>
+
+    <div
+      id="orderTimeBox"
+      class="order-time"
+    >
+      Order Time:
+      <span id="orderTimeValue">--</span>
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <h2 class="section-title">
+      Our Menu
+    </h2>
+
+    <div
+      id="menuGrid"
+      class="menu-grid"
+    ></div>
+
+  </section>
+
+
+  <section class="section track-section">
+
+    <h2 class="section-title">
+      Track Your Order
+    </h2>
+
+    <div class="track-box">
+
+      <div class="track-row">
+
+        <input
+          id="trackInput"
+          placeholder="Enter your Order ID"
+        >
+
+        <button id="trackButton">
+          Track
+        </button>
+
+      </div>
+
+      <div
+        id="trackResult"
+        class="track-result"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       IMPORTANT NOTICES
+  ================================================== -->
+
+  <section class="important-notices">
+
+    <h2 class="important-notices-title">
+      Important Notices
+    </h2>
+
+    <div class="important-notices-subtitle">
+      A few things we’d like you to know
+    </div>
+
+
+    <div class="notice-grid">
+
+
+      <!-- NOTICE 1 -->
+
+      <div class="notice-card">
+
+        <div class="notice-label">
+          ORDER
+        </div>
+
+        <h3>
+          Please Don’t Skip WhatsApp
+        </h3>
+
+        <p>
+          After placing your order, WhatsApp will open automatically.
+          Please do not skip this step. As we are newly launching our
+          website, WhatsApp helps us confirm your order if you experience
+          any issue with the website.
+        </p>
+
+      </div>
+
+
+      <!-- NOTICE 2 -->
+
+      <div class="notice-card">
+
+        <div class="notice-label">
+          ANY QUERIES
+        </div>
+
+        <h3>
+          We’re Here to Help
+        </h3>
+
+        <p>
+          Facing any issue with our website or your order?
+          Feel free to contact us directly.
+        </p>
+
+        <div class="notice-contact">
+          📞 Silu — 97768 56111
+        </div>
+
+      </div>
+
+
+      <!-- NOTICE 3 -->
+
+      <div class="notice-card">
+
+        <div class="notice-label">
+          FOR ADVANCE ORDERS
+        </div>
+
+        <h3>
+          Planning a Party or Event?
+        </h3>
+
+        <p>
+          Need food for a party, function, or special occasion?
+          You can place your order in advance by contacting us.
+        </p>
+
+        <div class="notice-contact">
+          📞 Silu — 97768 56111
+        </div>
+
+      </div>
+
+
+      <!-- NOTICE 4 -->
+
+      <div class="notice-card notice-delivery">
+
+        <div class="notice-label">
+          DELIVERY
+        </div>
+
+        <h3>
+          A Little Patience, A Lot of Care
+          <span class="notice-heart">❤️</span>
+        </h3>
+
+        <p>
+          We are newly starting our delivery service in the village area.
+          If there is any delay or inconvenience, we kindly request your
+          cooperation. With your support, we’ll do our best to reach you
+          as quickly as possible.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <p>
+    The Queen Fast Food
+  </p>
+
+  <p style="margin-top:8px">
+    Ibrisingh, Tirtol, Jagatsinghpur, Odisha
+  </p>
+
+  <p style="margin-top:8px">
+
+    <a
+      target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query=20.21680076286578,86.36464502294459"
+    >
+      View Location
+    </a>
+
+  </p>
+
+</footer>
+
+
+<div
+  id="cartOverlay"
+  class="overlay hidden"
+>
+
+  <div class="drawer">
+
+    <div class="drawer-head">
+
+      <h2>
+        Your Cart
+      </h2>
+
+      <button
+        id="closeCart"
+        class="close"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div id="cartBody"></div>
+
+    <div class="cart-bottom">
+
+      <div class="total-row total">
+
+        <span>
+          Total
+        </span>
+
+        <span>
+          ₹<span id="cartTotal">0</span>
+        </span>
+
+      </div>
+
+      <button
+        id="checkoutButton"
+        class="primary"
+      >
+        Proceed to Checkout
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  id="checkoutOverlay"
+  class="overlay hidden"
+>
+
+  <div class="modal">
+
+    <div class="drawer-head">
+
+      <h2>
+        Checkout
+      </h2>
+
+      <button
+        id="closeCheckout"
+        class="close"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Name
+      </label>
+
+      <input
+        id="customerName"
+        placeholder="Your name"
+        autocomplete="name"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Phone
+      </label>
+
+      <input
+        id="customerPhone"
+        type="tel"
+        maxlength="10"
+        inputmode="numeric"
+        placeholder="10 digit mobile number"
+        autocomplete="tel"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Delivery Address
+      </label>
+
+      <textarea
+        id="customerAddress"
+        placeholder="Enter complete delivery address"
+      ></textarea>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Delivery Location
+      </label>
+
+
+      <div class="location-buttons">
+
+        <button
+          id="currentLocationButton"
+          type="button"
+        >
+          📍 Use Current Location
+        </button>
+
+        <button
+          id="differentLocationButton"
+          type="button"
+        >
+          🗺️ Choose Different Location
+        </button>
+
+      </div>
+
+
+      <div
+        class="location-display"
+        id="locationDisplayBox"
+      >
+
+        <input
+          id="locationDisplay"
+          readonly
+          placeholder="No delivery location selected"
+        >
+
+      </div>
+
+
+      <div
+        id="differentLocationBox"
+        class="hidden"
+      >
+
+        <div class="google-location-box">
+
+          <div class="google-location-instruction">
+
+            📍 <strong>Select your address on Google Maps and copy the link.</strong>
+            Paste it here.
+
+          </div>
+
+
+          <button
+            id="openGoogleMapsButton"
+            class="google-location-open"
+            type="button"
+          >
+            🗺️ Open Google Maps
+          </button>
+
+
+          <input
+            id="googleMapsLocationInput"
+            class="google-location-input"
+            type="text"
+            placeholder="Paste Google Maps link here"
+            autocomplete="off"
+          >
+
+
+          <button
+            id="confirmGoogleLocationButton"
+            class="google-location-confirm"
+            type="button"
+          >
+            📍 Confirm Location
+          </button>
+
+
+          <div
+            id="googleLocationStatus"
+            class="google-location-status"
+          >
+            Select your exact address on Google Maps → Share →
+            Copy link → paste the link here.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="delivery-limit">
+
+        📦 <strong>Delivery available within 20 km</strong><br>
+        from The Queen Fast Food
+
+      </div>
+
+
+      <div
+        id="deliveryInsideMessage"
+        class="delivery-inside hidden"
+      >
+        ✅ This location is within our 20 km delivery area.
+        You can place your order.
+      </div>
+
+
+      <div
+        id="deliveryOutsideMessage"
+        class="delivery-outside hidden"
+      >
+        ❌ This location is outside our 20 km delivery area.
+        Please select a location within 20 km of The Queen Fast Food.
+      </div>
+
+
+      <div
+        id="deliveryInfo"
+        style="color:#aaa;font-size:12px;margin-top:8px"
+      >
+        Select your delivery location to calculate delivery charge.
+      </div>
+
+    </div>
+
+
+    <div
+      id="orderSummary"
+      class="summary"
+    ></div>
+
+
+    <div class="form-group">
+
+      <label>
+        Payment Method
+      </label>
+
+      <div class="payment-options">
+
+        <button
+          id="codButton"
+          class="payment-option active"
+          type="button"
+        >
+          💵 Cash on Delivery
+        </button>
+
+        <button
+          id="onlineButton"
+          class="payment-option"
+          type="button"
+        >
+          💳 Online Payment
+        </button>
+
+      </div>
+
+
+      <div
+        id="paymentWarning"
+        class="warning hidden"
+      >
+        Online payment is currently selected.
+      </div>
+
+    </div>
+
+
+    <button
+      id="placeOrderButton"
+      class="primary"
+      disabled
+    >
+      Place Order
+    </button>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue,
+  push,
+  set,
+  query,
+  orderByChild,
+  equalTo
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import {
+  getAuth,
+  signInAnonymously,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+
+  authDomain:
+    "the-queen-fast-food.firebaseapp.com",
+
+  databaseURL:
+    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+
+  projectId:
+    "the-queen-fast-food",
+
+  storageBucket:
+    "the-queen-fast-food.firebasestorage.app",
+
+  messagingSenderId:
+    "435721389652",
+
+  appId:
+    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+
+  measurementId:
+    "G-Q1YCK636KJ"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const db =
+  getDatabase(app);
+
+const auth =
+  getAuth(app);
+
+
+const CUSTOMER_STORAGE_KEY =
+  "queenFastFoodCustomer";
+
+let customerProfile = {
+  name:"",
+  phone:""
+};
+
+
+const DEFAULT_MENU = [
+
+  {
+    id:"veg_chowmin",
+    name:"Veg Chowmin",
+    price:50,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"veg_roll",
+    name:"Veg Roll",
+    price:50,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chicken_chowmin",
+    name:"Chicken Chowmin",
+    price:65,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chicken_roll",
+    name:"Chicken Roll",
+    price:60,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chicken_pakoda",
+    name:"Chicken Pakoda",
+    price:60,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chilli_chicken",
+    name:"Chilli Chicken",
+    price:120,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"veg_biriyani",
+    name:"Veg Biriyani",
+    price:100,
+    image:"",
+    available:true
+  },
+
+  {
+    id:"chicken_dum_biriyani",
+    name:"Chicken Dum Biriyani",
+    price:120,
+    image:"",
+    available:true
+  }
+
+];
+
+
+/* =====================================================
+   RESTAURANT / DELIVERY SETTINGS
+===================================================== */
+
+const RESTAURANT_LAT =
+  20.21680076286578;
+
+const RESTAURANT_LNG =
+  86.36464502294459;
+
+const DEFAULT_DELIVERY_RATE =
+  6;
+
+const MAX_DELIVERY_DISTANCE =
+  20;
+
+const WHATSAPP_DEFAULT =
+  "9090220791";
+
+
+let currentUser = null;
+
+let shopSettings = {};
+
+let cart = [];
+
+let deliveryDistance = null;
+
+let customerLat = null;
+
+let customerLng = null;
+
+let selectedLocationType = null;
+
+let selectedLocationText = "";
+
+let selectedGoogleMapsLink = "";
+
+let selectedPaymentMethod =
+  "COD";
+
+let locationWithinDeliveryArea =
+  false;
+
+let trackingUnsubscribe = null;
+
+let trackingOrderId = "";
+
+let authReadyPromise = null;
+
+
+/* =====================================================
+   CUSTOMER PROFILE
+===================================================== */
+
+function loadCustomerProfile(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        CUSTOMER_STORAGE_KEY
+      );
+
+    if(!saved){
+
+      customerProfile = {
+        name:"",
+        phone:""
+      };
+
+      return false;
+
+    }
+
+    const data =
+      JSON.parse(saved);
+
+    if(
+      !data ||
+      typeof data.name !== "string" ||
+      typeof data.phone !== "string"
+    ){
+
+      localStorage.removeItem(
+        CUSTOMER_STORAGE_KEY
+      );
+
+      return false;
+
+    }
+
+    const name =
+      data.name.trim();
+
+    const phone =
+      data.phone.trim();
+
+    if(
+      name.length < 2 ||
+      !/^[6-9]\d{9}$/.test(phone)
+    ){
+
+      localStorage.removeItem(
+        CUSTOMER_STORAGE_KEY
+      );
+
+      return false;
+
+    }
+
+    customerProfile = {
+      name:name,
+      phone:phone
+    };
+
+    return true;
+
+  }
+  catch(error){
+
+    console.error(
+      "CUSTOMER PROFILE ERROR:",
+      error
+    );
+
+    localStorage.removeItem(
+      CUSTOMER_STORAGE_KEY
+    );
+
+    return false;
+
+  }
+
+}
+
+
+function saveCustomerProfile(
+  name,
+  phone
+){
+
+  customerProfile = {
+    name:name.trim(),
+    phone:phone.trim()
+  };
+
+  localStorage.setItem(
+    CUSTOMER_STORAGE_KEY,
+    JSON.stringify(
+      customerProfile
+    )
+  );
+
+  updateCustomerUI();
+
+  fillCheckoutCustomer();
+
+}
+
+
+function updateCustomerUI(){
+
+  const welcome =
+    document.getElementById(
+      "customerWelcome"
+    );
+
+  if(!welcome){
+    return;
+  }
+
+  if(customerProfile.name){
+
+    welcome.textContent =
+      `👤 ${customerProfile.name}`;
+
+  }
+  else{
+
+    welcome.textContent = "";
+
+  }
+
+}
+
+
+function fillCheckoutCustomer(){
+
+  const nameInput =
+    document.getElementById(
+      "customerName"
+    );
+
+  const phoneInput =
+    document.getElementById(
+      "customerPhone"
+    );
+
+  if(nameInput){
+
+    nameInput.value =
+      customerProfile.name || "";
+
+  }
+
+  if(phoneInput){
+
+    phoneInput.value =
+      customerProfile.phone || "";
+
+  }
+
+  validateCheckout();
+
+}
+
+
+function showCustomerLogin(){
+
+  const overlay =
+    document.getElementById(
+      "customerLoginOverlay"
+    );
+
+  if(overlay){
+
+    overlay.classList.remove(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+function hideCustomerLogin(){
+
+  const overlay =
+    document.getElementById(
+      "customerLoginOverlay"
+    );
+
+  if(overlay){
+
+    overlay.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+function customerLogin(){
+
+  const nameInput =
+    document.getElementById(
+      "loginCustomerName"
+    );
+
+  const phoneInput =
+    document.getElementById(
+      "loginCustomerPhone"
+    );
+
+  const errorBox =
+    document.getElementById(
+      "customerLoginError"
+    );
+
+  const name =
+    nameInput.value.trim();
+
+  const phone =
+    phoneInput.value.trim();
+
+  errorBox.textContent = "";
+
+  if(name.length < 2){
+
+    errorBox.textContent =
+      "Please enter your name.";
+
+    nameInput.focus();
+
+    return;
+
+  }
+
+  if(
+    !/^[6-9]\d{9}$/.test(phone)
+  ){
+
+    errorBox.textContent =
+      "Please enter a valid 10 digit mobile number.";
+
+    phoneInput.focus();
+
+    return;
+
+  }
+
+  saveCustomerProfile(
+    name,
+    phone
+  );
+
+  hideCustomerLogin();
+
+}
+
+
+window.logoutCustomer =
+  function(){
+
+    const confirmed =
+      confirm(
+        "Are you sure you want to logout?"
+      );
+
+    if(!confirmed){
+      return;
+    }
+
+    localStorage.removeItem(
+      CUSTOMER_STORAGE_KEY
+    );
+
+    customerProfile = {
+      name:"",
+      phone:""
+    };
+
+    updateCustomerUI();
+
+    document.getElementById(
+      "customerName"
+    ).value = "";
+
+    document.getElementById(
+      "customerPhone"
+    ).value = "";
+
+    closeCustomerMenu();
+
+    showCustomerLogin();
+
+  };
+
+
+/* =====================================================
+   CUSTOMER MENU
+===================================================== */
+
+function openCustomerMenu(){
+
+  document.getElementById(
+    "customerMenuOverlay"
+  ).classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function closeCustomerMenu(){
+
+  document.getElementById(
+    "customerMenuOverlay"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+document.getElementById(
+  "customerMenuButton"
+).addEventListener(
+  "click",
+  event=>{
+
+    event.stopPropagation();
+
+    const menu =
+      document.getElementById(
+        "customerMenuOverlay"
+      );
+
+    if(
+      menu.classList.contains(
+        "hidden"
+      )
+    ){
+
+      openCustomerMenu();
+
+    }
+    else{
+
+      closeCustomerMenu();
+
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "customerMenuOverlay"
+).addEventListener(
+  "click",
+  event=>{
+
+    if(
+      event.target ===
+      document.getElementById(
+        "customerMenuOverlay"
+      )
+    ){
+
+      closeCustomerMenu();
+
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "myOrdersButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    closeCustomerMenu();
+
+    openOrderHistory();
+
+  }
+);
+
+
+document.getElementById(
+  "orderHistoryButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    closeCustomerMenu();
+
+    openOrderHistory();
+
+  }
+);
+
+
+/* =====================================================
+   ORDER HISTORY
+===================================================== */
+
+function openOrderHistory(){
+
+  const overlay =
+    document.getElementById(
+      "orderHistoryOverlay"
+    );
+
+  overlay.classList.remove(
+    "hidden"
+  );
+
+  loadOrderHistory();
+
+}
+
+
+function closeOrderHistory(){
+
+  document.getElementById(
+    "orderHistoryOverlay"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+document.getElementById(
+  "closeOrderHistory"
+).addEventListener(
+  "click",
+  closeOrderHistory
+);
+
+
+document.getElementById(
+  "orderHistoryOverlay"
+).addEventListener(
+  "click",
+  event=>{
+
+    if(
+      event.target ===
+      document.getElementById(
+        "orderHistoryOverlay"
+      )
+    ){
+
+      closeOrderHistory();
+
+    }
+
+  }
+);
+
+
+function loadOrderHistory(){
+
+  const list =
+    document.getElementById(
+      "orderHistoryList"
+    );
+
+  const userText =
+    document.getElementById(
+      "orderHistoryUser"
+    );
+
+  if(
+    !customerProfile.phone
+  ){
+
+    userText.textContent =
+      "Please login to view your orders.";
+
+    list.innerHTML = `
+      <div class="history-empty">
+        No customer profile found.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  userText.textContent =
+    `${customerProfile.name} • ${customerProfile.phone}`;
+
+
+  list.innerHTML = `
+    <div class="history-loading">
+      Loading your orders...
+    </div>
+  `;
+
+
+  const ordersQuery =
+    query(
+
+      ref(
+        db,
+        "orders"
+      ),
+
+      orderByChild(
+        "phone"
+      ),
+
+      equalTo(
+        customerProfile.phone
+      )
+
+    );
+
+
+  onValue(
+
+    ordersQuery,
+
+    snapshot=>{
+
+      const orders = [];
+
+      snapshot.forEach(
+        child=>{
+
+          const order =
+            child.val();
+
+          orders.push({
+
+            ...order,
+
+            firebaseKey:
+              child.key
+
+          });
+
+        }
+      );
+
+
+      orders.sort(
+        (a,b)=>
+          Number(
+            b.createdAt || 0
+          ) -
+          Number(
+            a.createdAt || 0
+          )
+      );
+
+
+      renderOrderHistory(
+        orders
+      );
+
+    },
+
+    error=>{
+
+      console.error(
+        "ORDER HISTORY ERROR:",
+        error
+      );
+
+      list.innerHTML = `
+        <div class="history-empty">
+          ❌ Unable to load your order history.
+        </div>
+      `;
+
+    },
+
+    {
+      onlyOnce:true
+    }
+
+  );
+
+}
+
+
+function renderOrderHistory(
+  orders
+){
+
+  const list =
+    document.getElementById(
+      "orderHistoryList"
+    );
+
+
+  if(
+    !orders.length
+  ){
+
+    list.innerHTML = `
+      <div class="history-empty">
+        📦<br>
+        <div style="margin-top:7px">
+          No order history yet.
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  orders.forEach(
+    order=>{
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+      card.className =
+        "history-card";
+
+
+      const status =
+        String(
+          order.status ||
+          "received"
+        ).toLowerCase();
+
+
+      const itemsText =
+        (
+          order.items ||
+          []
+        )
+        .map(
+          item=>
+            `${escapeHtml(item.name)} × ${item.quantity}`
+        )
+        .join(
+          " • "
+        );
+
+
+      const created =
+        order.createdAt
+          ? new Date(
+              order.createdAt
+            ).toLocaleString(
+              "en-IN"
+            )
+          : "--";
+
+
+      card.innerHTML = `
+
+        <div class="history-card-head">
+
+          <div class="history-order-id">
+            ${escapeHtml(
+              order.orderId ||
+              "Order"
+            )}
+          </div>
+
+          <div class="history-status">
+            ${getStatusEmoji(status)}
+            ${escapeHtml(
+              formatStatus(status)
+            )}
+          </div>
+
+        </div>
+
+        <div class="history-date">
+          🕐 ${escapeHtml(created)}
+        </div>
+
+        <div class="history-items">
+          ${itemsText || "No items"}
+        </div>
+
+        <div class="history-total">
+          Total: ₹${Number(
+            order.total || 0
+          )}
+        </div>
+
+      `;
+
+
+      card.addEventListener(
+        "click",
+        ()=>{
+
+          closeOrderHistory();
+
+          document.getElementById(
+            "trackInput"
+          ).value =
+            order.orderId || "";
+
+          trackOrder();
+
+          setTimeout(
+            ()=>{
+
+              document.getElementById(
+                "trackResult"
+              ).scrollIntoView({
+
+                behavior:"smooth",
+
+                block:"center"
+
+              });
+
+            },
+            300
+          );
+
+        }
+      );
+
+
+      list.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LOGIN EVENTS
+===================================================== */
+
+document.getElementById(
+  "customerLoginButton"
+).addEventListener(
+  "click",
+  customerLogin
+);
+
+
+document.getElementById(
+  "loginCustomerName"
+).addEventListener(
+  "keydown",
+  event=>{
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      customerLogin();
+
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "loginCustomerPhone"
+).addEventListener(
+  "keydown",
+  event=>{
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      customerLogin();
+
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "loginCustomerPhone"
+).addEventListener(
+  "input",
+  event=>{
+
+    event.target.value =
+      event.target.value
+        .replace(/\D/g,"")
+        .slice(0,10);
+
+  }
+);
+
+
+document.getElementById(
+  "logoutButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    window.logoutCustomer();
+
+  }
+);
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+function waitForAuthState(){
+
+  if(auth.currentUser){
+
+    currentUser =
+      auth.currentUser;
+
+    return Promise.resolve(
+      currentUser
+    );
+
+  }
+
+  if(authReadyPromise){
+
+    return authReadyPromise;
+
+  }
+
+  authReadyPromise =
+    new Promise(
+      resolve=>{
+
+        const unsubscribe =
+          onAuthStateChanged(
+            auth,
+            user=>{
+
+              if(user){
+
+                currentUser =
+                  user;
+
+                unsubscribe();
+
+                resolve(user);
+
+              }
+
+            }
+          );
+
+      }
+    );
+
+  return authReadyPromise;
+
+}
+
+
+async function startCustomerAuth(){
+
+  try{
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+    if(auth.currentUser){
+
+      currentUser =
+        auth.currentUser;
+
+      validateCheckout();
+
+      return currentUser;
+
+    }
+
+    const result =
+      await signInAnonymously(
+        auth
+      );
+
+    currentUser =
+      result.user;
+
+    validateCheckout();
+
+    return currentUser;
+
+  }
+  catch(error){
+
+    console.error(
+      "AUTH ERROR:",
+      error
+    );
+
+    currentUser = null;
+
+    alert(
+      "Secure connection failed.\n\n" +
+      "Code: " +
+      (
+        error.code ||
+        "unknown"
+      ) +
+      "\n\nMessage: " +
+      (
+        error.message ||
+        "Authentication failed."
+      )
+    );
+
+    throw error;
+
+  }
+
+}
+
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    if(user){
+
+      currentUser =
+        user;
+
+      validateCheckout();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+function loadSettings(){
+
+  onValue(
+    ref(
+      db,
+      "settings"
+    ),
+
+    snapshot=>{
+
+      shopSettings =
+        snapshot.val() || {};
+
+      renderWebsiteMode();
+
+      renderShopStatus();
+
+      renderMenu();
+
+      if(
+        !document
+          .getElementById(
+            "checkoutOverlay"
+          )
+          .classList
+          .contains("hidden")
+      ){
+
+        renderOrderSummary();
+
+      }
+
+    },
+
+    error=>{
+
+      console.error(
+        "SETTINGS ERROR:",
+        error
+      );
+
+    }
+
+  );
+
+}
+
+
+/* =====================================================
+   WEBSITE MODE
+===================================================== */
+
+function renderWebsiteMode(){
+
+  const screen =
+    document.getElementById(
+      "websiteModeScreen"
+    );
+
+  const mode =
+    String(
+      shopSettings.websiteMode ||
+      "normal"
+    ).toLowerCase();
+
+  if(mode === "normal"){
+
+    screen.classList.add(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+  screen.classList.remove(
+    "hidden"
+  );
+
+  const icon =
+    document.getElementById(
+      "websiteModeIcon"
+    );
+
+  const title =
+    document.getElementById(
+      "websiteModeTitle"
+    );
+
+  const message =
+    document.getElementById(
+      "websiteModeMessage"
+    );
+
+  if(mode === "maintenance"){
+
+    icon.textContent =
+      "🛠️";
+
+    title.textContent =
+      "Website Closed";
+
+    message.textContent =
+      shopSettings.websiteMessage ||
+      "The Queen Fast Food website is temporarily unavailable.";
+
+  }
+  else{
+
+    icon.textContent =
+      "🔧";
+
+    title.textContent =
+      "Updating";
+
+    message.textContent =
+      shopSettings.websiteMessage ||
+      "The website is currently being updated. Please try again later.";
+
+  }
+
+}
+
+
+/* =====================================================
+   SHOP STATUS
+===================================================== */
+
+function isShopOpen(){
+
+  const override =
+    String(
+      shopSettings.statusOverride ||
+      "auto"
+    ).toLowerCase();
+
+  if(override === "open"){
+    return true;
+  }
+
+  if(override === "closed"){
+    return false;
+  }
+
+  const now =
+    new Date();
+
+  const openTime =
+    shopSettings.openTime ||
+    "12:00";
+
+  const closeTime =
+    shopSettings.closeTime ||
+    "23:00";
+
+  const [oh,om] =
+    openTime
+      .split(":")
+      .map(Number);
+
+  const [ch,cm] =
+    closeTime
+      .split(":")
+      .map(Number);
+
+  const current =
+    now.getHours()*60 +
+    now.getMinutes();
+
+  const open =
+    oh*60 + om;
+
+  const close =
+    ch*60 + cm;
+
+  if(close > open){
+
+    return (
+      current >= open &&
+      current < close
+    );
+
+  }
+
+  return (
+    current >= open ||
+    current < close
+  );
+
+}
+
+
+function renderShopStatus(){
+
+  const open =
+    isShopOpen();
+
+  const dot =
+    document.getElementById(
+      "shopDot"
+    );
+
+  const text =
+    document.getElementById(
+      "shopStatusText"
+    );
+
+  dot.className =
+    "dot " +
+    (
+      open
+        ? "open"
+        : "closed"
+    );
+
+  text.textContent =
+    open
+      ? "YOUR ORDER IS JUST A CLICK AWAY"
+      : "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW";
+
+  const orderTime =
+    document.getElementById(
+      "orderTimeValue"
+    );
+
+  const openTime =
+    shopSettings.openTime ||
+    "12:00";
+
+  const closeTime =
+    shopSettings.closeTime ||
+    "23:00";
+
+  orderTime.textContent =
+    `${openTime} - ${closeTime}`;
+
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function getMenu(){
+
+  return DEFAULT_MENU.map(
+    defaultItem=>{
+
+      const serverItem =
+        shopSettings.menu &&
+        shopSettings.menu[
+          defaultItem.id
+        ]
+          ? shopSettings.menu[
+              defaultItem.id
+            ]
+          : {};
+
+      return {
+
+        ...defaultItem,
+
+        ...serverItem,
+
+        price:
+          Number(
+            serverItem.price !== undefined
+              ? serverItem.price
+              : defaultItem.price
+          ),
+
+        available:
+          serverItem.available !== undefined
+            ? serverItem.available !== false
+            : defaultItem.available
+
+      };
+
+    }
+  );
+
+}
+
+
+function renderMenu(){
+
+  const grid =
+    document.getElementById(
+      "menuGrid"
+    );
+
+  grid.innerHTML = "";
+
+  getMenu().forEach(
+    item=>{
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+      card.className =
+        "card";
+
+      const image =
+        item.image
+          ? `
+            <img
+              src="${escapeHtml(item.image)}"
+              alt="${escapeHtml(item.name)}"
+            >
+          `
+          : `
+            <div style="font-size:55px">
+              🍽️
+            </div>
+          `;
+
+      const unavailable =
+        !item.available;
+
+      const closed =
+        !isShopOpen();
+
+      const disabled =
+        unavailable ||
+        closed;
+
+      let buttonText =
+        "Add to Cart";
+
+      if(unavailable){
+
+        buttonText =
+          "OUT OF STOCK";
+
+      }
+      else if(closed){
+
+        buttonText =
+          "SHOP CLOSED";
+
+      }
+
+      card.innerHTML = `
+
+        <div class="card-img">
+          ${image}
+        </div>
+
+        <div class="card-content">
+
+          <h3>
+            ${escapeHtml(item.name)}
+          </h3>
+
+          <div class="price">
+            ₹${item.price}
+          </div>
+
+          ${
+            unavailable
+              ? `
+                <div class="stock">
+                  OUT OF STOCK
+                </div>
+              `
+              : ""
+          }
+
+          <button
+            ${disabled ? "disabled" : ""}
+          >
+            ${buttonText}
+          </button>
+
+        </div>
+      `;
+
+      const btn =
+        card.querySelector(
+          "button"
+        );
+
+      if(!disabled){
+
+        btn.addEventListener(
+          "click",
+          ()=>{
+
+            addToCart(item);
+
+          }
+        );
+
+      }
+
+      grid.appendChild(card);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CART
+===================================================== */
+
+function addToCart(item){
+
+  if(!isShopOpen()){
+
+    alert(
+      "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW"
+    );
+
+    return;
+
+  }
+
+  const existing =
+    cart.find(
+      x=>x.id === item.id
+    );
+
+  if(existing){
+
+    existing.quantity++;
+
+  }
+  else{
+
+    cart.push({
+
+      id:item.id,
+
+      name:item.name,
+
+      price:item.price,
+
+      quantity:1
+
+    });
+
+  }
+
+  renderCart();
+
+  const top =
+    document.getElementById(
+      "topCart"
+    );
+
+  top.animate(
+    [
+      {
+        transform:"scale(1)"
+      },
+      {
+        transform:"scale(1.12)"
+      },
+      {
+        transform:"scale(1)"
+      }
+    ],
+    {
+      duration:350
+    }
+  );
+
+}
+
+
+function renderCart(){
+
+  const body =
+    document.getElementById(
+      "cartBody"
+    );
+
+  const count =
+    cart.reduce(
+      (sum,item)=>
+        sum + item.quantity,
+      0
+    );
+
+  document.getElementById(
+    "cartCount"
+  ).textContent =
+    count;
+
+  if(cart.length === 0){
+
+    body.innerHTML = `
+      <p style="color:#777;text-align:center;padding:30px 0">
+        Your cart is empty.
+      </p>
+    `;
+
+    document.getElementById(
+      "cartTotal"
+    ).textContent =
+      "0";
+
+    return;
+
+  }
+
+  let subtotal = 0;
+
+  body.innerHTML = "";
+
+  cart.forEach(
+    item=>{
+
+      const line =
+        item.price *
+        item.quantity;
+
+      subtotal += line;
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.className =
+        "cart-item";
+
+      div.innerHTML = `
+
+        <div>
+
+          <b>
+            ${escapeHtml(item.name)}
+          </b>
+
+          <small>
+            ₹${item.price} × ${item.quantity}
+          </small>
+
+        </div>
+
+        <div style="text-align:right">
+
+          <b>
+            ₹${line}
+          </b>
+
+          <div class="qty">
+
+            <button data-action="minus">
+              −
+            </button>
+
+            <span>
+              ${item.quantity}
+            </span>
+
+            <button data-action="plus">
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+      div.querySelector(
+        "[data-action=minus]"
+      ).onclick =
+        ()=>{
+
+          item.quantity--;
+
+          if(item.quantity <= 0){
+
+            cart =
+              cart.filter(
+                x=>x.id !== item.id
+              );
+
+          }
+
+          renderCart();
+
+        };
+
+      div.querySelector(
+        "[data-action=plus]"
+      ).onclick =
+        ()=>{
+
+          item.quantity++;
+
+          renderCart();
+
+        };
+
+      body.appendChild(
+        div
+      );
+
+    }
+  );
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    subtotal;
+
+}
+
+
+function openCart(){
+
+  document.getElementById(
+    "cartOverlay"
+  ).classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function closeCart(){
+
+  document.getElementById(
+    "cartOverlay"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+
+function openCheckout(){
+
+  if(cart.length === 0){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+  if(!isShopOpen()){
+
+    alert(
+      "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW"
+    );
+
+    return;
+
+  }
+
+  closeCart();
+
+  fillCheckoutCustomer();
+
+  document.getElementById(
+    "checkoutOverlay"
+  ).classList.remove(
+    "hidden"
+  );
+
+  renderOrderSummary();
+
+  validateCheckout();
+
+}
+
+
+function closeCheckout(){
+
+  document.getElementById(
+    "checkoutOverlay"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+/* =====================================================
+   ORDER SUMMARY
+===================================================== */
+
+function renderOrderSummary(){
+
+  let subtotal = 0;
+
+  let html = "";
+
+  cart.forEach(
+    item=>{
+
+      const total =
+        item.price *
+        item.quantity;
+
+      subtotal += total;
+
+      html += `
+
+        <div class="summary-row">
+
+          <span>
+            ${escapeHtml(item.name)}
+            × ${item.quantity}
+          </span>
+
+          <span>
+            ₹${total}
+          </span>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+  const rate =
+    Number(
+      shopSettings.deliveryRate ||
+      DEFAULT_DELIVERY_RATE
+    );
+
+  let delivery = 0;
+
+  if(
+    deliveryDistance !== null
+  ){
+
+    delivery =
+      Math.ceil(
+        deliveryDistance *
+        rate
+      );
+
+  }
+
+  const grand =
+    subtotal +
+    delivery;
+
+  html += `
+
+    <hr
+      style="border-color:#292929;margin:12px 0"
+    >
+
+    <div class="summary-row">
+
+      <span>
+        Item Total
+      </span>
+
+      <b>
+        ₹${subtotal}
+      </b>
+
+    </div>
+
+    <div class="summary-row">
+
+      <span>
+
+        Delivery
+
+        ${
+          deliveryDistance !== null
+            ? `(${deliveryDistance.toFixed(2)} km)`
+            : ""
+        }
+
+      </span>
+
+      <b>
+        ₹${delivery}
+      </b>
+
+    </div>
+
+    <div class="summary-row total">
+
+      <span>
+        Total
+      </span>
+
+      <span>
+        ₹${grand}
+      </span>
+
+    </div>
+
+  `;
+
+  document.getElementById(
+    "orderSummary"
+  ).innerHTML =
+    html;
+
+  validateCheckout();
+
+}
+
+
+/* =====================================================
+   DIFFERENT LOCATION
+===================================================== */
+
+document.getElementById(
+  "differentLocationButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    selectedLocationType =
+      "different";
+
+    document.getElementById(
+      "differentLocationButton"
+    ).classList.add(
+      "active"
+    );
+
+    document.getElementById(
+      "currentLocationButton"
+    ).classList.remove(
+      "active"
+    );
+
+    document.getElementById(
+      "differentLocationBox"
+    ).classList.remove(
+      "hidden"
+    );
+
+    const status =
+      document.getElementById(
+        "googleLocationStatus"
+      );
+
+    if(!selectedGoogleMapsLink){
+
+      status.textContent =
+        "Select your address on Google Maps → Share → Copy link → paste the link here.";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   OPEN GOOGLE MAPS
+===================================================== */
+
+document.getElementById(
+  "openGoogleMapsButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    const googleMapsUrl =
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(
+        "20.21680076286578,86.36464502294459"
+      );
+
+    window.open(
+      googleMapsUrl,
+      "_blank"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   GOOGLE MAPS LOCATION INPUT
+===================================================== */
+
+document.getElementById(
+  "googleMapsLocationInput"
+).addEventListener(
+  "input",
+  event=>{
+
+    const value =
+      event.target.value.trim();
+
+    selectedGoogleMapsLink =
+      value;
+
+    validateCheckout();
+
+  }
+);
+
+
+/* =====================================================
+   CONFIRM GOOGLE MAPS LOCATION
+===================================================== */
+
+document.getElementById(
+  "confirmGoogleLocationButton"
+).addEventListener(
+  "click",
+  confirmGoogleMapsLocation
+);
+
+
+async function confirmGoogleMapsLocation(){
+
+  const input =
+    document.getElementById(
+      "googleMapsLocationInput"
+    );
+
+  const status =
+    document.getElementById(
+      "googleLocationStatus"
+    );
+
+  const link =
+    input.value.trim();
+
+
+  if(!link){
+
+    status.textContent =
+      "❌ Please paste your Google Maps location link.";
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  const coordinates =
+    extractCoordinatesFromGoogleMapsLink(
+      link
+    );
+
+
+  if(
+    !coordinates &&
+    !isGoogleMapsLink(link)
+  ){
+
+    status.textContent =
+      "❌ Please paste a valid Google Maps location link.";
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  selectedGoogleMapsLink =
+    link;
+
+  selectedLocationType =
+    "different";
+
+
+  if(coordinates){
+
+    customerLat =
+      coordinates.lat;
+
+    customerLng =
+      coordinates.lng;
+
+
+    deliveryDistance =
+      Number(
+        haversine(
+          RESTAURANT_LAT,
+          RESTAURANT_LNG,
+          customerLat,
+          customerLng
+        ).toFixed(2)
+      );
+
+
+    selectedLocationText =
+      "Google Maps selected location";
+
+
+    updateLocationDisplay();
+
+
+    status.innerHTML =
+      "✅ Exact Google Maps location added successfully.";
+
+
+    reverseGeocodeLocation(
+      customerLat,
+      customerLng
+    );
+
+  }
+  else{
+
+    customerLat = null;
+
+    customerLng = null;
+
+    deliveryDistance = null;
+
+    locationWithinDeliveryArea =
+      false;
+
+    selectedLocationText =
+      "Google Maps location link";
+
+
+    document.getElementById(
+      "locationDisplay"
+    ).value =
+      "Google Maps link added — exact coordinates not detected";
+
+
+    document.getElementById(
+      "deliveryInfo"
+    ).textContent =
+      "⚠️ This Google Maps link does not expose exact coordinates. Please use a full Google Maps link containing @latitude,longitude or ?q=latitude,longitude.";
+
+
+    status.innerHTML =
+      "⚠️ Google Maps link accepted, but exact coordinates could not be detected. Please copy the full Google Maps URL.";
+
+  }
+
+
+  renderOrderSummary();
+
+  validateCheckout();
+
+}
+
+
+/* =====================================================
+   GOOGLE MAPS LINK CHECK
+===================================================== */
+
+function isGoogleMapsLink(
+  link
+){
+
+  const raw =
+    String(link || "")
+      .trim();
+
+  if(!raw){
+    return false;
+  }
+
+
+  const value =
+    raw.toLowerCase();
+
+
+  const googleMapsDomain =
+    (
+      value.includes("google.com/maps") ||
+      value.includes("www.google.com/maps") ||
+      value.includes("maps.google.com") ||
+      value.includes("maps.app.goo.gl") ||
+      value.includes("goo.gl/maps")
+    );
+
+
+  if(googleMapsDomain){
+    return true;
+  }
+
+
+  try{
+
+    const url =
+      new URL(raw);
+
+    const host =
+      url.hostname.toLowerCase();
+
+    const path =
+      url.pathname.toLowerCase();
+
+
+    if(
+      host === "google.com" ||
+      host === "www.google.com"
+    ){
+
+      if(
+        path.startsWith("/maps") ||
+        path.startsWith("/search") ||
+        path.startsWith("/place")
+      ){
+
+        return true;
+
+      }
+
+    }
+
+
+    if(
+      host === "maps.google.com"
+    ){
+
+      return true;
+
+    }
+
+
+    if(
+      host === "maps.app.goo.gl" ||
+      host === "goo.gl"
+    ){
+
+      return true;
+
+    }
+
+  }
+  catch(error){
+
+  }
+
+
+  const coordinates =
+    extractCoordinatesFromGoogleMapsLink(
+      raw
+    );
+
+  return !!coordinates;
+
+}
+
+
+/* =====================================================
+   EXTRACT GOOGLE MAPS COORDINATES
+===================================================== */
+
+function extractCoordinatesFromGoogleMapsLink(
+  link
+){
+
+  const value =
+    String(link || "")
+      .trim();
+
+
+  if(!value){
+    return null;
+  }
+
+
+  function makeCoordinates(
+    latValue,
+    lngValue
+  ){
+
+    const lat =
+      Number(latValue);
+
+    const lng =
+      Number(lngValue);
+
+    if(
+      validCoordinates(
+        lat,
+        lng
+      )
+    ){
+
+      return {
+        lat,
+        lng
+      };
+
+    }
+
+    return null;
+
+  }
+
+
+  let match =
+    value.match(
+      /[?&](?:q|query)=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  match =
+    value.match(
+      /[?&]ll=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  match =
+    value.match(
+      /@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  match =
+    value.match(
+      /\/place\/(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  match =
+    value.match(
+      /\/search\/(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  match =
+    value.match(
+      /(-?\d{1,3}\.\d{4,})\s*[,]\s*(-?\d{1,3}\.\d{4,})/
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+    }
+
+  }
+
+
+  match =
+    value.match(
+      /(-?\d{1,3}\.\d{4,})\s+(-?\d{1,3}\.\d{4,})/
+    );
+
+
+  if(match){
+
+    const result =
+      makeCoordinates(
+        match[1],
+        match[2]
+      );
+
+    if(result){
+      return result;
+
+    }
+
+  }
+
+
+  if(
+    value.includes(
+      "20.21680076286578"
+    ) &&
+    value.includes(
+      "86.36464502294459"
+    )
+  ){
+
+    return {
+
+      lat:
+        20.21680076286578,
+
+      lng:
+        86.36464502294459
+
+    };
+
+  }
+
+
+  return null;
+
+}
+
+
+function validCoordinates(
+  lat,
+  lng
+){
+
+  return (
+    Number.isFinite(lat) &&
+    Number.isFinite(lng) &&
+    lat >= -90 &&
+    lat <= 90 &&
+    lng >= -180 &&
+    lng <= 180
+  );
+
+}
+
+
+/* =====================================================
+   UPDATE LOCATION DISPLAY
+===================================================== */
+
+function updateLocationDisplay(){
+
+  if(
+    customerLat === null ||
+    customerLng === null ||
+    deliveryDistance === null
+  ){
+
+    return;
+
+  }
+
+
+  locationWithinDeliveryArea =
+    deliveryDistance <=
+    MAX_DELIVERY_DISTANCE;
+
+
+  const rate =
+    Number(
+      shopSettings.deliveryRate ||
+      DEFAULT_DELIVERY_RATE
+    );
+
+
+  const deliveryCharge =
+    Math.ceil(
+      deliveryDistance *
+      rate
+    );
+
+
+  document.getElementById(
+    "locationDisplay"
+  ).value =
+    `${selectedLocationText || "Selected location"} • ${deliveryDistance.toFixed(2)} km away`;
+
+
+  const deliveryInfo =
+    document.getElementById(
+      "deliveryInfo"
+    );
+
+
+  const insideMessage =
+    document.getElementById(
+      "deliveryInsideMessage"
+    );
+
+
+  const outsideMessage =
+    document.getElementById(
+      "deliveryOutsideMessage"
+    );
+
+
+  if(locationWithinDeliveryArea){
+
+    deliveryInfo.innerHTML =
+      `📍 Delivery charge: ₹${deliveryCharge} (${deliveryDistance.toFixed(2)} km × ₹${rate}/km)`;
+
+    insideMessage.classList.remove(
+      "hidden"
+    );
+
+    outsideMessage.classList.add(
+      "hidden"
+    );
+
+  }
+  else{
+
+    deliveryInfo.innerHTML =
+      `❌ This location is ${deliveryDistance.toFixed(2)} km away — outside our 20 km delivery area.`;
+
+    insideMessage.classList.add(
+      "hidden"
+    );
+
+    outsideMessage.classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  validateCheckout();
+
+}
+
+
+/* =====================================================
+   REVERSE GEOCODING
+===================================================== */
+
+async function reverseGeocodeLocation(
+  lat,
+  lng
+){
+
+  try{
+
+    const url =
+      "https://nominatim.openstreetmap.org/reverse" +
+      "?format=jsonv2" +
+      "&lat=" +
+      encodeURIComponent(lat) +
+      "&lon=" +
+      encodeURIComponent(lng) +
+      "&zoom=18" +
+      "&addressdetails=1";
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          headers:{
+            "Accept":
+              "application/json"
+          }
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Reverse geocoding failed."
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const address =
+      data.address || {};
+
+
+    const parts = [
+
+      address.road,
+
+      address.neighbourhood,
+
+      address.suburb,
+
+      address.village,
+
+      address.town,
+
+      address.city,
+
+      address.district,
+
+      address.state
+
+    ].filter(
+      Boolean
+    );
+
+
+    const uniqueParts =
+      [...new Set(parts)];
+
+
+    const finalName =
+      uniqueParts.length
+        ? uniqueParts.join(", ")
+        : (
+            data.display_name ||
+            `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+          );
+
+
+    selectedLocationText =
+      finalName;
+
+
+    document.getElementById(
+      "locationDisplay"
+    ).value =
+      `${finalName} • ${deliveryDistance.toFixed(2)} km away`;
+
+
+  }
+  catch(error){
+
+    console.warn(
+      "PLACE NAME ERROR:",
+      error
+    );
+
+
+    const fallback =
+      `Selected location (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+
+
+    selectedLocationText =
+      fallback;
+
+
+    document.getElementById(
+      "locationDisplay"
+    ).value =
+      `${fallback} • ${deliveryDistance.toFixed(2)} km away`;
+
+  }
+
+}
+
+
+/* =====================================================
+   CURRENT LOCATION
+===================================================== */
+
+document.getElementById(
+  "currentLocationButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    if(!navigator.geolocation){
+
+      alert(
+        "Location is not supported by this browser."
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "currentLocationButton"
+      );
+
+
+    button.textContent =
+      "Getting...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+      position=>{
+
+        setSelectedLocation(
+          position.coords.latitude,
+          position.coords.longitude,
+          "Current location"
+        );
+
+
+        selectedLocationType =
+          "current";
+
+
+        selectedGoogleMapsLink =
+          `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+
+
+        document.getElementById(
+          "googleMapsLocationInput"
+        ).value =
+          selectedGoogleMapsLink;
+
+
+        document.getElementById(
+          "currentLocationButton"
+        ).classList.add(
+          "active"
+        );
+
+
+        document.getElementById(
+          "differentLocationButton"
+        ).classList.remove(
+          "active"
+        );
+
+
+        document.getElementById(
+          "differentLocationBox"
+        ).classList.add(
+          "hidden"
+        );
+
+
+        button.textContent =
+          "Location Ready ✓";
+
+
+        reverseGeocodeLocation(
+          position.coords.latitude,
+          position.coords.longitude
+        );
+
+      },
+
+
+      error=>{
+
+        console.error(
+          "LOCATION ERROR:",
+          error
+        );
+
+        button.textContent =
+          "📍 Use Current Location";
+
+        alert(
+          "Current location could not be accessed. You can use 'Choose Different Location' instead."
+        );
+
+      },
+
+
+      {
+        enableHighAccuracy:true,
+        timeout:10000,
+        maximumAge:0
+      }
+
+    );
+
+  }
+);
+
+
+/* =====================================================
+   SET LOCATION
+===================================================== */
+
+function setSelectedLocation(
+  lat,
+  lng,
+  label
+){
+
+  customerLat =
+    Number(lat);
+
+  customerLng =
+    Number(lng);
+
+  selectedLocationText =
+    label ||
+    "Selected location";
+
+
+  const distance =
+    haversine(
+      RESTAURANT_LAT,
+      RESTAURANT_LNG,
+      customerLat,
+      customerLng
+    );
+
+
+  deliveryDistance =
+    Number(
+      distance.toFixed(2)
+    );
+
+
+  locationWithinDeliveryArea =
+    deliveryDistance <=
+    MAX_DELIVERY_DISTANCE;
+
+
+  const rate =
+    Number(
+      shopSettings.deliveryRate ||
+      DEFAULT_DELIVERY_RATE
+    );
+
+
+  const deliveryCharge =
+    Math.ceil(
+      deliveryDistance *
+      rate
+    );
+
+
+  document.getElementById(
+    "locationDisplay"
+  ).value =
+    `${selectedLocationText} • ${deliveryDistance.toFixed(2)} km away`;
+
+
+  updateLocationDisplay();
+
+  renderOrderSummary();
+
+  validateCheckout();
+
+}
+
+
+/* =====================================================
+   HAVERSINE
+===================================================== */
+
+function haversine(
+  lat1,
+  lon1,
+  lat2,
+  lon2
+){
+
+  const R =
+    6371;
+
+  const dLat =
+    (lat2-lat1) *
+    Math.PI /
+    180;
+
+  const dLon =
+    (lon2-lon1) *
+    Math.PI /
+    180;
+
+  const a =
+    Math.sin(dLat/2)**2 +
+
+    Math.cos(
+      lat1*Math.PI/180
+    ) *
+
+    Math.cos(
+      lat2*Math.PI/180
+    ) *
+
+    Math.sin(
+      dLon/2
+    )**2;
+
+  return R * 2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1-a)
+    );
+
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+document.getElementById(
+  "codButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    selectedPaymentMethod =
+      "COD";
+
+    document.getElementById(
+      "codButton"
+    ).classList.add(
+      "active"
+    );
+
+    document.getElementById(
+      "onlineButton"
+    ).classList.remove(
+      "active"
+    );
+
+    document.getElementById(
+      "paymentWarning"
+    ).classList.add(
+      "hidden"
+    );
+
+    validateCheckout();
+
+  }
+);
+
+
+document.getElementById(
+  "onlineButton"
+).addEventListener(
+  "click",
+  ()=>{
+
+    selectedPaymentMethod =
+      "ONLINE";
+
+    document.getElementById(
+      "onlineButton"
+    ).classList.add(
+      "active"
+    );
+
+    document.getElementById(
+      "codButton"
+    ).classList.remove(
+      "active"
+    );
+
+    document.getElementById(
+      "paymentWarning"
+    ).classList.remove(
+      "hidden"
+    );
+
+    validateCheckout();
+
+  }
+);
+
+
+/* =====================================================
+   CHECKOUT NAME + PHONE
+===================================================== */
+
+document.getElementById(
+  "customerName"
+).addEventListener(
+  "input",
+  ()=>{
+
+    validateCheckout();
+
+  }
+);
+
+
+document.getElementById(
+  "customerPhone"
+).addEventListener(
+  "input",
+  event=>{
+
+    event.target.value =
+      event.target.value
+        .replace(/\D/g,"")
+        .slice(0,10);
+
+    validateCheckout();
+
+  }
+);
+
+
+/* =====================================================
+   VALIDATION
+===================================================== */
+
+function validateCheckout(){
+
+  const nameInput =
+    document.getElementById(
+      "customerName"
+    );
+
+  const phoneInput =
+    document.getElementById(
+      "customerPhone"
+    );
+
+  const addressInput =
+    document.getElementById(
+      "customerAddress"
+    );
+
+
+  if(
+    !nameInput ||
+    !phoneInput ||
+    !addressInput
+  ){
+
+    return false;
+
+  }
+
+
+  const name =
+    nameInput.value.trim();
+
+  const phone =
+    phoneInput.value.trim();
+
+  const address =
+    addressInput.value.trim();
+
+
+  const validPhone =
+    /^[6-9]\d{9}$/.test(
+      phone
+    );
+
+
+  const validDistance =
+    deliveryDistance !== null &&
+
+    customerLat !== null &&
+
+    customerLng !== null &&
+
+    locationWithinDeliveryArea === true &&
+
+    deliveryDistance <=
+      MAX_DELIVERY_DISTANCE;
+
+
+  const valid =
+    name.length >= 2 &&
+
+    validPhone &&
+
+    address.length >= 5 &&
+
+    selectedGoogleMapsLink.length > 0 &&
+
+    validDistance &&
+
+    cart.length > 0 &&
+
+    !!(
+      currentUser ||
+      auth.currentUser
+    );
+
+
+  const button =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+
+  if(button){
+
+    button.disabled =
+      !valid;
+
+  }
+
+
+  return valid;
+
+}
+
+
+document.getElementById(
+  "customerAddress"
+).addEventListener(
+  "input",
+  validateCheckout
+);
+
+
+/* =====================================================
+   PLACE ORDER
+===================================================== */
+
+document.getElementById(
+  "placeOrderButton"
+).addEventListener(
+  "click",
+  placeOrder
+);
+
+
+async function placeOrder(){
+
+  const button =
+    document.getElementById(
+      "placeOrderButton"
+    );
+
+
+  try{
+
+    let user =
+      auth.currentUser ||
+      currentUser;
+
+
+    if(!user){
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "Connecting...";
+
+      user =
+        await startCustomerAuth();
+
+    }
+
+
+    if(!user){
+
+      throw new Error(
+        "Customer authentication failed."
+      );
+
+    }
+
+
+    currentUser =
+      user;
+
+
+    if(!isShopOpen()){
+
+      alert(
+        "SORRY, THE QUEEN FAST FOOD IS CLOSED NOW"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      deliveryDistance === null ||
+      customerLat === null ||
+      customerLng === null
+    ){
+
+      alert(
+        "Please select your exact delivery location."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      deliveryDistance >
+      MAX_DELIVERY_DISTANCE
+    ){
+
+      alert(
+        "❌ Delivery is available only within 20 km of The Queen Fast Food.\n\n" +
+        "Your location is " +
+        deliveryDistance.toFixed(2) +
+        " km away."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      !locationWithinDeliveryArea
+    ){
+
+      alert(
+        "❌ This location is outside our 20 km delivery area."
+      );
+
+      return;
+
+    }
+
+
+    const name =
+      document.getElementById(
+        "customerName"
+      ).value.trim();
+
+
+    const phone =
+      document.getElementById(
+        "customerPhone"
+      ).value.trim();
+
+
+    const address =
+      document.getElementById(
+        "customerAddress"
+      ).value.trim();
+
+
+    const validPhone =
+      /^[6-9]\d{9}$/.test(
+        phone
+      );
+
+
+    if(name.length < 2){
+
+      alert(
+        "Please enter a valid name."
+      );
+
+      document.getElementById(
+        "customerName"
+      ).focus();
+
+      return;
+
+    }
+
+
+    if(!validPhone){
+
+      alert(
+        "Please enter a valid 10 digit mobile number."
+      );
+
+      document.getElementById(
+        "customerPhone"
+      ).focus();
+
+      return;
+
+    }
+
+
+    if(address.length < 5){
+
+      alert(
+        "Please enter your complete delivery address."
+      );
+
+      document.getElementById(
+        "customerAddress"
+      ).focus();
+
+      return;
+
+    }
+
+
+    if(!selectedGoogleMapsLink){
+
+      alert(
+        "Please add your Google Maps delivery location."
+      );
+
+      document.getElementById(
+        "differentLocationButton"
+      ).click();
+
+      return;
+
+    }
+
+
+    if(
+      deliveryDistance === null ||
+      customerLat === null ||
+      customerLng === null
+    ){
+
+      alert(
+        "Please confirm a Google Maps location containing exact coordinates."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      deliveryDistance >
+      MAX_DELIVERY_DISTANCE
+    ){
+
+      alert(
+        "❌ Delivery is available only within 20 km."
+      );
+
+      return;
+
+    }
+
+
+    if(cart.length === 0){
+
+      alert(
+        "Your cart is empty."
+      );
+
+      return;
+
+    }
+
+
+    if(!validateCheckout()){
+
+      alert(
+        "Please complete all required checkout details."
+      );
+
+      return;
+
+    }
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "Placing Order...";
+
+
+    const orderRef =
+      push(
+        ref(
+          db,
+          "orders"
+        )
+      );
+
+
+    const firebaseKey =
+      orderRef.key;
+
+
+    if(!firebaseKey){
+
+      throw new Error(
+        "Firebase could not create order key."
+      );
+
+    }
+
+
+    const orderId =
+      createOrderId(
+        firebaseKey
+      );
+
+
+    let subtotal = 0;
+
+
+    cart.forEach(
+      item=>{
+
+        subtotal +=
+          Number(item.price) *
+          Number(item.quantity);
+
+      }
+    );
+
+
+    const rate =
+      Number(
+        shopSettings.deliveryRate ||
+        DEFAULT_DELIVERY_RATE
+      );
+
+
+    const deliveryCharge =
+      Math.ceil(
+        Number(deliveryDistance) *
+        rate
+      );
+
+
+    const grandTotal =
+      subtotal +
+      deliveryCharge;
+
+
+    const now =
+      Date.now();
+
+
+    const orderData = {
+
+      ownerUid:
+        currentUser.uid,
+
+      orderId:
+        orderId,
+
+      firebaseOrderKey:
+        firebaseKey,
+
+      customerName:
+        name,
+
+      phone:
+        phone,
+
+      address:
+        address,
+
+      paymentMethod:
+        selectedPaymentMethod,
+
+      items:
+        cart.map(
+          item=>({
+
+            id:
+              item.id,
+
+            name:
+              item.name,
+
+            price:
+              Number(item.price),
+
+            quantity:
+              Number(item.quantity)
+
+          })
+        ),
+
+      subtotal:
+        Number(subtotal),
+
+      deliveryDistance:
+        Number(
+          Number(
+            deliveryDistance
+          ).toFixed(2)
+        ),
+
+      deliveryCharge:
+        Number(
+          deliveryCharge
+        ),
+
+      total:
+        Number(
+          grandTotal
+        ),
+
+      customerLat:
+        Number(customerLat),
+
+      customerLng:
+        Number(customerLng),
+
+      customerLocation:
+        selectedGoogleMapsLink,
+
+      customerLocationType:
+        selectedLocationType ||
+        "different",
+
+      customerLocationName:
+        selectedLocationText ||
+        "Google Maps selected delivery location",
+
+      customerGoogleMapsLink:
+        selectedGoogleMapsLink,
+
+      status:
+        "received",
+
+      createdAt:
+        now,
+
+      updatedAt:
+        now
+
+    };
+
+
+    await set(
+      orderRef,
+      orderData
+    );
+
+
+    localStorage.setItem(
+      "lastOrderId",
+      orderId
+    );
+
+    localStorage.setItem(
+      "lastOrderFirebaseKey",
+      firebaseKey
+    );
+
+
+    const whatsapp =
+      normalizeWhatsApp(
+        shopSettings.whatsappNumber ||
+        WHATSAPP_DEFAULT
+      );
+
+
+    const message =
+      buildWhatsAppMessage(
+        orderData
+      );
+
+
+    const whatsappUrl =
+      `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+
+
+    try{
+
+      window.open(
+        whatsappUrl,
+        "_blank"
+      );
+
+    }
+    catch(whatsappError){
+
+      console.warn(
+        "WHATSAPP OPEN ERROR:",
+        whatsappError
+      );
+
+    }
+
+
+    cart = [];
+
+    renderCart();
+
+    closeCheckout();
+
+
+    document.getElementById(
+      "thankYouOverlay"
+    ).classList.remove(
+      "hidden"
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        document.getElementById(
+          "thankYouOverlay"
+        ).classList.add(
+          "hidden"
+        );
+
+        document.getElementById(
+          "trackInput"
+        ).value =
+          orderId;
+
+        trackOrder();
+
+        window.scrollTo({
+
+          top:
+            document.body.scrollHeight,
+
+          behavior:
+            "smooth"
+
+        });
+
+      },
+      1800
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "ORDER ERROR:",
+      error
+    );
+
+
+    const code =
+      error &&
+      error.code
+        ? error.code
+        : "unknown";
+
+
+    const message =
+      error &&
+      error.message
+        ? error.message
+        : String(error);
+
+
+    alert(
+      "Order could not be placed.\n\n" +
+      "Error Code: " +
+      code +
+      "\n\nMessage: " +
+      message
+    );
+
+
+  }
+  finally{
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "Place Order";
+
+    validateCheckout();
+
+  }
+
+}
+
+
+/* =====================================================
+   ORDER ID
+===================================================== */
+
+function createOrderId(
+  key
+){
+
+  const clean =
+    String(
+      key || ""
+    )
+    .replace(
+      /[^A-Za-z0-9]/g,
+      ""
+    )
+    .toUpperCase();
+
+  return (
+    "TQF2026-" +
+    clean.slice(-8)
+  );
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function normalizeWhatsApp(
+  number
+){
+
+  let n =
+    String(number)
+      .replace(
+        /\D/g,
+        ""
+      );
+
+  if(n.length === 10){
+
+    n =
+      "91" + n;
+
+  }
+
+  return n;
+
+}
+
+
+function buildWhatsAppMessage(
+  order
+){
+
+  let locationType =
+    order.customerLocationType === "current"
+      ? "📍 Current Location"
+      : "🗺️ Google Maps Delivery Location";
+
+  let text =
+`🍽️ *THE QUEEN FAST FOOD*
+━━━━━━━━━━━━━━━━━━
+🧾 *NEW ORDER RECEIVED*
+
+🔖 *Order ID:* ${order.orderId}
+
+👤 *Customer:* ${order.customerName}
+
+📞 *Phone:* ${order.phone}
+
+🏠 *Delivery Address:*
+${order.address}
+
+━━━━━━━━━━━━━━━━━━
+🍴 *ORDER ITEMS*
+`;
+
+
+  order.items.forEach(
+    (item,index)=>{
+
+      text +=
+`${index + 1}. 🍽️ *${item.name}*
+Qty: *${item.quantity}*
+Price: *₹${item.price * item.quantity}*
+
+`;
+
+    }
+  );
+
+
+  text +=
+`━━━━━━━━━━━━━━━━━━
+🧮 *BILL SUMMARY*
+
+🛒 *Item Total:* ₹${order.subtotal}
+
+📍 *Distance:* ${order.deliveryDistance} km
+
+🚚 *Delivery Charge:* ₹${order.deliveryCharge}
+
+💰 *GRAND TOTAL:* ₹${order.total}
+
+💳 *Payment:* ${
+  order.paymentMethod === "COD"
+    ? "💵 Cash on Delivery"
+    : "💳 Online Payment"
+}
+
+━━━━━━━━━━━━━━━━━━
+
+${locationType}
+
+📌 *Location:* ${
+  order.customerLocationName ||
+  "Google Maps selected delivery location"
+}
+
+🗺️ *EXACT GOOGLE MAPS LOCATION:*
+${order.customerLocation}
+
+━━━━━━━━━━━━━━━━━━
+
+🕐 *Order Time:* ${
+  new Date(
+    order.createdAt
+  ).toLocaleString("en-IN")
+}
+
+🙏 *Thank you for ordering from The Queen Fast Food!* ❤️
+
+🍴 *Fresh Food • Fast Service • Easy Ordering*
+`;
+
+  return text;
+
+}
+
+
+/* =====================================================
+   TRACK ORDER
+===================================================== */
+
+document.getElementById(
+  "trackButton"
+).addEventListener(
+  "click",
+  trackOrder
+);
+
+
+async function trackOrder(){
+
+  const input =
+    document.getElementById(
+      "trackInput"
+    ).value
+      .trim()
+      .toUpperCase();
+
+
+  const result =
+    document.getElementById(
+      "trackResult"
+    );
+
+
+  if(!input){
+
+    if(trackingUnsubscribe){
+
+      trackingUnsubscribe();
+
+      trackingUnsubscribe =
+        null;
+
+    }
+
+    trackingOrderId =
+      "";
+
+    result.innerHTML = `
+      <p style="color:#888">
+        Enter an Order ID.
+      </p>
+    `;
+
+    return;
+
+  }
+
+
+  try{
+
+    await startCustomerAuth();
+
+    currentUser =
+      auth.currentUser;
+
+
+    if(!currentUser){
+
+      throw new Error(
+        "Customer authentication is not ready."
+      );
+
+    }
+
+
+    if(trackingUnsubscribe){
+
+      trackingUnsubscribe();
+
+      trackingUnsubscribe =
+        null;
+
+    }
+
+
+    trackingOrderId =
+      input;
+
+
+    const ordersQuery =
+      query(
+
+        ref(
+          db,
+          "orders"
+        ),
+
+        orderByChild(
+          "ownerUid"
+        ),
+
+        equalTo(
+          currentUser.uid
+        )
+
+      );
+
+
+    trackingUnsubscribe =
+      onValue(
+
+        ordersQuery,
+
+        snapshot=>{
+
+          let found =
+            null;
+
+
+          snapshot.forEach(
+            child=>{
+
+              const order =
+                child.val();
+
+
+              if(
+
+                String(
+                  order.orderId ||
+                  ""
+                ).toUpperCase() ===
+                trackingOrderId
+
+              ){
+
+                found = {
+
+                  ...order,
+
+                  firebaseKey:
+                    child.key
+
+                };
+
+              }
+
+            }
+          );
+
+
+          if(!found){
+
+            result.innerHTML = `
+
+              <div
+                style="
+                  text-align:center;
+                  padding:20px;
+                  color:#888
+                "
+              >
+
+                🔎
+
+                <p style="margin-top:8px">
+                  Order not found in your orders.
+                </p>
+
+                <small>
+                  Please check your Order ID.
+                </small>
+
+              </div>
+
+            `;
+
+            return;
+
+          }
+
+
+          renderTrackedOrder(
+            found
+          );
+
+        },
+
+
+        error=>{
+
+          console.error(
+            "TRACK ERROR:",
+            error
+          );
+
+
+          result.innerHTML = `
+
+            <p style="color:#ff625b">
+              ❌ Unable to track order.
+              Please try again.
+            </p>
+
+          `;
+
+        }
+
+      );
+
+  }
+  catch(error){
+
+    console.error(
+      "TRACK ERROR:",
+      error
+    );
+
+
+    result.innerHTML = `
+
+      <p style="color:#ff625b">
+        ❌ Unable to track order.
+      </p>
+
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   TRACKED ORDER UI
+===================================================== */
+
+function renderTrackedOrder(
+  order
+){
+
+  const result =
+    document.getElementById(
+      "trackResult"
+    );
+
+
+  const status =
+    String(
+      order.status ||
+      "received"
+    ).toLowerCase();
+
+
+  /* 6-STEP CUSTOMER TRACKING */
+  const steps = [
+    ["placed", "🛒", "Order Placed"],
+    ["received", "📦", "Order Received"],
+    ["processing", "⚙️", "Processing"],
+    ["making", "👨‍🍳", "Making"],
+    ["out_for_delivery", "🛵", "Out for Delivery"],
+    ["delivered", "🏠", "Delivered"]
+  ];
+
+  let currentIndex = 1;
+
+  if(status === "received"){
+    currentIndex = 1;
+  }
+  else if(status === "confirmed" || status === "processing"){
+    currentIndex = 2;
+  }
+  else if(status === "preparing" || status === "making"){
+    currentIndex = 3;
+  }
+  else if(status === "out_for_delivery"){
+    currentIndex = 4;
+  }
+  else if(status === "delivered"){
+    currentIndex = 5;
+  }
+  else if(status === "cancelled"){
+    currentIndex = -1;
+  }
+
+  let timeline = "";
+
+  steps.forEach((step,index)=>{
+    let stepClass = "";
+
+    if(index < currentIndex){
+      stepClass = "done";
+    }
+    else if(index === currentIndex){
+      stepClass = "active";
+    }
+
+    timeline += `
+      <div class="step ${stepClass}">
+        <div class="step-line"></div>
+        <div class="step-icon">${step[1]}</div>
+        <div class="step-label">${step[2]}</div>
+      </div>
+    `;
+  });
+
+
+  let items = "";
+
+
+  (
+    order.items ||
+    []
+  ).forEach(
+    item=>{
+
+      items += `
+
+        <div class="summary-row">
+
+          <span>
+
+            ${escapeHtml(
+              item.name
+            )}
+
+            × ${item.quantity}
+
+          </span>
+
+          <span>
+
+            ₹${
+              item.price *
+              item.quantity
+            }
+
+          </span>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  const canConfirm =
+    status ===
+    "out_for_delivery";
+
+
+  result.innerHTML = `
+
+    <div class="order-card">
+
+      <div class="order-head">
+
+        <div>
+
+          <div class="order-id">
+
+            🔖 ${
+              escapeHtml(
+                order.orderId
+              )
+            }
+
+          </div>
+
+          <small
+            style="color:#777"
+          >
+
+            🕐 ${
+              new Date(
+                order.createdAt ||
+                Date.now()
+              ).toLocaleString(
+                "en-IN"
+              )
+            }
+
+          </small>
+
+        </div>
+
+        <div class="order-status">
+
+          ${
+            getStatusEmoji(
+              status
+            )
+          }
+
+          ${
+            escapeHtml(
+              formatStatus(
+                status
+              )
+            )
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="timeline">
+
+        ${timeline}
+
+      </div>
+
+
+      <div style="margin-top:20px">
+
+        <h3
+          style="
+            margin-bottom:12px;
+            color:#d4af37
+          "
+        >
+          🍴 Your Items
+        </h3>
+
+        ${items}
+
+      </div>
+
+
+      <hr
+        style="
+          border-color:#292929;
+          margin:15px 0
+        "
+      >
+
+
+      <div class="summary-row">
+
+        <span>
+          🛒 Item Total
+        </span>
+
+        <b>
+          ₹${order.subtotal || 0}
+        </b>
+
+      </div>
+
+
+      <div class="summary-row">
+
+        <span>
+          🚚 Delivery
+        </span>
+
+        <b>
+          ₹${order.deliveryCharge || 0}
+        </b>
+
+      </div>
+
+
+      <div class="summary-row total">
+
+        <span>
+          💰 Total
+        </span>
+
+        <span>
+          ₹${order.total || 0}
+        </span>
+
+      </div>
+
+
+      ${
+        canConfirm
+          ? `
+
+            <button
+              id="deliveredButton"
+              class="primary"
+            >
+              🎉 Confirm Delivered
+            </button>
+
+          `
+          : ""
+      }
+
+
+      ${
+        status === "delivered"
+          ? `
+
+            <div
+              style="
+                margin-top:15px;
+                padding:13px;
+                border-radius:10px;
+                background:#102615;
+                color:#30d158;
+                text-align:center;
+                font-weight:700
+              "
+            >
+              🎉 Order Delivered Successfully!
+            </div>
+
+          `
+          : ""
+      }
+
+
+      ${
+        status === "cancelled"
+          ? `
+
+            <div
+              style="
+                margin-top:15px;
+                padding:13px;
+                border-radius:10px;
+                background:#301010;
+                color:#ff625b;
+                text-align:center;
+                font-weight:700
+              "
+            >
+              ❌ This order has been cancelled.
+            </div>
+
+          `
+          : ""
+      }
+
+    </div>
+
+  `;
+
+
+  if(canConfirm){
+
+    const deliveredButton =
+      document.getElementById(
+        "deliveredButton"
+      );
+
+
+    if(deliveredButton){
+
+      deliveredButton.onclick =
+        ()=>{
+
+          customerConfirmDelivered(
+            order
+          );
+
+        };
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   STATUS EMOJI
+===================================================== */
+
+function getStatusEmoji(
+  status
+){
+
+  const map = {
+
+    received:"📦",
+
+    confirmed:"⚙️",
+
+    processing:"⚙️",
+
+    preparing:"👨‍🍳",
+
+    making:"👨‍🍳",
+
+    out_for_delivery:"🛵",
+
+    delivered:"🏠",
+
+    cancelled:"❌"
+
+  };
+
+
+  return (
+    map[status] ||
+    "📌"
+  );
+
+}
+
+
+/* =====================================================
+   CUSTOMER CONFIRM DELIVERY
+===================================================== */
+
+async function customerConfirmDelivered(
+  order
+){
+
+  if(!auth.currentUser){
+
+    alert(
+      "Secure connection is not ready."
+    );
+
+    return;
+
+  }
+
+
+  currentUser =
+    auth.currentUser;
+
+
+  if(
+    order.ownerUid !==
+    currentUser.uid
+  ){
+
+    alert(
+      "This order does not belong to you."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    String(
+      order.status
+    ).toLowerCase() !==
+    "out_for_delivery"
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await set(
+
+      ref(
+        db,
+        `orders/${order.firebaseKey}/status`
+      ),
+
+      "delivered"
+
+    );
+
+
+    showDeliverySuccess();
+
+  }
+  catch(error){
+
+    console.error(
+      "DELIVERY CONFIRM ERROR:",
+      error
+    );
+
+
+    alert(
+      "Could not confirm delivery.\n\n" +
+      (
+        error.message ||
+        error
+      )
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   DELIVERY SUCCESS
+===================================================== */
+
+function showDeliverySuccess(){
+
+  const overlay =
+    document.getElementById(
+      "deliverySuccessOverlay"
+    );
+
+
+  const title =
+    document.getElementById(
+      "deliverySuccessTitle"
+    );
+
+
+  const message =
+    document.getElementById(
+      "deliverySuccessMessage"
+    );
+
+
+  const icon =
+    document.getElementById(
+      "deliverySuccessIcon"
+    );
+
+
+  const flowerContainer =
+    document.getElementById(
+      "flowerContainer"
+    );
+
+
+  overlay.classList.remove(
+    "hidden"
+  );
+
+
+  icon.textContent =
+    "🎉";
+
+
+  title.textContent =
+    "Order Delivered Successfully!";
+
+
+  message.textContent =
+    "";
+
+
+  flowerContainer.innerHTML =
+    "";
+
+
+  const flowers = [
+    "🌸",
+    "🌺",
+    "🌷",
+    "🌼",
+    "💮",
+    "🌹"
+  ];
+
+
+  for(
+    let i = 0;
+    i < 35;
+    i++
+  ){
+
+    const petal =
+      document.createElement(
+        "div"
+      );
+
+
+    petal.className =
+      "flower-petal";
+
+
+    petal.textContent =
+      flowers[
+        Math.floor(
+          Math.random() *
+          flowers.length
+        )
+      ];
+
+
+    petal.style.left =
+      Math.random() * 100 +
+      "%";
+
+
+    petal.style.fontSize =
+      (
+        18 +
+        Math.random() * 22
+      ) +
+      "px";
+
+
+    petal.style.animationDuration =
+      (
+        2 +
+        Math.random() * 2.5
+      ) +
+      "s";
+
+
+    petal.style.animationDelay =
+      Math.random() * .8 +
+      "s";
+
+
+    petal.style.setProperty(
+      "--drift",
+      (
+        -100 +
+        Math.random() * 200
+      ) +
+      "px"
+    );
+
+
+    flowerContainer.appendChild(
+      petal
+    );
+
+  }
+
+
+  setTimeout(
+    ()=>{
+
+      icon.textContent =
+        "🌸";
+
+
+      title.textContent =
+        "Thank You!";
+
+
+      message.textContent =
+        "Thank you for choosing The Queen Fast Food ❤️";
+
+    },
+    1000
+  );
+
+
+  setTimeout(
+    ()=>{
+
+      overlay.classList.add(
+        "hidden"
+      );
+
+
+      flowerContainer.innerHTML =
+        "";
+
+
+      const lastOrderId =
+        localStorage.getItem(
+          "lastOrderId"
+        );
+
+
+      if(lastOrderId){
+
+        document.getElementById(
+          "trackInput"
+        ).value =
+          lastOrderId;
+
+
+        trackOrder();
+
+
+        document.getElementById(
+          "trackResult"
+        ).scrollIntoView({
+
+          behavior:"smooth",
+
+          block:"center"
+
+        });
+
+      }
+
+    },
+    3500
+  );
+
+}
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function formatStatus(
+  status
+){
+
+  const map = {
+
+    received:"Order Received",
+
+    confirmed:"Processing",
+
+    processing:"Processing",
+
+    preparing:"Making",
+
+    making:"Making",
+
+    out_for_delivery:
+      "Out for Delivery",
+
+    delivered:"Delivered",
+
+    cancelled:"Cancelled"
+
+  };
+
+
+  return (
+    map[status] ||
+    status
+  );
+
+}
+
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+document.getElementById(
+  "topCart"
+).onclick =
+  openCart;
+
+
+document.getElementById(
+  "closeCart"
+).onclick =
+  closeCart;
+
+
+document.getElementById(
+  "checkoutButton"
+).onclick =
+  openCheckout;
+
+
+document.getElementById(
+  "closeCheckout"
+).onclick =
+  closeCheckout;
+
+
+/* =====================================================
+   START
+===================================================== */
+
+(async function(){
+
+  try{
+
+    const loggedIn =
+      loadCustomerProfile();
+
+
+    updateCustomerUI();
+
+
+    fillCheckoutCustomer();
+
+
+    if(!loggedIn){
+
+      showCustomerLogin();
+
+    }
+
+
+    await startCustomerAuth();
+
+
+    validateCheckout();
+
+
+    loadSettings();
+
+
+    renderCart();
+
+
+    setInterval(
+      renderShopStatus,
+      30000
+    );
+
+
+    const lastOrderId =
+      localStorage.getItem(
+        "lastOrderId"
+      );
+
+
+    if(lastOrderId){
+
+      document.getElementById(
+        "trackInput"
+      ).value =
+        lastOrderId;
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "STARTUP ERROR:",
+      error
+    );
+
+  }
+
+})();
+
+</script>
+
+</body>
+</html>
