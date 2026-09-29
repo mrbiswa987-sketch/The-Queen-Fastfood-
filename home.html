@@ -896,32 +896,35 @@ header{
 
 
 /* =====================================================
-   LIVE ADMIN OFFER
+   LIVE ADMIN OFFER - TOP BLINKING CIRCLE
 ===================================================== */
 .live-offer{
   position:fixed;
+  top:86px;
   right:18px;
-  bottom:18px;
   z-index:9000;
-  width:min(320px,calc(100vw - 36px));
-  background:linear-gradient(145deg,#171717,#0b0b0b);
-  border:1px solid #f59b23;
-  border-radius:18px;
-  padding:12px;
-  box-shadow:0 15px 45px rgba(0,0,0,.65),0 0 22px rgba(245,155,35,.18);
-  animation:offerPulse 2.2s ease-in-out infinite;
+  width:108px;
+  height:108px;
+  background:radial-gradient(circle at 35% 30%,#2a2a2a,#090909 68%);
+  border:2px solid #f59b23;
+  border-radius:50%;
+  padding:7px;
+  box-shadow:0 0 12px rgba(245,155,35,.35),0 0 35px rgba(245,155,35,.16);
+  animation:offerBlink 1.25s ease-in-out infinite;
+  overflow:visible;
 }
-.live-offer-inner{display:flex;gap:10px;align-items:center}
-.live-offer-image{width:76px;height:76px;border-radius:12px;overflow:hidden;background:#222;flex:0 0 76px;display:flex;align-items:center;justify-content:center;font-size:30px}
+.live-offer-inner{width:100%;height:100%;display:flex;flex-direction:column;gap:1px;align-items:center;justify-content:center;text-align:center}
+.live-offer-image{width:35px;height:35px;border-radius:50%;overflow:hidden;background:#222;display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 35px;border:1px solid rgba(245,155,35,.55)}
 .live-offer-image img{width:100%;height:100%;object-fit:cover}
-.live-offer-content{min-width:0;flex:1}
-.live-offer-badge{font-size:8px;letter-spacing:1.5px;color:#f59b23;font-weight:900;text-transform:uppercase}
-.live-offer-title{font-family:"Cormorant Garamond",serif;font-size:21px;font-weight:700;color:#fff;margin-top:2px}
-.live-offer-text{font-size:10px;color:#aaa;line-height:1.35;margin-top:2px}
-.live-offer-price{font-size:18px;font-weight:900;color:#f59b23;margin-top:3px}
-.live-offer-close{position:absolute;right:7px;top:6px;border:0;background:#222;color:#aaa;width:22px;height:22px;border-radius:50%;font-size:13px}
-.live-offer-btn{margin-top:6px;border:0;background:#f59b23;color:#000;border-radius:8px;padding:7px 10px;font-size:9px;font-weight:900}
-@keyframes offerPulse{0%,100%{box-shadow:0 15px 45px rgba(0,0,0,.65),0 0 10px rgba(245,155,35,.12)}50%{box-shadow:0 15px 45px rgba(0,0,0,.65),0 0 28px rgba(245,155,35,.30)}}
+.live-offer-content{min-width:0;width:100%}
+.live-offer-badge{font-size:6px;letter-spacing:1px;color:#f59b23;font-weight:900;text-transform:uppercase;white-space:nowrap}
+.live-offer-title{font-family:"Cormorant Garamond",serif;font-size:13px;line-height:1;font-weight:700;color:#fff;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 4px}
+.live-offer-text{font-size:6px;color:#aaa;line-height:1.1;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 5px}
+.live-offer-price{font-size:10px;font-weight:900;color:#f59b23;margin-top:2px;white-space:nowrap}
+.live-offer-close{position:absolute;right:-5px;top:-5px;border:1px solid #444;background:#161616;color:#aaa;width:20px;height:20px;border-radius:50%;font-size:12px;line-height:18px;padding:0}
+.live-offer-btn{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);border:1px solid #f59b23;background:#f59b23;color:#000;border-radius:10px;padding:4px 7px;font-size:6px;font-weight:900;white-space:nowrap}
+@keyframes offerBlink{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 10px rgba(245,155,35,.25),0 0 30px rgba(245,155,35,.12)}50%{opacity:.55;transform:scale(1.06);box-shadow:0 0 24px rgba(245,155,35,.8),0 0 55px rgba(245,155,35,.35)}}
+@media(max-width:600px){.live-offer{top:78px;right:10px;width:92px;height:92px}.live-offer-image{width:29px;height:29px;flex-basis:29px;font-size:15px}.live-offer-title{font-size:11px}.live-offer-text{font-size:5.5px}.live-offer-price{font-size:9px}}
 
 /* =====================================================
    FOOTER
@@ -3565,6 +3568,7 @@ onAuthStateChanged(
 
 function loadSettings(){
 
+  /* MASTER SETTINGS LISTENER */
   onValue(
     ref(db,"settings"),
     snapshot=>{
@@ -3584,6 +3588,46 @@ function loadSettings(){
     },
     error=>{
       console.error("SETTINGS ERROR:",error);
+    }
+  );
+
+  /* DIRECT MENU LISTENER - PRICE / NAME / IMAGE / STOCK IMMEDIATELY */
+  onValue(
+    ref(db,"settings/menu"),
+    snapshot=>{
+
+      if(!shopSettings || typeof shopSettings !== "object"){
+        shopSettings = {};
+      }
+
+      shopSettings.menu = snapshot.val() || {};
+
+      renderMenu();
+
+      if(!document.getElementById("checkoutOverlay").classList.contains("hidden")){
+        renderOrderSummary();
+        validateCheckout();
+      }
+    },
+    error=>{
+      console.error("MENU REALTIME ERROR:",error);
+    }
+  );
+
+  /* DIRECT OFFER LISTENER - OFFER ON/OFF + CONTENT IMMEDIATELY */
+  onValue(
+    ref(db,"settings/offer"),
+    snapshot=>{
+
+      if(!shopSettings || typeof shopSettings !== "object"){
+        shopSettings = {};
+      }
+
+      shopSettings.offer = snapshot.val() || {};
+      renderOfferCircle();
+    },
+    error=>{
+      console.error("OFFER REALTIME ERROR:",error);
     }
   );
 
@@ -3671,7 +3715,7 @@ function renderOfferCircle(){
   if(!box) return;
 
   const offer=shopSettings.offer || {};
-  const enabled = offer.enabled === true || String(offer.enabled).toLowerCase() === "true";
+  const enabled = offer.enabled === true || String(offer.enabled).toLowerCase() === "true" || shopSettings.offerEnabled === true || String(shopSettings.offerEnabled).toLowerCase() === "true";
   if(!enabled){
     box.classList.add("hidden");
     return;
