@@ -899,6 +899,13 @@ textarea{
   grid-column:2;
 }
 
+.menu-remove{
+  width:100%;
+  margin-top:8px;
+  padding:7px 8px;
+  font-size:9px;
+}
+
 /* =========================
    ACTIVE ORDER MANAGEMENT
 ========================= */
@@ -1795,12 +1802,29 @@ textarea{
           <div>
 
             <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
+              Original Price
+            </label>
+
+            <input
+              id="offerOriginalPrice"
+              type="number"
+              min="0"
+              placeholder="149"
+            >
+
+          </div>
+
+          <div>
+
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Offer Price
             </label>
 
             <input
               id="offerPrice"
-              placeholder="₹149"
+              type="number"
+              min="0"
+              placeholder="120"
             >
 
           </div>
@@ -2019,7 +2043,8 @@ let offerEnabled = true;
 let offerData = {
   title:"SPECIAL OFFER",
   text:"Burger + Fries + Cold Drink",
-  price:"₹149",
+  originalPrice:"149",
+  offerPrice:"120",
   button:"ORDER NOW",
   image:""
 };
@@ -2344,6 +2369,7 @@ function renderSettings(){
   offerEnabled =
     offer.enabled !== false;
 
+
   offerData = {
 
     title:
@@ -2354,9 +2380,14 @@ function renderSettings(){
       offer.text ||
       "Burger + Fries + Cold Drink",
 
-    price:
+    originalPrice:
+      offer.originalPrice ||
       offer.price ||
-      "₹149",
+      "149",
+
+    offerPrice:
+      offer.offerPrice ||
+      "120",
 
     button:
       offer.button ||
@@ -2367,6 +2398,7 @@ function renderSettings(){
       ""
 
   };
+
 
   renderOfferControls();
 
@@ -2829,8 +2861,17 @@ function renderOfferControls(){
   $("offerText").value =
     offerData.text;
 
+  $("offerOriginalPrice").value =
+    String(
+      offerData.originalPrice
+        ?? "149"
+    ).replace(/[^\d.]/g,"");
+
   $("offerPrice").value =
-    offerData.price;
+    String(
+      offerData.offerPrice
+        ?? "120"
+    ).replace(/[^\d.]/g,"");
 
   $("offerButton").value =
     offerData.button;
@@ -2887,6 +2928,19 @@ async function(){
 window.saveOffer =
 async function(){
 
+  const originalPrice =
+    $("offerOriginalPrice")
+      .value
+      .trim() ||
+    "149";
+
+  const offerPrice =
+    $("offerPrice")
+      .value
+      .trim() ||
+    "120";
+
+
   const data = {
 
     enabled:
@@ -2900,9 +2954,19 @@ async function(){
       $("offerText").value.trim() ||
       "Burger + Fries + Cold Drink",
 
+    originalPrice:
+      originalPrice,
+
+    offerPrice:
+      offerPrice,
+
+    /*
+      Compatibility:
+      old customer code jodi offer.price read kare,
+      se offer price paiba.
+    */
     price:
-      $("offerPrice").value.trim() ||
-      "₹149",
+      offerPrice,
 
     button:
       $("offerButton").value.trim() ||
@@ -2924,8 +2988,27 @@ async function(){
       }
     );
 
-    offerData =
-      data;
+    offerData = {
+
+      title:
+        data.title,
+
+      text:
+        data.text,
+
+      originalPrice:
+        data.originalPrice,
+
+      offerPrice:
+        data.offerPrice,
+
+      button:
+        data.button,
+
+      image:
+        data.image
+
+    };
 
     renderOfferControls();
 
@@ -3159,6 +3242,14 @@ function renderMenu(menu){
 
           </div>
 
+
+          <button
+            class="btn btn-red menu-remove"
+            onclick="removeMenuItem('${id}')"
+          >
+            🗑️ REMOVE
+          </button>
+
         </div>
 
       `
@@ -3313,6 +3404,90 @@ async function(id){
     showToast(
       error.message ||
       "Image update failed."
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   MENU REMOVE / HIDE
+========================================================= */
+
+window.removeMenuItem =
+async function(id){
+
+  const menuItem =
+    settings.menu?.[id] ||
+    defaultMenu[id] ||
+    {};
+
+  const itemName =
+    menuItem.name ||
+    id;
+
+
+  const confirmed =
+    confirm(
+      `Remove "${itemName}" from customer menu?\n\nThe item will NOT be deleted. It will only be hidden from the customer website.`
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `settings/menu/${id}`
+      ),
+      {
+        removed:true
+      }
+    );
+
+
+    if(!settings.menu){
+      settings.menu = {};
+    }
+
+
+    if(!settings.menu[id]){
+      settings.menu[id] = {
+        ...defaultMenu[id]
+      };
+    }
+
+
+    settings.menu[id] = {
+
+      ...settings.menu[id],
+
+      removed:true
+
+    };
+
+
+    showToast(
+      `${itemName} removed from customer menu.`
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "MENU REMOVE ERROR:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Could not remove menu item."
     );
 
   }
