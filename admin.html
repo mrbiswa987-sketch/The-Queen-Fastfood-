@@ -1324,34 +1324,21 @@ textarea{
 
     <div class="field">
       <label>Admin Email</label>
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Enter admin email"
-      >
+      <input id="loginEmail" type="email" placeholder="Enter admin email">
     </div>
 
     <div class="field">
       <label>Password</label>
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Enter password"
-      >
+      <input id="loginPassword" type="password" placeholder="Enter password">
     </div>
 
-    <button
-      class="btn btn-gold"
-      style="width:100%"
-      onclick="adminLogin()"
-    >
+    <button class="btn btn-gold" style="width:100%" onclick="adminLogin()">
       LOGIN
     </button>
 
-    <div
-      id="loginMessage"
-      style="margin-top:10px;color:#ff7777;font-size:10px;text-align:center;"
-    ></div>
+    <div id="loginMessage"
+      style="margin-top:10px;color:#ff7777;font-size:10px;text-align:center;">
+    </div>
 
   </div>
 
@@ -1368,10 +1355,7 @@ textarea{
         👑 <span>The Queen Fast Food</span> — Admin
       </div>
 
-      <button
-        class="btn btn-dark"
-        onclick="adminLogout()"
-      >
+      <button class="btn btn-dark" onclick="adminLogout()">
         Logout
       </button>
 
@@ -1382,13 +1366,13 @@ textarea{
 
   <div class="notification-wrap">
 
-    <button
-      id="notificationButton"
+    <button id="notificationButton"
       class="notification-btn"
-      onclick="toggleNotifications()"
-    >
+      onclick="toggleNotifications()">
+
       🔔 NEW ORDERS
       <span id="notificationBadge">0</span>
+
     </button>
 
     <div id="notificationPanel" class="notification-panel">
@@ -1399,10 +1383,7 @@ textarea{
           🔔 New Order Notifications
         </strong>
 
-        <button
-          class="btn btn-dark"
-          onclick="closeNotifications()"
-        >
+        <button class="btn btn-dark" onclick="closeNotifications()">
           Close
         </button>
 
@@ -1437,11 +1418,9 @@ textarea{
 
     <div class="grid">
 
-      <button
-        id="folderNew"
+      <button id="folderNew"
         class="folder-stat new-stat"
-        onclick="selectFolder('new')"
-      >
+        onclick="selectFolder('new')">
 
         <span id="newOrderDot" class="new-order-dot"></span>
 
@@ -1456,11 +1435,9 @@ textarea{
       </button>
 
 
-      <button
-        id="folderPending"
+      <button id="folderPending"
         class="folder-stat pending-stat"
-        onclick="selectFolder('pending')"
-      >
+        onclick="selectFolder('pending')">
 
         <small>⏳ PENDING</small>
 
@@ -1473,11 +1450,9 @@ textarea{
       </button>
 
 
-      <button
-        id="folderDelivery"
+      <button id="folderDelivery"
         class="folder-stat delivery-stat"
-        onclick="selectFolder('delivery')"
-      >
+        onclick="selectFolder('delivery')">
 
         <small>🏍️ DELIVERY</small>
 
@@ -1490,11 +1465,9 @@ textarea{
       </button>
 
 
-      <button
-        id="folderComplete"
+      <button id="folderComplete"
         class="folder-stat complete-stat"
-        onclick="selectFolder('complete')"
-      >
+        onclick="selectFolder('complete')">
 
         <small>✅ COMPLETE</small>
 
@@ -1507,11 +1480,9 @@ textarea{
       </button>
 
 
-      <button
-        id="folderCancelled"
+      <button id="folderCancelled"
         class="folder-stat cancelled-stat"
-        onclick="selectFolder('cancelled')"
-      >
+        onclick="selectFolder('cancelled')">
 
         <small>❌ CANCELLED</small>
 
@@ -1534,15 +1505,9 @@ textarea{
 
         <div class="shop-status">
 
-          <span
-            id="shopLight"
-            class="shop-light"
-          ></span>
+          <span id="shopLight" class="shop-light"></span>
 
-          <span
-            id="shopStatusText"
-            class="shop-status-text"
-          >
+          <span id="shopStatusText" class="shop-status-text">
             CHECKING...
           </span>
 
@@ -1555,27 +1520,21 @@ textarea{
 
         <div class="override-buttons">
 
-          <button
-            id="overrideAuto"
+          <button id="overrideAuto"
             class="override-btn"
-            onclick="setShopOverride('auto')"
-          >
+            onclick="setShopOverride('auto')">
             🕐 AUTO
           </button>
 
-          <button
-            id="overrideOpen"
+          <button id="overrideOpen"
             class="override-btn"
-            onclick="setShopOverride('open')"
-          >
+            onclick="setShopOverride('open')">
             🟢 FORCE OPEN
           </button>
 
-          <button
-            id="overrideClosed"
+          <button id="overrideClosed"
             class="override-btn"
-            onclick="setShopOverride('closed')"
-          >
+            onclick="setShopOverride('closed')">
             🔴 FORCE CLOSED
           </button>
 
@@ -1585,11 +1544,9 @@ textarea{
 
           <label>Opening Time</label>
 
-          <input
-            id="openingTime"
+          <input id="openingTime"
             type="time"
-            value="12:00"
-          >
+            value="12:00">
 
         </div>
 
@@ -1597,11 +1554,9 @@ textarea{
 
           <label>Closing Time</label>
 
-          <input
-            id="closingTime"
+          <input id="closingTime"
             type="time"
-            value="23:00"
-          >
+            value="23:00">
 
         </div>
 
@@ -1609,17 +1564,12 @@ textarea{
 
           <label>Closed Message</label>
 
-          <textarea
-            id="closedMessage"
-            placeholder="Sorry, we are closed right now."
-          ></textarea>
+          <textarea id="closedMessage"
+            placeholder="Sorry, we are closed right now."></textarea>
 
         </div>
 
-        <button
-          class="btn btn-gold"
-          onclick="saveShopSettings()"
-        >
+        <button class="btn btn-gold" onclick="saveShopSettings()">
           Save Shop Settings
         </button>
 
@@ -1652,40 +1602,27 @@ textarea{
             Update / Maintenance Message
           </label>
 
-          <textarea
-            id="updateMessage"
-            placeholder="We are making some improvements..."
-          ></textarea>
+          <textarea id="updateMessage"
+            placeholder="We are making some improvements..."></textarea>
 
         </div>
 
-        <button
-          class="btn btn-gold"
-          onclick="saveWebsiteSettings()"
-        >
+        <button class="btn btn-gold" onclick="saveWebsiteSettings()">
           Update Website
         </button>
 
-        <div
-          class="field"
-          style="margin-top:10px"
-        >
+        <div class="field" style="margin-top:10px">
 
           <label>WhatsApp Number</label>
 
-          <input
-            id="whatsappNumber"
+          <input id="whatsappNumber"
             type="tel"
             maxlength="10"
-            placeholder="Enter WhatsApp number"
-          >
+            placeholder="Enter WhatsApp number">
 
         </div>
 
-        <button
-          class="btn btn-gold"
-          onclick="saveWhatsApp()"
-        >
+        <button class="btn btn-gold" onclick="saveWhatsApp()">
           Save WhatsApp
         </button>
 
@@ -1702,11 +1639,9 @@ textarea{
             💵 Cash on Delivery
           </span>
 
-          <button
-            id="codSwitch"
+          <button id="codSwitch"
             class="switch on"
-            onclick="togglePayment('cod')"
-          ></button>
+            onclick="togglePayment('cod')"></button>
 
         </div>
 
@@ -1716,11 +1651,9 @@ textarea{
             💳 Online Payment
           </span>
 
-          <button
-            id="onlineSwitch"
+          <button id="onlineSwitch"
             class="switch on"
-            onclick="togglePayment('online')"
-          ></button>
+            onclick="togglePayment('online')"></button>
 
         </div>
 
@@ -1735,10 +1668,8 @@ textarea{
 
     <div class="details-offer-row">
 
-      <div
-        id="orderManagement"
-        class="order-details-box"
-      >
+      <div id="orderManagement"
+        class="order-details-box">
 
         <div class="active-order-head">
 
@@ -1752,10 +1683,8 @@ textarea{
 
         </div>
 
-        <div
-          id="activeOrdersList"
-          class="active-orders-list"
-        >
+        <div id="activeOrdersList"
+          class="active-orders-list">
 
           <div class="empty">
             No active customer orders.
@@ -1776,26 +1705,20 @@ textarea{
 
           <div>
 
-            <div
-              id="offerStatusText"
-              class="offer-status-text on"
-            >
+            <div id="offerStatusText"
+              class="offer-status-text on">
               Offer is ON
             </div>
 
-            <div
-              style="color:#666;font-size:8px;margin-top:2px;"
-            >
+            <div style="color:#666;font-size:8px;margin-top:2px;">
               Customer website offer
             </div>
 
           </div>
 
-          <button
-            id="offerSwitch"
+          <button id="offerSwitch"
             class="offer-switch on"
-            onclick="toggleOffer()"
-          ></button>
+            onclick="toggleOffer()"></button>
 
         </div>
 
@@ -1804,91 +1727,69 @@ textarea{
 
           <div>
 
-            <label
-              style="display:block;color:#777;font-size:8px;margin-bottom:4px;"
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Offer Title
             </label>
 
-            <input
-              id="offerTitle"
-              placeholder="SPECIAL OFFER"
-            >
+            <input id="offerTitle"
+              placeholder="SPECIAL OFFER">
 
           </div>
 
 
           <div>
 
-            <label
-              style="display:block;color:#777;font-size:8px;margin-bottom:4px;"
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Offer Price
             </label>
 
-            <input
-              id="offerPrice"
-              placeholder="₹149"
-            >
+            <input id="offerPrice"
+              placeholder="₹149">
 
           </div>
 
 
           <div class="offer-full">
 
-            <label
-              style="display:block;color:#777;font-size:8px;margin-bottom:4px;"
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Offer Description
             </label>
 
-            <textarea
-              id="offerText"
-              placeholder="Burger + Fries + Cold Drink"
-            ></textarea>
+            <textarea id="offerText"
+              placeholder="Burger + Fries + Cold Drink"></textarea>
 
           </div>
 
 
           <div>
 
-            <label
-              style="display:block;color:#777;font-size:8px;margin-bottom:4px;"
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Button Text
             </label>
 
-            <input
-              id="offerButton"
-              placeholder="ORDER NOW"
-            >
+            <input id="offerButton"
+              placeholder="ORDER NOW">
 
           </div>
 
 
           <div>
 
-            <label
-              style="display:block;color:#777;font-size:8px;margin-bottom:4px;"
-            >
+            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
               Image URL
             </label>
 
-            <input
-              id="offerImage"
-              placeholder="https://..."
-            >
+            <input id="offerImage"
+              placeholder="https://...">
 
           </div>
 
 
           <div class="offer-full">
 
-            <button
-              class="btn btn-gold"
+            <button class="btn btn-gold"
               style="width:100%"
-              onclick="saveOffer()"
-            >
+              onclick="saveOffer()">
               Save Offer
             </button>
 
@@ -1907,10 +1808,7 @@ textarea{
         🍽️ Menu Price / Image / Stock Control
       </h2>
 
-      <div
-        id="menuList"
-        class="menu-list"
-      ></div>
+      <div id="menuList" class="menu-list"></div>
 
     </div>
 
@@ -1919,10 +1817,7 @@ textarea{
 </div>
 
 
-<div
-  id="completeModal"
-  class="modal"
->
+<div id="completeModal" class="modal">
 
   <div class="modal-card">
 
@@ -1932,10 +1827,8 @@ textarea{
         ✅ Complete Orders
       </h2>
 
-      <button
-        class="close"
-        onclick="closeModal('completeModal')"
-      >
+      <button class="close"
+        onclick="closeModal('completeModal')">
         ×
       </button>
 
@@ -1948,10 +1841,7 @@ textarea{
 </div>
 
 
-<div
-  id="cancelledModal"
-  class="modal"
->
+<div id="cancelledModal" class="modal">
 
   <div class="modal-card">
 
@@ -1961,10 +1851,8 @@ textarea{
         ❌ Cancelled Orders
       </h2>
 
-      <button
-        class="close"
-        onclick="closeModal('cancelledModal')"
-      >
+      <button class="close"
+        onclick="closeModal('cancelledModal')">
         ×
       </button>
 
@@ -1977,10 +1865,7 @@ textarea{
 </div>
 
 
-<div
-  id="toast"
-  class="toast"
-></div>
+<div id="toast" class="toast"></div>
 
 
 <script type="module">
@@ -2301,8 +2186,6 @@ function loadData(){
   dataListenersStarted = true;
 
 
-  /* SETTINGS */
-
   onValue(
     ref(db,"settings"),
 
@@ -2325,8 +2208,6 @@ function loadData(){
     }
   );
 
-
-  /* MAIN ORDERS */
 
   onValue(
     ref(db,"orders"),
@@ -2363,17 +2244,6 @@ function loadData(){
     }
   );
 
-
-  /*
-    IMPORTANT:
-
-    Customer orders listener.
-
-    Eita add karajaichi jaha dwara
-    customerOrders path re customer-side
-    order key/orderId alaga hele bi
-    admin taku identify kari pariba.
-  */
 
   onValue(
     ref(db,"customerOrders"),
@@ -3644,12 +3514,6 @@ function normalizeStatus(value){
 }
 
 
-/*
-  IMPORTANT:
-
-  Read every possible status field.
-*/
-
 function getOrderStatus(order){
 
   if(!order){
@@ -4514,6 +4378,13 @@ function createOrderCard(
           ✕ CANCEL
         </button>
 
+        <button
+          class="btn btn-dark"
+          onclick="removeOrder('${escapeHtml(key)}')"
+        >
+          🗑 REMOVE ORDER
+        </button>
+
       </div>
 
     `;
@@ -4539,6 +4410,13 @@ function createOrderCard(
           onclick="updateOrderStatus('${escapeHtml(key)}','cancelled')"
         >
           ✕ CANCEL
+        </button>
+
+        <button
+          class="btn btn-dark"
+          onclick="removeOrder('${escapeHtml(key)}')"
+        >
+          🗑 REMOVE ORDER
         </button>
 
       </div>
@@ -4568,6 +4446,13 @@ function createOrderCard(
           ✕ CANCEL
         </button>
 
+        <button
+          class="btn btn-dark"
+          onclick="removeOrder('${escapeHtml(key)}')"
+        >
+          🗑 REMOVE ORDER
+        </button>
+
       </div>
 
     `;
@@ -4592,6 +4477,17 @@ function createOrderCard(
         "
       >
         🏍️ OUT FOR DELIVERY — WAITING FOR CUSTOMER DELIVERY CONFIRMATION
+      </div>
+
+      <div class="status-buttons">
+
+        <button
+          class="btn btn-dark"
+          onclick="removeOrder('${escapeHtml(key)}')"
+        >
+          🗑 REMOVE ORDER
+        </button>
+
       </div>
 
     `;
@@ -5172,12 +5068,6 @@ async function(
     }
 
 
-    /*
-      ADMIN NEVER SETS DELIVERED.
-
-      Customer confirmation only.
-    */
-
     if(
       String(newStatus)
         .trim()
@@ -5252,12 +5142,6 @@ async function(
     const updates = {};
 
 
-    /*
-      =====================================================
-      MAIN ORDER
-      =====================================================
-    */
-
     updates[
       `orders/${key}/status`
     ] =
@@ -5275,12 +5159,6 @@ async function(
     ] =
       now;
 
-
-    /*
-      =====================================================
-      DIRECT CUSTOMER UID CANDIDATES
-      =====================================================
-    */
 
     const directCustomerIds =
       new Set();
@@ -5319,10 +5197,6 @@ async function(
     );
 
 
-    /*
-      Same key customerOrders path.
-    */
-
     directCustomerIds.forEach(
       customerId=>{
 
@@ -5346,12 +5220,6 @@ async function(
       }
     );
 
-
-    /*
-      =====================================================
-      MATCH CUSTOMER ORDERS BY ORDER KEY / ORDER ID
-      =====================================================
-    */
 
     const matches =
       findCustomerOrderMatches(
@@ -5383,12 +5251,6 @@ async function(
       }
     );
 
-
-    /*
-      =====================================================
-      LEGACY CUSTOMER ORDER ID SUPPORT
-      =====================================================
-    */
 
     const customerOrderId =
       order.customerOrderId ||
@@ -5427,12 +5289,6 @@ async function(
     }
 
 
-    /*
-      =====================================================
-      CANCELLED ORDER COPY
-      =====================================================
-    */
-
     if(status === "cancelled"){
 
       updates[
@@ -5464,12 +5320,6 @@ async function(
     }
 
 
-    /*
-      =====================================================
-      ACTIVE ORDER
-      =====================================================
-    */
-
     if(
       status !== "cancelled"
     ){
@@ -5488,22 +5338,11 @@ async function(
     }
 
 
-    /*
-      =====================================================
-      SINGLE ATOMIC FIREBASE UPDATE
-      =====================================================
-    */
-
     await update(
       ref(db),
       updates
     );
 
-
-    /*
-      Local immediate update.
-      Firebase listener will also refresh it.
-    */
 
     if(orders[key]){
 
