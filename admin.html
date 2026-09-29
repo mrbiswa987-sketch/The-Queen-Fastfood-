@@ -1,1866 +1,988 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#070707">
-<title>The Queen Fast Food - Admin</title>
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1.0"> <meta name="theme-color" content="#070707"> <title>The Queen Fast Food - Admin</title>
 
 <style>
 :root{
-  --gold:#d4af37;
-  --gold2:#f5d76e;
-  --black:#070707;
-  --card:#111;
-  --border:#292929;
-  --white:#fff;
-  --muted:#888;
-  --green:#25d366;
-  --red:#ff4d4d;
-  --blue:#4da6ff;
-  --orange:#ff9f43;
-  --purple:#a970ff;
-  --lightgreen:#8ff0ad;
+--gold:#d4af37;
+--gold2:#f5d76e;
+--black:#070707;
+--card:#111;
+--border:#292929;
+--white:#fff;
+--muted:#888;
+--green:#25d366;
+--red:#ff4d4d;
+--blue:#4da6ff;
+--orange:#ff9f43;
+--purple:#a970ff;
+--lightgreen:#8ff0ad;
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#070707;
-  color:#fff;
-  font-size:13px;
-}
-
-button,input,textarea,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* =========================
-   LOGIN
-========================= */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#070707;color:#fff;font-size:13px}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
 .login-screen{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background:
-    radial-gradient(circle at center,rgba(212,175,55,.1),transparent 45%),
-    #050505;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+background:radial-gradient(circle at center,rgba(212,175,55,.1),transparent 45%),#050505
 }
-
 .login-box{
-  width:min(390px,100%);
-  background:#111;
-  border:1px solid #333;
-  border-radius:18px;
-  padding:28px;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
+width:min(390px,100%);
+background:#111;
+border:1px solid #333;
+border-radius:18px;
+padding:28px;
+box-shadow:0 20px 60px rgba(0,0,0,.5)
 }
-
-.logo{
-  text-align:center;
-  margin-bottom:22px;
+.logo{text-align:center;margin-bottom:22px}
+.logo-icon{font-size:44px}
+.logo h1{font-size:21px;color:var(--gold2);margin-top:4px}
+.logo p{color:#666;font-size:9px;letter-spacing:2px;margin-top:5px}
+.field{margin-bottom:10px}
+.field label{display:block;color:#999;font-size:10px;margin-bottom:5px;letter-spacing:.3px}
+.field input,.field textarea,.field select{
+width:100%;
+padding:9px 10px;
+border-radius:8px;
+border:1px solid #303030;
+background:#171717;
+color:white;
+outline:none;
+font-size:12px
 }
-
-.logo-icon{
-  font-size:44px;
-}
-
-.logo h1{
-  font-size:21px;
-  color:var(--gold2);
-  margin-top:4px;
-}
-
-.logo p{
-  color:#666;
-  font-size:9px;
-  letter-spacing:2px;
-  margin-top:5px;
-}
-
-.field{
-  margin-bottom:10px;
-}
-
-.field label{
-  display:block;
-  color:#999;
-  font-size:10px;
-  margin-bottom:5px;
-  letter-spacing:.3px;
-}
-
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  padding:9px 10px;
-  border-radius:8px;
-  border:1px solid #303030;
-  background:#171717;
-  color:white;
-  outline:none;
-  font-size:12px;
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:var(--gold);
-}
-
-textarea{
-  min-height:70px;
-  resize:vertical;
-}
-
-.btn{
-  border:0;
-  border-radius:7px;
-  padding:7px 10px;
-  font-size:11px;
-  font-weight:800;
-  transition:.18s;
-}
-
-.btn:hover{
-  transform:translateY(-1px);
-}
-
-.btn-gold{
-  background:var(--gold);
-  color:#000;
-}
-
-.btn-dark{
-  background:#191919;
-  border:1px solid #3b3b3b;
-  color:#fff;
-}
-
-.btn-red{
-  background:#351414;
-  border:1px solid #702525;
-  color:#ff8888;
-}
-
-.btn-green{
-  background:#12351f;
-  border:1px solid #1e6b39;
-  color:#69ed91;
-}
-
-.btn-blue{
-  background:#10253c;
-  border:1px solid #285b8d;
-  color:#73baff;
-}
-
-.btn-purple{
-  background:#24153c;
-  border:1px solid #6639a0;
-  color:#c99cff;
-}
-
-.btn-orange{
-  background:#3b240d;
-  border:1px solid #8b5a19;
-  color:#ffbd55;
-}
-
-.admin{
-  display:none;
-}
-
-/* =========================
-   TOPBAR
-========================= */
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
+textarea{min-height:70px;resize:vertical}
+.btn{border:0;border-radius:7px;padding:7px 10px;font-size:11px;font-weight:800;transition:.18s}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:#000}
+.btn-dark{background:#191919;border:1px solid #3b3b3b;color:#fff}
+.btn-red{background:#351414;border:1px solid #702525;color:#ff8888}
+.btn-green{background:#12351f;border:1px solid #1e6b39;color:#69ed91}
+.btn-blue{background:#10253c;border:1px solid #285b8d;color:#73baff}
+.btn-purple{background:#24153c;border:1px solid #6639a0;color:#c99cff}
+.btn-orange{background:#3b240d;border:1px solid #8b5a19;color:#ffbd55}
+.admin{display:none}
 
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(7,7,7,.97);
-  border-bottom:1px solid #222;
-  padding:9px 16px;
-  backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(7,7,7,.97);
+border-bottom:1px solid #222;
+padding:9px 16px;
+backdrop-filter:blur(12px)
 }
-
 .topbar-inner{
-  max-width:1450px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+max-width:1450px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
 }
-
-.brand{
-  font-size:13px;
-  font-weight:900;
-}
-
-.brand span{
-  color:var(--gold2);
-}
-
-/* =========================
-   ADMIN ID WARNING
-========================= */
+.brand{font-size:13px;font-weight:900}
+.brand span{color:var(--gold2)}
 
 .admin-id-box{
-  margin:0 0 13px;
-  background:#111;
-  border:1px solid #3a321b;
-  border-radius:11px;
-  padding:11px 13px;
-  text-align:left;
+margin:0 0 13px;
+background:#111;
+border:1px solid #3a321b;
+border-radius:11px;
+padding:11px 13px;
+text-align:left
 }
+.admin-id-title{color:var(--gold2);font-size:12px;font-weight:900;letter-spacing:.4px}
+.admin-id-warning{margin-top:4px;color:#777;font-size:8px;line-height:1.45}
+.admin-id-warning strong{color:#ffb0b0}
 
-.admin-id-title{
-  color:var(--gold2);
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.4px;
-}
-
-.admin-id-warning{
-  margin-top:4px;
-  color:#777;
-  font-size:8px;
-  line-height:1.45;
-}
-
-.admin-id-warning strong{
-  color:#ffb0b0;
-}
-
-/* =========================
-   NOTIFICATION
-========================= */
-
-.notification-wrap{
-  position:fixed;
-  top:8px;
-  right:16px;
-  z-index:500;
-}
-
+.notification-wrap{position:fixed;top:8px;right:16px;z-index:500}
 .notification-btn{
-  border:1px solid #6b581c;
-  background:#17130a;
-  color:#f5d76e;
-  border-radius:8px;
-  padding:7px 10px;
-  font-size:10px;
-  font-weight:900;
+border:1px solid #6b581c;
+background:#17130a;
+color:#f5d76e;
+border-radius:8px;
+padding:7px 10px;
+font-size:10px;
+font-weight:900
 }
-
 .notification-btn span{
-  display:inline-flex;
-  min-width:18px;
-  height:18px;
-  padding:0 5px;
-  align-items:center;
-  justify-content:center;
-  margin-left:4px;
-  border-radius:10px;
-  background:#ff4d4d;
-  color:#fff;
-  font-size:9px;
+display:inline-flex;
+min-width:18px;
+height:18px;
+padding:0 5px;
+align-items:center;
+justify-content:center;
+margin-left:4px;
+border-radius:10px;
+background:#ff4d4d;
+color:#fff;
+font-size:9px
 }
-
-.notification-btn.blink{
-  animation:notificationBlink .7s infinite;
-}
-
+.notification-btn.blink{animation:notificationBlink .7s infinite}
 @keyframes notificationBlink{
-  0%,100%{
-    box-shadow:0 0 4px rgba(57,211,83,.3);
-    border-color:#287d42;
-  }
-  50%{
-    box-shadow:
-      0 0 15px rgba(57,211,83,.9),
-      0 0 35px rgba(57,211,83,.4);
-    border-color:#39d353;
-  }
+0%,100%{box-shadow:0 0 4px rgba(57,211,83,.3);border-color:#287d42}
+50%{box-shadow:0 0 15px rgba(57,211,83,.9),0 0 35px rgba(57,211,83,.4);border-color:#39d353}
 }
-
 .notification-panel{
-  position:absolute;
-  top:38px;
-  right:0;
-  width:min(360px,92vw);
-  background:#111;
-  border:1px solid #3b321a;
-  border-radius:10px;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);
-  display:none;
-  overflow:hidden;
+position:absolute;
+top:38px;
+right:0;
+width:min(360px,92vw);
+background:#111;
+border:1px solid #3b321a;
+border-radius:10px;
+box-shadow:0 20px 60px rgba(0,0,0,.6);
+display:none;
+overflow:hidden
 }
-
-.notification-panel.show{
-  display:block;
-}
-
+.notification-panel.show{display:block}
 .notification-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:9px;
-  border-bottom:1px solid #292929;
-  color:#f5d76e;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+padding:9px;
+border-bottom:1px solid #292929;
+color:#f5d76e
 }
+.notification-item{padding:9px;border-bottom:1px solid #222;cursor:pointer}
+.notification-item:hover{background:#181818}
+.notification-item strong{display:block;color:#f5d76e;font-size:10px}
+.notification-item small{display:block;color:#777;margin-top:3px;font-size:8px}
 
-.notification-item{
-  padding:9px;
-  border-bottom:1px solid #222;
-  cursor:pointer;
-}
-
-.notification-item:hover{
-  background:#181818;
-}
-
-.notification-item strong{
-  display:block;
-  color:#f5d76e;
-  font-size:10px;
-}
-
-.notification-item small{
-  display:block;
-  color:#777;
-  margin-top:3px;
-  font-size:8px;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-.dashboard{
-  max-width:1450px;
-  margin:auto;
-  padding:17px 16px 45px;
-}
-
-/* =========================
-   TOP FOLDERS
-========================= */
+.dashboard{max-width:1450px;margin:auto;padding:17px 16px 45px}
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:9px;
-  margin-bottom:14px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:9px;
+margin-bottom:14px
 }
-
 .folder-stat{
-  width:100%;
-  text-align:left;
-  border:1px solid #292929;
-  cursor:pointer;
-  color:#fff;
-  transition:.2s;
-  background:#111;
-  border-radius:10px;
-  padding:11px;
-  position:relative;
+width:100%;
+text-align:left;
+border:1px solid #292929;
+cursor:pointer;
+color:#fff;
+transition:.2s;
+background:#111;
+border-radius:10px;
+padding:11px;
+position:relative
 }
-
-.folder-stat:hover{
-  transform:translateY(-2px);
-  border-color:#555;
-}
-
-.folder-stat small{
-  color:#777;
-  font-size:9px;
-}
-
-.folder-stat strong{
-  display:block;
-  font-size:22px;
-  color:var(--gold2);
-  margin-top:2px;
-}
-
-.folder-stat span{
-  display:block;
-  color:#666;
-  font-size:8px;
-  margin-top:5px;
-}
-
+.folder-stat:hover{transform:translateY(-2px);border-color:#555}
+.folder-stat small{color:#777;font-size:9px}
+.folder-stat strong{display:block;font-size:22px;color:var(--gold2);margin-top:2px}
+.folder-stat span{display:block;color:#666;font-size:8px;margin-top:5px}
 .new-order-dot{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#ffd43b;
-  box-shadow:
-    0 0 5px rgba(255,212,59,.55),
-    0 0 10px rgba(255,212,59,.2);
+position:absolute;
+top:10px;
+right:10px;
+width:10px;
+height:10px;
+border-radius:50%;
+background:#ffd43b;
+box-shadow:0 0 5px rgba(255,212,59,.55),0 0 10px rgba(255,212,59,.2)
 }
-
 .new-order-dot.alert{
-  background:#39d353;
-  animation:newOrderDotBlink .7s infinite;
+background:#39d353;
+animation:newOrderDotBlink .7s infinite
 }
-
 @keyframes newOrderDotBlink{
-  0%,100%{
-    opacity:1;
-    transform:scale(1);
-    background:#39d353;
-    box-shadow:
-      0 0 5px rgba(57,211,83,.7),
-      0 0 12px rgba(57,211,83,.5);
-  }
-  50%{
-    opacity:.25;
-    transform:scale(.72);
-    background:#39d353;
-    box-shadow:
-      0 0 16px rgba(57,211,83,1),
-      0 0 35px rgba(57,211,83,.75);
-  }
+0%,100%{opacity:1;transform:scale(1);background:#39d353;box-shadow:0 0 5px rgba(57,211,83,.7),0 0 12px rgba(57,211,83,.5)}
+50%{opacity:.25;transform:scale(.72);background:#39d353;box-shadow:0 0 16px rgba(57,211,83,1),0 0 35px rgba(57,211,83,.75)}
 }
-
-.new-stat{
-  border-color:rgba(212,175,55,.35);
-}
-
-.pending-stat{
-  border-color:rgba(255,159,67,.35);
-}
-
-.delivery-stat{
-  border-color:rgba(169,112,255,.35);
-}
-
-.complete-stat{
-  border-color:rgba(37,211,102,.35);
-}
-
-.cancelled-stat{
-  border-color:rgba(255,77,77,.35);
-}
-
+.new-stat{border-color:rgba(212,175,55,.35)}
+.pending-stat{border-color:rgba(255,159,67,.35)}
+.delivery-stat{border-color:rgba(169,112,255,.35)}
+.complete-stat{border-color:rgba(37,211,102,.35)}
+.cancelled-stat{border-color:rgba(255,77,77,.35)}
 .new-summary-alert{
-  border-color:#39d353!important;
-  animation:newSummaryBlink 1.05s ease-in-out infinite;
+border-color:#39d353!important;
+animation:newSummaryBlink 1.05s ease-in-out infinite
 }
-
 @keyframes newSummaryBlink{
-  0%,100%{
-    border-color:#208b45;
-    box-shadow:0 0 5px rgba(57,211,83,.25);
-  }
-  50%{
-    border-color:#39d353;
-    box-shadow:
-      0 0 14px rgba(57,211,83,.8),
-      0 0 35px rgba(57,211,83,.42),
-      0 0 70px rgba(57,211,83,.18);
-  }
+0%,100%{border-color:#208b45;box-shadow:0 0 5px rgba(57,211,83,.25)}
+50%{border-color:#39d353;box-shadow:0 0 14px rgba(57,211,83,.8),0 0 35px rgba(57,211,83,.42),0 0 70px rgba(57,211,83,.18)}
 }
-
-/* =========================
-   CONTROL GRID
-========================= */
 
 .control-grid{
-  display:grid;
-  grid-template-columns:
-    minmax(0,1.2fr)
-    minmax(0,1fr)
-    minmax(0,1fr);
-  gap:10px;
-  margin-bottom:12px;
+display:grid;
+grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);
+gap:10px;
+margin-bottom:12px
 }
-
 .control-box{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:11px;
-  padding:12px;
-  min-width:0;
+background:#111;
+border:1px solid #292929;
+border-radius:11px;
+padding:12px;
+min-width:0
 }
-
-.control-box h2{
-  font-size:12px;
-  margin-bottom:9px;
-  color:var(--gold2);
-}
-
+.control-box h2{font-size:12px;margin-bottom:9px;color:var(--gold2)}
 .notice{
-  background:#19170c;
-  border:1px solid #55450e;
-  color:#d9bd55;
-  border-radius:7px;
-  padding:8px 9px;
-  font-size:10px;
-  margin-bottom:10px;
-  line-height:1.45;
+background:#19170c;
+border:1px solid #55450e;
+color:#d9bd55;
+border-radius:7px;
+padding:8px 9px;
+font-size:10px;
+margin-bottom:10px;
+line-height:1.45
 }
-
-.success{
-  color:#6bea91;
-}
-
-.danger{
-  color:#ff7777;
-}
-
+.success{color:#6bea91}
+.danger{color:#ff7777}
 .shop-status{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-bottom:9px;
-  padding:8px 10px;
-  border-radius:8px;
-  background:#121212;
-  border:1px solid #282828;
+display:flex;
+align-items:center;
+gap:7px;
+margin-bottom:9px;
+padding:8px 10px;
+border-radius:8px;
+background:#121212;
+border:1px solid #282828
 }
-
 .shop-light{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#25d366;
-  box-shadow:0 0 8px #25d366;
+width:9px;
+height:9px;
+border-radius:50%;
+background:#25d366;
+box-shadow:0 0 8px #25d366
 }
-
 .shop-light.closed{
-  background:#ff3030;
-  box-shadow:0 0 10px #ff3030;
-  animation:redBlink .8s infinite;
+background:#ff3030;
+box-shadow:0 0 10px #ff3030;
+animation:redBlink .8s infinite
 }
-
-.shop-status-text{
-  font-size:10px;
-  font-weight:900;
-}
-
-.shop-status-text.closed{
-  color:#ff5c5c;
-}
-
+.shop-status-text{font-size:10px;font-weight:900}
+.shop-status-text.closed{color:#ff5c5c}
 @keyframes redBlink{
-  0%,100%{
-    opacity:1;
-    transform:scale(1);
-  }
-  50%{
-    opacity:.25;
-    transform:scale(.75);
-  }
+0%,100%{opacity:1;transform:scale(1)}
+50%{opacity:.25;transform:scale(.75)}
 }
-
 .override-buttons{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:5px;
-  margin-top:8px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:5px;
+margin-top:8px
 }
-
 .override-btn{
-  padding:7px 4px;
-  border-radius:7px;
-  border:1px solid #333;
-  background:#171717;
-  color:#aaa;
-  font-size:8px;
-  font-weight:900;
+padding:7px 4px;
+border-radius:7px;
+border:1px solid #333;
+background:#171717;
+color:#aaa;
+font-size:8px;
+font-weight:900
 }
-
-.override-btn.active-auto,
-.override-btn.active-open,
-.override-btn.active-closed{
-  border-color:var(--gold);
-  color:var(--gold2);
-  background:#29220b;
+.override-btn.active-auto,.override-btn.active-open,.override-btn.active-closed{
+border-color:var(--gold);
+color:var(--gold2);
+background:#29220b
 }
-
 .payment-row{
-  display:flex;
-  gap:7px;
-  align-items:center;
-  justify-content:space-between;
-  background:#171717;
-  border:1px solid #292929;
-  border-radius:8px;
-  padding:8px;
-  margin-bottom:6px;
+display:flex;
+gap:7px;
+align-items:center;
+justify-content:space-between;
+background:#171717;
+border:1px solid #292929;
+border-radius:8px;
+padding:8px;
+margin-bottom:6px
 }
-
-.payment-row span{
-  font-size:9px;
-  color:#ddd;
-}
-
+.payment-row span{font-size:9px;color:#ddd}
 .switch{
-  width:42px;
-  height:22px;
-  border-radius:30px;
-  background:#444;
-  position:relative;
-  border:0;
+width:42px;
+height:22px;
+border-radius:30px;
+background:#444;
+position:relative;
+border:0
 }
-
 .switch:after{
-  content:"";
-  position:absolute;
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:#fff;
-  top:3px;
-  left:3px;
-  transition:.2s;
+content:"";
+position:absolute;
+width:16px;
+height:16px;
+border-radius:50%;
+background:#fff;
+top:3px;
+left:3px;
+transition:.2s
 }
-
-.switch.on{
-  background:var(--green);
-}
-
-.switch.on:after{
-  left:23px;
-}
-
-/* =========================
-   ORDER DETAILS + OFFER
-========================= */
+.switch.on{background:var(--green)}
+.switch.on:after{left:23px}
 
 .details-offer-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:12px;
-  align-items:stretch;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:12px
 }
-
-.order-details-box,
-.offer-side{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:11px;
-  padding:12px;
-  min-width:0;
+.order-section,.offer-box{
+background:#111;
+border:1px solid #292929;
+border-radius:11px;
+padding:12px
 }
-
-.order-details-box h2{
-  color:var(--gold2);
-  font-size:12px;
-  margin-bottom:9px;
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+margin-bottom:10px
 }
-
-.offer-control-title{
-  color:var(--gold2);
-  font-size:12px;
-  font-weight:900;
-  margin-bottom:8px;
+.section-title h2{font-size:12px;color:var(--gold2)}
+.folder-name{
+font-size:11px;
+font-weight:900;
+color:#fff
 }
-
-.offer-status-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:8px;
-  background:#171717;
-  border:1px solid #292929;
-  border-radius:8px;
-  margin-bottom:8px;
+.order-list{
+display:grid;
+gap:9px
 }
-
-.offer-status-text{
-  font-size:9px;
-  color:#aaa;
+.order-card{
+background:#151515;
+border:1px solid #292929;
+border-radius:10px;
+padding:11px
 }
-
-.offer-status-text.on{
-  color:#69ed91;
-}
-
-.offer-switch{
-  width:42px;
-  height:22px;
-  border-radius:30px;
-  background:#444;
-  border:0;
-  position:relative;
-}
-
-.offer-switch:after{
-  content:"";
-  position:absolute;
-  width:16px;
-  height:16px;
-  background:#fff;
-  border-radius:50%;
-  top:3px;
-  left:3px;
-  transition:.2s;
-}
-
-.offer-switch.on{
-  background:#25d366;
-}
-
-.offer-switch.on:after{
-  left:23px;
-}
-
-.offer-control-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-}
-
-.offer-control-grid input,
-.offer-control-grid textarea{
-  width:100%;
-  background:#171717;
-  border:1px solid #303030;
-  color:#fff;
-  border-radius:7px;
-  padding:7px;
-  outline:none;
-  font-size:9px;
-}
-
-.offer-control-grid textarea{
-  min-height:55px;
-  resize:vertical;
-}
-
-.offer-full{
-  grid-column:1/-1;
-}
-
-/* =========================
-   MENU
-========================= */
-
-.menu-section{
-  background:#111;
-  border:1px solid #292929;
-  border-radius:11px;
-  padding:12px;
-  margin-bottom:12px;
-}
-
-.menu-section h2{
-  color:var(--gold2);
-  font-size:12px;
-  margin-bottom:10px;
-}
-
-.menu-list{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:9px;
-}
-
-.menu-item{
-  display:block;
-  padding:10px;
-  background:#151515;
-  border:1px solid #292929;
-  border-radius:10px;
-  min-width:0;
-}
-
-.menu-item:hover{
-  border-color:#4a4a4a;
-}
-
-.menu-top{
-  display:grid;
-  grid-template-columns:1fr;
-  align-items:center;
-  gap:7px;
-}
-
-.menu-name{
-  font-size:11px;
-  font-weight:800;
-  color:#eee;
-}
-
-.menu-id{
-  font-size:8px;
-  color:#555;
-  margin-top:2px;
-  overflow-wrap:anywhere;
-}
-
-.menu-price-area{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.menu-price-input{
-  width:68px!important;
-  padding:6px!important;
-  text-align:center;
-  font-size:11px!important;
-  color:var(--gold2)!important;
-  background:#070707!important;
-  border:1px solid #333!important;
-}
-
-.menu-save{
-  padding:6px 8px;
-  font-size:9px;
-}
-
-.stock-select{
-  background:#171717;
-  color:#fff;
-  border:1px solid #333;
-  border-radius:8px;
-  padding:7px 9px;
-  font-weight:700;
-  font-size:9px;
-  width:100%;
-}
-
-.stock-select.available{
-  border-color:rgba(37,211,102,.55);
-  color:#58dd8d;
-}
-
-.stock-select.out{
-  border-color:rgba(255,77,77,.55);
-  color:#ff7777;
-}
-
-.image-area{
-  margin-top:7px;
-  display:grid;
-  grid-template-columns:65px 1fr;
-  gap:6px;
-  align-items:center;
-}
-
-.image-preview{
-  width:65px;
-  height:48px;
-  object-fit:cover;
-  border-radius:6px;
-  border:1px solid #333;
-  background:#181818;
-}
-
-.image-url{
-  min-width:0;
-}
-
-.image-url input{
-  width:100%;
-  padding:7px 8px;
-  border-radius:6px;
-  border:1px solid #303030;
-  background:#171717;
-  color:#fff;
-  font-size:9px;
-  outline:none;
-}
-
-.image-save{
-  padding:6px 7px;
-  font-size:9px;
-  white-space:nowrap;
-  grid-column:2;
-}
-
-/* =========================
-   ACTIVE ORDER MANAGEMENT
-========================= */
-
-.active-order-management{
-  background:#0f0f0f;
-  border:1px solid #292929;
-  border-radius:11px;
-  overflow:hidden;
-  margin-bottom:12px;
-}
-
-.active-order-head{
-  padding:10px 12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  background:#151515;
-  border-bottom:1px solid #292929;
-}
-
-.active-order-head strong{
-  font-size:11px;
-}
-
-.active-order-head span{
-  min-width:28px;
-  height:28px;
-  padding:0 7px;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#29220b;
-  color:#ffd85a;
-  font-size:9px;
-  font-weight:900;
-}
-
-.active-orders-list{
-  padding:8px;
-  display:grid;
-  gap:7px;
-  max-height:650px;
-  overflow:auto;
-}
-
-/* =========================
-   ORDER CARD
-========================= */
-
-.order{
-  background:#161616;
-  border:1px solid #292929;
-  border-radius:9px;
-  padding:10px;
-  position:relative;
-  overflow:hidden;
-}
-
-.order.new-order{
-  border:1px solid #d4af37;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(212,175,55,.15),
-      rgba(37,211,102,.05),
-      #161616
-    );
-}
-
-.order.new-order.new-arrival{
-  animation:newOrderBlink .9s infinite;
-}
-
-@keyframes newOrderBlink{
-  0%,100%{
-    border-color:#d4af37;
-    box-shadow:
-      0 0 0 1px rgba(212,175,55,.12),
-      0 0 8px rgba(212,175,55,.15);
-  }
-  50%{
-    border-color:#fff0a0;
-    box-shadow:
-      0 0 0 2px rgba(245,215,110,.55),
-      0 0 25px rgba(245,215,110,.65),
-      0 0 50px rgba(212,175,55,.25);
-  }
-}
-
-.order.new-order:before{
-  content:"NEW ORDER";
-  position:absolute;
-  top:0;
-  right:0;
-  background:linear-gradient(135deg,#d4af37,#f5d76e);
-  color:#000;
-  font-size:8px;
-  font-weight:900;
-  padding:4px 7px;
-  border-bottom-left-radius:7px;
-}
-
 .order-head{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  flex-wrap:wrap;
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-bottom:8px
 }
-
-.order-id{
-  color:var(--gold2);
-  font-weight:900;
-  font-size:12px;
+.order-id{font-size:11px;font-weight:900;color:var(--gold2)}
+.order-meta{font-size:9px;color:#777;margin-top:3px}
+.status-badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:5px 8px;
+border-radius:20px;
+font-size:8px;
+font-weight:900
 }
-
-.order-date{
-  color:#777;
-  font-size:8px;
-  margin-top:2px;
+.status-received{background:#2d2812;color:#f5d76e}
+.status-processing{background:#10253c;color:#73baff}
+.status-making{background:#24153c;color:#c99cff}
+.status-out{background:#3b240d;color:#ffbd55}
+.status-delivered{background:#12351f;color:#69ed91}
+.status-cancelled{background:#351414;color:#ff8888}
+.customer-line{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+font-size:9px;
+color:#bbb;
+margin-bottom:7px
 }
-
-.status{
-  padding:4px 7px;
-  border-radius:13px;
-  font-size:8px;
-  font-weight:900;
-  background:#242424;
-  height:max-content;
+.customer-line span{
+background:#1b1b1b;
+border:1px solid #292929;
+border-radius:6px;
+padding:5px 7px
 }
-
-.status.received{
-  background:#3a2c05;
-  color:#ffd85a;
-}
-
-.status.confirmed,
-.status.processing{
-  background:#10253c;
-  color:#73baff;
-}
-
-.status.preparing,
-.status.making{
-  background:#30210b;
-  color:#ffbd55;
-}
-
-.status.out_for_delivery{
-  background:#211235;
-  color:#c394ff;
-}
-
-.status.delivered{
-  background:#12351f;
-  color:#69ed91;
-}
-
-.status.cancelled{
-  background:#351414;
-  color:#ff8888;
-}
-
-.order-info{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:5px;
-  margin:8px 0;
-}
-
-.info-box{
-  background:#101010;
-  padding:6px;
-  border-radius:6px;
-  font-size:9px;
-  line-height:1.35;
-  overflow-wrap:anywhere;
-}
-
-.info-box small{
-  color:#666;
-  display:block;
-  margin-bottom:2px;
-  font-size:7px;
-}
-
 .order-items{
-  margin:7px 0;
-  border-top:1px solid #292929;
-  border-bottom:1px solid #292929;
-  padding:6px 0;
+border-top:1px solid #292929;
+border-bottom:1px solid #292929;
+padding:7px 0;
+margin:7px 0
 }
-
 .order-item{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  padding:2px 0;
-  color:#bbb;
-  font-size:9px;
+display:flex;
+justify-content:space-between;
+gap:8px;
+padding:3px 0;
+font-size:9px
+}
+.order-item span:last-child{color:#ddd;font-weight:700}
+.bill-row{
+display:flex;
+justify-content:space-between;
+gap:8px;
+padding:3px 0;
+font-size:9px;
+color:#aaa
+}
+.bill-row.total{font-size:11px;color:#fff;font-weight:900;padding-top:6px}
+.action-row{
+display:flex;
+flex-wrap:wrap;
+gap:5px;
+margin-top:9px
+}
+.action-row .btn{font-size:8px;padding:6px 8px}
+.empty{
+padding:25px 10px;
+text-align:center;
+color:#666;
+font-size:10px;
+border:1px dashed #292929;
+border-radius:9px
 }
 
-.order-total{
-  display:flex;
-  justify-content:space-between;
-  font-size:11px;
-  font-weight:900;
+.offer-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:7px
+}
+.offer-preview{
+background:#171717;
+border:1px solid #292929;
+border-radius:9px;
+padding:9px
+}
+.offer-preview img{
+width:100%;
+height:100px;
+object-fit:cover;
+border-radius:7px;
+display:block;
+background:#0d0d0d
+}
+.offer-preview .offer-title{
+font-size:10px;
+font-weight:900;
+color:#f5d76e;
+margin-top:7px
+}
+.offer-preview .offer-text{
+font-size:9px;
+color:#aaa;
+margin-top:3px;
+line-height:1.35
 }
 
-.order-total strong{
-  color:var(--gold2);
+.menu-box{
+background:#111;
+border:1px solid #292929;
+border-radius:11px;
+padding:12px;
+margin-bottom:12px
 }
-
-.status-buttons{
-  display:flex;
-  gap:4px;
-  flex-wrap:wrap;
-  margin-top:7px;
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px
 }
-
-.status-buttons .btn{
-  font-size:8px;
-  padding:5px 7px;
+.menu-item{
+background:#151515;
+border:1px solid #292929;
+border-radius:9px;
+padding:9px
 }
-
-.maps-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  margin-top:5px;
-  padding:5px 7px;
-  border-radius:6px;
-  background:#10253c;
-  border:1px solid #285b8d;
-  color:#73baff;
-  text-decoration:none;
-  font-size:8px;
-  font-weight:900;
+.menu-item h3{
+font-size:10px;
+color:#f5d76e;
+margin-bottom:7px
 }
-
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.72);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  z-index:900;
+.menu-item img{
+width:100%;
+height:100px;
+object-fit:cover;
+border-radius:7px;
+background:#0d0d0d;
+margin-bottom:7px
 }
-
-.modal.show{
-  display:flex;
+.menu-price{
+display:flex;
+gap:5px;
+align-items:center;
+margin-bottom:6px
 }
-
-.modal-card{
-  width:min(850px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#111;
-  border:1px solid #333;
-  border-radius:13px;
-  padding:14px;
+.menu-price input{flex:1}
+.stock-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:5px;
+font-size:9px;
+color:#aaa
 }
-
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+.stock-btn{
+padding:6px 8px;
+border-radius:7px;
+border:1px solid #333;
+font-size:8px;
+font-weight:900;
+background:#171717;
+color:#aaa
 }
-
-.modal-head h2{
-  color:var(--gold2);
-  font-size:13px;
+.stock-btn.available{
+background:#12351f;
+border-color:#1e6b39;
+color:#69ed91
 }
-
-.close{
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  border:1px solid #444;
-  background:#181818;
-  color:#fff;
-  font-size:17px;
+.stock-btn.out{
+background:#351414;
+border-color:#702525;
+color:#ff8888
 }
-
-/* =========================
-   TOAST
-========================= */
 
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:22px;
-  transform:translateX(-50%) translateY(20px);
-  background:#181818;
-  color:#fff;
-  border:1px solid #444;
-  border-radius:8px;
-  padding:9px 13px;
-  font-size:10px;
-  font-weight:800;
-  z-index:9999;
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-  box-shadow:0 10px 30px rgba(0,0,0,.5);
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%) translateY(20px);
+background:#171717;
+border:1px solid #4a3e17;
+color:#f5d76e;
+padding:10px 15px;
+border-radius:9px;
+font-size:10px;
+font-weight:800;
+opacity:0;
+pointer-events:none;
+transition:.25s;
+z-index:9999
 }
-
 .toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:1100px){
-  .menu-list{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
+opacity:1;
+transform:translateX(-50%) translateY(0)
 }
 
 @media(max-width:1000px){
-  .control-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .details-offer-row{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .menu-list{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
+.control-grid{grid-template-columns:1fr 1fr}
+.menu-grid{grid-template-columns:repeat(3,1fr)}
 }
-
-@media(max-width:700px){
-  .dashboard{
-    padding:12px 9px 35px;
-  }
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .control-grid{
-    grid-template-columns:1fr;
-  }
-
-  .details-offer-row{
-    grid-template-columns:1fr;
-  }
-
-  .menu-list{
-    grid-template-columns:1fr;
-  }
-
-  .order-info{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .image-area{
-    grid-template-columns:65px 1fr;
-  }
-
-  .image-save{
-    grid-column:2;
-  }
+@media(max-width:760px){
+.grid{grid-template-columns:repeat(2,1fr)}
+.control-grid{grid-template-columns:1fr}
+.details-offer-row{grid-template-columns:1fr}
+.menu-grid{grid-template-columns:repeat(2,1fr)}
 }
-
 @media(max-width:480px){
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .folder-stat strong{
-    font-size:19px;
-  }
-
-  .order-info{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .override-buttons{
-    grid-template-columns:1fr;
-  }
-
-  .offer-control-grid{
-    grid-template-columns:1fr;
-  }
-
-  .offer-full{
-    grid-column:auto;
-  }
+.dashboard{padding:12px 9px 35px}
+.topbar{padding:8px 10px}
+.grid{gap:6px}
+.folder-stat{padding:9px}
+.folder-stat strong{font-size:19px}
+.menu-grid{grid-template-columns:1fr 1fr}
+.offer-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-screen" id="loginScreen">
+<div id="loginScreen" class="login-screen">
+<div class="login-box">
 
-  <div class="login-box">
+<div class="logo">
+<div class="logo-icon">👑</div>
+<h1>The Queen Fast Food</h1>
+<p>ADMIN CONTROL PANEL</p>
+</div>
 
-    <div class="logo">
-      <div class="logo-icon">👑</div>
-      <h1>THE QUEEN FAST FOOD</h1>
-      <p>ADMIN PANEL</p>
-    </div>
+<div class="admin-id-box">
+<div class="admin-id-title">🔐 ADMIN ACCESS</div>
+<div class="admin-id-warning">
+Only authorized administrator can access this panel.
+<strong>Do not share your login credentials.</strong>
+</div>
+</div>
 
-    <div class="field">
-      <label>Admin Email</label>
-      <input id="loginEmail" type="email" placeholder="Enter admin email">
-    </div>
+<div class="field">
+<label>Email</label>
+<input id="loginEmail" type="email" placeholder="Admin email">
+</div>
 
-    <div class="field">
-      <label>Password</label>
-      <input id="loginPassword" type="password" placeholder="Enter password">
-    </div>
+<div class="field">
+<label>Password</label>
+<input id="loginPassword" type="password" placeholder="Password">
+</div>
 
-    <button class="btn btn-gold" style="width:100%" onclick="adminLogin()">
-      LOGIN
-    </button>
+<button class="btn btn-gold" style="width:100%" onclick="adminLogin()">
+LOGIN
+</button>
 
-    <div id="loginMessage"
-      style="margin-top:10px;color:#ff7777;font-size:10px;text-align:center;">
-    </div>
+<div id="loginError" class="danger" style="margin-top:9px;font-size:9px"></div>
 
-  </div>
+</div>
+</div>
+
+
+<div id="adminPanel" class="admin">
+
+<div class="topbar">
+<div class="topbar-inner">
+
+<div class="brand">
+👑 The Queen <span>Fast Food</span>
+</div>
+
+<button class="btn btn-dark" onclick="adminLogout()">
+Logout
+</button>
+
+</div>
+</div>
+
+
+<div class="notification-wrap">
+
+<button
+id="notificationButton"
+class="notification-btn"
+onclick="toggleNotifications()"
+>
+🔔 Notifications
+<span id="notificationCount">0</span>
+</button>
+
+<div id="notificationPanel" class="notification-panel">
+
+<div class="notification-title">
+<strong>New Orders</strong>
+<button class="btn btn-dark" onclick="clearNotifications()">Clear</button>
+</div>
+
+<div id="notificationList"></div>
+
+</div>
+</div>
+
+
+<div class="dashboard">
+
+
+<div class="grid">
+
+<button
+id="newFolder"
+class="folder-stat new-stat"
+onclick="selectFolder('new')"
+>
+<small>NEW ORDERS</small>
+<strong id="newCount">0</strong>
+<span>Received orders</span>
+<div id="newOrderDot" class="new-order-dot"></div>
+</button>
+
+<button
+id="pendingFolder"
+class="folder-stat pending-stat"
+onclick="selectFolder('pending')"
+>
+<small>PENDING ORDERS</small>
+<strong id="pendingCount">0</strong>
+<span>Processing / Making</span>
+</button>
+
+<button
+id="deliveryFolder"
+class="folder-stat delivery-stat"
+onclick="selectFolder('delivery')"
+>
+<small>OUT FOR DELIVERY</small>
+<strong id="deliveryCount">0</strong>
+<span>Delivery orders</span>
+</button>
+
+<button
+id="completeFolder"
+class="folder-stat complete-stat"
+onclick="selectFolder('complete')"
+>
+<small>DELIVERED</small>
+<strong id="completeCount">0</strong>
+<span>Completed orders</span>
+</button>
+
+<button
+id="cancelledFolder"
+class="folder-stat cancelled-stat"
+onclick="selectFolder('cancelled')"
+>
+<small>CANCELLED</small>
+<strong id="cancelledCount">0</strong>
+<span>Cancelled orders</span>
+</button>
 
 </div>
 
 
-<div class="admin" id="adminPanel">
+<div class="control-grid">
 
-  <div class="topbar">
 
-    <div class="topbar-inner">
+<div class="control-box">
 
-      <div class="brand">
-        👑 <span>The Queen Fast Food</span> — Admin
-      </div>
+<h2>🏪 SHOP CONTROL</h2>
 
-      <button class="btn btn-dark" onclick="adminLogout()">
-        Logout
-      </button>
+<div class="shop-status">
 
-    </div>
+<div id="shopLight" class="shop-light"></div>
 
-  </div>
-
-
-  <div class="notification-wrap">
-
-    <button id="notificationButton"
-      class="notification-btn"
-      onclick="toggleNotifications()">
-
-      🔔 NEW ORDERS
-      <span id="notificationBadge">0</span>
-
-    </button>
-
-    <div id="notificationPanel" class="notification-panel">
-
-      <div class="notification-title">
-
-        <strong>
-          🔔 New Order Notifications
-        </strong>
-
-        <button class="btn btn-dark" onclick="closeNotifications()">
-          Close
-        </button>
-
-      </div>
-
-      <div id="notificationList">
-        No new orders.
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="dashboard">
-
-    <div class="admin-id-box">
-
-      <div class="admin-id-title">
-        👑 THE QUEEN FAST FOOD ADMIN ID
-      </div>
-
-      <div class="admin-id-warning">
-        ⚠️ <strong>STRICT WARNING:</strong>
-        This Admin ID is only for the Owner and Web Developer.
-        No other person is authorised to use this Admin ID.
-        Unauthorised use is strictly prohibited.
-      </div>
-
-    </div>
-
-
-    <div class="grid">
-
-      <button id="folderNew"
-        class="folder-stat new-stat"
-        onclick="selectFolder('new')">
-
-        <span id="newOrderDot" class="new-order-dot"></span>
-
-        <small>🆕 NEW ORDERS</small>
-
-        <strong id="newCount">0</strong>
-
-        <span>
-          New orders received
-        </span>
-
-      </button>
-
-
-      <button id="folderPending"
-        class="folder-stat pending-stat"
-        onclick="selectFolder('pending')">
-
-        <small>⏳ PENDING</small>
-
-        <strong id="pendingCount">0</strong>
-
-        <span>
-          Processing / Making
-        </span>
-
-      </button>
-
-
-      <button id="folderDelivery"
-        class="folder-stat delivery-stat"
-        onclick="selectFolder('delivery')">
-
-        <small>🏍️ DELIVERY</small>
-
-        <strong id="deliveryCount">0</strong>
-
-        <span>
-          Out for delivery
-        </span>
-
-      </button>
-
-
-      <button id="folderComplete"
-        class="folder-stat complete-stat"
-        onclick="selectFolder('complete')">
-
-        <small>✅ COMPLETE</small>
-
-        <strong id="completeCount">0</strong>
-
-        <span>
-          Delivered orders
-        </span>
-
-      </button>
-
-
-      <button id="folderCancelled"
-        class="folder-stat cancelled-stat"
-        onclick="selectFolder('cancelled')">
-
-        <small>❌ CANCELLED</small>
-
-        <strong id="cancelledCount">0</strong>
-
-        <span>
-          Cancelled orders
-        </span>
-
-      </button>
-
-    </div>
-
-
-    <div class="control-grid">
-
-      <div class="control-box">
-
-        <h2>🏪 Shop Control</h2>
-
-        <div class="shop-status">
-
-          <span id="shopLight" class="shop-light"></span>
-
-          <span id="shopStatusText" class="shop-status-text">
-            CHECKING...
-          </span>
-
-        </div>
-
-        <div class="notice">
-          <strong>Automatic Schedule:</strong>
-          12:00 PM – 11:00 PM IST
-        </div>
-
-        <div class="override-buttons">
-
-          <button id="overrideAuto"
-            class="override-btn"
-            onclick="setShopOverride('auto')">
-            🕐 AUTO
-          </button>
-
-          <button id="overrideOpen"
-            class="override-btn"
-            onclick="setShopOverride('open')">
-            🟢 FORCE OPEN
-          </button>
-
-          <button id="overrideClosed"
-            class="override-btn"
-            onclick="setShopOverride('closed')">
-            🔴 FORCE CLOSED
-          </button>
-
-        </div>
-
-        <div class="field" style="margin-top:9px">
-
-          <label>Opening Time</label>
-
-          <input id="openingTime"
-            type="time"
-            value="12:00">
-
-        </div>
-
-        <div class="field">
-
-          <label>Closing Time</label>
-
-          <input id="closingTime"
-            type="time"
-            value="23:00">
-
-        </div>
-
-        <div class="field">
-
-          <label>Closed Message</label>
-
-          <textarea id="closedMessage"
-            placeholder="Sorry, we are closed right now."></textarea>
-
-        </div>
-
-        <button class="btn btn-gold" onclick="saveShopSettings()">
-          Save Shop Settings
-        </button>
-
-      </div>
-
-
-      <div class="control-box">
-
-        <h2>🌐 Website Control</h2>
-
-        <div class="field">
-
-          <label>Website Mode</label>
-
-          <select id="websiteMode">
-
-            <option value="normal">Normal</option>
-
-            <option value="updating">Updating</option>
-
-            <option value="maintenance">Maintenance</option>
-
-          </select>
-
-        </div>
-
-        <div class="field">
-
-          <label>
-            Update / Maintenance Message
-          </label>
-
-          <textarea id="updateMessage"
-            placeholder="We are making some improvements..."></textarea>
-
-        </div>
-
-        <button class="btn btn-gold" onclick="saveWebsiteSettings()">
-          Update Website
-        </button>
-
-        <div class="field" style="margin-top:10px">
-
-          <label>WhatsApp Number</label>
-
-          <input id="whatsappNumber"
-            type="tel"
-            maxlength="10"
-            placeholder="Enter WhatsApp number">
-
-        </div>
-
-        <button class="btn btn-gold" onclick="saveWhatsApp()">
-          Save WhatsApp
-        </button>
-
-      </div>
-
-
-      <div class="control-box">
-
-        <h2>💳 Payment Method Control</h2>
-
-        <div class="payment-row">
-
-          <span>
-            💵 Cash on Delivery
-          </span>
-
-          <button id="codSwitch"
-            class="switch on"
-            onclick="togglePayment('cod')"></button>
-
-        </div>
-
-        <div class="payment-row">
-
-          <span>
-            💳 Online Payment
-          </span>
-
-          <button id="onlineSwitch"
-            class="switch on"
-            onclick="togglePayment('online')"></button>
-
-        </div>
-
-        <div class="notice">
-          Only enabled payment methods will appear on the customer checkout.
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="details-offer-row">
-
-      <div id="orderManagement"
-        class="order-details-box">
-
-        <div class="active-order-head">
-
-          <strong>
-            📦 Active Orders
-          </strong>
-
-          <span id="activeOrderCount">
-            0
-          </span>
-
-        </div>
-
-        <div id="activeOrdersList"
-          class="active-orders-list">
-
-          <div class="empty">
-            No active customer orders.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="offer-side">
-
-        <div class="offer-control-title">
-          🎁 Offer Control
-        </div>
-
-        <div class="offer-status-row">
-
-          <div>
-
-            <div id="offerStatusText"
-              class="offer-status-text on">
-              Offer is ON
-            </div>
-
-            <div style="color:#666;font-size:8px;margin-top:2px;">
-              Customer website offer
-            </div>
-
-          </div>
-
-          <button id="offerSwitch"
-            class="offer-switch on"
-            onclick="toggleOffer()"></button>
-
-        </div>
-
-
-        <div class="offer-control-grid">
-
-          <div>
-
-            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
-              Offer Title
-            </label>
-
-            <input id="offerTitle"
-              placeholder="SPECIAL OFFER">
-
-          </div>
-
-
-          <div>
-
-            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
-              Offer Price
-            </label>
-
-            <input id="offerPrice"
-              placeholder="₹149">
-
-          </div>
-
-
-          <div class="offer-full">
-
-            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
-              Offer Description
-            </label>
-
-            <textarea id="offerText"
-              placeholder="Burger + Fries + Cold Drink"></textarea>
-
-          </div>
-
-
-          <div>
-
-            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
-              Button Text
-            </label>
-
-            <input id="offerButton"
-              placeholder="ORDER NOW">
-
-          </div>
-
-
-          <div>
-
-            <label style="display:block;color:#777;font-size:8px;margin-bottom:4px;">
-              Image URL
-            </label>
-
-            <input id="offerImage"
-              placeholder="https://...">
-
-          </div>
-
-
-          <div class="offer-full">
-
-            <button class="btn btn-gold"
-              style="width:100%"
-              onclick="saveOffer()">
-              Save Offer
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="menu-section">
-
-      <h2>
-        🍽️ Menu Price / Image / Stock Control
-      </h2>
-
-      <div id="menuList" class="menu-list"></div>
-
-    </div>
-
-  </div>
+<div id="shopStatusText" class="shop-status-text">
+SHOP IS CLOSED
+</div>
 
 </div>
 
 
-<div id="completeModal" class="modal">
+<div class="override-buttons">
 
-  <div class="modal-card">
+<button
+id="overrideAuto"
+class="override-btn"
+onclick="setShopOverride('auto')"
+>
+AUTO
+</button>
 
-    <div class="modal-head">
+<button
+id="overrideOpen"
+class="override-btn"
+onclick="setShopOverride('open')"
+>
+FORCE OPEN
+</button>
 
-      <h2>
-        ✅ Complete Orders
-      </h2>
-
-      <button class="close"
-        onclick="closeModal('completeModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div id="completeModalList"></div>
-
-  </div>
+<button
+id="overrideClosed"
+class="override-btn"
+onclick="setShopOverride('closed')"
+>
+FORCE CLOSED
+</button>
 
 </div>
 
 
-<div id="cancelledModal" class="modal">
+<div style="margin-top:9px">
 
-  <div class="modal-card">
+<div class="field">
+<label>Opening Time</label>
+<input id="openingTime" type="time" value="12:00">
+</div>
 
-    <div class="modal-head">
+<div class="field">
+<label>Closing Time</label>
+<input id="closingTime" type="time" value="23:00">
+</div>
 
-      <h2>
-        ❌ Cancelled Orders
-      </h2>
+<div class="field">
+<label>Closed Message</label>
+<textarea id="closedMessage">Sorry, we are closed right now.</textarea>
+</div>
 
-      <button class="close"
-        onclick="closeModal('cancelledModal')">
-        ×
-      </button>
+<button
+class="btn btn-gold"
+onclick="saveShopSettings()"
+>
+SAVE SHOP SETTINGS
+</button>
 
-    </div>
+</div>
 
-    <div id="cancelledModalList"></div>
+</div>
 
-  </div>
+
+<div class="control-box">
+
+<h2>🌐 WEBSITE CONTROL</h2>
+
+<div class="field">
+<label>Website Mode</label>
+
+<select id="websiteMode">
+<option value="normal">Normal</option>
+<option value="updating">Updating</option>
+<option value="maintenance">Maintenance</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Message</label>
+<textarea id="updateMessage"></textarea>
+</div>
+
+<button
+class="btn btn-gold"
+onclick="saveWebsiteSettings()"
+>
+SAVE WEBSITE
+</button>
+
+
+<h2 style="margin-top:13px">
+📞 WHATSAPP
+</h2>
+
+<div class="field">
+<label>WhatsApp Number</label>
+<input id="whatsappNumber" type="text">
+</div>
+
+<button
+class="btn btn-gold"
+onclick="saveWhatsApp()"
+>
+SAVE WHATSAPP
+</button>
+
+</div>
+
+
+<div class="control-box">
+
+<h2>💳 PAYMENT CONTROL</h2>
+
+<div class="payment-row">
+<span>Cash on Delivery</span>
+<button
+id="codSwitch"
+class="switch"
+onclick="togglePayment('cod')"
+></button>
+</div>
+
+<div class="payment-row">
+<span>Online Payment</span>
+<button
+id="onlineSwitch"
+class="switch"
+onclick="togglePayment('online')"
+></button>
+</div>
+
+
+<h2 style="margin-top:13px">
+📦 DELIVERY
+</h2>
+
+<div class="field">
+<label>Delivery Rate / KM</label>
+<input id="deliveryRate" type="number" min="0" step="1">
+</div>
+
+<button
+class="btn btn-gold"
+onclick="saveDeliveryRate()"
+>
+SAVE DELIVERY RATE
+</button>
+
+</div>
+
+</div>
+
+
+<div class="details-offer-row">
+
+
+<div class="order-section">
+
+<div class="section-title">
+
+<h2 id="folderTitle">
+ORDER MANAGEMENT
+</h2>
+
+<button
+class="btn btn-dark"
+onclick="closeFolder()"
+>
+CLOSE
+</button>
+
+</div>
+
+<div id="orderList" class="order-list">
+
+<div class="empty">
+Select a folder above.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="offer-box">
+
+<div class="section-title">
+
+<h2>✨ OFFER CONTROL</h2>
+
+<button
+id="offerSwitch"
+class="switch"
+onclick="toggleOffer()"
+></button>
+
+</div>
+
+<div
+id="offerStatusText"
+style="font-size:9px;color:#777;margin-bottom:9px"
+>
+Offer is OFF
+</div>
+
+<div class="field">
+<label>Offer Title</label>
+<input id="offerTitle">
+</div>
+
+<div class="field">
+<label>Offer Text</label>
+<input id="offerText">
+</div>
+
+<div class="field">
+<label>Offer Price</label>
+<input id="offerPrice">
+</div>
+
+<div class="field">
+<label>Button Text</label>
+<input id="offerButton">
+</div>
+
+<div class="field">
+<label>Image URL</label>
+<input id="offerImage">
+</div>
+
+<button
+class="btn btn-gold"
+onclick="saveOffer()"
+>
+SAVE OFFER
+</button>
+
+</div>
+
+</div>
+
+
+<div class="menu-box">
+
+<div class="section-title">
+
+<h2>🍴 MENU CONTROL</h2>
+
+<span style="font-size:8px;color:#666">
+8 HOME PAGE ITEMS
+</span>
+
+</div>
+
+<div id="menuList" class="menu-grid"></div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1871,257 +993,202 @@ textarea{
 <script type="module">
 
 import {
-  initializeApp
+initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getDatabase,
-  ref,
-  onValue,
-  update
+getDatabase,
+ref,
+onValue,
+update,
+remove
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-  setPersistence,
-  browserLocalPersistence
+getAuth,
+onAuthStateChanged,
+signInWithEmailAndPassword,
+signOut,
+setPersistence,
+browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 const firebaseConfig = {
 
-  apiKey:
-    "AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
 
-  authDomain:
-    "the-queen-fast-food.firebaseapp.com",
+authDomain:"the-queen-fast-food.firebaseapp.com",
 
-  databaseURL:
-    "https://the-queen-fast-food-default-rtdb.firebaseio.com",
+databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
 
-  projectId:
-    "the-queen-fast-food",
+projectId:"the-queen-fast-food",
 
-  storageBucket:
-    "the-queen-fast-food.firebasestorage.app",
+storageBucket:"the-queen-fast-food.firebasestorage.app",
 
-  messagingSenderId:
-    "435721389652",
+messagingSenderId:"435721389652",
 
-  appId:
-    "1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
 
-  measurementId:
-    "G-Q1YCK636KJ"
+measurementId:"G-Q1YCK636KJ"
 
 };
 
 
 const app =
-  initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const db =
-  getDatabase(app);
+getDatabase(app);
 
 const auth =
-  getAuth(app);
+getAuth(app);
 
 
 const ADMIN_UID =
-  "eWlMt1dG2pUOxsTo0NaXgY1avn33";
+"eWlMt1dG2pUOxsTo0NaXgY1avn33";
 
 
 let settings = {};
-
 let orders = {};
-
 let customerOrdersData = {};
-
 let selectedFolder = null;
 
 let codEnabled = true;
-
 let onlineEnabled = true;
-
 let offerEnabled = true;
 
 let offerData = {
-  title:"SPECIAL OFFER",
-  text:"Burger + Fries + Cold Drink",
-  price:"₹149",
-  button:"ORDER NOW",
-  image:""
+title:"SPECIAL OFFER",
+text:"Burger + Fries + Cold Drink",
+price:"₹149",
+button:"ORDER NOW",
+image:""
 };
 
 let notificationAudioContext = null;
-
 let knownNewOrderIds = new Set();
-
 let newOrdersInitialized = false;
-
 let notificationActive = false;
-
 let dataListenersStarted = false;
 
 
-/* =========================
-   HELPERS
-========================= */
+const $ =
+id =>
+document.getElementById(id);
 
-function $(id){
-  return document.getElementById(id);
+
+/* =====================================================
+   EXACT 8 HOME PAGE MENU ITEMS
+===================================================== */
+
+const defaultMenu = {
+
+veg_chowmin:{
+name:"Veg Chowmin",
+price:50,
+image:"",
+stock:true
+},
+
+veg_roll:{
+name:"Veg Roll",
+price:50,
+image:"",
+stock:true
+},
+
+chicken_chowmin:{
+name:"Chicken Chowmin",
+price:65,
+image:"",
+stock:true
+},
+
+chicken_roll:{
+name:"Chicken Roll",
+price:60,
+image:"",
+stock:true
+},
+
+manchurian:{
+name:"Manchurian",
+price:50,
+image:"",
+stock:true
+},
+
+paneer_tikka:{
+name:"Paneer Tikka",
+price:60,
+image:"",
+stock:true
+},
+
+chili_chicken:{
+name:"Chili Chicken",
+price:120,
+image:"",
+stock:true
+},
+
+chicken_biriyani:{
+name:"Chicken Biriyani",
+price:120,
+image:"",
+stock:true
 }
 
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
+};
 
 
-function formatDate(value){
-
-  if(!value){
-    return "-";
-  }
-
-  const date =
-    new Date(Number(value));
-
-  if(Number.isNaN(date.getTime())){
-    return "-";
-  }
-
-  return date.toLocaleString(
-    "en-IN",
-    {
-      dateStyle:"medium",
-      timeStyle:"short"
-    }
-  );
-
-}
-
-
-function money(value){
-
-  return "₹" +
-    Number(value || 0)
-      .toLocaleString("en-IN");
-
-}
-
-
-function showToast(message){
-
-  const toast =
-    $("toast");
-
-  if(!toast){
-    return;
-  }
-
-  toast.textContent =
-    message;
-
-  toast.classList.add("show");
-
-  clearTimeout(
-    window.toastTimer
-  );
-
-  window.toastTimer =
-    setTimeout(
-      ()=>{
-        toast.classList.remove("show");
-      },
-      2500
-    );
-
-}
-
-
-/* =========================
-   AUTH
-========================= */
-
-setPersistence(
-  auth,
-  browserLocalPersistence
-).catch(
-  error=>{
-    console.error(error);
-  }
-);
-
+/* =====================================================
+   LOGIN
+===================================================== */
 
 window.adminLogin =
 async function(){
 
-  const email =
-    $("loginEmail")
-      .value
-      .trim();
+const email =
+$("loginEmail").value.trim();
 
-  const password =
-    $("loginPassword")
-      .value;
+const password =
+$("loginPassword").value;
 
-  const message =
-    $("loginMessage");
+$("loginError").textContent = "";
 
-  message.textContent = "";
+if(!email || !password){
 
-  if(!email || !password){
+$("loginError").textContent =
+"Enter email and password.";
 
-    message.textContent =
-      "Please enter email and password.";
+return;
 
-    return;
-  }
+}
 
-  try{
+try{
 
-    const credential =
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+await setPersistence(
+auth,
+browserLocalPersistence
+);
 
-    if(
-      credential.user.uid !==
-      ADMIN_UID
-    ){
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
-      await signOut(auth);
+}catch(error){
 
-      message.textContent =
-        "This account is not authorised.";
+console.error(error);
 
-      return;
-    }
+$("loginError").textContent =
+error.message ||
+"Login failed.";
 
-    message.textContent = "";
-
-  }catch(error){
-
-    console.error(error);
-
-    message.textContent =
-      error.message ||
-      "Login failed.";
-
-  }
+}
 
 };
 
@@ -2129,781 +1196,799 @@ async function(){
 window.adminLogout =
 async function(){
 
-  try{
+try{
 
-    await signOut(auth);
+await signOut(auth);
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
+console.error(error);
 
-  }
+}
 
 };
 
 
 onAuthStateChanged(
-  auth,
-  user=>{
+auth,
+user=>{
 
-    if(
-      user &&
-      user.uid === ADMIN_UID
-    ){
+if(
+user &&
+user.uid === ADMIN_UID
+){
 
-      $("loginScreen").style.display =
-        "none";
+$("loginScreen").style.display =
+"none";
 
-      $("adminPanel").style.display =
-        "block";
+$("adminPanel").style.display =
+"block";
 
-      loadData();
+loadData();
 
-    }else{
+}else{
 
-      $("loginScreen").style.display =
-        "flex";
+$("loginScreen").style.display =
+"flex";
 
-      $("adminPanel").style.display =
-        "none";
+$("adminPanel").style.display =
+"none";
 
-    }
+}
 
-  }
-);
+});
 
 
-/* =========================
-   FIREBASE DATA
-========================= */
+/* =====================================================
+   LOAD DATA
+===================================================== */
 
 function loadData(){
 
-  if(dataListenersStarted){
-    return;
-  }
+if(dataListenersStarted){
 
-  dataListenersStarted = true;
+return;
 
+}
 
-  onValue(
-    ref(db,"settings"),
-
-    snapshot=>{
-
-      settings =
-        snapshot.val() || {};
-
-      renderSettings();
-
-    },
-
-    error=>{
-
-      console.error(
-        "SETTINGS ERROR:",
-        error
-      );
-
-    }
-  );
+dataListenersStarted = true;
 
 
-  onValue(
-    ref(db,"orders"),
+onValue(
+ref(db,"settings"),
+snapshot=>{
 
-    snapshot=>{
+settings =
+snapshot.val() || {};
 
-      const newData =
-        snapshot.val() || {};
+renderSettings();
 
-      detectNewOrders(
-        newData
-      );
+},
+error=>{
 
-      orders =
-        newData;
+console.error(error);
 
-      renderOrders();
-
-      renderNotificationList();
-
-    },
-
-    error=>{
-
-      console.error(
-        "ORDERS ERROR:",
-        error
-      );
-
-      showToast(
-        "Could not load orders."
-      );
-
-    }
-  );
+}
+);
 
 
-  onValue(
-    ref(db,"customerOrders"),
+onValue(
+ref(db,"orders"),
+snapshot=>{
 
-    snapshot=>{
+const newData =
+snapshot.val() || {};
 
-      customerOrdersData =
-        snapshot.val() || {};
+detectNewOrders(
+newData
+);
 
-      console.log(
-        "CUSTOMER ORDERS SYNC DATA:",
-        customerOrdersData
-      );
+orders =
+newData;
 
-    },
+renderOrders();
 
-    error=>{
+renderNotificationList();
 
-      console.error(
-        "CUSTOMER ORDERS ERROR:",
-        error
-      );
+},
+error=>{
 
-    }
-  );
+console.error(error);
+
+showToast(
+"Could not load orders."
+);
+
+}
+
+);
 
 }
 
 
-/* =========================
+/* =====================================================
    SETTINGS
-========================= */
+===================================================== */
 
 function renderSettings(){
 
-  const shop =
-    settings.shop || {};
+const shop =
+settings.shop || {};
 
-  const website =
-    settings.website || {};
+const website =
+settings.website || {};
 
-  const offer =
-    settings.offer || {};
-
-
-  $("openingTime").value =
-    shop.openingTime ||
-    settings.openingTime ||
-    "12:00";
+const offer =
+settings.offer || {};
 
 
-  $("closingTime").value =
-    shop.closingTime ||
-    settings.closingTime ||
-    "23:00";
+$("openingTime").value =
+shop.openingTime ||
+settings.openingTime ||
+"12:00";
+
+$("closingTime").value =
+shop.closingTime ||
+settings.closingTime ||
+"23:00";
+
+$("closedMessage").value =
+shop.closedMessage ||
+settings.closedMessage ||
+"Sorry, we are closed right now.";
 
 
-  $("closedMessage").value =
-    shop.closedMessage ||
-    settings.closedMessage ||
-    "Sorry, we are closed right now.";
+$("websiteMode").value =
+website.mode ||
+settings.websiteMode ||
+"normal";
+
+$("updateMessage").value =
+website.message ||
+settings.updateMessage ||
+"";
 
 
-  $("websiteMode").value =
-    website.mode ||
-    settings.websiteMode ||
-    "normal";
+$("whatsappNumber").value =
+settings.whatsappNumber ||
+"9776856111";
 
 
-  $("updateMessage").value =
-    website.message ||
-    settings.updateMessage ||
-    "";
+codEnabled =
+settings.codEnabled !== false;
+
+onlineEnabled =
+settings.onlinePaymentEnabled !== false;
+
+renderPaymentControls();
 
 
-  $("whatsappNumber").value =
-    settings.whatsappNumber ||
-    "9776856111";
+const override =
+shop.override ||
+settings.shopOverride ||
+"auto";
+
+renderOverrideButtons(
+override
+);
 
 
-  codEnabled =
-    settings.codEnabled !== false;
+offerEnabled =
+offer.enabled !== false;
+
+offerData = {
+
+title:
+offer.title ||
+"SPECIAL OFFER",
+
+text:
+offer.text ||
+"Burger + Fries + Cold Drink",
+
+price:
+offer.price ||
+"₹149",
+
+button:
+offer.button ||
+"ORDER NOW",
+
+image:
+offer.image ||
+""
+
+};
+
+renderOfferControls();
 
 
-  onlineEnabled =
-    settings.onlinePaymentEnabled !== false;
+renderMenu(
+settings.menu || {}
+);
 
 
-  renderPaymentControls();
+$("deliveryRate").value =
+settings.deliveryRate ||
+6;
 
 
-  const override =
-    shop.override ||
-    settings.shopOverride ||
-    "auto";
-
-
-  renderOverrideButtons(
-    override
-  );
-
-
-  offerEnabled =
-    offer.enabled !== false;
-
-
-  offerData = {
-
-    title:
-      offer.title ||
-      "SPECIAL OFFER",
-
-    text:
-      offer.text ||
-      "Burger + Fries + Cold Drink",
-
-    price:
-      offer.price ||
-      "₹149",
-
-    button:
-      offer.button ||
-      "ORDER NOW",
-
-    image:
-      offer.image ||
-      ""
-
-  };
-
-
-  renderOfferControls();
-
-
-  renderMenu(
-    settings.menu || {}
-  );
-
-
-  updateShopStatus();
+updateShopStatus();
 
 }
 
 
-/* =========================
-   SHOP
-========================= */
+/* =====================================================
+   SHOP STATUS
+===================================================== */
 
 function getShopOpen(){
 
-  const shop =
-    settings.shop || {};
+const shop =
+settings.shop || {};
 
-  const override =
-    shop.override ||
-    settings.shopOverride ||
-    "auto";
-
-
-  if(override === "open"){
-    return true;
-  }
+const override =
+shop.override ||
+settings.shopOverride ||
+"auto";
 
 
-  if(override === "closed"){
-    return false;
-  }
+if(override === "open"){
+
+return true;
+
+}
 
 
-  const opening =
-    shop.openingTime ||
-    settings.openingTime ||
-    "12:00";
+if(override === "closed"){
+
+return false;
+
+}
 
 
-  const closing =
-    shop.closingTime ||
-    settings.closingTime ||
-    "23:00";
+const opening =
+shop.openingTime ||
+settings.openingTime ||
+"12:00";
+
+const closing =
+shop.closingTime ||
+settings.closingTime ||
+"23:00";
 
 
-  const now =
-    new Date();
+const now =
+new Date();
+
+const current =
+now.getHours() * 60 +
+now.getMinutes();
 
 
-  const current =
-    now.getHours() * 60 +
-    now.getMinutes();
+const [oh,om] =
+opening.split(":").map(Number);
+
+const [ch,cm] =
+closing.split(":").map(Number);
 
 
-  const [oh,om] =
-    opening
-      .split(":")
-      .map(Number);
+const openMinutes =
+oh * 60 + om;
+
+const closeMinutes =
+ch * 60 + cm;
 
 
-  const [ch,cm] =
-    closing
-      .split(":")
-      .map(Number);
-
-
-  const openMinutes =
-    oh * 60 + om;
-
-
-  const closeMinutes =
-    ch * 60 + cm;
-
-
-  return (
-    current >= openMinutes &&
-    current < closeMinutes
-  );
+return (
+current >= openMinutes &&
+current < closeMinutes
+);
 
 }
 
 
 function updateShopStatus(){
 
-  const open =
-    getShopOpen();
+const open =
+getShopOpen();
 
-  const light =
-    $("shopLight");
+const light =
+$("shopLight");
 
-  const text =
-    $("shopStatusText");
-
-
-  if(!light || !text){
-    return;
-  }
+const text =
+$("shopStatusText");
 
 
-  if(open){
+if(!light || !text){
 
-    light.classList.remove(
-      "closed"
-    );
+return;
 
-    text.classList.remove(
-      "closed"
-    );
+}
 
-    text.textContent =
-      "SHOP IS OPEN";
 
-  }else{
+if(open){
 
-    light.classList.add(
-      "closed"
-    );
+light.classList.remove(
+"closed"
+);
 
-    text.classList.add(
-      "closed"
-    );
+text.classList.remove(
+"closed"
+);
 
-    text.textContent =
-      "SHOP IS CLOSED";
+text.textContent =
+"SHOP IS OPEN";
 
-  }
+}else{
+
+light.classList.add(
+"closed"
+);
+
+text.classList.add(
+"closed"
+);
+
+text.textContent =
+"SHOP IS CLOSED";
+
+}
 
 }
 
 
 setInterval(
-  updateShopStatus,
-  30000
+updateShopStatus,
+30000
 );
 
+
+/* =====================================================
+   SHOP OVERRIDE
+===================================================== */
 
 window.setShopOverride =
 async function(mode){
 
-  try{
+try{
 
-    await update(
-      ref(db,"settings"),
-      {
+await update(
+ref(db,"settings"),
+{
 
-        shopOverride:
-          mode,
+shopOverride:
+mode,
 
-        "shop/override":
-          mode
+"shop/override":
+mode
 
-      }
-    );
+}
+);
 
-    showToast(
-      "Shop control updated."
-    );
+showToast(
+"Shop control updated."
+);
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
+console.error(error);
 
-    showToast(
-      error.message ||
-      "Could not update shop."
-    );
+showToast(
+error.message ||
+"Could not update shop."
+);
 
-  }
+}
 
 };
 
 
 function renderOverrideButtons(
-  mode
+mode
 ){
 
-  [
-    "overrideAuto",
-    "overrideOpen",
-    "overrideClosed"
-  ].forEach(
-    id=>{
+[
+"overrideAuto",
+"overrideOpen",
+"overrideClosed"
+].forEach(
+id=>{
 
-      $(id).classList.remove(
-        "active-auto",
-        "active-open",
-        "active-closed"
-      );
+$(id).classList.remove(
+"active-auto",
+"active-open",
+"active-closed"
+);
 
-    }
-  );
-
-
-  if(mode === "auto"){
-
-    $("overrideAuto")
-      .classList.add(
-        "active-auto"
-      );
-
-  }
+}
+);
 
 
-  if(mode === "open"){
+if(mode === "auto"){
 
-    $("overrideOpen")
-      .classList.add(
-        "active-open"
-      );
-
-  }
-
-
-  if(mode === "closed"){
-
-    $("overrideClosed")
-      .classList.add(
-        "active-closed"
-      );
-
-  }
+$("overrideAuto")
+.classList.add(
+"active-auto"
+);
 
 }
 
 
+if(mode === "open"){
+
+$("overrideOpen")
+.classList.add(
+"active-open"
+);
+
+}
+
+
+if(mode === "closed"){
+
+$("overrideClosed")
+.classList.add(
+"active-closed"
+);
+
+}
+
+}
+
+
+/* =====================================================
+   SAVE SHOP
+===================================================== */
+
 window.saveShopSettings =
 async function(){
 
-  try{
+try{
 
-    const opening =
-      $("openingTime").value ||
-      "12:00";
+const opening =
+$("openingTime").value ||
+"12:00";
 
-    const closing =
-      $("closingTime").value ||
-      "23:00";
+const closing =
+$("closingTime").value ||
+"23:00";
 
-    const closedMessage =
-      $("closedMessage")
-        .value
-        .trim() ||
-      "Sorry, we are closed right now.";
+const closedMessage =
+$("closedMessage").value.trim() ||
+"Sorry, we are closed right now.";
 
 
-    await update(
-      ref(db,"settings"),
-      {
+await update(
+ref(db,"settings"),
+{
 
-        openingTime:
-          opening,
+openingTime:
+opening,
 
-        closingTime:
-          closing,
+closingTime:
+closing,
 
-        closedMessage:
-          closedMessage,
+closedMessage:
+closedMessage,
 
-        "shop/openingTime":
-          opening,
+"shop/openingTime":
+opening,
 
-        "shop/closingTime":
-          closing,
+"shop/closingTime":
+closing,
 
-        "shop/closedMessage":
-          closedMessage
+"shop/closedMessage":
+closedMessage
 
-      }
-    );
+}
+);
 
 
-    showToast(
-      "Shop settings saved."
-    );
+showToast(
+"Shop settings saved."
+);
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
+console.error(error);
 
-    showToast(
-      error.message ||
-      "Could not save shop settings."
-    );
+showToast(
+error.message ||
+"Could not save shop settings."
+);
 
-  }
+}
 
 };
 
 
-/* =========================
+/* =====================================================
    WEBSITE
-========================= */
+===================================================== */
 
 window.saveWebsiteSettings =
 async function(){
 
-  try{
+try{
 
-    const mode =
-      $("websiteMode").value;
+const mode =
+$("websiteMode").value;
 
-    const message =
-      $("updateMessage")
-        .value
-        .trim();
+const message =
+$("updateMessage").value.trim();
 
 
-    await update(
-      ref(db,"settings"),
-      {
+await update(
+ref(db,"settings"),
+{
 
-        websiteMode:
-          mode,
+websiteMode:
+mode,
 
-        updateMessage:
-          message,
+updateMessage:
+message,
 
-        "website/mode":
-          mode,
+"website/mode":
+mode,
 
-        "website/message":
-          message
+"website/message":
+message
 
-      }
-    );
+}
+);
 
 
-    showToast(
-      "Website settings updated."
-    );
+showToast(
+"Website settings updated."
+);
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
+console.error(error);
 
-    showToast(
-      error.message ||
-      "Could not update website."
-    );
+showToast(
+error.message ||
+"Could not update website."
+);
 
-  }
+}
 
 };
 
 
-/* =========================
+/* =====================================================
    WHATSAPP
-========================= */
+===================================================== */
 
 window.saveWhatsApp =
 async function(){
 
-  const number =
-    $("whatsappNumber")
-      .value
-      .replace(/\D/g,"")
-      .slice(0,10);
+const number =
+$("whatsappNumber").value
+.replace(/\D/g,"")
+.slice(0,10);
 
 
-  if(number.length !== 10){
+if(number.length !== 10){
 
-    showToast(
-      "Enter a valid 10-digit WhatsApp number."
-    );
+showToast(
+"Enter a valid 10-digit WhatsApp number."
+);
 
-    return;
-  }
+return;
 
-
-  try{
-
-    await update(
-      ref(db,"settings"),
-      {
-        whatsappNumber:
-          number
-      }
-    );
+}
 
 
-    showToast(
-      "WhatsApp number saved."
-    );
+try{
 
-  }catch(error){
+await update(
+ref(db,"settings"),
+{
 
-    console.error(error);
+whatsappNumber:
+number
 
-    showToast(
-      error.message ||
-      "Could not save WhatsApp."
-    );
+}
+);
 
-  }
+showToast(
+"WhatsApp number saved."
+);
+
+}catch(error){
+
+console.error(error);
+
+showToast(
+error.message ||
+"Could not save WhatsApp."
+);
+
+}
 
 };
 
 
-/* =========================
+/* =====================================================
    PAYMENT
-========================= */
+===================================================== */
 
 window.togglePayment =
 async function(type){
 
-  try{
+try{
 
-    if(type === "cod"){
+if(type === "cod"){
 
-      codEnabled =
-        !codEnabled;
+codEnabled =
+!codEnabled;
 
+await update(
+ref(db,"settings"),
+{
 
-      await update(
-        ref(db,"settings"),
-        {
-          codEnabled:
-            codEnabled
-        }
-      );
+codEnabled:
+codEnabled
 
-    }
+}
+);
 
-
-    if(type === "online"){
-
-      onlineEnabled =
-        !onlineEnabled;
+}
 
 
-      await update(
-        ref(db,"settings"),
-        {
-          onlinePaymentEnabled:
-            onlineEnabled
-        }
-      );
+if(type === "online"){
 
-    }
+onlineEnabled =
+!onlineEnabled;
+
+await update(
+ref(db,"settings"),
+{
+
+onlinePaymentEnabled:
+onlineEnabled
+
+}
+);
+
+}
 
 
-    renderPaymentControls();
+renderPaymentControls();
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
+console.error(error);
 
-    showToast(
-      error.message ||
-      "Could not update payment."
-    );
+showToast(
+error.message ||
+"Could not update payment."
+);
 
-  }
+}
 
 };
 
 
 function renderPaymentControls(){
 
-  $("codSwitch")
-    .classList.toggle(
-      "on",
-      codEnabled
-    );
+$("codSwitch")
+.classList.toggle(
+"on",
+codEnabled
+);
 
-
-  $("onlineSwitch")
-    .classList.toggle(
-      "on",
-      onlineEnabled
-    );
+$("onlineSwitch")
+.classList.toggle(
+"on",
+onlineEnabled
+);
 
 }
 
 
-/* =========================
+/* =====================================================
+   DELIVERY RATE
+===================================================== */
+
+window.saveDeliveryRate =
+async function(){
+
+const rate =
+Number(
+$("deliveryRate").value
+);
+
+if(
+!Number.isFinite(rate) ||
+rate < 0
+){
+
+showToast(
+"Enter a valid delivery rate."
+);
+
+return;
+
+}
+
+try{
+
+await update(
+ref(db,"settings"),
+{
+
+deliveryRate:
+rate
+
+}
+);
+
+showToast(
+"Delivery rate saved."
+);
+
+}catch(error){
+
+console.error(error);
+
+showToast(
+error.message ||
+"Could not save delivery rate."
+);
+
+}
+
+};
+
+
+/* =====================================================
    OFFER
-========================= */
+===================================================== */
 
 function renderOfferControls(){
 
-  const switchEl =
-    $("offerSwitch");
+const switchEl =
+$("offerSwitch");
 
-  const status =
-    $("offerStatusText");
-
-
-  switchEl.classList.toggle(
-    "on",
-    offerEnabled
-  );
+const status =
+$("offerStatusText");
 
 
-  status.classList.toggle(
-    "on",
-    offerEnabled
-  );
+switchEl.classList.toggle(
+"on",
+offerEnabled
+);
+
+status.classList.toggle(
+"on",
+offerEnabled
+);
+
+status.textContent =
+offerEnabled
+?
+"Offer is ON"
+:
+"Offer is OFF";
 
 
-  status.textContent =
-    offerEnabled
-      ? "Offer is ON"
-      : "Offer is OFF";
+$("offerTitle").value =
+offerData.title;
 
+$("offerText").value =
+offerData.text;
 
-  $("offerTitle").value =
-    offerData.title;
+$("offerPrice").value =
+offerData.price;
 
+$("offerButton").value =
+offerData.button;
 
-  $("offerText").value =
-    offerData.text;
-
-
-  $("offerPrice").value =
-    offerData.price;
-
-
-  $("offerButton").value =
-    offerData.button;
-
-
-  $("offerImage").value =
-    offerData.image;
+$("offerImage").value =
+offerData.image;
 
 }
 
@@ -2911,46 +1996,46 @@ function renderOfferControls(){
 window.toggleOffer =
 async function(){
 
-  offerEnabled =
-    !offerEnabled;
+offerEnabled =
+!offerEnabled;
 
+try{
 
-  try{
+await update(
+ref(db,"settings"),
+{
 
-    await update(
-      ref(db,"settings"),
-      {
-        "offer/enabled":
-          offerEnabled
-      }
-    );
+"offer/enabled":
+offerEnabled
 
+}
+);
 
-    renderOfferControls();
+renderOfferControls();
 
+showToast(
+offerEnabled
+?
+"Offer enabled."
+:
+"Offer disabled."
+);
 
-    showToast(
-      offerEnabled
-        ? "Offer enabled."
-        : "Offer disabled."
-    );
+}catch(error){
 
-  }catch(error){
+console.error(error);
 
-    console.error(error);
+offerEnabled =
+!offerEnabled;
 
-    offerEnabled =
-      !offerEnabled;
+renderOfferControls();
 
-    renderOfferControls();
+showToast(
+error.message ||
+"Could not update offer."
+);
 
-
-    showToast(
-      error.message ||
-      "Could not update offer."
-    );
-
-  }
+}
 
 };
 
@@ -2958,2797 +2043,1650 @@ async function(){
 window.saveOffer =
 async function(){
 
-  const data = {
+const data = {
 
-    enabled:
-      offerEnabled,
+enabled:
+offerEnabled,
 
-    title:
-      $("offerTitle")
-        .value
-        .trim() ||
-      "SPECIAL OFFER",
+title:
+$("offerTitle").value.trim() ||
+"SPECIAL OFFER",
 
-    text:
-      $("offerText")
-        .value
-        .trim() ||
-      "Burger + Fries + Cold Drink",
+text:
+$("offerText").value.trim() ||
+"Burger + Fries + Cold Drink",
 
-    price:
-      $("offerPrice")
-        .value
-        .trim() ||
-      "₹149",
+price:
+$("offerPrice").value.trim() ||
+"₹149",
 
-    button:
-      $("offerButton")
-        .value
-        .trim() ||
-      "ORDER NOW",
+button:
+$("offerButton").value.trim() ||
+"ORDER NOW",
 
-    image:
-      $("offerImage")
-        .value
-        .trim() ||
-      ""
-
-  };
-
-
-  try{
-
-    await update(
-      ref(db,"settings"),
-      {
-        offer:data
-      }
-    );
-
-
-    offerData =
-      data;
-
-
-    renderOfferControls();
-
-
-    showToast(
-      "Offer saved successfully."
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      error.message ||
-      "Could not save offer."
-    );
-
-  }
+image:
+$("offerImage").value.trim() ||
+""
 
 };
 
 
-/* =========================
-   MENU
-========================= */
+try{
 
-const defaultMenu = {
+await update(
+ref(db,"settings"),
+{
 
-  veg_chowmin:{
-    name:"Veg Chowmin",
-    price:50,
-    image:"",
-    stock:true
-  },
+offer:
+data
 
-  veg_roll:{
-    name:"Veg Roll",
-    price:50,
-    image:"",
-    stock:true
-  },
+}
+);
 
-  manchurian:{
-    name:"Manchurian",
-    price:50,
-    image:"",
-    stock:true
-  },
+offerData =
+data;
 
-  paneer_tikka:{
-    name:"Paneer Tikka",
-    price:60,
-    image:"",
-    stock:true
-  },
+renderOfferControls();
 
-  paneer_butter_masala:{
-    name:"Paneer Butter Masala",
-    price:130,
-    image:"",
-    stock:true
-  },
+showToast(
+"Offer saved successfully."
+);
 
-  egg_chicken_chowmin:{
-    name:"Egg Chicken Chowmin",
-    price:65,
-    image:"",
-    stock:true
-  },
+}catch(error){
 
-  egg_chicken_roll:{
-    name:"Egg Chicken Roll",
-    price:60,
-    image:"",
-    stock:true
-  },
+console.error(error);
 
-  pakoda:{
-    name:"Pakoda",
-    price:60,
-    image:"",
-    stock:true
-  },
-
-  chili_chicken:{
-    name:"Chili Chicken",
-    price:120,
-    image:"",
-    stock:true
-  },
-
-  chicken_garlics:{
-    name:"Chicken Garlics",
-    price:80,
-    image:"",
-    stock:true
-  },
-
-  chicken_biriyani:{
-    name:"Chicken Biriyani",
-    price:120,
-    image:"",
-    stock:true
-  },
-
-  veg_biriyani:{
-    name:"Veg Biriyani",
-    price:100,
-    image:"",
-    stock:true
-  }
-
-};
-
-
-function renderMenu(menu){
-
-  const list =
-    $("menuList");
-
-  const merged = {};
-
-
-  Object.keys(defaultMenu)
-    .forEach(
-      id=>{
-
-        merged[id] = {
-
-          ...defaultMenu[id],
-
-          ...(menu[id] || {})
-
-        };
-
-      }
-    );
-
-
-  list.innerHTML =
-    Object.entries(merged)
-      .map(
-        ([id,item])=>`
-
-          <div class="menu-item">
-
-            <div class="menu-top">
-
-              <div>
-
-                <div class="menu-name">
-                  ${escapeHtml(item.name)}
-                </div>
-
-                <div class="menu-id">
-                  ${escapeHtml(id)}
-                </div>
-
-              </div>
-
-
-              <div class="menu-price-area">
-
-                <input
-                  id="price-${id}"
-                  class="menu-price-input"
-                  type="number"
-                  min="0"
-                  value="${Number(item.price || 0)}"
-                >
-
-                <button
-                  class="btn btn-gold menu-save"
-                  onclick="saveMenuPrice('${id}')"
-                >
-                  SAVE
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <div
-              style="
-                display:flex;
-                gap:6px;
-                align-items:center;
-                margin-top:6px;
-              "
-            >
-
-              <select
-                id="stock-${id}"
-                class="stock-select ${item.stock === false ? "out" : "available"}"
-                onchange="saveMenuStock('${id}',this.value)"
-              >
-
-                <option
-                  value="available"
-                  ${item.stock !== false ? "selected" : ""}
-                >
-                  AVAILABLE
-                </option>
-
-                <option
-                  value="out"
-                  ${item.stock === false ? "selected" : ""}
-                >
-                  OUT OF STOCK
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="image-area">
-
-              <img
-                id="preview-${id}"
-                class="image-preview"
-                src="${escapeHtml(item.image || "")}"
-                onerror="this.style.opacity=.25"
-              >
-
-              <div class="image-url">
-
-                <input
-                  id="image-${id}"
-                  value="${escapeHtml(item.image || "")}"
-                  placeholder="Food image URL"
-                >
-
-              </div>
-
-              <button
-                class="btn btn-dark image-save"
-                onclick="saveMenuImage('${id}')"
-              >
-                IMAGE
-              </button>
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join("");
+showToast(
+error.message ||
+"Could not save offer."
+);
 
 }
 
+};
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function renderMenu(
+serverMenu
+){
+
+const list =
+$("menuList");
+
+const merged = {};
+
+
+Object.keys(defaultMenu)
+.forEach(
+id=>{
+
+const serverItem =
+serverMenu &&
+serverMenu[id]
+?
+serverMenu[id]
+:
+{};
+
+
+merged[id] = {
+
+...defaultMenu[id],
+
+...serverItem,
+
+price:
+Number(
+serverItem.price !== undefined
+?
+serverItem.price
+:
+defaultMenu[id].price
+),
+
+stock:
+serverItem.stock !== undefined
+?
+serverItem.stock !== false
+:
+defaultMenu[id].stock
+
+};
+
+}
+);
+
+
+list.innerHTML = "";
+
+
+Object.keys(merged)
+.forEach(
+id=>{
+
+const item =
+merged[id];
+
+const card =
+document.createElement(
+"div"
+);
+
+card.className =
+"menu-item";
+
+
+card.innerHTML = `
+
+<h3>
+${escapeHtml(item.name)}
+</h3>
+
+<img
+src="${escapeHtml(item.image || "")}"
+onerror="this.style.display='none'"
+>
+
+<div class="menu-price">
+
+<input
+id="price_${id}"
+type="number"
+value="${Number(item.price)}"
+min="0"
+>
+
+<button
+class="btn btn-gold"
+onclick="saveMenuPrice('${id}')"
+>
+SAVE
+</button>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Image URL
+</label>
+
+<input
+id="image_${id}"
+type="text"
+value="${escapeHtml(item.image || "")}"
+placeholder="Image URL"
+>
+
+</div>
+
+
+<div class="stock-row">
+
+<span>
+Stock
+</span>
+
+<button
+id="stock_${id}"
+class="stock-btn ${item.stock ? "available" : "out"}"
+onclick="toggleMenuStock('${id}')"
+>
+${item.stock ? "AVAILABLE" : "OUT OF STOCK"}
+</button>
+
+</div>
+
+`;
+
+list.appendChild(card);
+
+}
+);
+
+}
+
+
+/* =====================================================
+   MENU STOCK
+===================================================== */
+
+window.toggleMenuStock =
+async function(id){
+
+const current =
+settings.menu &&
+settings.menu[id] &&
+settings.menu[id].stock !== undefined
+?
+settings.menu[id].stock
+:
+defaultMenu[id].stock;
+
+
+const next =
+!Boolean(current);
+
+
+try{
+
+await update(
+ref(db,"settings"),
+{
+
+[`menu/${id}/stock`]:
+next
+
+}
+);
+
+showToast(
+next
+?
+"Item available."
+:
+"Item marked out of stock."
+);
+
+}catch(error){
+
+console.error(error);
+
+showToast(
+error.message ||
+"Could not update stock."
+);
+
+}
+
+};
+
+
+/* =====================================================
+   MENU PRICE
+===================================================== */
 
 window.saveMenuPrice =
 async function(id){
 
-  const value =
-    Number(
-      $(`price-${id}`).value
-    );
+const input =
+$(`price_${id}`);
+
+const price =
+Number(input.value);
 
 
-  if(
-    !Number.isFinite(value) ||
-    value < 0
-  ){
+if(
+!Number.isFinite(price) ||
+price < 0
+){
 
-    showToast(
-      "Enter a valid price."
-    );
+showToast(
+"Enter valid price."
+);
 
-    return;
-  }
+return;
 
-
-  try{
-
-    await update(
-      ref(
-        db,
-        `settings/menu/${id}`
-      ),
-      {
-        price:value
-      }
-    );
+}
 
 
-    showToast(
-      "Food price updated."
-    );
+try{
 
-  }catch(error){
+await update(
+ref(db,"settings"),
+{
 
-    console.error(error);
+[`menu/${id}/price`]:
+price
 
-    showToast(
-      error.message ||
-      "Price update failed."
-    );
+}
+);
 
-  }
+showToast(
+"Price saved."
+);
 
-};
+}catch(error){
 
+console.error(error);
 
-window.saveMenuStock =
-async function(id,value){
+showToast(
+error.message ||
+"Could not save price."
+);
 
-  try{
-
-    await update(
-      ref(
-        db,
-        `settings/menu/${id}`
-      ),
-      {
-        stock:
-          value === "available"
-      }
-    );
-
-
-    const select =
-      $(`stock-${id}`);
-
-
-    select.classList.toggle(
-      "available",
-      value === "available"
-    );
-
-
-    select.classList.toggle(
-      "out",
-      value === "out"
-    );
-
-
-    showToast(
-      value === "available"
-        ? "Item available."
-        : "Item marked out of stock."
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      error.message ||
-      "Stock update failed."
-    );
-
-  }
+}
 
 };
 
+
+/* =====================================================
+   MENU IMAGE
+===================================================== */
 
 window.saveMenuImage =
 async function(id){
 
-  const input =
-    $(`image-${id}`);
+const input =
+$(`image_${id}`);
 
-  const image =
-    input.value.trim();
-
-
-  if(
-    image &&
-    !/^https?:\/\//i.test(image)
-  ){
-
-    showToast(
-      "Image URL must start with http:// or https://"
-    );
-
-    return;
-  }
+const image =
+input.value.trim();
 
 
-  try{
+try{
 
-    await update(
-      ref(
-        db,
-        `settings/menu/${id}`
-      ),
-      {
-        image:image
-      }
-    );
+await update(
+ref(db,"settings"),
+{
 
+[`menu/${id}/image`]:
+image
 
-    $(`preview-${id}`).src =
-      image;
+}
+);
 
+showToast(
+"Image saved."
+);
 
-    showToast(
-      "Food image updated."
-    );
+}catch(error){
 
-  }catch(error){
+console.error(error);
 
-    console.error(error);
+showToast(
+error.message ||
+"Could not save image."
+);
 
-    showToast(
-      error.message ||
-      "Image update failed."
-    );
-
-  }
+}
 
 };
 
 
-/* =========================================================
-   ORDER STATUS
-========================================================= */
+/* =====================================================
+   ORDER STATUS HELPERS
+===================================================== */
 
-function normalizeStatus(value){
-
-  const v =
-    String(value || "")
-      .trim()
-      .toLowerCase();
-
-
-  if(
-    !v ||
-    v === "new" ||
-    v === "received"
-  ){
-
-    return "received";
-
-  }
-
-
-  if(
-    v === "confirmed" ||
-    v === "processing" ||
-    v === "processed"
-  ){
-
-    return "processing";
-
-  }
-
-
-  if(
-    v === "preparing" ||
-    v === "making" ||
-    v === "preparing food"
-  ){
-
-    return "making";
-
-  }
-
-
-  if(
-    v === "out for delivery" ||
-    v === "out_for_delivery" ||
-    v === "outfordelivery"
-  ){
-
-    return "out_for_delivery";
-
-  }
-
-
-  if(
-    v === "delivered" ||
-    v === "complete" ||
-    v === "completed" ||
-    v === "customer received" ||
-    v === "customer_received" ||
-    v === "delivery confirmed" ||
-    v === "delivery_confirmed"
-  ){
-
-    return "delivered";
-
-  }
-
-
-  if(
-    v === "cancelled" ||
-    v === "canceled" ||
-    v === "cancel"
-  ){
-
-    return "cancelled";
-
-  }
-
-
-  return "received";
-
-}
-
-
-function getOrderStatus(order){
-
-  if(!order){
-    return "received";
-  }
-
-
-  return normalizeStatus(
-
-    order.status ||
-
-    order.orderStatus ||
-
-    order.deliveryStatus ||
-
-    order.customerOrderStatus ||
-
-    order.currentStatus
-
-  );
-
-}
-
-
-function statusLabel(status){
-
-  const s =
-    normalizeStatus(status);
-
-
-  if(s === "received")
-    return "RECEIVED";
-
-
-  if(s === "processing")
-    return "PROCESSING";
-
-
-  if(s === "making")
-    return "MAKING";
-
-
-  if(s === "out_for_delivery")
-    return "OUT FOR DELIVERY";
-
-
-  if(s === "delivered")
-    return "DELIVERED";
-
-
-  if(s === "cancelled")
-    return "CANCELLED";
-
-
-  return "RECEIVED";
-
-}
-
-
-/* =========================================================
-   NEW ORDER DETECTION
-========================================================= */
-
-function detectNewOrders(
-  newOrders
+function normalizeStatus(
+status
 ){
 
-  const ids =
-    Object.keys(newOrders);
+const value =
+String(
+status ||
+"received"
+)
+.toLowerCase()
+.trim();
 
 
-  if(!newOrdersInitialized){
+if(value === "confirmed")
+return "processing";
 
-    ids.forEach(
-      id=>{
+if(value === "preparing")
+return "making";
 
-        const order =
-          newOrders[id];
+if(value === "out")
+return "out_for_delivery";
 
-
-        if(
-          order &&
-          getOrderStatus(order) ===
-          "received"
-        ){
-
-          knownNewOrderIds.add(id);
-
-        }
-
-      }
-    );
-
-
-    newOrdersInitialized =
-      true;
-
-    return;
-
-  }
-
-
-  const newReceived =
-    ids.filter(
-      id=>{
-
-        const order =
-          newOrders[id];
-
-
-        return (
-
-          order &&
-
-          getOrderStatus(order) ===
-          "received" &&
-
-          !knownNewOrderIds.has(id)
-
-        );
-
-      }
-    );
-
-
-  ids.forEach(
-    id=>{
-
-      const order =
-        newOrders[id];
-
-
-      if(
-        order &&
-        getOrderStatus(order) ===
-        "received"
-      ){
-
-        knownNewOrderIds.add(id);
-
-      }
-
-    }
-  );
-
-
-  if(!newReceived.length){
-    return;
-  }
-
-
-  notificationActive =
-    true;
-
-
-  startNotificationEffects(
-    newReceived.length
-  );
+return value;
 
 }
 
 
-function startNotificationEffects(
-  count
+function getOrderStatus(
+order
 ){
 
-  const button =
-    $("notificationButton");
-
-  const folder =
-    $("folderNew");
-
-  const dot =
-    $("newOrderDot");
-
-
-  if(button){
-
-    button.classList.add(
-      "blink"
-    );
-
-  }
-
-
-  if(folder){
-
-    folder.classList.add(
-      "new-summary-alert"
-    );
-
-  }
-
-
-  if(dot){
-
-    dot.classList.add(
-      "alert"
-    );
-
-  }
-
-
-  playNewOrderSound();
-
-
-  showToast(
-    `🔔 ${count} NEW ORDER RECEIVED`
-  );
+return normalizeStatus(
+order &&
+order.status
+);
 
 }
 
 
-function stopNotificationEffects(){
+function statusLabel(
+status
+){
 
-  notificationActive =
-    false;
+const map = {
 
+received:"Order Received",
 
-  $("notificationButton")
-    ?.classList.remove(
-      "blink"
-    );
+processing:"Processing",
 
+making:"Making",
 
-  $("folderNew")
-    ?.classList.remove(
-      "new-summary-alert"
-    );
+out_for_delivery:"Out for Delivery",
 
+delivered:"Delivered",
 
-  $("newOrderDot")
-    ?.classList.remove(
-      "alert"
-    );
+cancelled:"Cancelled"
 
-}
+};
 
-
-function playNewOrderSound(){
-
-  try{
-
-    if(
-      !notificationAudioContext
-    ){
-
-      notificationAudioContext =
-        new(
-          window.AudioContext ||
-          window.webkitAudioContext
-        )();
-
-    }
-
-
-    if(
-      notificationAudioContext.state ===
-      "suspended"
-    ){
-
-      notificationAudioContext.resume();
-
-    }
-
-
-    const now =
-      notificationAudioContext.currentTime;
-
-
-    [0,.18,.36].forEach(
-      (delay,index)=>{
-
-        const oscillator =
-          notificationAudioContext
-            .createOscillator();
-
-
-        const gain =
-          notificationAudioContext
-            .createGain();
-
-
-        oscillator.type =
-          "sine";
-
-
-        oscillator.frequency.value =
-          index === 2
-            ? 1100
-            : 850;
-
-
-        gain.gain.setValueAtTime(
-          .0001,
-          now + delay
-        );
-
-
-        gain.gain
-          .exponentialRampToValueAtTime(
-            .18,
-            now + delay + .02
-          );
-
-
-        gain.gain
-          .exponentialRampToValueAtTime(
-            .0001,
-            now + delay + .13
-          );
-
-
-        oscillator.connect(gain);
-
-        gain.connect(
-          notificationAudioContext.destination
-        );
-
-
-        oscillator.start(
-          now + delay
-        );
-
-
-        oscillator.stop(
-          now + delay + .14
-        );
-
-      }
-    );
-
-  }catch(error){
-
-    console.warn(
-      "Notification sound unavailable:",
-      error
-    );
-
-  }
+return (
+map[normalizeStatus(status)] ||
+"Order Received"
+);
 
 }
 
 
-/* =========================================================
-   FOLDER
-========================================================= */
+function statusClass(
+status
+){
+
+const s =
+normalizeStatus(status);
+
+if(s === "processing")
+return "status-processing";
+
+if(s === "making")
+return "status-making";
+
+if(s === "out_for_delivery")
+return "status-out";
+
+if(s === "delivered")
+return "status-delivered";
+
+if(s === "cancelled")
+return "status-cancelled";
+
+return "status-received";
+
+}
+
+
+/* =====================================================
+   FOLDERS
+===================================================== */
 
 window.selectFolder =
 function(folder){
 
-  selectedFolder =
-    folder;
+selectedFolder =
+folder;
 
-
-  if(folder === "complete"){
-
-    stopNotificationEffects();
-
-    renderCompleteModal();
-
-    openModal(
-      "completeModal"
-    );
-
-    return;
-
-  }
-
-
-  if(folder === "cancelled"){
-
-    renderCancelledModal();
-
-    openModal(
-      "cancelledModal"
-    );
-
-    return;
-
-  }
-
-
-  if(
-    folder === "new" ||
-    folder === "pending" ||
-    folder === "delivery"
-  ){
-
-    stopNotificationEffects();
-
-
-    $("orderManagement")
-      ?.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-
-  }
+renderOrders();
 
 };
 
 
-/* =========================================================
-   ORDER RENDER
-========================================================= */
+window.closeFolder =
+function(){
+
+selectedFolder =
+null;
+
+$("folderTitle").textContent =
+"ORDER MANAGEMENT";
+
+$("orderList").innerHTML = `
+<div class="empty">
+Select a folder above.
+</div>
+`;
+
+};
+
+
+function getFolderOrders(){
+
+const list = [];
+
+Object.keys(orders || {})
+.forEach(
+key=>{
+
+const order =
+orders[key];
+
+const status =
+getOrderStatus(order);
+
+
+let folder = "";
+
+
+if(status === "received"){
+folder = "new";
+}
+else if(
+status === "processing" ||
+status === "making"
+){
+folder = "pending";
+}
+else if(
+status === "out_for_delivery"
+){
+folder = "delivery";
+}
+else if(
+status === "delivered"
+){
+folder = "complete";
+}
+else if(
+status === "cancelled"
+){
+folder = "cancelled";
+}
+
+
+if(
+!selectedFolder ||
+folder === selectedFolder
+){
+
+list.push({
+key,
+order
+});
+
+}
+
+}
+);
+
+
+list.sort(
+(a,b)=>
+Number(
+b.order.createdAt || 0
+) -
+Number(
+a.order.createdAt || 0
+)
+);
+
+
+return list;
+
+}
+
+
+/* =====================================================
+   ORDER COUNTS
+===================================================== */
 
 function renderOrders(){
 
-  const active = [];
-
-  const complete = [];
-
-  const cancelled = [];
-
-
-  Object.entries(orders)
-    .forEach(
-      ([key,order])=>{
-
-        const status =
-          getOrderStatus(order);
+let newCount = 0;
+let pendingCount = 0;
+let deliveryCount = 0;
+let completeCount = 0;
+let cancelledCount = 0;
 
 
-        if(
-          status === "delivered"
-        ){
+Object.values(
+orders || {}
+)
+.forEach(
+order=>{
 
-          complete.push([
-            key,
-            order
-          ]);
-
-        }
-
-        else if(
-          status === "cancelled"
-        ){
-
-          cancelled.push([
-            key,
-            order
-          ]);
-
-        }
-
-        else{
-
-          active.push([
-            key,
-            order
-          ]);
-
-        }
-
-      }
-    );
+const status =
+getOrderStatus(order);
 
 
-  const sortOrders =
-    list=>{
+if(status === "received")
+newCount++;
 
-      list.sort(
-        (a,b)=>{
+else if(
+status === "processing" ||
+status === "making"
+)
+pendingCount++;
 
-          return Number(
-            b[1].createdAt || 0
-          ) -
-          Number(
-            a[1].createdAt || 0
-          );
+else if(
+status === "out_for_delivery"
+)
+deliveryCount++;
 
-        }
-      );
+else if(
+status === "delivered"
+)
+completeCount++;
 
-    };
+else if(
+status === "cancelled"
+)
+cancelledCount++;
 
-
-  sortOrders(active);
-
-  sortOrders(complete);
-
-  sortOrders(cancelled);
-
-
-  updateFolderCounts(
-    active,
-    complete,
-    cancelled
-  );
+}
+);
 
 
-  $("activeOrdersList").innerHTML =
-    active.length
+$("newCount").textContent =
+newCount;
 
-      ? active
-          .map(
-            ([key,order])=>
-              createOrderCard(
-                key,
-                order,
-                getOrderStatus(order) ===
-                "received"
-              )
-          )
-          .join("")
+$("pendingCount").textContent =
+pendingCount;
 
-      : `<div class="empty">
-          No active customer orders.
-         </div>`;
+$("deliveryCount").textContent =
+deliveryCount;
+
+$("completeCount").textContent =
+completeCount;
+
+$("cancelledCount").textContent =
+cancelledCount;
 
 
-  $("activeOrderCount").textContent =
-    active.length;
+$("newFolder")
+.classList.toggle(
+"new-summary-alert",
+newCount > 0 &&
+notificationActive
+);
 
 
-  renderCompleteModal(
-    complete
-  );
+const dot =
+$("newOrderDot");
+
+dot.classList.toggle(
+"alert",
+newCount > 0 &&
+notificationActive
+);
 
 
-  renderCancelledModal(
-    cancelled
-  );
+if(!selectedFolder){
 
+$("orderList").innerHTML = `
+<div class="empty">
+Select a folder above.
+</div>
+`;
 
-  if(
-    notificationActive &&
-    active.some(
-      ([,order])=>
-        getOrderStatus(order) ===
-        "received"
-    )
-  ){
-
-    $("activeOrdersList")
-      .classList.add(
-        "new-active-alert"
-      );
-
-  }else{
-
-    $("activeOrdersList")
-      .classList.remove(
-        "new-active-alert"
-      );
-
-  }
+return;
 
 }
 
 
-/* =========================================================
-   COUNTS
-========================================================= */
+const names = {
 
-function updateFolderCounts(
-  active,
-  complete,
-  cancelled
-){
+new:"NEW ORDERS",
 
-  const values = {
+pending:"PENDING ORDERS",
 
-    new:
-      active.filter(
-        ([,order])=>
-          getOrderStatus(order) ===
-          "received"
-      ).length,
+delivery:"OUT FOR DELIVERY",
 
-    pending:
-      active.filter(
-        ([,order])=>{
+complete:"DELIVERED ORDERS",
 
-          const status =
-            getOrderStatus(order);
-
-
-          return (
-            status === "processing" ||
-            status === "making"
-          );
-
-        }
-      ).length,
-
-    delivery:
-      active.filter(
-        ([,order])=>
-          getOrderStatus(order) ===
-          "out_for_delivery"
-      ).length,
-
-    complete:
-      complete.length,
-
-    cancelled:
-      cancelled.length
-
-  };
-
-
-  $("newCount").textContent =
-    values.new;
-
-
-  $("pendingCount").textContent =
-    values.pending;
-
-
-  $("deliveryCount").textContent =
-    values.delivery;
-
-
-  $("completeCount").textContent =
-    values.complete;
-
-
-  $("cancelledCount").textContent =
-    values.cancelled;
-
-
-  $("completeModalList").dataset.count =
-    values.complete;
-
-
-  $("cancelledModalList").dataset.count =
-    values.cancelled;
-
-
-  const badge =
-    $("notificationBadge");
-
-
-  if(badge){
-
-    badge.textContent =
-      values.new;
-
-  }
-
-}
-
-
-/* =========================================================
-   COMPLETE MODAL
-========================================================= */
-
-function renderCompleteModal(
-  listOverride = null
-){
-
-  let list =
-    listOverride;
-
-
-  if(!list){
-
-    list =
-      Object.entries(orders)
-        .filter(
-          ([,order])=>
-            getOrderStatus(order) ===
-            "delivered"
-        );
-
-  }
-
-
-  list.sort(
-    (a,b)=>
-      Number(
-        b[1].createdAt || 0
-      ) -
-      Number(
-        a[1].createdAt || 0
-      )
-  );
-
-
-  $("completeModalList").innerHTML =
-    list.length
-
-      ? list
-          .map(
-            ([key,order])=>
-              createOrderCard(
-                key,
-                order,
-                false
-              )
-          )
-          .join("")
-
-      : `<div class="empty">
-          No completed orders.
-         </div>`;
-
-}
-
-
-/* =========================================================
-   CANCELLED MODAL
-========================================================= */
-
-function renderCancelledModal(
-  listOverride = null
-){
-
-  let list =
-    listOverride;
-
-
-  if(!list){
-
-    list =
-      Object.entries(orders)
-        .filter(
-          ([,order])=>
-            getOrderStatus(order) ===
-            "cancelled"
-        );
-
-  }
-
-
-  list.sort(
-    (a,b)=>
-      Number(
-        b[1].createdAt || 0
-      ) -
-      Number(
-        a[1].createdAt || 0
-      )
-  );
-
-
-  $("cancelledModalList").innerHTML =
-    list.length
-
-      ? list
-          .map(
-            ([key,order])=>
-              createOrderCard(
-                key,
-                order,
-                false
-              )
-          )
-          .join("")
-
-      : `<div class="empty">
-          No cancelled orders.
-         </div>`;
-
-}
-
-
-/* =========================================================
-   ORDER CARD
-========================================================= */
-
-function createOrderCard(
-  key,
-  order,
-  isNew
-){
-
-  const status =
-    getOrderStatus(order);
-
-
-  const statusClass =
-    status;
-
-
-  const itemList =
-    Array.isArray(order.items)
-
-      ? order.items
-
-      : Object.values(
-          order.items || {}
-        );
-
-
-  const itemHtml =
-    itemList.length
-
-      ? itemList
-          .map(
-            item=>`
-
-              <div class="order-item">
-
-                <span>
-
-                  ${escapeHtml(
-                    item.name ||
-                    item.itemName ||
-                    "Item"
-                  )}
-
-                  ×
-
-                  ${Number(
-                    item.quantity ||
-                    item.qty ||
-                    1
-                  )}
-
-                </span>
-
-                <strong>
-                  ₹${Number(
-                    item.total ||
-                    (
-                      Number(
-                        item.price || 0
-                      ) *
-                      Number(
-                        item.quantity ||
-                        item.qty ||
-                        1
-                      )
-                    )
-                  )}
-                </strong>
-
-              </div>
-
-            `
-          )
-          .join("")
-
-      : `<div class="order-item">
-           <span>No item details</span>
-         </div>`;
-
-
-  let actionHtml = "";
-
-
-  if(status === "received"){
-
-    actionHtml = `
-
-      <div class="status-buttons">
-
-        <button
-          class="btn btn-green"
-          onclick="updateOrderStatus('${escapeHtml(key)}','processing')"
-        >
-          ✓ CONFIRM ORDER
-        </button>
-
-        <button
-          class="btn btn-red"
-          onclick="updateOrderStatus('${escapeHtml(key)}','cancelled')"
-        >
-          ✕ CANCEL
-        </button>
-
-        <button
-          class="btn btn-dark"
-          onclick="removeOrder('${escapeHtml(key)}')"
-        >
-          🗑 REMOVE ORDER
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  else if(status === "processing"){
-
-    actionHtml = `
-
-      <div class="status-buttons">
-
-        <button
-          class="btn btn-orange"
-          onclick="updateOrderStatus('${escapeHtml(key)}','making')"
-        >
-          👨‍🍳 START PREPARING
-        </button>
-
-        <button
-          class="btn btn-red"
-          onclick="updateOrderStatus('${escapeHtml(key)}','cancelled')"
-        >
-          ✕ CANCEL
-        </button>
-
-        <button
-          class="btn btn-dark"
-          onclick="removeOrder('${escapeHtml(key)}')"
-        >
-          🗑 REMOVE ORDER
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  else if(status === "making"){
-
-    actionHtml = `
-
-      <div class="status-buttons">
-
-        <button
-          class="btn btn-purple"
-          onclick="updateOrderStatus('${escapeHtml(key)}','out_for_delivery')"
-        >
-          🏍️ OUT FOR DELIVERY
-        </button>
-
-        <button
-          class="btn btn-red"
-          onclick="updateOrderStatus('${escapeHtml(key)}','cancelled')"
-        >
-          ✕ CANCEL
-        </button>
-
-        <button
-          class="btn btn-dark"
-          onclick="removeOrder('${escapeHtml(key)}')"
-        >
-          🗑 REMOVE ORDER
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  else if(status === "out_for_delivery"){
-
-    actionHtml = `
-
-      <div
-        style="
-          margin-top:7px;
-          padding:7px 8px;
-          border-radius:7px;
-          background:#211235;
-          border:1px solid #6639a0;
-          color:#c394ff;
-          font-size:8px;
-          font-weight:900;
-        "
-      >
-        🏍️ OUT FOR DELIVERY — WAITING FOR CUSTOMER DELIVERY CONFIRMATION
-      </div>
-
-      <div class="status-buttons">
-
-        <button
-          class="btn btn-dark"
-          onclick="removeOrder('${escapeHtml(key)}')"
-        >
-          🗑 REMOVE ORDER
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  else if(
-    status === "delivered" ||
-    status === "cancelled"
-  ){
-
-    actionHtml = `
-
-      <div class="status-buttons">
-
-        <button
-          class="btn btn-dark"
-          onclick="removeOrder('${escapeHtml(key)}')"
-        >
-          REMOVE ORDER
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-
-  const lat =
-    order.latitude ??
-    order.lat ??
-    order.customerLat;
-
-
-  const lng =
-    order.longitude ??
-    order.lng ??
-    order.customerLng;
-
-
-  let mapsUrl = "";
-
-
-  if(
-    lat !== undefined &&
-    lng !== undefined &&
-    lat !== "" &&
-    lng !== ""
-  ){
-
-    mapsUrl =
-      `https://www.google.com/maps?q=${encodeURIComponent(lat)},${encodeURIComponent(lng)}`;
-
-  }else{
-
-    mapsUrl =
-      order.mapsLink ||
-      order.selectedGoogleMapsLink ||
-      order.googleMapsLink ||
-      order.customerLocationLink ||
-      "";
-
-  }
-
-
-  let mapsHtml = "";
-
-
-  if(mapsUrl){
-
-    mapsHtml = `
-
-      <a
-        class="maps-btn"
-        target="_blank"
-        rel="noopener"
-        href="${escapeHtml(mapsUrl)}"
-      >
-        📍 OPEN CUSTOMER LOCATION
-      </a>
-
-    `;
-
-  }
-
-
-  const rawDistance =
-    order.distanceKm ??
-    order.deliveryDistance ??
-    order.distance ??
-    order.deliveryKm ??
-    null;
-
-
-  let distanceHtml = "-";
-
-
-  if(
-    rawDistance !== null &&
-    rawDistance !== "" &&
-    Number.isFinite(
-      Number(rawDistance)
-    )
-  ){
-
-    distanceHtml =
-      `${Number(rawDistance).toFixed(2)} KM`;
-
-  }
-
-
-  const customerLocation =
-    order.selectedLocationText ||
-    order.locationText ||
-    order.customerLocation ||
-    order.location ||
-    order.address ||
-    order.customerAddress ||
-    "-";
-
-
-  const newClass =
-    isNew
-      ? "new-order"
-      : "";
-
-
-  const arrivalClass =
-    isNew &&
-    notificationActive
-      ? "new-arrival"
-      : "";
-
-
-  return `
-
-    <div
-      class="order ${newClass} ${arrivalClass}"
-      data-order-key="${escapeHtml(key)}"
-    >
-
-      <div class="order-head">
-
-        <div>
-
-          <div class="order-id">
-            #${escapeHtml(
-              order.orderId ||
-              key
-            )}
-          </div>
-
-          <div class="order-date">
-            ${formatDate(
-              order.createdAt
-            )}
-          </div>
-
-        </div>
-
-
-        <div
-          class="status ${statusClass}"
-        >
-          ${escapeHtml(
-            statusLabel(status)
-          )}
-        </div>
-
-      </div>
-
-
-      <div class="order-info">
-
-        <div class="info-box">
-
-          <small>
-            Customer
-          </small>
-
-          ${escapeHtml(
-            order.customerName ||
-            order.name ||
-            "-"
-          )}
-
-        </div>
-
-
-        <div class="info-box">
-
-          <small>
-            Phone
-          </small>
-
-          ${escapeHtml(
-            order.customerPhone ||
-            order.phone ||
-            "-"
-          )}
-
-        </div>
-
-
-        <div class="info-box">
-
-          <small>
-            Payment
-          </small>
-
-          ${escapeHtml(
-            order.paymentMethod ||
-            "-"
-          )}
-
-        </div>
-
-
-        <div class="info-box">
-
-          <small>
-            Customer Location
-          </small>
-
-          ${escapeHtml(
-            customerLocation
-          )}
-
-        </div>
-
-
-        <div class="info-box">
-
-          <small>
-            Distance
-          </small>
-
-          ${distanceHtml}
-
-        </div>
-
-
-        <div class="info-box">
-
-          <small>
-            Delivery Charge
-          </small>
-
-          ₹${Number(
-            order.deliveryCharge ||
-            0
-          )}
-
-        </div>
-
-      </div>
-
-
-      ${mapsHtml}
-
-
-      <div class="order-items">
-        ${itemHtml}
-      </div>
-
-
-      <div class="order-total">
-
-        <span>
-          Item Total
-        </span>
-
-        <strong>
-          ₹${Number(
-            order.itemTotal ||
-            order.subtotal ||
-            0
-          )}
-        </strong>
-
-      </div>
-
-
-      <div
-        class="order-total"
-        style="margin-top:3px"
-      >
-
-        <span>
-          Delivery
-        </span>
-
-        <strong>
-          ₹${Number(
-            order.deliveryCharge ||
-            0
-          )}
-        </strong>
-
-      </div>
-
-
-      <div
-        class="order-total"
-        style="
-          margin-top:5px;
-          padding-top:5px;
-          border-top:1px solid #292929;
-        "
-      >
-
-        <span>
-          Total
-        </span>
-
-        <strong>
-          ₹${Number(
-            order.total ||
-            (
-              Number(
-                order.itemTotal ||
-                order.subtotal ||
-                0
-              ) +
-              Number(
-                order.deliveryCharge ||
-                0
-              )
-            )
-          )}
-        </strong>
-
-      </div>
-
-
-      ${actionHtml}
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   FIND CUSTOMER ORDER RECORDS
-========================================================= */
-
-function findCustomerOrderMatches(
-  mainKey,
-  mainOrder
-){
-
-  const matches = [];
-
-
-  if(!customerOrdersData){
-    return matches;
-  }
-
-
-  const mainOrderId =
-    String(
-      mainOrder?.orderId ||
-      mainKey ||
-      ""
-    ).trim();
-
-
-  const possibleCustomerIds =
-    new Set();
-
-
-  [
-    mainOrder?.ownerUid,
-    mainOrder?.customerId,
-    mainOrder?.customerUID,
-    mainOrder?.uid,
-    mainOrder?.userId,
-    mainOrder?.customerUid
-  ].forEach(
-    value=>{
-
-      if(
-        value !== undefined &&
-        value !== null &&
-        String(value).trim()
-      ){
-
-        possibleCustomerIds.add(
-          String(value).trim()
-        );
-
-      }
-
-    }
-  );
-
-
-  Object.entries(
-    customerOrdersData
-  ).forEach(
-    ([customerUid,userOrders])=>{
-
-      if(
-        !userOrders ||
-        typeof userOrders !== "object"
-      ){
-        return;
-      }
-
-
-      Object.entries(
-        userOrders
-      ).forEach(
-        ([customerOrderKey,customerOrder])=>{
-
-          if(
-            !customerOrder ||
-            typeof customerOrder !== "object"
-          ){
-            return;
-          }
-
-
-          const customerOrderId =
-            String(
-              customerOrder.orderId ||
-              customerOrder.orderID ||
-              customerOrder.customerOrderId ||
-              customerOrder.id ||
-              customerOrderKey ||
-              ""
-            ).trim();
-
-
-          const linkedMainKey =
-            String(
-              customerOrder.mainOrderKey ||
-              customerOrder.orderKey ||
-              customerOrder.adminOrderKey ||
-              customerOrder.firebaseOrderKey ||
-              ""
-            ).trim();
-
-
-          const customerUidInOrder =
-            String(
-              customerOrder.ownerUid ||
-              customerOrder.customerId ||
-              customerOrder.customerUID ||
-              customerOrder.uid ||
-              customerOrder.userId ||
-              customerUid ||
-              ""
-            ).trim();
-
-
-          let match = false;
-
-
-          if(
-            customerOrderKey ===
-            mainKey
-          ){
-
-            match = true;
-
-          }
-
-
-          if(
-            linkedMainKey &&
-            linkedMainKey ===
-            String(mainKey)
-          ){
-
-            match = true;
-
-          }
-
-
-          if(
-            mainOrderId &&
-            customerOrderId &&
-            customerOrderId ===
-            mainOrderId
-          ){
-
-            match = true;
-
-          }
-
-
-          if(
-            mainOrderId &&
-            linkedMainKey &&
-            linkedMainKey ===
-            mainOrderId
-          ){
-
-            match = true;
-
-          }
-
-
-          if(
-            possibleCustomerIds.size &&
-            customerUidInOrder &&
-            possibleCustomerIds.has(
-              customerUidInOrder
-            ) &&
-            (
-              customerOrderKey ===
-              mainKey ||
-              customerOrderId ===
-              mainOrderId ||
-              customerOrderId ===
-              String(mainKey)
-            )
-          ){
-
-            match = true;
-
-          }
-
-
-          if(match){
-
-            matches.push({
-
-              customerUid,
-
-              customerOrderKey,
-
-              customerOrder
-
-            });
-
-          }
-
-        }
-      );
-
-    }
-  );
-
-
-  return matches;
-
-}
-
-
-/* =========================================================
-   IMPORTANT ORDER STATUS SYNC
-========================================================= */
-
-window.updateOrderStatus =
-async function(
-  key,
-  newStatus
-){
-
-  try{
-
-    const order =
-      orders[key];
-
-
-    if(!order){
-
-      throw new Error(
-        "Order not found."
-      );
-
-    }
-
-
-    if(
-      String(newStatus)
-        .trim()
-        .toLowerCase() ===
-      "delivered"
-    ){
-
-      showToast(
-        "Delivered status can only be confirmed by the customer."
-      );
-
-      return;
-
-    }
-
-
-    const status =
-      normalizeStatus(
-        newStatus
-      );
-
-
-    const currentStatus =
-      getOrderStatus(order);
-
-
-    const allowedTransitions = {
-
-      received:[
-        "processing",
-        "cancelled"
-      ],
-
-      processing:[
-        "making",
-        "cancelled"
-      ],
-
-      making:[
-        "out_for_delivery",
-        "cancelled"
-      ],
-
-      out_for_delivery:[],
-
-      delivered:[],
-
-      cancelled:[]
-
-    };
-
-
-    if(
-      !allowedTransitions[
-        currentStatus
-      ]?.includes(status)
-    ){
-
-      showToast(
-        `Cannot change ${statusLabel(currentStatus)} to ${statusLabel(status)}.`
-      );
-
-      return;
-
-    }
-
-
-    const now =
-      Date.now();
-
-
-    const updates = {};
-
-
-    updates[
-      `orders/${key}/status`
-    ] =
-      status;
-
-
-    updates[
-      `orders/${key}/orderStatus`
-    ] =
-      status;
-
-
-    updates[
-      `orders/${key}/updatedAt`
-    ] =
-      now;
-
-
-    const directCustomerIds =
-      new Set();
-
-
-    [
-
-      order.ownerUid,
-
-      order.customerId,
-
-      order.customerUID,
-
-      order.uid,
-
-      order.userId,
-
-      order.customerUid
-
-    ].forEach(
-      value=>{
-
-        if(
-          value !== undefined &&
-          value !== null &&
-          String(value).trim()
-        ){
-
-          directCustomerIds.add(
-            String(value).trim()
-          );
-
-        }
-
-      }
-    );
-
-
-    directCustomerIds.forEach(
-      customerId=>{
-
-        updates[
-          `customerOrders/${customerId}/${key}/status`
-        ] =
-          status;
-
-
-        updates[
-          `customerOrders/${customerId}/${key}/orderStatus`
-        ] =
-          status;
-
-
-        updates[
-          `customerOrders/${customerId}/${key}/updatedAt`
-        ] =
-          now;
-
-      }
-    );
-
-
-    const matches =
-      findCustomerOrderMatches(
-        key,
-        order
-      );
-
-
-    matches.forEach(
-      match=>{
-
-        updates[
-          `customerOrders/${match.customerUid}/${match.customerOrderKey}/status`
-        ] =
-          status;
-
-
-        updates[
-          `customerOrders/${match.customerUid}/${match.customerOrderKey}/orderStatus`
-        ] =
-          status;
-
-
-        updates[
-          `customerOrders/${match.customerUid}/${match.customerOrderKey}/updatedAt`
-        ] =
-          now;
-
-      }
-    );
-
-
-    const customerOrderId =
-      order.customerOrderId ||
-      order.orderId ||
-      null;
-
-
-    if(
-      customerOrderId &&
-      customerOrderId !== key
-    ){
-
-      directCustomerIds.forEach(
-        customerId=>{
-
-          updates[
-            `customerOrders/${customerId}/${customerOrderId}/status`
-          ] =
-            status;
-
-
-          updates[
-            `customerOrders/${customerId}/${customerOrderId}/orderStatus`
-          ] =
-            status;
-
-
-          updates[
-            `customerOrders/${customerId}/${customerOrderId}/updatedAt`
-          ] =
-            now;
-
-        }
-      );
-
-    }
-
-
-    if(status === "cancelled"){
-
-      updates[
-        `cancelledOrders/${key}`
-      ] = {
-
-        ...order,
-
-        status:
-          "cancelled",
-
-        orderStatus:
-          "cancelled",
-
-        cancelledAt:
-          now,
-
-        updatedAt:
-          now
-
-      };
-
-
-      updates[
-        `deliveredOrders/${key}`
-      ] =
-        null;
-
-    }
-
-
-    if(
-      status !== "cancelled"
-    ){
-
-      updates[
-        `deliveredOrders/${key}`
-      ] =
-        null;
-
-
-      updates[
-        `cancelledOrders/${key}`
-      ] =
-        null;
-
-    }
-
-
-    await update(
-      ref(db),
-      updates
-    );
-
-
-    if(orders[key]){
-
-      orders[key] = {
-
-        ...orders[key],
-
-        status:
-          status,
-
-        orderStatus:
-          status,
-
-        updatedAt:
-          now
-
-      };
-
-    }
-
-
-    renderOrders();
-
-    renderNotificationList();
-
-
-    showToast(
-      `Order ${statusLabel(status)}.`
-    );
-
-
-    if(status !== "received"){
-
-      closeNotifications();
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "ORDER STATUS UPDATE ERROR:",
-      error
-    );
-
-
-    showToast(
-      error.message ||
-      "Could not update order."
-    );
-
-  }
+cancelled:"CANCELLED ORDERS"
 
 };
 
 
-/* =========================================================
+$("folderTitle").textContent =
+names[selectedFolder] ||
+"ORDER MANAGEMENT";
+
+
+const list =
+getFolderOrders();
+
+
+if(!list.length){
+
+$("orderList").innerHTML = `
+<div class="empty">
+No orders in this folder.
+</div>
+`;
+
+return;
+
+}
+
+
+$("orderList").innerHTML =
+list.map(
+item =>
+renderOrderCard(
+item.key,
+item.order
+)
+).join("");
+
+}
+
+
+/* =====================================================
+   ORDER CARD
+===================================================== */
+
+function renderOrderCard(
+key,
+order
+){
+
+const status =
+getOrderStatus(order);
+
+
+const items =
+Array.isArray(order.items)
+?
+order.items
+:
+Object.values(
+order.items || {}
+);
+
+
+let itemHtml = "";
+
+
+items.forEach(
+item=>{
+
+const qty =
+Number(item.quantity || 0);
+
+const price =
+Number(item.price || 0);
+
+itemHtml += `
+
+<div class="order-item">
+
+<span>
+${escapeHtml(item.name || "")}
+× ${qty}
+</span>
+
+<span>
+₹${price * qty}
+</span>
+
+</div>
+
+`;
+
+}
+);
+
+
+let actionHtml = "";
+
+
+if(status === "received"){
+
+actionHtml += `
+<button
+class="btn btn-blue"
+onclick="updateOrderStatus('${key}','processing')"
+>
+ACCEPT / PROCESS
+</button>
+`;
+
+actionHtml += `
+<button
+class="btn btn-red"
+onclick="updateOrderStatus('${key}','cancelled')"
+>
+CANCEL
+</button>
+`;
+
+}
+
+
+if(status === "processing"){
+
+actionHtml += `
+<button
+class="btn btn-purple"
+onclick="updateOrderStatus('${key}','making')"
+>
+START MAKING
+</button>
+`;
+
+actionHtml += `
+<button
+class="btn btn-red"
+onclick="updateOrderStatus('${key}','cancelled')"
+>
+CANCEL
+</button>
+`;
+
+}
+
+
+if(status === "making"){
+
+actionHtml += `
+<button
+class="btn btn-orange"
+onclick="updateOrderStatus('${key}','out_for_delivery')"
+>
+OUT FOR DELIVERY
+</button>
+`;
+
+actionHtml += `
+<button
+class="btn btn-red"
+onclick="updateOrderStatus('${key}','cancelled')"
+>
+CANCEL
+</button>
+`;
+
+}
+
+
+if(status === "out_for_delivery"){
+
+actionHtml += `
+<div
+style="
+font-size:9px;
+color:#ffbd55;
+padding:6px 8px;
+background:#241708;
+border:1px solid #593a0f;
+border-radius:7px
+"
+>
+Waiting for customer delivery confirmation.
+</div>
+`;
+
+}
+
+
+if(status === "delivered"){
+
+actionHtml += `
+<div
+style="
+font-size:9px;
+color:#69ed91;
+padding:6px 8px;
+background:#102615;
+border:1px solid #1d6636;
+border-radius:7px
+"
+>
+🎉 Delivered successfully.
+</div>
+`;
+
+}
+
+
+if(status === "cancelled"){
+
+actionHtml += `
+<div
+style="
+font-size:9px;
+color:#ff8888;
+padding:6px 8px;
+background:#301010;
+border:1px solid #702525;
+border-radius:7px
+"
+>
+❌ Order cancelled.
+</div>
+`;
+
+}
+
+
+/* KEEP REMOVE ORDER OPTION */
+
+actionHtml += `
+<button
+class="btn btn-red"
+onclick="removeOrder('${key}')"
+>
+REMOVE ORDER
+</button>
+`;
+
+
+const customerLocation =
+order.customerGoogleMapsLink ||
+order.customerLocation ||
+"";
+
+
+return `
+
+<div class="order-card">
+
+<div class="order-head">
+
+<div>
+
+<div class="order-id">
+🔖 ${escapeHtml(order.orderId || key)}
+</div>
+
+<div class="order-meta">
+🕐 ${new Date(
+order.createdAt || Date.now()
+).toLocaleString("en-IN")}
+</div>
+
+</div>
+
+<div class="status-badge ${statusClass(status)}">
+${statusLabel(status)}
+</div>
+
+</div>
+
+
+<div class="customer-line">
+
+<span>
+👤 ${escapeHtml(order.customerName || "")}
+</span>
+
+<span>
+📞 ${escapeHtml(order.phone || "")}
+</span>
+
+<span>
+💳 ${escapeHtml(order.paymentMethod || "")}
+</span>
+
+</div>
+
+
+<div
+style="
+font-size:9px;
+color:#aaa;
+line-height:1.5;
+background:#101010;
+border:1px solid #252525;
+border-radius:7px;
+padding:7px;
+margin-bottom:7px
+"
+>
+
+🏠
+${escapeHtml(order.address || "")}
+
+</div>
+
+
+<div class="order-items">
+
+${itemHtml}
+
+</div>
+
+
+<div class="bill-row">
+<span>Item Total</span>
+<span>₹${Number(order.subtotal || 0)}</span>
+</div>
+
+<div class="bill-row">
+<span>Delivery</span>
+<span>₹${Number(order.deliveryCharge || 0)}</span>
+</div>
+
+<div class="bill-row">
+<span>Distance</span>
+<span>${Number(order.deliveryDistance || 0).toFixed(2)} km</span>
+</div>
+
+<div class="bill-row total">
+<span>Grand Total</span>
+<span>₹${Number(order.total || 0)}</span>
+</div>
+
+
+${
+customerLocation
+?
+`
+<div style="margin-top:8px">
+
+<a
+href="${escapeHtml(customerLocation)}"
+target="_blank"
+rel="noopener"
+class="btn btn-blue"
+style="display:inline-block;text-decoration:none"
+>
+📍 VIEW CUSTOMER LOCATION
+</a>
+
+</div>
+`
+:
+""
+}
+
+
+<div class="action-row">
+
+${actionHtml}
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+   UPDATE ORDER STATUS
+===================================================== */
+
+window.updateOrderStatus =
+async function(
+key,
+nextStatus
+){
+
+const order =
+orders[key];
+
+if(!order){
+
+return;
+
+}
+
+
+const current =
+getOrderStatus(order);
+
+
+const allowed = {
+
+received:[
+"processing",
+"cancelled"
+],
+
+processing:[
+"making",
+"cancelled"
+],
+
+making:[
+"out_for_delivery",
+"cancelled"
+],
+
+out_for_delivery:[],
+
+delivered:[],
+
+cancelled:[]
+
+};
+
+
+if(
+!allowed[current] ||
+!allowed[current].includes(
+nextStatus
+)
+){
+
+showToast(
+"Invalid order status change."
+);
+
+return;
+
+}
+
+
+try{
+
+const now =
+Date.now();
+
+
+const updates = {};
+
+
+updates[
+`orders/${key}/status`
+] =
+nextStatus;
+
+
+updates[
+`orders/${key}/updatedAt`
+] =
+now;
+
+
+if(
+order.ownerUid
+){
+
+updates[
+`customerOrders/${order.ownerUid}/${key}/status`
+] =
+nextStatus;
+
+updates[
+`customerOrders/${order.ownerUid}/${key}/updatedAt`
+] =
+now;
+
+}
+
+
+if(nextStatus === "cancelled"){
+
+updates[
+`cancelledOrders/${key}`
+] =
+{
+...order,
+status:"cancelled",
+updatedAt:now
+};
+
+}
+
+
+await update(
+ref(db),
+updates
+);
+
+
+showToast(
+"Order status updated."
+);
+
+}catch(error){
+
+console.error(error);
+
+showToast(
+error.message ||
+"Could not update order status."
+);
+
+}
+
+};
+
+
+/* =====================================================
    REMOVE ORDER
-========================================================= */
+===================================================== */
 
 window.removeOrder =
 async function(key){
 
-  try{
-
-    const updates = {
-
-      [`orders/${key}`]:
-        null,
-
-      [`deliveredOrders/${key}`]:
-        null,
-
-      [`cancelledOrders/${key}`]:
-        null
-
-    };
-
-
-    const order =
-      orders[key];
-
-
-    const customerIds =
-      new Set();
-
-
-    [
-
-      order?.ownerUid,
-
-      order?.customerId,
-
-      order?.customerUID,
-
-      order?.uid,
-
-      order?.userId,
-
-      order?.customerUid
-
-    ].forEach(
-      value=>{
-
-        if(
-          value !== undefined &&
-          value !== null &&
-          String(value).trim()
-        ){
-
-          customerIds.add(
-            String(value).trim()
-          );
-
-        }
-
-      }
-    );
-
-
-    customerIds.forEach(
-      customerId=>{
-
-        updates[
-          `customerOrders/${customerId}/${key}`
-        ] =
-          null;
-
-      }
-    );
-
-
-    const matches =
-      findCustomerOrderMatches(
-        key,
-        order || {}
-      );
-
-
-    matches.forEach(
-      match=>{
-
-        updates[
-          `customerOrders/${match.customerUid}/${match.customerOrderKey}`
-        ] =
-          null;
-
-      }
-    );
-
-
-    await update(
-      ref(db),
-      updates
-    );
-
-
-    showToast(
-      "Order removed."
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      error.message ||
-      "Could not remove order."
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-window.toggleNotifications =
-function(){
-
-  const panel =
-    $("notificationPanel");
-
-
-  if(!panel){
-    return;
-  }
-
-
-  panel.classList.toggle(
-    "show"
-  );
-
-
-  renderNotificationList();
-
-};
-
-
-window.closeNotifications =
-function(){
-
-  $("notificationPanel")
-    ?.classList.remove(
-      "show"
-    );
-
-};
-
-
-function renderNotificationList(){
-
-  const list =
-    $("notificationList");
-
-
-  if(!list){
-    return;
-  }
-
-
-  const received =
-    Object.entries(orders)
-
-      .filter(
-        ([,order])=>
-          getOrderStatus(order) ===
-          "received"
-      )
-
-      .sort(
-        (a,b)=>
-          Number(
-            b[1].createdAt || 0
-          ) -
-          Number(
-            a[1].createdAt || 0
-          )
-      );
-
-
-  if(!received.length){
-
-    list.innerHTML = `
-
-      <div
-        style="
-          padding:12px;
-          color:#666;
-          font-size:9px;
-        "
-      >
-        No new orders.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    received
-      .map(
-        ([key,order])=>`
-
-          <div
-            class="notification-item"
-            onclick="selectNotification('${escapeHtml(key)}')"
-          >
-
-            <strong>
-
-              🆕
-
-              ${escapeHtml(
-                order.orderId ||
-                key
-              )}
-
-            </strong>
-
-            <small>
-
-              ${escapeHtml(
-                order.customerName ||
-                "Customer"
-              )}
-
-              •
-
-              ₹${Number(
-                order.total ||
-                0
-              )}
-
-            </small>
-
-          </div>
-
-        `
-      )
-      .join("");
+if(!confirm(
+"Remove this order permanently?"
+)){
+
+return;
 
 }
 
 
-window.selectNotification =
+const order =
+orders[key];
+
+
+try{
+
+const updates = {};
+
+
+updates[
+`orders/${key}`
+] =
+null;
+
+updates[
+`deliveredOrders/${key}`
+] =
+null;
+
+updates[
+`cancelledOrders/${key}`
+] =
+null;
+
+
+if(
+order &&
+order.ownerUid
+){
+
+updates[
+`customerOrders/${order.ownerUid}/${key}`
+] =
+null;
+
+}
+
+
+await update(
+ref(db),
+updates
+);
+
+
+showToast(
+"Order removed."
+);
+
+}catch(error){
+
+console.error(error);
+
+showToast(
+error.message ||
+"Could not remove order."
+);
+
+}
+
+};
+
+
+/* =====================================================
+   NEW ORDER DETECTION
+===================================================== */
+
+function detectNewOrders(
+newData
+){
+
+const ids =
+Object.keys(newData || {})
+.filter(
+key =>
+getOrderStatus(
+newData[key]
+) === "received"
+);
+
+
+if(!newOrdersInitialized){
+
+ids.forEach(
+id =>
+knownNewOrderIds.add(id)
+);
+
+newOrdersInitialized =
+true;
+
+return;
+
+}
+
+
+const newIds =
+ids.filter(
+id =>
+!knownNewOrderIds.has(id)
+);
+
+
+if(newIds.length){
+
+notificationActive =
+true;
+
+playNotificationSound();
+
+}
+
+
+ids.forEach(
+id =>
+knownNewOrderIds.add(id)
+);
+
+
+Array.from(
+knownNewOrderIds
+).forEach(
+id=>{
+
+if(
+!ids.includes(id)
+){
+
+knownNewOrderIds.delete(id);
+
+}
+
+}
+);
+
+}
+
+
+/* =====================================================
+   NOTIFICATIONS
+===================================================== */
+
+function playNotificationSound(){
+
+try{
+
+if(!notificationAudioContext){
+
+notificationAudioContext =
+new (
+window.AudioContext ||
+window.webkitAudioContext
+)();
+
+}
+
+
+const oscillator =
+notificationAudioContext.createOscillator();
+
+const gain =
+notificationAudioContext.createGain();
+
+
+oscillator.connect(
+gain
+);
+
+gain.connect(
+notificationAudioContext.destination
+);
+
+oscillator.frequency.value =
+880;
+
+gain.gain.value =
+.12;
+
+oscillator.start();
+
+setTimeout(
+()=>{
+
+oscillator.frequency.value =
+660;
+
+},
+120
+);
+
+setTimeout(
+()=>{
+
+oscillator.stop();
+
+},
+250
+);
+
+}catch(error){
+
+console.warn(
+"Notification sound error",
+error
+);
+
+}
+
+}
+
+
+function renderNotificationList(){
+
+const list =
+$("notificationList");
+
+const received =
+Object.entries(
+orders || {}
+)
+.filter(
+([key,order]) =>
+getOrderStatus(order) === "received"
+)
+.sort(
+(a,b) =>
+Number(
+b[1].createdAt || 0
+) -
+Number(
+a[1].createdAt || 0
+)
+);
+
+
+$("notificationCount").textContent =
+received.length;
+
+
+if(!received.length){
+
+list.innerHTML = `
+<div
+style="
+padding:15px;
+color:#666;
+font-size:9px;
+text-align:center
+"
+>
+No new orders.
+</div>
+`;
+
+return;
+
+}
+
+
+list.innerHTML =
+received
+.slice(0,20)
+.map(
+([key,order]) =>
+`
+
+<div
+class="notification-item"
+onclick="openNotificationOrder('${key}')"
+>
+
+<strong>
+${escapeHtml(
+order.orderId || key
+)}
+</strong>
+
+<small>
+${escapeHtml(
+order.customerName || ""
+)}
+ · ₹${Number(
+order.total || 0
+)}
+</small>
+
+</div>
+
+`
+)
+.join("");
+
+}
+
+
+window.toggleNotifications =
+function(){
+
+$("notificationPanel")
+.classList.toggle(
+"show"
+);
+
+};
+
+
+window.clearNotifications =
+function(){
+
+notificationActive =
+false;
+
+renderOrders();
+
+};
+
+
+window.openNotificationOrder =
 function(key){
 
-  closeNotifications();
-
-  stopNotificationEffects();
-
-
-  selectedFolder =
-    "new";
-
-
-  $("orderManagement")
-    ?.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
-
-  setTimeout(
-    ()=>{
-
-      const card =
-        document.querySelector(
-          `[data-order-key="${CSS.escape(key)}"]`
-        );
-
-
-      if(card){
-
-        card.scrollIntoView({
-          behavior:"smooth",
-          block:"center"
-        });
-
-      }
-
-    },
-    150
-  );
-
-};
-
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-window.closeModal =
-function(id){
-
-  $(id)
-    ?.classList.remove(
-      "show"
-    );
-
-};
-
-
-window.openModal =
-function(id){
-
-  $(id)
-    ?.classList.add(
-      "show"
-    );
-
-};
-
-
-window.addEventListener(
-  "click",
-  event=>{
-
-    document
-      .querySelectorAll(
-        ".modal"
-      )
-      .forEach(
-        modal=>{
-
-          if(
-            event.target ===
-            modal
-          ){
-
-            modal.classList.remove(
-              "show"
-            );
-
-          }
-
-        }
-      );
-
-  }
+$("notificationPanel")
+.classList.remove(
+"show"
 );
+
+selectedFolder =
+"new";
+
+renderOrders();
+
+setTimeout(
+()=>{
+
+const cards =
+document.querySelectorAll(
+".order-card"
+);
+
+if(cards.length){
+
+cards[0].scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+},
+100
+);
+
+};
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+
+function showToast(
+message
+){
+
+const toast =
+$("toast");
+
+toast.textContent =
+message;
+
+toast.classList.add(
+"show"
+);
+
+
+clearTimeout(
+toastTimer
+);
+
+
+toastTimer =
+setTimeout(
+()=>{
+
+toast.classList.remove(
+"show"
+);
+
+},
+2500
+);
+
+}
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHtml(
+value
+){
+
+return String(
+value ?? ""
+)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
+
+}
 
 </script>
 
