@@ -1,4 +1,10 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1.0"> <meta name="theme-color" content="#070707"> <title>The Queen Fast Food - Admin</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#070707">
+<title>The Queen Fast Food - Admin</title>
 
 <style>
 :root{
@@ -16,11 +22,31 @@
 --purple:#a970ff;
 --lightgreen:#8ff0ad;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#070707;color:#fff;font-size:13px}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#070707;
+color:#fff;
+font-size:13px
+}
+
+button,input,textarea,select{
+font:inherit
+}
+
+button{
+cursor:pointer
+}
+
+.hidden{
+display:none!important
+}
 
 .login-screen{
 min-height:100vh;
@@ -28,8 +54,15 @@ display:flex;
 justify-content:center;
 align-items:center;
 padding:20px;
-background:radial-gradient(circle at center,rgba(212,175,55,.1),transparent 45%),#050505
+background:
+radial-gradient(
+circle at center,
+rgba(212,175,55,.1),
+transparent 45%
+),
+#050505
 }
+
 .login-box{
 width:min(390px,100%);
 background:#111;
@@ -38,13 +71,44 @@ border-radius:18px;
 padding:28px;
 box-shadow:0 20px 60px rgba(0,0,0,.5)
 }
-.logo{text-align:center;margin-bottom:22px}
-.logo-icon{font-size:44px}
-.logo h1{font-size:21px;color:var(--gold2);margin-top:4px}
-.logo p{color:#666;font-size:9px;letter-spacing:2px;margin-top:5px}
-.field{margin-bottom:10px}
-.field label{display:block;color:#999;font-size:10px;margin-bottom:5px;letter-spacing:.3px}
-.field input,.field textarea,.field select{
+
+.logo{
+text-align:center;
+margin-bottom:22px
+}
+
+.logo-icon{
+font-size:44px
+}
+
+.logo h1{
+font-size:21px;
+color:var(--gold2);
+margin-top:4px
+}
+
+.logo p{
+color:#666;
+font-size:9px;
+letter-spacing:2px;
+margin-top:5px
+}
+
+.field{
+margin-bottom:10px
+}
+
+.field label{
+display:block;
+color:#999;
+font-size:10px;
+margin-bottom:5px;
+letter-spacing:.3px
+}
+
+.field input,
+.field textarea,
+.field select{
 width:100%;
 padding:9px 10px;
 border-radius:8px;
@@ -54,18 +118,75 @@ color:white;
 outline:none;
 font-size:12px
 }
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
-textarea{min-height:70px;resize:vertical}
-.btn{border:0;border-radius:7px;padding:7px 10px;font-size:11px;font-weight:800;transition:.18s}
-.btn:hover{transform:translateY(-1px)}
-.btn-gold{background:var(--gold);color:#000}
-.btn-dark{background:#191919;border:1px solid #3b3b3b;color:#fff}
-.btn-red{background:#351414;border:1px solid #702525;color:#ff8888}
-.btn-green{background:#12351f;border:1px solid #1e6b39;color:#69ed91}
-.btn-blue{background:#10253c;border:1px solid #285b8d;color:#73baff}
-.btn-purple{background:#24153c;border:1px solid #6639a0;color:#c99cff}
-.btn-orange{background:#3b240d;border:1px solid #8b5a19;color:#ffbd55}
-.admin{display:none}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+border-color:var(--gold)
+}
+
+textarea{
+min-height:70px;
+resize:vertical
+}
+
+.btn{
+border:0;
+border-radius:7px;
+padding:7px 10px;
+font-size:11px;
+font-weight:800;
+transition:.18s
+}
+
+.btn:hover{
+transform:translateY(-1px)
+}
+
+.btn-gold{
+background:var(--gold);
+color:#000
+}
+
+.btn-dark{
+background:#191919;
+border:1px solid #3b3b3b;
+color:#fff
+}
+
+.btn-red{
+background:#351414;
+border:1px solid #702525;
+color:#ff8888
+}
+
+.btn-green{
+background:#12351f;
+border:1px solid #1e6b39;
+color:#69ed91
+}
+
+.btn-blue{
+background:#10253c;
+border:1px solid #285b8d;
+color:#73baff
+}
+
+.btn-purple{
+background:#24153c;
+border:1px solid #6639a0;
+color:#c99cff
+}
+
+.btn-orange{
+background:#3b240d;
+border:1px solid #8b5a19;
+color:#ffbd55
+}
+
+.admin{
+display:none
+}
 
 .topbar{
 position:sticky;
@@ -76,6 +197,7 @@ border-bottom:1px solid #222;
 padding:9px 16px;
 backdrop-filter:blur(12px)
 }
+
 .topbar-inner{
 max-width:1450px;
 margin:auto;
@@ -84,8 +206,15 @@ align-items:center;
 justify-content:space-between;
 gap:10px
 }
-.brand{font-size:13px;font-weight:900}
-.brand span{color:var(--gold2)}
+
+.brand{
+font-size:13px;
+font-weight:900
+}
+
+.brand span{
+color:var(--gold2)
+}
 
 .admin-id-box{
 margin:0 0 13px;
@@ -95,11 +224,32 @@ border-radius:11px;
 padding:11px 13px;
 text-align:left
 }
-.admin-id-title{color:var(--gold2);font-size:12px;font-weight:900;letter-spacing:.4px}
-.admin-id-warning{margin-top:4px;color:#777;font-size:8px;line-height:1.45}
-.admin-id-warning strong{color:#ffb0b0}
 
-.notification-wrap{position:fixed;top:8px;right:16px;z-index:500}
+.admin-id-title{
+color:var(--gold2);
+font-size:12px;
+font-weight:900;
+letter-spacing:.4px
+}
+
+.admin-id-warning{
+margin-top:4px;
+color:#777;
+font-size:8px;
+line-height:1.45
+}
+
+.admin-id-warning strong{
+color:#ffb0b0
+}
+
+.notification-wrap{
+position:fixed;
+top:8px;
+right:16px;
+z-index:500
+}
+
 .notification-btn{
 border:1px solid #6b581c;
 background:#17130a;
@@ -109,6 +259,7 @@ padding:7px 10px;
 font-size:10px;
 font-weight:900
 }
+
 .notification-btn span{
 display:inline-flex;
 min-width:18px;
@@ -122,11 +273,24 @@ background:#ff4d4d;
 color:#fff;
 font-size:9px
 }
-.notification-btn.blink{animation:notificationBlink .7s infinite}
-@keyframes notificationBlink{
-0%,100%{box-shadow:0 0 4px rgba(57,211,83,.3);border-color:#287d42}
-50%{box-shadow:0 0 15px rgba(57,211,83,.9),0 0 35px rgba(57,211,83,.4);border-color:#39d353}
+
+.notification-btn.blink{
+animation:notificationBlink .7s infinite
 }
+
+@keyframes notificationBlink{
+0%,100%{
+box-shadow:0 0 4px rgba(57,211,83,.3);
+border-color:#287d42
+}
+50%{
+box-shadow:
+0 0 15px rgba(57,211,83,.9),
+0 0 35px rgba(57,211,83,.4);
+border-color:#39d353
+}
+}
+
 .notification-panel{
 position:absolute;
 top:38px;
@@ -139,7 +303,11 @@ box-shadow:0 20px 60px rgba(0,0,0,.6);
 display:none;
 overflow:hidden
 }
-.notification-panel.show{display:block}
+
+.notification-panel.show{
+display:block
+}
+
 .notification-title{
 display:flex;
 align-items:center;
@@ -149,12 +317,35 @@ padding:9px;
 border-bottom:1px solid #292929;
 color:#f5d76e
 }
-.notification-item{padding:9px;border-bottom:1px solid #222;cursor:pointer}
-.notification-item:hover{background:#181818}
-.notification-item strong{display:block;color:#f5d76e;font-size:10px}
-.notification-item small{display:block;color:#777;margin-top:3px;font-size:8px}
 
-.dashboard{max-width:1450px;margin:auto;padding:17px 16px 45px}
+.notification-item{
+padding:9px;
+border-bottom:1px solid #222;
+cursor:pointer
+}
+
+.notification-item:hover{
+background:#181818
+}
+
+.notification-item strong{
+display:block;
+color:#f5d76e;
+font-size:10px
+}
+
+.notification-item small{
+display:block;
+color:#777;
+margin-top:3px;
+font-size:8px
+}
+
+.dashboard{
+max-width:1450px;
+margin:auto;
+padding:17px 16px 45px
+}
 
 .grid{
 display:grid;
@@ -162,6 +353,7 @@ grid-template-columns:repeat(5,1fr);
 gap:9px;
 margin-bottom:14px
 }
+
 .folder-stat{
 width:100%;
 text-align:left;
@@ -174,10 +366,31 @@ border-radius:10px;
 padding:11px;
 position:relative
 }
-.folder-stat:hover{transform:translateY(-2px);border-color:#555}
-.folder-stat small{color:#777;font-size:9px}
-.folder-stat strong{display:block;font-size:22px;color:var(--gold2);margin-top:2px}
-.folder-stat span{display:block;color:#666;font-size:8px;margin-top:5px}
+
+.folder-stat:hover{
+transform:translateY(-2px);
+border-color:#555
+}
+
+.folder-stat small{
+color:#777;
+font-size:9px
+}
+
+.folder-stat strong{
+display:block;
+font-size:22px;
+color:var(--gold2);
+margin-top:2px
+}
+
+.folder-stat span{
+display:block;
+color:#666;
+font-size:8px;
+margin-top:5px
+}
+
 .new-order-dot{
 position:absolute;
 top:10px;
@@ -186,36 +399,84 @@ width:10px;
 height:10px;
 border-radius:50%;
 background:#ffd43b;
-box-shadow:0 0 5px rgba(255,212,59,.55),0 0 10px rgba(255,212,59,.2)
+box-shadow:
+0 0 5px rgba(255,212,59,.55),
+0 0 10px rgba(255,212,59,.2)
 }
+
 .new-order-dot.alert{
 background:#39d353;
 animation:newOrderDotBlink .7s infinite
 }
+
 @keyframes newOrderDotBlink{
-0%,100%{opacity:1;transform:scale(1);background:#39d353;box-shadow:0 0 5px rgba(57,211,83,.7),0 0 12px rgba(57,211,83,.5)}
-50%{opacity:.25;transform:scale(.72);background:#39d353;box-shadow:0 0 16px rgba(57,211,83,1),0 0 35px rgba(57,211,83,.75)}
+0%,100%{
+opacity:1;
+transform:scale(1);
+background:#39d353;
+box-shadow:
+0 0 5px rgba(57,211,83,.7),
+0 0 12px rgba(57,211,83,.5)
 }
-.new-stat{border-color:rgba(212,175,55,.35)}
-.pending-stat{border-color:rgba(255,159,67,.35)}
-.delivery-stat{border-color:rgba(169,112,255,.35)}
-.complete-stat{border-color:rgba(37,211,102,.35)}
-.cancelled-stat{border-color:rgba(255,77,77,.35)}
+50%{
+opacity:.25;
+transform:scale(.72);
+background:#39d353;
+box-shadow:
+0 0 16px rgba(57,211,83,1),
+0 0 35px rgba(57,211,83,.75)
+}
+}
+
+.new-stat{
+border-color:rgba(212,175,55,.35)
+}
+
+.pending-stat{
+border-color:rgba(255,159,67,.35)
+}
+
+.delivery-stat{
+border-color:rgba(169,112,255,.35)
+}
+
+.complete-stat{
+border-color:rgba(37,211,102,.35)
+}
+
+.cancelled-stat{
+border-color:rgba(255,77,77,.35)
+}
+
 .new-summary-alert{
 border-color:#39d353!important;
 animation:newSummaryBlink 1.05s ease-in-out infinite
 }
+
 @keyframes newSummaryBlink{
-0%,100%{border-color:#208b45;box-shadow:0 0 5px rgba(57,211,83,.25)}
-50%{border-color:#39d353;box-shadow:0 0 14px rgba(57,211,83,.8),0 0 35px rgba(57,211,83,.42),0 0 70px rgba(57,211,83,.18)}
+0%,100%{
+border-color:#208b45;
+box-shadow:0 0 5px rgba(57,211,83,.25)
+}
+50%{
+border-color:#39d353;
+box-shadow:
+0 0 14px rgba(57,211,83,.8),
+0 0 35px rgba(57,211,83,.42),
+0 0 70px rgba(57,211,83,.18)
+}
 }
 
 .control-grid{
 display:grid;
-grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);
+grid-template-columns:
+minmax(0,1.2fr)
+minmax(0,1fr)
+minmax(0,1fr);
 gap:10px;
 margin-bottom:12px
 }
+
 .control-box{
 background:#111;
 border:1px solid #292929;
@@ -223,7 +484,13 @@ border-radius:11px;
 padding:12px;
 min-width:0
 }
-.control-box h2{font-size:12px;margin-bottom:9px;color:var(--gold2)}
+
+.control-box h2{
+font-size:12px;
+margin-bottom:9px;
+color:var(--gold2)
+}
+
 .notice{
 background:#19170c;
 border:1px solid #55450e;
@@ -234,8 +501,15 @@ font-size:10px;
 margin-bottom:10px;
 line-height:1.45
 }
-.success{color:#6bea91}
-.danger{color:#ff7777}
+
+.success{
+color:#6bea91
+}
+
+.danger{
+color:#ff7777
+}
+
 .shop-status{
 display:flex;
 align-items:center;
@@ -246,6 +520,7 @@ border-radius:8px;
 background:#121212;
 border:1px solid #282828
 }
+
 .shop-light{
 width:9px;
 height:9px;
@@ -253,23 +528,40 @@ border-radius:50%;
 background:#25d366;
 box-shadow:0 0 8px #25d366
 }
+
 .shop-light.closed{
 background:#ff3030;
 box-shadow:0 0 10px #ff3030;
 animation:redBlink .8s infinite
 }
-.shop-status-text{font-size:10px;font-weight:900}
-.shop-status-text.closed{color:#ff5c5c}
-@keyframes redBlink{
-0%,100%{opacity:1;transform:scale(1)}
-50%{opacity:.25;transform:scale(.75)}
+
+.shop-status-text{
+font-size:10px;
+font-weight:900
 }
+
+.shop-status-text.closed{
+color:#ff5c5c
+}
+
+@keyframes redBlink{
+0%,100%{
+opacity:1;
+transform:scale(1)
+}
+50%{
+opacity:.25;
+transform:scale(.75)
+}
+}
+
 .override-buttons{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:5px;
 margin-top:8px
 }
+
 .override-btn{
 padding:7px 4px;
 border-radius:7px;
@@ -279,11 +571,15 @@ color:#aaa;
 font-size:8px;
 font-weight:900
 }
-.override-btn.active-auto,.override-btn.active-open,.override-btn.active-closed{
+
+.override-btn.active-auto,
+.override-btn.active-open,
+.override-btn.active-closed{
 border-color:var(--gold);
 color:var(--gold2);
 background:#29220b
 }
+
 .payment-row{
 display:flex;
 gap:7px;
@@ -295,7 +591,12 @@ border-radius:8px;
 padding:8px;
 margin-bottom:6px
 }
-.payment-row span{font-size:9px;color:#ddd}
+
+.payment-row span{
+font-size:9px;
+color:#ddd
+}
+
 .switch{
 width:42px;
 height:22px;
@@ -304,6 +605,7 @@ background:#444;
 position:relative;
 border:0
 }
+
 .switch:after{
 content:"";
 position:absolute;
@@ -315,8 +617,14 @@ top:3px;
 left:3px;
 transition:.2s
 }
-.switch.on{background:var(--green)}
-.switch.on:after{left:23px}
+
+.switch.on{
+background:var(--green)
+}
+
+.switch.on:after{
+left:23px
+}
 
 .details-offer-row{
 display:grid;
@@ -324,12 +632,15 @@ grid-template-columns:1fr 1fr;
 gap:10px;
 margin-bottom:12px
 }
-.order-section,.offer-box{
+
+.order-section,
+.offer-box{
 background:#111;
 border:1px solid #292929;
 border-radius:11px;
 padding:12px
 }
+
 .section-title{
 display:flex;
 align-items:center;
@@ -337,30 +648,49 @@ justify-content:space-between;
 gap:8px;
 margin-bottom:10px
 }
-.section-title h2{font-size:12px;color:var(--gold2)}
+
+.section-title h2{
+font-size:12px;
+color:var(--gold2)
+}
+
 .folder-name{
 font-size:11px;
 font-weight:900;
 color:#fff
 }
+
 .order-list{
 display:grid;
 gap:9px
 }
+
 .order-card{
 background:#151515;
 border:1px solid #292929;
 border-radius:10px;
 padding:11px
 }
+
 .order-head{
 display:flex;
 justify-content:space-between;
 gap:10px;
 margin-bottom:8px
 }
-.order-id{font-size:11px;font-weight:900;color:var(--gold2)}
-.order-meta{font-size:9px;color:#777;margin-top:3px}
+
+.order-id{
+font-size:11px;
+font-weight:900;
+color:var(--gold2)
+}
+
+.order-meta{
+font-size:9px;
+color:#777;
+margin-top:3px
+}
+
 .status-badge{
 display:inline-flex;
 align-items:center;
@@ -370,12 +700,37 @@ border-radius:20px;
 font-size:8px;
 font-weight:900
 }
-.status-received{background:#2d2812;color:#f5d76e}
-.status-processing{background:#10253c;color:#73baff}
-.status-making{background:#24153c;color:#c99cff}
-.status-out{background:#3b240d;color:#ffbd55}
-.status-delivered{background:#12351f;color:#69ed91}
-.status-cancelled{background:#351414;color:#ff8888}
+
+.status-received{
+background:#2d2812;
+color:#f5d76e
+}
+
+.status-processing{
+background:#10253c;
+color:#73baff
+}
+
+.status-making{
+background:#24153c;
+color:#c99cff
+}
+
+.status-out{
+background:#3b240d;
+color:#ffbd55
+}
+
+.status-delivered{
+background:#12351f;
+color:#69ed91
+}
+
+.status-cancelled{
+background:#351414;
+color:#ff8888
+}
+
 .customer-line{
 display:flex;
 gap:8px;
@@ -384,18 +739,21 @@ font-size:9px;
 color:#bbb;
 margin-bottom:7px
 }
+
 .customer-line span{
 background:#1b1b1b;
 border:1px solid #292929;
 border-radius:6px;
 padding:5px 7px
 }
+
 .order-items{
 border-top:1px solid #292929;
 border-bottom:1px solid #292929;
 padding:7px 0;
 margin:7px 0
 }
+
 .order-item{
 display:flex;
 justify-content:space-between;
@@ -403,7 +761,12 @@ gap:8px;
 padding:3px 0;
 font-size:9px
 }
-.order-item span:last-child{color:#ddd;font-weight:700}
+
+.order-item span:last-child{
+color:#ddd;
+font-weight:700
+}
+
 .bill-row{
 display:flex;
 justify-content:space-between;
@@ -412,14 +775,26 @@ padding:3px 0;
 font-size:9px;
 color:#aaa
 }
-.bill-row.total{font-size:11px;color:#fff;font-weight:900;padding-top:6px}
+
+.bill-row.total{
+font-size:11px;
+color:#fff;
+font-weight:900;
+padding-top:6px
+}
+
 .action-row{
 display:flex;
 flex-wrap:wrap;
 gap:5px;
 margin-top:9px
 }
-.action-row .btn{font-size:8px;padding:6px 8px}
+
+.action-row .btn{
+font-size:8px;
+padding:6px 8px
+}
+
 .empty{
 padding:25px 10px;
 text-align:center;
@@ -434,12 +809,14 @@ display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:7px
 }
+
 .offer-preview{
 background:#171717;
 border:1px solid #292929;
 border-radius:9px;
 padding:9px
 }
+
 .offer-preview img{
 width:100%;
 height:100px;
@@ -448,12 +825,14 @@ border-radius:7px;
 display:block;
 background:#0d0d0d
 }
+
 .offer-preview .offer-title{
 font-size:10px;
 font-weight:900;
 color:#f5d76e;
 margin-top:7px
 }
+
 .offer-preview .offer-text{
 font-size:9px;
 color:#aaa;
@@ -468,22 +847,26 @@ border-radius:11px;
 padding:12px;
 margin-bottom:12px
 }
+
 .menu-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:8px
 }
+
 .menu-item{
 background:#151515;
 border:1px solid #292929;
 border-radius:9px;
 padding:9px
 }
+
 .menu-item h3{
 font-size:10px;
 color:#f5d76e;
 margin-bottom:7px
 }
+
 .menu-item img{
 width:100%;
 height:100px;
@@ -492,13 +875,18 @@ border-radius:7px;
 background:#0d0d0d;
 margin-bottom:7px
 }
+
 .menu-price{
 display:flex;
 gap:5px;
 align-items:center;
 margin-bottom:6px
 }
-.menu-price input{flex:1}
+
+.menu-price input{
+flex:1
+}
+
 .stock-row{
 display:flex;
 align-items:center;
@@ -507,6 +895,7 @@ gap:5px;
 font-size:9px;
 color:#aaa
 }
+
 .stock-btn{
 padding:6px 8px;
 border-radius:7px;
@@ -516,11 +905,13 @@ font-weight:900;
 background:#171717;
 color:#aaa
 }
+
 .stock-btn.available{
 background:#12351f;
 border-color:#1e6b39;
 color:#69ed91
 }
+
 .stock-btn.out{
 background:#351414;
 border-color:#702525;
@@ -531,7 +922,9 @@ color:#ff8888
 position:fixed;
 bottom:20px;
 left:50%;
-transform:translateX(-50%) translateY(20px);
+transform:
+translateX(-50%)
+translateY(20px);
 background:#171717;
 border:1px solid #4a3e17;
 color:#f5d76e;
@@ -544,29 +937,76 @@ pointer-events:none;
 transition:.25s;
 z-index:9999
 }
+
 .toast.show{
 opacity:1;
-transform:translateX(-50%) translateY(0)
+transform:
+translateX(-50%)
+translateY(0)
 }
 
 @media(max-width:1000px){
-.control-grid{grid-template-columns:1fr 1fr}
-.menu-grid{grid-template-columns:repeat(3,1fr)}
+
+.control-grid{
+grid-template-columns:1fr 1fr
 }
+
+.menu-grid{
+grid-template-columns:repeat(3,1fr)
+}
+
+}
+
 @media(max-width:760px){
-.grid{grid-template-columns:repeat(2,1fr)}
-.control-grid{grid-template-columns:1fr}
-.details-offer-row{grid-template-columns:1fr}
-.menu-grid{grid-template-columns:repeat(2,1fr)}
+
+.grid{
+grid-template-columns:repeat(2,1fr)
 }
+
+.control-grid{
+grid-template-columns:1fr
+}
+
+.details-offer-row{
+grid-template-columns:1fr
+}
+
+.menu-grid{
+grid-template-columns:repeat(2,1fr)
+}
+
+}
+
 @media(max-width:480px){
-.dashboard{padding:12px 9px 35px}
-.topbar{padding:8px 10px}
-.grid{gap:6px}
-.folder-stat{padding:9px}
-.folder-stat strong{font-size:19px}
-.menu-grid{grid-template-columns:1fr 1fr}
-.offer-grid{grid-template-columns:1fr}
+
+.dashboard{
+padding:12px 9px 35px
+}
+
+.topbar{
+padding:8px 10px
+}
+
+.grid{
+gap:6px
+}
+
+.folder-stat{
+padding:9px
+}
+
+.folder-stat strong{
+font-size:19px
+}
+
+.menu-grid{
+grid-template-columns:1fr 1fr
+}
+
+.offer-grid{
+grid-template-columns:1fr
+}
+
 }
 </style>
 </head>
@@ -574,56 +1014,121 @@ transform:translateX(-50%) translateY(0)
 <body>
 
 <div id="loginScreen" class="login-screen">
+
 <div class="login-box">
 
 <div class="logo">
-<div class="logo-icon">👑</div>
-<h1>The Queen Fast Food</h1>
-<p>ADMIN CONTROL PANEL</p>
+
+<div class="logo-icon">
+👑
 </div>
+
+<h1>
+The Queen Fast Food
+</h1>
+
+<p>
+ADMIN CONTROL PANEL
+</p>
+
+</div>
+
 
 <div class="admin-id-box">
-<div class="admin-id-title">🔐 ADMIN ACCESS</div>
+
+<div class="admin-id-title">
+🔐 ADMIN ACCESS
+</div>
+
 <div class="admin-id-warning">
+
 Only authorized administrator can access this panel.
-<strong>Do not share your login credentials.</strong>
+
+<strong>
+Do not share your login credentials.
+</strong>
+
 </div>
+
 </div>
+
 
 <div class="field">
-<label>Email</label>
-<input id="loginEmail" type="email" placeholder="Admin email">
+
+<label>
+Email
+</label>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Admin email"
+>
+
 </div>
+
 
 <div class="field">
-<label>Password</label>
-<input id="loginPassword" type="password" placeholder="Password">
+
+<label>
+Password
+</label>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password"
+>
+
 </div>
 
-<button class="btn btn-gold" style="width:100%" onclick="adminLogin()">
+
+<button
+class="btn btn-gold"
+style="width:100%"
+onclick="adminLogin()"
+>
 LOGIN
 </button>
 
-<div id="loginError" class="danger" style="margin-top:9px;font-size:9px"></div>
+
+<div
+id="loginError"
+class="danger"
+style="margin-top:9px;font-size:9px"
+></div>
 
 </div>
+
 </div>
 
 
 <div id="adminPanel" class="admin">
 
+
 <div class="topbar">
+
 <div class="topbar-inner">
 
 <div class="brand">
-👑 The Queen <span>Fast Food</span>
+
+👑 The Queen
+<span>
+Fast Food
+</span>
+
 </div>
 
-<button class="btn btn-dark" onclick="adminLogout()">
+
+<button
+class="btn btn-dark"
+onclick="adminLogout()"
+>
 Logout
 </button>
 
 </div>
+
 </div>
 
 
@@ -634,20 +1139,43 @@ id="notificationButton"
 class="notification-btn"
 onclick="toggleNotifications()"
 >
+
 🔔 Notifications
-<span id="notificationCount">0</span>
+
+<span id="notificationCount">
+0
+</span>
+
 </button>
 
-<div id="notificationPanel" class="notification-panel">
+
+<div
+id="notificationPanel"
+class="notification-panel"
+>
 
 <div class="notification-title">
-<strong>New Orders</strong>
-<button class="btn btn-dark" onclick="clearNotifications()">Clear</button>
+
+<strong>
+New Orders
+</strong>
+
+<button
+class="btn btn-dark"
+onclick="clearNotifications()"
+>
+Clear
+</button>
+
 </div>
 
-<div id="notificationList"></div>
+
+<div
+id="notificationList"
+></div>
 
 </div>
+
 </div>
 
 
@@ -656,55 +1184,114 @@ onclick="toggleNotifications()"
 
 <div class="grid">
 
+
 <button
 id="newFolder"
 class="folder-stat new-stat"
 onclick="selectFolder('new')"
 >
-<small>NEW ORDERS</small>
-<strong id="newCount">0</strong>
-<span>Received orders</span>
-<div id="newOrderDot" class="new-order-dot"></div>
+
+<small>
+NEW ORDERS
+</small>
+
+<strong id="newCount">
+0
+</strong>
+
+<span>
+Received orders
+</span>
+
+<div
+id="newOrderDot"
+class="new-order-dot"
+></div>
+
 </button>
+
 
 <button
 id="pendingFolder"
 class="folder-stat pending-stat"
 onclick="selectFolder('pending')"
 >
-<small>PENDING ORDERS</small>
-<strong id="pendingCount">0</strong>
-<span>Processing / Making</span>
+
+<small>
+PENDING ORDERS
+</small>
+
+<strong id="pendingCount">
+0
+</strong>
+
+<span>
+Processing / Making
+</span>
+
 </button>
+
 
 <button
 id="deliveryFolder"
 class="folder-stat delivery-stat"
 onclick="selectFolder('delivery')"
 >
-<small>OUT FOR DELIVERY</small>
-<strong id="deliveryCount">0</strong>
-<span>Delivery orders</span>
+
+<small>
+OUT FOR DELIVERY
+</small>
+
+<strong id="deliveryCount">
+0
+</strong>
+
+<span>
+Delivery orders
+</span>
+
 </button>
+
 
 <button
 id="completeFolder"
 class="folder-stat complete-stat"
 onclick="selectFolder('complete')"
 >
-<small>DELIVERED</small>
-<strong id="completeCount">0</strong>
-<span>Completed orders</span>
+
+<small>
+DELIVERED
+</small>
+
+<strong id="completeCount">
+0
+</strong>
+
+<span>
+Completed orders
+</span>
+
 </button>
+
 
 <button
 id="cancelledFolder"
 class="folder-stat cancelled-stat"
 onclick="selectFolder('cancelled')"
 >
-<small>CANCELLED</small>
-<strong id="cancelledCount">0</strong>
-<span>Cancelled orders</span>
+
+<small>
+CANCELLED
+</small>
+
+<strong id="cancelledCount">
+0
+</strong>
+
+<span>
+Cancelled orders
+</span>
+
 </button>
 
 </div>
@@ -715,13 +1302,22 @@ onclick="selectFolder('cancelled')"
 
 <div class="control-box">
 
-<h2>🏪 SHOP CONTROL</h2>
+<h2>
+🏪 SHOP CONTROL
+</h2>
+
 
 <div class="shop-status">
 
-<div id="shopLight" class="shop-light"></div>
+<div
+id="shopLight"
+class="shop-light"
+></div>
 
-<div id="shopStatusText" class="shop-status-text">
+<div
+id="shopStatusText"
+class="shop-status-text"
+>
 SHOP IS CLOSED
 </div>
 
@@ -759,20 +1355,51 @@ FORCE CLOSED
 
 <div style="margin-top:9px">
 
-<div class="field">
-<label>Opening Time</label>
-<input id="openingTime" type="time" value="12:00">
-</div>
 
 <div class="field">
-<label>Closing Time</label>
-<input id="closingTime" type="time" value="23:00">
+
+<label>
+Opening Time
+</label>
+
+<input
+id="openingTime"
+type="time"
+value="12:00"
+>
+
 </div>
 
+
 <div class="field">
-<label>Closed Message</label>
-<textarea id="closedMessage">Sorry, we are closed right now.</textarea>
+
+<label>
+Closing Time
+</label>
+
+<input
+id="closingTime"
+type="time"
+value="23:00"
+>
+
 </div>
+
+
+<div class="field">
+
+<label>
+Closed Message
+</label>
+
+<textarea
+id="closedMessage"
+>
+Sorry, we are closed right now.
+</textarea>
+
+</div>
+
 
 <button
 class="btn btn-gold"
@@ -788,23 +1415,48 @@ SAVE SHOP SETTINGS
 
 <div class="control-box">
 
-<h2>🌐 WEBSITE CONTROL</h2>
+<h2>
+🌐 WEBSITE CONTROL
+</h2>
+
 
 <div class="field">
-<label>Website Mode</label>
+
+<label>
+Website Mode
+</label>
 
 <select id="websiteMode">
-<option value="normal">Normal</option>
-<option value="updating">Updating</option>
-<option value="maintenance">Maintenance</option>
+
+<option value="normal">
+Normal
+</option>
+
+<option value="updating">
+Updating
+</option>
+
+<option value="maintenance">
+Maintenance
+</option>
+
 </select>
 
 </div>
 
+
 <div class="field">
-<label>Message</label>
-<textarea id="updateMessage"></textarea>
+
+<label>
+Message
+</label>
+
+<textarea
+id="updateMessage"
+></textarea>
+
 </div>
+
 
 <button
 class="btn btn-gold"
@@ -818,10 +1470,20 @@ SAVE WEBSITE
 📞 WHATSAPP
 </h2>
 
+
 <div class="field">
-<label>WhatsApp Number</label>
-<input id="whatsappNumber" type="text">
+
+<label>
+WhatsApp Number
+</label>
+
+<input
+id="whatsappNumber"
+type="text"
+>
+
 </div>
+
 
 <button
 class="btn btn-gold"
@@ -835,24 +1497,38 @@ SAVE WHATSAPP
 
 <div class="control-box">
 
-<h2>💳 PAYMENT CONTROL</h2>
+<h2>
+💳 PAYMENT CONTROL
+</h2>
+
 
 <div class="payment-row">
-<span>Cash on Delivery</span>
+
+<span>
+Cash on Delivery
+</span>
+
 <button
 id="codSwitch"
 class="switch"
 onclick="togglePayment('cod')"
 ></button>
+
 </div>
 
+
 <div class="payment-row">
-<span>Online Payment</span>
+
+<span>
+Online Payment
+</span>
+
 <button
 id="onlineSwitch"
 class="switch"
 onclick="togglePayment('online')"
 ></button>
+
 </div>
 
 
@@ -860,10 +1536,22 @@ onclick="togglePayment('online')"
 📦 DELIVERY
 </h2>
 
+
 <div class="field">
-<label>Delivery Rate / KM</label>
-<input id="deliveryRate" type="number" min="0" step="1">
+
+<label>
+Delivery Rate / KM
+</label>
+
+<input
+id="deliveryRate"
+type="number"
+min="0"
+step="1"
+>
+
 </div>
+
 
 <button
 class="btn btn-gold"
@@ -897,7 +1585,11 @@ CLOSE
 
 </div>
 
-<div id="orderList" class="order-list">
+
+<div
+id="orderList"
+class="order-list"
+>
 
 <div class="empty">
 Select a folder above.
@@ -912,7 +1604,9 @@ Select a folder above.
 
 <div class="section-title">
 
-<h2>✨ OFFER CONTROL</h2>
+<h2>
+✨ OFFER CONTROL
+</h2>
 
 <button
 id="offerSwitch"
@@ -922,6 +1616,7 @@ onclick="toggleOffer()"
 
 </div>
 
+
 <div
 id="offerStatusText"
 style="font-size:9px;color:#777;margin-bottom:9px"
@@ -929,30 +1624,61 @@ style="font-size:9px;color:#777;margin-bottom:9px"
 Offer is OFF
 </div>
 
+
 <div class="field">
-<label>Offer Title</label>
+
+<label>
+Offer Title
+</label>
+
 <input id="offerTitle">
+
 </div>
 
+
 <div class="field">
-<label>Offer Text</label>
+
+<label>
+Offer Text
+</label>
+
 <input id="offerText">
+
 </div>
 
+
 <div class="field">
-<label>Offer Price</label>
+
+<label>
+Offer Price
+</label>
+
 <input id="offerPrice">
+
 </div>
 
+
 <div class="field">
-<label>Button Text</label>
+
+<label>
+Button Text
+</label>
+
 <input id="offerButton">
+
 </div>
 
+
 <div class="field">
-<label>Image URL</label>
+
+<label>
+Image URL
+</label>
+
 <input id="offerImage">
+
 </div>
+
 
 <button
 class="btn btn-gold"
@@ -970,7 +1696,9 @@ SAVE OFFER
 
 <div class="section-title">
 
-<h2>🍴 MENU CONTROL</h2>
+<h2>
+🍴 MENU CONTROL
+</h2>
 
 <span style="font-size:8px;color:#666">
 8 HOME PAGE ITEMS
@@ -978,23 +1706,34 @@ SAVE OFFER
 
 </div>
 
-<div id="menuList" class="menu-grid"></div>
+
+<div
+id="menuList"
+class="menu-grid"
+></div>
+
+</div>
+
 
 </div>
 
 </div>
 
-</div>
 
-
-<div id="toast" class="toast"></div>
+<div
+id="toast"
+class="toast"
+></div>
 
 
 <script type="module">
 
 import {
 initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
 getDatabase,
@@ -1002,7 +1741,10 @@ ref,
 onValue,
 update,
 remove
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 
 import {
 getAuth,
@@ -1011,26 +1753,36 @@ signInWithEmailAndPassword,
 signOut,
 setPersistence,
 browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 const firebaseConfig = {
 
-apiKey:"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
+apiKey:
+"AIzaSyBtJaMwLBSJP2d6QXa3ZRXkGIonok-erQg",
 
-authDomain:"the-queen-fast-food.firebaseapp.com",
+authDomain:
+"the-queen-fast-food.firebaseapp.com",
 
-databaseURL:"https://the-queen-fast-food-default-rtdb.firebaseio.com",
+databaseURL:
+"https://the-queen-fast-food-default-rtdb.firebaseio.com",
 
-projectId:"the-queen-fast-food",
+projectId:
+"the-queen-fast-food",
 
-storageBucket:"the-queen-fast-food.firebasestorage.app",
+storageBucket:
+"the-queen-fast-food.firebasestorage.app",
 
-messagingSenderId:"435721389652",
+messagingSenderId:
+"435721389652",
 
-appId:"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
+appId:
+"1:435721389652:web:c4bec2b5d89a4e2ab50fc1",
 
-measurementId:"G-Q1YCK636KJ"
+measurementId:
+"G-Q1YCK636KJ"
 
 };
 
@@ -1038,8 +1790,10 @@ measurementId:"G-Q1YCK636KJ"
 const app =
 initializeApp(firebaseConfig);
 
+
 const db =
 getDatabase(app);
+
 
 const auth =
 getAuth(app);
@@ -1050,27 +1804,48 @@ const ADMIN_UID =
 
 
 let settings = {};
+
 let orders = {};
+
 let customerOrdersData = {};
+
 let selectedFolder = null;
 
 let codEnabled = true;
+
 let onlineEnabled = true;
+
 let offerEnabled = true;
 
+
 let offerData = {
+
 title:"SPECIAL OFFER",
+
 text:"Burger + Fries + Cold Drink",
+
 price:"₹149",
+
 button:"ORDER NOW",
+
 image:""
+
 };
 
+
 let notificationAudioContext = null;
-let knownNewOrderIds = new Set();
-let newOrdersInitialized = false;
-let notificationActive = false;
-let dataListenersStarted = false;
+
+let knownNewOrderIds =
+new Set();
+
+let newOrdersInitialized =
+false;
+
+let notificationActive =
+false;
+
+let dataListenersStarted =
+false;
 
 
 const $ =
@@ -1086,57 +1861,57 @@ const defaultMenu = {
 
 veg_chowmin:{
 name:"Veg Chowmin",
-price:50,
+price:120,
 image:"",
 stock:true
 },
 
 veg_roll:{
 name:"Veg Roll",
-price:50,
-image:"",
+price:35,
+image:"https://t3.ftcdn.net/jpg/07/64/84/78/240_F_764847835_E4rC9S6qnC8rHSGUnwX9YsGnntSMtHDO.jpg",
 stock:true
 },
 
 chicken_chowmin:{
 name:"Chicken Chowmin",
 price:65,
-image:"",
+image:"https://t3.ftcdn.net/jpg/14/66/78/82/240_F_1466788216_SOVI8FmhDyCRXIObBqpUDfOwBy94X8GP.jpg",
 stock:true
 },
 
 chicken_roll:{
 name:"Chicken Roll",
 price:60,
-image:"",
+image:"https://t3.ftcdn.net/jpg/16/92/08/10/240_F_1692081042_lxtUhcUSFj8RWwsDMTBUuqv7jpEJEepH.jpg",
 stock:true
 },
 
-manchurian:{
-name:"Manchurian",
-price:50,
-image:"",
-stock:true
-},
-
-paneer_tikka:{
-name:"Paneer Tikka",
+chicken_pakoda:{
+name:"Chicken Pakoda",
 price:60,
-image:"",
+image:"https://t3.ftcdn.net/jpg/11/35/74/74/240_F_1135747404_Yl9eKUwY7vOWPbwF0AZvKlcgdKf5XaUm.jpg",
 stock:true
 },
 
-chili_chicken:{
-name:"Chili Chicken",
+chilli_chicken:{
+name:"Chilli Chicken",
 price:120,
-image:"",
+image:"https://t3.ftcdn.net/jpg/09/43/87/72/240_F_943877268_Q6tjM8uPJWhOaiWqqd8BZj2GSIdYt785.jpg",
 stock:true
 },
 
-chicken_biriyani:{
-name:"Chicken Biriyani",
-price:120,
-image:"",
+veg_biriyani:{
+name:"Veg Biriyani",
+price:100,
+image:"https://as1.ftcdn.net/v2/jpg/08/59/75/24/1000_F_859752460_Ni2dNarET8ZbO7jM9bVPszE7QdZ4XVIq.jpg",
+stock:true
+},
+
+chicken_dum_biriyani:{
+name:"Chicken Dum Biriyani",
+price:129,
+image:"https://images.pexels.com/photos/28674660/pexels-photo-28674660.jpeg",
 stock:true
 }
 
@@ -1327,10 +2102,12 @@ shop.openingTime ||
 settings.openingTime ||
 "12:00";
 
+
 $("closingTime").value =
 shop.closingTime ||
 settings.closingTime ||
 "23:00";
+
 
 $("closedMessage").value =
 shop.closedMessage ||
@@ -1342,6 +2119,7 @@ $("websiteMode").value =
 website.mode ||
 settings.websiteMode ||
 "normal";
+
 
 $("updateMessage").value =
 website.message ||
@@ -1368,6 +2146,7 @@ shop.override ||
 settings.shopOverride ||
 "auto";
 
+
 renderOverrideButtons(
 override
 );
@@ -1375,6 +2154,7 @@ override
 
 offerEnabled =
 offer.enabled !== false;
+
 
 offerData = {
 
@@ -1399,6 +2179,7 @@ offer.image ||
 ""
 
 };
+
 
 renderOfferControls();
 
@@ -1452,6 +2233,7 @@ shop.openingTime ||
 settings.openingTime ||
 "12:00";
 
+
 const closing =
 shop.closingTime ||
 settings.closingTime ||
@@ -1460,6 +2242,7 @@ settings.closingTime ||
 
 const now =
 new Date();
+
 
 const current =
 now.getHours() * 60 +
@@ -1480,8 +2263,18 @@ const closeMinutes =
 ch * 60 + cm;
 
 
+if(openMinutes <= closeMinutes){
+
 return (
 current >= openMinutes &&
+current < closeMinutes
+);
+
+}
+
+
+return (
+current >= openMinutes ||
 current < closeMinutes
 );
 
@@ -1901,6 +2694,7 @@ Number(
 $("deliveryRate").value
 );
 
+
 if(
 !Number.isFinite(rate) ||
 rate < 0
@@ -1913,6 +2707,7 @@ showToast(
 return;
 
 }
+
 
 try{
 
@@ -1962,10 +2757,12 @@ switchEl.classList.toggle(
 offerEnabled
 );
 
+
 status.classList.toggle(
 "on",
 offerEnabled
 );
+
 
 status.textContent =
 offerEnabled
@@ -2171,10 +2968,12 @@ id=>{
 const item =
 merged[id];
 
+
 const card =
 document.createElement(
 "div"
 );
+
 
 card.className =
 "menu-item";
@@ -2223,6 +3022,14 @@ value="${escapeHtml(item.image || "")}"
 placeholder="Image URL"
 >
 
+<button
+class="btn btn-gold"
+style="width:100%;margin-top:5px"
+onclick="saveMenuImage('${id}')"
+>
+SAVE IMAGE
+</button>
+
 </div>
 
 
@@ -2243,6 +3050,7 @@ ${item.stock ? "AVAILABLE" : "OUT OF STOCK"}
 </div>
 
 `;
+
 
 list.appendChild(card);
 
@@ -2429,11 +3237,14 @@ status ||
 if(value === "confirmed")
 return "processing";
 
+
 if(value === "preparing")
 return "making";
 
+
 if(value === "out")
 return "out_for_delivery";
+
 
 return value;
 
@@ -2472,6 +3283,7 @@ cancelled:"Cancelled"
 
 };
 
+
 return (
 map[normalizeStatus(status)] ||
 "Order Received"
@@ -2487,20 +3299,26 @@ status
 const s =
 normalizeStatus(status);
 
+
 if(s === "processing")
 return "status-processing";
+
 
 if(s === "making")
 return "status-making";
 
+
 if(s === "out_for_delivery")
 return "status-out";
+
 
 if(s === "delivered")
 return "status-delivered";
 
+
 if(s === "cancelled")
 return "status-cancelled";
+
 
 return "status-received";
 
@@ -2532,9 +3350,11 @@ $("folderTitle").textContent =
 "ORDER MANAGEMENT";
 
 $("orderList").innerHTML = `
+
 <div class="empty">
 Select a folder above.
 </div>
+
 `;
 
 };
@@ -2544,12 +3364,14 @@ function getFolderOrders(){
 
 const list = [];
 
+
 Object.keys(orders || {})
 .forEach(
 key=>{
 
 const order =
 orders[key];
+
 
 const status =
 getOrderStatus(order);
@@ -2559,28 +3381,42 @@ let folder = "";
 
 
 if(status === "received"){
+
 folder = "new";
+
 }
+
 else if(
 status === "processing" ||
 status === "making"
 ){
+
 folder = "pending";
+
 }
+
 else if(
 status === "out_for_delivery"
 ){
+
 folder = "delivery";
+
 }
+
 else if(
 status === "delivered"
 ){
+
 folder = "complete";
+
 }
+
 else if(
 status === "cancelled"
 ){
+
 folder = "cancelled";
+
 }
 
 
@@ -2623,9 +3459,13 @@ return list;
 function renderOrders(){
 
 let newCount = 0;
+
 let pendingCount = 0;
+
 let deliveryCount = 0;
+
 let completeCount = 0;
+
 let cancelledCount = 0;
 
 
@@ -2642,21 +3482,25 @@ getOrderStatus(order);
 if(status === "received")
 newCount++;
 
+
 else if(
 status === "processing" ||
 status === "making"
 )
 pendingCount++;
 
+
 else if(
 status === "out_for_delivery"
 )
 deliveryCount++;
 
+
 else if(
 status === "delivered"
 )
 completeCount++;
+
 
 else if(
 status === "cancelled"
@@ -2694,6 +3538,7 @@ notificationActive
 const dot =
 $("newOrderDot");
 
+
 dot.classList.toggle(
 "alert",
 newCount > 0 &&
@@ -2704,9 +3549,11 @@ notificationActive
 if(!selectedFolder){
 
 $("orderList").innerHTML = `
+
 <div class="empty">
 Select a folder above.
 </div>
+
 `;
 
 return;
@@ -2741,9 +3588,11 @@ getFolderOrders();
 if(!list.length){
 
 $("orderList").innerHTML = `
+
 <div class="empty">
 No orders in this folder.
 </div>
+
 `;
 
 return;
@@ -2798,6 +3647,7 @@ Number(item.quantity || 0);
 const price =
 Number(item.price || 0);
 
+
 itemHtml += `
 
 <div class="order-item">
@@ -2825,21 +3675,26 @@ let actionHtml = "";
 if(status === "received"){
 
 actionHtml += `
+
 <button
 class="btn btn-blue"
 onclick="updateOrderStatus('${key}','processing')"
 >
 ACCEPT / PROCESS
 </button>
+
 `;
 
+
 actionHtml += `
+
 <button
 class="btn btn-red"
 onclick="updateOrderStatus('${key}','cancelled')"
 >
 CANCEL
 </button>
+
 `;
 
 }
@@ -2848,21 +3703,26 @@ CANCEL
 if(status === "processing"){
 
 actionHtml += `
+
 <button
 class="btn btn-purple"
 onclick="updateOrderStatus('${key}','making')"
 >
 START MAKING
 </button>
+
 `;
 
+
 actionHtml += `
+
 <button
 class="btn btn-red"
 onclick="updateOrderStatus('${key}','cancelled')"
 >
 CANCEL
 </button>
+
 `;
 
 }
@@ -2871,21 +3731,26 @@ CANCEL
 if(status === "making"){
 
 actionHtml += `
+
 <button
 class="btn btn-orange"
 onclick="updateOrderStatus('${key}','out_for_delivery')"
 >
 OUT FOR DELIVERY
 </button>
+
 `;
 
+
 actionHtml += `
+
 <button
 class="btn btn-red"
 onclick="updateOrderStatus('${key}','cancelled')"
 >
 CANCEL
 </button>
+
 `;
 
 }
@@ -2894,6 +3759,7 @@ CANCEL
 if(status === "out_for_delivery"){
 
 actionHtml += `
+
 <div
 style="
 font-size:9px;
@@ -2906,6 +3772,7 @@ border-radius:7px
 >
 Waiting for customer delivery confirmation.
 </div>
+
 `;
 
 }
@@ -2914,6 +3781,7 @@ Waiting for customer delivery confirmation.
 if(status === "delivered"){
 
 actionHtml += `
+
 <div
 style="
 font-size:9px;
@@ -2926,6 +3794,7 @@ border-radius:7px
 >
 🎉 Delivered successfully.
 </div>
+
 `;
 
 }
@@ -2934,6 +3803,7 @@ border-radius:7px
 if(status === "cancelled"){
 
 actionHtml += `
+
 <div
 style="
 font-size:9px;
@@ -2946,6 +3816,7 @@ border-radius:7px
 >
 ❌ Order cancelled.
 </div>
+
 `;
 
 }
@@ -2954,12 +3825,14 @@ border-radius:7px
 /* KEEP REMOVE ORDER OPTION */
 
 actionHtml += `
+
 <button
 class="btn btn-red"
 onclick="removeOrder('${key}')"
 >
 REMOVE ORDER
 </button>
+
 `;
 
 
@@ -2973,42 +3846,80 @@ return `
 
 <div class="order-card">
 
+
 <div class="order-head">
+
 
 <div>
 
+
 <div class="order-id">
-🔖 ${escapeHtml(order.orderId || key)}
+
+🔖
+${escapeHtml(
+order.orderId || key
+)}
+
 </div>
+
 
 <div class="order-meta">
-🕐 ${new Date(
+
+🕐
+${new Date(
 order.createdAt || Date.now()
 ).toLocaleString("en-IN")}
-</div>
 
 </div>
 
-<div class="status-badge ${statusClass(status)}">
+
+</div>
+
+
+<div
+class="status-badge ${statusClass(status)}"
+>
+
 ${statusLabel(status)}
+
 </div>
+
 
 </div>
 
 
 <div class="customer-line">
 
-<span>
-👤 ${escapeHtml(order.customerName || "")}
-</span>
 
 <span>
-📞 ${escapeHtml(order.phone || "")}
+
+👤
+${escapeHtml(
+order.customerName || ""
+)}
+
 </span>
 
+
 <span>
-💳 ${escapeHtml(order.paymentMethod || "")}
+
+📞
+${escapeHtml(
+order.phone || ""
+)}
+
 </span>
+
+
+<span>
+
+💳
+${escapeHtml(
+order.paymentMethod || ""
+)}
+
+</span>
+
 
 </div>
 
@@ -3027,7 +3938,9 @@ margin-bottom:7px
 >
 
 🏠
-${escapeHtml(order.address || "")}
+${escapeHtml(
+order.address || ""
+)}
 
 </div>
 
@@ -3040,23 +3953,63 @@ ${itemHtml}
 
 
 <div class="bill-row">
-<span>Item Total</span>
-<span>₹${Number(order.subtotal || 0)}</span>
+
+<span>
+Item Total
+</span>
+
+<span>
+₹${Number(
+order.subtotal || 0
+)}
+</span>
+
 </div>
 
-<div class="bill-row">
-<span>Delivery</span>
-<span>₹${Number(order.deliveryCharge || 0)}</span>
-</div>
 
 <div class="bill-row">
-<span>Distance</span>
-<span>${Number(order.deliveryDistance || 0).toFixed(2)} km</span>
+
+<span>
+Delivery
+</span>
+
+<span>
+₹${Number(
+order.deliveryCharge || 0
+)}
+</span>
+
 </div>
+
+
+<div class="bill-row">
+
+<span>
+Distance
+</span>
+
+<span>
+${Number(
+order.deliveryDistance || 0
+).toFixed(2)}
+km
+</span>
+
+</div>
+
 
 <div class="bill-row total">
-<span>Grand Total</span>
-<span>₹${Number(order.total || 0)}</span>
+
+<span>
+Grand Total
+</span>
+
+<span>
+₹${Number(
+order.total || 0
+)}
+</span>
+
 </div>
 
 
@@ -3064,6 +4017,7 @@ ${
 customerLocation
 ?
 `
+
 <div style="margin-top:8px">
 
 <a
@@ -3077,6 +4031,7 @@ style="display:inline-block;text-decoration:none"
 </a>
 
 </div>
+
 `
 :
 ""
@@ -3088,6 +4043,7 @@ style="display:inline-block;text-decoration:none"
 ${actionHtml}
 
 </div>
+
 
 </div>
 
@@ -3108,6 +4064,7 @@ nextStatus
 
 const order =
 orders[key];
+
 
 if(!order){
 
@@ -3192,6 +4149,7 @@ updates[
 ] =
 nextStatus;
 
+
 updates[
 `customerOrders/${order.ownerUid}/${key}/updatedAt`
 ] =
@@ -3206,9 +4164,13 @@ updates[
 `cancelledOrders/${key}`
 ] =
 {
+
 ...order,
+
 status:"cancelled",
+
 updatedAt:now
+
 };
 
 }
@@ -3268,10 +4230,12 @@ updates[
 ] =
 null;
 
+
 updates[
 `deliveredOrders/${key}`
 ] =
 null;
+
 
 updates[
 `cancelledOrders/${key}`
@@ -3413,6 +4377,7 @@ window.webkitAudioContext
 const oscillator =
 notificationAudioContext.createOscillator();
 
+
 const gain =
 notificationAudioContext.createGain();
 
@@ -3425,13 +4390,17 @@ gain.connect(
 notificationAudioContext.destination
 );
 
+
 oscillator.frequency.value =
 880;
+
 
 gain.gain.value =
 .12;
 
+
 oscillator.start();
+
 
 setTimeout(
 ()=>{
@@ -3442,6 +4411,7 @@ oscillator.frequency.value =
 },
 120
 );
+
 
 setTimeout(
 ()=>{
@@ -3469,6 +4439,7 @@ function renderNotificationList(){
 const list =
 $("notificationList");
 
+
 const received =
 Object.entries(
 orders || {}
@@ -3495,6 +4466,7 @@ received.length;
 if(!received.length){
 
 list.innerHTML = `
+
 <div
 style="
 padding:15px;
@@ -3505,6 +4477,7 @@ text-align:center
 >
 No new orders.
 </div>
+
 `;
 
 return;
@@ -3525,18 +4498,24 @@ onclick="openNotificationOrder('${key}')"
 >
 
 <strong>
+
 ${escapeHtml(
 order.orderId || key
 )}
+
 </strong>
 
+
 <small>
+
 ${escapeHtml(
 order.customerName || ""
 )}
- · ₹${Number(
+
+· ₹${Number(
 order.total || 0
 )}
+
 </small>
 
 </div>
@@ -3578,10 +4557,13 @@ $("notificationPanel")
 "show"
 );
 
+
 selectedFolder =
 "new";
 
+
 renderOrders();
+
 
 setTimeout(
 ()=>{
@@ -3591,11 +4573,15 @@ document.querySelectorAll(
 ".order-card"
 );
 
+
 if(cards.length){
 
 cards[0].scrollIntoView({
+
 behavior:"smooth",
+
 block:"center"
+
 });
 
 }
@@ -3621,8 +4607,10 @@ message
 const toast =
 $("toast");
 
+
 toast.textContent =
 message;
+
 
 toast.classList.add(
 "show"
