@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#070707">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color"
+content="#070707">
+
 <title>The Queen Fast Food</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap"
+rel="stylesheet">
+
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -533,6 +548,284 @@ header{
 
 
 /* =====================================================
+   OFFER CIRCLE
+   ADMIN CONTROLLED
+===================================================== */
+
+.offer-circle-wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:5px 20px 35px;
+  display:flex;
+  justify-content:center;
+}
+
+.offer-circle{
+  position:relative;
+  width:min(390px,88vw);
+  min-height:390px;
+  border-radius:50%;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  isolation:isolate;
+
+  background:
+    radial-gradient(
+      circle at 50% 32%,
+      rgba(245,155,35,.20) 0%,
+      rgba(245,155,35,.08) 34%,
+      transparent 64%
+    ),
+    linear-gradient(
+      145deg,
+      #211407,
+      #090909 58%,
+      #171007
+    );
+
+  border:1px solid rgba(245,155,35,.72);
+
+  box-shadow:
+    0 0 0 1px rgba(245,155,35,.08),
+    0 0 25px rgba(245,155,35,.16),
+    0 0 65px rgba(245,155,35,.09),
+    inset 0 0 50px rgba(245,155,35,.08);
+
+  animation:offerCirclePulse 3.5s ease-in-out infinite;
+}
+
+.offer-circle::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  border:1px dashed rgba(245,155,35,.45);
+  box-shadow:
+    inset 0 0 20px rgba(245,155,35,.12);
+  animation:offerCircleRotate 18s linear infinite;
+  pointer-events:none;
+}
+
+.offer-circle::after{
+  content:"";
+  position:absolute;
+  inset:20px;
+  border-radius:50%;
+  border:1px solid rgba(245,155,35,.14);
+  box-shadow:
+    0 0 18px rgba(245,155,35,.08),
+    inset 0 0 25px rgba(245,155,35,.06);
+  pointer-events:none;
+}
+
+.offer-circle-content{
+  position:relative;
+  z-index:5;
+  width:78%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.offer-circle-badge{
+  color:#f59b23;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:9px;
+  text-shadow:0 0 10px rgba(245,155,35,.45);
+}
+
+.offer-circle-image-wrap{
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  overflow:hidden;
+  margin-bottom:10px;
+  border:2px solid rgba(245,155,35,.65);
+  box-shadow:
+    0 0 18px rgba(245,155,35,.24);
+  background:#151515;
+}
+
+.offer-circle-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.offer-circle-title{
+  color:#fff;
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(27px,6vw,38px);
+  font-weight:700;
+  line-height:1;
+  text-shadow:
+    0 0 14px rgba(255,255,255,.08);
+  margin-bottom:9px;
+}
+
+.offer-circle-text{
+  color:#aaa;
+  font-size:11px;
+  line-height:1.45;
+  max-width:260px;
+  min-height:15px;
+}
+
+.offer-circle-price{
+  color:#f59b23;
+  font-family:"Playfair Display",serif;
+  font-size:26px;
+  font-weight:800;
+  margin-top:8px;
+  text-shadow:
+    0 0 12px rgba(245,155,35,.35);
+}
+
+.offer-circle-button{
+  margin-top:13px;
+  min-width:135px;
+  padding:10px 18px;
+  border:1px solid #f59b23;
+  border-radius:30px;
+  background:
+    linear-gradient(
+      135deg,
+      #f59b23,
+      #d47c0b
+    );
+  color:#090909;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.4px;
+  box-shadow:
+    0 0 15px rgba(245,155,35,.18);
+  transition:.25s;
+}
+
+.offer-circle-button:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 22px rgba(245,155,35,.38);
+}
+
+.offer-spark{
+  position:absolute;
+  z-index:4;
+  color:#f5d76e;
+  font-size:15px;
+  pointer-events:none;
+  text-shadow:
+    0 0 8px rgba(245,155,35,.9);
+  animation:
+    offerSparkBlink 1.8s ease-in-out infinite,
+    offerSparkFloat 3.2s ease-in-out infinite;
+}
+
+.offer-spark.s1{
+  top:18%;
+  left:19%;
+  animation-delay:.1s;
+}
+
+.offer-spark.s2{
+  top:28%;
+  right:15%;
+  font-size:11px;
+  animation-delay:.7s;
+}
+
+.offer-spark.s3{
+  bottom:25%;
+  left:14%;
+  font-size:12px;
+  animation-delay:1.1s;
+}
+
+.offer-spark.s4{
+  bottom:18%;
+  right:20%;
+  font-size:16px;
+  animation-delay:1.5s;
+}
+
+.offer-spark.s5{
+  top:12%;
+  right:31%;
+  font-size:8px;
+  animation-delay:.4s;
+}
+
+.offer-spark.s6{
+  bottom:13%;
+  left:34%;
+  font-size:9px;
+  animation-delay:1.8s;
+}
+
+@keyframes offerCircleRotate{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes offerCirclePulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(245,155,35,.08),
+      0 0 25px rgba(245,155,35,.16),
+      0 0 65px rgba(245,155,35,.09),
+      inset 0 0 50px rgba(245,155,35,.08);
+  }
+
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(245,155,35,.12),
+      0 0 34px rgba(245,155,35,.24),
+      0 0 80px rgba(245,155,35,.13),
+      inset 0 0 60px rgba(245,155,35,.11);
+  }
+}
+
+@keyframes offerSparkBlink{
+  0%,100%{
+    opacity:.15;
+    transform:scale(.55);
+  }
+
+  45%{
+    opacity:1;
+    transform:scale(1.15);
+  }
+
+  65%{
+    opacity:.8;
+    transform:scale(.9);
+  }
+}
+
+@keyframes offerSparkFloat{
+  0%,100%{
+    margin-top:0;
+  }
+
+  50%{
+    margin-top:-7px;
+  }
+}
+
+
+/* =====================================================
    MENU
 ===================================================== */
 
@@ -722,7 +1015,9 @@ header{
   background:#292929;
   margin-bottom:7px;
   border-radius:5px;
-  transition:background .25s ease,box-shadow .25s ease;
+  transition:
+    background .25s ease,
+    box-shadow .25s ease;
 }
 
 .step-icon{
@@ -740,23 +1035,28 @@ header{
 
 .step.done .step-line{
   background:#f59b23;
-  box-shadow:0 0 8px rgba(245,155,35,.25);
+  box-shadow:
+    0 0 8px rgba(245,155,35,.25);
 }
 
 .step.active{
   color:#f59b23;
   font-weight:800;
-  animation:trackingActiveBlink 1.15s ease-in-out infinite;
+  animation:
+    trackingActiveBlink 1.15s ease-in-out infinite;
 }
 
 .step.active .step-line{
   background:#f59b23;
-  box-shadow:0 0 12px rgba(245,155,35,.65);
-  animation:trackingLineBlink 1.15s ease-in-out infinite;
+  box-shadow:
+    0 0 12px rgba(245,155,35,.65);
+  animation:
+    trackingLineBlink 1.15s ease-in-out infinite;
 }
 
 .step.active .step-icon{
-  animation:trackingIconBlink 1.15s ease-in-out infinite;
+  animation:
+    trackingIconBlink 1.15s ease-in-out infinite;
 }
 
 @keyframes trackingActiveBlink{
@@ -771,22 +1071,28 @@ header{
 @keyframes trackingLineBlink{
   0%,100%{
     opacity:1;
-    box-shadow:0 0 12px rgba(245,155,35,.65);
+    box-shadow:
+      0 0 12px rgba(245,155,35,.65);
   }
+
   50%{
     opacity:.38;
-    box-shadow:0 0 3px rgba(245,155,35,.2);
+    box-shadow:
+      0 0 3px rgba(245,155,35,.2);
   }
 }
 
 @keyframes trackingIconBlink{
   0%,100%{
     transform:scale(1);
-    filter:drop-shadow(0 0 4px rgba(245,155,35,.35));
+    filter:
+      drop-shadow(0 0 4px rgba(245,155,35,.35));
   }
+
   50%{
     transform:scale(1.14);
-    filter:drop-shadow(0 0 10px rgba(245,155,35,.8));
+    filter:
+      drop-shadow(0 0 10px rgba(245,155,35,.8));
   }
 }
 
@@ -848,11 +1154,12 @@ header{
   left:0;
   width:3px;
   height:100%;
-  background:linear-gradient(
-    to bottom,
-    #f59b23,
-    rgba(245,155,35,.15)
-  );
+  background:
+    linear-gradient(
+      to bottom,
+      #f59b23,
+      rgba(245,155,35,.15)
+    );
 }
 
 .notice-card:hover{
@@ -1342,6 +1649,7 @@ footer a{
   from{
     transform:scale(.9) rotate(-5deg)
   }
+
   to{
     transform:scale(1.1) rotate(5deg)
   }
@@ -1398,12 +1706,16 @@ footer a{
 
 @keyframes petalFall{
   0%{
-    transform:translateY(-80px) rotate(0deg);
+    transform:
+      translateY(-80px)
+      rotate(0deg);
     opacity:0;
   }
+
   10%{
     opacity:1
   }
+
   100%{
     transform:
       translateY(110vh)
@@ -1418,9 +1730,11 @@ footer a{
     transform:scale(.5);
     opacity:0;
   }
+
   70%{
     transform:scale(1.08)
   }
+
   100%{
     transform:scale(1);
     opacity:1;
@@ -1439,7 +1753,8 @@ footer a{
   }
 
   .notice-grid{
-    grid-template-columns:repeat(4,minmax(190px,1fr));
+    grid-template-columns:
+      repeat(4,minmax(190px,1fr));
     overflow-x:auto;
     padding-bottom:5px;
   }
@@ -1501,6 +1816,21 @@ footer a{
 
   .hero h1 .queen-title{
     letter-spacing:1px;
+  }
+
+  .offer-circle-wrap{
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:25px;
+  }
+
+  .offer-circle{
+    width:min(350px,90vw);
+    min-height:350px;
+  }
+
+  .offer-circle-content{
+    width:76%;
   }
 
   .menu-grid{
@@ -1567,8 +1897,11 @@ footer a{
   }
 
 }
+
 </style>
+
 </head>
+
 
 <body>
 
@@ -1578,25 +1911,25 @@ footer a{
 ===================================================== -->
 
 <div
-  id="customerMenuOverlay"
-  class="customer-menu-overlay hidden"
+id="customerMenuOverlay"
+class="customer-menu-overlay hidden"
 >
 
   <div
-    id="customerMenuBox"
-    class="customer-menu-box"
+  id="customerMenuBox"
+  class="customer-menu-box"
   >
 
     <button
-      id="myOrdersButton"
-      class="customer-menu-item"
+    id="myOrdersButton"
+    class="customer-menu-item"
     >
       📦 My Orders
     </button>
 
     <button
-      id="orderHistoryButton"
-      class="customer-menu-item"
+    id="orderHistoryButton"
+    class="customer-menu-item"
     >
       🕐 Order History
     </button>
@@ -1611,8 +1944,8 @@ footer a{
 ===================================================== -->
 
 <div
-  id="orderHistoryOverlay"
-  class="order-history-overlay hidden"
+id="orderHistoryOverlay"
+class="order-history-overlay hidden"
 >
 
   <div class="order-history-modal">
@@ -1624,8 +1957,8 @@ footer a{
       </h2>
 
       <button
-        id="closeOrderHistory"
-        class="close"
+      id="closeOrderHistory"
+      class="close"
       >
         ×
       </button>
@@ -1633,13 +1966,13 @@ footer a{
     </div>
 
     <div
-      id="orderHistoryUser"
-      class="order-history-user"
+    id="orderHistoryUser"
+    class="order-history-user"
     ></div>
 
     <div
-      id="orderHistoryList"
-      class="order-history-list"
+    id="orderHistoryList"
+    class="order-history-list"
     ></div>
 
   </div>
@@ -1647,13 +1980,24 @@ footer a{
 </div>
 
 
-<div id="customerLoginOverlay" class="customer-login-overlay hidden">
+<!-- =====================================================
+     CUSTOMER LOGIN
+===================================================== -->
+
+<div
+id="customerLoginOverlay"
+class="customer-login-overlay hidden"
+>
 
   <div class="customer-login-box">
 
-    <div class="customer-login-crown">👑</div>
+    <div class="customer-login-crown">
+      👑
+    </div>
 
-    <h2>Welcome to The Queen</h2>
+    <h2>
+      Welcome to The Queen
+    </h2>
 
     <p>
       Enter your name and mobile number to continue.
@@ -1661,42 +2005,46 @@ footer a{
 
     <div class="customer-login-field">
 
-      <label>Name</label>
+      <label>
+        Name
+      </label>
 
       <input
-        id="loginCustomerName"
-        type="text"
-        placeholder="Your name"
-        autocomplete="name"
+      id="loginCustomerName"
+      type="text"
+      placeholder="Your name"
+      autocomplete="name"
       >
 
     </div>
 
     <div class="customer-login-field">
 
-      <label>Mobile Number</label>
+      <label>
+        Mobile Number
+      </label>
 
       <input
-        id="loginCustomerPhone"
-        type="tel"
-        maxlength="10"
-        inputmode="numeric"
-        placeholder="10 digit mobile number"
-        autocomplete="tel"
+      id="loginCustomerPhone"
+      type="tel"
+      maxlength="10"
+      inputmode="numeric"
+      placeholder="10 digit mobile number"
+      autocomplete="tel"
       >
 
     </div>
 
     <button
-      id="customerLoginButton"
-      class="customer-login-button"
+    id="customerLoginButton"
+    class="customer-login-button"
     >
       Continue
     </button>
 
     <div
-      id="customerLoginError"
-      class="customer-login-error"
+    id="customerLoginError"
+    class="customer-login-error"
     ></div>
 
   </div>
@@ -1704,11 +2052,21 @@ footer a{
 </div>
 
 
-<div id="websiteModeScreen" class="website-mode hidden">
+<!-- =====================================================
+     WEBSITE MODE
+===================================================== -->
+
+<div
+id="websiteModeScreen"
+class="website-mode hidden"
+>
 
   <div class="website-mode-inner">
 
-    <div id="websiteModeIcon" class="website-mode-icon">
+    <div
+    id="websiteModeIcon"
+    class="website-mode-icon"
+    >
       🔧
     </div>
 
@@ -1726,7 +2084,14 @@ footer a{
 </div>
 
 
-<div id="thankYouOverlay" class="thankyou hidden">
+<!-- =====================================================
+     THANK YOU
+===================================================== -->
+
+<div
+id="thankYouOverlay"
+class="thankyou hidden"
+>
 
   <div>
 
@@ -1738,7 +2103,9 @@ footer a{
       Thank You!
     </h1>
 
-    <p style="color:#aaa;margin-top:10px">
+    <p
+    style="color:#aaa;margin-top:10px"
+    >
       Your order has been placed successfully.
     </p>
 
@@ -1747,9 +2114,13 @@ footer a{
 </div>
 
 
+<!-- =====================================================
+     DELIVERY SUCCESS
+===================================================== -->
+
 <div
-  id="deliverySuccessOverlay"
-  class="delivery-success-message hidden"
+id="deliverySuccessOverlay"
+class="delivery-success-message hidden"
 >
 
   <div id="flowerContainer"></div>
@@ -1757,8 +2128,8 @@ footer a{
   <div class="delivery-success-content">
 
     <div
-      id="deliverySuccessIcon"
-      class="delivery-success-icon"
+    id="deliverySuccessIcon"
+    class="delivery-success-icon"
     >
       🎉
     </div>
@@ -1776,6 +2147,10 @@ footer a{
 </div>
 
 
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header>
 
   <div class="nav">
@@ -1783,10 +2158,10 @@ footer a{
     <div class="nav-left">
 
       <button
-        id="customerMenuButton"
-        class="menu-button"
-        title="Options"
-        aria-label="Options"
+      id="customerMenuButton"
+      class="menu-button"
+      title="Options"
+      aria-label="Options"
       >
         ☰
       </button>
@@ -1800,21 +2175,22 @@ footer a{
     <div class="nav-actions">
 
       <span
-        id="customerWelcome"
-        class="customer-welcome"
+      id="customerWelcome"
+      class="customer-welcome"
       ></span>
 
       <button
-        id="topCart"
-        class="cart-top"
+      id="topCart"
+      class="cart-top"
       >
-        🛒 Cart <b id="cartCount">0</b>
+        🛒 Cart
+        <b id="cartCount">0</b>
       </button>
 
       <button
-        id="logoutButton"
-        class="logout-top"
-        title="Logout"
+      id="logoutButton"
+      class="logout-top"
+      title="Logout"
       >
         Logout
       </button>
@@ -1826,212 +2202,329 @@ footer a{
 </header>
 
 
+<!-- =====================================================
+     MAIN WEBSITE
+===================================================== -->
+
 <main id="mainWebsite">
 
-  <section class="hero">
 
-    <h1>
+<section class="hero">
 
-      <span class="welcome">
-        WELCOME TO
-      </span>
+  <h1>
 
-      <span class="queen-title">
-        THE QUEEN FAST FOOD
-      </span>
+    <span class="welcome">
+      WELCOME TO
+    </span>
 
-    </h1>
+    <span class="queen-title">
+      THE QUEEN FAST FOOD
+    </span>
 
-    <p>
-      Fresh food • Fast service • Easy ordering
-    </p>
+  </h1>
 
-    <div class="brand-message">
+  <p>
+    Fresh food • Fast service • Easy ordering
+  </p>
 
-      <strong>
-        GOOD FOOD &amp; GOOD MOOD
-      </strong>
+  <div class="brand-message">
 
-      <span>
-        Delicious food, great taste — right here at Ibrisingh Bazar.
-      </span>
+    <strong>
+      GOOD FOOD &amp; GOOD MOOD
+    </strong>
 
-    </div>
+    <span>
+      Delicious food, great taste — right here at Ibrisingh Bazar.
+    </span>
 
-    <div class="status">
+  </div>
 
-      <span
-        id="shopDot"
-        class="dot"
-      ></span>
+  <div class="status">
 
-      <span id="shopStatusText">
-        Checking shop status...
-      </span>
+    <span
+    id="shopDot"
+    class="dot"
+    ></span>
 
-    </div>
+    <span id="shopStatusText">
+      Checking shop status...
+    </span>
 
-    <div
-      id="orderTimeBox"
-      class="order-time"
-    >
-      Order Time:
-      <span id="orderTimeValue">--</span>
-    </div>
+  </div>
 
-  </section>
+  <div
+  id="orderTimeBox"
+  class="order-time"
+  >
+    Order Time:
+    <span id="orderTimeValue">
+      --
+    </span>
+  </div>
 
-
-  <section class="section">
-
-    <h2 class="section-title">
-      Our Menu
-    </h2>
-
-    <div
-      id="menuGrid"
-      class="menu-grid"
-    ></div>
-
-  </section>
+</section>
 
 
-  <section class="section track-section">
+<!-- =====================================================
+     OFFER CIRCLE
+===================================================== -->
 
-    <h2 class="section-title">
-      Track Your Order
-    </h2>
+<section
+id="offerCircleSection"
+class="offer-circle-wrap hidden"
+>
 
-    <div class="track-box">
+  <div
+  id="offerCircle"
+  class="offer-circle"
+  >
 
-      <div class="track-row">
+    <span class="offer-spark s1">
+      ✦
+    </span>
 
-        <input
-          id="trackInput"
-          placeholder="Enter your Order ID"
-        >
+    <span class="offer-spark s2">
+      ✦
+    </span>
 
-        <button id="trackButton">
-          Track
-        </button>
+    <span class="offer-spark s3">
+      ✧
+    </span>
 
+    <span class="offer-spark s4">
+      ✦
+    </span>
+
+    <span class="offer-spark s5">
+      ·
+    </span>
+
+    <span class="offer-spark s6">
+      ✧
+    </span>
+
+
+    <div class="offer-circle-content">
+
+      <div class="offer-circle-badge">
+        SPECIAL OFFER
       </div>
 
       <div
-        id="trackResult"
-        class="track-result"
-      ></div>
+      id="offerCircleImageWrap"
+      class="offer-circle-image-wrap hidden"
+      >
+
+        <img
+        id="offerCircleImage"
+        class="offer-circle-image"
+        alt="Special Offer"
+        >
+
+      </div>
+
+      <h2
+      id="offerCircleTitle"
+      class="offer-circle-title"
+      >
+      </h2>
+
+      <p
+      id="offerCircleText"
+      class="offer-circle-text"
+      >
+      </p>
+
+      <div
+      id="offerCirclePrice"
+      class="offer-circle-price hidden"
+      >
+      </div>
+
+      <button
+      id="offerCircleButton"
+      class="offer-circle-button"
+      type="button"
+      >
+        Order Now
+      </button>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <section class="important-notices">
+<!-- =====================================================
+     MENU
+===================================================== -->
 
-    <h2 class="important-notices-title">
-      Important Notices
-    </h2>
+<section class="section">
 
-    <div class="important-notices-subtitle">
-      A few things we’d like you to know
-    </div>
+  <h2 class="section-title">
+    Our Menu
+  </h2>
 
+  <div
+  id="menuGrid"
+  class="menu-grid"
+  ></div>
 
-    <div class="notice-grid">
-
-
-      <div class="notice-card">
-
-        <div class="notice-label">
-          ORDER
-        </div>
-
-        <h3>
-          Please Don’t Skip WhatsApp
-        </h3>
-
-        <p>
-          After placing your order, WhatsApp will open automatically.
-          Please do not skip this step. As we are newly launching our
-          website, WhatsApp helps us confirm your order if you experience
-          any issue with the website.
-        </p>
-
-      </div>
+</section>
 
 
-      <div class="notice-card">
+<!-- =====================================================
+     TRACK
+===================================================== -->
 
-        <div class="notice-label">
-          ANY QUERIES
-        </div>
+<section
+class="section track-section"
+>
 
-        <h3>
-          We’re Here to Help
-        </h3>
+  <h2 class="section-title">
+    Track Your Order
+  </h2>
 
-        <p>
-          Facing any issue with our website or your order?
-          Feel free to contact us directly.
-        </p>
+  <div class="track-box">
 
-        <div class="notice-contact">
-          📞 Silu — 97768 56111
-        </div>
+    <div class="track-row">
 
-      </div>
+      <input
+      id="trackInput"
+      placeholder="Enter your Order ID"
+      >
 
-
-      <div class="notice-card">
-
-        <div class="notice-label">
-          FOR ADVANCE ORDERS
-        </div>
-
-        <h3>
-          Planning a Party or Event?
-        </h3>
-
-        <p>
-          Need food for a party, function, or special occasion?
-          You can place your order in advance by contacting us.
-        </p>
-
-        <div class="notice-contact">
-          📞 Silu — 97768 56111
-        </div>
-
-      </div>
-
-
-      <div class="notice-card notice-delivery">
-
-        <div class="notice-label">
-          DELIVERY
-        </div>
-
-        <h3>
-          A Little Patience, A Lot of Care
-          <span class="notice-heart">❤️</span>
-        </h3>
-
-        <p>
-          We are newly starting our delivery service in the village area.
-          If there is any delay or inconvenience, we kindly request your
-          cooperation. With your support, we’ll do our best to reach you
-          as quickly as possible.
-        </p>
-
-      </div>
-
+      <button id="trackButton">
+        Track
+      </button>
 
     </div>
 
-  </section>
+    <div
+    id="trackResult"
+    class="track-result"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     IMPORTANT NOTICES
+===================================================== -->
+
+<section class="important-notices">
+
+  <h2 class="important-notices-title">
+    Important Notices
+  </h2>
+
+  <div class="important-notices-subtitle">
+    A few things we’d like you to know
+  </div>
+
+  <div class="notice-grid">
+
+
+    <div class="notice-card">
+
+      <div class="notice-label">
+        ORDER
+      </div>
+
+      <h3>
+        Please Don’t Skip WhatsApp
+      </h3>
+
+      <p>
+        After placing your order, WhatsApp will open automatically.
+        Please do not skip this step. As we are newly launching our website,
+        WhatsApp helps us confirm your order if you experience any issue
+        with the website.
+      </p>
+
+    </div>
+
+
+    <div class="notice-card">
+
+      <div class="notice-label">
+        ANY QUERIES
+      </div>
+
+      <h3>
+        We’re Here to Help
+      </h3>
+
+      <p>
+        Facing any issue with our website or your order?
+        Feel free to contact us directly.
+      </p>
+
+      <div class="notice-contact">
+        📞 Silu — 97768 56111
+      </div>
+
+    </div>
+
+
+    <div class="notice-card">
+
+      <div class="notice-label">
+        FOR ADVANCE ORDERS
+      </div>
+
+      <h3>
+        Planning a Party or Event?
+      </h3>
+
+      <p>
+        Need food for a party, function, or special occasion?
+        You can place your order in advance by contacting us.
+      </p>
+
+      <div class="notice-contact">
+        📞 Silu — 97768 56111
+      </div>
+
+    </div>
+
+
+    <div class="notice-card notice-delivery">
+
+      <div class="notice-label">
+        DELIVERY
+      </div>
+
+      <h3>
+        A Little Patience, A Lot of Care
+        <span class="notice-heart">
+          ❤️
+        </span>
+      </h3>
+
+      <p>
+        We are newly starting our delivery service in the village area.
+        If there is any delay or inconvenience, we kindly request your
+        cooperation. With your support, we’ll do our best to reach you
+        as quickly as possible.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
 
 </main>
 
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -2046,8 +2539,8 @@ footer a{
   <p style="margin-top:8px">
 
     <a
-      target="_blank"
-      href="https://www.google.com/maps/search/?api=1&query=20.21680076286578,86.36464502294459"
+    target="_blank"
+    href="https://www.google.com/maps/search/?api=1&query=20.21680076286578,86.36464502294459"
     >
       View Location
     </a>
@@ -2057,9 +2550,13 @@ footer a{
 </footer>
 
 
+<!-- =====================================================
+     CART
+===================================================== -->
+
 <div
-  id="cartOverlay"
-  class="overlay hidden"
+id="cartOverlay"
+class="overlay hidden"
 >
 
   <div class="drawer">
@@ -2071,8 +2568,8 @@ footer a{
       </h2>
 
       <button
-        id="closeCart"
-        class="close"
+      id="closeCart"
+      class="close"
       >
         ×
       </button>
@@ -2096,8 +2593,8 @@ footer a{
       </div>
 
       <button
-        id="checkoutButton"
-        class="primary"
+      id="checkoutButton"
+      class="primary"
       >
         Proceed to Checkout
       </button>
@@ -2109,9 +2606,13 @@ footer a{
 </div>
 
 
+<!-- =====================================================
+     CHECKOUT
+===================================================== -->
+
 <div
-  id="checkoutOverlay"
-  class="overlay hidden"
+id="checkoutOverlay"
+class="overlay hidden"
 >
 
   <div class="modal">
@@ -2123,8 +2624,8 @@ footer a{
       </h2>
 
       <button
-        id="closeCheckout"
-        class="close"
+      id="closeCheckout"
+      class="close"
       >
         ×
       </button>
@@ -2139,9 +2640,9 @@ footer a{
       </label>
 
       <input
-        id="customerName"
-        placeholder="Your name"
-        autocomplete="name"
+      id="customerName"
+      placeholder="Your name"
+      autocomplete="name"
       >
 
     </div>
@@ -2154,12 +2655,12 @@ footer a{
       </label>
 
       <input
-        id="customerPhone"
-        type="tel"
-        maxlength="10"
-        inputmode="numeric"
-        placeholder="10 digit mobile number"
-        autocomplete="tel"
+      id="customerPhone"
+      type="tel"
+      maxlength="10"
+      inputmode="numeric"
+      placeholder="10 digit mobile number"
+      autocomplete="tel"
       >
 
     </div>
@@ -2172,8 +2673,8 @@ footer a{
       </label>
 
       <textarea
-        id="customerAddress"
-        placeholder="Enter complete delivery address"
+      id="customerAddress"
+      placeholder="Enter complete delivery address"
       ></textarea>
 
     </div>
@@ -2185,19 +2686,18 @@ footer a{
         Delivery Location
       </label>
 
-
       <div class="location-buttons">
 
         <button
-          id="currentLocationButton"
-          type="button"
+        id="currentLocationButton"
+        type="button"
         >
           📍 Use Current Location
         </button>
 
         <button
-          id="differentLocationButton"
-          type="button"
+        id="differentLocationButton"
+        type="button"
         >
           🗺️ Choose Different Location
         </button>
@@ -2206,68 +2706,71 @@ footer a{
 
 
       <div
-        class="location-display"
-        id="locationDisplayBox"
+      class="location-display"
+      id="locationDisplayBox"
       >
 
         <input
-          id="locationDisplay"
-          readonly
-          placeholder="No delivery location selected"
+        id="locationDisplay"
+        readonly
+        placeholder="No delivery location selected"
         >
 
       </div>
 
 
       <div
-        id="differentLocationBox"
-        class="hidden"
+      id="differentLocationBox"
+      class="hidden"
       >
 
         <div class="google-location-box">
 
           <div class="google-location-instruction">
 
-            📍 <strong>Select your address on Google Maps and copy the link.</strong>
+            📍
+            <strong>
+              Select your address on Google Maps and copy the link.
+            </strong>
+
             Paste it here.
 
           </div>
 
 
           <button
-            id="openGoogleMapsButton"
-            class="google-location-open"
-            type="button"
+          id="openGoogleMapsButton"
+          class="google-location-open"
+          type="button"
           >
             🗺️ Open Google Maps
           </button>
 
 
           <input
-            id="googleMapsLocationInput"
-            class="google-location-input"
-            type="text"
-            placeholder="Paste Google Maps link here"
-            autocomplete="off"
+          id="googleMapsLocationInput"
+          class="google-location-input"
+          type="text"
+          placeholder="Paste Google Maps link here"
+          autocomplete="off"
           >
 
 
           <button
-            id="confirmGoogleLocationButton"
-            class="google-location-confirm"
-            type="button"
+          id="confirmGoogleLocationButton"
+          class="google-location-confirm"
+          type="button"
           >
             📍 Confirm Location
           </button>
 
 
           <div
-            id="googleLocationStatus"
-            class="google-location-status"
+          id="googleLocationStatus"
+          class="google-location-status"
           >
-            Select your exact address on Google Maps → Share →
-            Copy link → paste the link here.
-
+            Select your exact address on Google Maps →
+            Share → Copy link → paste the link here.
           </div>
 
         </div>
@@ -2277,15 +2780,21 @@ footer a{
 
       <div class="delivery-limit">
 
-        📦 <strong>Delivery available within 20 km</strong><br>
+        📦
+        <strong>
+          Delivery available within 20 km
+        </strong>
+
+        <br>
+
         from The Queen Fast Food
 
       </div>
 
 
       <div
-        id="deliveryInsideMessage"
-        class="delivery-inside hidden"
+      id="deliveryInsideMessage"
+      class="delivery-inside hidden"
       >
         ✅ This location is within our 20 km delivery area.
         You can place your order.
@@ -2293,8 +2802,8 @@ footer a{
 
 
       <div
-        id="deliveryOutsideMessage"
-        class="delivery-outside hidden"
+      id="deliveryOutsideMessage"
+      class="delivery-outside hidden"
       >
         ❌ This location is outside our 20 km delivery area.
         Please select a location within 20 km of The Queen Fast Food.
@@ -2302,8 +2811,8 @@ footer a{
 
 
       <div
-        id="deliveryInfo"
-        style="color:#aaa;font-size:12px;margin-top:8px"
+      id="deliveryInfo"
+      style="color:#aaa;font-size:12px;margin-top:8px"
       >
         Select your delivery location to calculate delivery charge.
       </div>
@@ -2312,8 +2821,8 @@ footer a{
 
 
     <div
-      id="orderSummary"
-      class="summary"
+    id="orderSummary"
+    class="summary"
     ></div>
 
 
@@ -2326,17 +2835,17 @@ footer a{
       <div class="payment-options">
 
         <button
-          id="codButton"
-          class="payment-option active"
-          type="button"
+        id="codButton"
+        class="payment-option active"
+        type="button"
         >
           💵 Cash on Delivery
         </button>
 
         <button
-          id="onlineButton"
-          class="payment-option"
-          type="button"
+        id="onlineButton"
+        class="payment-option"
+        type="button"
         >
           💳 Online Payment
         </button>
@@ -2345,8 +2854,8 @@ footer a{
 
 
       <div
-        id="paymentWarning"
-        class="warning hidden"
+      id="paymentWarning"
+      class="warning hidden"
       >
         Online payment is currently selected.
       </div>
@@ -2355,9 +2864,9 @@ footer a{
 
 
     <button
-      id="placeOrderButton"
-      class="primary"
-      disabled
+    id="placeOrderButton"
+    class="primary"
+    disabled
     >
       Place Order
     </button>
@@ -2371,7 +2880,10 @@ footer a{
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
   getDatabase,
@@ -2382,7 +2894,10 @@ import {
   query,
   orderByChild,
   equalTo
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 
 import {
   getAuth,
@@ -2390,7 +2905,9 @@ import {
   onAuthStateChanged,
   setPersistence,
   browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -2434,6 +2951,7 @@ const auth =
 
 const CUSTOMER_STORAGE_KEY =
   "queenFastFoodCustomer";
+
 
 let customerProfile = {
   name:"",
@@ -2690,7 +3208,8 @@ function updateCustomerUI(){
   }
   else{
 
-    welcome.textContent = "";
+    welcome.textContent =
+      "";
 
   }
 
@@ -2724,7 +3243,6 @@ function fillCheckoutCustomer(){
   }
 
   validateCheckout();
-
 
 }
 
@@ -2788,7 +3306,8 @@ function customerLogin(){
   const phone =
     phoneInput.value.trim();
 
-  errorBox.textContent = "";
+  errorBox.textContent =
+    "";
 
   if(name.length < 2){
 
@@ -2825,41 +3344,41 @@ function customerLogin(){
 
 
 window.logoutCustomer =
-  function(){
+function(){
 
-    const confirmed =
-      confirm(
-        "Are you sure you want to logout?"
-      );
-
-    if(!confirmed){
-      return;
-    }
-
-    localStorage.removeItem(
-      CUSTOMER_STORAGE_KEY
+  const confirmed =
+    confirm(
+      "Are you sure you want to logout?"
     );
 
-    customerProfile = {
-      name:"",
-      phone:""
-    };
+  if(!confirmed){
+    return;
+  }
 
-    updateCustomerUI();
+  localStorage.removeItem(
+    CUSTOMER_STORAGE_KEY
+  );
 
-    document.getElementById(
-      "customerName"
-    ).value = "";
-
-    document.getElementById(
-      "customerPhone"
-    ).value = "";
-
-    closeCustomerMenu();
-
-    showCustomerLogin();
-
+  customerProfile = {
+    name:"",
+    phone:""
   };
+
+  updateCustomerUI();
+
+  document.getElementById(
+    "customerName"
+  ).value = "";
+
+  document.getElementById(
+    "customerPhone"
+  ).value = "";
+
+  closeCustomerMenu();
+
+  showCustomerLogin();
+
+};
 
 
 /* =====================================================
@@ -3058,10 +3577,8 @@ function loadOrderHistory(){
 
   }
 
-
   userText.textContent =
     `${customerProfile.name} • ${customerProfile.phone}`;
-
 
   list.innerHTML = `
     <div class="history-loading">
@@ -3069,30 +3586,22 @@ function loadOrderHistory(){
     </div>
   `;
 
-
   const ordersQuery =
     query(
-
       ref(
         db,
         "orders"
       ),
-
       orderByChild(
         "phone"
       ),
-
       equalTo(
         customerProfile.phone
       )
-
     );
 
-
   onValue(
-
     ordersQuery,
-
     snapshot=>{
 
       const orders = [];
@@ -3104,17 +3613,13 @@ function loadOrderHistory(){
             child.val();
 
           orders.push({
-
             ...order,
-
             firebaseKey:
               child.key
-
           });
 
         }
       );
-
 
       orders.sort(
         (a,b)=>
@@ -3126,13 +3631,11 @@ function loadOrderHistory(){
           )
       );
 
-
       renderOrderHistory(
         orders
       );
 
     },
-
     error=>{
 
       console.error(
@@ -3147,11 +3650,9 @@ function loadOrderHistory(){
       `;
 
     },
-
     {
       onlyOnce:true
     }
-
   );
 
 }
@@ -3166,14 +3667,14 @@ function renderOrderHistory(
       "orderHistoryList"
     );
 
-
   if(
     !orders.length
   ){
 
     list.innerHTML = `
       <div class="history-empty">
-        📦<br>
+        📦
+        <br>
         <div style="margin-top:7px">
           No order history yet.
         </div>
@@ -3184,9 +3685,8 @@ function renderOrderHistory(
 
   }
 
-
-  list.innerHTML = "";
-
+  list.innerHTML =
+    "";
 
   orders.forEach(
     order=>{
@@ -3199,13 +3699,11 @@ function renderOrderHistory(
       card.className =
         "history-card";
 
-
       const status =
         String(
           order.status ||
           "received"
         ).toLowerCase();
-
 
       const itemsText =
         (
@@ -3220,7 +3718,6 @@ function renderOrderHistory(
           " • "
         );
 
-
       const created =
         order.createdAt
           ? new Date(
@@ -3230,9 +3727,7 @@ function renderOrderHistory(
             )
           : "--";
 
-
       card.innerHTML = `
-
         <div class="history-card-head">
 
           <div class="history-order-id">
@@ -3264,9 +3759,7 @@ function renderOrderHistory(
             order.total || 0
           )}
         </div>
-
       `;
-
 
       card.addEventListener(
         "click",
@@ -3287,11 +3780,8 @@ function renderOrderHistory(
               document.getElementById(
                 "trackResult"
               ).scrollIntoView({
-
                 behavior:"smooth",
-
                 block:"center"
-
               });
 
             },
@@ -3300,7 +3790,6 @@ function renderOrderHistory(
 
         }
       );
-
 
       list.appendChild(
         card
@@ -3481,7 +3970,8 @@ async function startCustomerAuth(){
       error
     );
 
-    currentUser = null;
+    currentUser =
+      null;
 
     alert(
       "Secure connection failed.\n\n" +
@@ -3544,6 +4034,12 @@ function loadSettings(){
 
       renderMenu();
 
+      /*
+       * OFFER CIRCLE
+       * Admin settings.offer controls this.
+       */
+      renderOfferCircle();
+
       if(
         !document
           .getElementById(
@@ -3568,6 +4064,217 @@ function loadSettings(){
 
     }
 
+  );
+
+}
+
+
+/* =====================================================
+   OFFER CIRCLE
+===================================================== */
+
+function renderOfferCircle(){
+
+  const section =
+    document.getElementById(
+      "offerCircleSection"
+    );
+
+  if(!section){
+    return;
+  }
+
+  const offer =
+    shopSettings.offer || {};
+
+  const enabled =
+    offer.enabled === true ||
+    String(
+      offer.enabled
+    ).toLowerCase() === "true" ||
+    Number(
+      offer.enabled
+    ) === 1;
+
+  if(!enabled){
+
+    section.classList.add(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+  const title =
+    String(
+      offer.title ||
+      "Special Offer"
+    ).trim();
+
+  const text =
+    String(
+      offer.text ||
+      ""
+    ).trim();
+
+  const price =
+    String(
+      offer.price ?? ""
+    ).trim();
+
+  const buttonText =
+    String(
+      offer.button ||
+      "Order Now"
+    ).trim();
+
+  const image =
+    String(
+      offer.image ||
+      ""
+    ).trim();
+
+
+  const titleElement =
+    document.getElementById(
+      "offerCircleTitle"
+    );
+
+  const textElement =
+    document.getElementById(
+      "offerCircleText"
+    );
+
+  const priceElement =
+    document.getElementById(
+      "offerCirclePrice"
+    );
+
+  const buttonElement =
+    document.getElementById(
+      "offerCircleButton"
+    );
+
+  const imageWrap =
+    document.getElementById(
+      "offerCircleImageWrap"
+    );
+
+  const imageElement =
+    document.getElementById(
+      "offerCircleImage"
+    );
+
+
+  if(titleElement){
+
+    titleElement.textContent =
+      title;
+
+  }
+
+
+  if(textElement){
+
+    textElement.textContent =
+      text;
+
+  }
+
+
+  if(priceElement){
+
+    if(price){
+
+      priceElement.textContent =
+        price.startsWith("₹")
+          ? price
+          : `₹${price}`;
+
+      priceElement.classList.remove(
+        "hidden"
+      );
+
+    }
+    else{
+
+      priceElement.textContent =
+        "";
+
+      priceElement.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+
+
+  if(buttonElement){
+
+    buttonElement.textContent =
+      buttonText || "Order Now";
+
+    buttonElement.onclick =
+      ()=>{
+
+        const menu =
+          document.getElementById(
+            "menuGrid"
+          );
+
+        if(menu){
+
+          menu.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+        }
+
+      };
+
+  }
+
+
+  if(image){
+
+    imageElement.src =
+      image;
+
+    imageElement.alt =
+      title || "Special Offer";
+
+    imageWrap.classList.remove(
+      "hidden"
+    );
+
+    imageElement.onerror =
+      ()=>{
+
+        imageWrap.classList.add(
+          "hidden"
+        );
+
+      };
+
+  }
+  else{
+
+    imageElement.removeAttribute(
+      "src"
+    );
+
+    imageWrap.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  section.classList.remove(
+    "hidden"
   );
 
 }
@@ -3816,7 +4523,8 @@ function renderMenu(){
       "menuGrid"
     );
 
-  grid.innerHTML = "";
+  grid.innerHTML =
+    "";
 
   getMenu().forEach(
     item=>{
@@ -3902,6 +4610,7 @@ function renderMenu(){
           </button>
 
         </div>
+
       `;
 
       const btn =
@@ -3922,7 +4631,9 @@ function renderMenu(){
 
       }
 
-      grid.appendChild(card);
+      grid.appendChild(
+        card
+      );
 
     }
   );
@@ -4021,7 +4732,9 @@ function renderCart(){
   if(cart.length === 0){
 
     body.innerHTML = `
-      <p style="color:#777;text-align:center;padding:30px 0">
+      <p
+      style="color:#777;text-align:center;padding:30px 0"
+      >
         Your cart is empty.
       </p>
     `;
@@ -4035,9 +4748,11 @@ function renderCart(){
 
   }
 
-  let subtotal = 0;
+  let subtotal =
+    0;
 
-  body.innerHTML = "";
+  body.innerHTML =
+    "";
 
   cart.forEach(
     item=>{
@@ -4046,7 +4761,8 @@ function renderCart(){
         item.price *
         item.quantity;
 
-      subtotal += line;
+      subtotal +=
+        line;
 
       const div =
         document.createElement(
@@ -4078,7 +4794,9 @@ function renderCart(){
 
           <div class="qty">
 
-            <button data-action="minus">
+            <button
+            data-action="minus"
+            >
               −
             </button>
 
@@ -4086,7 +4804,9 @@ function renderCart(){
               ${item.quantity}
             </span>
 
-            <button data-action="plus">
+            <button
+            data-action="plus"
+            >
               +
             </button>
 
@@ -4204,7 +4924,6 @@ function openCheckout(){
 
   validateCheckout();
 
-
 }
 
 
@@ -4225,9 +4944,11 @@ function closeCheckout(){
 
 function renderOrderSummary(){
 
-  let subtotal = 0;
+  let subtotal =
+    0;
 
-  let html = "";
+  let html =
+    "";
 
   cart.forEach(
     item=>{
@@ -4236,7 +4957,8 @@ function renderOrderSummary(){
         item.price *
         item.quantity;
 
-      subtotal += total;
+      subtotal +=
+        total;
 
       html += `
 
@@ -4264,7 +4986,8 @@ function renderOrderSummary(){
       DEFAULT_DELIVERY_RATE
     );
 
-  let delivery = 0;
+  let delivery =
+    0;
 
   if(
     deliveryDistance !== null
@@ -4285,7 +5008,7 @@ function renderOrderSummary(){
   html += `
 
     <hr
-      style="border-color:#292929;margin:12px 0"
+    style="border-color:#292929;margin:12px 0"
     >
 
     <div class="summary-row">
@@ -4340,7 +5063,6 @@ function renderOrderSummary(){
     html;
 
   validateCheckout();
-
 
 }
 
@@ -4466,7 +5188,6 @@ async function confirmGoogleMapsLocation(){
   const link =
     input.value.trim();
 
-
   if(!link){
 
     status.textContent =
@@ -4478,12 +5199,10 @@ async function confirmGoogleMapsLocation(){
 
   }
 
-
   const coordinates =
     extractCoordinatesFromGoogleMapsLink(
       link
     );
-
 
   if(
     !coordinates &&
@@ -4499,13 +5218,11 @@ async function confirmGoogleMapsLocation(){
 
   }
 
-
   selectedGoogleMapsLink =
     link;
 
   selectedLocationType =
     "different";
-
 
   if(coordinates){
 
@@ -4514,7 +5231,6 @@ async function confirmGoogleMapsLocation(){
 
     customerLng =
       coordinates.lng;
-
 
     deliveryDistance =
       Number(
@@ -4526,17 +5242,13 @@ async function confirmGoogleMapsLocation(){
         ).toFixed(2)
       );
 
-
     selectedLocationText =
       "Google Maps selected location";
 
-
     updateLocationDisplay();
-
 
     status.innerHTML =
       "✅ Exact Google Maps location added successfully.";
-
 
     reverseGeocodeLocation(
       customerLat,
@@ -4546,11 +5258,14 @@ async function confirmGoogleMapsLocation(){
   }
   else{
 
-    customerLat = null;
+    customerLat =
+      null;
 
-    customerLng = null;
+    customerLng =
+      null;
 
-    deliveryDistance = null;
+    deliveryDistance =
+      null;
 
     locationWithinDeliveryArea =
       false;
@@ -4558,24 +5273,20 @@ async function confirmGoogleMapsLocation(){
     selectedLocationText =
       "Google Maps location link";
 
-
     document.getElementById(
       "locationDisplay"
     ).value =
       "Google Maps link added — exact coordinates not detected";
-
 
     document.getElementById(
       "deliveryInfo"
     ).textContent =
       "⚠️ This Google Maps link does not expose exact coordinates. Please use a full Google Maps link containing @latitude,longitude or ?q=latitude,longitude.";
 
-
     status.innerHTML =
       "⚠️ Google Maps link accepted, but exact coordinates could not be detected. Please copy the full Google Maps URL.";
 
   }
-
 
   renderOrderSummary();
 
@@ -4600,10 +5311,8 @@ function isGoogleMapsLink(
     return false;
   }
 
-
   const value =
     raw.toLowerCase();
-
 
   const googleMapsDomain =
     (
@@ -4614,11 +5323,9 @@ function isGoogleMapsLink(
       value.includes("goo.gl/maps")
     );
 
-
   if(googleMapsDomain){
     return true;
   }
-
 
   try{
 
@@ -4630,7 +5337,6 @@ function isGoogleMapsLink(
 
     const path =
       url.pathname.toLowerCase();
-
 
     if(
       host === "google.com" ||
@@ -4649,7 +5355,6 @@ function isGoogleMapsLink(
 
     }
 
-
     if(
       host === "maps.google.com"
     ){
@@ -4657,7 +5362,6 @@ function isGoogleMapsLink(
       return true;
 
     }
-
 
     if(
       host === "maps.app.goo.gl" ||
@@ -4672,7 +5376,6 @@ function isGoogleMapsLink(
   catch(error){
 
   }
-
 
   const coordinates =
     extractCoordinatesFromGoogleMapsLink(
@@ -4696,11 +5399,9 @@ function extractCoordinatesFromGoogleMapsLink(
     String(link || "")
       .trim();
 
-
   if(!value){
     return null;
   }
-
 
   function makeCoordinates(
     latValue,
@@ -4734,9 +5435,8 @@ function extractCoordinatesFromGoogleMapsLink(
 
   let match =
     value.match(
-      /[?&](?:q|query)=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/i
+      /[?&](?:q|query)=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/
     );
-
 
   if(match){
 
@@ -4755,9 +5455,8 @@ function extractCoordinatesFromGoogleMapsLink(
 
   match =
     value.match(
-      /[?&]ll=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/i
+      /[?&]ll=(-?\d+(?:\.\d+)?)[,%20]+(-?\d+(?:\.\d+)?)/
     );
-
 
   if(match){
 
@@ -4779,7 +5478,6 @@ function extractCoordinatesFromGoogleMapsLink(
       /@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
     );
 
-
   if(match){
 
     const result =
@@ -4799,7 +5497,6 @@ function extractCoordinatesFromGoogleMapsLink(
     value.match(
       /\/place\/(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
     );
-
 
   if(match){
 
@@ -4821,7 +5518,6 @@ function extractCoordinatesFromGoogleMapsLink(
       /\/search\/(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i
     );
 
-
   if(match){
 
     const result =
@@ -4839,9 +5535,8 @@ function extractCoordinatesFromGoogleMapsLink(
 
   match =
     value.match(
-      /(-?\d{1,3}\.\d{4,})\s*[,]\s*(-?\d{1,3}\.\d{4,})/
+      /(-?\d{1,3}\.\d{4,})\s*,\s*(-?\d{1,3}\.\d{4,})/
     );
-
 
   if(match){
 
@@ -4863,7 +5558,6 @@ function extractCoordinatesFromGoogleMapsLink(
       /(-?\d{1,3}\.\d{4,})\s+(-?\d{1,3}\.\d{4,})/
     );
 
-
   if(match){
 
     const result =
@@ -4874,7 +5568,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
     if(result){
       return result;
-
     }
 
   }
@@ -4901,7 +5594,6 @@ function extractCoordinatesFromGoogleMapsLink(
 
   }
 
-
   return null;
 
 }
@@ -4913,12 +5605,19 @@ function validCoordinates(
 ){
 
   return (
+
     Number.isFinite(lat) &&
+
     Number.isFinite(lng) &&
+
     lat >= -90 &&
+
     lat <= 90 &&
+
     lng >= -180 &&
+
     lng <= 180
+
   );
 
 }
@@ -4940,11 +5639,9 @@ function updateLocationDisplay(){
 
   }
 
-
   locationWithinDeliveryArea =
     deliveryDistance <=
     MAX_DELIVERY_DISTANCE;
-
 
   const rate =
     Number(
@@ -4952,37 +5649,31 @@ function updateLocationDisplay(){
       DEFAULT_DELIVERY_RATE
     );
 
-
   const deliveryCharge =
     Math.ceil(
       deliveryDistance *
       rate
     );
 
-
   document.getElementById(
     "locationDisplay"
   ).value =
     `${selectedLocationText || "Selected location"} • ${deliveryDistance.toFixed(2)} km away`;
-
 
   const deliveryInfo =
     document.getElementById(
       "deliveryInfo"
     );
 
-
   const insideMessage =
     document.getElementById(
       "deliveryInsideMessage"
     );
 
-
   const outsideMessage =
     document.getElementById(
       "deliveryOutsideMessage"
     );
-
 
   if(locationWithinDeliveryArea){
 
@@ -5013,7 +5704,6 @@ function updateLocationDisplay(){
 
   }
 
-
   validateCheckout();
 
 }
@@ -5040,7 +5730,6 @@ async function reverseGeocodeLocation(
       "&zoom=18" +
       "&addressdetails=1";
 
-
     const response =
       await fetch(
         url,
@@ -5052,7 +5741,6 @@ async function reverseGeocodeLocation(
         }
       );
 
-
     if(!response.ok){
 
       throw new Error(
@@ -5061,14 +5749,11 @@ async function reverseGeocodeLocation(
 
     }
 
-
     const data =
       await response.json();
 
-
     const address =
       data.address || {};
-
 
     const parts = [
 
@@ -5092,10 +5777,8 @@ async function reverseGeocodeLocation(
       Boolean
     );
 
-
     const uniqueParts =
       [...new Set(parts)];
-
 
     const finalName =
       uniqueParts.length
@@ -5105,10 +5788,8 @@ async function reverseGeocodeLocation(
             `${lat.toFixed(6)}, ${lng.toFixed(6)}`
           );
 
-
     selectedLocationText =
       finalName;
-
 
     document.getElementById(
       "locationDisplay"
@@ -5123,14 +5804,11 @@ async function reverseGeocodeLocation(
       error
     );
 
-
     const fallback =
       `Selected location (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
 
-
     selectedLocationText =
       fallback;
-
 
     document.getElementById(
       "locationDisplay"
@@ -5162,16 +5840,13 @@ document.getElementById(
 
     }
 
-
     const button =
       document.getElementById(
         "currentLocationButton"
       );
 
-
     button.textContent =
       "Getting...";
-
 
     navigator.geolocation.getCurrentPosition(
 
@@ -5183,20 +5858,16 @@ document.getElementById(
           "Current location"
         );
 
-
         selectedLocationType =
           "current";
 
-
         selectedGoogleMapsLink =
           `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
-
 
         document.getElementById(
           "googleMapsLocationInput"
         ).value =
           selectedGoogleMapsLink;
-
 
         document.getElementById(
           "currentLocationButton"
@@ -5204,13 +5875,11 @@ document.getElementById(
           "active"
         );
 
-
         document.getElementById(
           "differentLocationButton"
         ).classList.remove(
           "active"
         );
-
 
         document.getElementById(
           "differentLocationBox"
@@ -5218,10 +5887,8 @@ document.getElementById(
           "hidden"
         );
 
-
         button.textContent =
           "Location Ready ✓";
-
 
         reverseGeocodeLocation(
           position.coords.latitude,
@@ -5230,7 +5897,6 @@ document.getElementById(
 
       },
 
-
       error=>{
 
         console.error(
@@ -5238,17 +5904,14 @@ document.getElementById(
           error
         );
 
-
         button.textContent =
           "📍 Use Current Location";
-
 
         alert(
           "Current location could not be accessed. You can use 'Choose Different Location' instead."
         );
 
       },
-
 
       {
         enableHighAccuracy:true,
@@ -5282,7 +5945,6 @@ function setSelectedLocation(
     label ||
     "Selected location";
 
-
   const distance =
     haversine(
       RESTAURANT_LAT,
@@ -5291,37 +5953,19 @@ function setSelectedLocation(
       customerLng
     );
 
-
   deliveryDistance =
     Number(
       distance.toFixed(2)
     );
 
-
   locationWithinDeliveryArea =
     deliveryDistance <=
     MAX_DELIVERY_DISTANCE;
-
-
-  const rate =
-    Number(
-      shopSettings.deliveryRate ||
-      DEFAULT_DELIVERY_RATE
-    );
-
-
-  const deliveryCharge =
-    Math.ceil(
-      deliveryDistance *
-      rate
-    );
-
 
   document.getElementById(
     "locationDisplay"
   ).value =
     `${selectedLocationText} • ${deliveryDistance.toFixed(2)} km away`;
-
 
   updateLocationDisplay();
 
@@ -5346,18 +5990,15 @@ function haversine(
   const R =
     6371;
 
-
   const dLat =
     (lat2-lat1) *
     Math.PI /
     180;
 
-
   const dLon =
     (lon2-lon1) *
     Math.PI /
     180;
-
 
   const a =
     Math.sin(dLat/2)**2 +
@@ -5373,7 +6014,6 @@ function haversine(
     Math.sin(
       dLon/2
     )**2;
-
 
   return R * 2 *
     Math.atan2(
@@ -5397,13 +6037,11 @@ document.getElementById(
     selectedPaymentMethod =
       "COD";
 
-
     document.getElementById(
       "codButton"
     ).classList.add(
       "active"
     );
-
 
     document.getElementById(
       "onlineButton"
@@ -5411,13 +6049,11 @@ document.getElementById(
       "active"
     );
 
-
     document.getElementById(
       "paymentWarning"
     ).classList.add(
       "hidden"
     );
-
 
     validateCheckout();
 
@@ -5434,13 +6070,11 @@ document.getElementById(
     selectedPaymentMethod =
       "ONLINE";
 
-
     document.getElementById(
       "onlineButton"
     ).classList.add(
       "active"
     );
-
 
     document.getElementById(
       "codButton"
@@ -5448,13 +6082,11 @@ document.getElementById(
       "active"
     );
 
-
     document.getElementById(
       "paymentWarning"
     ).classList.remove(
       "hidden"
     );
-
 
     validateCheckout();
 
@@ -5489,7 +6121,6 @@ document.getElementById(
         .replace(/\D/g,"")
         .slice(0,10);
 
-
     validateCheckout();
 
   }
@@ -5507,18 +6138,15 @@ function validateCheckout(){
       "customerName"
     );
 
-
   const phoneInput =
     document.getElementById(
       "customerPhone"
     );
 
-
   const addressInput =
     document.getElementById(
       "customerAddress"
     );
-
 
   if(
     !nameInput ||
@@ -5530,24 +6158,19 @@ function validateCheckout(){
 
   }
 
-
   const name =
     nameInput.value.trim();
-
 
   const phone =
     phoneInput.value.trim();
 
-
   const address =
     addressInput.value.trim();
-
 
   const validPhone =
     /^[6-9]\d{9}$/.test(
       phone
     );
-
 
   const validDistance =
     deliveryDistance !== null &&
@@ -5560,7 +6183,6 @@ function validateCheckout(){
 
     deliveryDistance <=
       MAX_DELIVERY_DISTANCE;
-
 
   const valid =
     name.length >= 2 &&
@@ -5580,12 +6202,10 @@ function validateCheckout(){
       auth.currentUser
     );
 
-
   const button =
     document.getElementById(
       "placeOrderButton"
     );
-
 
   if(button){
 
@@ -5593,7 +6213,6 @@ function validateCheckout(){
       !valid;
 
   }
-
 
   return valid;
 
@@ -5627,13 +6246,11 @@ async function placeOrder(){
       "placeOrderButton"
     );
 
-
   try{
 
     let user =
       auth.currentUser ||
       currentUser;
-
 
     if(!user){
 
@@ -5643,12 +6260,10 @@ async function placeOrder(){
       button.textContent =
         "Connecting...";
 
-
       user =
         await startCustomerAuth();
 
     }
-
 
     if(!user){
 
@@ -5658,10 +6273,8 @@ async function placeOrder(){
 
     }
 
-
     currentUser =
       user;
-
 
     if(!isShopOpen()){
 
@@ -5672,7 +6285,6 @@ async function placeOrder(){
       return;
 
     }
-
 
     if(
       deliveryDistance === null ||
@@ -5687,7 +6299,6 @@ async function placeOrder(){
       return;
 
     }
-
 
     if(
       deliveryDistance >
@@ -5705,7 +6316,6 @@ async function placeOrder(){
 
     }
 
-
     if(
       !locationWithinDeliveryArea
     ){
@@ -5718,30 +6328,25 @@ async function placeOrder(){
 
     }
 
-
     const name =
       document.getElementById(
         "customerName"
       ).value.trim();
-
 
     const phone =
       document.getElementById(
         "customerPhone"
       ).value.trim();
 
-
     const address =
       document.getElementById(
         "customerAddress"
       ).value.trim();
 
-
     const validPhone =
       /^[6-9]\d{9}$/.test(
         phone
       );
-
 
     if(name.length < 2){
 
@@ -5749,16 +6354,13 @@ async function placeOrder(){
         "Please enter a valid name."
       );
 
-
       document.getElementById(
         "customerName"
       ).focus();
 
-
       return;
 
     }
-
 
     if(!validPhone){
 
@@ -5766,16 +6368,13 @@ async function placeOrder(){
         "Please enter a valid 10 digit mobile number."
       );
 
-
       document.getElementById(
         "customerPhone"
       ).focus();
 
-
       return;
 
     }
-
 
     if(address.length < 5){
 
@@ -5783,16 +6382,13 @@ async function placeOrder(){
         "Please enter your complete delivery address."
       );
 
-
       document.getElementById(
         "customerAddress"
       ).focus();
 
-
       return;
 
     }
-
 
     if(!selectedGoogleMapsLink){
 
@@ -5800,16 +6396,13 @@ async function placeOrder(){
         "Please add your Google Maps delivery location."
       );
 
-
       document.getElementById(
         "differentLocationButton"
       ).click();
 
-
       return;
 
     }
-
 
     if(
       deliveryDistance === null ||
@@ -5821,11 +6414,9 @@ async function placeOrder(){
         "Please confirm a Google Maps location containing exact coordinates."
       );
 
-
       return;
 
     }
-
 
     if(
       deliveryDistance >
@@ -5836,11 +6427,9 @@ async function placeOrder(){
         "❌ Delivery is available only within 20 km."
       );
 
-
       return;
 
     }
-
 
     if(cart.length === 0){
 
@@ -5848,11 +6437,9 @@ async function placeOrder(){
         "Your cart is empty."
       );
 
-
       return;
 
     }
-
 
     if(!validateCheckout()){
 
@@ -5860,19 +6447,15 @@ async function placeOrder(){
         "Please complete all required checkout details."
       );
 
-
       return;
 
     }
 
-
     button.disabled =
       true;
 
-
     button.textContent =
       "Placing Order...";
-
 
     const orderRef =
       push(
@@ -5882,10 +6465,8 @@ async function placeOrder(){
         )
       );
 
-
     const firebaseKey =
       orderRef.key;
-
 
     if(!firebaseKey){
 
@@ -5895,15 +6476,13 @@ async function placeOrder(){
 
     }
 
-
     const orderId =
       createOrderId(
         firebaseKey
       );
 
-
-    let subtotal = 0;
-
+    let subtotal =
+      0;
 
     cart.forEach(
       item=>{
@@ -5915,13 +6494,11 @@ async function placeOrder(){
       }
     );
 
-
     const rate =
       Number(
         shopSettings.deliveryRate ||
         DEFAULT_DELIVERY_RATE
       );
-
 
     const deliveryCharge =
       Math.ceil(
@@ -5929,15 +6506,12 @@ async function placeOrder(){
         rate
       );
 
-
     const grandTotal =
       subtotal +
       deliveryCharge;
 
-
     const now =
       Date.now();
-
 
     const orderData = {
 
@@ -6032,24 +6606,20 @@ async function placeOrder(){
 
     };
 
-
     await set(
       orderRef,
       orderData
     );
-
 
     localStorage.setItem(
       "lastOrderId",
       orderId
     );
 
-
     localStorage.setItem(
       "lastOrderFirebaseKey",
       firebaseKey
     );
-
 
     const whatsapp =
       normalizeWhatsApp(
@@ -6057,16 +6627,13 @@ async function placeOrder(){
         WHATSAPP_DEFAULT
       );
 
-
     const message =
       buildWhatsAppMessage(
         orderData
       );
 
-
     const whatsappUrl =
       `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
-
 
     try{
 
@@ -6085,22 +6652,17 @@ async function placeOrder(){
 
     }
 
-
     cart = [];
-
 
     renderCart();
 
-
     closeCheckout();
-
 
     document.getElementById(
       "thankYouOverlay"
     ).classList.remove(
       "hidden"
     );
-
 
     setTimeout(
       ()=>{
@@ -6111,15 +6673,12 @@ async function placeOrder(){
           "hidden"
         );
 
-
         document.getElementById(
           "trackInput"
         ).value =
           orderId;
 
-
         trackOrder();
-
 
         window.scrollTo({
 
@@ -6131,11 +6690,9 @@ async function placeOrder(){
 
         });
 
-
       },
       1800
     );
-
 
   }
   catch(error){
@@ -6145,20 +6702,17 @@ async function placeOrder(){
       error
     );
 
-
     const code =
       error &&
       error.code
         ? error.code
         : "unknown";
 
-
     const message =
       error &&
       error.message
         ? error.message
         : String(error);
-
 
     alert(
       "Order could not be placed.\n\n" +
@@ -6174,10 +6728,8 @@ async function placeOrder(){
     button.disabled =
       false;
 
-
     button.textContent =
       "Place Order";
-
 
     validateCheckout();
 
@@ -6204,7 +6756,6 @@ function createOrderId(
     )
     .toUpperCase();
 
-
   return (
     "TQF2026-" +
     clean.slice(-8)
@@ -6228,14 +6779,12 @@ function normalizeWhatsApp(
         ""
       );
 
-
   if(n.length === 10){
 
     n =
       "91" + n;
 
   }
-
 
   return n;
 
@@ -6378,12 +6927,10 @@ async function trackOrder(){
       .trim()
       .toUpperCase();
 
-
   const result =
     document.getElementById(
       "trackResult"
     );
-
 
   if(!input){
 
@@ -6396,10 +6943,8 @@ async function trackOrder(){
 
     }
 
-
     trackingOrderId =
       "";
-
 
     result.innerHTML = `
       <p style="color:#888">
@@ -6407,20 +6952,16 @@ async function trackOrder(){
       </p>
     `;
 
-
     return;
 
   }
-
 
   try{
 
     await startCustomerAuth();
 
-
     currentUser =
       auth.currentUser;
-
 
     if(!currentUser){
 
@@ -6429,7 +6970,6 @@ async function trackOrder(){
       );
 
     }
-
 
     if(trackingUnsubscribe){
 
@@ -6440,10 +6980,8 @@ async function trackOrder(){
 
     }
 
-
     trackingOrderId =
       input;
-
 
     const ordersQuery =
       query(
@@ -6463,7 +7001,6 @@ async function trackOrder(){
 
       );
 
-
     trackingUnsubscribe =
       onValue(
 
@@ -6474,13 +7011,11 @@ async function trackOrder(){
           let found =
             null;
 
-
           snapshot.forEach(
             child=>{
 
               const order =
                 child.val();
-
 
               if(
 
@@ -6506,17 +7041,16 @@ async function trackOrder(){
             }
           );
 
-
           if(!found){
 
             result.innerHTML = `
 
               <div
-                style="
-                  text-align:center;
-                  padding:20px;
-                  color:#888
-                "
+              style="
+                text-align:center;
+                padding:20px;
+                color:#888
+              "
               >
 
                 🔎
@@ -6541,13 +7075,11 @@ async function trackOrder(){
 
           }
 
-
           renderTrackedOrder(
             found
           );
 
         },
-
 
         error=>{
 
@@ -6555,7 +7087,6 @@ async function trackOrder(){
             "TRACK ERROR:",
             error
           );
-
 
           result.innerHTML = `
 
@@ -6580,7 +7111,6 @@ async function trackOrder(){
       "TRACK ERROR:",
       error
     );
-
 
     result.innerHTML = `
 
@@ -6610,13 +7140,11 @@ function renderTrackedOrder(
       "trackResult"
     );
 
-
   const status =
     String(
       order.status ||
       "received"
     ).toLowerCase();
-
 
   const steps = [
 
@@ -6658,10 +7186,8 @@ function renderTrackedOrder(
 
   ];
 
-
   let currentIndex =
     0;
-
 
   if(status === "received"){
 
@@ -6712,16 +7238,14 @@ function renderTrackedOrder(
 
   }
 
-
-  let timeline = "";
-
+  let timeline =
+    "";
 
   steps.forEach(
     (step,index)=>{
 
       let className =
         "";
-
 
       if(
         status !== "cancelled" &&
@@ -6742,11 +7266,10 @@ function renderTrackedOrder(
 
       }
 
-
       timeline += `
 
         <div
-          class="step ${className}"
+        class="step ${className}"
         >
 
           <div class="step-line"></div>
@@ -6766,9 +7289,8 @@ function renderTrackedOrder(
     }
   );
 
-
-  let items = "";
-
+  let items =
+    "";
 
   (
     order.items ||
@@ -6806,11 +7328,9 @@ function renderTrackedOrder(
     }
   );
 
-
   const canConfirm =
     status ===
     "out_for_delivery";
-
 
   result.innerHTML = `
 
@@ -6831,7 +7351,7 @@ function renderTrackedOrder(
           </div>
 
           <small
-            style="color:#777"
+          style="color:#777"
           >
 
             🕐 ${
@@ -6879,10 +7399,10 @@ function renderTrackedOrder(
       <div style="margin-top:20px">
 
         <h3
-          style="
-            margin-bottom:12px;
-            color:#f59b23
-          "
+        style="
+          margin-bottom:12px;
+          color:#f59b23
+        "
         >
 
           🍴 Your Items
@@ -6895,25 +7415,21 @@ function renderTrackedOrder(
 
 
       <hr
-        style="
-          border-color:#292929;
-          margin:15px 0
-        "
+      style="
+        border-color:#292929;
+        margin:15px 0
+      "
       >
 
 
       <div class="summary-row">
 
         <span>
-
           🛒 Item Total
-
         </span>
 
         <b>
-
           ₹${order.subtotal || 0}
-
         </b>
 
       </div>
@@ -6922,15 +7438,11 @@ function renderTrackedOrder(
       <div class="summary-row">
 
         <span>
-
           🚚 Delivery
-
         </span>
 
         <b>
-
           ₹${order.deliveryCharge || 0}
-
         </b>
 
       </div>
@@ -6939,15 +7451,11 @@ function renderTrackedOrder(
       <div class="summary-row total">
 
         <span>
-
           💰 Total
-
         </span>
 
         <span>
-
           ₹${order.total || 0}
-
         </span>
 
       </div>
@@ -6958,8 +7466,8 @@ function renderTrackedOrder(
           ? `
 
             <button
-              id="deliveredButton"
-              class="primary"
+            id="deliveredButton"
+            class="primary"
             >
 
               🎉 Confirm Delivered
@@ -6976,15 +7484,15 @@ function renderTrackedOrder(
           ? `
 
             <div
-              style="
-                margin-top:15px;
-                padding:13px;
-                border-radius:10px;
-                background:#102615;
-                color:#30d158;
-                text-align:center;
-                font-weight:700
-              "
+            style="
+              margin-top:15px;
+              padding:13px;
+              border-radius:10px;
+              background:#102615;
+              color:#30d158;
+              text-align:center;
+              font-weight:700
+            "
             >
 
               🎉 Order Delivered Successfully!
@@ -7001,15 +7509,15 @@ function renderTrackedOrder(
           ? `
 
             <div
-              style="
-                margin-top:15px;
-                padding:13px;
-                border-radius:10px;
-                background:#301010;
-                color:#ff625b;
-                text-align:center;
-                font-weight:700
-              "
+            style="
+              margin-top:15px;
+              padding:13px;
+              border-radius:10px;
+              background:#301010;
+              color:#ff625b;
+              text-align:center;
+              font-weight:700
+            "
             >
 
               ❌ This order has been cancelled.
@@ -7025,14 +7533,12 @@ function renderTrackedOrder(
 
   `;
 
-
   if(canConfirm){
 
     const deliveredButton =
       document.getElementById(
         "deliveredButton"
       );
-
 
     if(deliveredButton){
 
@@ -7088,7 +7594,6 @@ function getStatusEmoji(
 
   };
 
-
   return (
     map[status] ||
     "📌"
@@ -7115,10 +7620,8 @@ async function customerConfirmDelivered(
 
   }
 
-
   currentUser =
     auth.currentUser;
-
 
   if(
     order.ownerUid !==
@@ -7133,7 +7636,6 @@ async function customerConfirmDelivered(
 
   }
 
-
   if(
     String(
       order.status
@@ -7144,7 +7646,6 @@ async function customerConfirmDelivered(
     return;
 
   }
-
 
   try{
 
@@ -7159,7 +7660,6 @@ async function customerConfirmDelivered(
 
     );
 
-
     showDeliverySuccess();
 
   }
@@ -7169,7 +7669,6 @@ async function customerConfirmDelivered(
       "DELIVERY CONFIRM ERROR:",
       error
     );
-
 
     alert(
       "Could not confirm delivery.\n\n" +
@@ -7195,51 +7694,41 @@ function showDeliverySuccess(){
       "deliverySuccessOverlay"
     );
 
-
   const title =
     document.getElementById(
       "deliverySuccessTitle"
     );
-
 
   const message =
     document.getElementById(
       "deliverySuccessMessage"
     );
 
-
   const icon =
     document.getElementById(
       "deliverySuccessIcon"
     );
-
 
   const flowerContainer =
     document.getElementById(
       "flowerContainer"
     );
 
-
   overlay.classList.remove(
     "hidden"
   );
 
-
   icon.textContent =
     "🎉";
-
 
   title.textContent =
     "Order Delivered Successfully!";
 
-
   message.textContent =
     "";
 
-
   flowerContainer.innerHTML =
     "";
-
 
   const flowers = [
 
@@ -7252,7 +7741,6 @@ function showDeliverySuccess(){
 
   ];
 
-
   for(
     let i = 0;
     i < 35;
@@ -7264,10 +7752,8 @@ function showDeliverySuccess(){
         "div"
       );
 
-
     petal.className =
       "flower-petal";
-
 
     petal.textContent =
       flowers[
@@ -7277,11 +7763,9 @@ function showDeliverySuccess(){
         )
       ];
 
-
     petal.style.left =
       Math.random() * 100 +
       "%";
-
 
     petal.style.fontSize =
       (
@@ -7290,7 +7774,6 @@ function showDeliverySuccess(){
       ) +
       "px";
 
-
     petal.style.animationDuration =
       (
         2 +
@@ -7298,11 +7781,9 @@ function showDeliverySuccess(){
       ) +
       "s";
 
-
     petal.style.animationDelay =
       Math.random() * .8 +
       "s";
-
 
     petal.style.setProperty(
       "--drift",
@@ -7313,13 +7794,11 @@ function showDeliverySuccess(){
       "px"
     );
 
-
     flowerContainer.appendChild(
       petal
     );
 
   }
-
 
   setTimeout(
     ()=>{
@@ -7327,10 +7806,8 @@ function showDeliverySuccess(){
       icon.textContent =
         "🌸";
 
-
       title.textContent =
         "Thank You!";
-
 
       message.textContent =
         "Thank you for choosing The Queen Fast Food ❤️";
@@ -7339,7 +7816,6 @@ function showDeliverySuccess(){
     1000
   );
 
-
   setTimeout(
     ()=>{
 
@@ -7347,16 +7823,13 @@ function showDeliverySuccess(){
         "hidden"
       );
 
-
       flowerContainer.innerHTML =
         "";
-
 
       const lastOrderId =
         localStorage.getItem(
           "lastOrderId"
         );
-
 
       if(lastOrderId){
 
@@ -7365,9 +7838,7 @@ function showDeliverySuccess(){
         ).value =
           lastOrderId;
 
-
         trackOrder();
-
 
         document.getElementById(
           "trackResult"
@@ -7380,7 +7851,6 @@ function showDeliverySuccess(){
         });
 
       }
-
 
     },
     3500
@@ -7424,7 +7894,6 @@ function formatStatus(
       "Cancelled"
 
   };
-
 
   return (
     map[status] ||
@@ -7509,12 +7978,9 @@ document.getElementById(
     const loggedIn =
       loadCustomerProfile();
 
-
     updateCustomerUI();
 
-
     fillCheckoutCustomer();
-
 
     if(!loggedIn){
 
@@ -7522,30 +7988,23 @@ document.getElementById(
 
     }
 
-
     await startCustomerAuth();
-
 
     validateCheckout();
 
-
     loadSettings();
 
-
     renderCart();
-
 
     setInterval(
       renderShopStatus,
       30000
     );
 
-
     const lastOrderId =
       localStorage.getItem(
         "lastOrderId"
       );
-
 
     if(lastOrderId){
 
@@ -7555,7 +8014,6 @@ document.getElementById(
         lastOrderId;
 
     }
-
 
   }
   catch(error){
@@ -7568,7 +8026,6 @@ document.getElementById(
   }
 
 })();
-
 
 </script>
 
