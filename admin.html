@@ -4524,9 +4524,9 @@ function createOrderCard(
 }
 
 
-/* =========================
-   UPDATE ORDER
-========================= */
+/* =========================================================
+   IMPORTANT ORDER STATUS SYNC
+   ========================================================= */
 
 window.updateOrderStatus =
 async function(
@@ -4551,8 +4551,7 @@ async function(
     /*
       ADMIN NEVER SETS DELIVERED.
 
-      Delivered must come only from
-      customer delivery confirmation.
+      Delivered is confirmed by customer only.
     */
 
     if(
@@ -4576,12 +4575,6 @@ async function(
         newStatus
       );
 
-
-    /*
-      Extra protection:
-      Admin can only move an order through
-      the normal delivery flow.
-    */
 
     const currentStatus =
       normalizeStatus(
@@ -4634,11 +4627,37 @@ async function(
       Date.now();
 
 
+    /*
+      ======================================================
+      MULTI LOCATION REAL-TIME STATUS SYNC
+      ======================================================
+
+      Main order:
+      orders/{key}
+
+      Customer order:
+      customerOrders/{ownerUid}/{key}
+
+      Both receive:
+      status
+      orderStatus
+      updatedAt
+
+      This keeps different customer-side readers compatible.
+    */
+
     const updates = {};
 
 
+    /* MAIN ORDER */
+
     updates[
       `orders/${key}/status`
+    ] =
+      status;
+
+    updates[
+      `orders/${key}/orderStatus`
     ] =
       status;
 
@@ -4649,23 +4668,20 @@ async function(
 
 
     /*
-      IMPORTANT:
-      Customer tracking receives the EXACT
-      admin status here.
+      CUSTOMER ORDER
 
-      So:
-      RECEIVED -> RECEIVED
-      PROCESSING -> PROCESSING
-      MAKING -> MAKING
-      OUT FOR DELIVERY -> OUT FOR DELIVERY
-
-      It will NOT become DELIVERED.
+      Existing system uses ownerUid.
     */
 
     if(order.ownerUid){
 
       updates[
         `customerOrders/${order.ownerUid}/${key}/status`
+      ] =
+        status;
+
+      updates[
+        `customerOrders/${order.ownerUid}/${key}/orderStatus`
       ] =
         status;
 
@@ -4677,6 +4693,79 @@ async function(
     }
 
 
+    /*
+      Some customer systems store customer UID
+      under customerId instead of ownerUid.
+    */
+
+    const customerId =
+      order.customerId ||
+      order.customerUID ||
+      order.uid ||
+      null;
+
+
+    if(
+      customerId &&
+      customerId !== order.ownerUid
+    ){
+
+      updates[
+        `customerOrders/${customerId}/${key}/status`
+      ] =
+        status;
+
+      updates[
+        `customerOrders/${customerId}/${key}/orderStatus`
+      ] =
+        status;
+
+      updates[
+        `customerOrders/${customerId}/${key}/updatedAt`
+      ] =
+        now;
+
+    }
+
+
+    /*
+      If the order itself has a separate customer
+      order ID, keep that ID synchronized too.
+    */
+
+    const customerOrderId =
+      order.customerOrderId ||
+      order.orderId ||
+      null;
+
+
+    if(
+      customerOrderId &&
+      customerOrderId !== key
+    ){
+
+      updates[
+        `orders/${customerOrderId}/status`
+      ] =
+        status;
+
+      updates[
+        `orders/${customerOrderId}/orderStatus`
+      ] =
+        status;
+
+      updates[
+        `orders/${customerOrderId}/updatedAt`
+      ] =
+        now;
+
+    }
+
+
+    /*
+      CANCELLED COPY
+    */
+
     if(status === "cancelled"){
 
       updates[
@@ -4686,6 +4775,9 @@ async function(
         ...order,
 
         status:
+          "cancelled",
+
+        orderStatus:
           "cancelled",
 
         cancelledAt:
@@ -4704,6 +4796,11 @@ async function(
     }
 
 
+    /*
+      ACTIVE STATUS:
+      remove old archive copies.
+    */
+
     if(
       status !== "cancelled"
     ){
@@ -4721,10 +4818,50 @@ async function(
     }
 
 
+    /*
+      ONE FIREBASE MULTI-PATH UPDATE
+
+      Everything changes together.
+    */
+
     await update(
       ref(db),
       updates
     );
+
+
+    /*
+      Update local object immediately too.
+      Firebase onValue will also refresh it.
+    */
+
+    if(orders[key]){
+
+      orders[key] = {
+
+        ...orders[key],
+
+        status:
+          status,
+
+        orderStatus:
+          status,
+
+        updatedAt:
+          now
+
+      };
+
+    }
+
+
+    /*
+      Re-render immediately without waiting for
+      the next network/UI cycle.
+    */
+
+    renderOrders();
+    renderNotificationList();
 
 
     showToast(
@@ -4740,7 +4877,10 @@ async function(
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "ORDER STATUS UPDATE ERROR:",
+      error
+    );
 
     showToast(
       error.message ||
@@ -4769,6 +4909,40 @@ async function(key){
         null
 
     };
+
+
+    const order =
+      orders[key];
+
+
+    if(order?.ownerUid){
+
+      updates[
+        `customerOrders/${order.ownerUid}/${key}`
+      ] =
+        null;
+
+    }
+
+
+    const customerId =
+      order?.customerId ||
+      order?.customerUID ||
+      order?.uid ||
+      null;
+
+
+    if(
+      customerId &&
+      customerId !== order?.ownerUid
+    ){
+
+      updates[
+        `customerOrders/${customerId}/${key}`
+      ] =
+        null;
+
+    }
 
 
     await update(
