@@ -3463,7 +3463,8 @@ function detectNewOrders(
 
         if(
           order &&
-          getOrderStatus(order) === "received"
+          getOrderStatus(order) === "received" &&
+          order.activeRemoved !== true
         ){
 
           knownNewOrderIds.add(id);
@@ -3491,6 +3492,7 @@ function detectNewOrders(
         return (
           order &&
           getOrderStatus(order) === "received" &&
+          order.activeRemoved !== true &&
           !knownNewOrderIds.has(id)
         );
 
@@ -3506,7 +3508,8 @@ function detectNewOrders(
 
       if(
         order &&
-        getOrderStatus(order) === "received"
+        getOrderStatus(order) === "received" &&
+        order.activeRemoved !== true
       ){
 
         knownNewOrderIds.add(id);
@@ -3794,7 +3797,14 @@ function renderOrders(){
 
         }
 
-        else{
+        /*
+          NEW:
+          If admin removed the order from Active Orders,
+          keep it in Firebase but do not show it here.
+        */
+        else if(
+          order.activeRemoved !== true
+        ){
 
           active.push([
             key,
@@ -4256,6 +4266,37 @@ function createOrderCard(
           onclick="removeOrder('${key}')"
         >
           REMOVE ORDER
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /*
+    NEW:
+    Active order remove button.
+    This does NOT delete the order.
+    It only hides the order from Active Orders.
+  */
+
+  if(
+    status !== "delivered" &&
+    status !== "cancelled" &&
+    order.activeRemoved !== true
+  ){
+
+    actionHtml += `
+
+      <div class="status-buttons">
+
+        <button
+          class="btn btn-dark"
+          onclick="removeActiveOrder('${key}')"
+        >
+          🗑️ REMOVE FROM ACTIVE
         </button>
 
       </div>
@@ -4916,6 +4957,132 @@ async function(
 };
 
 
+/* =========================================================
+   REMOVE ACTIVE ORDER ONLY
+========================================================= */
+
+window.removeActiveOrder =
+async function(key){
+
+  try{
+
+    const order =
+      orders[key];
+
+    if(!order){
+
+      showToast(
+        "Order not found."
+      );
+
+      return;
+
+    }
+
+
+    const status =
+      getOrderStatus(order);
+
+
+    if(
+      status === "delivered" ||
+      status === "cancelled"
+    ){
+
+      showToast(
+        "Use REMOVE ORDER for completed/cancelled orders."
+      );
+
+      return;
+
+    }
+
+
+    const confirmed =
+      confirm(
+        "Remove this order from Active Orders?\n\nThe order will NOT be deleted from customer history."
+      );
+
+
+    if(!confirmed){
+      return;
+    }
+
+
+    const now =
+      Date.now();
+
+
+    const updates = {
+
+      [`orders/${key}/activeRemoved`]:
+        true,
+
+      [`orders/${key}/activeRemovedAt`]:
+        now
+
+    };
+
+
+    await update(
+      ref(db),
+      updates
+    );
+
+
+    if(orders[key]){
+
+      orders[key] = {
+
+        ...orders[key],
+
+        activeRemoved:
+          true,
+
+        activeRemovedAt:
+          now
+
+      };
+
+    }
+
+
+    /*
+      Remove notification tracking also.
+      So removed order will not come back
+      inside NEW ORDERS notification.
+    */
+
+    knownNewOrderIds.add(key);
+
+
+    renderOrders();
+
+    renderNotificationList();
+
+
+    showToast(
+      "Order removed from Active Orders."
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "REMOVE ACTIVE ORDER ERROR:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Could not remove order."
+    );
+
+  }
+
+};
+
+
 window.removeOrder =
 async function(key){
 
@@ -5037,7 +5204,8 @@ function renderNotificationList(){
     Object.entries(orders)
       .filter(
         ([,order])=>
-          getOrderStatus(order) === "received"
+          getOrderStatus(order) === "received" &&
+          order.activeRemoved !== true
       )
       .sort(
         (a,b)=>
